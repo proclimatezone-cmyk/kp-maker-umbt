@@ -1,0 +1,1 @@
+Set w=CreateObject("Word.Application"):w.Visible=0:Set d=w.Documents.Open("C:\\MN og\\devs\\kp maker for umbt\\gen_1775892117293.docx"):d.ExportAsFixedFormat "C:\\MN og\\devs\\kp maker for umbt\\gen_1775892117293.pdf",17:d.Close 0:w.Quit
