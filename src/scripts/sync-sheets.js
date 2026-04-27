@@ -13,8 +13,8 @@ if (!process.env.GOOGLE_CLIENT_ID) {
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // --- CONFIGURATION ---
-const SPREADSHEET_ID = '1Fb1ZAoS242eZMK_LrkJ3VCwRVrhbMkr3FsdjGRYS6rQ';
-const RANGE = 'Лист1!A2:E'; 
+const SPREADSHEET_ID = '1O5aeKAbSc_UkDk7expSqaDO5dpUaQLyqWI40Vhp4MhE';
+const RANGE = "'для кп'!A2:W"; 
 const OUTPUT_FILE = path.join(__dirname, '..', 'data', 'products.json');
 const IMG_DIR = path.join(__dirname, '..', '..', 'public', 'images', 'products');
 // ----------------------
@@ -51,12 +51,19 @@ export async function syncSheets() {
     const imageCache = new Map(); // To avoid re-downloading same images
 
     for (let i = 0; i < rows.length; i++) {
-      const [category, name, model, price, imageUrl] = rows[i];
+      const row = rows[i];
+      const category = row[0];
+      const series = row[1];    // Column B = Series (e.g. MV8, MV9M)
+      const model = row[2];     // Column C = Model
+      const imageUrl = row[22]; // Column W = Photo URL
+      const price = row[21];    // Column V = Price
+      
       if (!model) continue;
 
       const pId = model.toLowerCase().replace(/[^a-z0-9]/g, '-');
       let localImagePath = '/images/products/placeholder.png';
 
+      let slidesImage = '';
       // Handle Google Drive Folder/File URLs
       if (imageUrl && imageUrl.includes('drive.google.com')) {
         try {
@@ -65,17 +72,33 @@ export async function syncSheets() {
             const folderId = imageUrl.split('folders/')[1].split('?')[0];
             
             if (imageCache.has(folderId)) {
-              localImagePath = imageCache.get(folderId);
+              localImagePath = imageCache.get(folderId).localImagePath;
+              slidesImage = imageCache.get(folderId).slidesImage;
             } else {
               console.log(`Listing files in folder: ${folderId}`);
               const folderFiles = await drive.files.list({
                 q: `'${folderId}' in parents and mimeType contains 'image/'`,
-                fields: 'files(id, name, fileExtension)',
-                pageSize: 1
+                fields: 'files(id, name, fileExtension, thumbnailLink, mimeType)',
+                pageSize: 10
               });
               
               if (folderFiles.data.files.length > 0) {
-                fileId = folderFiles.data.files[0].id;
+                // Prefer jpg/png over avif/webp for Slides API compatibility
+                const preferred = folderFiles.data.files.find(f => 
+                  f.mimeType === 'image/jpeg' || f.mimeType === 'image/png'
+                ) || folderFiles.data.files[0];
+                fileId = preferred.id;
+                slidesImage = `https://drive.google.com/uc?id=${fileId}`;
+                
+                // Make file public
+                try {
+                  await drive.permissions.create({
+                    fileId: fileId,
+                    requestBody: { role: 'reader', type: 'anyone' }
+                  });
+                } catch (e) {
+                  console.warn(`Could not set permissions for file ${fileId}: ${e.message}`);
+                }
                 const ext = folderFiles.data.files[0].fileExtension || 'png';
                 const fileName = `${folderId}.${ext}`;
                 const fullPath = path.join(IMG_DIR, fileName);
@@ -95,7 +118,58 @@ export async function syncSheets() {
                   });
                 }
                 localImagePath = `/images/products/${fileName}`;
-                imageCache.set(folderId, localImagePath);
+                imageCache.set(folderId, { localImagePath, slidesImage });
+              }
+            }
+          } else {
+            // Handle direct file URLs
+            if (imageUrl.includes('file/d/')) {
+              fileId = imageUrl.split('file/d/')[1].split('/')[0];
+            } else if (imageUrl.includes('id=')) {
+              fileId = imageUrl.split('id=')[1].split('&')[0];
+            }
+
+            if (fileId) {
+              if (imageCache.has(fileId)) {
+                localImagePath = imageCache.get(fileId).localImagePath;
+                slidesImage = imageCache.get(fileId).slidesImage;
+              } else {
+                const fileInfo = await drive.files.get({
+                  fileId: fileId,
+                  fields: 'id, name, fileExtension, thumbnailLink'
+                });
+                // Publicly accessible format for Google Slides (uc?id is often more reliable)
+                slidesImage = `https://drive.google.com/uc?id=${fileId}`;
+                
+                // Make file public so Slides API can access the link
+                try {
+                  await drive.permissions.create({
+                    fileId: fileId,
+                    requestBody: { role: 'reader', type: 'anyone' }
+                  });
+                } catch (e) {
+                  console.warn(`Could not set permissions for file ${fileId}: ${e.message}`);
+                }
+
+                const ext = fileInfo.data.fileExtension || 'png';
+                const fileName = `${fileId}.${ext}`;
+                const fullPath = path.join(IMG_DIR, fileName);
+                if (!fs.existsSync(fullPath)) {
+                  console.log(`Downloading image file: ${fileName}`);
+                  const dest = fs.createWriteStream(fullPath);
+                  const res = await drive.files.get(
+                    { fileId, alt: 'media' },
+                    { responseType: 'stream' }
+                  );
+                  await new Promise((resolve, reject) => {
+                    res.data
+                      .on('end', () => resolve())
+                      .on('error', err => reject(err))
+                      .pipe(dest);
+                  });
+                }
+                localImagePath = `/images/products/${fileName}`;
+                imageCache.set(fileId, { localImagePath, slidesImage });
               }
             }
           }
@@ -107,17 +181,26 @@ export async function syncSheets() {
       products.push({
         id: pId,
         category: category || 'General',
-        name: name || '',
+        series: series || '',
+        name: category || '',
         model: model || '',
         price: parseFloat(String(price).replace(/[^0-9.]/g, '')) || 0,
         image: localImagePath,
+        slidesImage: slidesImage || imageUrl,
+        driveImage: imageUrl,
         specs: ""
       });
     }
 
-    fs.writeFileSync(OUTPUT_FILE, JSON.stringify(products, null, 2));
-    console.log(`SUCCESS: Updated ${products.length} products and synced images.`);
-    return { count: products.length };
+    try {
+      fs.writeFileSync(OUTPUT_FILE, JSON.stringify(products, null, 2));
+      console.log(`SUCCESS: Updated ${products.length} products in local file.`);
+    } catch (fsErr) {
+      console.warn('Could not save to local file (expected on Vercel):', fsErr.message);
+    }
+    
+    console.log(`SUCCESS: Synced ${products.length} products.`);
+    return { count: products.length, products };
 
   } catch (err) {
     console.error('ERROR during sync:', err.message);
