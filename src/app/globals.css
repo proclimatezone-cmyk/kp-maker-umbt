@@ -130,9 +130,9 @@ body {
   box-shadow: var(--shadow-sm);
 }
 
-.fade-in .section {
 .fade-in {
   opacity: 1;
+  transition: opacity 0.3s ease;
 }
 
 .hidden {
@@ -185,18 +185,19 @@ body {
   margin-left: auto;
 }
 
-.tag-status {
-  font-size: 0.65rem;
-  font-weight: 600;
+.save-indicator {
   display: flex;
   align-items: center;
-  gap: 0.3rem;
-  margin-left: auto;
-  padding: 0.15rem 0.5rem;
-  border-radius: 4px;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.3rem 0.75rem;
+  border-radius: 20px;
+  margin-left: 1.5rem;
+  transition: all 0.3s ease;
 }
-.tag-status.saving { background: #fefce8; color: #a16207; }
-.tag-status.saved { background: #f0fdf4; color: #16a34a; }
+.save-indicator.saving { background: #fefce8; color: #a16207; }
+.save-indicator.saved { background: #f0fdf4; color: #16a34a; }
 
 /* ===== GRID ===== */
 .row { display: grid; gap: 0.75rem; }
