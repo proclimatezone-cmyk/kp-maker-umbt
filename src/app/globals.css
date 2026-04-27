@@ -131,17 +131,12 @@ body {
 }
 
 .fade-in .section {
-  animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+.fade-in {
+  opacity: 1;
 }
 
-.section:nth-child(1) { animation-delay: 0.1s; }
-.section:nth-child(2) { animation-delay: 0.2s; }
-.section:nth-child(3) { animation-delay: 0.3s; }
-.section:nth-child(4) { animation-delay: 0.4s; }
-
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
+.hidden {
+  opacity: 0;
 }
 
 .section-header {
@@ -151,6 +146,8 @@ body {
   margin-bottom: 1.25rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid var(--border);
+  height: 54px; /* Жесткая фиксация высоты */
+  overflow: hidden;
 }
 
 .section-header h2 {
@@ -448,13 +445,12 @@ body {
 .gen-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 
 /* ===== ANIMATIONS ===== */
-.fade-in { animation: fadeIn 0.4s ease-out both; }
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-.hidden { display: none; }
+.fade-in { opacity: 1; }
+.hidden { opacity: 0; }
 .spin { animation: spin 1s linear infinite; }
 @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-.scale-in { animation: scaleIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+.scale-in { opacity: 1; }
 @keyframes scaleIn {
   from { opacity: 0; transform: scale(0.9); }
   to { opacity: 1; transform: scale(1); }

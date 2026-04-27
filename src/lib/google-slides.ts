@@ -16,6 +16,7 @@ const TABLE_STYLE = {
 
 // Layout Constants
 const PRODUCT_ROW_H = 1200000;
+const ACCESSORY_ROW_H = 700000;
 const HEADER_FOOTER_H = 500000;
 const TABLE_WIDTH = 6800000;
 const TABLE_X = 500000;
@@ -100,6 +101,20 @@ export async function generateSlidesKP(data: {
         }]
       });
     }
+  });
+  
+  const isAccessory = (g: GroupedItem) => {
+    const c = g.category.toLowerCase();
+    return c.includes('аксессуар') || c.includes('автоматика') || c.includes('пульт') || c.includes('панель') || c.includes('опция');
+  };
+
+  // 2.1 Sort groups: Main units (with images) first, then accessories
+  groups.sort((a, b) => {
+    const aAcc = isAccessory(a);
+    const bAcc = isAccessory(b);
+    if (aAcc && !bAcc) return 1;
+    if (!aAcc && bAcc) return -1;
+    return 0;
   });
 
   // 3. Split groups into per-slide chunks
@@ -242,7 +257,14 @@ export async function generateSlidesKP(data: {
       const tableId = `kp_${Date.now()}_${t}`;
       const extraRows = isLastTable ? (opts.paymentType === 'transfer' ? 2 : 1) : 0;
       const displayRows = 1 + tData.rows + extraRows;
-      const tableHeight = HEADER_FOOTER_H + (tData.rows * PRODUCT_ROW_H) + (extraRows * HEADER_FOOTER_H);
+      
+      // Calculate real table height based on row types
+      let totalRowsH = 0;
+      tData.groups.forEach(g => {
+        const h = isAccessory(g) ? ACCESSORY_ROW_H : PRODUCT_ROW_H;
+        totalRowsH += g.models.length * h;
+      });
+      const tableHeight = HEADER_FOOTER_H + totalRowsH + (extraRows * HEADER_FOOTER_H);
 
       // Create table
       tableReqs.push({
@@ -258,9 +280,16 @@ export async function generateSlidesKP(data: {
 
       // Row heights
       tableReqs.push({ updateTableRowProperties: { objectId: tableId, rowIndices: [0], tableRowProperties: { minRowHeight: { magnitude: HEADER_FOOTER_H, unit: 'EMU' } }, fields: 'minRowHeight' }});
-      for (let i = 1; i <= tData.rows; i++) {
-        tableReqs.push({ updateTableRowProperties: { objectId: tableId, rowIndices: [i], tableRowProperties: { minRowHeight: { magnitude: PRODUCT_ROW_H, unit: 'EMU' } }, fields: 'minRowHeight' }});
-      }
+      
+      let currentRowIdx = 1;
+      tData.groups.forEach(g => {
+        const rowH = isAccessory(g) ? ACCESSORY_ROW_H : PRODUCT_ROW_H;
+        for (let i = 0; i < g.models.length; i++) {
+          tableReqs.push({ updateTableRowProperties: { objectId: tableId, rowIndices: [currentRowIdx], tableRowProperties: { minRowHeight: { magnitude: rowH, unit: 'EMU' } }, fields: 'minRowHeight' }});
+          currentRowIdx++;
+        }
+      });
+
       if (isLastTable) {
         for (let i = displayRows - extraRows; i < displayRows; i++) {
           tableReqs.push({ updateTableRowProperties: { objectId: tableId, rowIndices: [i], tableRowProperties: { minRowHeight: { magnitude: HEADER_FOOTER_H, unit: 'EMU' } }, fields: 'minRowHeight' }});
@@ -280,7 +309,8 @@ export async function generateSlidesKP(data: {
       let currentY = TABLE_START_Y + HEADER_FOOTER_H;
       for (const group of tData.groups) {
           const startRow = r;
-          const groupHeight = group.models.length * PRODUCT_ROW_H;
+          const rowH = isAccessory(group) ? ACCESSORY_ROW_H : PRODUCT_ROW_H;
+          const groupHeight = group.models.length * rowH;
 
           // Image cell
           if (opts.showImages) {
@@ -289,7 +319,9 @@ export async function generateSlidesKP(data: {
               if (imageUrl && imageUrl.includes('drive.google.com/uc?id='))
                 imageUrl = imageUrl.replace('drive.google.com/uc?id=', 'lh3.googleusercontent.com/d/');
               if (imageUrl) {
-                  const imgW = 1400000, imgH = 1100000, colW = COL_WIDTHS_WITH_IMG[0];
+                  const imgW = 1400000, colW = COL_WIDTHS_WITH_IMG[0];
+                  // Adjust image height to row height if needed
+                  const imgH = Math.min(1100000, groupHeight - 100000);
                   imageRequests.push({ createImage: { url: imageUrl, elementProperties: { pageObjectId: sId, size: { width: { magnitude: imgW, unit: 'EMU' }, height: { magnitude: imgH, unit: 'EMU' } }, transform: { scaleX: 1, scaleY: 1, translateX: TABLE_X + (colW / 2) - (imgW / 2), translateY: currentY + (groupHeight / 2) - (imgH / 2), unit: 'EMU' } } } });
               }
           }
@@ -344,7 +376,7 @@ export async function generateSlidesKP(data: {
           const totIdxR = opts.showImages ? 5 : 4;
           if (opts.paymentType === 'transfer') {
               tableReqs.push({ insertText: { objectId: tableId, cellLocation: { rowIndex: r, columnIndex: totIdxL }, text: `Оплата: Перечисление (${opts.transferFee}%)` } });
-              tableReqs.push({ insertText: { objectId: tableId, cellLocation: { rowIndex: r, columnIndex: totIdxR }, text: opts.currency === 'sum' ? `Курс: ${opts.exchangeRate.toLocaleString()} сум` : ' ' } });
+              tableReqs.push({ insertText: { objectId: tableId, cellLocation: { rowIndex: r, columnIndex: totIdxR }, text: ' ' } });
               tableReqs.push({ updateTableCellProperties: { objectId: tableId, tableRange: { location: { rowIndex: r, columnIndex: totIdxL }, rowSpan: 1, columnSpan: 1 }, tableCellProperties: { tableCellBackgroundFill: { solidFill: { color: { rgbColor: COLORS.ROW_BG } } }, contentAlignment: 'MIDDLE' }, fields: 'tableCellBackgroundFill,contentAlignment' }});
               tableReqs.push({ updateTableCellProperties: { objectId: tableId, tableRange: { location: { rowIndex: r, columnIndex: totIdxR }, rowSpan: 1, columnSpan: 1 }, tableCellProperties: { tableCellBackgroundFill: { solidFill: { color: { rgbColor: COLORS.ROW_BG } } }, contentAlignment: 'MIDDLE' }, fields: 'tableCellBackgroundFill,contentAlignment' }});
               r++;
@@ -354,7 +386,9 @@ export async function generateSlidesKP(data: {
           tableReqs.push({ updateTableCellProperties: { objectId: tableId, tableRange: { location: { rowIndex: r, columnIndex: totIdxL }, rowSpan: 1, columnSpan: 1 }, tableCellProperties: { tableCellBackgroundFill: { solidFill: { color: { rgbColor: COLORS.TOTAL_L } } }, contentAlignment: 'MIDDLE' }, fields: 'tableCellBackgroundFill,contentAlignment' }});
           tableReqs.push({ updateTableCellProperties: { objectId: tableId, tableRange: { location: { rowIndex: r, columnIndex: totIdxR }, rowSpan: 1, columnSpan: 1 }, tableCellProperties: { tableCellBackgroundFill: { solidFill: { color: { rgbColor: COLORS.TOTAL_R } } }, contentAlignment: 'MIDDLE' }, fields: 'tableCellBackgroundFill,contentAlignment' }});
           for (let col = totIdxL; col <= totIdxR; col++) {
-             tableReqs.push({ updateTextStyle: { objectId: tableId, cellLocation: { rowIndex: r, columnIndex: col }, style: { ...TABLE_STYLE, bold: true, fontSize: { magnitude: 14, unit: 'PT' } }, fields: 'fontFamily,italic,fontSize,bold' }});
+             // Reduce font size for total value to prevent line breaks
+             const fontSize = col === totIdxR ? 12 : 14; 
+             tableReqs.push({ updateTextStyle: { objectId: tableId, cellLocation: { rowIndex: r, columnIndex: col }, style: { ...TABLE_STYLE, bold: true, fontSize: { magnitude: fontSize, unit: 'PT' } }, fields: 'fontFamily,italic,fontSize,bold' }});
              tableReqs.push({ updateParagraphStyle: { objectId: tableId, cellLocation: { rowIndex: r, columnIndex: col }, style: { alignment: 'CENTER' }, fields: 'alignment' }});
           }
 
