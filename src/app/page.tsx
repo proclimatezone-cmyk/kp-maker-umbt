@@ -18,126 +18,177 @@ const SectionHeader = memo(({ icon: Icon, title, color, tag, status }: any) => (
   </div>
 ))
 
-const ManagerSection = memo(({ data, onChange, status }: any) => (
-  <div className="section">
-    <SectionHeader icon={User} title="Менеджер" color="purple" status={status} />
-    <div className="field">
-      <label className="field-label">ФИО</label>
-      <input className="field-input" placeholder="Иванов Иван" value={data.name} onChange={e => onChange({ ...data, name: e.target.value })} />
-    </div>
-    <div className="row cols-2">
-      <div className="field">
-        <label className="field-label">Телефон</label>
-        <input className="field-input" placeholder="+998" value={data.phone} onChange={e => onChange({ ...data, phone: e.target.value })} />
-      </div>
-      <div className="field">
-        <label className="field-label">Email</label>
-        <input className="field-input" type="email" placeholder="name@umbt.uz" value={data.email} onChange={e => onChange({ ...data, email: e.target.value })} />
-      </div>
-    </div>
-  </div>
-))
+const ManagerSection = memo(({ data, onChange, status }: any) => {
+  const [local, setLocal] = useState(data);
+  useEffect(() => { setLocal(data); }, [data]);
+  
+  const blur = () => onChange(local);
 
-const SettingsSection = memo(({ cpName, setCpName, equipmentType, setEquipmentType, options, setOptions, status }: any) => (
-  <div className="section">
-    <SectionHeader icon={Briefcase} title="Настройки КП" color="blue" status={status} />
-    <div className="row cols-2">
+  return (
+    <div className="section">
+      <SectionHeader icon={User} title="Менеджер" color="purple" status={status} />
       <div className="field">
-        <label className="field-label">Номер КП</label>
-        <input className="field-input" value={cpName} onChange={e => setCpName(e.target.value)} />
-      </div>
-      <div className="field">
-        <label className="field-label">Тип оборудования</label>
-        <input className="field-input" placeholder="VRF / Чиллер" value={equipmentType} onChange={e => setEquipmentType(e.target.value)} />
-      </div>
-    </div>
-    <div className="row cols-3" style={{ marginTop: '0.5rem' }}>
-      <div className="field">
-        <label className="field-label">Фото</label>
-        <div className="toggle-group">
-          <button className={options.showImages ? 'on' : ''} onClick={() => setOptions({ ...options, showImages: true })}>Да</button>
-          <button className={!options.showImages ? 'on' : ''} onClick={() => setOptions({ ...options, showImages: false })}>Нет</button>
-        </div>
-      </div>
-      <div className="field">
-        <label className="field-label">Валюта</label>
-        <div className="toggle-group">
-          <button className={options.currency === 'ue' ? 'on' : ''} onClick={() => setOptions({ ...options, currency: 'ue' })}>у.е.</button>
-          <button className={options.currency === 'sum' ? 'on' : ''} onClick={() => setOptions({ ...options, currency: 'sum' })}>UZS</button>
-        </div>
-      </div>
-      <div className="field">
-        <label className="field-label">Оплата</label>
-        <div className="toggle-group">
-          <button className={options.paymentType === 'cash' ? 'on' : ''} onClick={() => setOptions({ ...options, paymentType: 'cash' })}>Нал</button>
-          <button className={options.paymentType === 'transfer' ? 'on' : ''} onClick={() => setOptions({ ...options, paymentType: 'transfer' })}>Безнал</button>
-        </div>
-      </div>
-    </div>
-    {options.paymentType === 'transfer' && (
-      <div className="transfer-box scale-in">
-        <div className="row cols-2">
-          <div className="field" style={{ marginBottom: 0 }}>
-            <label className="field-label">Курс (1 у.е.)</label>
-            <input className="field-input" type="number" value={options.exchangeRate} onChange={e => setOptions({ ...options, exchangeRate: Number(e.target.value) })} />
-          </div>
-          <div className="field" style={{ marginBottom: 0 }}>
-            <label className="field-label">Накрутка %</label>
-            <input className="field-input" type="number" value={options.transferFee} onChange={e => setOptions({ ...options, transferFee: Number(e.target.value) })} />
-          </div>
-        </div>
-      </div>
-    )}
-  </div>
-))
-
-const ObjectSection = memo(({ client, setClient, company, setCompany, objectType, setObjectType, registrationDate, setRegistrationDate, address, setAddress, status }: any) => (
-  <div className="section">
-    <SectionHeader icon={Building2} title="Объект" color="green" status={status} />
-    <div className="row cols-4">
-      <div className="field">
-        <label className="field-label">Название</label>
-        <input className="field-input" placeholder="ЖК 'Tashkent City'" value={client} onChange={e => setClient(e.target.value)} />
-      </div>
-      <div className="field">
-        <label className="field-label">Компания</label>
-        <input className="field-input" placeholder="ООО 'ST-STROY'" value={company} onChange={e => setCompany(e.target.value)} />
-      </div>
-      <div className="field">
-        <label className="field-label">Тип</label>
-        <input className="field-input" placeholder="БЦ / ЖК / Завод" value={objectType} onChange={e => setObjectType(e.target.value)} />
-      </div>
-      <div className="field">
-        <label className="field-label">Месяц регистрации</label>
-        <input className="field-input" type="month" value={registrationDate} onChange={e => setRegistrationDate(e.target.value)} />
-      </div>
-    </div>
-    <div className="field" style={{ marginTop: '0.25rem' }}>
-      <label className="field-label">Адрес</label>
-      <input className="field-input" placeholder="г. Ташкент, ул. Навои, 12" value={address} onChange={e => setAddress(e.target.value)} />
-    </div>
-  </div>
-))
-
-const ContactSection = memo(({ data, onChange, status }: any) => (
-  <div className="section">
-    <SectionHeader icon={Phone} title="Контактное лицо" color="orange" status={status} />
-    <div className="row cols-3">
-      <div className="field" style={{ marginBottom: 0 }}>
         <label className="field-label">ФИО</label>
-        <input className="field-input" placeholder="Петров Пётр" value={data.name} onChange={e => onChange({ ...data, name: e.target.value })} />
+        <input className="field-input" placeholder="Иванов Иван" 
+          value={local.name} 
+          onChange={e => setLocal({ ...local, name: e.target.value })} 
+          onBlur={blur}
+        />
       </div>
-      <div className="field" style={{ marginBottom: 0 }}>
-        <label className="field-label">Телефон</label>
-        <input className="field-input" placeholder="+998 90 123 45 67" value={data.phone} onChange={e => onChange({ ...data, phone: e.target.value })} />
-      </div>
-      <div className="field" style={{ marginBottom: 0 }}>
-        <label className="field-label">Должность</label>
-        <input className="field-input" placeholder="Главный инженер" value={data.position} onChange={e => onChange({ ...data, position: e.target.value })} />
+      <div className="row cols-2">
+        <div className="field">
+          <label className="field-label">Телефон</label>
+          <input className="field-input" placeholder="+998" 
+            value={local.phone} 
+            onChange={e => setLocal({ ...local, phone: e.target.value })} 
+            onBlur={blur}
+          />
+        </div>
+        <div className="field">
+          <label className="field-label">Email</label>
+          <input className="field-input" type="email" placeholder="name@umbt.uz" 
+            value={local.email} 
+            onChange={e => setLocal({ ...local, email: e.target.value })} 
+            onBlur={blur}
+          />
+        </div>
       </div>
     </div>
-  </div>
-))
+  );
+});
+
+const SettingsSection = memo(({ cpName, setCpName, equipmentType, setEquipmentType, options, setOptions, status }: any) => {
+  const [lCp, setLCp] = useState(cpName);
+  const [lEq, setLEq] = useState(equipmentType);
+  const [lRate, setLRate] = useState(options.exchangeRate);
+  const [lFee, setLFee] = useState(options.transferFee);
+
+  useEffect(() => { setLCp(cpName); }, [cpName]);
+  useEffect(() => { setLEq(equipmentType); }, [equipmentType]);
+  useEffect(() => { setLRate(options.exchangeRate); }, [options.exchangeRate]);
+  useEffect(() => { setLFee(options.transferFee); }, [options.transferFee]);
+
+  return (
+    <div className="section">
+      <SectionHeader icon={Briefcase} title="Настройки КП" color="blue" status={status} />
+      <div className="row cols-2">
+        <div className="field">
+          <label className="field-label">Номер КП</label>
+          <input className="field-input" value={lCp} onChange={e => setLCp(e.target.value)} onBlur={() => setCpName(lCp)} />
+        </div>
+        <div className="field">
+          <label className="field-label">Тип оборудования</label>
+          <input className="field-input" placeholder="VRF / Чиллер" value={lEq} onChange={e => setLEq(e.target.value)} onBlur={() => setEquipmentType(lEq)} />
+        </div>
+      </div>
+      <div className="row cols-3" style={{ marginTop: '0.5rem' }}>
+        <div className="field">
+          <label className="field-label">Фото</label>
+          <div className="toggle-group">
+            <button className={options.showImages ? 'on' : ''} onClick={() => setOptions({ ...options, showImages: true })}>Да</button>
+            <button className={!options.showImages ? 'on' : ''} onClick={() => setOptions({ ...options, showImages: false })}>Нет</button>
+          </div>
+        </div>
+        <div className="field">
+          <label className="field-label">Валюта</label>
+          <div className="toggle-group">
+            <button className={options.currency === 'ue' ? 'on' : ''} onClick={() => setOptions({ ...options, currency: 'ue' })}>у.е.</button>
+            <button className={options.currency === 'sum' ? 'on' : ''} onClick={() => setOptions({ ...options, currency: 'sum' })}>UZS</button>
+          </div>
+        </div>
+        <div className="field">
+          <label className="field-label">Оплата</label>
+          <div className="toggle-group">
+            <button className={options.paymentType === 'cash' ? 'on' : ''} onClick={() => setOptions({ ...options, paymentType: 'cash' })}>Нал</button>
+            <button className={options.paymentType === 'transfer' ? 'on' : ''} onClick={() => setOptions({ ...options, paymentType: 'transfer' })}>Безнал</button>
+          </div>
+        </div>
+      </div>
+      {options.paymentType === 'transfer' && (
+        <div className="transfer-box scale-in" style={{ opacity: 1 }}>
+          <div className="row cols-2">
+            <div className="field" style={{ marginBottom: 0 }}>
+              <label className="field-label">Курс (1 у.е.)</label>
+              <input className="field-input" type="number" value={lRate} onChange={e => setLRate(Number(e.target.value))} onBlur={() => setOptions({ ...options, exchangeRate: lRate })} />
+            </div>
+            <div className="field" style={{ marginBottom: 0 }}>
+              <label className="field-label">Накрутка %</label>
+              <input className="field-input" type="number" value={lFee} onChange={e => setLFee(Number(e.target.value))} onBlur={() => setOptions({ ...options, transferFee: lFee })} />
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+});
+
+const ObjectSection = memo(({ client, setClient, company, setCompany, objectType, setObjectType, registrationDate, setRegistrationDate, address, setAddress, status }: any) => {
+  const [lCli, setLCli] = useState(client);
+  const [lCom, setLCom] = useState(company);
+  const [lObj, setLObj] = useState(objectType);
+  const [lReg, setLReg] = useState(registrationDate);
+  const [lAdr, setLAdr] = useState(address);
+
+  useEffect(() => { setLCli(client); }, [client]);
+  useEffect(() => { setLCom(company); }, [company]);
+  useEffect(() => { setLObj(objectType); }, [objectType]);
+  useEffect(() => { setLReg(registrationDate); }, [registrationDate]);
+  useEffect(() => { setLAdr(address); }, [address]);
+
+  return (
+    <div className="section">
+      <SectionHeader icon={Building2} title="Объект" color="green" status={status} />
+      <div className="row cols-4">
+        <div className="field">
+          <label className="field-label">Название</label>
+          <input className="field-input" placeholder="ЖК 'Tashkent City'" value={lCli} onChange={e => setLCli(e.target.value)} onBlur={() => setClient(lCli)} />
+        </div>
+        <div className="field">
+          <label className="field-label">Компания</label>
+          <input className="field-input" placeholder="ООО 'ST-STROY'" value={lCom} onChange={e => setLCom(e.target.value)} onBlur={() => setCompany(lCom)} />
+        </div>
+        <div className="field">
+          <label className="field-label">Тип</label>
+          <input className="field-input" placeholder="БЦ / ЖК / Завод" value={lObj} onChange={e => setLObj(e.target.value)} onBlur={() => setObjectType(lObj)} />
+        </div>
+        <div className="field">
+          <label className="field-label">Месяц регистрации</label>
+          <input className="field-input" type="month" value={lReg} onChange={e => setLReg(e.target.value)} onBlur={() => setRegistrationDate(lReg)} />
+        </div>
+      </div>
+      <div className="field" style={{ marginTop: '0.25rem' }}>
+        <label className="field-label">Адрес</label>
+        <input className="field-input" placeholder="г. Ташкент, ул. Навои, 12" value={lAdr} onChange={e => setLAdr(e.target.value)} onBlur={() => setAddress(lAdr)} />
+      </div>
+    </div>
+  );
+});
+
+const ContactSection = memo(({ data, onChange, status }: any) => {
+  const [local, setLocal] = useState(data);
+  useEffect(() => { setLocal(data); }, [data]);
+  const blur = () => onChange(local);
+
+  return (
+    <div className="section">
+      <SectionHeader icon={Phone} title="Контактное лицо" color="orange" status={status} />
+      <div className="row cols-3">
+        <div className="field" style={{ marginBottom: 0 }}>
+          <label className="field-label">ФИО</label>
+          <input className="field-input" placeholder="Петров Пётр" value={local.name} onChange={e => setLocal({ ...local, name: e.target.value })} onBlur={blur} />
+        </div>
+        <div className="field" style={{ marginBottom: 0 }}>
+          <label className="field-label">Телефон</label>
+          <input className="field-input" placeholder="+998 90 123 45 67" value={local.phone} onChange={e => setLocal({ ...local, phone: e.target.value })} onBlur={blur} />
+        </div>
+        <div className="field" style={{ marginBottom: 0 }}>
+          <label className="field-label">Должность</label>
+          <input className="field-input" placeholder="Главный инженер" value={local.position} onChange={e => setLocal({ ...local, position: e.target.value })} onBlur={blur} />
+        </div>
+      </div>
+    </div>
+  );
+});
 
 export default function Home() {
   const [manager, setManager] = useState({ name: '', phone: '', email: '' })
