@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
 
     // 1. Generate Google Slides Presentation and PDF
     console.log('Generating Google Slides and PDF...');
-    const { presentationId, pdfUrl, pdfBuffer } = await generateSlidesKP({
+    const { presentationId, pdfUrl, pdfBuffer, auditError } = await generateSlidesKP({
       cpName,
       client,
       items,
@@ -36,6 +36,7 @@ export async function POST(req: NextRequest) {
         'X-Presentation-Id': presentationId,
         'X-Presentation-Url': url,
         'X-PDF-Url': pdfUrl || '',
+        'X-Audit-Error': auditError || '',
         'X-Success': 'true'
       }
     });

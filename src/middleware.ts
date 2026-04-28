@@ -8,13 +8,10 @@ export async function middleware(req: NextRequest) {
   const isProtectedPage = req.nextUrl.pathname === '/';
   const isProtectedApi = req.nextUrl.pathname.startsWith('/api/') && !req.nextUrl.pathname.startsWith('/api/auth');
 
-  // Temporarily disable auth for testing
-  return NextResponse.next();
-/*
   if (!isProtectedPage && !isProtectedApi) {
     return NextResponse.next();
   }
-*/
+
 
   const token = req.cookies.get('umbt_auth')?.value;
 

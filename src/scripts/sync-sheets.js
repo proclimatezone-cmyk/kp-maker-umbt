@@ -198,6 +198,7 @@ export async function syncSheets() {
     } catch (fsErr) {
       console.warn('Could not save to local file (expected on Vercel):', fsErr.message);
     }
+
     
     console.log(`SUCCESS: Synced ${products.length} products.`);
     return { count: products.length, products };

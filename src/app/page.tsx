@@ -274,8 +274,25 @@ export default function Home() {
       const d = new Date()
       setCpName(`КП-${d.toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit', year: '2-digit' }).replace(/\./g, '')}/01`)
     }
+
+    const loadData = async () => {
+      try {
+        const res = await fetch('/api/products');
+        const data = await res.json();
+        if (data.success && data.products.length > 0) {
+          setProducts(data.products);
+          localStorage.setItem('umbt_products', JSON.stringify(data.products));
+        }
+      } catch (e) {
+        console.error('Failed to load products from API:', e);
+      }
+    };
+
+    loadData();
     setIsMounted(true)
   }, [uid])
+
+
 
   // --- Autosave ---
   useEffect(() => {
@@ -348,7 +365,13 @@ export default function Home() {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ manager, client, cpName, items: items.map(i => { const p = products.find(x => x.id === i.productId); return p ? { ...p, quantity: i.quantity } : null; }).filter(Boolean), total: totalPrice, extraData: { company, address, objectType, registrationDate, equipmentType, contactPerson }, options })
       })
-      if (r.ok) { const b = await r.blob(); const url = URL.createObjectURL(b); setLastPdfUrl(url); const a = document.createElement('a'); a.href = url; a.download = `${cpName}.pdf`; a.click(); }
+      if (r.ok) { 
+        const auditErr = r.headers.get('X-Audit-Error');
+        if (auditErr) {
+          alert('⚠️ PDF готов, но данные НЕ записаны в таблицу аудита!\nОшибка: ' + auditErr);
+        }
+        const b = await r.blob(); const url = URL.createObjectURL(b); setLastPdfUrl(url); const a = document.createElement('a'); a.href = url; a.download = `${cpName}.pdf`; a.click(); 
+      }
       else { const e = await r.json(); alert(`Ошибка: ${e.error}`) }
     } catch { alert('Критическая ошибка') } finally { setLoading(false) }
   }
