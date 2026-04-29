@@ -271,7 +271,7 @@ export async function generateSlidesKP(data: {
       activeSlideIds.add(sId);
       const isLastTable = t === tablesData.length - 1;
       const tableId = `kp_${Date.now()}_${t}`;
-      const extraRows = isLastTable ? (opts.paymentType === 'transfer' ? 2 : 1) : 0;
+      const extraRows = isLastTable ? 1 : 0;
       const displayRows = 1 + tData.rows + extraRows;
       
       // Calculate real table height based on row types
@@ -392,14 +392,7 @@ export async function generateSlidesKP(data: {
           const totIdxL = opts.showImages ? 4 : 3;
           const totIdxR = opts.showImages ? 5 : 4;
           
-          if (opts.paymentType === 'transfer') {
-              tableReqs.push({ insertText: { objectId: tableId, cellLocation: { rowIndex: r, columnIndex: totIdxL }, text: `Оплата: Перечисление (${opts.transferFee}%)` } });
-              tableReqs.push({ insertText: { objectId: tableId, cellLocation: { rowIndex: r, columnIndex: totIdxR }, text: ' ' } });
-              tableReqs.push({ updateTableCellProperties: { objectId: tableId, tableRange: { location: { rowIndex: r, columnIndex: totIdxL }, rowSpan: 1, columnSpan: 1 }, tableCellProperties: { tableCellBackgroundFill: { solidFill: { color: { rgbColor: COLORS.ROW_BG } } }, contentAlignment: 'MIDDLE' }, fields: 'tableCellBackgroundFill,contentAlignment' }});
-              tableReqs.push({ updateTableCellProperties: { objectId: tableId, tableRange: { location: { rowIndex: r, columnIndex: totIdxR }, rowSpan: 1, columnSpan: 1 }, tableCellProperties: { tableCellBackgroundFill: { solidFill: { color: { rgbColor: COLORS.ROW_BG } } }, contentAlignment: 'MIDDLE' }, fields: 'tableCellBackgroundFill,contentAlignment' }});
-              r++;
-              currentRowY += HEADER_FOOTER_H;
-          }
+
 
 
           tableReqs.push({ insertText: { objectId: tableId, cellLocation: { rowIndex: r, columnIndex: totIdxL }, text: 'Итого:' } });
@@ -418,10 +411,7 @@ export async function generateSlidesKP(data: {
           if (totIdxL > 1) {
             tableReqs.push({ mergeTableCells: { objectId: tableId, tableRange: { location: { rowIndex: r, columnIndex: 0 }, rowSpan: 1, columnSpan: totIdxL } } });
           }
-          // Also merge on transfer row if present
-          if (opts.paymentType === 'transfer' && totIdxL > 1) {
-            tableReqs.push({ mergeTableCells: { objectId: tableId, tableRange: { location: { rowIndex: r - 1, columnIndex: 0 }, rowSpan: 1, columnSpan: totIdxL } } });
-          }
+
       }
 
       // Column widths & borders
