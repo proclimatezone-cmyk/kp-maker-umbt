@@ -345,7 +345,7 @@ export async function generateSlidesKP(data: {
 
           // Category cell
           const catIdx = opts.showImages ? 1 : 0;
-          const catText = `${group.category}${group.series ? `\n${group.series}` : ''}`.trim();
+          const catText = group.category.trim();
           tableReqs.push({ insertText: { objectId: tableId, cellLocation: { rowIndex: r, columnIndex: catIdx }, text: catText || ' ' } });
 
           // Model rows
