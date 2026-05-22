@@ -19,7 +19,15 @@ const OUTPUT_FILE = path.join(__dirname, '..', 'data', 'products.json');
 const IMG_DIR = path.join(__dirname, '..', '..', 'public', 'images', 'products');
 // ----------------------
 
-if (!fs.existsSync(IMG_DIR)) fs.mkdirSync(IMG_DIR, { recursive: true });
+const isVercel = process.env.VERCEL === '1';
+
+if (!isVercel && !fs.existsSync(IMG_DIR)) {
+  try {
+    fs.mkdirSync(IMG_DIR, { recursive: true });
+  } catch (err) {
+    console.warn('Could not create images directory:', err.message);
+  }
+}
 
 export async function syncSheets() {
   console.log('--- STARTING SYNC WITH GOOGLE DRIVE IMAGES ---');
@@ -50,6 +58,24 @@ export async function syncSheets() {
     const products = [];
     const imageCache = new Map(); // To avoid re-downloading same images
 
+    // Load existing products to populate imageCache and speed up sync dramatically
+    try {
+      if (fs.existsSync(OUTPUT_FILE)) {
+        const existingData = JSON.parse(fs.readFileSync(OUTPUT_FILE, 'utf8'));
+        for (const p of existingData) {
+          if (p.driveImage && p.image) {
+            imageCache.set(p.driveImage, {
+              localImagePath: p.image,
+              slidesImage: p.slidesImage || p.image
+            });
+          }
+        }
+        console.log(`Loaded ${imageCache.size} cached images from existing products list.`);
+      }
+    } catch (err) {
+      console.warn('Failed to load existing products cache:', err.message);
+    }
+
     for (let i = 0; i < rows.length; i++) {
       const row = rows[i];
       const category = row[0];
@@ -64,8 +90,15 @@ export async function syncSheets() {
       let localImagePath = '/images/products/placeholder.png';
 
       let slidesImage = '';
+      
+      // Fast path: check image cache by full URL first
+      if (imageUrl && imageCache.has(imageUrl)) {
+        const cached = imageCache.get(imageUrl);
+        localImagePath = cached.localImagePath;
+        slidesImage = cached.slidesImage;
+      }
       // Handle Google Drive Folder/File URLs
-      if (imageUrl && imageUrl.includes('drive.google.com')) {
+      else if (imageUrl && imageUrl.includes('drive.google.com')) {
         try {
           let fileId = '';
           if (imageUrl.includes('folders/')) {
@@ -99,26 +132,32 @@ export async function syncSheets() {
                 } catch (e) {
                   console.warn(`Could not set permissions for file ${fileId}: ${e.message}`);
                 }
-                const ext = folderFiles.data.files[0].fileExtension || 'png';
-                const fileName = `${folderId}.${ext}`;
-                const fullPath = path.join(IMG_DIR, fileName);
-                
-                if (!fs.existsSync(fullPath)) {
-                  console.log(`Downloading image: ${fileName}`);
-                  const dest = fs.createWriteStream(fullPath);
-                  const res = await drive.files.get(
-                    { fileId, alt: 'media' },
-                    { responseType: 'stream' }
-                  );
-                  await new Promise((resolve, reject) => {
-                    res.data
-                      .on('end', () => resolve())
-                      .on('error', err => reject(err))
-                      .pipe(dest);
-                  });
+
+                if (isVercel) {
+                  localImagePath = slidesImage;
+                } else {
+                  const ext = folderFiles.data.files[0].fileExtension || 'png';
+                  const fileName = `${folderId}.${ext}`;
+                  const fullPath = path.join(IMG_DIR, fileName);
+                  
+                  if (!fs.existsSync(fullPath)) {
+                    console.log(`Downloading image: ${fileName}`);
+                    const dest = fs.createWriteStream(fullPath);
+                    const res = await drive.files.get(
+                      { fileId, alt: 'media' },
+                      { responseType: 'stream' }
+                    );
+                    await new Promise((resolve, reject) => {
+                      res.data
+                        .on('end', () => resolve())
+                        .on('error', err => reject(err))
+                        .pipe(dest);
+                    });
+                  }
+                  localImagePath = `/images/products/${fileName}`;
                 }
-                localImagePath = `/images/products/${fileName}`;
                 imageCache.set(folderId, { localImagePath, slidesImage });
+                imageCache.set(imageUrl, { localImagePath, slidesImage });
               }
             }
           } else {
@@ -134,11 +173,6 @@ export async function syncSheets() {
                 localImagePath = imageCache.get(fileId).localImagePath;
                 slidesImage = imageCache.get(fileId).slidesImage;
               } else {
-                const fileInfo = await drive.files.get({
-                  fileId: fileId,
-                  fields: 'id, name, fileExtension, thumbnailLink'
-                });
-                // Publicly accessible format for Google Slides (uc?id is often more reliable)
                 slidesImage = `https://drive.google.com/uc?id=${fileId}`;
                 
                 // Make file public so Slides API can access the link
@@ -151,25 +185,34 @@ export async function syncSheets() {
                   console.warn(`Could not set permissions for file ${fileId}: ${e.message}`);
                 }
 
-                const ext = fileInfo.data.fileExtension || 'png';
-                const fileName = `${fileId}.${ext}`;
-                const fullPath = path.join(IMG_DIR, fileName);
-                if (!fs.existsSync(fullPath)) {
-                  console.log(`Downloading image file: ${fileName}`);
-                  const dest = fs.createWriteStream(fullPath);
-                  const res = await drive.files.get(
-                    { fileId, alt: 'media' },
-                    { responseType: 'stream' }
-                  );
-                  await new Promise((resolve, reject) => {
-                    res.data
-                      .on('end', () => resolve())
-                      .on('error', err => reject(err))
-                      .pipe(dest);
+                if (isVercel) {
+                  localImagePath = slidesImage;
+                } else {
+                  const fileInfo = await drive.files.get({
+                    fileId: fileId,
+                    fields: 'id, name, fileExtension, thumbnailLink'
                   });
+                  const ext = fileInfo.data.fileExtension || 'png';
+                  const fileName = `${fileId}.${ext}`;
+                  const fullPath = path.join(IMG_DIR, fileName);
+                  if (!fs.existsSync(fullPath)) {
+                    console.log(`Downloading image file: ${fileName}`);
+                    const dest = fs.createWriteStream(fullPath);
+                    const res = await drive.files.get(
+                      { fileId, alt: 'media' },
+                      { responseType: 'stream' }
+                    );
+                    await new Promise((resolve, reject) => {
+                      res.data
+                        .on('end', () => resolve())
+                        .on('error', err => reject(err))
+                        .pipe(dest);
+                    });
+                  }
+                  localImagePath = `/images/products/${fileName}`;
                 }
-                localImagePath = `/images/products/${fileName}`;
                 imageCache.set(fileId, { localImagePath, slidesImage });
+                imageCache.set(imageUrl, { localImagePath, slidesImage });
               }
             }
           }
