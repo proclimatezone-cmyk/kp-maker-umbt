@@ -339,7 +339,7 @@ export async function generateSlidesKP(data: {
 
   const placeholders = [
     { find: '{{client}}', replace: data.client },
-    { find: '{{title}}', replace: `Коммерческое предложение ${data.cpName}` },
+    { find: '{{title}}', replace: `Коммерческое предложение № ${data.cpName.replace(/^КП-/, '')}` },
     { find: '{{date_text}}', replace: `Дата ${new Date().toLocaleDateString('ru-RU')}` },
     { find: '{{manager_name}}', replace: data.manager.name },
     { find: '{{manager_phone}}', replace: data.manager.phone },
