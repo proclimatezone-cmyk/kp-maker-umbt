@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useMemo, useCallback, memo } from 'react'
-import { Plus, Trash2, FileText, User, Briefcase, Calculator, Search, RefreshCw, Building2, Phone, CheckCircle, CloudCheck, Loader2 } from 'lucide-react'
+import { Plus, Trash2, FileText, User, Briefcase, Calculator, Search, RefreshCw, Building2, Phone, CheckCircle, CloudCheck, Loader2, Copy } from 'lucide-react'
 import productsData from '@/data/products.json'
 
 interface Item { id: string; productId: string; quantity: number }
@@ -231,7 +231,36 @@ const ModelSearchSelector = memo(({ value, onChange, cleanProducts }: { value: s
           }, 200);
         }}
         placeholder="Поиск модели..."
+        style={{ paddingRight: '2.2rem' }}
       />
+      {currentProduct && !isOpen && (
+        <button 
+          onClick={(e) => {
+            e.stopPropagation();
+            navigator.clipboard.writeText(currentProduct.model);
+          }}
+          title="Копировать название модели"
+          style={{
+            position: 'absolute',
+            right: '0.4rem',
+            top: '50%',
+            transform: 'translateY(-50%)',
+            background: 'transparent',
+            border: 'none',
+            cursor: 'pointer',
+            color: 'var(--text-muted)',
+            display: 'flex',
+            alignItems: 'center',
+            padding: '4px',
+            borderRadius: '4px',
+            transition: 'all 0.15s'
+          }}
+          onMouseOver={(e) => e.currentTarget.style.color = 'var(--accent)'}
+          onMouseOut={(e) => e.currentTarget.style.color = 'var(--text-muted)'}
+        >
+          <Copy size={13} />
+        </button>
+      )}
       {isOpen && (
         <div className="model-selector-dropdown">
           {filtered.length === 0 ? (
@@ -258,7 +287,7 @@ const ModelSearchSelector = memo(({ value, onChange, cleanProducts }: { value: s
   );
 });
 
-const EquipmentRow = memo(({ item, products, cleanProducts, onUpdate, onDelete, calculatePrice, currencyLabel }: any) => {
+const EquipmentRow = memo(({ item, products, cleanProducts, onUpdate, onDelete, onClone, calculatePrice, currencyLabel }: any) => {
   const p = products.find((x: any) => x.id === item.productId);
   const [qty, setQty] = useState<number | string>(item.quantity);
   useEffect(() => { setQty(item.quantity); }, [item.quantity]);
@@ -300,9 +329,19 @@ const EquipmentRow = memo(({ item, products, cleanProducts, onUpdate, onDelete, 
         <span className="sum">{(p ? calculatePrice(p.price) * (Number(qty) || 0) : 0).toLocaleString()}</span>
       </td>
       <td style={{ textAlign: 'right' }}>
-        <button className="btn-danger" onClick={() => onDelete(item.id)}>
-          <Trash2 size={15} />
-        </button>
+        <div style={{ display: 'flex', gap: '0.4rem', justifyContent: 'flex-end', alignItems: 'center' }}>
+          <button 
+            className="btn-danger" 
+            style={{ background: 'transparent', color: 'var(--text-muted)', padding: '0.4rem' }}
+            onClick={() => onClone(item.id)} 
+            title="Дублировать строку"
+          >
+            <Copy size={14} />
+          </button>
+          <button className="btn-danger" onClick={() => onDelete(item.id)} title="Удалить строку">
+            <Trash2 size={15} />
+          </button>
+        </div>
       </td>
     </tr>
   );
@@ -319,6 +358,8 @@ export default function Home() {
   const [equipmentType, setEquipmentType] = useState('')
   const [contactPerson, setContactPerson] = useState({ name: '', phone: '', position: '' })
   const [items, setItems] = useState<Item[]>([])
+  const [partnerBonusType, setPartnerBonusType] = useState<'percent' | 'fixed'>('percent')
+  const [partnerBonusValue, setPartnerBonusValue] = useState<number>(0)
   const [loading, setLoading] = useState(false)
   const [syncing, setSyncing] = useState(false)
   const [lastPdfUrl, setLastPdfUrl] = useState<string | null>(null)
@@ -360,6 +401,8 @@ export default function Home() {
       const savedOptions = s('umbt_options'); if (savedOptions) setOptions(JSON.parse(savedOptions))
       const prod = s('umbt_products'); if (prod) setProducts(JSON.parse(prod))
       const savedCp = s('umbt_cpName'); if (savedCp) setCpName(savedCp)
+      if (s('umbt_bonusType')) setPartnerBonusType(s('umbt_bonusType') as 'percent' | 'fixed')
+      if (s('umbt_bonusValue')) setPartnerBonusValue(Number(s('umbt_bonusValue')) || 0)
     } catch {}
     if (!s('umbt_cpName')) {
       const d = new Date()
@@ -403,12 +446,14 @@ export default function Home() {
         localStorage.setItem('umbt_options', JSON.stringify(options))
         localStorage.setItem('umbt_products', JSON.stringify(products))
         localStorage.setItem('umbt_cpName', cpName)
+        localStorage.setItem('umbt_bonusType', partnerBonusType)
+        localStorage.setItem('umbt_bonusValue', partnerBonusValue.toString())
         setSaveStatus('saved')
         setTimeout(() => setSaveStatus('idle'), 2000)
       } catch (e) { console.error(e) }
     }, 1000)
     return () => clearTimeout(timer)
-  }, [manager, client, company, address, objectType, registrationDate, equipmentType, contactPerson, items, options, products, cpName, isMounted])
+  }, [manager, client, company, address, objectType, registrationDate, equipmentType, contactPerson, items, options, products, cpName, partnerBonusType, partnerBonusValue, isMounted])
 
   const cleanProducts = useMemo(() => products.filter(p => p.model && !p.model.startsWith('---') && p.id && !p.id.startsWith('---')), [products])
   const filteredProducts = useMemo(() => {
@@ -429,6 +474,13 @@ export default function Home() {
     return sum + (p ? calculatePrice(p.price) * item.quantity : 0)
   }, 0), [items, products, calculatePrice])
 
+  const partnerBonusSum = useMemo(() => {
+    if (partnerBonusType === 'percent') {
+      return Math.round(totalPrice * (Number(partnerBonusValue) / 100));
+    }
+    return Number(partnerBonusValue) || 0;
+  }, [totalPrice, partnerBonusType, partnerBonusValue]);
+
   const currencyLabel = options.currency === 'sum' ? 'сум' : 'у.е.'
 
   const updateItem = useCallback((id: string, updates: Partial<Item>) => {
@@ -438,6 +490,18 @@ export default function Home() {
   const deleteItem = useCallback((id: string) => {
     setItems(prev => prev.length > 1 ? prev.filter(i => i.id !== id) : prev)
   }, [])
+
+  const cloneItem = useCallback((id: string) => {
+    setItems(prev => {
+      const idx = prev.findIndex(i => i.id === id);
+      if (idx === -1) return prev;
+      const target = prev[idx];
+      const newItem = { ...target, id: uid() };
+      const copy = [...prev];
+      copy.splice(idx + 1, 0, newItem);
+      return copy;
+    });
+  }, [uid]);
 
   const handleSync = async () => {
     setSyncing(true)
@@ -525,15 +589,43 @@ export default function Home() {
               </thead>
               <tbody>
                 {items.map(item => (
-                  <EquipmentRow key={item.id} item={item} products={products} cleanProducts={cleanProducts} onUpdate={updateItem} onDelete={deleteItem} calculatePrice={calculatePrice} currencyLabel={currencyLabel} />
+                  <EquipmentRow key={item.id} item={item} products={products} cleanProducts={cleanProducts} onUpdate={updateItem} onDelete={deleteItem} onClone={cloneItem} calculatePrice={calculatePrice} currencyLabel={currencyLabel} />
                 ))}
               </tbody>
             </table>
           </div>
-          <div className="total-bar">
-            <span className="total-label">Итого</span>
-            <span className="total-value">{totalPrice.toLocaleString()}</span>
-            <span className="total-currency">{currencyLabel}</span>
+          <div className="total-area" style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginTop: '1.25rem', paddingTop: '1rem', borderTop: '1px solid var(--border)' }}>
+            <div className="total-bar" style={{ marginTop: 0, paddingTop: 0, borderTop: 'none' }}>
+              <span className="total-label">Итого</span>
+              <span className="total-value">{totalPrice.toLocaleString()}</span>
+              <span className="total-currency">{currencyLabel}</span>
+            </div>
+            
+            <div className="bonus-bar" style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+              <span className="total-label" style={{ color: 'var(--text-secondary)', fontSize: '0.65rem' }}>Партнерский бонус</span>
+              <div className="toggle-group" style={{ width: 'auto', display: 'inline-flex', padding: '2px', border: '1px solid var(--border)' }}>
+                <button className={partnerBonusType === 'percent' ? 'on' : ''} style={{ padding: '0.2rem 0.5rem', fontSize: '0.75rem' }} onClick={() => setPartnerBonusType('percent')}>%</button>
+                <button className={partnerBonusType === 'fixed' ? 'on' : ''} style={{ padding: '0.2rem 0.5rem', fontSize: '0.75rem' }} onClick={() => setPartnerBonusType('fixed')}>{currencyLabel}</button>
+              </div>
+              <input 
+                className="qty-input" 
+                type="number" 
+                min="0"
+                value={partnerBonusValue}
+                onChange={e => setPartnerBonusValue(Math.max(0, parseInt(e.target.value) || 0))}
+                onFocus={e => e.target.select()}
+                style={{ width: '80px', padding: '0.25rem 0.5rem', fontSize: '0.85rem' }}
+              />
+              <span className="bonus-sum-value" style={{ fontWeight: 600, color: 'var(--accent)', fontSize: '1.1rem' }}>
+                - {partnerBonusSum.toLocaleString()} {currencyLabel}
+              </span>
+            </div>
+            
+            <div className="final-net-bar" style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'baseline', gap: '0.5rem', borderTop: '1px dashed var(--border)', paddingTop: '0.5rem' }}>
+              <span className="total-label" style={{ fontSize: '0.65rem' }}>За вычетом бонуса</span>
+              <span className="total-value" style={{ fontSize: '1.5rem', color: 'var(--text-secondary)' }}>{(totalPrice - partnerBonusSum).toLocaleString()}</span>
+              <span className="total-currency" style={{ fontSize: '0.85rem' }}>{currencyLabel}</span>
+            </div>
           </div>
         </div>
 

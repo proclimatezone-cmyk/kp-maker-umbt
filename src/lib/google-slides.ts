@@ -148,32 +148,106 @@ export async function generateSlidesKP(data: {
   });
   
 
-  // 3. Split groups into per-slide chunks
-  const tablesData: { slideIndex: number, groups: GroupedItem[], rows: number }[] = [];
-  let currentTable: { slideIndex: number, groups: GroupedItem[], rows: number } = { slideIndex: 0, groups: [], rows: 0 };
-  
-  for (const group of groups) {
+  // 3. Split groups into per-slide chunks based on height in EMU
+  const tablesData: { slideIndex: number, groups: GroupedItem[], height: number, rows: number }[] = [];
+  let currentSlideIndex = 0;
+  let currentGroups: GroupedItem[] = [];
+
+  const calculateHeight = (slideGroups: GroupedItem[], isLast: boolean) => {
+    let h = HEADER_FOOTER_H; // Header row height
+    slideGroups.forEach(g => {
+      const rowH = isAccessory(g) ? ACCESSORY_ROW_H : PRODUCT_ROW_H;
+      h += g.models.length * rowH;
+    });
+    if (isLast) {
+      h += HEADER_FOOTER_H; // Footer "Total" row height
+    }
+    return h;
+  };
+
+  const countRows = (slideGroups: GroupedItem[]) => {
+    return slideGroups.reduce((sum, g) => sum + g.models.length, 0);
+  };
+
+  const MAX_HEIGHT = 5300000; // EMU limit for table height on a single slide
+
+  for (let gIdx = 0; gIdx < groups.length; gIdx++) {
+    const group = groups[gIdx];
     let modelsRemaining = [...group.models];
     
     while (modelsRemaining.length > 0) {
-      const limit = currentTable.slideIndex === 0 ? MAX_ROWS_SLIDE_1 : MAX_ROWS_SLIDE_N;
-      const spaceLeft = Math.max(0, limit - currentTable.rows);
+      const modelToTest = modelsRemaining[0];
       
-      if (spaceLeft === 0) {
-        tablesData.push(currentTable);
-        currentTable = { slideIndex: currentTable.slideIndex + 1, groups: [], rows: 0 };
-        continue;
+      const getTestGroups = (existing: GroupedItem[], newModel: any) => {
+        if (existing.length === 0) {
+          return [{ ...group, models: [newModel] }];
+        }
+        const last = existing[existing.length - 1];
+        const isAcc = (c: string) => {
+          const lc = c.toLowerCase();
+          return lc.includes('аксессуар') || lc.includes('автоматика') || lc.includes('пульт') || lc.includes('панель') || lc.includes('опция');
+        };
+        const lastIsAcc = isAcc(last.category);
+        const currentIsAcc = isAcc(group.category);
+        
+        if (last.category === group.category && last.series === group.series && last.image === group.image && lastIsAcc === currentIsAcc) {
+          const copy = existing.map((x, idx) => {
+            if (idx === existing.length - 1) {
+              return { ...x, models: [...x.models, newModel] };
+            }
+            return x;
+          });
+          return copy;
+        } else {
+          return [...existing, { ...group, models: [newModel] }];
+        }
+      };
+
+      const nextTestGroups = getTestGroups(currentGroups, modelToTest);
+      
+      const isActuallyLast = (gIdx === groups.length - 1) && (modelsRemaining.length === 1);
+      const testHeight = calculateHeight(nextTestGroups, isActuallyLast);
+      
+      if (testHeight <= MAX_HEIGHT) {
+        currentGroups = nextTestGroups;
+        modelsRemaining.shift();
+      } else {
+        if (currentGroups.length === 0) {
+          currentGroups = nextTestGroups;
+          modelsRemaining.shift();
+          const forceHeight = calculateHeight(currentGroups, isActuallyLast);
+          tablesData.push({
+            slideIndex: currentSlideIndex,
+            groups: currentGroups,
+            height: forceHeight,
+            rows: countRows(currentGroups)
+          });
+          currentSlideIndex++;
+          currentGroups = [];
+        } else {
+          const finalHeight = calculateHeight(currentGroups, false);
+          tablesData.push({
+            slideIndex: currentSlideIndex,
+            groups: currentGroups,
+            height: finalHeight,
+            rows: countRows(currentGroups)
+          });
+          currentSlideIndex++;
+          currentGroups = [];
+        }
       }
-
-      const take = Math.min(modelsRemaining.length, spaceLeft);
-      const chunkModels = modelsRemaining.slice(0, take);
-      modelsRemaining = modelsRemaining.slice(take);
-
-      currentTable.groups.push({ ...group, models: chunkModels });
-      currentTable.rows += take;
     }
   }
-  if (currentTable.groups.length > 0) tablesData.push(currentTable);
+
+  if (currentGroups.length > 0) {
+    const finalHeight = calculateHeight(currentGroups, true);
+    tablesData.push({
+      slideIndex: currentSlideIndex,
+      groups: currentGroups,
+      height: finalHeight,
+      rows: countRows(currentGroups)
+    });
+  }
 
   // 3. Copy template & duplicate slides
   console.log('Copying template:', TEMPLATE_ID, 'to folder:', TARGET_FOLDER_ID);
