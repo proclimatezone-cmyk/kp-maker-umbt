@@ -15,12 +15,12 @@ const TABLE_STYLE = {
 };
 
 // Layout Constants
-const PRODUCT_ROW_H = 650000;
-const ACCESSORY_ROW_H = 350000;
-const HEADER_FOOTER_H = 450000;
+const PRODUCT_ROW_H = 950000;
+const ACCESSORY_ROW_H = 400000;
+const HEADER_FOOTER_H = 500000;
 const TABLE_WIDTH = 6800000;
 const TABLE_X = 500000;
-const TABLE_START_Y = 1900000;
+const TABLE_START_Y = 2700000;
 const MAX_ROWS_SLIDE_1 = 3;
 const MAX_ROWS_SLIDE_N = 3;
 
@@ -169,7 +169,7 @@ export async function generateSlidesKP(data: {
     return slideGroups.reduce((sum, g) => sum + g.models.length, 0);
   };
 
-  const MAX_HEIGHT = 5300000; // EMU limit for table height on a single slide
+  const MAX_HEIGHT = 4500000; // EMU limit for table height on a single slide
 
   for (let gIdx = 0; gIdx < groups.length; gIdx++) {
     const group = groups[gIdx];
