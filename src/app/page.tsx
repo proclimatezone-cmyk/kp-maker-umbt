@@ -187,17 +187,86 @@ const ContactSection = memo(({ data, onChange }: any) => {
   );
 });
 
+const ModelSearchSelector = memo(({ value, onChange, cleanProducts }: { value: string, onChange: (val: string) => void, cleanProducts: any[] }) => {
+  const currentProduct = cleanProducts.find((p: any) => p.id === value);
+  const [isOpen, setIsOpen] = useState(false);
+  const [query, setQuery] = useState('');
+  
+  useEffect(() => {
+    if (currentProduct) {
+      setQuery(currentProduct.model);
+    }
+  }, [currentProduct]);
+
+  const filtered = useMemo(() => {
+    if (!query) return cleanProducts.slice(0, 50);
+    const q = query.toLowerCase();
+    return cleanProducts.filter((p: any) => 
+      p.model.toLowerCase().includes(q) || 
+      (p.series || '').toLowerCase().includes(q) || 
+      (p.category || '').toLowerCase().includes(q)
+    ).slice(0, 50);
+  }, [query, cleanProducts]);
+
+  return (
+    <div className="model-selector-container" style={{ position: 'relative' }}>
+      <input 
+        className="model-search-input"
+        type="text" 
+        value={query}
+        onChange={e => {
+          setQuery(e.target.value);
+          setIsOpen(true);
+        }}
+        onFocus={() => {
+          setIsOpen(true);
+          setQuery('');
+        }}
+        onBlur={() => {
+          setTimeout(() => {
+            setIsOpen(false);
+            if (currentProduct) {
+              setQuery(currentProduct.model);
+            }
+          }, 200);
+        }}
+        placeholder="Поиск модели..."
+      />
+      {isOpen && (
+        <div className="model-selector-dropdown">
+          {filtered.length === 0 ? (
+            <div className="dropdown-no-results">Ничего не найдено</div>
+          ) : (
+            filtered.map((p: any) => (
+              <div 
+                key={p.id} 
+                className="dropdown-item"
+                onMouseDown={() => {
+                  onChange(p.id);
+                  setQuery(p.model);
+                  setIsOpen(false);
+                }}
+              >
+                <div className="dropdown-item-model">{p.model}</div>
+                <div className="dropdown-item-meta">{p.series || p.category}</div>
+              </div>
+            ))
+          )}
+        </div>
+      )}
+    </div>
+  );
+});
+
 const EquipmentRow = memo(({ item, products, cleanProducts, onUpdate, onDelete, calculatePrice, currencyLabel }: any) => {
   const p = products.find((x: any) => x.id === item.productId);
-  const [qty, setQty] = useState(item.quantity);
+  const [qty, setQty] = useState<number | string>(item.quantity);
   useEffect(() => { setQty(item.quantity); }, [item.quantity]);
 
   return (
     <tr>
       <td data-label="Модель">
-        <select value={item.productId} onChange={e => onUpdate(item.id, { productId: e.target.value })}>
-          {cleanProducts.map((x: any) => <option key={x.id} value={x.id}>{x.model} — {x.series || x.category}</option>)}
-        </select>
+        <ModelSearchSelector value={item.productId} onChange={val => onUpdate(item.id, { productId: val })} cleanProducts={cleanProducts} />
         <div className="cat-label">{p?.series || p?.category}</div>
       </td>
       <td data-label="Цена" style={{ textAlign: 'center' }}>
@@ -207,12 +276,28 @@ const EquipmentRow = memo(({ item, products, cleanProducts, onUpdate, onDelete, 
       <td data-label="Кол-во" style={{ textAlign: 'center' }}>
         <input className="qty-input" type="number" min="1" 
           value={qty} 
-          onChange={e => setQty(parseInt(e.target.value) || 0)} 
-          onBlur={() => qty !== item.quantity && onUpdate(item.id, { quantity: qty })}
+          onChange={e => {
+            const val = e.target.value;
+            setQty(val === '' ? '' : (parseInt(val) || 0));
+          }} 
+          onFocus={e => {
+            if (Number(qty) === 0) {
+              setQty('');
+            } else {
+              e.target.select();
+            }
+          }}
+          onBlur={() => {
+            const finalQty = qty === '' ? 1 : Number(qty);
+            setQty(finalQty);
+            if (finalQty !== item.quantity) {
+              onUpdate(item.id, { quantity: finalQty });
+            }
+          }}
         />
       </td>
       <td data-label="Сумма" style={{ textAlign: 'right' }}>
-        <span className="sum">{(p ? calculatePrice(p.price) * item.quantity : 0).toLocaleString()}</span>
+        <span className="sum">{(p ? calculatePrice(p.price) * (Number(qty) || 0) : 0).toLocaleString()}</span>
       </td>
       <td style={{ textAlign: 'right' }}>
         <button className="btn-danger" onClick={() => onDelete(item.id)}>

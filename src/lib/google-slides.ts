@@ -9,18 +9,18 @@ const AUDIT_SHEET_ID = '1y8MKzptCnTUnBymmuB-KLzPM1ZnYX6PM7jjxz8J9YM4';
 
 // Style Constants
 const TABLE_STYLE = {
-    fontFamily: 'Segoe UI',
+    fontFamily: 'Calibri',
     italic: true,
-    fontSize: { magnitude: 11, unit: 'PT' }
+    fontSize: { magnitude: 10, unit: 'PT' }
 };
 
 // Layout Constants
-const PRODUCT_ROW_H = 1500000;
-const ACCESSORY_ROW_H = 450000;
-const HEADER_FOOTER_H = 500000;
+const PRODUCT_ROW_H = 650000;
+const ACCESSORY_ROW_H = 350000;
+const HEADER_FOOTER_H = 450000;
 const TABLE_WIDTH = 6800000;
 const TABLE_X = 500000;
-const TABLE_START_Y = 2700000;
+const TABLE_START_Y = 1900000;
 const MAX_ROWS_SLIDE_1 = 3;
 const MAX_ROWS_SLIDE_N = 3;
 
@@ -204,40 +204,64 @@ export async function generateSlidesKP(data: {
     await slides.presentations.batchUpdate({ presentationId, requestBody: { requests: duplicateReqs } });
   }
 
-  // 4. PRE-UPLOAD ALL IMAGES IN PARALLEL (Local and Remote)
-  console.log('Pre-uploading all images to Drive in parallel...');
+  // 4. PRE-UPLOAD ALL IMAGES IN PARALLEL (Local and Remote) + LOGO
+  console.log('Pre-uploading all images and logo to Drive in parallel...');
   const fileIdsToDelete: string[] = [];
   const imageMap = new Map<string, string>();
   const uniqueImages = [...new Set(groups.map(g => g.image).filter(Boolean))];
+  let logoUrl = '';
 
-  await Promise.all(uniqueImages.map(async (imgPath, idx) => {
-    try {
-      if (imgPath.startsWith('http')) {
-        // Remote image -> Drive Proxy
-        const driveUrl = await uploadToDrive(imgPath, `kp_remote_img_${Date.now()}_${idx}`);
-        if (driveUrl) {
-           // Conversion to direct link format for better rendering
-           const finalUrl = driveUrl.replace('drive.google.com/uc?id=', 'lh3.googleusercontent.com/d/');
-           imageMap.set(imgPath, finalUrl);
+  await Promise.all([
+    ...uniqueImages.map(async (imgPath, idx) => {
+      try {
+        if (imgPath.startsWith('http')) {
+          // Remote image -> Drive Proxy
+          const driveUrl = await uploadToDrive(imgPath, `kp_remote_img_${Date.now()}_${idx}`);
+          if (driveUrl) {
+             // Conversion to direct link format for better rendering
+             const finalUrl = driveUrl.replace('drive.google.com/uc?id=', 'lh3.googleusercontent.com/d/');
+             imageMap.set(imgPath, finalUrl);
+          }
+        } else {
+          // Local image -> Drive
+          const fullPath = path.join(process.cwd(), 'public', imgPath.replace(/^\//, ''));
+          if (fs.existsSync(fullPath)) {
+            const upload = await drive.files.create({
+              requestBody: { name: `kp_local_img_${Date.now()}_${idx}`, mimeType: 'image/png' },
+              media: { body: fs.createReadStream(fullPath) },
+              fields: 'id'
+            });
+            const fileId = upload.data.id!;
+            fileIdsToDelete.push(fileId);
+            await drive.permissions.create({ fileId, requestBody: { role: 'reader', type: 'anyone' } });
+            const finalUrl = `https://lh3.googleusercontent.com/d/${fileId}`;
+            imageMap.set(imgPath, finalUrl);
+          }
         }
-      } else {
-        // Local image -> Drive
-        const fullPath = path.join(process.cwd(), 'public', imgPath.replace(/^\//, ''));
-        if (fs.existsSync(fullPath)) {
+      } catch (err) { console.error(`SpeedUp: Image upload failed for ${imgPath}`, err); }
+    }),
+    (async () => {
+      try {
+        const logoPath = path.join(process.cwd(), 'logo near itogo.png');
+        if (fs.existsSync(logoPath)) {
           const upload = await drive.files.create({
-            requestBody: { name: `kp_local_img_${Date.now()}_${idx}`, mimeType: 'image/png' },
-            media: { body: fs.createReadStream(fullPath) },
+            requestBody: { name: `kp_logo_${Date.now()}`, mimeType: 'image/png' },
+            media: { body: fs.createReadStream(logoPath) },
             fields: 'id'
           });
           const fileId = upload.data.id!;
           fileIdsToDelete.push(fileId);
           await drive.permissions.create({ fileId, requestBody: { role: 'reader', type: 'anyone' } });
-          const finalUrl = `https://lh3.googleusercontent.com/d/${fileId}`;
-          imageMap.set(imgPath, finalUrl);
+          logoUrl = `https://lh3.googleusercontent.com/d/${fileId}`;
+          console.log('Logo near itogo uploaded successfully:', logoUrl);
+        } else {
+          console.warn('Logo file "logo near itogo.png" not found at project root');
         }
+      } catch (err) {
+        console.error('Failed to upload logo near itogo', err);
       }
-    } catch (err) { console.error(`SpeedUp: Image upload failed for ${imgPath}`, err); }
-  }));
+    })()
+  ]);
 
   const placeholders = [
     { find: '{{client}}', replace: data.client },
@@ -410,6 +434,24 @@ export async function generateSlidesKP(data: {
           // Merge empty cells to the left of Итого and place logo
           if (totIdxL > 1) {
             tableReqs.push({ mergeTableCells: { objectId: tableId, tableRange: { location: { rowIndex: r, columnIndex: 0 }, rowSpan: 1, columnSpan: totIdxL } } });
+            
+            if (logoUrl) {
+              const logoW = 1600000;
+              const logoH = 266000; // ~6:1 aspect ratio
+              const logoX = TABLE_X + 150000;
+              const logoY = currentRowY + (HEADER_FOOTER_H / 2) - (logoH / 2);
+              
+              imageRequests.push({
+                createImage: {
+                  url: logoUrl,
+                  elementProperties: {
+                    pageObjectId: sId,
+                    size: { width: { magnitude: logoW, unit: 'EMU' }, height: { magnitude: logoH, unit: 'EMU' } },
+                    transform: { scaleX: 1, scaleY: 1, translateX: logoX, translateY: logoY, unit: 'EMU' }
+                  }
+                }
+              });
+            }
           }
 
       }
