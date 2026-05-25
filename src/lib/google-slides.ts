@@ -489,6 +489,17 @@ export async function generateSlidesKP(data: {
   try {
     const contact = data.extraData?.contactPerson || {};
     
+    const rawRegDate = data.extraData?.registrationDate || '';
+    let formattedRegDate = rawRegDate;
+    if (rawRegDate && rawRegDate.includes('-')) {
+      const parts = rawRegDate.split('-');
+      if (parts.length === 3) {
+        formattedRegDate = `${parts[2]}-${parts[1]}-${parts[0]}`;
+      } else if (parts.length === 2) {
+        formattedRegDate = `01-${parts[1]}-${parts[0]}`;
+      }
+    }
+
     // Column mapping: A=0..W=22
     const rowData = [
       '',                                                    // A: Номер объекта (auto from sheet)
@@ -498,7 +509,7 @@ export async function generateSlidesKP(data: {
       '',                                                    // E: Комментарий
       data.extraData?.address || '',                         // F: Адрес объекта
       data.manager?.name || '',                              // G: Менеджер
-      data.extraData?.registrationDate || '',                // H: Месяц регистрации
+      formattedRegDate,                                      // H: Дата регистрации
       '',                                                    // I: Стадия проекта
       new Date().toLocaleString('ru-RU', { month: 'long' }),// J: Месяц создания заказа
       '',                                                    // K: Сумма заказа

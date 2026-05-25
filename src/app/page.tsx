@@ -149,8 +149,8 @@ const ObjectSection = memo(({ client, setClient, company, setCompany, objectType
           <input className="field-input" placeholder="БЦ / ЖК / Завод" value={lObj} onChange={e => setLObj(e.target.value)} onBlur={() => lObj !== objectType && setObjectType(lObj)} />
         </div>
         <div className="field">
-          <label className="field-label">Месяц регистрации</label>
-          <input className="field-input" type="month" value={lReg} onChange={e => setLReg(e.target.value)} onBlur={() => lReg !== registrationDate && setRegistrationDate(lReg)} />
+          <label className="field-label">Дата регистрации</label>
+          <input className="field-input" type="date" value={lReg} onChange={e => setLReg(e.target.value)} onBlur={() => lReg !== registrationDate && setRegistrationDate(lReg)} />
         </div>
       </div>
       <div className="field" style={{ marginTop: '0.25rem' }}>
@@ -261,7 +261,13 @@ export default function Home() {
       if (s('umbt_company')) setCompany(s('umbt_company')!)
       if (s('umbt_address')) setAddress(s('umbt_address')!)
       if (s('umbt_objectType')) setObjectType(s('umbt_objectType')!)
-      if (s('umbt_regDate')) setRegistrationDate(s('umbt_regDate')!)
+      if (s('umbt_regDate')) {
+        let val = s('umbt_regDate')!;
+        if (val && val.length === 7 && val.includes('-')) {
+          val = `${val}-01`;
+        }
+        setRegistrationDate(val);
+      }
       if (s('umbt_equipType')) setEquipmentType(s('umbt_equipType')!)
       const c = s('umbt_contact'); if (c) setContactPerson(JSON.parse(c))
       const it = s('umbt_items'); if (it) setItems(JSON.parse(it))
