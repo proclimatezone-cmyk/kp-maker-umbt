@@ -42,6 +42,15 @@ interface GroupedItem {
   models: { model: string; quantity: number; price: number; }[];
 }
 
+function getDriveFileId(url: string): string | null {
+  if (!url) return null;
+  const idMatch = url.match(/[?&]id=([^&]+)/);
+  if (idMatch) return idMatch[1];
+  const dMatch = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
+  if (dMatch) return dMatch[1];
+  return null;
+}
+
 async function uploadToDrive(imageUrl: string, fileName: string): Promise<string | null> {
   try {
     const oauth2Client = new google.auth.OAuth2(
@@ -51,7 +60,27 @@ async function uploadToDrive(imageUrl: string, fileName: string): Promise<string
     oauth2Client.setCredentials({ refresh_token: process.env.GOOGLE_REFRESH_TOKEN });
     const drive = google.drive({ version: 'v3', auth: oauth2Client });
 
+    const driveFileId = getDriveFileId(imageUrl);
+    if (driveFileId) {
+      try {
+        console.log(`Copying Google Drive file ${driveFileId} directly...`);
+        const copy = await drive.files.copy({
+          fileId: driveFileId,
+          requestBody: { name: fileName }
+        });
+        const fileId = copy.data.id!;
+        await drive.permissions.create({ fileId, requestBody: { role: 'reader', type: 'anyone' } });
+        return `https://drive.google.com/uc?id=${fileId}`;
+      } catch (copyErr) {
+        console.warn(`Direct copy failed for file ${driveFileId}, falling back to fetch...`, copyErr);
+      }
+    }
+
+    console.log(`Fetching remote image ${imageUrl}...`);
     const response = await fetch(imageUrl);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch image: ${response.statusText}`);
+    }
     const buffer = Buffer.from(await response.arrayBuffer());
     
     const upload = await drive.files.create({
@@ -64,7 +93,7 @@ async function uploadToDrive(imageUrl: string, fileName: string): Promise<string
     await drive.permissions.create({ fileId, requestBody: { role: 'reader', type: 'anyone' } });
     return `https://drive.google.com/uc?id=${fileId}`;
   } catch (e) {
-    console.error('Upload to Drive failed', e);
+    console.error('Upload to Drive failed for:', imageUrl, e);
     return null;
   }
 }
@@ -94,6 +123,11 @@ export async function generateSlidesKP(data: {
   const sheets = google.sheets({ version: 'v4', auth: oauth2Client });
 
   const opts = data.options || { showImages: true, currency: 'ue', paymentType: 'cash', exchangeRate: 12500, transferFee: 10 };
+  const showImages = opts.showImages !== false && opts.showImages !== 'false';
+  const currency = opts.currency || 'ue';
+  const paymentType = opts.paymentType || 'cash';
+  const exchangeRate = Number(opts.exchangeRate) || 12500;
+  const transferFee = Number(opts.transferFee) || 10;
 
   // 1. Sum up identical products and preserve order
   const aggregated: any[] = [];
@@ -127,7 +161,7 @@ export async function generateSlidesKP(data: {
     let group = groups.length > 0 ? groups[groups.length - 1] : null;
     const prevIsAcc = group ? isAcc(group.category) : false;
 
-    if (group && group.category === cat && group.series === ser && group.image === img && currentIsAcc === prevIsAcc) {
+    if (group && group.category === cat && group.series === ser && (showImages ? group.image === img : true) && currentIsAcc === prevIsAcc) {
       group.models.push({ 
         model: item.model || 'Модель не указана', 
         quantity: item.quantity, 
@@ -190,7 +224,7 @@ export async function generateSlidesKP(data: {
         const lastIsAcc = isAcc(last.category);
         const currentIsAcc = isAcc(group.category);
         
-        if (last.category === group.category && last.series === group.series && last.image === group.image && lastIsAcc === currentIsAcc) {
+        if (last.category === group.category && last.series === group.series && (showImages ? last.image === group.image : true) && lastIsAcc === currentIsAcc) {
           const copy = existing.map((x, idx) => {
             if (idx === existing.length - 1) {
               return { ...x, models: [...x.models, newModel] };
@@ -282,7 +316,7 @@ export async function generateSlidesKP(data: {
   console.log('Pre-uploading all images and logo to Drive in parallel...');
   const fileIdsToDelete: string[] = [];
   const imageMap = new Map<string, string>();
-  const uniqueImages = [...new Set(groups.map(g => g.image).filter(Boolean))];
+  const uniqueImages = showImages ? [...new Set(groups.map(g => g.image).filter(Boolean))] : [];
   let logoUrl = '';
 
   await Promise.all([
@@ -295,6 +329,12 @@ export async function generateSlidesKP(data: {
              // Conversion to direct link format for better rendering
              const finalUrl = driveUrl.replace('drive.google.com/uc?id=', 'lh3.googleusercontent.com/d/');
              imageMap.set(imgPath, finalUrl);
+             
+             // Extract file ID to delete it later!
+             const newFileId = getDriveFileId(driveUrl);
+             if (newFileId) {
+               fileIdsToDelete.push(newFileId);
+             }
           }
         } else {
           // Local image -> Drive
@@ -350,16 +390,15 @@ export async function generateSlidesKP(data: {
     requestBody: { requests: placeholders.map(p => ({ replaceAllText: { replaceText: p.replace, containsText: { text: p.find, matchCase: false } } })) }
   });
 
-
   // 6. Build table requests for each slide
   const imageRequests: any[] = [];
   const activeSlideIds = new Set<string>();
   const tableReqs: any[] = [];
-  const numCols = opts.showImages ? 6 : 5;
-  const columnWidths = opts.showImages ? COL_WIDTHS_WITH_IMG : COL_WIDTHS_NO_IMG;
+  const numCols = showImages ? 6 : 5;
+  const columnWidths = showImages ? COL_WIDTHS_WITH_IMG : COL_WIDTHS_NO_IMG;
   const colPriceLabel = 'Цена';
   const sumLabel = 'Сумма';
-  const headers = opts.showImages
+  const headers = showImages
     ? ['Внешний вид', 'Наименование', 'Модель', 'Кол-во', colPriceLabel, sumLabel]
     : ['Наименование', 'Модель', 'Кол-во', colPriceLabel, sumLabel];
 
@@ -429,7 +468,7 @@ export async function generateSlidesKP(data: {
           const groupHeight = group.models.length * rowH;
 
           // Image cell
-          if (opts.showImages) {
+          if (showImages) {
               tableReqs.push({ insertText: { objectId: tableId, cellLocation: { rowIndex: r, columnIndex: 0 }, text: ' ' } });
               let imageUrl = imageMap.get(group.image);
               if (imageUrl && imageUrl.includes('drive.google.com/uc?id='))
@@ -442,24 +481,24 @@ export async function generateSlidesKP(data: {
           }
 
           // Category cell
-          const catIdx = opts.showImages ? 1 : 0;
+          const catIdx = showImages ? 1 : 0;
           const catText = group.category.trim();
           tableReqs.push({ insertText: { objectId: tableId, cellLocation: { rowIndex: r, columnIndex: catIdx }, text: catText || ' ' } });
 
           // Model rows
           for (const m of group.models) {
               const isFirstInGroup = r === startRow;
-              const mCol = opts.showImages ? 2 : 1;
-              const qCol = opts.showImages ? 3 : 2;
-              const pCol = opts.showImages ? 4 : 3;
-              const sCol = opts.showImages ? 5 : 4;
+              const mCol = showImages ? 2 : 1;
+              const qCol = showImages ? 3 : 2;
+              const pCol = showImages ? 4 : 3;
+              const sCol = showImages ? 5 : 4;
 
               tableReqs.push({ insertText: { objectId: tableId, cellLocation: { rowIndex: r, columnIndex: mCol }, text: m.model || ' ' } });
               tableReqs.push({ insertText: { objectId: tableId, cellLocation: { rowIndex: r, columnIndex: qCol }, text: m.quantity.toString() || '0' } });
 
               let adjustedPrice = m.price;
-              if (opts.paymentType === 'transfer') adjustedPrice *= (1 + opts.transferFee / 100);
-              if (opts.currency === 'sum') adjustedPrice *= opts.exchangeRate;
+              if (paymentType === 'transfer') adjustedPrice *= (1 + transferFee / 100);
+              if (currency === 'sum') adjustedPrice *= exchangeRate;
               adjustedPrice = Math.round(adjustedPrice);
 
               tableReqs.push({ insertText: { objectId: tableId, cellLocation: { rowIndex: r, columnIndex: pCol }, text: adjustedPrice.toLocaleString() } });
@@ -467,7 +506,7 @@ export async function generateSlidesKP(data: {
 
               // Cell styling
               for (let col = 0; col < numCols; col++) {
-                  const isMergedAway = !isFirstInGroup && ((opts.showImages && (col === 0 || col === 1)) || (!opts.showImages && col === 0));
+                  const isMergedAway = !isFirstInGroup && ((showImages && (col === 0 || col === 1)) || (!showImages && col === 0));
                   tableReqs.push({ updateTableCellProperties: { objectId: tableId, tableRange: { location: { rowIndex: r, columnIndex: col }, rowSpan: 1, columnSpan: 1 }, tableCellProperties: { tableCellBackgroundFill: { solidFill: { color: { rgbColor: COLORS.ROW_BG } } }, contentAlignment: 'MIDDLE' }, fields: 'tableCellBackgroundFill,contentAlignment' }});
                   if (!isMergedAway) {
                       tableReqs.push({ updateTextStyle: { objectId: tableId, cellLocation: { rowIndex: r, columnIndex: col }, style: TABLE_STYLE, fields: 'fontFamily,italic,fontSize' }});
@@ -480,15 +519,15 @@ export async function generateSlidesKP(data: {
 
           // Merge cells for multi-model groups
           if (group.models.length > 1) {
-              if (opts.showImages) tableReqs.push({ mergeTableCells: { objectId: tableId, tableRange: { location: { rowIndex: startRow, columnIndex: 0 }, rowSpan: group.models.length, columnSpan: 1 } } });
-              tableReqs.push({ mergeTableCells: { objectId: tableId, tableRange: { location: { rowIndex: startRow, columnIndex: opts.showImages ? 1 : 0 }, rowSpan: group.models.length, columnSpan: 1 } } });
+              if (showImages) tableReqs.push({ mergeTableCells: { objectId: tableId, tableRange: { location: { rowIndex: startRow, columnIndex: 0 }, rowSpan: group.models.length, columnSpan: 1 } } });
+              tableReqs.push({ mergeTableCells: { objectId: tableId, tableRange: { location: { rowIndex: startRow, columnIndex: showImages ? 1 : 0 }, rowSpan: group.models.length, columnSpan: 1 } } });
           }
       }
 
       // Footer rows (transfer info + totals)
       if (isLastTable) {
-          const totIdxL = opts.showImages ? 4 : 3;
-          const totIdxR = opts.showImages ? 5 : 4;
+          const totIdxL = showImages ? 4 : 3;
+          const totIdxR = showImages ? 5 : 4;
           
 
 
@@ -527,7 +566,6 @@ export async function generateSlidesKP(data: {
               });
             }
           }
-
       }
 
       // Column widths & borders
