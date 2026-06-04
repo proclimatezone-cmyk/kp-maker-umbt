@@ -145,7 +145,15 @@ export async function generateSlidesKP(data: {
   aggregated.forEach(item => {
     const cat = item.category || 'Оборудование';
     const ser = item.series || '';
-    let img = item.slidesImage && item.slidesImage.startsWith('http') ? item.slidesImage : item.image;
+    let img = '';
+    const localExists = item.image && fs.existsSync(path.join(process.cwd(), 'public', item.image.replace(/^\//, '')));
+    if (localExists) {
+      img = item.image;
+    } else if (item.slidesImage && item.slidesImage.startsWith('http')) {
+      img = item.slidesImage;
+    } else {
+      img = item.image || '';
+    }
     
     // 2.0 Determine if it's an accessory to decide on photo and grouping
     const isAcc = (c: string) => {
