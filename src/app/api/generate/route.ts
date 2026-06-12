@@ -6,7 +6,19 @@ import path from 'path'
 export async function POST(req: NextRequest) {
   try {
     const data = await req.json()
-    const { manager, client, cpName, items, total, extraData, options } = data
+    const { 
+      manager, 
+      client, 
+      cpName, 
+      items, 
+      additionalItems,
+      equipmentTotal,
+      partnerBonus,
+      additionalTotal,
+      total, 
+      extraData, 
+      options 
+    } = data
 
     // 1. Generate Google Slides Presentation and PDF
     console.log('Generating Google Slides and PDF...');
@@ -14,6 +26,10 @@ export async function POST(req: NextRequest) {
       cpName,
       client,
       items,
+      additionalItems,
+      equipmentTotal,
+      partnerBonus,
+      additionalTotal,
       total,
       manager,
       extraData,

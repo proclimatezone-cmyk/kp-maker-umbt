@@ -6,6 +6,94 @@ import productsData from '@/data/products.json'
 
 interface Item { id: string; productId: string; quantity: number }
 
+export interface AdditionalItem {
+  id: string;
+  name: string;
+  quantity: string;
+  price: number;
+}
+
+export function parseQuantity(qtyStr: string | number): number {
+  if (typeof qtyStr === 'number') return qtyStr;
+  if (!qtyStr) return 1;
+  const match = qtyStr.match(/[\d.,]+/);
+  if (!match) return 1;
+  const num = parseFloat(match[0].replace(',', '.'));
+  return isNaN(num) ? 1 : num;
+}
+
+const AdditionalRow = memo(({ item, onUpdate, onDelete, onClone, calculatePrice, currencyLabel }: any) => {
+  const [name, setName] = useState(item.name);
+  const [qty, setQty] = useState(item.quantity);
+  const [price, setPrice] = useState(item.price);
+
+  useEffect(() => { setName(item.name); }, [item.name]);
+  useEffect(() => { setQty(item.quantity); }, [item.quantity]);
+  useEffect(() => { setPrice(item.price); }, [item.price]);
+
+  const parsedQty = parseQuantity(qty);
+  const calculatedSum = calculatePrice(price) * parsedQty;
+
+  return (
+    <tr>
+      <td data-label="Наименование">
+        <input 
+          className="model-search-input" 
+          type="text" 
+          value={name} 
+          placeholder="Например: Установка кондиционеров"
+          onChange={e => setName(e.target.value)}
+          onBlur={() => name !== item.name && onUpdate(item.id, { name })}
+          style={{ width: '100%', minWidth: '200px' }}
+        />
+      </td>
+      <td data-label="Кол-во" style={{ textAlign: 'center' }}>
+        <input 
+          className="qty-input" 
+          type="text" 
+          value={qty} 
+          placeholder="работа"
+          onChange={e => setQty(e.target.value)}
+          onBlur={() => qty !== item.quantity && onUpdate(item.id, { quantity: qty })}
+          style={{ width: '100%', minWidth: '80px', textAlign: 'center' }}
+        />
+      </td>
+      <td data-label="Цена" style={{ textAlign: 'center' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px' }}>
+          <input 
+            className="qty-input" 
+            type="number" 
+            min="0"
+            value={price} 
+            onChange={e => setPrice(Number(e.target.value) || 0)}
+            onBlur={() => price !== item.price && onUpdate(item.id, { price })}
+            style={{ width: '80px', textAlign: 'center' }}
+          />
+          <span className="price-unit">{currencyLabel}</span>
+        </div>
+      </td>
+      <td data-label="Сумма" style={{ textAlign: 'right' }}>
+        <span className="sum">{calculatedSum.toLocaleString()}</span>
+      </td>
+      <td style={{ textAlign: 'right' }}>
+        <div style={{ display: 'flex', gap: '0.4rem', justifyContent: 'flex-end', alignItems: 'center' }}>
+          <button 
+            className="btn-danger" 
+            style={{ background: 'transparent', color: 'var(--text-muted)', padding: '0.4rem' }}
+            onClick={() => onClone(item.id)} 
+            title="Дублировать строку"
+          >
+            <Copy size={14} />
+          </button>
+          <button className="btn-danger" onClick={() => onDelete(item.id)} title="Удалить строку">
+            <Trash2 size={15} />
+          </button>
+        </div>
+      </td>
+    </tr>
+  );
+});
+
 // --- Sub-components with Local Buffering ---
 
 const SectionHeader = memo(({ icon: Icon, title, color, tag }: any) => (
@@ -358,6 +446,7 @@ export default function Home() {
   const [equipmentType, setEquipmentType] = useState('')
   const [contactPerson, setContactPerson] = useState({ name: '', phone: '', position: '' })
   const [items, setItems] = useState<Item[]>([])
+  const [additionalItems, setAdditionalItems] = useState<AdditionalItem[]>([])
   const [partnerBonusType, setPartnerBonusType] = useState<'percent' | 'fixed'>('percent')
   const [partnerBonusValue, setPartnerBonusValue] = useState<number>(0)
   const [loading, setLoading] = useState(false)
@@ -398,6 +487,7 @@ export default function Home() {
       const c = s('umbt_contact'); if (c) setContactPerson(JSON.parse(c))
       const it = s('umbt_items'); if (it) setItems(JSON.parse(it))
       else if (productsData.length > 0) setItems([{ id: uid(), productId: productsData[0].id, quantity: 1 }])
+      const addIt = s('umbt_additional_items'); if (addIt) setAdditionalItems(JSON.parse(addIt))
       const savedOptions = s('umbt_options'); if (savedOptions) setOptions(JSON.parse(savedOptions))
       const prod = s('umbt_products'); if (prod) setProducts(JSON.parse(prod))
       const savedCp = s('umbt_cpName'); if (savedCp) setCpName(savedCp)
@@ -443,6 +533,7 @@ export default function Home() {
         localStorage.setItem('umbt_equipType', equipmentType)
         localStorage.setItem('umbt_contact', JSON.stringify(contactPerson))
         localStorage.setItem('umbt_items', JSON.stringify(items))
+        localStorage.setItem('umbt_additional_items', JSON.stringify(additionalItems))
         localStorage.setItem('umbt_options', JSON.stringify(options))
         localStorage.setItem('umbt_products', JSON.stringify(products))
         localStorage.setItem('umbt_cpName', cpName)
@@ -453,7 +544,7 @@ export default function Home() {
       } catch (e) { console.error(e) }
     }, 1000)
     return () => clearTimeout(timer)
-  }, [manager, client, company, address, objectType, registrationDate, equipmentType, contactPerson, items, options, products, cpName, partnerBonusType, partnerBonusValue, isMounted])
+  }, [manager, client, company, address, objectType, registrationDate, equipmentType, contactPerson, items, additionalItems, options, products, cpName, partnerBonusType, partnerBonusValue, isMounted])
 
   const cleanProducts = useMemo(() => products.filter(p => p.model && !p.model.startsWith('---') && p.id && !p.id.startsWith('---')), [products])
   const filteredProducts = useMemo(() => {
@@ -469,17 +560,26 @@ export default function Home() {
     return Math.round(p)
   }, [options])
 
-  const totalPrice = useMemo(() => items.reduce((sum, item) => {
+  const equipmentTotal = useMemo(() => items.reduce((sum, item) => {
     const p = products.find(x => x.id === item.productId)
     return sum + (p ? calculatePrice(p.price) * item.quantity : 0)
   }, 0), [items, products, calculatePrice])
 
   const partnerBonusSum = useMemo(() => {
     if (partnerBonusType === 'percent') {
-      return Math.round(totalPrice * (Number(partnerBonusValue) / 100));
+      return Math.round(equipmentTotal * (Number(partnerBonusValue) / 100));
     }
     return Number(partnerBonusValue) || 0;
-  }, [totalPrice, partnerBonusType, partnerBonusValue]);
+  }, [equipmentTotal, partnerBonusType, partnerBonusValue]);
+
+  const additionalTotal = useMemo(() => additionalItems.reduce((sum, item) => {
+    const parsedQty = parseQuantity(item.quantity);
+    return sum + calculatePrice(item.price) * parsedQty;
+  }, 0), [additionalItems, calculatePrice]);
+
+  const grandTotal = useMemo(() => {
+    return equipmentTotal - partnerBonusSum + additionalTotal;
+  }, [equipmentTotal, partnerBonusSum, additionalTotal]);
 
   const currencyLabel = options.currency === 'sum' ? 'сум' : 'у.е.'
 
@@ -493,6 +593,26 @@ export default function Home() {
 
   const cloneItem = useCallback((id: string) => {
     setItems(prev => {
+      const idx = prev.findIndex(i => i.id === id);
+      if (idx === -1) return prev;
+      const target = prev[idx];
+      const newItem = { ...target, id: uid() };
+      const copy = [...prev];
+      copy.splice(idx + 1, 0, newItem);
+      return copy;
+    });
+  }, [uid]);
+
+  const updateAdditionalItem = useCallback((id: string, updates: Partial<AdditionalItem>) => {
+    setAdditionalItems(prev => prev.map(i => i.id === id ? { ...i, ...updates } : i))
+  }, [])
+
+  const deleteAdditionalItem = useCallback((id: string) => {
+    setAdditionalItems(prev => prev.filter(i => i.id !== id))
+  }, [])
+
+  const cloneAdditionalItem = useCallback((id: string) => {
+    setAdditionalItems(prev => {
       const idx = prev.findIndex(i => i.id === id);
       if (idx === -1) return prev;
       const target = prev[idx];
@@ -518,7 +638,22 @@ export default function Home() {
     try {
       const r = await fetch('/api/generate', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ manager, client, cpName, items: items.map(i => { const p = products.find(x => x.id === i.productId); return p ? { ...p, quantity: i.quantity } : null; }).filter(Boolean), total: totalPrice, extraData: { company, address, objectType, registrationDate, equipmentType, contactPerson }, options })
+        body: JSON.stringify({ 
+          manager, 
+          client, 
+          cpName, 
+          items: items.map(i => { 
+            const p = products.find(x => x.id === i.productId); 
+            return p ? { ...p, quantity: i.quantity } : null; 
+          }).filter(Boolean), 
+          additionalItems,
+          equipmentTotal,
+          partnerBonus: partnerBonusSum,
+          additionalTotal,
+          total: grandTotal, 
+          extraData: { company, address, objectType, registrationDate, equipmentType, contactPerson }, 
+          options 
+        })
       })
       if (r.ok) { 
         const auditErr = r.headers.get('X-Audit-Error');
@@ -596,13 +731,13 @@ export default function Home() {
           </div>
           <div className="total-area" style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginTop: '1.25rem', paddingTop: '1rem', borderTop: '1px solid var(--border)' }}>
             <div className="total-bar" style={{ marginTop: 0, paddingTop: 0, borderTop: 'none' }}>
-              <span className="total-label">Итого</span>
-              <span className="total-value">{totalPrice.toLocaleString()}</span>
+              <span className="total-label">Итого кондиционирование</span>
+              <span className="total-value">{equipmentTotal.toLocaleString()}</span>
               <span className="total-currency">{currencyLabel}</span>
             </div>
             
             <div className="bonus-bar" style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
-              <span className="total-label" style={{ color: 'var(--text-secondary)', fontSize: '0.65rem' }}>Партнерский бонус</span>
+              <span className="total-label" style={{ color: 'var(--text-secondary)', fontSize: '0.65rem' }}>Партнерский бонус (только кондиционеры)</span>
               <div className="toggle-group" style={{ width: 'auto', display: 'inline-flex', padding: '2px', border: '1px solid var(--border)' }}>
                 <button className={partnerBonusType === 'percent' ? 'on' : ''} style={{ padding: '0.2rem 0.5rem', fontSize: '0.75rem' }} onClick={() => setPartnerBonusType('percent')}>%</button>
                 <button className={partnerBonusType === 'fixed' ? 'on' : ''} style={{ padding: '0.2rem 0.5rem', fontSize: '0.75rem' }} onClick={() => setPartnerBonusType('fixed')}>{currencyLabel}</button>
@@ -622,9 +757,93 @@ export default function Home() {
             </div>
             
             <div className="final-net-bar" style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'baseline', gap: '0.5rem', borderTop: '1px dashed var(--border)', paddingTop: '0.5rem' }}>
-              <span className="total-label" style={{ fontSize: '0.65rem' }}>За вычетом бонуса</span>
-              <span className="total-value" style={{ fontSize: '1.5rem', color: 'var(--text-secondary)' }}>{(totalPrice - partnerBonusSum).toLocaleString()}</span>
+              <span className="total-label" style={{ fontSize: '0.65rem' }}>Раздел с кондиционированием за вычетом бонуса</span>
+              <span className="total-value" style={{ fontSize: '1.3rem', color: 'var(--text-secondary)' }}>{(equipmentTotal - partnerBonusSum).toLocaleString()}</span>
               <span className="total-currency" style={{ fontSize: '0.85rem' }}>{currencyLabel}</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="section" style={{ marginTop: '1.5rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', paddingBottom: '1rem', borderBottom: '1px solid var(--border)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+              <div className="section-icon orange"><Calculator size={15} /></div>
+              <h2 style={{ fontSize: '0.95rem', fontWeight: 700 }}>Дополнительный раздел</h2>
+              <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', background: 'var(--bg-input)', padding: '0.15rem 0.5rem', borderRadius: '4px' }}>{additionalItems.length} поз.</span>
+            </div>
+            <button className="btn btn-primary" onClick={() => setAdditionalItems([...additionalItems, { id: uid(), name: '', quantity: '1', price: 0 }])}>
+              <Plus size={15} /> Добавить
+            </button>
+          </div>
+          {additionalItems.length === 0 ? (
+            <div style={{ textAlign: 'center', padding: '2rem', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
+              Нет дополнительных позиций. Нажмите «Добавить», чтобы внести работы, монтаж или воздуховоды.
+            </div>
+          ) : (
+            <div className="tbl-wrap">
+              <table className="tbl">
+                <thead>
+                  <tr>
+                    <th style={{ width: '48%' }}>Наименование</th>
+                    <th style={{ width: '15%', textAlign: 'center' }}>Кол-во</th>
+                    <th style={{ width: '17%', textAlign: 'center' }}>Цена</th>
+                    <th style={{ width: '10%', textAlign: 'right' }}>Сумма</th>
+                    <th style={{ width: '10%' }}></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {additionalItems.map(item => (
+                    <AdditionalRow 
+                      key={item.id} 
+                      item={item} 
+                      onUpdate={updateAdditionalItem} 
+                      onDelete={deleteAdditionalItem} 
+                      onClone={cloneAdditionalItem} 
+                      calculatePrice={calculatePrice} 
+                      currencyLabel={currencyLabel} 
+                    />
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+          {additionalItems.length > 0 && (
+            <div className="total-area" style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginTop: '1.25rem', paddingTop: '1rem', borderTop: '1px solid var(--border)' }}>
+              <div className="total-bar" style={{ marginTop: 0, paddingTop: 0, borderTop: 'none' }}>
+                <span className="total-label">Итого доп. раздел</span>
+                <span className="total-value">{additionalTotal.toLocaleString()}</span>
+                <span className="total-currency">{currencyLabel}</span>
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div className="section" style={{ marginTop: '1.5rem', border: '2px solid var(--accent)', background: 'var(--bg-card)' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>Кондиционирование (за вычетом бонуса):</span>
+              <span style={{ fontWeight: 600, color: 'var(--text-main)' }}>
+                {(equipmentTotal - partnerBonusSum).toLocaleString()} {currencyLabel}
+              </span>
+            </div>
+            {additionalItems.length > 0 && (
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>Дополнительный раздел:</span>
+                <span style={{ fontWeight: 600, color: 'var(--text-main)' }}>
+                  {additionalTotal.toLocaleString()} {currencyLabel}
+                </span>
+              </div>
+            )}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', borderTop: '1px solid var(--border)', paddingTop: '0.75rem', marginTop: '0.25rem' }}>
+              <span style={{ fontSize: '1rem', fontWeight: 800, color: 'var(--text-main)' }}>ОБЩИЙ ИТОГ:</span>
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.4rem' }}>
+                <span style={{ fontSize: '1.75rem', fontWeight: 800, color: 'var(--accent)' }}>
+                  {grandTotal.toLocaleString()}
+                </span>
+                <span style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-muted)' }}>
+                  {currencyLabel}
+                </span>
+              </div>
             </div>
           </div>
         </div>

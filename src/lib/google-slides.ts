@@ -7,6 +7,15 @@ const TEMPLATE_ID = '1o0UwoDw31SoDXq2vUtvr5QKf2SLlcFm9D6CwmX-wyc4';
 const TARGET_FOLDER_ID = '12akf-jI3SDHuHqxeDYlCfGPAxjHn5QgW';
 const AUDIT_SHEET_ID = '1y8MKzptCnTUnBymmuB-KLzPM1ZnYX6PM7jjxz8J9YM4';
 
+export function parseQuantity(qtyStr: string | number): number {
+  if (typeof qtyStr === 'number') return qtyStr;
+  if (!qtyStr) return 1;
+  const match = qtyStr.match(/[\d.,]+/);
+  if (!match) return 1;
+  const num = parseFloat(match[0].replace(',', '.'));
+  return isNaN(num) ? 1 : num;
+}
+
 // Style Constants
 const TABLE_STYLE = {
     fontFamily: 'Calibri',
@@ -100,13 +109,17 @@ async function uploadToDrive(imageUrl: string, fileName: string): Promise<string
 
 function isAccessory(g: GroupedItem) {
   const c = g.category.toLowerCase();
-  return c.includes('аксессуар') || c.includes('автоматика') || c.includes('пульт') || c.includes('панель') || c.includes('опция');
+  return c.includes('аксессуар') || c.includes('автоматика') || c.includes('пульт') || c.includes('панель') || c.includes('опция') || c.includes('дополнительные работы');
 }
 
 export async function generateSlidesKP(data: {
   cpName: string;
   client: string;
   items: any[];
+  additionalItems?: any[];
+  equipmentTotal?: number;
+  partnerBonus?: number;
+  additionalTotal?: number;
   total: number;
   manager: any;
   extraData?: any; 
@@ -140,9 +153,36 @@ export async function generateSlidesKP(data: {
     }
   });
 
+  const aggregatedAdditional: any[] = [];
+  if (data.additionalItems && data.additionalItems.length > 0) {
+    data.additionalItems.forEach(item => {
+      if (!item.name && !item.price) return;
+      const name = item.name || 'Дополнительные услуги';
+      const existing = aggregatedAdditional.find(a => a.model === name && a.price === item.price);
+      if (existing) {
+        const currentQty = parseQuantity(existing.quantity);
+        const newQty = parseQuantity(item.quantity);
+        existing.quantity = (currentQty + newQty).toString();
+      } else {
+        aggregatedAdditional.push({
+          id: item.id,
+          category: 'Дополнительные работы и материалы',
+          series: '',
+          model: name,
+          price: Number(item.price) || 0,
+          quantity: item.quantity ? item.quantity.toString() : '1',
+          image: '',
+          isAdditional: true
+        });
+      }
+    });
+  }
+
+  const allAggregated = [...aggregated, ...aggregatedAdditional];
+
   // 2. Group adjacent items by category+series (Preserves original order)
   const groups: GroupedItem[] = [];
-  aggregated.forEach(item => {
+  allAggregated.forEach(item => {
     const cat = item.category || 'Оборудование';
     const ser = item.series || '';
     let img = '';
@@ -158,7 +198,7 @@ export async function generateSlidesKP(data: {
     // 2.0 Determine if it's an accessory to decide on photo and grouping
     const isAcc = (c: string) => {
       const lc = c.toLowerCase();
-      return lc.includes('аксессуар') || lc.includes('автоматика') || lc.includes('пульт') || lc.includes('панель') || lc.includes('опция');
+      return lc.includes('аксессуар') || lc.includes('автоматика') || lc.includes('пульт') || lc.includes('панель') || lc.includes('опция') || lc.includes('дополнительные работы');
     };
     const currentIsAcc = isAcc(cat);
 
@@ -190,7 +230,56 @@ export async function generateSlidesKP(data: {
   });
   
 
-  // 3. Split groups into per-slide chunks based on height in EMU
+  // 3. Define footer rows
+  const footerRows: { label: string; value: number; isGrand?: boolean; colorL: any; colorR: any }[] = [];
+  const hasAdd = data.additionalTotal && data.additionalTotal > 0;
+  const hasBonus = data.partnerBonus && data.partnerBonus > 0;
+
+  if (hasAdd || hasBonus) {
+    const eqTotal = data.equipmentTotal || (data.total - (data.additionalTotal || 0) + (data.partnerBonus || 0));
+    footerRows.push({ 
+      label: 'Итого кондиционирование:', 
+      value: eqTotal, 
+      colorL: COLORS.TOTAL_L, 
+      colorR: COLORS.TOTAL_R 
+    });
+
+    if (hasBonus) {
+      footerRows.push({ 
+        label: 'Партнерский бонус (скидка):', 
+        value: -data.partnerBonus!, 
+        colorL: { red: 255/255, green: 220/255, blue: 220/255 }, 
+        colorR: { red: 255/255, green: 180/255, blue: 180/255 } 
+      });
+    }
+
+    if (hasAdd) {
+      footerRows.push({ 
+        label: 'Итого доп. раздел:', 
+        value: data.additionalTotal!, 
+        colorL: { red: 255/255, green: 240/255, blue: 215/255 }, 
+        colorR: { red: 255/255, green: 220/255, blue: 170/255 } 
+      });
+    }
+
+    footerRows.push({ 
+      label: 'ОБЩИЙ ИТОГ:', 
+      value: data.total, 
+      isGrand: true, 
+      colorL: { red: 122/255, green: 147/255, blue: 172/255 }, 
+      colorR: { red: 100/255, green: 125/255, blue: 150/255 } 
+    });
+  } else {
+    footerRows.push({ 
+      label: 'Итого:', 
+      value: data.total, 
+      isGrand: true, 
+      colorL: COLORS.TOTAL_L, 
+      colorR: COLORS.TOTAL_R 
+    });
+  }
+
+  // 3.1 Split groups into per-slide chunks based on height in EMU
   const tablesData: { slideIndex: number, groups: GroupedItem[], height: number, rows: number }[] = [];
   let currentSlideIndex = 0;
   let currentGroups: GroupedItem[] = [];
@@ -202,7 +291,7 @@ export async function generateSlidesKP(data: {
       h += g.models.length * rowH;
     });
     if (isLast) {
-      h += HEADER_FOOTER_H; // Footer "Total" row height
+      h += footerRows.length * HEADER_FOOTER_H; // Footer "Total" rows height
     }
     return h;
   };
@@ -227,7 +316,7 @@ export async function generateSlidesKP(data: {
         const last = existing[existing.length - 1];
         const isAcc = (c: string) => {
           const lc = c.toLowerCase();
-          return lc.includes('аксессуар') || lc.includes('автоматика') || lc.includes('пульт') || lc.includes('панель') || lc.includes('опция');
+          return lc.includes('аксессуар') || lc.includes('автоматика') || lc.includes('пульт') || lc.includes('панель') || lc.includes('опция') || lc.includes('дополнительные работы');
         };
         const lastIsAcc = isAcc(last.category);
         const currentIsAcc = isAcc(group.category);
@@ -510,7 +599,9 @@ export async function generateSlidesKP(data: {
               adjustedPrice = Math.round(adjustedPrice);
 
               tableReqs.push({ insertText: { objectId: tableId, cellLocation: { rowIndex: r, columnIndex: pCol }, text: adjustedPrice.toLocaleString() } });
-              tableReqs.push({ insertText: { objectId: tableId, cellLocation: { rowIndex: r, columnIndex: sCol }, text: (adjustedPrice * m.quantity).toLocaleString() } });
+              
+              const parsedQty = parseQuantity(m.quantity);
+              tableReqs.push({ insertText: { objectId: tableId, cellLocation: { rowIndex: r, columnIndex: sCol }, text: (adjustedPrice * parsedQty).toLocaleString() } });
 
               // Cell styling
               for (let col = 0; col < numCols; col++) {
@@ -536,27 +627,37 @@ export async function generateSlidesKP(data: {
       if (isLastTable) {
           const totIdxL = showImages ? 4 : 3;
           const totIdxR = showImages ? 5 : 4;
-          
 
+          footerRows.forEach((frow, fIdx) => {
+              const rowIdx = r + fIdx;
+              
+              // Запись текста
+              tableReqs.push({ insertText: { objectId: tableId, cellLocation: { rowIndex: rowIdx, columnIndex: totIdxL }, text: frow.label } });
+              tableReqs.push({ insertText: { objectId: tableId, cellLocation: { rowIndex: rowIdx, columnIndex: totIdxR }, text: frow.value.toLocaleString() } });
+              
+              // Цвет фона
+              tableReqs.push({ updateTableCellProperties: { objectId: tableId, tableRange: { location: { rowIndex: rowIdx, columnIndex: totIdxL }, rowSpan: 1, columnSpan: 1 }, tableCellProperties: { tableCellBackgroundFill: { solidFill: { color: { rgbColor: frow.colorL } } }, contentAlignment: 'MIDDLE' }, fields: 'tableCellBackgroundFill,contentAlignment' }});
+              tableReqs.push({ updateTableCellProperties: { objectId: tableId, tableRange: { location: { rowIndex: rowIdx, columnIndex: totIdxR }, rowSpan: 1, columnSpan: 1 }, tableCellProperties: { tableCellBackgroundFill: { solidFill: { color: { rgbColor: frow.colorR } } }, contentAlignment: 'MIDDLE' }, fields: 'tableCellBackgroundFill,contentAlignment' }});
+              
+              // Стиль текста
+              const fontSize = frow.isGrand ? 12 : 10;
+              const isBold = frow.isGrand || frow.label.includes('Итого');
+              const textRgb = frow.isGrand ? { red: 1, green: 1, blue: 1 } : { red: 0, green: 0, blue: 0 };
+              
+              tableReqs.push({ updateTextStyle: { objectId: tableId, cellLocation: { rowIndex: rowIdx, columnIndex: totIdxL }, style: { ...TABLE_STYLE, bold: isBold, fontSize: { magnitude: fontSize, unit: 'PT' }, foregroundColor: { opaqueColor: { rgbColor: textRgb } } }, fields: 'fontFamily,italic,fontSize,bold,foregroundColor' }});
+              tableReqs.push({ updateTextStyle: { objectId: tableId, cellLocation: { rowIndex: rowIdx, columnIndex: totIdxR }, style: { ...TABLE_STYLE, bold: isBold, fontSize: { magnitude: fontSize, unit: 'PT' }, foregroundColor: { opaqueColor: { rgbColor: textRgb } } }, fields: 'fontFamily,italic,fontSize,bold,foregroundColor' }});
+              
+              tableReqs.push({ updateParagraphStyle: { objectId: tableId, cellLocation: { rowIndex: rowIdx, columnIndex: totIdxL }, style: { alignment: 'RIGHT' }, fields: 'alignment' }});
+              tableReqs.push({ updateParagraphStyle: { objectId: tableId, cellLocation: { rowIndex: rowIdx, columnIndex: totIdxR }, style: { alignment: 'RIGHT' }, fields: 'alignment' }});
 
+              // Объединение пустых ячеек слева
+              if (totIdxL > 1) {
+                  tableReqs.push({ mergeTableCells: { objectId: tableId, tableRange: { location: { rowIndex: rowIdx, columnIndex: 0 }, rowSpan: 1, columnSpan: totIdxL } } });
+              }
+          });
 
-          tableReqs.push({ insertText: { objectId: tableId, cellLocation: { rowIndex: r, columnIndex: totIdxL }, text: 'Итого:' } });
-          tableReqs.push({ insertText: { objectId: tableId, cellLocation: { rowIndex: r, columnIndex: totIdxR }, text: data.total.toLocaleString() || '0' } });
-          
-          tableReqs.push({ updateTableCellProperties: { objectId: tableId, tableRange: { location: { rowIndex: r, columnIndex: totIdxL }, rowSpan: 1, columnSpan: 1 }, tableCellProperties: { tableCellBackgroundFill: { solidFill: { color: { rgbColor: COLORS.TOTAL_L } } }, contentAlignment: 'MIDDLE' }, fields: 'tableCellBackgroundFill,contentAlignment' }});
-          tableReqs.push({ updateTableCellProperties: { objectId: tableId, tableRange: { location: { rowIndex: r, columnIndex: totIdxR }, rowSpan: 1, columnSpan: 1 }, tableCellProperties: { tableCellBackgroundFill: { solidFill: { color: { rgbColor: COLORS.TOTAL_R } } }, contentAlignment: 'MIDDLE' }, fields: 'tableCellBackgroundFill,contentAlignment' }});
-          
-          for (let col = totIdxL; col <= totIdxR; col++) {
-             const fontSize = col === totIdxR ? 12 : 14; 
-             tableReqs.push({ updateTextStyle: { objectId: tableId, cellLocation: { rowIndex: r, columnIndex: col }, style: { ...TABLE_STYLE, bold: true, fontSize: { magnitude: fontSize, unit: 'PT' } }, fields: 'fontFamily,italic,fontSize,bold' }});
-             tableReqs.push({ updateParagraphStyle: { objectId: tableId, cellLocation: { rowIndex: r, columnIndex: col }, style: { alignment: 'CENTER' }, fields: 'alignment' }});
-          }
-
-          // Merge empty cells to the left of Итого and place logo
-          if (totIdxL > 1) {
-            tableReqs.push({ mergeTableCells: { objectId: tableId, tableRange: { location: { rowIndex: r, columnIndex: 0 }, rowSpan: 1, columnSpan: totIdxL } } });
-            
-            if (logoUrl) {
+          // Вставляем логотип в первую строку итогов (если есть пустое место слева)
+          if (totIdxL > 1 && logoUrl) {
               const logoW = 1600000;
               const logoH = 266000; // ~6:1 aspect ratio
               const logoX = TABLE_X + 150000;
@@ -572,8 +673,9 @@ export async function generateSlidesKP(data: {
                   }
                 }
               });
-            }
           }
+          
+          r += footerRows.length;
       }
 
       // Column widths & borders
