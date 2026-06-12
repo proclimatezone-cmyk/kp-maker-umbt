@@ -493,7 +493,7 @@ export async function generateSlidesKP(data: {
       activeSlideIds.add(sId);
       const isLastTable = t === tablesData.length - 1;
       const tableId = `kp_${Date.now()}_${t}`;
-      const extraRows = isLastTable ? 1 : 0;
+      const extraRows = isLastTable ? footerRows.length : 0;
       const displayRows = 1 + tData.rows + extraRows;
       
       // Calculate real table height based on row types
