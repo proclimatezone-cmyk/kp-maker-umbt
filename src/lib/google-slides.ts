@@ -109,7 +109,7 @@ async function uploadToDrive(imageUrl: string, fileName: string): Promise<string
 
 function isAccessory(g: GroupedItem) {
   const c = g.category.toLowerCase();
-  return c.includes('аксессуар') || c.includes('автоматика') || c.includes('пульт') || c.includes('панель') || c.includes('опция') || c.includes('дополнительные работы');
+  return c.includes('аксессуар') || c.includes('автоматика') || c.includes('пульт') || c.includes('панель') || c.includes('опция');
 }
 
 export async function generateSlidesKP(data: {
