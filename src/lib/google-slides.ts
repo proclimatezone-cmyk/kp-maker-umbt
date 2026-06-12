@@ -630,7 +630,7 @@ export async function generateSlidesKP(data: {
               // Стиль текста
               const fontSize = frow.isGrand ? 12 : 10;
               const isBold = frow.isGrand || frow.label.includes('Итого');
-              const textRgb = frow.isGrand ? { red: 1, green: 1, blue: 1 } : { red: 0, green: 0, blue: 0 };
+              const textRgb = frow.label === 'ОБЩИЙ ИТОГ:' ? { red: 1, green: 1, blue: 1 } : { red: 0, green: 0, blue: 0 };
               
               tableReqs.push({ updateTextStyle: { objectId: tableId, cellLocation: { rowIndex: rowIdx, columnIndex: totIdxL }, style: { ...TABLE_STYLE, bold: isBold, fontSize: { magnitude: fontSize, unit: 'PT' }, foregroundColor: { opaqueColor: { rgbColor: textRgb } } }, fields: 'fontFamily,italic,fontSize,bold,foregroundColor' }});
               tableReqs.push({ updateTextStyle: { objectId: tableId, cellLocation: { rowIndex: rowIdx, columnIndex: totIdxR }, style: { ...TABLE_STYLE, bold: isBold, fontSize: { magnitude: fontSize, unit: 'PT' }, foregroundColor: { opaqueColor: { rgbColor: textRgb } } }, fields: 'fontFamily,italic,fontSize,bold,foregroundColor' }});
