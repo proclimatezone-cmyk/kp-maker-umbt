@@ -578,8 +578,8 @@ export default function Home() {
   }, 0), [additionalItems, calculatePrice]);
 
   const grandTotal = useMemo(() => {
-    return equipmentTotal - partnerBonusSum + additionalTotal;
-  }, [equipmentTotal, partnerBonusSum, additionalTotal]);
+    return equipmentTotal + additionalTotal;
+  }, [equipmentTotal, additionalTotal]);
 
   const currencyLabel = options.currency === 'sum' ? 'сум' : 'у.е.'
 
@@ -821,9 +821,9 @@ export default function Home() {
         <div className="section" style={{ marginTop: '1.5rem', border: '2px solid var(--accent)', background: 'var(--bg-card)' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>Кондиционирование (за вычетом бонуса):</span>
+              <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>Кондиционирование:</span>
               <span style={{ fontWeight: 600, color: 'var(--text-main)' }}>
-                {(equipmentTotal - partnerBonusSum).toLocaleString()} {currencyLabel}
+                {equipmentTotal.toLocaleString()} {currencyLabel}
               </span>
             </div>
             {additionalItems.length > 0 && (

@@ -233,10 +233,9 @@ export async function generateSlidesKP(data: {
   // 3. Define footer rows
   const footerRows: { label: string; value: number; isGrand?: boolean; colorL: any; colorR: any }[] = [];
   const hasAdd = data.additionalTotal && data.additionalTotal > 0;
-  const hasBonus = data.partnerBonus && data.partnerBonus > 0;
 
-  if (hasAdd || hasBonus) {
-    const eqTotal = data.equipmentTotal || (data.total - (data.additionalTotal || 0) + (data.partnerBonus || 0));
+  if (hasAdd) {
+    const eqTotal = data.equipmentTotal || (data.total - (data.additionalTotal || 0));
     footerRows.push({ 
       label: 'Итого кондиционирование:', 
       value: eqTotal, 
@@ -244,23 +243,12 @@ export async function generateSlidesKP(data: {
       colorR: COLORS.TOTAL_R 
     });
 
-    if (hasBonus) {
-      footerRows.push({ 
-        label: 'Партнерский бонус (скидка):', 
-        value: -data.partnerBonus!, 
-        colorL: { red: 255/255, green: 220/255, blue: 220/255 }, 
-        colorR: { red: 255/255, green: 180/255, blue: 180/255 } 
-      });
-    }
-
-    if (hasAdd) {
-      footerRows.push({ 
-        label: 'Итого доп. раздел:', 
-        value: data.additionalTotal!, 
-        colorL: { red: 255/255, green: 240/255, blue: 215/255 }, 
-        colorR: { red: 255/255, green: 220/255, blue: 170/255 } 
-      });
-    }
+    footerRows.push({ 
+      label: 'Итого доп. раздел:', 
+      value: data.additionalTotal!, 
+      colorL: { red: 255/255, green: 240/255, blue: 215/255 }, 
+      colorR: { red: 255/255, green: 220/255, blue: 170/255 } 
+    });
 
     footerRows.push({ 
       label: 'ОБЩИЙ ИТОГ:', 
@@ -647,8 +635,8 @@ export async function generateSlidesKP(data: {
               tableReqs.push({ updateTextStyle: { objectId: tableId, cellLocation: { rowIndex: rowIdx, columnIndex: totIdxL }, style: { ...TABLE_STYLE, bold: isBold, fontSize: { magnitude: fontSize, unit: 'PT' }, foregroundColor: { opaqueColor: { rgbColor: textRgb } } }, fields: 'fontFamily,italic,fontSize,bold,foregroundColor' }});
               tableReqs.push({ updateTextStyle: { objectId: tableId, cellLocation: { rowIndex: rowIdx, columnIndex: totIdxR }, style: { ...TABLE_STYLE, bold: isBold, fontSize: { magnitude: fontSize, unit: 'PT' }, foregroundColor: { opaqueColor: { rgbColor: textRgb } } }, fields: 'fontFamily,italic,fontSize,bold,foregroundColor' }});
               
-              tableReqs.push({ updateParagraphStyle: { objectId: tableId, cellLocation: { rowIndex: rowIdx, columnIndex: totIdxL }, style: { alignment: 'RIGHT' }, fields: 'alignment' }});
-              tableReqs.push({ updateParagraphStyle: { objectId: tableId, cellLocation: { rowIndex: rowIdx, columnIndex: totIdxR }, style: { alignment: 'RIGHT' }, fields: 'alignment' }});
+              tableReqs.push({ updateParagraphStyle: { objectId: tableId, cellLocation: { rowIndex: rowIdx, columnIndex: totIdxL }, style: { alignment: 'END' }, fields: 'alignment' }});
+              tableReqs.push({ updateParagraphStyle: { objectId: tableId, cellLocation: { rowIndex: rowIdx, columnIndex: totIdxR }, style: { alignment: 'END' }, fields: 'alignment' }});
 
               // Объединение пустых ячеек слева
               if (totIdxL > 1) {
