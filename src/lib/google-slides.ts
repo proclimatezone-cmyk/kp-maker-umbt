@@ -26,6 +26,7 @@ const TABLE_STYLE = {
 // Layout Constants
 const PRODUCT_ROW_H = 950000;
 const ACCESSORY_ROW_H = 400000;
+const ADDITIONAL_ROW_H = 300000;
 const HEADER_FOOTER_H = 500000;
 const TABLE_WIDTH = 6800000;
 const TABLE_X = 500000;
@@ -109,7 +110,14 @@ async function uploadToDrive(imageUrl: string, fileName: string): Promise<string
 
 function isAccessory(g: GroupedItem) {
   const c = g.category.toLowerCase();
-  return c.includes('аксессуар') || c.includes('автоматика') || c.includes('пульт') || c.includes('панель') || c.includes('опция') || c.includes('дополнительные работы') || c.includes('дополнительные услуги') || g.models.some(m => m.isAdditional);
+  return c.includes('аксессуар') || c.includes('автоматика') || c.includes('пульт') || c.includes('панель') || c.includes('опция');
+}
+
+function getRowHeight(g: GroupedItem): number {
+  if (g.models.some(m => m.isAdditional)) {
+    return ADDITIONAL_ROW_H;
+  }
+  return isAccessory(g) ? ACCESSORY_ROW_H : PRODUCT_ROW_H;
 }
 
 export async function generateSlidesKP(data: {
@@ -249,7 +257,7 @@ export async function generateSlidesKP(data: {
   const calculateHeight = (slideGroups: GroupedItem[], isLast: boolean) => {
     let h = HEADER_FOOTER_H; // Header row height
     slideGroups.forEach(g => {
-      const rowH = isAccessory(g) ? ACCESSORY_ROW_H : PRODUCT_ROW_H;
+      const rowH = getRowHeight(g);
       h += g.models.length * rowH;
     });
     if (isLast) {
@@ -473,7 +481,7 @@ export async function generateSlidesKP(data: {
       // Calculate real table height based on row types
       let totalRowsH = 0;
       tData.groups.forEach(g => {
-        const h = isAccessory(g) ? ACCESSORY_ROW_H : PRODUCT_ROW_H;
+        const h = getRowHeight(g);
         totalRowsH += g.models.length * h;
       });
       const tableHeight = HEADER_FOOTER_H + totalRowsH + (extraRows * HEADER_FOOTER_H);
@@ -495,7 +503,7 @@ export async function generateSlidesKP(data: {
       
       let currentRowIdx = 1;
       tData.groups.forEach(g => {
-        const rowH = isAccessory(g) ? ACCESSORY_ROW_H : PRODUCT_ROW_H;
+        const rowH = getRowHeight(g);
         for (let i = 0; i < g.models.length; i++) {
           tableReqs.push({ updateTableRowProperties: { objectId: tableId, rowIndices: [currentRowIdx], tableRowProperties: { minRowHeight: { magnitude: rowH, unit: 'EMU' } }, fields: 'minRowHeight' }});
           currentRowIdx++;
@@ -523,7 +531,7 @@ export async function generateSlidesKP(data: {
       for (const group of tData.groups) {
           const startRow = r;
           const startGroupY = currentRowY;
-          const rowH = isAccessory(group) ? ACCESSORY_ROW_H : PRODUCT_ROW_H;
+          const rowH = getRowHeight(group);
           const groupHeight = group.models.length * rowH;
           const isGroupAdditional = group.models.some(m => m.isAdditional);
 
