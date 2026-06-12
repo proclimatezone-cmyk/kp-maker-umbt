@@ -48,7 +48,7 @@ interface GroupedItem {
   category: string;
   series: string;
   image: string;
-  models: { model: string; quantity: number; price: number; }[];
+  models: { model: string; quantity: number; price: number; isAdditional?: boolean; }[];
 }
 
 function getDriveFileId(url: string): string | null {
@@ -213,7 +213,8 @@ export async function generateSlidesKP(data: {
       group.models.push({ 
         model: item.model || 'Модель не указана', 
         quantity: item.quantity, 
-        price: Number(item.price) || 0 
+        price: Number(item.price) || 0,
+        isAdditional: !!item.isAdditional
       });
     } else {
       groups.push({
@@ -223,7 +224,8 @@ export async function generateSlidesKP(data: {
         models: [{ 
           model: item.model || 'Модель не указана', 
           quantity: item.quantity, 
-          price: Number(item.price) || 0 
+          price: Number(item.price) || 0,
+          isAdditional: !!item.isAdditional
         }]
       });
     }
@@ -523,9 +525,10 @@ export async function generateSlidesKP(data: {
           const startGroupY = currentRowY;
           const rowH = isAccessory(group) ? ACCESSORY_ROW_H : PRODUCT_ROW_H;
           const groupHeight = group.models.length * rowH;
+          const isGroupAdditional = group.models.some(m => m.isAdditional);
 
           // Image cell
-          if (showImages) {
+          if (showImages && !isGroupAdditional) {
               tableReqs.push({ insertText: { objectId: tableId, cellLocation: { rowIndex: r, columnIndex: 0 }, text: ' ' } });
               let imageUrl = imageMap.get(group.image);
               if (imageUrl && imageUrl.includes('drive.google.com/uc?id='))
@@ -538,9 +541,11 @@ export async function generateSlidesKP(data: {
           }
 
           // Category cell
-          const catIdx = showImages ? 1 : 0;
-          const catText = group.category.trim();
-          tableReqs.push({ insertText: { objectId: tableId, cellLocation: { rowIndex: r, columnIndex: catIdx }, text: catText || ' ' } });
+          if (!isGroupAdditional) {
+              const catIdx = showImages ? 1 : 0;
+              const catText = group.category.trim();
+              tableReqs.push({ insertText: { objectId: tableId, cellLocation: { rowIndex: r, columnIndex: catIdx }, text: catText || ' ' } });
+          }
 
           // Model rows
           for (const m of group.models) {
@@ -550,7 +555,11 @@ export async function generateSlidesKP(data: {
               const pCol = showImages ? 4 : 3;
               const sCol = showImages ? 5 : 4;
 
-              tableReqs.push({ insertText: { objectId: tableId, cellLocation: { rowIndex: r, columnIndex: mCol }, text: m.model || ' ' } });
+              if (isGroupAdditional) {
+                  tableReqs.push({ insertText: { objectId: tableId, cellLocation: { rowIndex: r, columnIndex: 0 }, text: m.model || ' ' } });
+              } else {
+                  tableReqs.push({ insertText: { objectId: tableId, cellLocation: { rowIndex: r, columnIndex: mCol }, text: m.model || ' ' } });
+              }
               tableReqs.push({ insertText: { objectId: tableId, cellLocation: { rowIndex: r, columnIndex: qCol }, text: m.quantity.toString() || '0' } });
 
               let adjustedPrice = m.price;
@@ -565,19 +574,35 @@ export async function generateSlidesKP(data: {
 
               // Cell styling
               for (let col = 0; col < numCols; col++) {
-                  const isMergedAway = !isFirstInGroup && ((showImages && (col === 0 || col === 1)) || (!showImages && col === 0));
+                  const isMergedAway = isGroupAdditional
+                      ? (showImages ? (col === 1 || col === 2) : (col === 1))
+                      : (!isFirstInGroup && ((showImages && (col === 0 || col === 1)) || (!showImages && col === 0)));
                   tableReqs.push({ updateTableCellProperties: { objectId: tableId, tableRange: { location: { rowIndex: r, columnIndex: col }, rowSpan: 1, columnSpan: 1 }, tableCellProperties: { tableCellBackgroundFill: { solidFill: { color: { rgbColor: COLORS.ROW_BG } } }, contentAlignment: 'MIDDLE' }, fields: 'tableCellBackgroundFill,contentAlignment' }});
                   if (!isMergedAway) {
                       tableReqs.push({ updateTextStyle: { objectId: tableId, cellLocation: { rowIndex: r, columnIndex: col }, style: TABLE_STYLE, fields: 'fontFamily,italic,fontSize' }});
                       tableReqs.push({ updateParagraphStyle: { objectId: tableId, cellLocation: { rowIndex: r, columnIndex: col }, style: { alignment: 'CENTER' }, fields: 'alignment' }});
                   }
               }
+
+              if (isGroupAdditional) {
+                  tableReqs.push({
+                      mergeTableCells: {
+                          objectId: tableId,
+                          tableRange: {
+                              location: { rowIndex: r, columnIndex: 0 },
+                              rowSpan: 1,
+                              columnSpan: showImages ? 3 : 2
+                          }
+                      }
+                  });
+              }
+
               r++;
               currentRowY += rowH;
           }
 
           // Merge cells for multi-model groups
-          if (group.models.length > 1) {
+          if (group.models.length > 1 && !isGroupAdditional) {
               if (showImages) tableReqs.push({ mergeTableCells: { objectId: tableId, tableRange: { location: { rowIndex: startRow, columnIndex: 0 }, rowSpan: group.models.length, columnSpan: 1 } } });
               tableReqs.push({ mergeTableCells: { objectId: tableId, tableRange: { location: { rowIndex: startRow, columnIndex: showImages ? 1 : 0 }, rowSpan: group.models.length, columnSpan: 1 } } });
           }
