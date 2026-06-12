@@ -635,8 +635,8 @@ export async function generateSlidesKP(data: {
               tableReqs.push({ updateTextStyle: { objectId: tableId, cellLocation: { rowIndex: rowIdx, columnIndex: totIdxL }, style: { ...TABLE_STYLE, bold: isBold, fontSize: { magnitude: fontSize, unit: 'PT' }, foregroundColor: { opaqueColor: { rgbColor: textRgb } } }, fields: 'fontFamily,italic,fontSize,bold,foregroundColor' }});
               tableReqs.push({ updateTextStyle: { objectId: tableId, cellLocation: { rowIndex: rowIdx, columnIndex: totIdxR }, style: { ...TABLE_STYLE, bold: isBold, fontSize: { magnitude: fontSize, unit: 'PT' }, foregroundColor: { opaqueColor: { rgbColor: textRgb } } }, fields: 'fontFamily,italic,fontSize,bold,foregroundColor' }});
               
-              tableReqs.push({ updateParagraphStyle: { objectId: tableId, cellLocation: { rowIndex: rowIdx, columnIndex: totIdxL }, style: { alignment: 'END' }, fields: 'alignment' }});
-              tableReqs.push({ updateParagraphStyle: { objectId: tableId, cellLocation: { rowIndex: rowIdx, columnIndex: totIdxR }, style: { alignment: 'END' }, fields: 'alignment' }});
+              tableReqs.push({ updateParagraphStyle: { objectId: tableId, cellLocation: { rowIndex: rowIdx, columnIndex: totIdxL }, style: { alignment: 'CENTER' }, fields: 'alignment' }});
+              tableReqs.push({ updateParagraphStyle: { objectId: tableId, cellLocation: { rowIndex: rowIdx, columnIndex: totIdxR }, style: { alignment: 'CENTER' }, fields: 'alignment' }});
 
               // Объединение пустых ячеек слева
               if (totIdxL > 1) {
