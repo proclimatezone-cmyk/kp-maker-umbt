@@ -231,41 +231,13 @@ export async function generateSlidesKP(data: {
   
 
   // 3. Define footer rows
-  const footerRows: { label: string; value: number; isGrand?: boolean; colorL: any; colorR: any }[] = [];
-  const hasAdd = data.additionalTotal && data.additionalTotal > 0;
-
-  if (hasAdd) {
-    const eqTotal = data.equipmentTotal || (data.total - (data.additionalTotal || 0));
-    footerRows.push({ 
-      label: 'Итого кондиционирование:', 
-      value: eqTotal, 
-      colorL: COLORS.TOTAL_L, 
-      colorR: COLORS.TOTAL_R 
-    });
-
-    footerRows.push({ 
-      label: 'Итого доп. раздел:', 
-      value: data.additionalTotal!, 
-      colorL: { red: 255/255, green: 240/255, blue: 215/255 }, 
-      colorR: { red: 255/255, green: 220/255, blue: 170/255 } 
-    });
-
-    footerRows.push({ 
-      label: 'ОБЩИЙ ИТОГ:', 
-      value: data.total, 
-      isGrand: true, 
-      colorL: { red: 122/255, green: 147/255, blue: 172/255 }, 
-      colorR: { red: 100/255, green: 125/255, blue: 150/255 } 
-    });
-  } else {
-    footerRows.push({ 
-      label: 'Итого:', 
-      value: data.total, 
-      isGrand: true, 
-      colorL: COLORS.TOTAL_L, 
-      colorR: COLORS.TOTAL_R 
-    });
-  }
+  const footerRows = [{ 
+    label: 'Итого:', 
+    value: data.total, 
+    isGrand: true, 
+    colorL: COLORS.TOTAL_L, 
+    colorR: COLORS.TOTAL_R 
+  }];
 
   // 3.1 Split groups into per-slide chunks based on height in EMU
   const tablesData: { slideIndex: number, groups: GroupedItem[], height: number, rows: number }[] = [];
@@ -649,7 +621,7 @@ export async function generateSlidesKP(data: {
               const logoW = 1600000;
               const logoH = 266000; // ~6:1 aspect ratio
               const logoX = TABLE_X + 150000;
-              const logoY = currentRowY + (HEADER_FOOTER_H / 2) - (logoH / 2);
+              const logoY = TABLE_START_Y + tableHeight - (HEADER_FOOTER_H / 2) - (logoH / 2);
               
               imageRequests.push({
                 createImage: {
