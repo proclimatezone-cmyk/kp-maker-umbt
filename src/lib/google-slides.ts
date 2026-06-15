@@ -153,7 +153,7 @@ export async function generateSlidesKP(data: {
   // 1. Sum up identical products and preserve order
   const aggregated: any[] = [];
   data.items.forEach(item => {
-    const existing = aggregated.find(a => a.id === item.id || a.model === item.model);
+    const existing = aggregated.find(a => (item.id && a.id === item.id) || (item.model && a.model === item.model));
     if (existing) {
       existing.quantity += (Number(item.quantity) || 1);
     } else {

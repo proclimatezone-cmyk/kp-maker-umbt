@@ -489,7 +489,6 @@ export default function Home() {
       else if (productsData.length > 0) setItems([{ id: uid(), productId: productsData[0].id, quantity: 1 }])
       const addIt = s('umbt_additional_items'); if (addIt) setAdditionalItems(JSON.parse(addIt))
       const savedOptions = s('umbt_options'); if (savedOptions) setOptions(JSON.parse(savedOptions))
-      const prod = s('umbt_products'); if (prod) setProducts(JSON.parse(prod))
       const savedCp = s('umbt_cpName'); if (savedCp) setCpName(savedCp)
       if (s('umbt_bonusType')) setPartnerBonusType(s('umbt_bonusType') as 'percent' | 'fixed')
       if (s('umbt_bonusValue')) setPartnerBonusValue(Number(s('umbt_bonusValue')) || 0)
@@ -505,7 +504,6 @@ export default function Home() {
         const data = await res.json();
         if (data.success && data.products.length > 0) {
           setProducts(data.products);
-          localStorage.setItem('umbt_products', JSON.stringify(data.products));
         }
       } catch (e) {
         console.error('Failed to load products from API:', e);
@@ -535,7 +533,6 @@ export default function Home() {
         localStorage.setItem('umbt_items', JSON.stringify(items))
         localStorage.setItem('umbt_additional_items', JSON.stringify(additionalItems))
         localStorage.setItem('umbt_options', JSON.stringify(options))
-        localStorage.setItem('umbt_products', JSON.stringify(products))
         localStorage.setItem('umbt_cpName', cpName)
         localStorage.setItem('umbt_bonusType', partnerBonusType)
         localStorage.setItem('umbt_bonusValue', partnerBonusValue.toString())
@@ -544,7 +541,7 @@ export default function Home() {
       } catch (e) { console.error(e) }
     }, 1000)
     return () => clearTimeout(timer)
-  }, [manager, client, company, address, objectType, registrationDate, equipmentType, contactPerson, items, additionalItems, options, products, cpName, partnerBonusType, partnerBonusValue, isMounted])
+  }, [manager, client, company, address, objectType, registrationDate, equipmentType, contactPerson, items, additionalItems, options, cpName, partnerBonusType, partnerBonusValue, isMounted])
 
   const cleanProducts = useMemo(() => products.filter(p => p.model && !p.model.startsWith('---') && p.id && !p.id.startsWith('---')), [products])
   const filteredProducts = useMemo(() => {

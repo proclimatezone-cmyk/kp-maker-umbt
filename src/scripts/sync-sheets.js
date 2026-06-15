@@ -29,6 +29,15 @@ if (!isVercel && !fs.existsSync(IMG_DIR)) {
   }
 }
 
+function getDriveFileId(url) {
+  if (!url) return null;
+  const idMatch = url.match(/[?&]id=([^&]+)/);
+  if (idMatch) return idMatch[1];
+  const dMatch = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
+  if (dMatch) return dMatch[1];
+  return null;
+}
+
 export async function syncSheets() {
   console.log('--- STARTING SYNC WITH GOOGLE DRIVE IMAGES ---');
 
@@ -88,26 +97,60 @@ export async function syncSheets() {
 
       const pId = model.toLowerCase().replace(/[^a-z0-9]/g, '-');
       let localImagePath = '/images/products/placeholder.png';
-
       let slidesImage = '';
+      let forceDownload = false;
       
       // Fast path: check image cache by full URL first
       if (imageUrl && imageCache.has(imageUrl)) {
         const cached = imageCache.get(imageUrl);
-        localImagePath = cached.localImagePath;
-        slidesImage = cached.slidesImage;
+        let isValid = true;
+        const checkId = getDriveFileId(cached.slidesImage);
+        if (checkId) {
+          try {
+            await drive.files.get({ fileId: checkId, fields: 'id' });
+          } catch (e) {
+            console.log(`[Cache Invalidation] File ID ${checkId} no longer exists. Re-fetching.`);
+            isValid = false;
+          }
+        }
+        if (isValid) {
+          localImagePath = cached.localImagePath;
+          slidesImage = cached.slidesImage;
+        } else {
+          imageCache.delete(imageUrl);
+          if (checkId) imageCache.delete(checkId);
+          forceDownload = true;
+        }
       }
       // Handle Google Drive Folder/File URLs
-      else if (imageUrl && imageUrl.includes('drive.google.com')) {
+      if (!slidesImage && imageUrl && imageUrl.includes('drive.google.com')) {
         try {
           let fileId = '';
           if (imageUrl.includes('folders/')) {
             const folderId = imageUrl.split('folders/')[1].split('?')[0];
             
-            if (imageCache.has(folderId)) {
-              localImagePath = imageCache.get(folderId).localImagePath;
-              slidesImage = imageCache.get(folderId).slidesImage;
+            let cachedVal = imageCache.get(folderId);
+            let isValid = true;
+            if (cachedVal && cachedVal.slidesImage) {
+              const checkId = getDriveFileId(cachedVal.slidesImage);
+              if (checkId) {
+                try {
+                  await drive.files.get({ fileId: checkId, fields: 'id' });
+                } catch (e) {
+                  console.log(`[Cache Invalidation] Folder file ID ${checkId} no longer exists. Re-fetching.`);
+                  isValid = false;
+                }
+              }
             } else {
+              isValid = false;
+            }
+
+            if (isValid && cachedVal) {
+              localImagePath = cachedVal.localImagePath;
+              slidesImage = cachedVal.slidesImage;
+            } else {
+              imageCache.delete(folderId);
+              forceDownload = true;
               console.log(`Listing files in folder: ${folderId}`);
               const folderFiles = await drive.files.list({
                 q: `'${folderId}' in parents and mimeType contains 'image/'`,
@@ -140,7 +183,7 @@ export async function syncSheets() {
                   const fileName = `${folderId}.${ext}`;
                   const fullPath = path.join(IMG_DIR, fileName);
                   
-                  if (!fs.existsSync(fullPath)) {
+                  if (forceDownload || !fs.existsSync(fullPath)) {
                     console.log(`Downloading image: ${fileName}`);
                     const dest = fs.createWriteStream(fullPath);
                     const res = await drive.files.get(
@@ -169,10 +212,28 @@ export async function syncSheets() {
             }
 
             if (fileId) {
-              if (imageCache.has(fileId)) {
-                localImagePath = imageCache.get(fileId).localImagePath;
-                slidesImage = imageCache.get(fileId).slidesImage;
+              let cachedVal = imageCache.get(fileId);
+              let isValid = true;
+              if (cachedVal && cachedVal.slidesImage) {
+                const checkId = getDriveFileId(cachedVal.slidesImage);
+                if (checkId) {
+                  try {
+                    await drive.files.get({ fileId: checkId, fields: 'id' });
+                  } catch (e) {
+                    console.log(`[Cache Invalidation] Direct file ID ${checkId} no longer exists. Re-fetching.`);
+                    isValid = false;
+                  }
+                }
               } else {
+                isValid = false;
+              }
+
+              if (isValid && cachedVal) {
+                localImagePath = cachedVal.localImagePath;
+                slidesImage = cachedVal.slidesImage;
+              } else {
+                imageCache.delete(fileId);
+                forceDownload = true;
                 slidesImage = `https://drive.google.com/uc?id=${fileId}`;
                 
                 // Make file public so Slides API can access the link
@@ -195,7 +256,7 @@ export async function syncSheets() {
                   const ext = fileInfo.data.fileExtension || 'png';
                   const fileName = `${fileId}.${ext}`;
                   const fullPath = path.join(IMG_DIR, fileName);
-                  if (!fs.existsSync(fullPath)) {
+                  if (forceDownload || !fs.existsSync(fullPath)) {
                     console.log(`Downloading image file: ${fileName}`);
                     const dest = fs.createWriteStream(fullPath);
                     const res = await drive.files.get(
@@ -218,6 +279,32 @@ export async function syncSheets() {
           }
         } catch (err) {
           console.warn(`Failed to process image for ${model}:`, err.message);
+        }
+      }
+
+      if (!isVercel && localImagePath && localImagePath.startsWith('/images/products/') && localImagePath !== '/images/products/placeholder.png') {
+        const fileName = path.basename(localImagePath);
+        const fullPath = path.join(IMG_DIR, fileName);
+        if (!fs.existsSync(fullPath)) {
+          const fileId = getDriveFileId(slidesImage);
+          if (fileId) {
+            try {
+              console.log(`Downloading missing local image: ${fileName}`);
+              const dest = fs.createWriteStream(fullPath);
+              const res = await drive.files.get(
+                { fileId, alt: 'media' },
+                { responseType: 'stream' }
+              );
+              await new Promise((resolve, reject) => {
+                res.data
+                  .on('end', () => resolve())
+                  .on('error', err => reject(err))
+                  .pipe(dest);
+              });
+            } catch (err) {
+              console.warn(`Failed to download missing local image ${fileName}: ${err.message}`);
+            }
+          }
         }
       }
 
