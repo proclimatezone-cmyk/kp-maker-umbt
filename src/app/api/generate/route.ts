@@ -17,8 +17,11 @@ export async function POST(req: NextRequest) {
       additionalTotal,
       total, 
       extraData, 
-      options 
+      options,
+      origin: clientOrigin
     } = data
+
+    const origin = clientOrigin || req.nextUrl.origin;
 
     // 1. Generate Google Slides Presentation and PDF
     console.log('Generating Google Slides and PDF...');
@@ -33,7 +36,8 @@ export async function POST(req: NextRequest) {
       total,
       manager,
       extraData,
-      options
+      options,
+      origin
     });
 
     if (!pdfBuffer) {

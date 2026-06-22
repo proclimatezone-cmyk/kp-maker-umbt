@@ -22,10 +22,10 @@ export function parseQuantity(qtyStr: string | number): number {
   return isNaN(num) ? 1 : num;
 }
 
-const AdditionalRow = memo(({ item, onUpdate, onDelete, onClone, calculatePrice, currencyLabel }: any) => {
+const AdditionalRow = memo(({ item, onUpdate, onDelete, onClone, calculatePrice, currencyLabel, labels }: any) => {
   const [name, setName] = useState(item.name);
   const [qty, setQty] = useState(item.quantity);
-  const [price, setPrice] = useState(item.price);
+  const [price, setPrice] = useState<number | string>(item.price);
 
   useEffect(() => { setName(item.name); }, [item.name]);
   useEffect(() => { setQty(item.quantity); }, [item.quantity]);
@@ -58,15 +58,31 @@ const AdditionalRow = memo(({ item, onUpdate, onDelete, onClone, calculatePrice,
           style={{ width: '100%', minWidth: '80px', textAlign: 'center' }}
         />
       </td>
-      <td data-label="Цена" style={{ textAlign: 'center' }}>
+      <td data-label={labels.price} style={{ textAlign: 'center' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px' }}>
           <input 
             className="qty-input" 
             type="number" 
             min="0"
-            value={price} 
-            onChange={e => setPrice(Number(e.target.value) || 0)}
-            onBlur={() => price !== item.price && onUpdate(item.id, { price })}
+            value={price === 0 ? '' : price} 
+            onChange={e => {
+              const val = e.target.value;
+              setPrice(val === '' ? '' : (parseInt(val) || 0));
+            }}
+            onFocus={e => {
+              if (Number(price) === 0) {
+                setPrice('');
+              } else {
+                e.target.select();
+              }
+            }}
+            onBlur={() => {
+              const finalPrice = price === '' ? 0 : Number(price);
+              setPrice(finalPrice);
+              if (finalPrice !== item.price) {
+                onUpdate(item.id, { price: finalPrice });
+              }
+            }}
             style={{ width: '80px', textAlign: 'center' }}
           />
           <span className="price-unit">{currencyLabel}</span>
@@ -375,7 +391,7 @@ const ModelSearchSelector = memo(({ value, onChange, cleanProducts }: { value: s
   );
 });
 
-const EquipmentRow = memo(({ item, products, cleanProducts, onUpdate, onDelete, onClone, calculatePrice, currencyLabel }: any) => {
+const EquipmentRow = memo(({ item, products, cleanProducts, onUpdate, onDelete, onClone, calculatePrice, currencyLabel, labels }: any) => {
   const p = products.find((x: any) => x.id === item.productId);
   const [qty, setQty] = useState<number | string>(item.quantity);
   useEffect(() => { setQty(item.quantity); }, [item.quantity]);
@@ -386,7 +402,7 @@ const EquipmentRow = memo(({ item, products, cleanProducts, onUpdate, onDelete, 
         <ModelSearchSelector value={item.productId} onChange={val => onUpdate(item.id, { productId: val })} cleanProducts={cleanProducts} />
         <div className="cat-label">{p?.series || p?.category}</div>
       </td>
-      <td data-label="Цена" style={{ textAlign: 'center' }}>
+      <td data-label={labels.price} style={{ textAlign: 'center' }}>
         <span className="price">{calculatePrice(p?.price || 0).toLocaleString()}</span>
         <span className="price-unit">{currencyLabel}</span>
       </td>
@@ -413,7 +429,7 @@ const EquipmentRow = memo(({ item, products, cleanProducts, onUpdate, onDelete, 
           }}
         />
       </td>
-      <td data-label="Сумма" style={{ textAlign: 'right' }}>
+      <td data-label={labels.sum} style={{ textAlign: 'right' }}>
         <span className="sum">{(p ? calculatePrice(p.price) * (Number(qty) || 0) : 0).toLocaleString()}</span>
       </td>
       <td style={{ textAlign: 'right' }}>
@@ -578,6 +594,16 @@ export default function Home() {
     return equipmentTotal + additionalTotal;
   }, [equipmentTotal, additionalTotal]);
 
+  const labels = useMemo(() => {
+    if (options.paymentType === 'transfer') {
+      return { price: 'Цена с НДС', sum: 'Сумма с НДС', total: 'Итого с НДС' };
+    } else if (options.currency === 'sum') {
+      return { price: 'Цена СУМ', sum: 'Сумма СУМ', total: 'Итого СУМ' };
+    } else {
+      return { price: 'Цена у.е.', sum: 'Сумма у.е.', total: 'Итого у.е.' };
+    }
+  }, [options.paymentType, options.currency]);
+
   const currencyLabel = options.currency === 'sum' ? 'сум' : 'у.е.'
 
   const updateItem = useCallback((id: string, updates: Partial<Item>) => {
@@ -585,7 +611,7 @@ export default function Home() {
   }, [])
 
   const deleteItem = useCallback((id: string) => {
-    setItems(prev => prev.length > 1 ? prev.filter(i => i.id !== id) : prev)
+    setItems(prev => prev.filter(i => i.id !== id))
   }, [])
 
   const cloneItem = useCallback((id: string) => {
@@ -649,7 +675,8 @@ export default function Home() {
           additionalTotal,
           total: grandTotal, 
           extraData: { company, address, objectType, registrationDate, equipmentType, contactPerson }, 
-          options 
+          options,
+          origin: typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000'
         })
       })
       if (r.ok) { 
@@ -708,24 +735,30 @@ export default function Home() {
               <Plus size={15} /> Добавить
             </button>
           </div>
-          <div className="tbl-wrap">
-            <table className="tbl">
-              <thead>
-                <tr>
-                  <th style={{ width: '48%' }}>Модель</th>
-                  <th style={{ width: '14%', textAlign: 'center' }}>Цена</th>
-                  <th style={{ width: '10%', textAlign: 'center' }}>Кол-во</th>
-                  <th style={{ width: '18%', textAlign: 'right' }}>Сумма</th>
-                  <th style={{ width: '10%' }}></th>
-                </tr>
-              </thead>
-              <tbody>
-                {items.map(item => (
-                  <EquipmentRow key={item.id} item={item} products={products} cleanProducts={cleanProducts} onUpdate={updateItem} onDelete={deleteItem} onClone={cloneItem} calculatePrice={calculatePrice} currencyLabel={currencyLabel} />
-                ))}
-              </tbody>
-            </table>
-          </div>
+          {items.length === 0 ? (
+            <div style={{ textAlign: 'center', padding: '2rem', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
+              Нет выбранных кондиционеров. Нажмите «Добавить» или воспользуйтесь поиском ниже.
+            </div>
+          ) : (
+            <div className="tbl-wrap">
+              <table className="tbl">
+                <thead>
+                  <tr>
+                    <th style={{ width: '48%' }}>Модель</th>
+                    <th style={{ width: '14%', textAlign: 'center' }}>{labels.price}</th>
+                    <th style={{ width: '10%', textAlign: 'center' }}>Кол-во</th>
+                    <th style={{ width: '18%', textAlign: 'right' }}>{labels.sum}</th>
+                    <th style={{ width: '10%' }}></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {items.map(item => (
+                    <EquipmentRow key={item.id} item={item} products={products} cleanProducts={cleanProducts} onUpdate={updateItem} onDelete={deleteItem} onClone={cloneItem} calculatePrice={calculatePrice} currencyLabel={currencyLabel} labels={labels} />
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
           <div className="total-area" style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginTop: '1.25rem', paddingTop: '1rem', borderTop: '1px solid var(--border)' }}>
             <div className="total-bar" style={{ marginTop: 0, paddingTop: 0, borderTop: 'none' }}>
               <span className="total-label">Итого кондиционирование</span>
@@ -783,8 +816,8 @@ export default function Home() {
                   <tr>
                     <th style={{ width: '48%' }}>Наименование</th>
                     <th style={{ width: '15%', textAlign: 'center' }}>Кол-во</th>
-                    <th style={{ width: '17%', textAlign: 'center' }}>Цена</th>
-                    <th style={{ width: '10%', textAlign: 'right' }}>Сумма</th>
+                    <th style={{ width: '17%', textAlign: 'center' }}>{labels.price}</th>
+                    <th style={{ width: '10%', textAlign: 'right' }}>{labels.sum}</th>
                     <th style={{ width: '10%' }}></th>
                   </tr>
                 </thead>
@@ -798,6 +831,7 @@ export default function Home() {
                       onClone={cloneAdditionalItem} 
                       calculatePrice={calculatePrice} 
                       currencyLabel={currencyLabel} 
+                      labels={labels}
                     />
                   ))}
                 </tbody>

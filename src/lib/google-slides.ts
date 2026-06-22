@@ -25,9 +25,10 @@ const TABLE_STYLE = {
 
 // Layout Constants
 const PRODUCT_ROW_H = 950000;
-const ACCESSORY_ROW_H = 400000;
-const ADDITIONAL_ROW_H = 300000;
+const ACCESSORY_ROW_H = 450000;
+const ADDITIONAL_ROW_H = 450000;
 const HEADER_FOOTER_H = 500000;
+const ROW_OVERHEAD = 45000;
 const TABLE_WIDTH = 6800000;
 const TABLE_X = 500000;
 const TABLE_START_Y = 2700000;
@@ -132,6 +133,7 @@ export async function generateSlidesKP(data: {
   manager: any;
   extraData?: any; 
   options?: any;
+  origin?: string;
 }) {
   const oauth2Client = new google.auth.OAuth2(
     process.env.GOOGLE_CLIENT_ID,
@@ -149,6 +151,7 @@ export async function generateSlidesKP(data: {
   const paymentType = opts.paymentType || 'cash';
   const exchangeRate = Number(opts.exchangeRate) || 12500;
   const transferFee = Number(opts.transferFee) || 10;
+  const origin = data.origin || 'http://localhost:3000';
 
   // 1. Sum up identical products and preserve order
   const aggregated: any[] = [];
@@ -241,8 +244,17 @@ export async function generateSlidesKP(data: {
   
 
   // 3. Define footer rows
+  let totalLabel = 'Итого:';
+  if (paymentType === 'transfer') {
+    totalLabel = 'Итого с НДС:';
+  } else if (currency === 'sum') {
+    totalLabel = 'Итого СУМ:';
+  } else {
+    totalLabel = 'Итого у.е.:';
+  }
+
   const footerRows = [{ 
-    label: 'Итого:', 
+    label: totalLabel, 
     value: data.total, 
     isGrand: true, 
     colorL: COLORS.TOTAL_L, 
@@ -350,6 +362,15 @@ export async function generateSlidesKP(data: {
     });
   }
 
+  if (tablesData.length === 0) {
+    tablesData.push({
+      slideIndex: 0,
+      groups: [],
+      height: HEADER_FOOTER_H + footerRows.length * HEADER_FOOTER_H,
+      rows: 0
+    });
+  }
+
   // 3. Copy template & duplicate slides
   console.log('Copying template:', TEMPLATE_ID, 'to folder:', TARGET_FOLDER_ID);
   const copy = await drive.files.copy({
@@ -389,45 +410,112 @@ export async function generateSlidesKP(data: {
   await Promise.all([
     ...uniqueImages.map(async (imgPath, idx) => {
       try {
-        if (imgPath.startsWith('http')) {
-          // Remote image -> Drive Proxy
-          const driveUrl = await uploadToDrive(imgPath, `kp_remote_img_${Date.now()}_${idx}`);
-          if (driveUrl) {
-             // Conversion to direct link format for better rendering
-             const finalUrl = driveUrl.replace('drive.google.com/uc?id=', 'lh3.googleusercontent.com/d/');
-             imageMap.set(imgPath, finalUrl);
-             
-             // Extract file ID to delete it later!
-             const newFileId = getDriveFileId(driveUrl);
-             if (newFileId) {
-               fileIdsToDelete.push(newFileId);
-             }
+        let buffer: Buffer | null = null;
+        let mimeType = 'image/png';
+
+        if (imgPath.startsWith('/')) {
+          // Local image path (fetch via HTTP first, fall back to FS)
+          const absoluteUrl = `${origin}${imgPath}`;
+          console.log(`Fetching local image via HTTP from ${absoluteUrl}...`);
+          try {
+            const response = await fetch(absoluteUrl);
+            if (response.ok) {
+              buffer = Buffer.from(await response.arrayBuffer());
+              if (imgPath.endsWith('.jpg') || imgPath.endsWith('.jpeg')) {
+                mimeType = 'image/jpeg';
+              } else if (imgPath.endsWith('.webp')) {
+                mimeType = 'image/webp';
+              }
+            }
+          } catch (fetchErr: any) {
+            console.warn(`HTTP fetch failed for local image ${absoluteUrl}, trying local fs...`, fetchErr.message);
           }
+
+          // Fallback to local FS
+          if (!buffer) {
+            const fullPath = path.join(process.cwd(), 'public', imgPath.replace(/^\//, ''));
+            if (fs.existsSync(fullPath)) {
+              buffer = fs.readFileSync(fullPath);
+              if (imgPath.endsWith('.jpg') || imgPath.endsWith('.jpeg')) {
+                mimeType = 'image/jpeg';
+              } else if (imgPath.endsWith('.webp')) {
+                mimeType = 'image/webp';
+              }
+            }
+          }
+        } else if (imgPath.startsWith('http')) {
+          // Remote image path (try direct copy first)
+          const driveFileId = getDriveFileId(imgPath);
+          if (driveFileId) {
+            try {
+              console.log(`Copying Google Drive file ${driveFileId} directly...`);
+              const copy = await drive.files.copy({
+                fileId: driveFileId,
+                requestBody: { name: `kp_remote_img_${Date.now()}_${idx}` }
+              });
+              const fileId = copy.data.id!;
+              fileIdsToDelete.push(fileId);
+              await drive.permissions.create({ fileId, requestBody: { role: 'reader', type: 'anyone' } });
+              const finalUrl = `https://lh3.googleusercontent.com/d/${fileId}`;
+              imageMap.set(imgPath, finalUrl);
+              return; // Succeeded, skip fallback upload
+            } catch (copyErr: any) {
+              console.warn(`Direct copy failed for file ${driveFileId}, falling back to fetch...`, copyErr.message);
+            }
+          }
+
+          // Fallback fetch
+          console.log(`Fetching remote image ${imgPath}...`);
+          const response = await fetch(imgPath);
+          if (response.ok) {
+            buffer = Buffer.from(await response.arrayBuffer());
+            const contentType = response.headers.get('content-type');
+            if (contentType) mimeType = contentType;
+          }
+        }
+
+        if (buffer) {
+          console.log(`Uploading image buffer to Drive for ${imgPath}...`);
+          const upload = await drive.files.create({
+            requestBody: { name: `kp_img_${Date.now()}_${idx}`, mimeType },
+            media: { body: Readable.from(buffer) },
+            fields: 'id'
+          });
+          const fileId = upload.data.id!;
+          fileIdsToDelete.push(fileId);
+          await drive.permissions.create({ fileId, requestBody: { role: 'reader', type: 'anyone' } });
+          const finalUrl = `https://lh3.googleusercontent.com/d/${fileId}`;
+          imageMap.set(imgPath, finalUrl);
         } else {
-          // Local image -> Drive
-          const fullPath = path.join(process.cwd(), 'public', imgPath.replace(/^\//, ''));
-          if (fs.existsSync(fullPath)) {
-            const upload = await drive.files.create({
-              requestBody: { name: `kp_local_img_${Date.now()}_${idx}`, mimeType: 'image/png' },
-              media: { body: fs.createReadStream(fullPath) },
-              fields: 'id'
-            });
-            const fileId = upload.data.id!;
-            fileIdsToDelete.push(fileId);
-            await drive.permissions.create({ fileId, requestBody: { role: 'reader', type: 'anyone' } });
-            const finalUrl = `https://lh3.googleusercontent.com/d/${fileId}`;
-            imageMap.set(imgPath, finalUrl);
-          }
+          console.warn(`Failed to resolve image: ${imgPath}`);
         }
       } catch (err) { console.error(`SpeedUp: Image upload failed for ${imgPath}`, err); }
     }),
     (async () => {
       try {
-        const logoPath = path.join(process.cwd(), 'logo near itogo.png');
-        if (fs.existsSync(logoPath)) {
+        const logoUrlToFetch = `${origin}/logo-near-itogo.png`;
+        let buffer: Buffer | null = null;
+        console.log('Fetching logo from:', logoUrlToFetch);
+        try {
+          const response = await fetch(logoUrlToFetch);
+          if (response.ok) {
+            buffer = Buffer.from(await response.arrayBuffer());
+          }
+        } catch (e: any) {
+          console.warn('Could not fetch logo via HTTP, trying local file...', e.message);
+        }
+
+        if (!buffer) {
+          const logoPath = path.join(process.cwd(), 'logo near itogo.png');
+          if (fs.existsSync(logoPath)) {
+            buffer = fs.readFileSync(logoPath);
+          }
+        }
+
+        if (buffer) {
           const upload = await drive.files.create({
             requestBody: { name: `kp_logo_${Date.now()}`, mimeType: 'image/png' },
-            media: { body: fs.createReadStream(logoPath) },
+            media: { body: Readable.from(buffer) },
             fields: 'id'
           });
           const fileId = upload.data.id!;
@@ -436,7 +524,7 @@ export async function generateSlidesKP(data: {
           logoUrl = `https://lh3.googleusercontent.com/d/${fileId}`;
           console.log('Logo near itogo uploaded successfully:', logoUrl);
         } else {
-          console.warn('Logo file "logo near itogo.png" not found at project root');
+          console.warn('Logo file not found');
         }
       } catch (err) {
         console.error('Failed to upload logo near itogo', err);
@@ -463,8 +551,21 @@ export async function generateSlidesKP(data: {
   const tableReqs: any[] = [];
   const numCols = showImages ? 6 : 5;
   const columnWidths = showImages ? COL_WIDTHS_WITH_IMG : COL_WIDTHS_NO_IMG;
-  const colPriceLabel = 'Цена';
-  const sumLabel = 'Сумма';
+  
+  let colPriceLabel = 'Цена';
+  let sumLabel = 'Сумма';
+
+  if (paymentType === 'transfer') {
+    colPriceLabel = 'Цена с НДС';
+    sumLabel = 'Сумма с НДС';
+  } else if (currency === 'sum') {
+    colPriceLabel = 'Цена СУМ';
+    sumLabel = 'Сумма СУМ';
+  } else {
+    colPriceLabel = 'Цена у.е.';
+    sumLabel = 'Сумма у.е.';
+  }
+
   const headers = showImages
     ? ['Внешний вид', 'Наименование', 'Модель', 'Кол-во', colPriceLabel, sumLabel]
     : ['Наименование', 'Модель', 'Кол-во', colPriceLabel, sumLabel];
@@ -544,7 +645,9 @@ export async function generateSlidesKP(data: {
               if (imageUrl) {
                   const imgW = 1400000, colW = COL_WIDTHS_WITH_IMG[0];
                   const imgH = Math.min(1100000, groupHeight - 100000);
-                  imageRequests.push({ createImage: { url: imageUrl, elementProperties: { pageObjectId: sId, size: { width: { magnitude: imgW, unit: 'EMU' }, height: { magnitude: imgH, unit: 'EMU' } }, transform: { scaleX: 1, scaleY: 1, translateX: TABLE_X + (colW / 2) - (imgW / 2), translateY: startGroupY + (groupHeight / 2) - (imgH / 2), unit: 'EMU' } } } });
+                  const actualStartGroupY = startGroupY + startRow * ROW_OVERHEAD;
+                  const actualGroupHeight = groupHeight + group.models.length * ROW_OVERHEAD;
+                  imageRequests.push({ createImage: { url: imageUrl, elementProperties: { pageObjectId: sId, size: { width: { magnitude: imgW, unit: 'EMU' }, height: { magnitude: imgH, unit: 'EMU' } }, transform: { scaleX: 1, scaleY: 1, translateX: TABLE_X + (colW / 2) - (imgW / 2), translateY: actualStartGroupY + (actualGroupHeight / 2) - (imgH / 2), unit: 'EMU' } } } });
               }
           }
 
@@ -648,13 +751,14 @@ export async function generateSlidesKP(data: {
                   tableReqs.push({ mergeTableCells: { objectId: tableId, tableRange: { location: { rowIndex: rowIdx, columnIndex: 0 }, rowSpan: 1, columnSpan: totIdxL } } });
               }
           });
-
+          
           // Вставляем логотип в первую строку итогов (если есть пустое место слева)
           if (totIdxL > 1 && logoUrl) {
               const logoW = 1600000;
               const logoH = 266000; // ~6:1 aspect ratio
               const logoX = TABLE_X + 150000;
-              const logoY = TABLE_START_Y + tableHeight - (HEADER_FOOTER_H / 2) - (logoH / 2);
+              const actualTableHeight = tableHeight + (displayRows - 1) * ROW_OVERHEAD;
+              const logoY = TABLE_START_Y + actualTableHeight - (HEADER_FOOTER_H / 2) - (logoH / 2);
               
               imageRequests.push({
                 createImage: {
