@@ -38,14 +38,30 @@ function getDriveFileId(url) {
   return null;
 }
 
-export async function syncSheets() {
-  console.log('--- STARTING SYNC WITH GOOGLE DRIVE IMAGES ---');
-
+function getGoogleAuth() {
+  if (process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL && process.env.GOOGLE_PRIVATE_KEY) {
+    return new google.auth.JWT({
+      email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
+      key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n'),
+      scopes: [
+        'https://www.googleapis.com/auth/presentations',
+        'https://www.googleapis.com/auth/drive',
+        'https://www.googleapis.com/auth/spreadsheets'
+      ]
+    });
+  }
   const auth = new google.auth.OAuth2(
     process.env.GOOGLE_CLIENT_ID,
     process.env.GOOGLE_CLIENT_SECRET
   );
   auth.setCredentials({ refresh_token: process.env.GOOGLE_REFRESH_TOKEN });
+  return auth;
+}
+
+export async function syncSheets() {
+  console.log('--- STARTING SYNC WITH GOOGLE DRIVE IMAGES ---');
+
+  const auth = getGoogleAuth();
 
   const sheets = google.sheets({ version: 'v4', auth });
   const drive = google.drive({ version: 'v3', auth });
@@ -308,6 +324,8 @@ export async function syncSheets() {
         }
       }
 
+      const coolingCap = row[3] ? parseFloat(String(row[3]).replace(',', '.')) : 0;
+
       products.push({
         id: pId,
         category: category || 'General',
@@ -318,6 +336,7 @@ export async function syncSheets() {
         image: localImagePath,
         slidesImage: slidesImage || imageUrl,
         driveImage: imageUrl,
+        coolingCapacity: isNaN(coolingCap) ? 0 : coolingCap,
         specs: ""
       });
     }

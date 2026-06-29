@@ -465,6 +465,7 @@ export default function Home() {
   const [additionalItems, setAdditionalItems] = useState<AdditionalItem[]>([])
   const [partnerBonusType, setPartnerBonusType] = useState<'percent' | 'fixed'>('percent')
   const [partnerBonusValue, setPartnerBonusValue] = useState<number>(0)
+  const [showDan, setShowDan] = useState(false)
   const [loading, setLoading] = useState(false)
   const [syncing, setSyncing] = useState(false)
   const [lastPdfUrl, setLastPdfUrl] = useState<string | null>(null)
@@ -508,6 +509,7 @@ export default function Home() {
       const savedCp = s('umbt_cpName'); if (savedCp) setCpName(savedCp)
       if (s('umbt_bonusType')) setPartnerBonusType(s('umbt_bonusType') as 'percent' | 'fixed')
       if (s('umbt_bonusValue')) setPartnerBonusValue(Number(s('umbt_bonusValue')) || 0)
+      if (s('umbt_showDan')) setShowDan(s('umbt_showDan') === 'true')
     } catch {}
     if (!s('umbt_cpName')) {
       const d = new Date()
@@ -552,12 +554,13 @@ export default function Home() {
         localStorage.setItem('umbt_cpName', cpName)
         localStorage.setItem('umbt_bonusType', partnerBonusType)
         localStorage.setItem('umbt_bonusValue', partnerBonusValue.toString())
+        localStorage.setItem('umbt_showDan', showDan ? 'true' : 'false')
         setSaveStatus('saved')
         setTimeout(() => setSaveStatus('idle'), 2000)
       } catch (e) { console.error(e) }
     }, 1000)
     return () => clearTimeout(timer)
-  }, [manager, client, company, address, objectType, registrationDate, equipmentType, contactPerson, items, additionalItems, options, cpName, partnerBonusType, partnerBonusValue, isMounted])
+  }, [manager, client, company, address, objectType, registrationDate, equipmentType, contactPerson, items, additionalItems, options, cpName, partnerBonusType, partnerBonusValue, showDan, isMounted])
 
   const cleanProducts = useMemo(() => products.filter(p => p.model && !p.model.startsWith('---') && p.id && !p.id.startsWith('---')), [products])
   const filteredProducts = useMemo(() => {
@@ -577,6 +580,25 @@ export default function Home() {
     const p = products.find(x => x.id === item.productId)
     return sum + (p ? calculatePrice(p.price) * item.quantity : 0)
   }, 0), [items, products, calculatePrice])
+
+  const capacityMetrics = useMemo(() => {
+    let external = 0;
+    let internal = 0;
+    items.forEach(item => {
+      const p = products.find(x => x.id === item.productId);
+      if (!p) return;
+      const cat = (p.category || '').toLowerCase();
+      const cap = Number(p.coolingCapacity) || 0;
+      const qty = Number(item.quantity) || 0;
+      if (cat.includes('наруж') || cat.includes('внеш')) {
+        external += cap * qty;
+      } else if (cat.includes('внутр')) {
+        internal += cap * qty;
+      }
+    });
+    const ratio = external > 0 ? (internal / external) * 100 : 0;
+    return { external, internal, ratio };
+  }, [items, products]);
 
   const partnerBonusSum = useMemo(() => {
     if (partnerBonusType === 'percent') {
@@ -740,57 +762,132 @@ export default function Home() {
               Нет выбранных кондиционеров. Нажмите «Добавить» или воспользуйтесь поиском ниже.
             </div>
           ) : (
-            <div className="tbl-wrap">
-              <table className="tbl">
-                <thead>
-                  <tr>
-                    <th style={{ width: '48%' }}>Модель</th>
-                    <th style={{ width: '14%', textAlign: 'center' }}>{labels.price}</th>
-                    <th style={{ width: '10%', textAlign: 'center' }}>Кол-во</th>
-                    <th style={{ width: '18%', textAlign: 'right' }}>{labels.sum}</th>
-                    <th style={{ width: '10%' }}></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {items.map(item => (
-                    <EquipmentRow key={item.id} item={item} products={products} cleanProducts={cleanProducts} onUpdate={updateItem} onDelete={deleteItem} onClone={cloneItem} calculatePrice={calculatePrice} currencyLabel={currencyLabel} labels={labels} />
-                  ))}
-                </tbody>
-              </table>
-            </div>
+            <>
+              {/* Capacity Metrics Widget */}
+              <div className="capacity-widget" style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
+                gap: '1rem',
+                marginBottom: '1rem',
+                padding: '0.75rem 1rem',
+                background: 'var(--bg-input)',
+                borderRadius: 'var(--radius-sm)',
+                border: '1px solid var(--border)',
+              }}>
+                <div>
+                  <span className="field-label" style={{ marginBottom: '2px', fontSize: '0.65rem' }}>Внутренние блоки (кВт)</span>
+                  <span style={{ fontSize: '1.15rem', fontWeight: 700, color: 'var(--text)' }}>
+                    {capacityMetrics.internal.toFixed(1)} кВт
+                  </span>
+                </div>
+                <div>
+                  <span className="field-label" style={{ marginBottom: '2px', fontSize: '0.65rem' }}>Наружные блоки (кВт)</span>
+                  <span style={{ fontSize: '1.15rem', fontWeight: 700, color: 'var(--text)' }}>
+                    {capacityMetrics.external.toFixed(1)} кВт
+                  </span>
+                </div>
+                <div>
+                  <span className="field-label" style={{ marginBottom: '2px', fontSize: '0.65rem' }}>Индекс загрузки / Соотношение</span>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <span style={{
+                      fontSize: '1.15rem',
+                      fontWeight: 700,
+                      color: capacityMetrics.ratio > 130 || capacityMetrics.ratio < 50
+                        ? 'var(--error)'
+                        : 'var(--success)'
+                    }}>
+                      {capacityMetrics.ratio.toFixed(1)}%
+                    </span>
+                    <span style={{
+                      fontSize: '0.75rem',
+                      padding: '2px 6px',
+                      borderRadius: '4px',
+                      fontWeight: 600,
+                      background: capacityMetrics.ratio > 130 || capacityMetrics.ratio < 50
+                        ? 'rgba(239, 68, 68, 0.1)'
+                        : 'rgba(34, 197, 94, 0.1)',
+                      color: capacityMetrics.ratio > 130 || capacityMetrics.ratio < 50
+                        ? 'var(--error)'
+                        : 'var(--success)'
+                    }}>
+                      {capacityMetrics.ratio > 130 ? 'Перегруз' : capacityMetrics.ratio < 50 ? 'Недогруз' : 'В норме'}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="tbl-wrap">
+                <table className="tbl">
+                  <thead>
+                    <tr>
+                      <th style={{ width: '48%' }}>Модель</th>
+                      <th style={{ width: '14%', textAlign: 'center' }}>{labels.price}</th>
+                      <th style={{ width: '10%', textAlign: 'center' }}>Кол-во</th>
+                      <th style={{ width: '18%', textAlign: 'right' }}>{labels.sum}</th>
+                      <th style={{ width: '10%' }}></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {items.map(item => (
+                      <EquipmentRow key={item.id} item={item} products={products} cleanProducts={cleanProducts} onUpdate={updateItem} onDelete={deleteItem} onClone={cloneItem} calculatePrice={calculatePrice} currencyLabel={currencyLabel} labels={labels} />
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </>
           )}
           <div className="total-area" style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginTop: '1.25rem', paddingTop: '1rem', borderTop: '1px solid var(--border)' }}>
-            <div className="total-bar" style={{ marginTop: 0, paddingTop: 0, borderTop: 'none' }}>
-              <span className="total-label">Итого кондиционирование</span>
-              <span className="total-value">{equipmentTotal.toLocaleString()}</span>
-              <span className="total-currency">{currencyLabel}</span>
-            </div>
-            
-            <div className="bonus-bar" style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
-              <span className="total-label" style={{ color: 'var(--text-secondary)', fontSize: '0.65rem' }}>Партнерский бонус (только кондиционеры)</span>
-              <div className="toggle-group" style={{ width: 'auto', display: 'inline-flex', padding: '2px', border: '1px solid var(--border)' }}>
-                <button className={partnerBonusType === 'percent' ? 'on' : ''} style={{ padding: '0.2rem 0.5rem', fontSize: '0.75rem' }} onClick={() => setPartnerBonusType('percent')}>%</button>
-                <button className={partnerBonusType === 'fixed' ? 'on' : ''} style={{ padding: '0.2rem 0.5rem', fontSize: '0.75rem' }} onClick={() => setPartnerBonusType('fixed')}>{currencyLabel}</button>
+            <div className="total-bar" style={{ marginTop: 0, paddingTop: 0, borderTop: 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <button 
+                className={`btn ${showDan ? 'btn-primary' : 'btn-ghost'}`} 
+                onClick={() => setShowDan(!showDan)}
+                style={{
+                  fontSize: '0.75rem',
+                  padding: '0.35rem 0.75rem',
+                  background: showDan ? 'var(--error)' : 'transparent',
+                  color: showDan ? 'white' : 'var(--text-secondary)',
+                  border: showDan ? 'none' : '1px solid var(--border)',
+                  boxShadow: showDan ? '0 1px 3px rgba(239,68,68,0.3)' : 'none'
+                }}
+              >
+                Сдаем Дань
+              </button>
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem' }}>
+                <span className="total-label">Итого кондиционирование</span>
+                <span className="total-value">{equipmentTotal.toLocaleString()}</span>
+                <span className="total-currency">{currencyLabel}</span>
               </div>
-              <input 
-                className="qty-input" 
-                type="number" 
-                min="0"
-                value={partnerBonusValue}
-                onChange={e => setPartnerBonusValue(Math.max(0, parseInt(e.target.value) || 0))}
-                onFocus={e => e.target.select()}
-                style={{ width: '80px', padding: '0.25rem 0.5rem', fontSize: '0.85rem' }}
-              />
-              <span className="bonus-sum-value" style={{ fontWeight: 600, color: 'var(--accent)', fontSize: '1.1rem' }}>
-                - {partnerBonusSum.toLocaleString()} {currencyLabel}
-              </span>
             </div>
             
-            <div className="final-net-bar" style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'baseline', gap: '0.5rem', borderTop: '1px dashed var(--border)', paddingTop: '0.5rem' }}>
-              <span className="total-label" style={{ fontSize: '0.65rem' }}>Раздел с кондиционированием за вычетом бонуса</span>
-              <span className="total-value" style={{ fontSize: '1.3rem', color: 'var(--text-secondary)' }}>{(equipmentTotal - partnerBonusSum).toLocaleString()}</span>
-              <span className="total-currency" style={{ fontSize: '0.85rem' }}>{currencyLabel}</span>
-            </div>
+            {showDan && (
+              <>
+                <div className="bonus-bar" style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '1rem', flexWrap: 'wrap', borderTop: '1px dashed var(--border)', paddingTop: '0.75rem' }}>
+                  <span className="total-label" style={{ color: 'var(--text-secondary)', fontSize: '0.65rem' }}>Партнерский бонус (только кондиционеры)</span>
+                  <div className="toggle-group" style={{ width: 'auto', display: 'inline-flex', padding: '2px', border: '1px solid var(--border)' }}>
+                    <button className={partnerBonusType === 'percent' ? 'on' : ''} style={{ padding: '0.2rem 0.5rem', fontSize: '0.75rem' }} onClick={() => setPartnerBonusType('percent')}>%</button>
+                    <button className={partnerBonusType === 'fixed' ? 'on' : ''} style={{ padding: '0.2rem 0.5rem', fontSize: '0.75rem' }} onClick={() => setPartnerBonusType('fixed')}>{currencyLabel}</button>
+                  </div>
+                  <input 
+                    className="qty-input" 
+                    type="number" 
+                    min="0"
+                    value={partnerBonusValue}
+                    onChange={e => setPartnerBonusValue(Math.max(0, parseInt(e.target.value) || 0))}
+                    onFocus={e => e.target.select()}
+                    style={{ width: '80px', padding: '0.25rem 0.5rem', fontSize: '0.85rem' }}
+                  />
+                  <span className="bonus-sum-value" style={{ fontWeight: 600, color: 'var(--error)', fontSize: '1.1rem' }}>
+                    - {partnerBonusSum.toLocaleString()} {currencyLabel}
+                  </span>
+                </div>
+                
+                <div className="final-net-bar" style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'baseline', gap: '0.5rem', borderTop: '1px dashed var(--border)', paddingTop: '0.5rem' }}>
+                  <span className="total-label" style={{ fontSize: '0.65rem' }}>Раздел с кондиционированием за вычетом бонуса</span>
+                  <span className="total-value" style={{ fontSize: '1.3rem', color: 'var(--text-secondary)' }}>{(equipmentTotal - partnerBonusSum).toLocaleString()}</span>
+                  <span className="total-currency" style={{ fontSize: '0.85rem' }}>{currencyLabel}</span>
+                </div>
+              </>
+            )}
           </div>
         </div>
 

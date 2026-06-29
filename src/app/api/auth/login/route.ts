@@ -6,6 +6,26 @@ import path from 'path';
 const SPREADSHEET_ID = '1O5aeKAbSc_UkDk7expSqaDO5dpUaQLyqWI40Vhp4MhE';
 const JWT_SECRET = new TextEncoder().encode(process.env.JWT_SECRET || 'umbt-super-secret-key-2026-xyz');
 
+function getGoogleAuth() {
+  if (process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL && process.env.GOOGLE_PRIVATE_KEY) {
+    return new google.auth.JWT({
+      email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
+      key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n'),
+      scopes: [
+        'https://www.googleapis.com/auth/presentations',
+        'https://www.googleapis.com/auth/drive',
+        'https://www.googleapis.com/auth/spreadsheets'
+      ]
+    });
+  }
+  const oauth2Client = new google.auth.OAuth2(
+    process.env.GOOGLE_CLIENT_ID,
+    process.env.GOOGLE_CLIENT_SECRET
+  );
+  oauth2Client.setCredentials({ refresh_token: process.env.GOOGLE_REFRESH_TOKEN });
+  return oauth2Client;
+}
+
 export async function POST(req: NextRequest) {
   try {
     const { email } = await req.json();
@@ -22,11 +42,7 @@ export async function POST(req: NextRequest) {
     const userAgent = req.headers.get('user-agent') || 'Unknown Device';
     const timestamp = new Date().toLocaleString('ru-RU', { timeZone: 'Asia/Tashkent' });
 
-    const auth = new google.auth.OAuth2(
-      process.env.GOOGLE_CLIENT_ID,
-      process.env.GOOGLE_CLIENT_SECRET
-    );
-    auth.setCredentials({ refresh_token: process.env.GOOGLE_REFRESH_TOKEN });
+    const auth = getGoogleAuth();
     const sheets = google.sheets({ version: 'v4', auth });
 
     // 1. Check whitelist in "accessed" sheet

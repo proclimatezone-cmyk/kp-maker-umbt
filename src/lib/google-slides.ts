@@ -20,13 +20,13 @@ export function parseQuantity(qtyStr: string | number): number {
 const TABLE_STYLE = {
     fontFamily: 'Calibri',
     italic: true,
-    fontSize: { magnitude: 10, unit: 'PT' }
+    fontSize: { magnitude: 9, unit: 'PT' }
 };
 
 // Layout Constants
-const PRODUCT_ROW_H = 950000;
-const ACCESSORY_ROW_H = 450000;
-const ADDITIONAL_ROW_H = 450000;
+const PRODUCT_ROW_H = 800000;
+const ACCESSORY_ROW_H = 350000;
+const ADDITIONAL_ROW_H = 350000;
 const HEADER_FOOTER_H = 500000;
 const ROW_OVERHEAD = 15000;
 const TABLE_WIDTH = 6800000;
@@ -43,7 +43,7 @@ const COLORS = {
     BORDER:    { red: 0, green: 0, blue: 0 },
 };
 
-const COL_WIDTHS_WITH_IMG = [1600000, 1200000, 1400000, 500000, 1050000, 1050000];
+const COL_WIDTHS_WITH_IMG = [1500000, 1100000, 1700000, 450000, 1025000, 1025000];
 const COL_WIDTHS_NO_IMG = [2050000, 2100000, 550000, 900000, 900000];
 
 interface GroupedItem {
@@ -62,14 +62,30 @@ function getDriveFileId(url: string): string | null {
   return null;
 }
 
+function getGoogleAuth() {
+  if (process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL && process.env.GOOGLE_PRIVATE_KEY) {
+    return new google.auth.JWT({
+      email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
+      key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n'),
+      scopes: [
+        'https://www.googleapis.com/auth/presentations',
+        'https://www.googleapis.com/auth/drive',
+        'https://www.googleapis.com/auth/spreadsheets'
+      ]
+    });
+  }
+  const oauth2Client = new google.auth.OAuth2(
+    process.env.GOOGLE_CLIENT_ID,
+    process.env.GOOGLE_CLIENT_SECRET
+  );
+  oauth2Client.setCredentials({ refresh_token: process.env.GOOGLE_REFRESH_TOKEN });
+  return oauth2Client;
+}
+
 async function uploadToDrive(imageUrl: string, fileName: string): Promise<string | null> {
   try {
-    const oauth2Client = new google.auth.OAuth2(
-      process.env.GOOGLE_CLIENT_ID,
-      process.env.GOOGLE_CLIENT_SECRET
-    );
-    oauth2Client.setCredentials({ refresh_token: process.env.GOOGLE_REFRESH_TOKEN });
-    const drive = google.drive({ version: 'v3', auth: oauth2Client });
+    const auth = getGoogleAuth();
+    const drive = google.drive({ version: 'v3', auth });
 
     const driveFileId = getDriveFileId(imageUrl);
     if (driveFileId) {
@@ -135,15 +151,11 @@ export async function generateSlidesKP(data: {
   options?: any;
   origin?: string;
 }) {
-  const oauth2Client = new google.auth.OAuth2(
-    process.env.GOOGLE_CLIENT_ID,
-    process.env.GOOGLE_CLIENT_SECRET
-  );
-  oauth2Client.setCredentials({ refresh_token: process.env.GOOGLE_REFRESH_TOKEN });
+  const auth = getGoogleAuth();
 
-  const slides = google.slides({ version: 'v1', auth: oauth2Client });
-  const drive = google.drive({ version: 'v3', auth: oauth2Client });
-  const sheets = google.sheets({ version: 'v4', auth: oauth2Client });
+  const slides = google.slides({ version: 'v1', auth });
+  const drive = google.drive({ version: 'v3', auth });
+  const sheets = google.sheets({ version: 'v4', auth });
 
   const opts = data.options || { showImages: true, currency: 'ue', paymentType: 'cash', exchangeRate: 12500, transferFee: 10 };
   const showImages = opts.showImages !== false && opts.showImages !== 'false';
@@ -209,7 +221,7 @@ export async function generateSlidesKP(data: {
     // 2.0 Determine if it's an accessory to decide on photo and grouping
     const isAcc = (c: string) => {
       const lc = c.toLowerCase();
-      return lc.includes('аксессуар') || lc.includes('автоматика') || lc.includes('пульт') || lc.includes('панель') || lc.includes('опция') || lc.includes('дополнительные работы');
+      return lc.includes('аксессуар') || lc.includes('автоматика') || lc.includes('пульт') || lc.includes('панель') || lc.includes('опция') || lc.includes('дополнительные работы') || lc.includes('дополнительные работы и материалы');
     };
     const currentIsAcc = isAcc(cat);
 
@@ -220,9 +232,16 @@ export async function generateSlidesKP(data: {
     let group = groups.length > 0 ? groups[groups.length - 1] : null;
     const prevIsAcc = group ? isAcc(group.category) : false;
 
-    if (group && group.category === cat && group.series === ser && (showImages ? group.image === img : true) && currentIsAcc === prevIsAcc) {
+    const formattedModel = (item.model || 'Модель не указана').replace(/-/g, '\u2011');
+
+    const shouldGroup = group && (
+      (currentIsAcc && prevIsAcc && group.category === cat) ||
+      (!currentIsAcc && !prevIsAcc && group.category === cat && group.series === ser && (showImages ? group.image === img : true))
+    );
+
+    if (shouldGroup && group) {
       group.models.push({ 
-        model: item.model || 'Модель не указана', 
+        model: formattedModel, 
         quantity: item.quantity, 
         price: Number(item.price) || 0,
         isAdditional: !!item.isAdditional
@@ -233,7 +252,7 @@ export async function generateSlidesKP(data: {
         series: ser,
         image: img,
         models: [{ 
-          model: item.model || 'Модель не указана', 
+          model: formattedModel, 
           quantity: item.quantity, 
           price: Number(item.price) || 0,
           isAdditional: !!item.isAdditional
@@ -380,36 +399,51 @@ export async function generateSlidesKP(data: {
   const presentationId = copy.data.id!;
   const presentation = await slides.presentations.get({ presentationId });
   const templateSlideIds = presentation.data.slides!.map(s => s.objectId!);
-  const allSlideIds = [templateSlideIds[0]];
-  // Extra template slides (2nd, 3rd, etc.) will be deleted later
-  const extraTemplateSlides = templateSlideIds.slice(1);
+  let allSlideIds: string[] = [];
+  let slidesToDelete: string[] = [];
 
-  if (tablesData.length > 1) {
+  if (tablesData.length === 1) {
+    allSlideIds = [templateSlideIds[0]];
+    slidesToDelete = [templateSlideIds[1], templateSlideIds[2]];
+  } else {
+    slidesToDelete = [templateSlideIds[0]];
+    allSlideIds = [templateSlideIds[1]]; // Page 1 is Slide 2 (footer masked)
+    
     const duplicateReqs = [];
-    for (let i = 1; i < tablesData.length; i++) {
+    for (let i = 1; i < tablesData.length - 1; i++) {
         const newId = `slide_page_${i}_${Date.now()}`;
-        const sourceId = allSlideIds[i - 1]; // Дублируем предыдущий слайд, чтобы сохранить порядок
         duplicateReqs.push({
             duplicateObject: {
-                objectId: sourceId,
-                objectIds: { [sourceId]: newId }
+                objectId: templateSlideIds[1], // Duplicate Slide 2
+                objectIds: { [templateSlideIds[1]]: newId }
             }
         });
         allSlideIds.push(newId);
     }
-    await slides.presentations.batchUpdate({ presentationId, requestBody: { requests: duplicateReqs } });
+    allSlideIds.push(templateSlideIds[2]); // Page N is Slide 3 (footer visible)
+
+    if (duplicateReqs.length > 0) {
+      await slides.presentations.batchUpdate({ presentationId, requestBody: { requests: duplicateReqs } });
+    }
   }
 
   // 4. PRE-UPLOAD ALL IMAGES IN PARALLEL (Local and Remote) + LOGO
-  console.log('Pre-uploading all images and logo to Drive in parallel...');
+  console.log('Pre-uploading all images to Drive in parallel...');
   const fileIdsToDelete: string[] = [];
   const imageMap = new Map<string, string>();
   const uniqueImages = showImages ? [...new Set(groups.map(g => g.image).filter(Boolean))] : [];
-  let logoUrl = '';
+  const logoUrl = 'https://lh3.googleusercontent.com/d/1qqx8jRGF8WjVfl7GZyGehWuVdPbeC4AX';
 
   await Promise.all([
     ...uniqueImages.map(async (imgPath, idx) => {
       try {
+        const driveFileId = getDriveFileId(imgPath);
+        if (driveFileId) {
+          const finalUrl = `https://lh3.googleusercontent.com/d/${driveFileId}`;
+          imageMap.set(imgPath, finalUrl);
+          return;
+        }
+
         let buffer: Buffer | null = null;
         let mimeType = 'image/png';
 
@@ -444,26 +478,6 @@ export async function generateSlidesKP(data: {
             }
           }
         } else if (imgPath.startsWith('http')) {
-          // Remote image path (try direct copy first)
-          const driveFileId = getDriveFileId(imgPath);
-          if (driveFileId) {
-            try {
-              console.log(`Copying Google Drive file ${driveFileId} directly...`);
-              const copy = await drive.files.copy({
-                fileId: driveFileId,
-                requestBody: { name: `kp_remote_img_${Date.now()}_${idx}` }
-              });
-              const fileId = copy.data.id!;
-              fileIdsToDelete.push(fileId);
-              await drive.permissions.create({ fileId, requestBody: { role: 'reader', type: 'anyone' } });
-              const finalUrl = `https://lh3.googleusercontent.com/d/${fileId}`;
-              imageMap.set(imgPath, finalUrl);
-              return; // Succeeded, skip fallback upload
-            } catch (copyErr: any) {
-              console.warn(`Direct copy failed for file ${driveFileId}, falling back to fetch...`, copyErr.message);
-            }
-          }
-
           // Fallback fetch
           console.log(`Fetching remote image ${imgPath}...`);
           const response = await fetch(imgPath);
@@ -490,46 +504,7 @@ export async function generateSlidesKP(data: {
           console.warn(`Failed to resolve image: ${imgPath}`);
         }
       } catch (err) { console.error(`SpeedUp: Image upload failed for ${imgPath}`, err); }
-    }),
-    (async () => {
-      try {
-        const logoUrlToFetch = `${origin}/logo-near-itogo.png`;
-        let buffer: Buffer | null = null;
-        console.log('Fetching logo from:', logoUrlToFetch);
-        try {
-          const response = await fetch(logoUrlToFetch);
-          if (response.ok) {
-            buffer = Buffer.from(await response.arrayBuffer());
-          }
-        } catch (e: any) {
-          console.warn('Could not fetch logo via HTTP, trying local file...', e.message);
-        }
-
-        if (!buffer) {
-          const logoPath = path.join(process.cwd(), 'logo near itogo.png');
-          if (fs.existsSync(logoPath)) {
-            buffer = fs.readFileSync(logoPath);
-          }
-        }
-
-        if (buffer) {
-          const upload = await drive.files.create({
-            requestBody: { name: `kp_logo_${Date.now()}`, mimeType: 'image/png' },
-            media: { body: Readable.from(buffer) },
-            fields: 'id'
-          });
-          const fileId = upload.data.id!;
-          fileIdsToDelete.push(fileId);
-          await drive.permissions.create({ fileId, requestBody: { role: 'reader', type: 'anyone' } });
-          logoUrl = `https://lh3.googleusercontent.com/d/${fileId}`;
-          console.log('Logo near itogo uploaded successfully:', logoUrl);
-        } else {
-          console.warn('Logo file not found');
-        }
-      } catch (err) {
-        console.error('Failed to upload logo near itogo', err);
-      }
-    })()
+    })
   ]);
 
   const placeholders = [
@@ -757,8 +732,7 @@ export async function generateSlidesKP(data: {
               const logoW = 1600000;
               const logoH = 266000; // ~6:1 aspect ratio
               const logoX = TABLE_X + 150000;
-              const actualTableHeight = tableHeight + (displayRows - 1) * ROW_OVERHEAD;
-              const logoY = TABLE_START_Y + actualTableHeight - (HEADER_FOOTER_H / 2) - (logoH / 2);
+              const logoY = TABLE_START_Y + HEADER_FOOTER_H + totalRowsH + r * ROW_OVERHEAD + (HEADER_FOOTER_H / 2) - (logoH / 2);
               
               imageRequests.push({
                 createImage: {
@@ -781,9 +755,7 @@ export async function generateSlidesKP(data: {
   }
 
   // 7. Apply tables, then images (separate batches for resilience)
-  const unusedSlideIds = allSlideIds.filter(id => !activeSlideIds.has(id));
-  const allToDelete = [...unusedSlideIds, ...extraTemplateSlides];
-  const delReqs = allToDelete.map(id => ({ deleteObject: { objectId: id } }));
+  const delReqs = slidesToDelete.map(id => ({ deleteObject: { objectId: id } }));
 
   try {
     await slides.presentations.batchUpdate({
