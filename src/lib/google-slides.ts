@@ -24,16 +24,17 @@ const TABLE_STYLE = {
 };
 
 // Layout Constants
-const PRODUCT_ROW_H = 800000;
-const ACCESSORY_ROW_H = 350000;
-const ADDITIONAL_ROW_H = 350000;
-const HEADER_FOOTER_H = 500000;
-const ROW_OVERHEAD = 15000;
+const PRODUCT_ROW_H_FIRST = 550000;
+const PRODUCT_ROW_H_SUBSEQUENT = 250000;
+const ACCESSORY_ROW_H = 240000;
+const ADDITIONAL_ROW_H = 240000;
+const HEADER_FOOTER_H = 350000;
+const ROW_OVERHEAD = 10000;
 const TABLE_WIDTH = 6800000;
 const TABLE_X = 500000;
 const TABLE_START_Y = 2700000;
-const MAX_ROWS_SLIDE_1 = 3;
-const MAX_ROWS_SLIDE_N = 3;
+const MAX_HEIGHT_WITH_TERMS = 3500000;
+const MAX_HEIGHT_WITHOUT_TERMS = 5000000;
 
 const COLORS = {
     HEADER_BG: { red: 122/255, green: 147/255, blue: 172/255 },
@@ -130,11 +131,64 @@ function isAccessory(g: GroupedItem) {
   return c.includes('аксессуар') || c.includes('автоматика') || c.includes('пульт') || c.includes('панель') || c.includes('опция');
 }
 
-function getRowHeight(g: GroupedItem): number {
-  if (g.models.some(m => m.isAdditional)) {
-    return ADDITIONAL_ROW_H;
+function estimateTextLines(text: string, charsPerLine: number): number {
+  if (!text) return 1;
+  const paragraphs = text.split('\n');
+  let totalLines = 0;
+  paragraphs.forEach(p => {
+    totalLines += Math.max(1, Math.ceil(p.length / charsPerLine));
+  });
+  return totalLines;
+}
+
+function getModelRowHeight(category: string, model: string, isAdditional: boolean, showImages: boolean, isFirstInProductGroup: boolean): number {
+  const isAcc = !isAdditional && (
+    category.toLowerCase().includes('аксессуар') || 
+    category.toLowerCase().includes('автоматика') || 
+    category.toLowerCase().includes('пульт') || 
+    category.toLowerCase().includes('панель') || 
+    category.toLowerCase().includes('опция')
+  );
+
+  let baseH = ADDITIONAL_ROW_H;
+  if (isAdditional) {
+    baseH = ADDITIONAL_ROW_H;
+  } else if (isAcc) {
+    baseH = ACCESSORY_ROW_H;
+  } else {
+    baseH = isFirstInProductGroup ? PRODUCT_ROW_H_FIRST : PRODUCT_ROW_H_SUBSEQUENT;
   }
-  return isAccessory(g) ? ACCESSORY_ROW_H : PRODUCT_ROW_H;
+
+  const catCharsPerLine = showImages ? 12 : 22;
+  const modelCharsPerLine = showImages ? 18 : 22;
+
+  let catLines = 1;
+  if (!isAdditional) {
+    catLines = estimateTextLines(category, catCharsPerLine);
+  }
+
+  const modelLines = estimateTextLines(model, modelCharsPerLine);
+  const maxLines = Math.max(catLines, modelLines);
+
+  let estimatedH = baseH;
+  if (isFirstInProductGroup && !isAdditional && !isAcc) {
+    const textHeight = 250000 + (maxLines - 1) * 160000;
+    estimatedH = Math.max(PRODUCT_ROW_H_FIRST, textHeight);
+  } else {
+    estimatedH = baseH + (maxLines - 1) * 160000;
+  }
+
+  return estimatedH;
+}
+
+function getGroupHeight(g: GroupedItem, showImages: boolean): number {
+  let totalH = 0;
+  const isAdd = g.models.some(m => m.isAdditional);
+  for (let i = 0; i < g.models.length; i++) {
+    const isFirstInProduct = !isAdd && !isAccessory(g) && (i === 0);
+    totalH += getModelRowHeight(g.category, g.models[i].model, isAdd, showImages, isFirstInProduct);
+  }
+  return totalH;
 }
 
 export async function generateSlidesKP(data: {
@@ -288,8 +342,7 @@ export async function generateSlidesKP(data: {
   const calculateHeight = (slideGroups: GroupedItem[], isLast: boolean) => {
     let h = HEADER_FOOTER_H; // Header row height
     slideGroups.forEach(g => {
-      const rowH = getRowHeight(g);
-      h += g.models.length * rowH;
+      h += getGroupHeight(g, showImages);
     });
     if (isLast) {
       h += footerRows.length * HEADER_FOOTER_H; // Footer "Total" rows height
@@ -300,8 +353,6 @@ export async function generateSlidesKP(data: {
   const countRows = (slideGroups: GroupedItem[]) => {
     return slideGroups.reduce((sum, g) => sum + g.models.length, 0);
   };
-
-  const MAX_HEIGHT = 4500000; // EMU limit for table height on a single slide
 
   for (let gIdx = 0; gIdx < groups.length; gIdx++) {
     const group = groups[gIdx];
@@ -339,8 +390,9 @@ export async function generateSlidesKP(data: {
       
       const isActuallyLast = (gIdx === groups.length - 1) && (modelsRemaining.length === 1);
       const testHeight = calculateHeight(nextTestGroups, isActuallyLast);
+      const currentMaxHeight = isActuallyLast ? MAX_HEIGHT_WITH_TERMS : MAX_HEIGHT_WITHOUT_TERMS;
       
-      if (testHeight <= MAX_HEIGHT) {
+      if (testHeight <= currentMaxHeight) {
         currentGroups = nextTestGroups;
         modelsRemaining.shift();
       } else {
@@ -557,8 +609,7 @@ export async function generateSlidesKP(data: {
       // Calculate real table height based on row types
       let totalRowsH = 0;
       tData.groups.forEach(g => {
-        const h = getRowHeight(g);
-        totalRowsH += g.models.length * h;
+        totalRowsH += getGroupHeight(g, showImages);
       });
       const tableHeight = HEADER_FOOTER_H + totalRowsH + (extraRows * HEADER_FOOTER_H);
 
@@ -579,8 +630,11 @@ export async function generateSlidesKP(data: {
       
       let currentRowIdx = 1;
       tData.groups.forEach(g => {
-        const rowH = getRowHeight(g);
+        const isAdd = g.models.some(m => m.isAdditional);
+        const isAcc = isAccessory(g);
         for (let i = 0; i < g.models.length; i++) {
+          const isFirstInProduct = !isAdd && !isAcc && (i === 0);
+          const rowH = getModelRowHeight(g.category, g.models[i].model, isAdd, showImages, isFirstInProduct);
           tableReqs.push({ updateTableRowProperties: { objectId: tableId, rowIndices: [currentRowIdx], tableRowProperties: { minRowHeight: { magnitude: rowH, unit: 'EMU' } }, fields: 'minRowHeight' }});
           currentRowIdx++;
         }
@@ -607,8 +661,7 @@ export async function generateSlidesKP(data: {
       for (const group of tData.groups) {
           const startRow = r;
           const startGroupY = currentRowY;
-          const rowH = getRowHeight(group);
-          const groupHeight = group.models.length * rowH;
+          const groupHeight = getGroupHeight(group, showImages);
           const isGroupAdditional = group.models.some(m => m.isAdditional);
 
           // Image cell
@@ -640,6 +693,9 @@ export async function generateSlidesKP(data: {
               const qCol = showImages ? 3 : 2;
               const pCol = showImages ? 4 : 3;
               const sCol = showImages ? 5 : 4;
+
+              const isFirstInProduct = !isGroupAdditional && !isAccessory(group) && isFirstInGroup;
+              const rowH = getModelRowHeight(group.category, m.model, isGroupAdditional, showImages, isFirstInProduct);
 
               if (isGroupAdditional) {
                   tableReqs.push({ insertText: { objectId: tableId, cellLocation: { rowIndex: r, columnIndex: 0 }, text: m.model || ' ' } });

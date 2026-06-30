@@ -12,8 +12,8 @@ async function runTest() {
     // Filter valid products
     const validProducts = products.filter(p => p.model && !p.model.startsWith('---'));
 
-    // Pick 3-5 random items
-    const numItems = Math.floor(Math.random() * 3) + 3; // 3 to 5 items
+    // Pick 15 items to test multi-page formatting
+    const numItems = 15;
     let items = [];
     let total = 0;
 
@@ -56,9 +56,30 @@ async function runTest() {
     console.log(`Отправка данных с ${items.length} товарами на сумму $${total}`);
 
     try {
-        const response = await fetch('http://localhost:3000/api/generate', {
+        console.log('🔑 Logging in as test user...');
+        const loginResponse = await fetch('http://localhost:3000/api/auth/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: 'test@umbt.uz' })
+        });
+        if (!loginResponse.ok) {
+            console.error('❌ Login failed:', await loginResponse.text());
+            return;
+        }
+        const setCookie = loginResponse.headers.get('set-cookie');
+        if (!setCookie) {
+            console.error('❌ No set-cookie header received from login!');
+            return;
+        }
+        const cookieVal = setCookie.split(';')[0];
+        console.log('✅ Logged in successfully. Generating proposal...');
+
+        const response = await fetch('http://localhost:3000/api/generate', {
+            method: 'POST',
+            headers: { 
+                'Content-Type': 'application/json',
+                'Cookie': cookieVal
+            },
             body: JSON.stringify(testData)
         });
 
