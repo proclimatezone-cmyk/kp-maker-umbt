@@ -24,17 +24,17 @@ const TABLE_STYLE = {
 };
 
 // Layout Constants
-const PRODUCT_ROW_H_FIRST = 550000;
-const PRODUCT_ROW_H_SUBSEQUENT = 250000;
-const ACCESSORY_ROW_H = 240000;
-const ADDITIONAL_ROW_H = 240000;
-const HEADER_FOOTER_H = 350000;
+const PRODUCT_ROW_H_FIRST = 570000;
+const PRODUCT_ROW_H_SUBSEQUENT = 260000;
+const ACCESSORY_ROW_H = 250000;
+const ADDITIONAL_ROW_H = 250000;
+const HEADER_FOOTER_H = 360000;
 const ROW_OVERHEAD = 10000;
 const TABLE_WIDTH = 6800000;
 const TABLE_X = 380000;
 const TABLE_START_Y = 2700000;
-const MAX_HEIGHT_WITH_TERMS = 3900000;
-const MAX_HEIGHT_WITHOUT_TERMS = 7380000;
+const MAX_HEIGHT_WITH_TERMS = 3700000;
+const MAX_HEIGHT_WITHOUT_TERMS = 7100000;
 
 const COLORS = {
     HEADER_BG: { red: 122/255, green: 147/255, blue: 172/255 },
@@ -341,12 +341,17 @@ export async function generateSlidesKP(data: {
 
   const calculateHeight = (slideGroups: GroupedItem[], isLast: boolean) => {
     let h = HEADER_FOOTER_H; // Header row height
+    let rowCount = 1; // Start with header row
     slideGroups.forEach(g => {
       h += getGroupHeight(g, showImages);
+      rowCount += g.models.length;
     });
     if (isLast) {
       h += footerRows.length * HEADER_FOOTER_H; // Footer "Total" rows height
+      rowCount += footerRows.length;
     }
+    // Add border height overhead (1 PT = 12700 EMU per horizontal border/row)
+    h += rowCount * 12700;
     return h;
   };
 
