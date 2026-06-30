@@ -20,21 +20,21 @@ export function parseQuantity(qtyStr: string | number): number {
 const TABLE_STYLE = {
     fontFamily: 'Calibri',
     italic: true,
-    fontSize: { magnitude: 9, unit: 'PT' }
+    fontSize: { magnitude: 10, unit: 'PT' }
 };
 
 // Layout Constants
-const PRODUCT_ROW_H_FIRST = 570000;
-const PRODUCT_ROW_H_SUBSEQUENT = 260000;
-const ACCESSORY_ROW_H = 250000;
-const ADDITIONAL_ROW_H = 250000;
-const HEADER_FOOTER_H = 360000;
+const PRODUCT_ROW_H_FIRST = 600000;
+const PRODUCT_ROW_H_SUBSEQUENT = 300000;
+const ACCESSORY_ROW_H = 280000;
+const ADDITIONAL_ROW_H = 280000;
+const HEADER_FOOTER_H = 380000;
 const ROW_OVERHEAD = 10000;
 const TABLE_WIDTH = 6800000;
 const TABLE_X = 380000;
 const TABLE_START_Y = 2700000;
-const MAX_HEIGHT_WITH_TERMS = 3700000;
-const MAX_HEIGHT_WITHOUT_TERMS = 7100000;
+const MAX_HEIGHT_WITH_TERMS = 3600000;
+const MAX_HEIGHT_WITHOUT_TERMS = 7000000;
 
 const COLORS = {
     HEADER_BG: { red: 122/255, green: 147/255, blue: 172/255 },
@@ -159,8 +159,8 @@ function getModelRowHeight(category: string, model: string, isAdditional: boolea
     baseH = isFirstInProductGroup ? PRODUCT_ROW_H_FIRST : PRODUCT_ROW_H_SUBSEQUENT;
   }
 
-  const catCharsPerLine = showImages ? 12 : 22;
-  const modelCharsPerLine = showImages ? 18 : 22;
+  const catCharsPerLine = showImages ? 11 : 20;
+  const modelCharsPerLine = showImages ? 16 : 20;
 
   let catLines = 1;
   if (!isAdditional) {
@@ -631,6 +631,8 @@ export async function generateSlidesKP(data: {
       });
 
       // Row heights
+      const rowHeights: number[] = [];
+      rowHeights.push(HEADER_FOOTER_H);
       tableReqs.push({ updateTableRowProperties: { objectId: tableId, rowIndices: [0], tableRowProperties: { minRowHeight: { magnitude: HEADER_FOOTER_H, unit: 'EMU' } }, fields: 'minRowHeight' }});
       
       let currentRowIdx = 1;
@@ -641,6 +643,7 @@ export async function generateSlidesKP(data: {
           const isFirstInProduct = !isAdd && !isAcc && (i === 0);
           const rowH = getModelRowHeight(g.category, g.models[i].model, isAdd, showImages, isFirstInProduct);
           tableReqs.push({ updateTableRowProperties: { objectId: tableId, rowIndices: [currentRowIdx], tableRowProperties: { minRowHeight: { magnitude: rowH, unit: 'EMU' } }, fields: 'minRowHeight' }});
+          rowHeights.push(rowH);
           currentRowIdx++;
         }
       });
@@ -648,8 +651,17 @@ export async function generateSlidesKP(data: {
       if (isLastTable) {
         for (let i = displayRows - extraRows; i < displayRows; i++) {
           tableReqs.push({ updateTableRowProperties: { objectId: tableId, rowIndices: [i], tableRowProperties: { minRowHeight: { magnitude: HEADER_FOOTER_H, unit: 'EMU' } }, fields: 'minRowHeight' }});
+          rowHeights.push(HEADER_FOOTER_H);
         }
       }
+
+      const getRowTopY = (idx: number) => {
+        let y = TABLE_START_Y;
+        for (let j = 0; j < idx; j++) {
+          y += rowHeights[j] + 12700; // 1 PT border weight
+        }
+        return y;
+      };
 
       // Header row
       headers.forEach((h, i) => {
@@ -661,12 +673,9 @@ export async function generateSlidesKP(data: {
 
       // Data rows
       let r = 1;
-      let currentRowY = TABLE_START_Y + HEADER_FOOTER_H; // Row 0 was header
 
       for (const group of tData.groups) {
           const startRow = r;
-          const startGroupY = currentRowY;
-          const groupHeight = getGroupHeight(group, showImages);
           const isGroupAdditional = group.models.some(m => m.isAdditional);
 
           // Image cell
@@ -677,10 +686,32 @@ export async function generateSlidesKP(data: {
                 imageUrl = imageUrl.replace('drive.google.com/uc?id=', 'lh3.googleusercontent.com/d/');
               if (imageUrl) {
                   const imgW = 1400000, colW = COL_WIDTHS_WITH_IMG[0];
-                  const imgH = Math.min(1100000, groupHeight - 100000);
-                  const actualStartGroupY = startGroupY + startRow * ROW_OVERHEAD;
-                  const actualGroupHeight = groupHeight + group.models.length * ROW_OVERHEAD;
-                  imageRequests.push({ createImage: { url: imageUrl, elementProperties: { pageObjectId: sId, size: { width: { magnitude: imgW, unit: 'EMU' }, height: { magnitude: imgH, unit: 'EMU' } }, transform: { scaleX: 1, scaleY: 1, translateX: TABLE_X + (colW / 2) - (imgW / 2), translateY: actualStartGroupY + (actualGroupHeight / 2) - (imgH / 2), unit: 'EMU' } } } });
+                  
+                  // Calculate exact group Y position and height from rowHeights array
+                  const startY = getRowTopY(startRow);
+                  let groupH = 0;
+                  for (let i = 0; i < group.models.length; i++) {
+                      groupH += rowHeights[startRow + i];
+                  }
+                  groupH += (group.models.length - 1) * 12700; // add borders between rows in group
+                  
+                  const imgH = Math.min(1100000, groupH - 100000);
+                  imageRequests.push({ 
+                    createImage: { 
+                      url: imageUrl, 
+                      elementProperties: { 
+                        pageObjectId: sId, 
+                        size: { width: { magnitude: imgW, unit: 'EMU' }, height: { magnitude: imgH, unit: 'EMU' } }, 
+                        transform: { 
+                          scaleX: 1, 
+                          scaleY: 1, 
+                          translateX: TABLE_X + (colW / 2) - (imgW / 2), 
+                          translateY: startY + (groupH / 2) - (imgH / 2), 
+                          unit: 'EMU' 
+                        } 
+                      } 
+                    } 
+                  });
               }
           }
 
@@ -745,7 +776,6 @@ export async function generateSlidesKP(data: {
               }
 
               r++;
-              currentRowY += rowH;
           }
 
           // Merge cells for multi-model groups
@@ -793,7 +823,10 @@ export async function generateSlidesKP(data: {
               const logoW = 1600000;
               const logoH = 266000; // ~6:1 aspect ratio
               const logoX = TABLE_X + 150000;
-              const logoY = TABLE_START_Y + HEADER_FOOTER_H + totalRowsH + r * ROW_OVERHEAD + (HEADER_FOOTER_H / 2) - (logoH / 2);
+              
+              const footerRowY = getRowTopY(r);
+              const footerRowH = rowHeights[r];
+              const logoY = footerRowY + (footerRowH / 2) - (logoH / 2);
               
               imageRequests.push({
                 createImage: {
