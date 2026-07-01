@@ -275,7 +275,7 @@ function getGroupRowHeights(g: GroupedItem, showImages: boolean): number[] {
       baseH = (i === 0 && g.models.length === 1) ? PRODUCT_ROW_H_FIRST : PRODUCT_ROW_H_SUBSEQUENT;
     }
     
-    const modelCharsPerLine = showImages ? 16 : 20;
+    const modelCharsPerLine = showImages ? 22 : 30;
     const modelLines = estimateTextLines(m.model, modelCharsPerLine);
     
     let rowH = baseH + (modelLines - 1) * 160000;
@@ -284,12 +284,12 @@ function getGroupRowHeights(g: GroupedItem, showImages: boolean): number[] {
   
   // 2. Adjust rows under a group to have identical heights if group-level height requirement is larger
   if (!isAdd && !isAcc && g.models.length > 0) {
-    const catCharsPerLine = showImages ? 11 : 20;
+    const catCharsPerLine = showImages ? 14 : 30;
     const catLines = estimateTextLines(g.category, catCharsPerLine);
     const requiredCatHeight = PRODUCT_ROW_H_FIRST + (catLines - 1) * 160000;
     
     // If showing images, the group needs to be tall enough to fit the image
-    const requiredImageHeight = showImages ? 1200000 : 0;
+    const requiredImageHeight = showImages ? 1000000 : 0;
     const minGroupHeight = Math.max(requiredCatHeight, requiredImageHeight);
     
     const currentGroupSum = heights.reduce((sum, h) => sum + h, 0);
