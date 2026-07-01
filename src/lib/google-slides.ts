@@ -32,8 +32,8 @@ const HEADER_FOOTER_H = 380000;
 const ROW_OVERHEAD = 10000;
 const TABLE_WIDTH = 6800000;
 const TABLE_X = 380000;
-const TABLE_START_Y = 2700000;
-const MAX_HEIGHT_WITH_TERMS = 3600000;
+const TABLE_START_Y = 2650000;
+const MAX_HEIGHT_WITH_TERMS = 4150000;
 const MAX_HEIGHT_WITHOUT_TERMS = 7000000;
 
 const COLORS = {
@@ -153,7 +153,7 @@ function addDynamicTerms(slideId: string, requests: any[]) {
       elementProperties: {
         pageObjectId: slideId,
         size: { width: { magnitude: 6900000, unit: 'EMU' }, height: { magnitude: 4100000, unit: 'EMU' } },
-        transform: { scaleX: 1, scaleY: 1, translateX: 310000, translateY: 6450000, unit: 'EMU' }
+        transform: { scaleX: 1, scaleY: 1, translateX: 310000, translateY: 6750000, unit: 'EMU' }
       }
     }
   });
@@ -190,8 +190,8 @@ function addDynamicTerms(slideId: string, requests: any[]) {
       shapeType: 'TEXT_BOX',
       elementProperties: {
         pageObjectId: slideId,
-        size: { width: { magnitude: 6800000, unit: 'EMU' }, height: { magnitude: 3400000, unit: 'EMU' } },
-        transform: { scaleX: 1, scaleY: 1, translateX: 380000, translateY: 6500000, unit: 'EMU' }
+        size: { width: { magnitude: 6800000, unit: 'EMU' }, height: { magnitude: 3100000, unit: 'EMU' } },
+        transform: { scaleX: 1, scaleY: 1, translateX: 380000, translateY: 6800000, unit: 'EMU' }
       }
     }
   });
@@ -209,8 +209,8 @@ function addDynamicTerms(slideId: string, requests: any[]) {
       objectId: textBoxId,
       style: {
         fontFamily: 'Calibri',
-        fontSize: { magnitude: 10, unit: 'PT' },
-        foregroundColor: { opaqueColor: { rgbColor: { red: 51/255, green: 51/255, blue: 51/255 } } }
+        fontSize: { magnitude: 10.5, unit: 'PT' },
+        foregroundColor: { opaqueColor: { rgbColor: { red: 0, green: 0, blue: 0 } } }
       },
       fields: 'fontFamily,fontSize,foregroundColor'
     }
@@ -232,7 +232,7 @@ function addDynamicTerms(slideId: string, requests: any[]) {
   requests.push({
     updateTextStyle: {
       objectId: textBoxId,
-      style: { fontSize: { magnitude: 10.5, unit: 'PT' } },
+      style: { fontSize: { magnitude: 11.5, unit: 'PT' } },
       textRange: { startIndex: 0, endIndex: idxMainEnd, type: 'FIXED_RANGE' },
       fields: 'fontSize'
     }
@@ -242,7 +242,7 @@ function addDynamicTerms(slideId: string, requests: any[]) {
   requests.push({
     updateTextStyle: {
       objectId: textBoxId,
-      style: { bold: true, underline: true, fontSize: { magnitude: 11, unit: 'PT' } },
+      style: { bold: true, underline: true, fontSize: { magnitude: 12, unit: 'PT' } },
       textRange: { startIndex: idxHeaderStart, endIndex: idxHeaderEnd, type: 'FIXED_RANGE' },
       fields: 'bold,underline,fontSize'
     }
@@ -270,7 +270,9 @@ function getGroupRowHeights(g: GroupedItem, showImages: boolean): number[] {
     } else if (isAcc) {
       baseH = ACCESSORY_ROW_H;
     } else {
-      baseH = (i === 0) ? PRODUCT_ROW_H_FIRST : PRODUCT_ROW_H_SUBSEQUENT;
+      // If there's only 1 model in the group, the first row is PRODUCT_ROW_H_FIRST.
+      // If there are multiple models, all rows start with PRODUCT_ROW_H_SUBSEQUENT.
+      baseH = (i === 0 && g.models.length === 1) ? PRODUCT_ROW_H_FIRST : PRODUCT_ROW_H_SUBSEQUENT;
     }
     
     const modelCharsPerLine = showImages ? 16 : 20;
@@ -280,7 +282,7 @@ function getGroupRowHeights(g: GroupedItem, showImages: boolean): number[] {
     heights.push(rowH);
   }
   
-  // 2. Adjust the first row if we need to fit the category text and the image
+  // 2. Adjust rows under a group to have identical heights if group-level height requirement is larger
   if (!isAdd && !isAcc && g.models.length > 0) {
     const catCharsPerLine = showImages ? 11 : 20;
     const catLines = estimateTextLines(g.category, catCharsPerLine);
@@ -293,7 +295,10 @@ function getGroupRowHeights(g: GroupedItem, showImages: boolean): number[] {
     const currentGroupSum = heights.reduce((sum, h) => sum + h, 0);
     if (currentGroupSum < minGroupHeight) {
       const deficit = minGroupHeight - currentGroupSum;
-      heights[0] += deficit;
+      const extra = Math.ceil(deficit / g.models.length);
+      for (let i = 0; i < heights.length; i++) {
+        heights[i] += extra;
+      }
     }
   }
   
@@ -472,16 +477,32 @@ export async function generateSlidesKP(data: {
     return slideGroups.reduce((sum, g) => sum + g.models.length, 0);
   };
 
-  for (let gIdx = 0; gIdx < groups.length; gIdx++) {
-    const group = groups[gIdx];
-    let modelsRemaining = [...group.models];
+  let remainingGroups = groups.map(g => ({ ...g, models: [...g.models] }));
+
+  while (remainingGroups.length > 0) {
+    let currentGroupsOnPage: GroupedItem[] = [];
     
-    while (modelsRemaining.length > 0) {
-      const modelToTest = modelsRemaining[0];
+    // Check if all remaining groups can fit on this page as the last page
+    const testLastHeight = calculateHeight(remainingGroups, true);
+    if (testLastHeight <= MAX_HEIGHT_WITH_TERMS) {
+      tablesData.push({
+        slideIndex: currentSlideIndex,
+        groups: remainingGroups,
+        height: testLastHeight,
+        rows: countRows(remainingGroups)
+      });
+      break;
+    }
+    
+    // If not, this page is not the last page, so we use MAX_HEIGHT_WITHOUT_TERMS
+    let addedAny = false;
+    while (remainingGroups.length > 0) {
+      const nextGroup = remainingGroups[0];
+      const nextModel = nextGroup.models[0];
       
       const getTestGroups = (existing: GroupedItem[], newModel: any) => {
         if (existing.length === 0) {
-          return [{ ...group, models: [newModel] }];
+          return [{ ...nextGroup, models: [newModel] }];
         }
         const last = existing[existing.length - 1];
         const isAcc = (c: string) => {
@@ -489,9 +510,9 @@ export async function generateSlidesKP(data: {
           return lc.includes('аксессуар') || lc.includes('автоматика') || lc.includes('пульт') || lc.includes('панель') || lc.includes('опция') || lc.includes('дополнительные работы');
         };
         const lastIsAcc = isAcc(last.category);
-        const currentIsAcc = isAcc(group.category);
+        const currentIsAcc = isAcc(nextGroup.category);
         
-        if (last.category === group.category && last.series === group.series && (showImages ? last.image === group.image : true) && lastIsAcc === currentIsAcc) {
+        if (last.category === nextGroup.category && last.series === nextGroup.series && (showImages ? last.image === nextGroup.image : true) && lastIsAcc === currentIsAcc) {
           const copy = existing.map((x, idx) => {
             if (idx === existing.length - 1) {
               return { ...x, models: [...x.models, newModel] };
@@ -500,55 +521,73 @@ export async function generateSlidesKP(data: {
           });
           return copy;
         } else {
-          return [...existing, { ...group, models: [newModel] }];
+          return [...existing, { ...nextGroup, models: [newModel] }];
         }
       };
 
-      const nextTestGroups = getTestGroups(currentGroups, modelToTest);
+      const nextTestGroups = getTestGroups(currentGroupsOnPage, nextModel);
       
-      const isActuallyLast = (gIdx === groups.length - 1) && (modelsRemaining.length === 1);
-      const testHeight = calculateHeight(nextTestGroups, isActuallyLast);
-      const currentMaxHeight = isActuallyLast ? MAX_HEIGHT_WITH_TERMS : MAX_HEIGHT_WITHOUT_TERMS;
+      // If this is the absolute last model, it must fit under MAX_HEIGHT_WITH_TERMS
+      const isAbsoluteLast = (remainingGroups.length === 1) && (nextGroup.models.length === 1);
+      const testHeight = calculateHeight(nextTestGroups, isAbsoluteLast);
+      const testMaxHeight = isAbsoluteLast ? MAX_HEIGHT_WITH_TERMS : MAX_HEIGHT_WITHOUT_TERMS;
       
-      if (testHeight <= currentMaxHeight) {
-        currentGroups = nextTestGroups;
-        modelsRemaining.shift();
-      } else {
-        if (currentGroups.length === 0) {
-          currentGroups = nextTestGroups;
-          modelsRemaining.shift();
-          const forceHeight = calculateHeight(currentGroups, isActuallyLast);
-          tablesData.push({
-            slideIndex: currentSlideIndex,
-            groups: currentGroups,
-            height: forceHeight,
-            rows: countRows(currentGroups)
-          });
-          currentSlideIndex++;
-          currentGroups = [];
-        } else {
-          const finalHeight = calculateHeight(currentGroups, false);
-          tablesData.push({
-            slideIndex: currentSlideIndex,
-            groups: currentGroups,
-            height: finalHeight,
-            rows: countRows(currentGroups)
-          });
-          currentSlideIndex++;
-          currentGroups = [];
+      if (testHeight <= testMaxHeight) {
+        currentGroupsOnPage = nextTestGroups;
+        nextGroup.models.shift();
+        if (nextGroup.models.length === 0) {
+          remainingGroups.shift();
         }
+        addedAny = true;
+      } else {
+        break;
       }
     }
-  }
+    
+    if (!addedAny) {
+      // Force at least one model to prevent infinite loop
+      const nextGroup = remainingGroups[0];
+      const nextModel = nextGroup.models[0];
+      
+      const getTestGroupsForce = (existing: GroupedItem[], newModel: any) => {
+        if (existing.length === 0) {
+          return [{ ...nextGroup, models: [newModel] }];
+        }
+        const last = existing[existing.length - 1];
+        const isAcc = (c: string) => {
+          const lc = c.toLowerCase();
+          return lc.includes('аксессуар') || lc.includes('автоматика') || lc.includes('пульт') || lc.includes('панель') || lc.includes('опция') || lc.includes('дополнительные работы');
+        };
+        const lastIsAcc = isAcc(last.category);
+        const currentIsAcc = isAcc(nextGroup.category);
+        
+        if (last.category === nextGroup.category && last.series === nextGroup.series && (showImages ? last.image === nextGroup.image : true) && lastIsAcc === currentIsAcc) {
+          const copy = existing.map((x, idx) => {
+            if (idx === existing.length - 1) {
+              return { ...x, models: [...x.models, newModel] };
+            }
+            return x;
+          });
+          return copy;
+        } else {
+          return [...existing, { ...nextGroup, models: [newModel] }];
+        }
+      };
 
-  if (currentGroups.length > 0) {
-    const finalHeight = calculateHeight(currentGroups, true);
+      currentGroupsOnPage = getTestGroupsForce(currentGroupsOnPage, nextModel);
+      nextGroup.models.shift();
+      if (nextGroup.models.length === 0) {
+        remainingGroups.shift();
+      }
+    }
+    
     tablesData.push({
       slideIndex: currentSlideIndex,
-      groups: currentGroups,
-      height: finalHeight,
-      rows: countRows(currentGroups)
+      groups: currentGroupsOnPage,
+      height: calculateHeight(currentGroupsOnPage, false),
+      rows: countRows(currentGroupsOnPage)
     });
+    currentSlideIndex++;
   }
 
   if (tablesData.length === 0) {
