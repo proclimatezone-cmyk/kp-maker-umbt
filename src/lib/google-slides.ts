@@ -141,54 +141,167 @@ function estimateTextLines(text: string, charsPerLine: number): number {
   return totalLines;
 }
 
-function getModelRowHeight(category: string, model: string, isAdditional: boolean, showImages: boolean, isFirstInProductGroup: boolean): number {
-  const isAcc = !isAdditional && (
-    category.toLowerCase().includes('аксессуар') || 
-    category.toLowerCase().includes('автоматика') || 
-    category.toLowerCase().includes('пульт') || 
-    category.toLowerCase().includes('панель') || 
-    category.toLowerCase().includes('опция')
+function addDynamicTerms(slideId: string, requests: any[]) {
+  const maskId = `terms_mask_${slideId}_${Date.now()}`;
+  const textBoxId = `terms_text_${slideId}_${Date.now()}`;
+
+  // 1. Create mask rectangle to hide raster terms on slide background
+  requests.push({
+    createShape: {
+      objectId: maskId,
+      shapeType: 'RECTANGLE',
+      elementProperties: {
+        pageObjectId: slideId,
+        size: { width: { magnitude: 6900000, unit: 'EMU' }, height: { magnitude: 4100000, unit: 'EMU' } },
+        transform: { scaleX: 1, scaleY: 1, translateX: 310000, translateY: 6450000, unit: 'EMU' }
+      }
+    }
+  });
+
+  // Style mask shape (solid white, no border)
+  requests.push({
+    updateShapeProperties: {
+      objectId: maskId,
+      shapeProperties: {
+        shapeBackgroundFill: {
+          solidFill: { color: { rgbColor: { red: 1, green: 1, blue: 1 } } }
+        },
+        outline: { propertyState: 'NOT_RENDERED' }
+      },
+      fields: 'shapeBackgroundFill,outline'
+    }
+  });
+
+  // 2. Create terms text box
+  const mainParagraph = 'Компания UMBT предлагает современные климатические решения от бренда Midea для коммерческих и промышленных объектов любого масштаба.';
+  const headerTitle = 'Условия предложения:';
+  const bulletPoints = [
+    '1. Условия поставки: со склада продавца в Ташкенте (бесплатная доставка в г. Ташкенте);',
+    '2. Срок поставки: 2 рабочих дня после подтверждения получения платежа* (*уточнить наличие);',
+    '3. Условия оплаты: 100% предоплата;',
+    '4. Гарантия: 18 месяцев после поставки или 12 месяцев после пуска в эксплуатацию;',
+    '5. Срок действия предложения: 1 неделя с момента подачи'
+  ];
+  const termsText = mainParagraph + '\n\n' + headerTitle + '\n' + bulletPoints.join('\n');
+
+  requests.push({
+    createShape: {
+      objectId: textBoxId,
+      shapeType: 'TEXT_BOX',
+      elementProperties: {
+        pageObjectId: slideId,
+        size: { width: { magnitude: 6800000, unit: 'EMU' }, height: { magnitude: 3400000, unit: 'EMU' } },
+        transform: { scaleX: 1, scaleY: 1, translateX: 380000, translateY: 6500000, unit: 'EMU' }
+      }
+    }
+  });
+
+  requests.push({
+    insertText: {
+      objectId: textBoxId,
+      text: termsText
+    }
+  });
+
+  // Formatting text
+  requests.push({
+    updateTextStyle: {
+      objectId: textBoxId,
+      style: {
+        fontFamily: 'Calibri',
+        fontSize: { magnitude: 10, unit: 'PT' },
+        foregroundColor: { opaqueColor: { rgbColor: { red: 51/255, green: 51/255, blue: 51/255 } } }
+      },
+      fields: 'fontFamily,fontSize,foregroundColor'
+    }
+  });
+
+  const idxMainEnd = mainParagraph.length;
+  const idxHeaderStart = idxMainEnd + 2;
+  const idxHeaderEnd = idxHeaderStart + headerTitle.length;
+
+  // Center align the main paragraph
+  requests.push({
+    updateParagraphStyle: {
+      objectId: textBoxId,
+      style: { alignment: 'CENTER' },
+      textRange: { startIndex: 0, endIndex: idxMainEnd, type: 'FIXED_RANGE' },
+      fields: 'alignment'
+    }
+  });
+  requests.push({
+    updateTextStyle: {
+      objectId: textBoxId,
+      style: { fontSize: { magnitude: 10.5, unit: 'PT' } },
+      textRange: { startIndex: 0, endIndex: idxMainEnd, type: 'FIXED_RANGE' },
+      fields: 'fontSize'
+    }
+  });
+
+  // Header styling (Bold, Underlined)
+  requests.push({
+    updateTextStyle: {
+      objectId: textBoxId,
+      style: { bold: true, underline: true, fontSize: { magnitude: 11, unit: 'PT' } },
+      textRange: { startIndex: idxHeaderStart, endIndex: idxHeaderEnd, type: 'FIXED_RANGE' },
+      fields: 'bold,underline,fontSize'
+    }
+  });
+}
+
+function getGroupRowHeights(g: GroupedItem, showImages: boolean): number[] {
+  const isAdd = g.models.some(m => m.isAdditional);
+  const isAcc = !isAdd && (
+    g.category.toLowerCase().includes('аксессуар') || 
+    g.category.toLowerCase().includes('автоматика') || 
+    g.category.toLowerCase().includes('пульт') || 
+    g.category.toLowerCase().includes('панель') || 
+    g.category.toLowerCase().includes('опция')
   );
 
-  let baseH = ADDITIONAL_ROW_H;
-  if (isAdditional) {
-    baseH = ADDITIONAL_ROW_H;
-  } else if (isAcc) {
-    baseH = ACCESSORY_ROW_H;
-  } else {
-    baseH = isFirstInProductGroup ? PRODUCT_ROW_H_FIRST : PRODUCT_ROW_H_SUBSEQUENT;
+  const heights: number[] = [];
+  
+  // 1. Calculate raw height for each row based on the model name
+  for (let i = 0; i < g.models.length; i++) {
+    const m = g.models[i];
+    let baseH = ADDITIONAL_ROW_H;
+    if (isAdd) {
+      baseH = ADDITIONAL_ROW_H;
+    } else if (isAcc) {
+      baseH = ACCESSORY_ROW_H;
+    } else {
+      baseH = (i === 0) ? PRODUCT_ROW_H_FIRST : PRODUCT_ROW_H_SUBSEQUENT;
+    }
+    
+    const modelCharsPerLine = showImages ? 16 : 20;
+    const modelLines = estimateTextLines(m.model, modelCharsPerLine);
+    
+    let rowH = baseH + (modelLines - 1) * 160000;
+    heights.push(rowH);
   }
-
-  const catCharsPerLine = showImages ? 11 : 20;
-  const modelCharsPerLine = showImages ? 16 : 20;
-
-  let catLines = 1;
-  if (!isAdditional) {
-    catLines = estimateTextLines(category, catCharsPerLine);
+  
+  // 2. Adjust the first row if we need to fit the category text and the image
+  if (!isAdd && !isAcc && g.models.length > 0) {
+    const catCharsPerLine = showImages ? 11 : 20;
+    const catLines = estimateTextLines(g.category, catCharsPerLine);
+    const requiredCatHeight = PRODUCT_ROW_H_FIRST + (catLines - 1) * 160000;
+    
+    // If showing images, the group needs to be tall enough to fit the image
+    const requiredImageHeight = showImages ? 1200000 : 0;
+    const minGroupHeight = Math.max(requiredCatHeight, requiredImageHeight);
+    
+    const currentGroupSum = heights.reduce((sum, h) => sum + h, 0);
+    if (currentGroupSum < minGroupHeight) {
+      const deficit = minGroupHeight - currentGroupSum;
+      heights[0] += deficit;
+    }
   }
-
-  const modelLines = estimateTextLines(model, modelCharsPerLine);
-  const maxLines = Math.max(catLines, modelLines);
-
-  let estimatedH = baseH;
-  if (isFirstInProductGroup && !isAdditional && !isAcc) {
-    const textHeight = 250000 + (maxLines - 1) * 160000;
-    estimatedH = Math.max(PRODUCT_ROW_H_FIRST, textHeight);
-  } else {
-    estimatedH = baseH + (maxLines - 1) * 160000;
-  }
-
-  return estimatedH;
+  
+  return heights;
 }
 
 function getGroupHeight(g: GroupedItem, showImages: boolean): number {
-  let totalH = 0;
-  const isAdd = g.models.some(m => m.isAdditional);
-  for (let i = 0; i < g.models.length; i++) {
-    const isFirstInProduct = !isAdd && !isAccessory(g) && (i === 0);
-    totalH += getModelRowHeight(g.category, g.models[i].model, isAdd, showImages, isFirstInProduct);
-  }
-  return totalH;
+  return getGroupRowHeights(g, showImages).reduce((sum, h) => sum + h, 0);
 }
 
 export async function generateSlidesKP(data: {
@@ -637,15 +750,12 @@ export async function generateSlidesKP(data: {
       
       let currentRowIdx = 1;
       tData.groups.forEach(g => {
-        const isAdd = g.models.some(m => m.isAdditional);
-        const isAcc = isAccessory(g);
-        for (let i = 0; i < g.models.length; i++) {
-          const isFirstInProduct = !isAdd && !isAcc && (i === 0);
-          const rowH = getModelRowHeight(g.category, g.models[i].model, isAdd, showImages, isFirstInProduct);
+        const heights = getGroupRowHeights(g, showImages);
+        heights.forEach(rowH => {
           tableReqs.push({ updateTableRowProperties: { objectId: tableId, rowIndices: [currentRowIdx], tableRowProperties: { minRowHeight: { magnitude: rowH, unit: 'EMU' } }, fields: 'minRowHeight' }});
           rowHeights.push(rowH);
           currentRowIdx++;
-        }
+        });
       });
 
       if (isLastTable) {
@@ -730,8 +840,7 @@ export async function generateSlidesKP(data: {
               const pCol = showImages ? 4 : 3;
               const sCol = showImages ? 5 : 4;
 
-              const isFirstInProduct = !isGroupAdditional && !isAccessory(group) && isFirstInGroup;
-              const rowH = getModelRowHeight(group.category, m.model, isGroupAdditional, showImages, isFirstInProduct);
+               // Row heights are pre-calculated and set at the table level
 
               if (isGroupAdditional) {
                   tableReqs.push({ insertText: { objectId: tableId, cellLocation: { rowIndex: r, columnIndex: 0 }, text: m.model || ' ' } });
@@ -847,6 +956,10 @@ export async function generateSlidesKP(data: {
       tableReqs.push(...columnWidths.map((w, index) => ({ updateTableColumnProperties: { objectId: tableId, columnIndices: [index], tableColumnProperties: { columnWidth: { magnitude: w, unit: 'EMU' } }, fields: 'columnWidth' }})));
       tableReqs.push({ updateTableBorderProperties: { objectId: tableId, borderPosition: 'ALL', tableBorderProperties: { tableBorderFill: { solidFill: { color: { rgbColor: COLORS.BORDER } } }, weight: { magnitude: 1, unit: 'PT' } }, fields: 'tableBorderFill,weight' }});
   }
+
+  // Add dynamic terms on the last slide
+  const lastSlideId = allSlideIds[allSlideIds.length - 1];
+  addDynamicTerms(lastSlideId, tableReqs);
 
   // 7. Apply tables, then images (separate batches for resilience)
   const delReqs = slidesToDelete.map(id => ({ deleteObject: { objectId: id } }));
