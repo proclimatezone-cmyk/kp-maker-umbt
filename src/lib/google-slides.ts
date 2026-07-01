@@ -190,8 +190,8 @@ function addDynamicTerms(slideId: string, requests: any[]) {
       shapeType: 'TEXT_BOX',
       elementProperties: {
         pageObjectId: slideId,
-        size: { width: { magnitude: 6800000, unit: 'EMU' }, height: { magnitude: 3100000, unit: 'EMU' } },
-        transform: { scaleX: 1, scaleY: 1, translateX: 380000, translateY: 6750000, unit: 'EMU' }
+        size: { width: { magnitude: 6800000, unit: 'EMU' }, height: { magnitude: 1700000, unit: 'EMU' } },
+        transform: { scaleX: 1, scaleY: 1, translateX: 380000, translateY: 8150000, unit: 'EMU' }
       }
     }
   });
