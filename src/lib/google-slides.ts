@@ -152,8 +152,8 @@ function addDynamicTerms(slideId: string, requests: any[]) {
       shapeType: 'RECTANGLE',
       elementProperties: {
         pageObjectId: slideId,
-        size: { width: { magnitude: 6900000, unit: 'EMU' }, height: { magnitude: 3740000, unit: 'EMU' } },
-        transform: { scaleX: 1, scaleY: 1, translateX: 310000, translateY: 6700000, unit: 'EMU' }
+        size: { width: { magnitude: 6900000, unit: 'EMU' }, height: { magnitude: 3240000, unit: 'EMU' } },
+        transform: { scaleX: 1, scaleY: 1, translateX: 310000, translateY: 7200000, unit: 'EMU' }
       }
     }
   });
@@ -994,6 +994,34 @@ export async function generateSlidesKP(data: {
       // Column widths & borders
       tableReqs.push(...columnWidths.map((w, index) => ({ updateTableColumnProperties: { objectId: tableId, columnIndices: [index], tableColumnProperties: { columnWidth: { magnitude: w, unit: 'EMU' } }, fields: 'columnWidth' }})));
       tableReqs.push({ updateTableBorderProperties: { objectId: tableId, borderPosition: 'ALL', tableBorderProperties: { tableBorderFill: { solidFill: { color: { rgbColor: COLORS.BORDER } } }, weight: { magnitude: 1, unit: 'PT' } }, fields: 'tableBorderFill,weight' }});
+      tableReqs.push({ updateTableBorderProperties: { objectId: tableId, borderPosition: 'OUTER', tableBorderProperties: { tableBorderFill: { solidFill: { color: { rgbColor: COLORS.BORDER } } }, weight: { magnitude: 1, unit: 'PT' } }, fields: 'tableBorderFill,weight' }});
+      tableReqs.push({ updateTableBorderProperties: { objectId: tableId, borderPosition: 'BOTTOM', tableBorderProperties: { tableBorderFill: { solidFill: { color: { rgbColor: COLORS.BORDER } } }, weight: { magnitude: 1, unit: 'PT' } }, fields: 'tableBorderFill,weight' }});
+
+      // Draw a black rectangle line at the bottom of the table to prevent Google Slides border export bugs
+      const bottomLineId = `table_bottom_line_${tableId}_${Date.now()}`;
+      tableReqs.push({
+          createShape: {
+              objectId: bottomLineId,
+              shapeType: 'RECTANGLE',
+              elementProperties: {
+                  pageObjectId: sId,
+                  size: { width: { magnitude: TABLE_WIDTH, unit: 'EMU' }, height: { magnitude: 12700, unit: 'EMU' } },
+                  transform: { scaleX: 1, scaleY: 1, translateX: TABLE_X, translateY: TABLE_START_Y + tableHeight - 6350, unit: 'EMU' }
+              }
+          }
+      });
+      tableReqs.push({
+          updateShapeProperties: {
+              objectId: bottomLineId,
+              shapeProperties: {
+                  shapeBackgroundFill: {
+                      solidFill: { color: { rgbColor: { red: 0, green: 0, blue: 0 } } }
+                  },
+                  outline: { propertyState: 'NOT_RENDERED' }
+              },
+              fields: 'shapeBackgroundFill,outline'
+          }
+      });
   }
 
   // Add dynamic terms on the last slide
