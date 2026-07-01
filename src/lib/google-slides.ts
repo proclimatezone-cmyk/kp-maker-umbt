@@ -152,8 +152,8 @@ function addDynamicTerms(slideId: string, requests: any[]) {
       shapeType: 'RECTANGLE',
       elementProperties: {
         pageObjectId: slideId,
-        size: { width: { magnitude: 6900000, unit: 'EMU' }, height: { magnitude: 4100000, unit: 'EMU' } },
-        transform: { scaleX: 1, scaleY: 1, translateX: 310000, translateY: 6750000, unit: 'EMU' }
+        size: { width: { magnitude: 6900000, unit: 'EMU' }, height: { magnitude: 3740000, unit: 'EMU' } },
+        transform: { scaleX: 1, scaleY: 1, translateX: 310000, translateY: 6700000, unit: 'EMU' }
       }
     }
   });
@@ -191,7 +191,7 @@ function addDynamicTerms(slideId: string, requests: any[]) {
       elementProperties: {
         pageObjectId: slideId,
         size: { width: { magnitude: 6800000, unit: 'EMU' }, height: { magnitude: 3100000, unit: 'EMU' } },
-        transform: { scaleX: 1, scaleY: 1, translateX: 380000, translateY: 6800000, unit: 'EMU' }
+        transform: { scaleX: 1, scaleY: 1, translateX: 380000, translateY: 6750000, unit: 'EMU' }
       }
     }
   });
@@ -768,7 +768,7 @@ export async function generateSlidesKP(data: {
       tData.groups.forEach(g => {
         totalRowsH += getGroupHeight(g, showImages);
       });
-      const tableHeight = HEADER_FOOTER_H + totalRowsH + (extraRows * HEADER_FOOTER_H);
+      const tableHeight = HEADER_FOOTER_H + totalRowsH + (extraRows * HEADER_FOOTER_H) + (displayRows * 12700);
 
       // Create table
       tableReqs.push({
