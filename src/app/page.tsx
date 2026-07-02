@@ -697,7 +697,7 @@ export default function Home() {
           }).filter(Boolean), 
           additionalItems,
           equipmentTotal,
-          partnerBonus: partnerBonusSum,
+          partnerBonus: showDan ? partnerBonusSum : 0,
           additionalTotal,
           total: grandTotal, 
           extraData: { company, address, objectType, registrationDate, equipmentType, contactPerson }, 
