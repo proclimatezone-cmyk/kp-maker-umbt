@@ -136,7 +136,34 @@ function estimateTextLines(text: string, charsPerLine: number): number {
   const paragraphs = text.split('\n');
   let totalLines = 0;
   paragraphs.forEach(p => {
-    totalLines += Math.max(1, Math.ceil(p.length / charsPerLine));
+    const words = p.trim().split(/\s+/).filter(Boolean);
+    if (words.length === 0) {
+      totalLines += 1;
+      return;
+    }
+    let currentLineLength = 0;
+    let linesInParagraph = 1;
+    words.forEach(word => {
+      if (word.length > charsPerLine) {
+        if (currentLineLength > 0) {
+          linesInParagraph++;
+          currentLineLength = 0;
+        }
+        const wordLines = Math.ceil(word.length / charsPerLine);
+        linesInParagraph += wordLines - 1;
+        currentLineLength = word.length % charsPerLine;
+      } else {
+        if (currentLineLength === 0) {
+          currentLineLength = word.length;
+        } else if (currentLineLength + 1 + word.length <= charsPerLine) {
+          currentLineLength += 1 + word.length;
+        } else {
+          linesInParagraph++;
+          currentLineLength = word.length;
+        }
+      }
+    });
+    totalLines += linesInParagraph;
   });
   return totalLines;
 }
@@ -996,33 +1023,7 @@ export async function generateSlidesKP(data: {
       tableReqs.push({ updateTableBorderProperties: { objectId: tableId, borderPosition: 'ALL', tableBorderProperties: { tableBorderFill: { solidFill: { color: { rgbColor: COLORS.BORDER } } }, weight: { magnitude: 1, unit: 'PT' } }, fields: 'tableBorderFill,weight' }});
       tableReqs.push({ updateTableBorderProperties: { objectId: tableId, borderPosition: 'OUTER', tableBorderProperties: { tableBorderFill: { solidFill: { color: { rgbColor: COLORS.BORDER } } }, weight: { magnitude: 1, unit: 'PT' } }, fields: 'tableBorderFill,weight' }});
       tableReqs.push({ updateTableBorderProperties: { objectId: tableId, borderPosition: 'BOTTOM', tableBorderProperties: { tableBorderFill: { solidFill: { color: { rgbColor: COLORS.BORDER } } }, weight: { magnitude: 1, unit: 'PT' } }, fields: 'tableBorderFill,weight' }});
-
-      // Draw a black rectangle line at the bottom of the table to prevent Google Slides border export bugs
-      const bottomLineId = `table_bottom_line_${tableId}_${Date.now()}`;
-      tableReqs.push({
-          createShape: {
-              objectId: bottomLineId,
-              shapeType: 'RECTANGLE',
-              elementProperties: {
-                  pageObjectId: sId,
-                  size: { width: { magnitude: TABLE_WIDTH, unit: 'EMU' }, height: { magnitude: 12700, unit: 'EMU' } },
-                  transform: { scaleX: 1, scaleY: 1, translateX: TABLE_X, translateY: TABLE_START_Y + tableHeight - 6350, unit: 'EMU' }
-              }
-          }
-      });
-      tableReqs.push({
-          updateShapeProperties: {
-              objectId: bottomLineId,
-              shapeProperties: {
-                  shapeBackgroundFill: {
-                      solidFill: { color: { rgbColor: { red: 0, green: 0, blue: 0 } } }
-                  },
-                  outline: { propertyState: 'NOT_RENDERED' }
-              },
-              fields: 'shapeBackgroundFill,outline'
-          }
-      });
-  }
+   }
 
   // Add dynamic terms on the last slide
   const lastSlideId = allSlideIds[allSlideIds.length - 1];
