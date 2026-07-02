@@ -402,6 +402,25 @@ export async function generateSlidesKP(data: {
 
   const allAggregated = [...aggregated, ...aggregatedAdditional];
 
+  const getAdjustedPrice = (price: number) => {
+    let p = price;
+    if (paymentType === 'transfer') p *= (1 + transferFee / 100);
+    if (currency === 'sum') p *= exchangeRate;
+    return Math.round(p);
+  };
+
+  const calculatedEquipTotal = data.equipmentTotal !== undefined ? data.equipmentTotal : aggregated.reduce((sum, item) => {
+    const price = getAdjustedPrice(Number(item.price) || 0);
+    const qty = parseQuantity(item.quantity);
+    return sum + (price * qty);
+  }, 0);
+
+  const calculatedAddTotal = data.additionalTotal !== undefined ? data.additionalTotal : aggregatedAdditional.reduce((sum, item) => {
+    const price = getAdjustedPrice(Number(item.price) || 0);
+    const qty = parseQuantity(item.quantity);
+    return sum + (price * qty);
+  }, 0);
+
   // 2. Group adjacent items by category+series (Preserves original order)
   const groups: GroupedItem[] = [];
   allAggregated.forEach(item => {
@@ -462,22 +481,96 @@ export async function generateSlidesKP(data: {
   
 
   // 3. Define footer rows
-  let totalLabel = 'Итого:';
-  if (paymentType === 'transfer') {
-    totalLabel = 'Итого с НДС:';
-  } else if (currency === 'sum') {
-    totalLabel = 'Итого СУМ:';
-  } else {
-    totalLabel = 'Итого у.е.:';
-  }
+  const footerRows: { label: string; value: number; isGrand?: boolean; colorL: any; colorR: any }[] = [];
 
-  const footerRows = [{ 
-    label: totalLabel, 
-    value: data.total, 
-    isGrand: true, 
-    colorL: COLORS.TOTAL_L, 
-    colorR: COLORS.TOTAL_R 
-  }];
+  const hasBonus = data.partnerBonus !== undefined && data.partnerBonus > 0;
+  const hasAdditional = calculatedAddTotal > 0;
+
+  if (hasBonus) {
+    let equipLabel = 'Итого кондиционирование у.е.:';
+    let netLabel = 'Итого за вычетом бонуса у.е.:';
+    let bonusLabel = 'Партнерский бонус:';
+    let addLabel = 'Итого доп. раздел у.е.:';
+    let grandLabel = 'ОБЩИЙ ИТОГ:';
+
+    if (paymentType === 'transfer') {
+      equipLabel = 'Итого кондиционирование с НДС:';
+      netLabel = 'Итого за вычетом бонуса с НДС:';
+      addLabel = 'Итого доп. раздел с НДС:';
+      grandLabel = 'ОБЩИЙ ИТОГ с НДС:';
+    } else if (currency === 'sum') {
+      equipLabel = 'Итого кондиционирование СУМ:';
+      netLabel = 'Итого за вычетом бонуса СУМ:';
+      addLabel = 'Итого доп. раздел СУМ:';
+      grandLabel = 'ОБЩИЙ ИТОГ СУМ:';
+    } else {
+      equipLabel = 'Итого кондиционирование у.е.:';
+      netLabel = 'Итого за вычетом бонуса у.е.:';
+      addLabel = 'Итого доп. раздел у.е.:';
+      grandLabel = 'ОБЩИЙ ИТОГ:';
+    }
+
+    footerRows.push({
+      label: equipLabel,
+      value: calculatedEquipTotal,
+      colorL: COLORS.TOTAL_L,
+      colorR: COLORS.TOTAL_R
+    });
+
+    footerRows.push({
+      label: bonusLabel,
+      value: -data.partnerBonus!,
+      colorL: COLORS.TOTAL_L,
+      colorR: COLORS.TOTAL_R
+    });
+
+    if (hasAdditional) {
+      footerRows.push({
+        label: netLabel,
+        value: calculatedEquipTotal - data.partnerBonus!,
+        colorL: COLORS.TOTAL_L,
+        colorR: COLORS.TOTAL_R
+      });
+      footerRows.push({
+        label: addLabel,
+        value: calculatedAddTotal,
+        colorL: COLORS.TOTAL_L,
+        colorR: COLORS.TOTAL_R
+      });
+      footerRows.push({
+        label: grandLabel,
+        value: data.total,
+        isGrand: true,
+        colorL: COLORS.TOTAL_L,
+        colorR: COLORS.TOTAL_R
+      });
+    } else {
+      footerRows.push({
+        label: grandLabel,
+        value: data.total,
+        isGrand: true,
+        colorL: COLORS.TOTAL_L,
+        colorR: COLORS.TOTAL_R
+      });
+    }
+  } else {
+    let totalLabel = 'Итого:';
+    if (paymentType === 'transfer') {
+      totalLabel = 'Итого с НДС:';
+    } else if (currency === 'sum') {
+      totalLabel = 'Итого СУМ:';
+    } else {
+      totalLabel = 'Итого у.е.:';
+    }
+
+    footerRows.push({ 
+      label: totalLabel, 
+      value: data.total, 
+      isGrand: true, 
+      colorL: COLORS.TOTAL_L, 
+      colorR: COLORS.TOTAL_R 
+    });
+  }
 
   // 3.1 Split groups into per-slide chunks based on height in EMU
   const tablesData: { slideIndex: number, groups: GroupedItem[], height: number, rows: number }[] = [];
@@ -979,19 +1072,28 @@ export async function generateSlidesKP(data: {
               // Стиль текста
               const fontSize = frow.isGrand ? 12 : 10;
               const isBold = frow.isGrand || frow.label.includes('Итого');
-              const textRgb = frow.label === 'ОБЩИЙ ИТОГ:' ? { red: 1, green: 1, blue: 1 } : { red: 0, green: 0, blue: 0 };
+              const textRgb = { red: 0, green: 0, blue: 0 };
               
               tableReqs.push({ updateTextStyle: { objectId: tableId, cellLocation: { rowIndex: rowIdx, columnIndex: totIdxL }, style: { ...TABLE_STYLE, bold: isBold, fontSize: { magnitude: fontSize, unit: 'PT' }, foregroundColor: { opaqueColor: { rgbColor: textRgb } } }, fields: 'fontFamily,italic,fontSize,bold,foregroundColor' }});
               tableReqs.push({ updateTextStyle: { objectId: tableId, cellLocation: { rowIndex: rowIdx, columnIndex: totIdxR }, style: { ...TABLE_STYLE, bold: isBold, fontSize: { magnitude: fontSize, unit: 'PT' }, foregroundColor: { opaqueColor: { rgbColor: textRgb } } }, fields: 'fontFamily,italic,fontSize,bold,foregroundColor' }});
               
               tableReqs.push({ updateParagraphStyle: { objectId: tableId, cellLocation: { rowIndex: rowIdx, columnIndex: totIdxL }, style: { alignment: 'CENTER' }, fields: 'alignment' }});
               tableReqs.push({ updateParagraphStyle: { objectId: tableId, cellLocation: { rowIndex: rowIdx, columnIndex: totIdxR }, style: { alignment: 'CENTER' }, fields: 'alignment' }});
-
-              // Объединение пустых ячеек слева
-              if (totIdxL > 1) {
-                  tableReqs.push({ mergeTableCells: { objectId: tableId, tableRange: { location: { rowIndex: rowIdx, columnIndex: 0 }, rowSpan: 1, columnSpan: totIdxL } } });
-              }
           });
+
+          // Объединение пустых ячеек слева по всей высоте подвала
+          if (totIdxL > 1 && footerRows.length > 0) {
+              tableReqs.push({ 
+                  mergeTableCells: { 
+                       objectId: tableId, 
+                       tableRange: { 
+                           location: { rowIndex: r, columnIndex: 0 }, 
+                           rowSpan: footerRows.length, 
+                           columnSpan: totIdxL 
+                       } 
+                  } 
+              });
+          }
           
           // Вставляем логотип в первую строку итогов (если есть пустое место слева)
           if (totIdxL > 1 && logoUrl) {
@@ -1000,8 +1102,12 @@ export async function generateSlidesKP(data: {
               const logoX = TABLE_X + 150000;
               
               const footerRowY = getRowTopY(r);
-              const footerRowH = rowHeights[r];
-              const logoY = footerRowY + (footerRowH / 2) - (logoH / 2);
+              let totalFooterH = 0;
+              for (let i = 0; i < footerRows.length; i++) {
+                  totalFooterH += rowHeights[r + i];
+              }
+              totalFooterH += (footerRows.length - 1) * 12700; // add borders between rows in footer
+              const logoY = footerRowY + (totalFooterH / 2) - (logoH / 2);
               
               imageRequests.push({
                 createImage: {

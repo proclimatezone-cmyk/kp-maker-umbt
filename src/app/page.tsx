@@ -613,8 +613,12 @@ export default function Home() {
   }, 0), [additionalItems, calculatePrice]);
 
   const grandTotal = useMemo(() => {
-    return equipmentTotal + additionalTotal;
-  }, [equipmentTotal, additionalTotal]);
+    const base = equipmentTotal + additionalTotal;
+    if (showDan) {
+      return base - partnerBonusSum;
+    }
+    return base;
+  }, [equipmentTotal, additionalTotal, showDan, partnerBonusSum]);
 
   const labels = useMemo(() => {
     if (options.paymentType === 'transfer') {
