@@ -1096,18 +1096,16 @@ export async function generateSlidesKP(data: {
           }
           
           // Вставляем логотип в первую строку итогов (если есть пустое место слева)
+          // Логотип всегда на уровне ПЕРВОЙ строки футера («Итого у.е.:»)
           if (totIdxL > 1 && logoUrl) {
               const logoW = 1600000;
               const logoH = 266000; // ~6:1 aspect ratio
               const logoX = TABLE_X + 150000;
               
-              const footerRowY = getRowTopY(r);
-              let totalFooterH = 0;
-              for (let i = 0; i < footerRows.length; i++) {
-                  totalFooterH += rowHeights[r + i];
-              }
-              totalFooterH += (footerRows.length - 1) * 12700; // add borders between rows in footer
-              const logoY = footerRowY + (totalFooterH / 2) - (logoH / 2);
+              // Центрируем только по первой строке футера, а не по всему блоку
+              const firstFooterRowY = getRowTopY(r);
+              const firstFooterRowH = rowHeights[r] || HEADER_FOOTER_H;
+              const logoY = firstFooterRowY + (firstFooterRowH / 2) - (logoH / 2);
               
               imageRequests.push({
                 createImage: {
