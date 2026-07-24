@@ -1165,7 +1165,7 @@ export async function generateSlidesKP(data: {
     try { await drive.files.delete({ fileId }); } catch (e) {}
   }));
 
-  // 8. Export PDF & upload
+  // 8. Export PDF and delete temporary presentation from Drive
   let pdfUrl = '';
   let pdfBuffer: Buffer | null = null;
   try {
@@ -1175,29 +1175,15 @@ export async function generateSlidesKP(data: {
     }, { responseType: 'arraybuffer' });
     
     pdfBuffer = Buffer.from(exportRes.data as ArrayBuffer);
-    const stream = new Readable();
-    stream.push(pdfBuffer);
-    stream.push(null);
+  } catch (err) { console.error('PDF export failure', err); }
 
-    const pdfUpload = await drive.files.create({
-      requestBody: {
-        name: `КП - ${data.client} - ${data.cpName}.pdf`,
-        parents: [TARGET_FOLDER_ID],
-        mimeType: 'application/pdf'
-      },
-      media: { body: stream, mimeType: 'application/pdf' },
-      fields: 'id,webViewLink'
-    });
-
-    const pdfId = pdfUpload.data.id!;
-    await drive.permissions.create({
-      fileId: pdfId,
-      requestBody: { role: 'reader', type: 'anyone' }
-    });
-
-    const pdfInfo = await drive.files.get({ fileId: pdfId, fields: 'webViewLink' });
-    pdfUrl = pdfInfo.data.webViewLink || '';
-  } catch (err) { console.error('PDF failure', err); }
+  // Immediately delete temporary presentation from Google Drive
+  try {
+    await drive.files.delete({ fileId: presentationId });
+    console.log(`Deleted temp presentation ${presentationId} from Drive`);
+  } catch (e) {
+    console.error('Failed to delete temp presentation', e);
+  }
 
   // 9. Report to audit spreadsheet
   try {
