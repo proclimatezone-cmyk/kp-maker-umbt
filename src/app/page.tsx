@@ -4,7 +4,7 @@ import { useState, useEffect, useMemo, useCallback, memo } from 'react'
 import { Plus, Trash2, FileText, User, Briefcase, Calculator, Search, RefreshCw, Building2, Phone, CheckCircle, CloudCheck, Loader2, Copy } from 'lucide-react'
 import productsData from '@/data/products.json'
 
-interface Item { id: string; productId: string; quantity: number }
+interface Item { id: string; productId: string; quantity: number; discount?: number }
 
 export interface AdditionalItem {
   id: string;
@@ -394,7 +394,15 @@ const ModelSearchSelector = memo(({ value, onChange, cleanProducts }: { value: s
 const EquipmentRow = memo(({ item, products, cleanProducts, onUpdate, onDelete, onClone, calculatePrice, currencyLabel, labels }: any) => {
   const p = products.find((x: any) => x.id === item.productId);
   const [qty, setQty] = useState<number | string>(item.quantity);
+  const [discount, setDiscount] = useState<number | string>(item.discount !== undefined ? item.discount : 0);
+
   useEffect(() => { setQty(item.quantity); }, [item.quantity]);
+  useEffect(() => { setDiscount(item.discount !== undefined ? item.discount : 0); }, [item.discount]);
+
+  const baseUnitPrice = calculatePrice(p?.price || 0);
+  const discountVal = Number(discount) || 0;
+  const finalUnitPrice = Math.round(baseUnitPrice * (1 + discountVal / 100));
+  const finalSum = finalUnitPrice * (Number(qty) || 0);
 
   return (
     <tr>
@@ -403,8 +411,42 @@ const EquipmentRow = memo(({ item, products, cleanProducts, onUpdate, onDelete, 
         <div className="cat-label">{p?.series || p?.category}</div>
       </td>
       <td data-label={labels.price} style={{ textAlign: 'center' }}>
-        <span className="price">{calculatePrice(p?.price || 0).toLocaleString()}</span>
+        <span className="price">{finalUnitPrice.toLocaleString()}</span>
         <span className="price-unit">{currencyLabel}</span>
+      </td>
+      <td data-label="Скидка %" style={{ textAlign: 'center' }}>
+        <input 
+          className="qty-input" 
+          type="number" 
+          step="any"
+          value={discount === 0 ? '' : discount} 
+          placeholder="0"
+          onChange={e => {
+            const val = e.target.value;
+            setDiscount(val === '' ? '' : val);
+          }} 
+          onFocus={e => {
+            if (Number(discount) === 0) {
+              setDiscount('');
+            } else {
+              e.target.select();
+            }
+          }}
+          onBlur={() => {
+            const finalDiscount = discount === '' ? 0 : Number(discount);
+            setDiscount(finalDiscount);
+            if (finalDiscount !== (item.discount || 0)) {
+              onUpdate(item.id, { discount: finalDiscount });
+            }
+          }}
+          style={{ 
+            width: '65px', 
+            textAlign: 'center',
+            color: discountVal < 0 ? '#10b981' : discountVal > 0 ? '#ef4444' : 'inherit',
+            fontWeight: discountVal !== 0 ? '600' : 'normal'
+          }}
+          title="Скидка (-) или наценка (+)"
+        />
       </td>
       <td data-label="Кол-во" style={{ textAlign: 'center' }}>
         <input className="qty-input" type="number" min="1" 
@@ -430,7 +472,7 @@ const EquipmentRow = memo(({ item, products, cleanProducts, onUpdate, onDelete, 
         />
       </td>
       <td data-label={labels.sum} style={{ textAlign: 'right' }}>
-        <span className="sum">{(p ? calculatePrice(p.price) * (Number(qty) || 0) : 0).toLocaleString()}</span>
+        <span className="sum">{finalSum.toLocaleString()}</span>
       </td>
       <td style={{ textAlign: 'right' }}>
         <div style={{ display: 'flex', gap: '0.4rem', justifyContent: 'flex-end', alignItems: 'center' }}>
@@ -577,8 +619,12 @@ export default function Home() {
   }, [options])
 
   const equipmentTotal = useMemo(() => items.reduce((sum, item) => {
-    const p = products.find(x => x.id === item.productId)
-    return sum + (p ? calculatePrice(p.price) * item.quantity : 0)
+    const p = products.find(x => x.id === item.productId);
+    if (!p) return sum;
+    const baseUnitPrice = calculatePrice(p.price);
+    const discountVal = item.discount || 0;
+    const finalUnitPrice = Math.round(baseUnitPrice * (1 + discountVal / 100));
+    return sum + (finalUnitPrice * (item.quantity || 0));
   }, 0), [items, products, calculatePrice])
 
   const capacityMetrics = useMemo(() => {
@@ -693,7 +739,11 @@ export default function Home() {
           cpName, 
           items: items.map(i => { 
             const p = products.find(x => x.id === i.productId); 
-            return p ? { ...p, quantity: i.quantity } : null; 
+            if (!p) return null;
+            const baseUnitPrice = calculatePrice(p.price);
+            const discountVal = i.discount || 0;
+            const finalUnitPrice = Math.round(baseUnitPrice * (1 + discountVal / 100));
+            return { ...p, price: finalUnitPrice, quantity: i.quantity }; 
           }).filter(Boolean), 
           additionalItems,
           equipmentTotal,
@@ -824,11 +874,12 @@ export default function Home() {
                 <table className="tbl">
                   <thead>
                     <tr>
-                      <th style={{ width: '48%' }}>Модель</th>
+                      <th style={{ width: '40%' }}>Модель</th>
                       <th style={{ width: '14%', textAlign: 'center' }}>{labels.price}</th>
+                      <th style={{ width: '12%', textAlign: 'center' }}>Скидка %</th>
                       <th style={{ width: '10%', textAlign: 'center' }}>Кол-во</th>
-                      <th style={{ width: '18%', textAlign: 'right' }}>{labels.sum}</th>
-                      <th style={{ width: '10%' }}></th>
+                      <th style={{ width: '16%', textAlign: 'right' }}>{labels.sum}</th>
+                      <th style={{ width: '8%' }}></th>
                     </tr>
                   </thead>
                   <tbody>
