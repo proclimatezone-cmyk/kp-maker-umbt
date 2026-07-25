@@ -745,7 +745,10 @@ export default function Home() {
             const finalUnitPrice = Math.round(baseUnitPrice * (1 + discountVal / 100));
             return { ...p, price: finalUnitPrice, quantity: i.quantity }; 
           }).filter(Boolean), 
-          additionalItems,
+          additionalItems: additionalItems.map(i => ({
+            ...i,
+            price: Math.round(calculatePrice(i.price))
+          })),
           equipmentTotal,
           partnerBonus: showDan ? partnerBonusSum : 0,
           additionalTotal,

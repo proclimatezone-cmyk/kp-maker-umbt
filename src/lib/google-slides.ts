@@ -403,10 +403,7 @@ export async function generateSlidesKP(data: {
   const allAggregated = [...aggregated, ...aggregatedAdditional];
 
   const getAdjustedPrice = (price: number) => {
-    let p = price;
-    if (paymentType === 'transfer') p *= (1 + transferFee / 100);
-    if (currency === 'sum') p *= exchangeRate;
-    return Math.round(p);
+    return Math.round(price);
   };
 
   const calculatedEquipTotal = data.equipmentTotal !== undefined ? data.equipmentTotal : aggregated.reduce((sum, item) => {
@@ -826,7 +823,11 @@ export async function generateSlidesKP(data: {
           });
           const fileId = upload.data.id!;
           fileIdsToDelete.push(fileId);
-          await drive.permissions.create({ fileId, requestBody: { role: 'reader', type: 'anyone' } });
+          try {
+            await drive.permissions.create({ fileId, requestBody: { role: 'reader', type: 'anyone' } });
+          } catch (pErr: any) {
+            console.warn('Failed to set permission on Drive file:', pErr?.message || pErr);
+          }
           const finalUrl = `https://lh3.googleusercontent.com/d/${fileId}`;
           imageMap.set(imgPath, finalUrl);
         } else {
@@ -1008,10 +1009,7 @@ export async function generateSlidesKP(data: {
               }
               tableReqs.push({ insertText: { objectId: tableId, cellLocation: { rowIndex: r, columnIndex: qCol }, text: m.quantity.toString() || '0' } });
 
-              let adjustedPrice = m.price;
-              if (paymentType === 'transfer') adjustedPrice *= (1 + transferFee / 100);
-              if (currency === 'sum') adjustedPrice *= exchangeRate;
-              adjustedPrice = Math.round(adjustedPrice);
+              const adjustedPrice = Math.round(m.price);
 
               tableReqs.push({ insertText: { objectId: tableId, cellLocation: { rowIndex: r, columnIndex: pCol }, text: adjustedPrice.toLocaleString() } });
               
