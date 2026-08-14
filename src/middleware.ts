@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { jwtVerify } from 'jose';
-
-const JWT_SECRET = new TextEncoder().encode(process.env.JWT_SECRET || 'umbt-super-secret-key-2026-xyz');
+import { getJwtSecret } from '@/lib/auth-secret';
 
 export async function middleware(req: NextRequest) {
   // Only protect main application and specific APIs
@@ -20,8 +19,19 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(new URL('/login', req.url));
   }
 
+  let jwtSecret: Uint8Array;
   try {
-    const { payload } = await jwtVerify(token, JWT_SECRET);
+    jwtSecret = getJwtSecret();
+  } catch (err) {
+    // Fail closed: без ключа подписи проверить токен нельзя, и пускать нельзя тоже.
+    console.error('[auth] JWT_SECRET misconfigured:', (err as Error).message);
+    return isProtectedApi
+      ? NextResponse.json({ error: 'Server auth misconfigured' }, { status: 500 })
+      : new NextResponse('Server auth misconfigured', { status: 500 });
+  }
+
+  try {
+    const { payload } = await jwtVerify(token, jwtSecret);
     const forwarded = req.headers.get('x-forwarded-for');
     const currentIp = forwarded ? forwarded.split(',')[0] : (req as any).ip || 'Unknown IP';
     

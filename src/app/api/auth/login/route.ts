@@ -2,9 +2,10 @@ import { NextRequest, NextResponse } from 'next/server';
 import { google } from 'googleapis';
 import { SignJWT } from 'jose';
 import path from 'path';
+import { getJwtSecret } from '@/lib/auth-secret';
 
 const SPREADSHEET_ID = '1O5aeKAbSc_UkDk7expSqaDO5dpUaQLyqWI40Vhp4MhE';
-const JWT_SECRET = new TextEncoder().encode(process.env.JWT_SECRET || 'umbt-super-secret-key-2026-xyz');
+const SESSION_TTL = '30d';
 
 function getGoogleAuth() {
   if (process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL && process.env.GOOGLE_PRIVATE_KEY) {
@@ -57,7 +58,7 @@ export async function POST(req: NextRequest) {
       if (rows && rows.length > 0) {
         // Flatten and normalize emails
         const allowedEmails = rows.map(row => row[0]?.toString().trim().toLowerCase()).filter(Boolean);
-        if (allowedEmails.includes(email.trim().toLowerCase()) || email === 'debug@umbt.uz' || email === 'test@umbt.uz') {
+        if (allowedEmails.includes(email.trim().toLowerCase())) {
           isAllowed = true;
         }
       }
@@ -71,7 +72,8 @@ export async function POST(req: NextRequest) {
       const token = await new SignJWT({ email, ip })
         .setProtectedHeader({ alg: 'HS256' })
         .setIssuedAt()
-        .sign(JWT_SECRET);
+        .setExpirationTime(SESSION_TTL)
+        .sign(getJwtSecret());
 
       const response = NextResponse.json({ success: true });
       response.cookies.set('umbt_auth', token, {

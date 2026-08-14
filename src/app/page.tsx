@@ -722,8 +722,15 @@ export default function Home() {
     setSyncing(true)
     try {
       const r = await fetch('/api/sync', { method: 'POST' }); const d = await r.json()
-      if (d.success) { setProducts(d.products); setItems([]); alert('✅ База обновлена.'); }
-      else alert('Ошибка: ' + d.error)
+      if (d.success && Array.isArray(d.products)) {
+        setProducts(d.products)
+        // Набранное КП не трогаем: обновляется только прайс.
+        const missing = items.filter(i => !d.products.some((p: any) => p.id === i.productId)).length
+        alert(missing > 0
+          ? `✅ База обновлена. ${missing} поз. из вашего КП больше нет в прайсе — проверьте их.`
+          : '✅ База обновлена.')
+      }
+      else alert('Ошибка: ' + (d.error || 'сервер вернул пустой прайс'))
     } catch { alert('Ошибка сети') } finally { setSyncing(false) }
   }
 

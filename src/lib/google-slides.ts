@@ -367,7 +367,14 @@ export async function generateSlidesKP(data: {
   // 1. Sum up identical products and preserve order
   const aggregated: any[] = [];
   data.items.forEach(item => {
-    const existing = aggregated.find(a => (item.id && a.id === item.id) || (item.model && a.model === item.model));
+    // Цена входит в ключ: одна и та же модель с разными скидками приходит
+    // отдельными строками и должна такой же и остаться, иначе сумма строк
+    // в таблице разойдётся с «Итого».
+    const itemPrice = Number(item.price) || 0;
+    const existing = aggregated.find(a =>
+      (Number(a.price) || 0) === itemPrice &&
+      ((item.id && a.id === item.id) || (item.model && a.model === item.model))
+    );
     if (existing) {
       existing.quantity += (Number(item.quantity) || 1);
     } else {
@@ -735,18 +742,22 @@ export async function generateSlidesKP(data: {
     slidesToDelete = [templateSlideIds[0]];
     allSlideIds = [templateSlideIds[1]]; // Page 1 is Slide 2 (footer masked)
     
-    const duplicateReqs = [];
+    const middleSlideIds: string[] = [];
     for (let i = 1; i < tablesData.length - 1; i++) {
-        const newId = `slide_page_${i}_${Date.now()}`;
-        duplicateReqs.push({
-            duplicateObject: {
-                objectId: templateSlideIds[1], // Duplicate Slide 2
-                objectIds: { [templateSlideIds[1]]: newId }
-            }
-        });
-        allSlideIds.push(newId);
+        middleSlideIds.push(`slide_page_${i}_${Date.now()}`);
     }
+    allSlideIds.push(...middleSlideIds);
     allSlideIds.push(templateSlideIds[2]); // Page N is Slide 3 (footer visible)
+
+    // duplicateObject inserts every copy directly after the source slide, so requests
+    // sent front-to-back come out reversed in the deck. Send them back-to-front:
+    // the last request lands closest to the source, which is page 2.
+    const duplicateReqs = [...middleSlideIds].reverse().map(newId => ({
+        duplicateObject: {
+            objectId: templateSlideIds[1], // Duplicate Slide 2
+            objectIds: { [templateSlideIds[1]]: newId }
+        }
+    }));
 
     if (duplicateReqs.length > 0) {
       await slides.presentations.batchUpdate({ presentationId, requestBody: { requests: duplicateReqs } });
