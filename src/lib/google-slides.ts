@@ -3,6 +3,7 @@ import path from 'path';
 import fs from 'fs';
 import { Readable } from 'stream';
 import { formatNum } from './format';
+import { buildTermsLines, getMoneyLabels } from './delivery-terms';
 
 const TEMPLATE_ID = '1o0UwoDw31SoDXq2vUtvr5QKf2SLlcFm9D6CwmX-wyc4';
 const TARGET_FOLDER_ID = '12akf-jI3SDHuHqxeDYlCfGPAxjHn5QgW';
@@ -169,7 +170,7 @@ function estimateTextLines(text: string, charsPerLine: number): number {
   return totalLines;
 }
 
-function addDynamicTerms(slideId: string, requests: any[]) {
+function addDynamicTerms(slideId: string, requests: any[], bulletPoints: string[]) {
   const maskId = `terms_mask_${slideId}_${Date.now()}`;
   const textBoxId = `terms_text_${slideId}_${Date.now()}`;
 
@@ -203,13 +204,6 @@ function addDynamicTerms(slideId: string, requests: any[]) {
   // 2. Create terms text box
   const mainParagraph = 'Компания UMBT предлагает современные климатические решения от бренда Midea для коммерческих и промышленных объектов любого масштаба.';
   const headerTitle = 'Условия предложения:';
-  const bulletPoints = [
-    '1. Условия поставки: со склада продавца в Ташкенте (бесплатная доставка в г. Ташкенте);',
-    '2. Срок поставки: 2 рабочих дня после подтверждения получения платежа* (*уточнить наличие);',
-    '3. Условия оплаты: 100% предоплата;',
-    '4. Гарантия: 18 месяцев после поставки или 12 месяцев после пуска в эксплуатацию;',
-    '5. Срок действия предложения: 1 неделя с момента подачи'
-  ];
   const termsText = mainParagraph + '\n\n' + headerTitle + '\n' + bulletPoints.join('\n');
 
   requests.push({
@@ -365,6 +359,9 @@ export async function generateSlidesKP(data: {
   const transferFee = Number(opts.transferFee) || 12;
   const origin = data.origin || 'http://localhost:3000';
 
+  // Подписи денежных колонок и итогов зависят от базиса поставки (CIP/DDP).
+  const money = getMoneyLabels(opts);
+
   // 1. Sum up identical products and preserve order
   const aggregated: any[] = [];
   data.items.forEach(item => {
@@ -492,28 +489,11 @@ export async function generateSlidesKP(data: {
   const hasAdditional = calculatedAddTotal > 0;
 
   if (hasBonus) {
-    let equipLabel = 'Итого кондиционирование у.е.:';
-    let netLabel = 'Итого за вычетом бонуса у.е.:';
-    let bonusLabel = 'Партнерский бонус:';
-    let addLabel = 'Итого доп. раздел у.е.:';
-    let grandLabel = 'ОБЩИЙ ИТОГ:';
-
-    if (paymentType === 'transfer') {
-      equipLabel = 'Итого кондиционирование с НДС:';
-      netLabel = 'Итого за вычетом бонуса с НДС:';
-      addLabel = 'Итого доп. раздел с НДС:';
-      grandLabel = 'ОБЩИЙ ИТОГ с НДС:';
-    } else if (currency === 'sum') {
-      equipLabel = 'Итого кондиционирование СУМ:';
-      netLabel = 'Итого за вычетом бонуса СУМ:';
-      addLabel = 'Итого доп. раздел СУМ:';
-      grandLabel = 'ОБЩИЙ ИТОГ СУМ:';
-    } else {
-      equipLabel = 'Итого кондиционирование у.е.:';
-      netLabel = 'Итого за вычетом бонуса у.е.:';
-      addLabel = 'Итого доп. раздел у.е.:';
-      grandLabel = 'ОБЩИЙ ИТОГ:';
-    }
+    const equipLabel = money.total('кондиционирование') + ':';
+    const netLabel = money.total('за вычетом бонуса') + ':';
+    const bonusLabel = 'Партнерский бонус:';
+    const addLabel = money.total('доп. раздел') + ':';
+    const grandLabel = `ОБЩИЙ ИТОГ${money.incoterm ? ' ' + money.incoterm : ''}:`;
 
     footerRows.push({
       label: equipLabel,
@@ -559,14 +539,7 @@ export async function generateSlidesKP(data: {
       });
     }
   } else {
-    let totalLabel = 'Итого:';
-    if (paymentType === 'transfer') {
-      totalLabel = 'Итого с НДС:';
-    } else if (currency === 'sum') {
-      totalLabel = 'Итого СУМ:';
-    } else {
-      totalLabel = 'Итого у.е.:';
-    }
+    const totalLabel = money.total() + ':';
 
     footerRows.push({ 
       label: totalLabel, 
@@ -869,19 +842,8 @@ export async function generateSlidesKP(data: {
   const numCols = showImages ? 6 : 5;
   const columnWidths = showImages ? COL_WIDTHS_WITH_IMG : COL_WIDTHS_NO_IMG;
   
-  let colPriceLabel = 'Цена';
-  let sumLabel = 'Сумма';
-
-  if (paymentType === 'transfer') {
-    colPriceLabel = 'Цена с НДС';
-    sumLabel = 'Сумма с НДС';
-  } else if (currency === 'sum') {
-    colPriceLabel = 'Цена СУМ';
-    sumLabel = 'Сумма СУМ';
-  } else {
-    colPriceLabel = 'Цена у.е.';
-    sumLabel = 'Сумма у.е.';
-  }
+  const colPriceLabel = money.price;
+  const sumLabel = money.sum;
 
   const headers = showImages
     ? ['Внешний вид', 'Наименование', 'Модель', 'Кол-во', colPriceLabel, sumLabel]
@@ -1141,7 +1103,7 @@ export async function generateSlidesKP(data: {
 
   // Add dynamic terms on the last slide
   const lastSlideId = allSlideIds[allSlideIds.length - 1];
-  addDynamicTerms(lastSlideId, tableReqs);
+  addDynamicTerms(lastSlideId, tableReqs, buildTermsLines(opts));
 
   // 7. Apply tables, then images (separate batches for resilience)
   const delReqs = slidesToDelete.map(id => ({ deleteObject: { objectId: id } }));

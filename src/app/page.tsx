@@ -1,9 +1,10 @@
 'use client'
 
 import { useState, useEffect, useMemo, useCallback, memo } from 'react'
-import { Plus, Trash2, FileText, User, Briefcase, Calculator, Search, RefreshCw, Building2, Phone, CheckCircle, CloudCheck, Loader2, Copy } from 'lucide-react'
+import { Plus, Trash2, FileText, User, Briefcase, Calculator, Search, RefreshCw, Building2, Phone, CheckCircle, CloudCheck, Loader2, Copy, Truck } from 'lucide-react'
 import productsData from '@/data/products.json'
 import { formatNum } from '@/lib/format'
+import { DELIVERY_TERMS, DeliveryTerm, buildTermsLines, getMoneyLabels } from '@/lib/delivery-terms'
 
 /** Ставка НДС в Узбекистане. Та же цифра идёт в спецификацию договора. */
 export const VAT_RATE = 12
@@ -222,6 +223,44 @@ const SettingsSection = memo(({ cpName, setCpName, equipmentType, setEquipmentTy
     </div>
   );
 });
+
+const DeliverySection = memo(({ options, setOptions, termsLines }: any) => (
+  <div className="section">
+    <SectionHeader icon={Truck} title="Условия поставки" color="blue" />
+    <div className="row cols-2">
+      <div className="field">
+        <label className="field-label">Базис поставки</label>
+        <div className="toggle-group wrap">
+          {(Object.keys(DELIVERY_TERMS) as DeliveryTerm[]).map(key => (
+            <button
+              key={key}
+              className={options.deliveryTerms === key ? 'on' : ''}
+              onClick={() => setOptions({ ...options, deliveryTerms: key })}
+            >
+              {DELIVERY_TERMS[key].label}
+            </button>
+          ))}
+        </div>
+      </div>
+      <div className="field">
+        <label className="field-label">Гарантия</label>
+        <div className="toggle-group">
+          <button className={Number(options.warrantyMonths) !== 36 ? 'on' : ''} onClick={() => setOptions({ ...options, warrantyMonths: 18 })}>18 месяцев</button>
+          <button className={Number(options.warrantyMonths) === 36 ? 'on' : ''} onClick={() => setOptions({ ...options, warrantyMonths: 36 })}>36 месяцев</button>
+        </div>
+      </div>
+    </div>
+
+    <div className="terms-preview">
+      <span className="terms-preview-title">Как это встанет в КП</span>
+      <ol className="terms-list">
+        {termsLines.map((line: string, i: number) => (
+          <li key={i}>{line.replace(/^\d+\.\s*/, '')}</li>
+        ))}
+      </ol>
+    </div>
+  </div>
+));
 
 const ObjectSection = memo(({ client, setClient, company, setCompany, objectType, setObjectType, registrationDate, setRegistrationDate, address, setAddress }: any) => {
   const [lCli, setLCli] = useState(client);
@@ -504,7 +543,9 @@ export default function Home() {
     currency: 'ue',
     paymentType: 'cash',
     exchangeRate: 12800,
-    transferFee: VAT_RATE
+    transferFee: VAT_RATE,
+    deliveryTerms: 'warehouse',
+    warrantyMonths: 18
   })
 
   const uid = useCallback(() => Math.random().toString(36).substr(2, 9), [])
@@ -536,7 +577,9 @@ export default function Home() {
         // Поле «накрутка» всегда означало НДС, но по умолчанию стояло 10 % вместо 12 %.
         // Разово поднимаем сохранённое старое значение до действующей ставки.
         if (Number(parsed.transferFee) === 10) parsed.transferFee = VAT_RATE
-        setOptions(parsed)
+        // Сохранённое дополняет умолчания, а не заменяет их целиком: иначе поля,
+        // добавленные позже, у действующих пользователей остаются пустыми.
+        setOptions(prev => ({ ...prev, ...parsed }))
       }
       const savedCp = s('umbt_cpName'); if (savedCp) setCpName(savedCp)
       if (s('umbt_bonusType')) setPartnerBonusType(s('umbt_bonusType') as 'percent' | 'fixed')
@@ -658,15 +701,14 @@ export default function Home() {
     return base;
   }, [equipmentTotal, additionalTotal, showDan, partnerBonusSum]);
 
-  const labels = useMemo(() => {
-    if (options.paymentType === 'transfer') {
-      return { price: 'Цена с НДС', sum: 'Сумма с НДС', total: 'Итого с НДС' };
-    } else if (options.currency === 'sum') {
-      return { price: 'Цена СУМ', sum: 'Сумма СУМ', total: 'Итого СУМ' };
-    } else {
-      return { price: 'Цена у.е.', sum: 'Сумма у.е.', total: 'Итого у.е.' };
-    }
-  }, [options.paymentType, options.currency]);
+  const money = useMemo(() => getMoneyLabels(options), [options]);
+  const labels = useMemo(() => ({
+    price: money.price,
+    sum: money.sum,
+    total: money.total(),
+  }), [money]);
+
+  const termsLines = useMemo(() => buildTermsLines(options), [options]);
 
   const currencyLabel = options.currency === 'sum' ? 'сум' : 'у.е.'
 
@@ -752,7 +794,7 @@ export default function Home() {
           partnerBonus: showDan ? partnerBonusSum : 0,
           additionalTotal,
           total: grandTotal, 
-          extraData: { company, address, objectType, registrationDate, equipmentType, contactPerson }, 
+          extraData: { company, address, objectType, registrationDate, equipmentType, contactPerson },
           options,
           origin: typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000'
         })
@@ -801,6 +843,7 @@ export default function Home() {
 
         <ObjectSection client={client} setClient={setClient} company={company} setCompany={setCompany} objectType={objectType} setObjectType={setObjectType} registrationDate={registrationDate} setRegistrationDate={setRegistrationDate} address={address} setAddress={setAddress} />
         <ContactSection data={contactPerson} onChange={setContactPerson} />
+        <DeliverySection options={options} setOptions={setOptions} termsLines={termsLines} />
 
         <div className="section">
           <div className="section-header">

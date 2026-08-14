@@ -323,7 +323,37 @@ body {
   white-space: nowrap;
 }
 
+.toggle-group.wrap { flex-wrap: wrap; }
+.toggle-group.wrap button { flex: 1 1 8rem; }
+
 .toggle-group button:hover:not(.on) { color: var(--text); }
+
+/* ===== ПРЕДПРОСМОТР УСЛОВИЙ ===== */
+.terms-preview {
+  margin-top: 1rem;
+  padding: 0.85rem 1rem;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+
+.terms-preview-title {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.terms-list {
+  margin: 0;
+  padding-left: 1.15rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.terms-list li { font-size: 0.86rem; color: var(--text); }
 
 .toggle-group button.on {
   background: #fff;
