@@ -3,6 +3,10 @@
 import { useState, useEffect, useMemo, useCallback, memo } from 'react'
 import { Plus, Trash2, FileText, User, Briefcase, Calculator, Search, RefreshCw, Building2, Phone, CheckCircle, CloudCheck, Loader2, Copy } from 'lucide-react'
 import productsData from '@/data/products.json'
+import { formatNum } from '@/lib/format'
+
+/** Ставка НДС в Узбекистане. Та же цифра идёт в спецификацию договора. */
+export const VAT_RATE = 12
 
 interface Item { id: string; productId: string; quantity: number; discount?: number }
 
@@ -44,10 +48,9 @@ const AdditionalRow = memo(({ item, onUpdate, onDelete, onClone, calculatePrice,
           placeholder="Например: Установка кондиционеров"
           onChange={e => setName(e.target.value)}
           onBlur={() => name !== item.name && onUpdate(item.id, { name })}
-          style={{ width: '100%', minWidth: '200px' }}
         />
       </td>
-      <td data-label="Кол-во" style={{ textAlign: 'center' }}>
+      <td data-label="Кол-во">
         <input 
           className="qty-input" 
           type="text" 
@@ -55,11 +58,10 @@ const AdditionalRow = memo(({ item, onUpdate, onDelete, onClone, calculatePrice,
           placeholder="работа"
           onChange={e => setQty(e.target.value)}
           onBlur={() => qty !== item.quantity && onUpdate(item.id, { quantity: qty })}
-          style={{ width: '100%', minWidth: '80px', textAlign: 'center' }}
         />
       </td>
-      <td data-label={labels.price} style={{ textAlign: 'center' }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px' }}>
+      <td data-label={labels.price}>
+        <div className="metric-row" style={{ justifyContent: 'flex-end' }}>
           <input 
             className="qty-input" 
             type="number" 
@@ -83,19 +85,17 @@ const AdditionalRow = memo(({ item, onUpdate, onDelete, onClone, calculatePrice,
                 onUpdate(item.id, { price: finalPrice });
               }
             }}
-            style={{ width: '80px', textAlign: 'center' }}
           />
           <span className="price-unit">{currencyLabel}</span>
         </div>
       </td>
-      <td data-label="Сумма" style={{ textAlign: 'right' }}>
-        <span className="sum">{calculatedSum.toLocaleString()}</span>
+      <td data-label="Сумма">
+        <span className="sum">{formatNum(calculatedSum)}</span>
       </td>
-      <td style={{ textAlign: 'right' }}>
-        <div style={{ display: 'flex', gap: '0.4rem', justifyContent: 'flex-end', alignItems: 'center' }}>
-          <button 
-            className="btn-danger" 
-            style={{ background: 'transparent', color: 'var(--text-muted)', padding: '0.4rem' }}
+      <td data-label="">
+        <div className="row-actions">
+          <button
+            className="btn-danger"
             onClick={() => onClone(item.id)} 
             title="Дублировать строку"
           >
@@ -213,7 +213,7 @@ const SettingsSection = memo(({ cpName, setCpName, equipmentType, setEquipmentTy
               <input className="field-input" type="number" value={lRate} onChange={e => setLRate(Number(e.target.value))} onBlur={() => lRate !== options.exchangeRate && setOptions({ ...options, exchangeRate: lRate })} />
             </div>
             <div className="field" style={{ marginBottom: 0 }}>
-              <label className="field-label">Накрутка %</label>
+              <label className="field-label">НДС %</label>
               <input className="field-input" type="number" value={lFee} onChange={e => setLFee(Number(e.target.value))} onBlur={() => lFee !== options.transferFee && setOptions({ ...options, transferFee: lFee })} />
             </div>
           </div>
@@ -344,23 +344,7 @@ const ModelSearchSelector = memo(({ value, onChange, cleanProducts }: { value: s
             navigator.clipboard.writeText(currentProduct.model);
           }}
           title="Копировать название модели"
-          style={{
-            position: 'absolute',
-            right: '0.4rem',
-            top: '50%',
-            transform: 'translateY(-50%)',
-            background: 'transparent',
-            border: 'none',
-            cursor: 'pointer',
-            color: 'var(--text-muted)',
-            display: 'flex',
-            alignItems: 'center',
-            padding: '4px',
-            borderRadius: '4px',
-            transition: 'all 0.15s'
-          }}
-          onMouseOver={(e) => e.currentTarget.style.color = 'var(--accent)'}
-          onMouseOut={(e) => e.currentTarget.style.color = 'var(--text-muted)'}
+          className="copy-btn"
         >
           <Copy size={13} />
         </button>
@@ -410,11 +394,13 @@ const EquipmentRow = memo(({ item, products, cleanProducts, onUpdate, onDelete, 
         <ModelSearchSelector value={item.productId} onChange={val => onUpdate(item.id, { productId: val })} cleanProducts={cleanProducts} />
         <div className="cat-label">{p?.series || p?.category}</div>
       </td>
-      <td data-label={labels.price} style={{ textAlign: 'center' }}>
-        <span className="price">{finalUnitPrice.toLocaleString()}</span>
-        <span className="price-unit">{currencyLabel}</span>
+      <td data-label={labels.price}>
+        <span className="cell-value">
+          <span className="price">{formatNum(finalUnitPrice)}</span>
+          <span className="price-unit">{currencyLabel}</span>
+        </span>
       </td>
-      <td data-label="Скидка %" style={{ textAlign: 'center' }}>
+      <td data-label="Скидка %">
         <input 
           className="qty-input" 
           type="number" 
@@ -439,16 +425,14 @@ const EquipmentRow = memo(({ item, products, cleanProducts, onUpdate, onDelete, 
               onUpdate(item.id, { discount: finalDiscount });
             }
           }}
-          style={{ 
-            width: '65px', 
-            textAlign: 'center',
-            color: discountVal < 0 ? '#10b981' : discountVal > 0 ? '#ef4444' : 'inherit',
-            fontWeight: discountVal !== 0 ? '600' : 'normal'
+          style={{
+            color: discountVal < 0 ? 'var(--success)' : discountVal > 0 ? 'var(--error)' : 'inherit',
+            fontWeight: discountVal !== 0 ? 600 : 400
           }}
           title="Скидка (-) или наценка (+)"
         />
       </td>
-      <td data-label="Кол-во" style={{ textAlign: 'center' }}>
+      <td data-label="Кол-во">
         <input className="qty-input" type="number" min="1" 
           value={qty} 
           onChange={e => {
@@ -471,14 +455,13 @@ const EquipmentRow = memo(({ item, products, cleanProducts, onUpdate, onDelete, 
           }}
         />
       </td>
-      <td data-label={labels.sum} style={{ textAlign: 'right' }}>
-        <span className="sum">{finalSum.toLocaleString()}</span>
+      <td data-label={labels.sum}>
+        <span className="sum">{formatNum(finalSum)}</span>
       </td>
-      <td style={{ textAlign: 'right' }}>
-        <div style={{ display: 'flex', gap: '0.4rem', justifyContent: 'flex-end', alignItems: 'center' }}>
-          <button 
-            className="btn-danger" 
-            style={{ background: 'transparent', color: 'var(--text-muted)', padding: '0.4rem' }}
+      <td data-label="">
+        <div className="row-actions">
+          <button
+            className="btn-danger"
             onClick={() => onClone(item.id)} 
             title="Дублировать строку"
           >
@@ -521,7 +504,7 @@ export default function Home() {
     currency: 'ue',
     paymentType: 'cash',
     exchangeRate: 12800,
-    transferFee: 10
+    transferFee: VAT_RATE
   })
 
   const uid = useCallback(() => Math.random().toString(36).substr(2, 9), [])
@@ -547,7 +530,14 @@ export default function Home() {
       const it = s('umbt_items'); if (it) setItems(JSON.parse(it))
       else if (productsData.length > 0) setItems([{ id: uid(), productId: productsData[0].id, quantity: 1 }])
       const addIt = s('umbt_additional_items'); if (addIt) setAdditionalItems(JSON.parse(addIt))
-      const savedOptions = s('umbt_options'); if (savedOptions) setOptions(JSON.parse(savedOptions))
+      const savedOptions = s('umbt_options')
+      if (savedOptions) {
+        const parsed = JSON.parse(savedOptions)
+        // Поле «накрутка» всегда означало НДС, но по умолчанию стояло 10 % вместо 12 %.
+        // Разово поднимаем сохранённое старое значение до действующей ставки.
+        if (Number(parsed.transferFee) === 10) parsed.transferFee = VAT_RATE
+        setOptions(parsed)
+      }
       const savedCp = s('umbt_cpName'); if (savedCp) setCpName(savedCp)
       if (s('umbt_bonusType')) setPartnerBonusType(s('umbt_bonusType') as 'percent' | 'fixed')
       if (s('umbt_bonusValue')) setPartnerBonusValue(Number(s('umbt_bonusValue')) || 0)
@@ -645,6 +635,8 @@ export default function Home() {
     const ratio = external > 0 ? (internal / external) * 100 : 0;
     return { external, internal, ratio };
   }, [items, products]);
+
+  const capacityOutOfRange = capacityMetrics.ratio > 130 || capacityMetrics.ratio < 50;
 
   const partnerBonusSum = useMemo(() => {
     if (partnerBonusType === 'percent') {
@@ -811,69 +803,37 @@ export default function Home() {
         <ContactSection data={contactPerson} onChange={setContactPerson} />
 
         <div className="section">
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', paddingBottom: '1rem', borderBottom: '1px solid var(--border)' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-              <div className="section-icon pink"><Calculator size={15} /></div>
-              <h2 style={{ fontSize: '0.95rem', fontWeight: 700 }}>Оборудование</h2>
-              <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', background: 'var(--bg-input)', padding: '0.15rem 0.5rem', borderRadius: '4px' }}>{items.length} поз.</span>
-            </div>
-            <button className="btn btn-primary" onClick={() => setItems([...items, { id: uid(), productId: products[0]?.id || '', quantity: 1 }])}>
+          <div className="section-header">
+            <div className="section-icon pink"><Calculator size={15} /></div>
+            <h2>Оборудование</h2>
+            <span className="count-pill">{items.length} поз.</span>
+            <button className="btn btn-primary" style={{ marginLeft: 'auto' }} onClick={() => setItems([...items, { id: uid(), productId: products[0]?.id || '', quantity: 1 }])}>
               <Plus size={15} /> Добавить
             </button>
           </div>
           {items.length === 0 ? (
-            <div style={{ textAlign: 'center', padding: '2rem', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
+            <div className="empty-state">
               Нет выбранных кондиционеров. Нажмите «Добавить» или воспользуйтесь поиском ниже.
             </div>
           ) : (
             <>
               {/* Capacity Metrics Widget */}
-              <div className="capacity-widget" style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
-                gap: '1rem',
-                marginBottom: '1rem',
-                padding: '0.75rem 1rem',
-                background: 'var(--bg-input)',
-                borderRadius: 'var(--radius-sm)',
-                border: '1px solid var(--border)',
-              }}>
-                <div>
-                  <span className="field-label" style={{ marginBottom: '2px', fontSize: '0.65rem' }}>Внутренние блоки (кВт)</span>
-                  <span style={{ fontSize: '1.15rem', fontWeight: 700, color: 'var(--text)' }}>
-                    {capacityMetrics.internal.toFixed(1)} кВт
-                  </span>
+              <div className="metrics">
+                <div className="metric">
+                  <span className="metric-label">Внутренние блоки</span>
+                  <span className="metric-value">{capacityMetrics.internal.toFixed(1)} кВт</span>
                 </div>
-                <div>
-                  <span className="field-label" style={{ marginBottom: '2px', fontSize: '0.65rem' }}>Наружные блоки (кВт)</span>
-                  <span style={{ fontSize: '1.15rem', fontWeight: 700, color: 'var(--text)' }}>
-                    {capacityMetrics.external.toFixed(1)} кВт
-                  </span>
+                <div className="metric">
+                  <span className="metric-label">Наружные блоки</span>
+                  <span className="metric-value">{capacityMetrics.external.toFixed(1)} кВт</span>
                 </div>
-                <div>
-                  <span className="field-label" style={{ marginBottom: '2px', fontSize: '0.65rem' }}>Индекс загрузки / Соотношение</span>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                    <span style={{
-                      fontSize: '1.15rem',
-                      fontWeight: 700,
-                      color: capacityMetrics.ratio > 130 || capacityMetrics.ratio < 50
-                        ? 'var(--error)'
-                        : 'var(--success)'
-                    }}>
+                <div className="metric">
+                  <span className="metric-label">Индекс загрузки</span>
+                  <div className="metric-row">
+                    <span className={`metric-value ${capacityOutOfRange ? 'bad' : 'ok'}`}>
                       {capacityMetrics.ratio.toFixed(1)}%
                     </span>
-                    <span style={{
-                      fontSize: '0.75rem',
-                      padding: '2px 6px',
-                      borderRadius: '4px',
-                      fontWeight: 600,
-                      background: capacityMetrics.ratio > 130 || capacityMetrics.ratio < 50
-                        ? 'rgba(239, 68, 68, 0.1)'
-                        : 'rgba(34, 197, 94, 0.1)',
-                      color: capacityMetrics.ratio > 130 || capacityMetrics.ratio < 50
-                        ? 'var(--error)'
-                        : 'var(--success)'
-                    }}>
+                    <span className={`badge ${capacityOutOfRange ? 'bad' : 'ok'}`}>
                       {capacityMetrics.ratio > 130 ? 'Перегруз' : capacityMetrics.ratio < 50 ? 'Недогруз' : 'В норме'}
                     </span>
                   </div>
@@ -901,74 +861,64 @@ export default function Home() {
               </div>
             </>
           )}
-          <div className="total-area" style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginTop: '1.25rem', paddingTop: '1rem', borderTop: '1px solid var(--border)' }}>
-            <div className="total-bar" style={{ marginTop: 0, paddingTop: 0, borderTop: 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <button 
-                className={`btn ${showDan ? 'btn-primary' : 'btn-ghost'}`} 
+          <div className="total-area">
+            <div className="total-bar">
+              <button
+                className={`btn-dan ${showDan ? 'on' : ''}`}
                 onClick={() => setShowDan(!showDan)}
-                style={{
-                  fontSize: '0.75rem',
-                  padding: '0.35rem 0.75rem',
-                  background: showDan ? 'var(--error)' : 'transparent',
-                  color: showDan ? 'white' : 'var(--text-secondary)',
-                  border: showDan ? 'none' : '1px solid var(--border)',
-                  boxShadow: showDan ? '0 1px 3px rgba(239,68,68,0.3)' : 'none'
-                }}
               >
                 Сдаем Дань
               </button>
-              <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem' }}>
+              <div className="total-figure">
                 <span className="total-label">Итого кондиционирование</span>
-                <span className="total-value">{equipmentTotal.toLocaleString()}</span>
+                <span className="total-value">{formatNum(equipmentTotal)}</span>
                 <span className="total-currency">{currencyLabel}</span>
               </div>
             </div>
-            
+
             {showDan && (
               <>
-                <div className="bonus-bar" style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '1rem', flexWrap: 'wrap', borderTop: '1px dashed var(--border)', paddingTop: '0.75rem' }}>
-                  <span className="total-label" style={{ color: 'var(--text-secondary)', fontSize: '0.65rem' }}>Партнерский бонус (только кондиционеры)</span>
-                  <div className="toggle-group" style={{ width: 'auto', display: 'inline-flex', padding: '2px', border: '1px solid var(--border)' }}>
-                    <button className={partnerBonusType === 'percent' ? 'on' : ''} style={{ padding: '0.2rem 0.5rem', fontSize: '0.75rem' }} onClick={() => setPartnerBonusType('percent')}>%</button>
-                    <button className={partnerBonusType === 'fixed' ? 'on' : ''} style={{ padding: '0.2rem 0.5rem', fontSize: '0.75rem' }} onClick={() => setPartnerBonusType('fixed')}>{currencyLabel}</button>
+                <div className="bonus-bar">
+                  <span className="total-label">Партнерский бонус (только кондиционеры)</span>
+                  <div className="toggle-group" style={{ width: 'auto', flex: '0 0 auto' }}>
+                    <button className={partnerBonusType === 'percent' ? 'on' : ''} onClick={() => setPartnerBonusType('percent')}>%</button>
+                    <button className={partnerBonusType === 'fixed' ? 'on' : ''} onClick={() => setPartnerBonusType('fixed')}>{currencyLabel}</button>
                   </div>
-                  <input 
-                    className="qty-input" 
-                    type="number" 
+                  <input
+                    className="qty-input"
+                    type="number"
                     min="0"
                     value={partnerBonusValue}
                     onChange={e => setPartnerBonusValue(Math.max(0, parseInt(e.target.value) || 0))}
                     onFocus={e => e.target.select()}
-                    style={{ width: '80px', padding: '0.25rem 0.5rem', fontSize: '0.85rem' }}
+                    style={{ width: '5.5rem' }}
                   />
-                  <span className="bonus-sum-value" style={{ fontWeight: 600, color: 'var(--error)', fontSize: '1.1rem' }}>
-                    - {partnerBonusSum.toLocaleString()} {currencyLabel}
+                  <span className="bonus-sum-value">
+                    − {formatNum(partnerBonusSum)} {currencyLabel}
                   </span>
                 </div>
-                
-                <div className="final-net-bar" style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'baseline', gap: '0.5rem', borderTop: '1px dashed var(--border)', paddingTop: '0.5rem' }}>
-                  <span className="total-label" style={{ fontSize: '0.65rem' }}>Раздел с кондиционированием за вычетом бонуса</span>
-                  <span className="total-value" style={{ fontSize: '1.3rem', color: 'var(--text-secondary)' }}>{(equipmentTotal - partnerBonusSum).toLocaleString()}</span>
-                  <span className="total-currency" style={{ fontSize: '0.85rem' }}>{currencyLabel}</span>
+
+                <div className="final-net-bar">
+                  <span className="total-label">За вычетом бонуса</span>
+                  <span className="total-value" style={{ fontSize: '1.25rem', color: 'var(--text-secondary)' }}>{formatNum((equipmentTotal - partnerBonusSum))}</span>
+                  <span className="total-currency">{currencyLabel}</span>
                 </div>
               </>
             )}
           </div>
         </div>
 
-        <div className="section" style={{ marginTop: '1.5rem' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', paddingBottom: '1rem', borderBottom: '1px solid var(--border)' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-              <div className="section-icon orange"><Calculator size={15} /></div>
-              <h2 style={{ fontSize: '0.95rem', fontWeight: 700 }}>Дополнительный раздел</h2>
-              <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', background: 'var(--bg-input)', padding: '0.15rem 0.5rem', borderRadius: '4px' }}>{additionalItems.length} поз.</span>
-            </div>
-            <button className="btn btn-primary" onClick={() => setAdditionalItems([...additionalItems, { id: uid(), name: '', quantity: '1', price: 0 }])}>
+        <div className="section">
+          <div className="section-header">
+            <div className="section-icon orange"><Calculator size={15} /></div>
+            <h2>Дополнительный раздел</h2>
+            <span className="count-pill">{additionalItems.length} поз.</span>
+            <button className="btn btn-primary" style={{ marginLeft: 'auto' }} onClick={() => setAdditionalItems([...additionalItems, { id: uid(), name: '', quantity: '1', price: 0 }])}>
               <Plus size={15} /> Добавить
             </button>
           </div>
           {additionalItems.length === 0 ? (
-            <div style={{ textAlign: 'center', padding: '2rem', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
+            <div className="empty-state">
               Нет дополнительных позиций. Нажмите «Добавить», чтобы внести работы, монтаж или воздуховоды.
             </div>
           ) : (
@@ -1001,43 +951,41 @@ export default function Home() {
             </div>
           )}
           {additionalItems.length > 0 && (
-            <div className="total-area" style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginTop: '1.25rem', paddingTop: '1rem', borderTop: '1px solid var(--border)' }}>
-              <div className="total-bar" style={{ marginTop: 0, paddingTop: 0, borderTop: 'none' }}>
-                <span className="total-label">Итого доп. раздел</span>
-                <span className="total-value">{additionalTotal.toLocaleString()}</span>
-                <span className="total-currency">{currencyLabel}</span>
+            <div className="total-area">
+              <div className="total-bar">
+                <div className="total-figure">
+                  <span className="total-label">Итого доп. раздел</span>
+                  <span className="total-value">{formatNum(additionalTotal)}</span>
+                  <span className="total-currency">{currencyLabel}</span>
+                </div>
               </div>
             </div>
           )}
         </div>
 
-        <div className="section" style={{ marginTop: '1.5rem', border: '2px solid var(--accent)', background: 'var(--bg-card)' }}>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>Кондиционирование:</span>
-              <span style={{ fontWeight: 600, color: 'var(--text-main)' }}>
-                {equipmentTotal.toLocaleString()} {currencyLabel}
-              </span>
+        <div className="grand">
+          <div className="grand-line">
+            <span>Кондиционирование</span>
+            <b>{formatNum(equipmentTotal)} {currencyLabel}</b>
+          </div>
+          {showDan && partnerBonusSum > 0 && (
+            <div className="grand-line">
+              <span>Партнерский бонус</span>
+              <b style={{ color: 'var(--error)' }}>− {formatNum(partnerBonusSum)} {currencyLabel}</b>
             </div>
-            {additionalItems.length > 0 && (
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>Дополнительный раздел:</span>
-                <span style={{ fontWeight: 600, color: 'var(--text-main)' }}>
-                  {additionalTotal.toLocaleString()} {currencyLabel}
-                </span>
-              </div>
-            )}
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', borderTop: '1px solid var(--border)', paddingTop: '0.75rem', marginTop: '0.25rem' }}>
-              <span style={{ fontSize: '1rem', fontWeight: 800, color: 'var(--text-main)' }}>ОБЩИЙ ИТОГ:</span>
-              <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.4rem' }}>
-                <span style={{ fontSize: '1.75rem', fontWeight: 800, color: 'var(--accent)' }}>
-                  {grandTotal.toLocaleString()}
-                </span>
-                <span style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-muted)' }}>
-                  {currencyLabel}
-                </span>
-              </div>
+          )}
+          {additionalItems.length > 0 && (
+            <div className="grand-line">
+              <span>Дополнительный раздел</span>
+              <b>{formatNum(additionalTotal)} {currencyLabel}</b>
             </div>
+          )}
+          <div className="grand-total">
+            <span className="lbl">ОБЩИЙ ИТОГ</span>
+            <span>
+              <span className="val">{formatNum(grandTotal)}</span>
+              <span className="cur">{currencyLabel}</span>
+            </span>
           </div>
         </div>
 
@@ -1046,11 +994,11 @@ export default function Home() {
           <input placeholder="Поиск по базе (модель, категория)..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} />
         </div>
         {searchTerm && (
-          <div className="section" style={{ padding: '0.5rem', maxHeight: '300px', overflowY: 'auto' }}>
+          <div className="section search-results">
             {filteredProducts.map(p => (
               <div key={p.id} className="search-item" onClick={() => { setItems([...items, { id: uid(), productId: p.id, quantity: 1 }]); setSearchTerm('') }}>
                 <div className="si-model">{p.model}</div>
-                <div className="si-meta">{p.series || p.category} · {calculatePrice(p.price).toLocaleString()} {currencyLabel}</div>
+                <div className="si-meta">{p.series || p.category} · {formatNum(calculatePrice(p.price))} {currencyLabel}</div>
               </div>
             ))}
           </div>
@@ -1063,12 +1011,12 @@ export default function Home() {
               {loading ? 'Генерация КП...' : 'Генерация PDF...'}
             </button>
           ) : (
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
+            <>
               <button className="gen-btn" onClick={() => { const a = document.createElement('a'); a.href = lastPdfUrl; a.download = `${cpName}.pdf`; a.click(); }} style={{ background: 'var(--success)' }}>
                 <CheckCircle size={20} /> Готово! Скачать КП
               </button>
-              <button className="btn btn-ghost" onClick={() => setLastPdfUrl(null)} style={{ fontSize: '0.75rem' }}>Создать еще один</button>
-            </div>
+              <button className="btn btn-ghost" onClick={() => setLastPdfUrl(null)}>Создать еще один</button>
+            </>
           )}
         </div>
       </div>

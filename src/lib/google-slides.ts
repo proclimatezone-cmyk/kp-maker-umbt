@@ -2,6 +2,7 @@ import { google } from 'googleapis';
 import path from 'path';
 import fs from 'fs';
 import { Readable } from 'stream';
+import { formatNum } from './format';
 
 const TEMPLATE_ID = '1o0UwoDw31SoDXq2vUtvr5QKf2SLlcFm9D6CwmX-wyc4';
 const TARGET_FOLDER_ID = '12akf-jI3SDHuHqxeDYlCfGPAxjHn5QgW';
@@ -356,12 +357,12 @@ export async function generateSlidesKP(data: {
   const drive = google.drive({ version: 'v3', auth });
   const sheets = google.sheets({ version: 'v4', auth });
 
-  const opts = data.options || { showImages: true, currency: 'ue', paymentType: 'cash', exchangeRate: 12500, transferFee: 10 };
+  const opts = data.options || { showImages: true, currency: 'ue', paymentType: 'cash', exchangeRate: 12500, transferFee: 12 };
   const showImages = opts.showImages !== false && opts.showImages !== 'false';
   const currency = opts.currency || 'ue';
   const paymentType = opts.paymentType || 'cash';
   const exchangeRate = Number(opts.exchangeRate) || 12500;
-  const transferFee = Number(opts.transferFee) || 10;
+  const transferFee = Number(opts.transferFee) || 12;
   const origin = data.origin || 'http://localhost:3000';
 
   // 1. Sum up identical products and preserve order
@@ -1022,10 +1023,10 @@ export async function generateSlidesKP(data: {
 
               const adjustedPrice = Math.round(m.price);
 
-              tableReqs.push({ insertText: { objectId: tableId, cellLocation: { rowIndex: r, columnIndex: pCol }, text: adjustedPrice.toLocaleString() } });
+              tableReqs.push({ insertText: { objectId: tableId, cellLocation: { rowIndex: r, columnIndex: pCol }, text:formatNum(adjustedPrice) } });
               
               const parsedQty = parseQuantity(m.quantity);
-              tableReqs.push({ insertText: { objectId: tableId, cellLocation: { rowIndex: r, columnIndex: sCol }, text: (adjustedPrice * parsedQty).toLocaleString() } });
+              tableReqs.push({ insertText: { objectId: tableId, cellLocation: { rowIndex: r, columnIndex: sCol }, text:formatNum((adjustedPrice * parsedQty)) } });
 
               // Cell styling
               for (let col = 0; col < numCols; col++) {
@@ -1072,7 +1073,7 @@ export async function generateSlidesKP(data: {
               
               // Запись текста
               tableReqs.push({ insertText: { objectId: tableId, cellLocation: { rowIndex: rowIdx, columnIndex: totIdxL }, text: frow.label } });
-              tableReqs.push({ insertText: { objectId: tableId, cellLocation: { rowIndex: rowIdx, columnIndex: totIdxR }, text: frow.value.toLocaleString() } });
+              tableReqs.push({ insertText: { objectId: tableId, cellLocation: { rowIndex: rowIdx, columnIndex: totIdxR }, text:formatNum(frow.value) } });
               
               // Цвет фона
               tableReqs.push({ updateTableCellProperties: { objectId: tableId, tableRange: { location: { rowIndex: rowIdx, columnIndex: totIdxL }, rowSpan: 1, columnSpan: 1 }, tableCellProperties: { tableCellBackgroundFill: { solidFill: { color: { rgbColor: frow.colorL } } }, contentAlignment: 'MIDDLE' }, fields: 'tableCellBackgroundFill,contentAlignment' }});
