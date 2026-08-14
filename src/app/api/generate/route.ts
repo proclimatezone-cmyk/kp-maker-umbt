@@ -1,68 +1,104 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { generateSlidesKP } from '@/lib/google-slides'
-import { google } from 'googleapis'
-import path from 'path'
+import { buildKpDocx } from '@/lib/docx-kp'
+import { convertDocxToPdf } from '@/lib/docx-to-pdf'
+
+// Сборка большого КП с картинками не укладывается в умолчание Vercel.
+export const maxDuration = 60
+
+const DOCX_MIME =
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+
+/** Заголовок с именем файла: кириллица допустима только в filename*. */
+function contentDisposition(name: string, ext: string) {
+  const encoded = encodeURIComponent(`${name}.${ext}`)
+  return `attachment; filename="kp.${ext}"; filename*=UTF-8''${encoded}`
+}
 
 export async function POST(req: NextRequest) {
   try {
     const data = await req.json()
-    const { 
-      manager, 
-      client, 
-      cpName, 
-      items, 
-      additionalItems,
-      equipmentTotal,
-      partnerBonus,
-      additionalTotal,
-      total, 
-      extraData, 
-      options,
-      origin: clientOrigin
-    } = data
-
-    const origin = clientOrigin || req.nextUrl.origin;
-
-    // 1. Generate Google Slides Presentation and PDF
-    console.log('Generating Google Slides and PDF...');
-    const { presentationId, pdfUrl, pdfBuffer, auditError } = await generateSlidesKP({
-      cpName,
+    const {
+      manager,
       client,
+      cpName,
+      cpDate,
       items,
       additionalItems,
       equipmentTotal,
       partnerBonus,
       additionalTotal,
       total,
-      manager,
       extraData,
       options,
-      origin
-    });
+      origin: clientOrigin,
+      template = 'new',
+      format = 'docx',
+    } = data
 
-    if (!pdfBuffer) {
-      throw new Error('Failed to generate PDF buffer');
+    const origin = clientOrigin || req.nextUrl.origin
+
+    // --- Старый вид: прежний путь через Google Slides, на выходе PDF ---
+    if (template === 'old') {
+      const { presentationId, pdfUrl, pdfBuffer, auditError } = await generateSlidesKP({
+        cpName, client, items, additionalItems, equipmentTotal, partnerBonus,
+        additionalTotal, total, manager, extraData, options, origin,
+      })
+
+      if (!pdfBuffer) throw new Error('Не удалось получить PDF из презентации')
+
+      return new NextResponse(new Uint8Array(pdfBuffer), {
+        headers: {
+          'Content-Type': 'application/pdf',
+          'Content-Disposition': contentDisposition(cpName || 'КП', 'pdf'),
+          'X-Presentation-Id': presentationId,
+          'X-PDF-Url': pdfUrl || '',
+          // Заголовки принимают только latin1, а ошибка приходит от Google
+          // и может содержать что угодно.
+          'X-Audit-Error': encodeURIComponent(auditError || ''),
+        },
+      })
     }
 
-    const url = `https://docs.google.com/presentation/d/${presentationId}/edit`;
+    // --- Новый вид: сборка .docx из шаблона ---
+    const allItems = [
+      ...(items || []),
+      ...(additionalItems || []).map((a: any) => ({
+        category: 'Дополнительные работы и материалы',
+        model: a.name || 'Дополнительные услуги',
+        quantity: a.quantity,
+        price: a.price,
+        isAdditional: true,
+      })),
+    ]
 
-    // Using Uint8Array for better compatibility with NextResponse constructor in TS
-    const body = new Uint8Array(pdfBuffer);
+    const docx = await buildKpDocx({
+      cpNumber: cpName || '',
+      cpDate: cpDate || new Date().toLocaleDateString('ru-RU'),
+      items: allItems,
+      total,
+      options: options || {},
+      origin,
+    })
 
-    return new NextResponse(body, {
+    if (format === 'pdf') {
+      const pdf = await convertDocxToPdf(docx, cpName || 'КП')
+      return new NextResponse(new Uint8Array(pdf), {
+        headers: {
+          'Content-Type': 'application/pdf',
+          'Content-Disposition': contentDisposition(cpName || 'КП', 'pdf'),
+        },
+      })
+    }
+
+    return new NextResponse(new Uint8Array(docx), {
       headers: {
-        'Content-Type': 'application/pdf',
-        'Content-Disposition': `attachment; filename="${encodeURIComponent(cpName)}.pdf"`,
-        'X-Presentation-Id': presentationId,
-        'X-Presentation-Url': url,
-        'X-PDF-Url': pdfUrl || '',
-        'X-Audit-Error': auditError || '',
-        'X-Success': 'true'
-      }
-    });
-
+        'Content-Type': DOCX_MIME,
+        'Content-Disposition': contentDisposition(cpName || 'КП', 'docx'),
+      },
+    })
   } catch (err: any) {
-    console.error('Slides Generation Error:', err)
+    console.error('Ошибка генерации КП:', err)
     return NextResponse.json({ error: err.message, success: false }, { status: 500 })
   }
 }

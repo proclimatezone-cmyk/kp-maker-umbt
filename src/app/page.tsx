@@ -159,13 +159,15 @@ const ManagerSection = memo(({ data, onChange }: any) => {
   );
 });
 
-const SettingsSection = memo(({ cpName, setCpName, equipmentType, setEquipmentType, options, setOptions }: any) => {
+const SettingsSection = memo(({ cpName, setCpName, cpDate, setCpDate, equipmentType, setEquipmentType, options, setOptions }: any) => {
   const [lCp, setLCp] = useState(cpName);
+  const [lDate, setLDate] = useState(cpDate);
   const [lEq, setLEq] = useState(equipmentType);
   const [lRate, setLRate] = useState(options.exchangeRate);
   const [lFee, setLFee] = useState(options.transferFee);
 
   useEffect(() => { setLCp(cpName); }, [cpName]);
+  useEffect(() => { setLDate(cpDate); }, [cpDate]);
   useEffect(() => { setLEq(equipmentType); }, [equipmentType]);
   useEffect(() => { setLRate(options.exchangeRate); }, [options.exchangeRate]);
   useEffect(() => { setLFee(options.transferFee); }, [options.transferFee]);
@@ -179,8 +181,28 @@ const SettingsSection = memo(({ cpName, setCpName, equipmentType, setEquipmentTy
           <input className="field-input" value={lCp} onChange={e => setLCp(e.target.value)} onBlur={() => lCp !== cpName && setCpName(lCp)} />
         </div>
         <div className="field">
-          <label className="field-label">Тип оборудования</label>
-          <input className="field-input" placeholder="VRF / Чиллер" value={lEq} onChange={e => setLEq(e.target.value)} onBlur={() => lEq !== equipmentType && setEquipmentType(lEq)} />
+          <label className="field-label">Дата КП</label>
+          <input className="field-input" placeholder="14.08.2026" value={lDate} onChange={e => setLDate(e.target.value)} onBlur={() => lDate !== cpDate && setCpDate(lDate)} />
+        </div>
+      </div>
+      <div className="field">
+        <label className="field-label">Тип оборудования</label>
+        <input className="field-input" placeholder="VRF / Чиллер" value={lEq} onChange={e => setLEq(e.target.value)} onBlur={() => lEq !== equipmentType && setEquipmentType(lEq)} />
+      </div>
+      <div className="row cols-2">
+        <div className="field">
+          <label className="field-label">Вид КП</label>
+          <div className="toggle-group">
+            <button className={options.template !== 'old' ? 'on' : ''} onClick={() => setOptions({ ...options, template: 'new' })}>Новый</button>
+            <button className={options.template === 'old' ? 'on' : ''} onClick={() => setOptions({ ...options, template: 'old' })}>Старый</button>
+          </div>
+        </div>
+        <div className="field">
+          <label className="field-label">Формат файла</label>
+          <div className="toggle-group">
+            <button className={options.format !== 'pdf' ? 'on' : ''} onClick={() => setOptions({ ...options, format: 'docx' })} disabled={options.template === 'old'}>Word</button>
+            <button className={options.format === 'pdf' ? 'on' : ''} onClick={() => setOptions({ ...options, format: 'pdf' })}>PDF</button>
+          </div>
         </div>
       </div>
       <div className="row cols-3" style={{ marginTop: '0.5rem' }}>
@@ -521,6 +543,7 @@ export default function Home() {
   const [company, setCompany] = useState('')
   const [address, setAddress] = useState('')
   const [cpName, setCpName] = useState('')
+  const [cpDate, setCpDate] = useState('')
   const [objectType, setObjectType] = useState('')
   const [registrationDate, setRegistrationDate] = useState('')
   const [equipmentType, setEquipmentType] = useState('')
@@ -532,7 +555,7 @@ export default function Home() {
   const [showDan, setShowDan] = useState(false)
   const [loading, setLoading] = useState(false)
   const [syncing, setSyncing] = useState(false)
-  const [lastPdfUrl, setLastPdfUrl] = useState<string | null>(null)
+  const [lastFile, setLastFile] = useState<{ url: string; ext: string } | null>(null)
   const [searchTerm, setSearchTerm] = useState('')
   const [products, setProducts] = useState<any[]>(productsData)
   const [isMounted, setIsMounted] = useState(false)
@@ -545,7 +568,9 @@ export default function Home() {
     exchangeRate: 12800,
     transferFee: VAT_RATE,
     deliveryTerms: 'warehouse',
-    warrantyMonths: 18
+    warrantyMonths: 18,
+    template: 'new',
+    format: 'docx'
   })
 
   const uid = useCallback(() => Math.random().toString(36).substr(2, 9), [])
@@ -582,10 +607,14 @@ export default function Home() {
         setOptions(prev => ({ ...prev, ...parsed }))
       }
       const savedCp = s('umbt_cpName'); if (savedCp) setCpName(savedCp)
+      const savedDate = s('umbt_cpDate'); if (savedDate) setCpDate(savedDate)
       if (s('umbt_bonusType')) setPartnerBonusType(s('umbt_bonusType') as 'percent' | 'fixed')
       if (s('umbt_bonusValue')) setPartnerBonusValue(Number(s('umbt_bonusValue')) || 0)
       if (s('umbt_showDan')) setShowDan(s('umbt_showDan') === 'true')
     } catch {}
+    if (!s('umbt_cpDate')) {
+      setCpDate(new Date().toLocaleDateString('ru-RU'))
+    }
     if (!s('umbt_cpName')) {
       const d = new Date()
       setCpName(`КП-${d.toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit', year: '2-digit' }).replace(/\./g, '')}/01`)
@@ -627,6 +656,7 @@ export default function Home() {
         localStorage.setItem('umbt_additional_items', JSON.stringify(additionalItems))
         localStorage.setItem('umbt_options', JSON.stringify(options))
         localStorage.setItem('umbt_cpName', cpName)
+        localStorage.setItem('umbt_cpDate', cpDate)
         localStorage.setItem('umbt_bonusType', partnerBonusType)
         localStorage.setItem('umbt_bonusValue', partnerBonusValue.toString())
         localStorage.setItem('umbt_showDan', showDan ? 'true' : 'false')
@@ -635,7 +665,7 @@ export default function Home() {
       } catch (e) { console.error(e) }
     }, 1000)
     return () => clearTimeout(timer)
-  }, [manager, client, company, address, objectType, registrationDate, equipmentType, contactPerson, items, additionalItems, options, cpName, partnerBonusType, partnerBonusValue, showDan, isMounted])
+  }, [manager, client, company, address, objectType, registrationDate, equipmentType, contactPerson, items, additionalItems, options, cpName, cpDate, partnerBonusType, partnerBonusValue, showDan, isMounted])
 
   const cleanProducts = useMemo(() => products.filter(p => p.model && !p.model.startsWith('---') && p.id && !p.id.startsWith('---')), [products])
   const filteredProducts = useMemo(() => {
@@ -775,9 +805,12 @@ export default function Home() {
       const r = await fetch('/api/generate', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
-          manager, 
-          client, 
-          cpName, 
+          manager,
+          client,
+          cpName,
+          cpDate,
+          template: options.template || 'new',
+          format: options.template === 'old' ? 'pdf' : (options.format || 'docx'),
           items: items.map(i => { 
             const p = products.find(x => x.id === i.productId); 
             if (!p) return null;
@@ -799,12 +832,17 @@ export default function Home() {
           origin: typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000'
         })
       })
-      if (r.ok) { 
+      if (r.ok) {
         const auditErr = r.headers.get('X-Audit-Error');
         if (auditErr) {
-          alert('⚠️ PDF готов, но данные НЕ записаны в таблицу аудита!\nОшибка: ' + auditErr);
+          alert('⚠️ Документ готов, но данные НЕ записаны в таблицу аудита!\nОшибка: ' + decodeURIComponent(auditErr));
         }
-        const b = await r.blob(); const url = URL.createObjectURL(b); setLastPdfUrl(url); const a = document.createElement('a'); a.href = url; a.download = `${cpName}.pdf`; a.click(); 
+        // Старый вид всегда отдаёт PDF, у нового расширение зависит от выбора.
+        const ext = options.template === 'old' || options.format === 'pdf' ? 'pdf' : 'docx';
+        const b = await r.blob();
+        const url = URL.createObjectURL(b);
+        setLastFile({ url, ext });
+        const a = document.createElement('a'); a.href = url; a.download = `${cpName}.${ext}`; a.click();
       }
       else { const e = await r.json(); alert(`Ошибка: ${e.error}`) }
     } catch { alert('Критическая ошибка') } finally { setLoading(false) }
@@ -838,7 +876,7 @@ export default function Home() {
       <div className="page fade-in" style={{ opacity: isMounted ? 1 : 0 }}>
         <div className="cols-top">
           <ManagerSection data={manager} onChange={setManager} />
-          <SettingsSection cpName={cpName} setCpName={setCpName} equipmentType={equipmentType} setEquipmentType={setEquipmentType} options={options} setOptions={setOptions} />
+          <SettingsSection cpName={cpName} setCpName={setCpName} cpDate={cpDate} setCpDate={setCpDate} equipmentType={equipmentType} setEquipmentType={setEquipmentType} options={options} setOptions={setOptions} />
         </div>
 
         <ObjectSection client={client} setClient={setClient} company={company} setCompany={setCompany} objectType={objectType} setObjectType={setObjectType} registrationDate={registrationDate} setRegistrationDate={setRegistrationDate} address={address} setAddress={setAddress} />
@@ -1048,17 +1086,19 @@ export default function Home() {
         )}
 
         <div className="gen-wrap">
-          {!lastPdfUrl ? (
+          {!lastFile ? (
             <button className="gen-btn" onClick={handleGenerate} disabled={loading}>
               {loading ? <RefreshCw className="spin" size={20} /> : <FileText size={20} />}
-              {loading ? 'Генерация КП...' : 'Генерация PDF...'}
+              {loading
+                ? 'Собираем КП...'
+                : `Сформировать ${options.template === 'old' || options.format === 'pdf' ? 'PDF' : 'Word'}`}
             </button>
           ) : (
             <>
-              <button className="gen-btn" onClick={() => { const a = document.createElement('a'); a.href = lastPdfUrl; a.download = `${cpName}.pdf`; a.click(); }} style={{ background: 'var(--success)' }}>
-                <CheckCircle size={20} /> Готово! Скачать КП
+              <button className="gen-btn" onClick={() => { const a = document.createElement('a'); a.href = lastFile.url; a.download = `${cpName}.${lastFile.ext}`; a.click(); }} style={{ background: 'var(--success)' }}>
+                <CheckCircle size={20} /> Готово! Скачать {lastFile.ext.toUpperCase()}
               </button>
-              <button className="btn btn-ghost" onClick={() => setLastPdfUrl(null)}>Создать еще один</button>
+              <button className="btn btn-ghost" onClick={() => setLastFile(null)}>Создать ещё одно</button>
             </>
           )}
         </div>
