@@ -36,6 +36,43 @@ export function money(value: number): string {
 }
 
 /**
+ * Комплект «внутренний + наружный» в прайсе идёт одной позицией с одной
+ * ценой, а в договоре расписывается двумя строками с ценой пополам.
+ *
+ * Разделителем считается только «+», окружённый пробелами: в артикулах
+ * встречается «/» («MHA-96HWAN1/MOUB-96HD1N1-R» — это одна позиция и
+ * делить её нельзя), а в описаниях попадается «+55 градусов».
+ */
+export function splitKits(items: ContractInput[]): ContractInput[] {
+  const out: ContractInput[] = [];
+
+  for (const item of items) {
+    const parts = String(item.model || '').split(/\s+\+\s+/).map(s => s.trim()).filter(Boolean);
+
+    if (parts.length < 2) {
+      out.push(item);
+      continue;
+    }
+
+    const price = Number(item.unitPrice) || 0;
+    // Половинки считаем так, чтобы их сумма точно равнялась цене комплекта:
+    // остаток от деления уходит в последнюю строку.
+    const share = Math.round((price / parts.length) * 100) / 100;
+    const shares = parts.map((_, i) =>
+      i === parts.length - 1
+        ? Math.round((price - share * (parts.length - 1)) * 100) / 100
+        : share
+    );
+
+    parts.forEach((model, i) => {
+      out.push({ ...item, model, name: undefined, unitPrice: shares[i] });
+    });
+  }
+
+  return out;
+}
+
+/**
  * Спецификация к договору.
  *
  * Расчёт сверен со строками подписанного договора UZ41/26:
@@ -99,10 +136,35 @@ export function withInventoryNames<T extends { model: string; name?: string }>(
   items: T[],
   namesByArticle: Record<string, string>
 ): T[] {
+  const keys = Object.keys(namesByArticle);
+
   return items.map(item => {
-    const full = namesByArticle[stockKey(item.model)];
+    const key = stockKey(item.model);
+    if (!key) return item;
+
+    // Точное совпадение.
+    let full = namesByArticle[key];
+
+    // Иначе — по началу артикула: в прайсе встречаются хвосты, которых нет
+    // в инвентаризации («MI2-56T2DHN18(At)S» против «MI2-56T2DHN18(At)»),
+    // и наоборот. Побеждает самое длинное совпадение, чтобы не спутать
+    // MIH28 с MIH280.
+    if (!full) {
+      const match = keys
+        .filter(k => k.length >= 6 && (key.startsWith(k) || k.startsWith(key)))
+        .sort((a, b) => b.length - a.length)[0];
+      if (match) full = namesByArticle[match];
+    }
+
     return full ? { ...item, name: full } : item;
   });
+}
+
+/** Позиции, для которых полное название в инвентаризации не нашлось. */
+export function missingInventoryNames<T extends { model: string; name?: string }>(
+  items: T[]
+): string[] {
+  return items.filter(i => !i.name?.trim()).map(i => i.model);
 }
 
 /** Строка пункта 3.1 договора целиком. */
