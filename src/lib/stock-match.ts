@@ -1,0 +1,28 @@
+/**
+ * Сопоставление позиций прайса со складской инвентаризацией.
+ * Модуль намеренно без обращений к Google: он нужен и на сервере,
+ * и в браузере, а googleapis в клиентский бандл тянуть нельзя.
+ */
+
+/**
+ * Артикул из названия инвентаризации.
+ *
+ * В складской таблице названия полные и двуязычные:
+ * «Промышленный фанкоил канального типа MKT3-200G50-CR / Industrial duct...»
+ * а в прайсе КП модель записана коротко: «MKT3-200G50-CR».
+ */
+export function extractArticle(name: string): string {
+  if (!name) return '';
+  const candidates = name.match(/[A-Z0-9][A-Z0-9._/()-]{4,}/gi) || [];
+  // Берём самый длинный: короткие куски вроде «CR» или «50» встречаются в описании.
+  const best = candidates
+    .map(c => c.replace(/[.,;]+$/, ''))
+    .filter(c => /\d/.test(c))
+    .sort((a, b) => b.length - a.length)[0];
+  return (best || '').toUpperCase();
+}
+
+/** Ключ сопоставления: только буквы и цифры, регистр не важен. */
+export function stockKey(value: string): string {
+  return (value || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+}

@@ -5,6 +5,7 @@ import { Plus, Trash2, FileText, User, Briefcase, Calculator, Search, RefreshCw,
 import productsData from '@/data/products.json'
 import { formatNum } from '@/lib/format'
 import { DELIVERY_TERMS, DeliveryTerm, buildTermsLines, getMoneyLabels } from '@/lib/delivery-terms'
+import { stockKey } from '@/lib/stock-match'
 
 /** Ставка НДС в Узбекистане. Та же цифра идёт в спецификацию договора. */
 export const VAT_RATE = 12
@@ -436,13 +437,18 @@ const ModelSearchSelector = memo(({ value, onChange, cleanProducts }: { value: s
   );
 });
 
-const EquipmentRow = memo(({ item, products, cleanProducts, onUpdate, onDelete, onClone, calculatePrice, currencyLabel, labels }: any) => {
+const EquipmentRow = memo(({ item, products, cleanProducts, stock, onUpdate, onDelete, onClone, calculatePrice, currencyLabel, labels }: any) => {
   const p = products.find((x: any) => x.id === item.productId);
   const [qty, setQty] = useState<number | string>(item.quantity);
   const [discount, setDiscount] = useState<number | string>(item.discount !== undefined ? item.discount : 0);
 
   useEffect(() => { setQty(item.quantity); }, [item.quantity]);
   useEffect(() => { setDiscount(item.discount !== undefined ? item.discount : 0); }, [item.discount]);
+
+  // Остаток по складу: null — таблица ещё не прочитана, undefined — модели там нет.
+  const available: number | undefined | null =
+    stock === null ? null : stock[stockKey(p?.model || '')];
+  const shortage = typeof available === 'number' && Number(qty) > available;
 
   const baseUnitPrice = calculatePrice(p?.price || 0);
   const discountVal = Number(discount) || 0;
@@ -453,7 +459,18 @@ const EquipmentRow = memo(({ item, products, cleanProducts, onUpdate, onDelete, 
     <tr>
       <td data-label="Модель">
         <ModelSearchSelector value={item.productId} onChange={val => onUpdate(item.id, { productId: val })} cleanProducts={cleanProducts} />
-        <div className="cat-label">{p?.series || p?.category}</div>
+        <div className="cat-label">
+          {p?.series || p?.category}
+          {available !== null && (
+            <span className={`stock-tag ${shortage ? 'short' : available ? 'ok' : 'none'}`}>
+              {typeof available === 'number' && available > 0
+                ? `на складе ${available}`
+                : typeof available === 'number'
+                  ? 'нет на складе'
+                  : 'нет в инвентаризации'}
+            </span>
+          )}
+        </div>
       </td>
       <td data-label={labels.price}>
         <span className="cell-value">
@@ -561,6 +578,8 @@ export default function Home() {
   const [isMounted, setIsMounted] = useState(false)
   const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved'>('idle')
   const [reqOpen, setReqOpen] = useState(true)
+  const [stock, setStock] = useState<Record<string, number> | null>(null)
+  const [stockError, setStockError] = useState('')
 
   const [options, setOptions] = useState({
     showImages: true,
@@ -635,6 +654,12 @@ export default function Home() {
     };
 
     loadData();
+
+    fetch('/api/stock')
+      .then(r => r.json())
+      .then(d => (d.success ? setStock(d.byArticle) : setStockError(d.error || 'Остатки недоступны')))
+      .catch(() => setStockError('Не удалось получить остатки'));
+
     setIsMounted(true)
   }, [uid])
 
@@ -918,6 +943,12 @@ export default function Home() {
             </div>
           ) : (
             <>
+              {stockError && (
+                <div className="notice">
+                  Остатки не подгрузились: {stockError}
+                </div>
+              )}
+
               {/* Capacity Metrics Widget */}
               <div className="metrics">
                 <div className="metric">
@@ -955,7 +986,7 @@ export default function Home() {
                   </thead>
                   <tbody>
                     {items.map(item => (
-                      <EquipmentRow key={item.id} item={item} products={products} cleanProducts={cleanProducts} onUpdate={updateItem} onDelete={deleteItem} onClone={cloneItem} calculatePrice={calculatePrice} currencyLabel={currencyLabel} labels={labels} />
+                      <EquipmentRow key={item.id} item={item} products={products} cleanProducts={cleanProducts} stock={stock} onUpdate={updateItem} onDelete={deleteItem} onClone={cloneItem} calculatePrice={calculatePrice} currencyLabel={currencyLabel} labels={labels} />
                     ))}
                   </tbody>
                 </table>
