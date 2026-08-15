@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getStock, indexByArticle } from '@/lib/stock';
+import { getStock, indexByArticle, indexNamesByArticle } from '@/lib/stock';
 
 export const dynamic = 'force-dynamic';
 
@@ -12,6 +12,7 @@ export async function GET(req: NextRequest) {
       updatedAt: new Date().toISOString(),
       count: rows.length,
       byArticle: indexByArticle(rows),
+      namesByArticle: indexNamesByArticle(rows),
     });
   } catch (err: any) {
     // Чаще всего это отсутствие доступа к таблице — сообщение должно

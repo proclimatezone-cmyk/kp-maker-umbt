@@ -101,3 +101,19 @@ export function indexByArticle(rows: StockRow[]): Record<string, number> {
   }
   return map;
 }
+
+/**
+ * Полные названия по артикулу. В договор позиции идут именно так, как
+ * они записаны в инвентаризации, а не коротким артикулом из прайса.
+ */
+export function indexNamesByArticle(rows: StockRow[]): Record<string, string> {
+  const map: Record<string, string> = {};
+  for (const r of rows) {
+    const key = stockKey(r.article);
+    if (!key) continue;
+    // Названия двуязычные через слэш — для договора берём русскую часть.
+    const ru = r.name.split(/\s*\/\s*/)[0].trim();
+    if (ru && (!map[key] || ru.length > map[key].length)) map[key] = ru;
+  }
+  return map;
+}
