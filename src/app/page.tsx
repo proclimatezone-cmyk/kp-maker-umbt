@@ -952,7 +952,7 @@ export default function Home() {
         const a = document.createElement('a'); a.href = url; a.download = `${cpName}.${ext}`; a.click();
       }
       else { const e = await r.json(); alert(`Ошибка: ${e.error}`) }
-    } catch { alert('Критическая ошибка') } finally { setLoading(false) }
+    } catch (err: any) { alert('Не удалось создать КП: ' + (err?.message || 'нет связи с сервером')) } finally { setLoading(false) }
   }
 
   return (
