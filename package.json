@@ -27,7 +27,8 @@
     "puppeteer": "^24.41.0",
     "puppeteer-core": "^24.41.0",
     "react": "^19.2.5",
-    "react-dom": "^19.2.5"
+    "react-dom": "^19.2.5",
+    "sharp": "^0.34.5"
   },
   "devDependencies": {
     "@types/node": "^25.6.0",

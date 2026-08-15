@@ -72,14 +72,26 @@ export async function POST(req: NextRequest) {
       })),
     ]
 
-    const docx = await buildKpDocx({
+    const baseArgs = {
       cpNumber: cpName || '',
       cpDate: cpDate || new Date().toLocaleDateString('ru-RU'),
       items: allItems,
       total,
       options: options || {},
       origin,
-    })
+    }
+
+    let docx = await buildKpDocx(baseArgs)
+    let sizeWarning = ''
+
+    // Vercel рубит ответ больше 4.5 МБ и отдаёт HTML-страницу ошибки вместо
+    // файла. Если фото раздули документ сверх лимита — пересобираем без них,
+    // чтобы менеджер всегда получил рабочий файл, а не тупик.
+    const LIMIT = 4.3 * 1024 * 1024
+    if (docx.length > LIMIT && (options?.showImages ?? true)) {
+      docx = await buildKpDocx({ ...baseArgs, options: { ...(options || {}), showImages: false } })
+      sizeWarning = 'Слишком много фото для одного файла — КП собрано без изображений'
+    }
 
     if (format === 'pdf') {
       const pdf = await convertDocxToPdf(docx, cpName || 'КП')
@@ -95,6 +107,7 @@ export async function POST(req: NextRequest) {
       headers: {
         'Content-Type': DOCX_MIME,
         'Content-Disposition': contentDisposition(cpName || 'КП', 'docx'),
+        'X-Size-Warning': encodeURIComponent(sizeWarning),
       },
     })
   } catch (err: any) {

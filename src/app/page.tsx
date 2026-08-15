@@ -945,6 +945,8 @@ export default function Home() {
           alert('⚠️ Документ готов, но данные НЕ записаны в таблицу аудита!\nОшибка: ' + decodeURIComponent(auditErr));
         }
         // Старый вид всегда отдаёт PDF, у нового расширение зависит от выбора.
+        const sizeWarn = decodeURIComponent(r.headers.get('X-Size-Warning') || '');
+        if (sizeWarn) alert('⚠️ ' + sizeWarn);
         const ext = options.template === 'old' || options.format === 'pdf' ? 'pdf' : 'docx';
         const b = await r.blob();
         const url = URL.createObjectURL(b);

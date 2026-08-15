@@ -26,19 +26,24 @@ function toNumber(value: unknown): number {
   return isFinite(n) ? n : 0;
 }
 
-/** Ищет строку заголовка и возвращает индексы нужных колонок. */
+/**
+ * Ищет строку заголовка и колонки. Структура таблицы «Склад UMBT»:
+ * Наименование | Модель | Свободный остаток на складе | Общий приход | Отгружено | Бронь.
+ * Модель — отдельная колонка, поэтому сопоставляем по ней напрямую,
+ * а не вытаскиваем артикул из названия.
+ */
 function findColumns(rows: string[][]) {
   for (let i = 0; i < Math.min(rows.length, 30); i++) {
     const cells = (rows[i] || []).map(c => String(c ?? '').trim().toLowerCase());
-    const name = cells.findIndex(c => c === 'товар' || c.startsWith('наимен'));
-    if (name === -1) continue;
+    const model = cells.findIndex(c => c === 'модель' || c.startsWith('модель'));
+    if (model === -1) continue;
 
-    // «Кол-во по учету» — это остаток по документам; берём фактический.
-    const qty = cells.findIndex((c, idx) => idx !== name && c.startsWith('кол-во') && !c.includes('учет'));
+    // Показываем именно свободный остаток (приход минус отгрузки и бронь).
+    const qty = cells.findIndex(c => c.includes('свободн') && c.includes('остат'));
     if (qty === -1) continue;
 
-    const unit = cells.findIndex(c => c === 'ед.' || c === 'ед' || c.startsWith('ед.изм'));
-    return { headerRow: i, name, qty, unit };
+    const name = cells.findIndex(c => c === 'товар' || c.startsWith('наимен'));
+    return { headerRow: i, model, qty, name };
   }
   return null;
 }
@@ -49,8 +54,13 @@ async function readSheet(): Promise<StockRow[]> {
   // gid из ссылки — это внутренний идентификатор листа, а values.get работает
   // с именем. Поэтому сначала спрашиваем метаданные книги.
   const meta = await sheets.spreadsheets.get({ spreadsheetId: STOCK_SHEET_ID, fields: 'sheets.properties' });
+  const all = meta.data.sheets || [];
+  // В книге несколько вкладок (Состояние склада, Приход, Заказы, Бронь) —
+  // нужна «Состояние склада»: сначала по gid из ссылки, затем по названию.
   const sheet =
-    meta.data.sheets?.find(s => s.properties?.sheetId === STOCK_SHEET_GID) || meta.data.sheets?.[0];
+    all.find(s => s.properties?.sheetId === STOCK_SHEET_GID) ||
+    all.find(s => /состоян/i.test(s.properties?.title || '')) ||
+    all[0];
   const title = sheet?.properties?.title;
   if (!title) throw new Error('В таблице остатков не найдено ни одного листа');
 
@@ -63,22 +73,21 @@ async function readSheet(): Promise<StockRow[]> {
   const cols = findColumns(rows);
   if (!cols) {
     throw new Error(
-      `На листе «${title}» не найдены колонки «Товар» и «Кол-во». Проверьте шапку таблицы.`
+      `На листе «${title}» не найдены колонки «Модель» и «Свободный остаток». Проверьте шапку таблицы.`
     );
   }
 
   const out: StockRow[] = [];
   for (let i = cols.headerRow + 1; i < rows.length; i++) {
     const row = rows[i] || [];
-    const name = String(row[cols.name] ?? '').trim();
-    if (!name) continue;
-    const article = extractArticle(name);
-    if (!article) continue;
+    const model = String(row[cols.model] ?? '').trim();
+    if (!model) continue; // строки-категории («VRF») модели не имеют — пропускаем
+    // Артикул для сопоставления берём из самой колонки «Модель».
     out.push({
-      name,
-      article,
+      name: String(row[cols.name] ?? '').trim() || model,
+      article: model,
       qty: toNumber(row[cols.qty]),
-      unit: String(row[cols.unit] ?? 'шт').trim() || 'шт',
+      unit: 'шт',
     });
   }
   return out;
