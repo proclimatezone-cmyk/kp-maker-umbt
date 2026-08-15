@@ -4,7 +4,11 @@ import path from 'path';
 
 let cachedProducts: any[] | null = null;
 let lastCacheTime = 0;
-const CACHE_TTL = 30 * 1000; // 30 seconds
+// 10 минут. При 30 секундах прайс пересинхронизировался почти на каждый
+// заход, а syncSheets на каждый товар отдельно проверяет картинку в Drive —
+// это десятки запросов к Google на одно открытие. Свежие цены менеджер
+// всё равно тянет кнопкой «Обновить базу» (forceRefresh), которая кеш минует.
+const CACHE_TTL = 10 * 60 * 1000;
 
 export async function getProducts(forceRefresh = false) {
   const now = Date.now();

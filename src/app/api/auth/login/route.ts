@@ -27,16 +27,45 @@ function getGoogleAuth() {
   return oauth2Client;
 }
 
+// Простейший счётчик попыток на IP в памяти процесса. От распределённого
+// перебора не спасает, но отсекает примитивный скрипт по одному адресу.
+const attempts = new Map<string, { count: number; resetAt: number }>();
+const RATE_LIMIT = 8;
+const RATE_WINDOW = 60_000;
+
+function rateLimited(ip: string): boolean {
+  const now = Date.now();
+  const rec = attempts.get(ip);
+  if (!rec || now > rec.resetAt) {
+    attempts.set(ip, { count: 1, resetAt: now + RATE_WINDOW });
+    return false;
+  }
+  rec.count += 1;
+  return rec.count > RATE_LIMIT;
+}
+
+/** Гасит формулы, которые Google исполнил бы в ячейке. */
+function sheetSafe(value: string): string {
+  const v = String(value ?? '');
+  return /^[=+\-@\t\r]/.test(v) ? `'${v}` : v;
+}
+
 export async function POST(req: NextRequest) {
   try {
-    const { email } = await req.json();
-    
-    if (!email) {
-      return NextResponse.json({ success: false, error: 'Email is required' }, { status: 400 });
-    }
-
     const forwarded = req.headers.get('x-forwarded-for');
     const ip = forwarded ? forwarded.split(',')[0] : (req as any).ip || 'Unknown IP';
+
+    if (rateLimited(ip)) {
+      return NextResponse.json({ success: false, error: 'Слишком много попыток. Подождите минуту.' }, { status: 429 });
+    }
+
+    const { email: rawEmail } = await req.json();
+
+    // Ограничиваем длину: без этого 200 КБ мусора уходили в лог-таблицу.
+    if (!rawEmail || typeof rawEmail !== 'string' || rawEmail.length > 254) {
+      return NextResponse.json({ success: false, error: 'Email is required' }, { status: 400 });
+    }
+    const email = rawEmail;
     const city = req.headers.get('x-vercel-ip-city') || 'Unknown City';
     const country = req.headers.get('x-vercel-ip-country') || 'Unknown Country';
     const location = `${city}, ${country}`;
@@ -93,12 +122,18 @@ export async function POST(req: NextRequest) {
         let coords = '';
         let mapLink = '';
         try {
-          const geoRes = await fetch(`http://ip-api.com/json/${ip}?fields=status,message,isp,lat,lon`);
+          // HTTPS и таймаут: раньше был http и без ограничения — зависший
+          // сервис держал ответ входа, ip передавался в URL как есть.
+          const safeIp = encodeURIComponent(ip);
+          const geoRes = await fetch(
+            `https://ip-api.com/json/${safeIp}?fields=status,message,isp,lat,lon`,
+            { signal: AbortSignal.timeout(3000) }
+          );
           const geoData = await geoRes.json();
           if (geoData.status === 'success') {
-            isp = geoData.isp || 'Unknown ISP';
+            isp = String(geoData.isp || 'Unknown ISP').replace(/["=]/g, '');
             coords = `${geoData.lat}, ${geoData.lon}`;
-            mapLink = `https://www.google.com/maps?q=${geoData.lat},${geoData.lon}`;
+            mapLink = `https://www.google.com/maps?q=${Number(geoData.lat)},${Number(geoData.lon)}`;
           }
         } catch (e) { console.error('Geo API failed', e); }
 
@@ -159,7 +194,10 @@ export async function POST(req: NextRequest) {
             valueInputOption: 'USER_ENTERED',
             requestBody: {
               values: [
-                [ip, timestamp, locationCell, fullDeviceInfo, email]
+                // locationCell — намеренная гиперссылка из доверенных гео-данных.
+                // Всё, что пришло от пользователя (email, ip, user-agent), гасим,
+                // иначе строка вида =IMPORTRANGE(...) станет живой формулой.
+                [sheetSafe(ip), timestamp, locationCell, sheetSafe(fullDeviceInfo), sheetSafe(email)]
               ]
             }
           });

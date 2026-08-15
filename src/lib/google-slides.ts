@@ -1170,15 +1170,22 @@ export async function generateSlidesKP(data: {
       }
     }
 
+    // Гасит формулы: все поля ниже приходят из браузера, а лист аудита
+    // пишется в режиме USER_ENTERED.
+    const s = (v: any) => {
+      const str = String(v ?? '');
+      return /^[=+\-@\t\r]/.test(str) ? `'${str}` : str;
+    };
+
     // Column mapping: A=0..W=22
     const rowData = [
       '',                                                    // A: Номер объекта (auto from sheet)
-      data.client || '',                                     // B: Название объекта
-      data.extraData?.company || '',                         // C: Компания заявитель
-      data.extraData?.objectType || '',                      // D: Тип объекта
+      s(data.client),                                        // B: Название объекта
+      s(data.extraData?.company),                            // C: Компания заявитель
+      s(data.extraData?.objectType),                         // D: Тип объекта
       '',                                                    // E: Комментарий
-      data.extraData?.address || '',                         // F: Адрес объекта
-      data.manager?.name || '',                              // G: Менеджер
+      s(data.extraData?.address),                            // F: Адрес объекта
+      s(data.manager?.name),                                 // G: Менеджер
       formattedRegDate,                                      // H: Дата регистрации
       '',                                                    // I: Стадия проекта
       new Date().toLocaleString('ru-RU', { month: 'long' }),// J: Месяц создания заказа
@@ -1190,9 +1197,9 @@ export async function generateSlidesKP(data: {
       '',                                                    // P: Оборудование основное (не заполняем)
       '',                                                    // Q: Оборудование допол. (не заполняем)
       '',                                                    // R: (пусто)
-      contact.phone || '',                                   // S: контакт, тел
-      contact.name || '',                                    // T: Контакт, ФИО
-      contact.position || '',                                // U: контакт, должн.
+      s(contact.phone),                                      // S: контакт, тел
+      s(contact.name),                                       // T: Контакт, ФИО
+      s(contact.position),                                   // U: контакт, должн.
       '',                                                    // V: Статус
       pdfUrl || ''                                           // W: Ссылка на КП
     ];
