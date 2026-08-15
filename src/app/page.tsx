@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useMemo, useCallback, memo } from 'react'
-import { Plus, Trash2, FileText, User, Briefcase, Calculator, Search, RefreshCw, Building2, Phone, CheckCircle, CloudCheck, Loader2, Copy, Truck, ChevronDown } from 'lucide-react'
+import { Plus, Trash2, FileText, User, Briefcase, Calculator, Search, RefreshCw, Building2, Phone, CheckCircle, CloudCheck, Loader2, Copy, Truck, ChevronDown, FileSignature } from 'lucide-react'
 import productsData from '@/data/products.json'
 import { formatNum } from '@/lib/format'
 import { DELIVERY_TERMS, DeliveryTerm, buildTermsLines, getMoneyLabels } from '@/lib/delivery-terms'
@@ -243,6 +243,46 @@ const SettingsSection = memo(({ cpName, setCpName, cpDate, setCpDate, equipmentT
           </div>
         </div>
       )}
+    </div>
+  );
+});
+
+const CONTRACT_FIELDS: [key: string, label: string, placeholder: string][] = [
+  ['number',   'Номер договора',  'UZ57/26'],
+  ['date',     'Дата договора',   '15 августа 2026'],
+  ['validUntil','Действует по',   '31 декабря 2026'],
+  ['specNumber','Номер спецификации', '1'],
+  ['buyerName','Покупатель, ООО', 'TASHKENT CITY QURILISH'],
+  ['buyerDirector', 'Директор покупателя', 'Каримов А. Р.'],
+  ['buyerInn', 'ИНН покупателя',  '301 555 777'],
+  ['buyerAccount', 'Расчётный счёт', '2020 8000 1234 5678 9001'],
+  ['buyerMfo', 'МФО',             '00873'],
+  ['buyerBank','Банк',            'АКБ «Асака банк», Мирабадский филиал'],
+  ['buyerAddress', 'Адрес покупателя', 'г. Ташкент, Мирабадский р-н, ул. Нукус, 12'],
+];
+
+const ContractSection = memo(({ contract, onChange }: any) => {
+  const [local, setLocal] = useState(contract);
+  useEffect(() => { setLocal(contract); }, [contract]);
+  const blur = () => { if (JSON.stringify(local) !== JSON.stringify(contract)) onChange(local); };
+
+  return (
+    <div className="section">
+      <SectionHeader icon={FileSignature} title="Договор поставки" color="purple" />
+      <div className="row cols-3">
+        {CONTRACT_FIELDS.map(([key, label, placeholder]) => (
+          <div className="field" key={key}>
+            <label className="field-label">{label}</label>
+            <input
+              className="field-input"
+              placeholder={placeholder}
+              value={local[key] || ''}
+              onChange={e => setLocal({ ...local, [key]: e.target.value })}
+              onBlur={blur}
+            />
+          </div>
+        ))}
+      </div>
     </div>
   );
 });
@@ -565,6 +605,7 @@ export default function Home() {
   const [registrationDate, setRegistrationDate] = useState('')
   const [equipmentType, setEquipmentType] = useState('')
   const [contactPerson, setContactPerson] = useState({ name: '', phone: '', position: '' })
+  const [contract, setContract] = useState<Record<string, string>>({})
   const [items, setItems] = useState<Item[]>([])
   const [additionalItems, setAdditionalItems] = useState<AdditionalItem[]>([])
   const [partnerBonusType, setPartnerBonusType] = useState<'percent' | 'fixed'>('percent')
@@ -613,6 +654,7 @@ export default function Home() {
       }
       if (s('umbt_equipType')) setEquipmentType(s('umbt_equipType')!)
       const c = s('umbt_contact'); if (c) setContactPerson(JSON.parse(c))
+      const dg = s('umbt_contract'); if (dg) setContract(JSON.parse(dg))
       const it = s('umbt_items'); if (it) setItems(JSON.parse(it))
       else if (productsData.length > 0) setItems([{ id: uid(), productId: productsData[0].id, quantity: 1 }])
       const addIt = s('umbt_additional_items'); if (addIt) setAdditionalItems(JSON.parse(addIt))
@@ -679,6 +721,7 @@ export default function Home() {
         localStorage.setItem('umbt_regDate', registrationDate)
         localStorage.setItem('umbt_equipType', equipmentType)
         localStorage.setItem('umbt_contact', JSON.stringify(contactPerson))
+        localStorage.setItem('umbt_contract', JSON.stringify(contract))
         localStorage.setItem('umbt_items', JSON.stringify(items))
         localStorage.setItem('umbt_additional_items', JSON.stringify(additionalItems))
         localStorage.setItem('umbt_options', JSON.stringify(options))
@@ -693,7 +736,7 @@ export default function Home() {
       } catch (e) { console.error(e) }
     }, 1000)
     return () => clearTimeout(timer)
-  }, [manager, client, company, address, objectType, registrationDate, equipmentType, contactPerson, items, additionalItems, options, cpName, cpDate, partnerBonusType, partnerBonusValue, showDan, reqOpen, isMounted])
+  }, [manager, client, company, address, objectType, registrationDate, equipmentType, contactPerson, contract, items, additionalItems, options, cpName, cpDate, partnerBonusType, partnerBonusValue, showDan, reqOpen, isMounted])
 
   const cleanProducts = useMemo(() => products.filter(p => p.model && !p.model.startsWith('---') && p.id && !p.id.startsWith('---')), [products])
   const filteredProducts = useMemo(() => {
@@ -924,6 +967,7 @@ export default function Home() {
         <ObjectSection client={client} setClient={setClient} company={company} setCompany={setCompany} objectType={objectType} setObjectType={setObjectType} registrationDate={registrationDate} setRegistrationDate={setRegistrationDate} address={address} setAddress={setAddress} />
         <ContactSection data={contactPerson} onChange={setContactPerson} />
               <DeliverySection options={options} setOptions={setOptions} termsLines={termsLines} />
+              <ContractSection contract={contract} onChange={setContract} />
             </div>
           )}
         </div>
