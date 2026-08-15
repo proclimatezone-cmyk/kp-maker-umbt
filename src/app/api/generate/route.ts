@@ -3,8 +3,10 @@ import { generateSlidesKP } from '@/lib/google-slides'
 import { buildKpDocx } from '@/lib/docx-kp'
 import { convertDocxToPdf } from '@/lib/docx-to-pdf'
 
-// Сборка большого КП с картинками не укладывается в умолчание Vercel.
-export const maxDuration = 60
+// План Hobby разрешает не больше 10с — 60 роняло функцию с 500. Сборка .docx
+// укладывается в секунды; старый путь через Slides длиннее и на этом плане
+// может упереться в лимит, поэтому по умолчанию используется новый вид.
+export const maxDuration = 10
 
 const DOCX_MIME =
   'application/vnd.openxmlformats-officedocument.wordprocessingml.document'

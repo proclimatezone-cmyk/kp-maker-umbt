@@ -6,7 +6,7 @@ import Docxtemplater from 'docxtemplater';
 import { buildSpec, splitKits, withInventoryNames, missingInventoryNames, ContractInput } from '@/lib/contract';
 import { getStock, indexNamesByArticle } from '@/lib/stock';
 
-export const maxDuration = 60;
+export const maxDuration = 10;
 
 const DOCX_MIME = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
 

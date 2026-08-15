@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 
 export const dynamic = 'force-dynamic';
-export const maxDuration = 60;
+export const maxDuration = 10;
 
 /**
  * Открытый диагностический прогон сборки КП прямо на сервере: помогает
