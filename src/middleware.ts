@@ -5,7 +5,9 @@ import { getJwtSecret } from '@/lib/auth-secret';
 export async function middleware(req: NextRequest) {
   // Only protect main application and specific APIs
   const isProtectedPage = req.nextUrl.pathname === '/';
-  const isProtectedApi = req.nextUrl.pathname.startsWith('/api/') && !req.nextUrl.pathname.startsWith('/api/auth');
+  const isProtectedApi = req.nextUrl.pathname.startsWith('/api/')
+    && !req.nextUrl.pathname.startsWith('/api/auth')
+    && req.nextUrl.pathname !== '/api/health';
 
   if (!isProtectedPage && !isProtectedApi) {
     return NextResponse.next();
