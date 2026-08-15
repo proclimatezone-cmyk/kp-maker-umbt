@@ -959,3 +959,6 @@ body {
   font-size: 0.84rem;
   margin-bottom: 1rem;
 }
+
+.gen-secondary { min-height: 2.9rem; padding: 0.75rem 1.1rem; }
+@media (max-width: 720px) { .gen-secondary { width: 100%; } }

@@ -229,20 +229,16 @@ const SettingsSection = memo(({ cpName, setCpName, cpDate, setCpDate, equipmentT
           </div>
         </div>
       </div>
-      {options.paymentType === 'transfer' && (
-        <div className="transfer-box" style={{ opacity: 1, marginTop: '1rem' }}>
-          <div className="row cols-2">
-            <div className="field" style={{ marginBottom: 0 }}>
-              <label className="field-label">Курс (1 у.е.)</label>
-              <input className="field-input" type="number" value={lRate} onChange={e => setLRate(Number(e.target.value))} onBlur={() => lRate !== options.exchangeRate && setOptions({ ...options, exchangeRate: lRate })} />
-            </div>
-            <div className="field" style={{ marginBottom: 0 }}>
-              <label className="field-label">НДС %</label>
-              <input className="field-input" type="number" value={lFee} onChange={e => setLFee(Number(e.target.value))} onBlur={() => lFee !== options.transferFee && setOptions({ ...options, transferFee: lFee })} />
-            </div>
-          </div>
+      <div className="row cols-2">
+        <div className="field">
+          <label className="field-label">Курс (1 у.е.)</label>
+          <input className="field-input" type="number" value={lRate} onChange={e => setLRate(Number(e.target.value))} onBlur={() => lRate !== options.exchangeRate && setOptions({ ...options, exchangeRate: lRate })} />
         </div>
-      )}
+        <div className="field">
+          <label className="field-label">НДС %</label>
+          <input className="field-input" type="number" value={lFee} onChange={e => setLFee(Number(e.target.value))} onBlur={() => lFee !== options.transferFee && setOptions({ ...options, transferFee: lFee })} />
+        </div>
+      </div>
     </div>
   );
 });
@@ -612,6 +608,7 @@ export default function Home() {
   const [partnerBonusValue, setPartnerBonusValue] = useState<number>(0)
   const [showDan, setShowDan] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [contractLoading, setContractLoading] = useState(false)
   const [syncing, setSyncing] = useState(false)
   const [lastFile, setLastFile] = useState<{ url: string; ext: string } | null>(null)
   const [searchTerm, setSearchTerm] = useState('')
@@ -867,6 +864,45 @@ export default function Home() {
       }
       else alert('Ошибка: ' + (d.error || 'сервер вернул пустой прайс'))
     } catch { alert('Ошибка сети') } finally { setSyncing(false) }
+  }
+
+  const handleContract = async () => {
+    if (!contract.number || !contract.buyerName) {
+      alert('Заполните номер договора и покупателя в разделе «Договор поставки»')
+      return
+    }
+    if (items.length === 0) { alert('Добавьте хотя бы одну позицию оборудования'); return }
+
+    setContractLoading(true)
+    try {
+      const r = await fetch('/api/contract', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contract,
+          exchangeRate: options.exchangeRate,
+          // В договор уходит цена в у.е. без НДС: со скидкой, но без
+          // накрутки и пересчёта в сумы — это делает сервер по курсу.
+          items: items.map(i => {
+            const p = products.find(x => x.id === i.productId)
+            if (!p) return null
+            return {
+              model: p.model,
+              quantity: i.quantity,
+              unitPriceUe: Math.round(p.price * (1 + (i.discount || 0) / 100)),
+            }
+          }).filter(Boolean),
+        }),
+      })
+      if (r.ok) {
+        const warn = decodeURIComponent(r.headers.get('X-Contract-Warning') || '')
+        const b = await r.blob()
+        const url = URL.createObjectURL(b)
+        const a = document.createElement('a'); a.href = url; a.download = `Договор ${contract.number}.docx`; a.click()
+        if (warn) alert('⚠️ Договор готов, но: ' + warn)
+      } else {
+        const e = await r.json(); alert(`Ошибка: ${e.error}`)
+      }
+    } catch { alert('Не удалось сформировать договор') } finally { setContractLoading(false) }
   }
 
   const handleGenerate = async () => {
@@ -1190,6 +1226,10 @@ export default function Home() {
             <span className="actionbar-cur">{currencyLabel}</span>
           </div>
         <div className="gen-wrap">
+          <button className="btn btn-ghost gen-secondary" onClick={handleContract} disabled={contractLoading}>
+            {contractLoading ? <RefreshCw className="spin" size={16} /> : <FileSignature size={16} />}
+            {contractLoading ? 'Собираем...' : 'Договор'}
+          </button>
           {!lastFile ? (
             <button className="gen-btn" onClick={handleGenerate} disabled={loading}>
               {loading ? <RefreshCw className="spin" size={20} /> : <FileText size={20} />}
