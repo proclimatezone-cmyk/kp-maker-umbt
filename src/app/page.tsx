@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useMemo, useCallback, memo } from 'react'
-import { Plus, Trash2, FileText, User, Briefcase, Calculator, Search, RefreshCw, Building2, Phone, CheckCircle, CloudCheck, Loader2, Copy, Truck } from 'lucide-react'
+import { Plus, Trash2, FileText, User, Briefcase, Calculator, Search, RefreshCw, Building2, Phone, CheckCircle, CloudCheck, Loader2, Copy, Truck, ChevronDown } from 'lucide-react'
 import productsData from '@/data/products.json'
 import { formatNum } from '@/lib/format'
 import { DELIVERY_TERMS, DeliveryTerm, buildTermsLines, getMoneyLabels } from '@/lib/delivery-terms'
@@ -560,6 +560,7 @@ export default function Home() {
   const [products, setProducts] = useState<any[]>(productsData)
   const [isMounted, setIsMounted] = useState(false)
   const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved'>('idle')
+  const [reqOpen, setReqOpen] = useState(true)
 
   const [options, setOptions] = useState({
     showImages: true,
@@ -611,6 +612,7 @@ export default function Home() {
       if (s('umbt_bonusType')) setPartnerBonusType(s('umbt_bonusType') as 'percent' | 'fixed')
       if (s('umbt_bonusValue')) setPartnerBonusValue(Number(s('umbt_bonusValue')) || 0)
       if (s('umbt_showDan')) setShowDan(s('umbt_showDan') === 'true')
+      if (s('umbt_reqOpen')) setReqOpen(s('umbt_reqOpen') === 'true')
     } catch {}
     if (!s('umbt_cpDate')) {
       setCpDate(new Date().toLocaleDateString('ru-RU'))
@@ -660,12 +662,13 @@ export default function Home() {
         localStorage.setItem('umbt_bonusType', partnerBonusType)
         localStorage.setItem('umbt_bonusValue', partnerBonusValue.toString())
         localStorage.setItem('umbt_showDan', showDan ? 'true' : 'false')
+        localStorage.setItem('umbt_reqOpen', reqOpen ? 'true' : 'false')
         setSaveStatus('saved')
         setTimeout(() => setSaveStatus('idle'), 2000)
       } catch (e) { console.error(e) }
     }, 1000)
     return () => clearTimeout(timer)
-  }, [manager, client, company, address, objectType, registrationDate, equipmentType, contactPerson, items, additionalItems, options, cpName, cpDate, partnerBonusType, partnerBonusValue, showDan, isMounted])
+  }, [manager, client, company, address, objectType, registrationDate, equipmentType, contactPerson, items, additionalItems, options, cpName, cpDate, partnerBonusType, partnerBonusValue, showDan, reqOpen, isMounted])
 
   const cleanProducts = useMemo(() => products.filter(p => p.model && !p.model.startsWith('---') && p.id && !p.id.startsWith('---')), [products])
   const filteredProducts = useMemo(() => {
@@ -874,14 +877,31 @@ export default function Home() {
       </header>
 
       <div className="page fade-in" style={{ opacity: isMounted ? 1 : 0 }}>
-        <div className="cols-top">
-          <ManagerSection data={manager} onChange={setManager} />
-          <SettingsSection cpName={cpName} setCpName={setCpName} cpDate={cpDate} setCpDate={setCpDate} equipmentType={equipmentType} setEquipmentType={setEquipmentType} options={options} setOptions={setOptions} />
-        </div>
+        <div className="requisites">
+          <button className="requisites-head" onClick={() => setReqOpen(!reqOpen)} aria-expanded={reqOpen}>
+            <ChevronDown size={16} className={reqOpen ? 'rot' : ''} />
+            <span className="requisites-title">Реквизиты КП</span>
+            {!reqOpen && (
+              <span className="requisites-summary">
+                {[cpName, cpDate, client, manager.name].filter(Boolean).join(' · ') || 'не заполнены'}
+              </span>
+            )}
+            <span className="requisites-action">{reqOpen ? 'Свернуть' : 'Изменить'}</span>
+          </button>
+
+          {reqOpen && (
+            <div className="requisites-body">
+              <div className="cols-top">
+                <ManagerSection data={manager} onChange={setManager} />
+                <SettingsSection cpName={cpName} setCpName={setCpName} cpDate={cpDate} setCpDate={setCpDate} equipmentType={equipmentType} setEquipmentType={setEquipmentType} options={options} setOptions={setOptions} />
+              </div>
 
         <ObjectSection client={client} setClient={setClient} company={company} setCompany={setCompany} objectType={objectType} setObjectType={setObjectType} registrationDate={registrationDate} setRegistrationDate={setRegistrationDate} address={address} setAddress={setAddress} />
         <ContactSection data={contactPerson} onChange={setContactPerson} />
-        <DeliverySection options={options} setOptions={setOptions} termsLines={termsLines} />
+              <DeliverySection options={options} setOptions={setOptions} termsLines={termsLines} />
+            </div>
+          )}
+        </div>
 
         <div className="section">
           <div className="section-header">
@@ -1085,6 +1105,15 @@ export default function Home() {
           </div>
         )}
 
+      </div>
+
+      <div className="actionbar">
+        <div className="actionbar-inner">
+          <div className="actionbar-total">
+            <span className="actionbar-label">Общий итог</span>
+            <span className="actionbar-value">{formatNum(grandTotal)}</span>
+            <span className="actionbar-cur">{currencyLabel}</span>
+          </div>
         <div className="gen-wrap">
           {!lastFile ? (
             <button className="gen-btn" onClick={handleGenerate} disabled={loading}>
@@ -1101,6 +1130,7 @@ export default function Home() {
               <button className="btn btn-ghost" onClick={() => setLastFile(null)}>Создать ещё одно</button>
             </>
           )}
+        </div>
         </div>
       </div>
     </>

@@ -624,6 +624,111 @@ body {
   border: 1px solid rgba(15, 111, 184, 0.22);
 }
 
+/* ===== ПАНЕЛЬ РЕКВИЗИТОВ =====
+   Анкеты заполняются один раз и потом почти не меняются, поэтому они
+   сворачиваются: иначе до таблицы оборудования приходилось листать
+   пять карточек подряд. */
+.requisites {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.requisites-head {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  color: var(--text);
+}
+.requisites-head:hover { background: var(--bg-hover); }
+.requisites-head svg { color: var(--text-muted); transition: transform 0.18s ease; flex-shrink: 0; }
+.requisites-head svg.rot { transform: rotate(180deg); }
+
+.requisites-title { font-weight: 700; font-size: 0.92rem; white-space: nowrap; }
+
+.requisites-summary {
+  flex: 1;
+  min-width: 0;
+  font-size: 0.84rem;
+  color: var(--text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.requisites-action {
+  margin-left: auto;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+.requisites-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 0 1rem 1rem;
+  border-top: 1px solid var(--border);
+}
+/* Внутри панели карточки уже не нужны — рамка одна, общая. */
+.requisites-body .section {
+  border: none;
+  box-shadow: none;
+  padding: 0.75rem 0 0;
+  background: none;
+}
+
+/* ===== ЗАКРЕПЛЁННАЯ НИЖНЯЯ ПОЛОСА =====
+   Итог и кнопка генерации всегда на виду — раньше до них надо было
+   долистать страницу до конца. */
+.actionbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 90;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: saturate(1.6) blur(10px);
+  border-top: 1px solid var(--border);
+  padding: 0.7rem 0 max(0.7rem, env(safe-area-inset-bottom));
+}
+
+.actionbar-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.actionbar-total { display: flex; align-items: baseline; gap: 0.45rem; min-width: 0; }
+.actionbar-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-muted);
+}
+.actionbar-value {
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+.actionbar-cur { font-size: 0.9rem; font-weight: 600; color: var(--text-secondary); }
+
+.actionbar .gen-wrap { margin: 0 0 0 auto; flex-direction: row; align-items: center; }
+
 /* ===== GENERATE ===== */
 .gen-wrap { display: flex; flex-direction: column; align-items: center; gap: 0.85rem; margin-top: 0.5rem; }
 
@@ -802,5 +907,31 @@ body {
   .total-value { font-size: 1.4rem; }
   .grand-total .val { font-size: 1.5rem; }
 
+  .requisites-head { padding: 0.8rem 0.85rem; }
+  .requisites-body { padding: 0 0.85rem 0.85rem; }
+
+  /* Метрики мощности — служебная справка, на телефоне им хватает одной полосы. */
+  .metrics { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.4rem; }
+  .metric { padding: 0.5rem 0.55rem; }
+  .metric-label { font-size: 0.58rem; }
+  .metric-value { font-size: 0.95rem; }
+  .metric-row { gap: 0.25rem; }
+  .badge { font-size: 0.6rem; padding: 0.05rem 0.3rem; }
+
+  /* Заголовок секции и кнопка «Добавить» — в одну строку. */
+  .section-header { flex-wrap: nowrap; gap: 0.45rem; }
+  .section-header h2 { font-size: 0.88rem; }
+  .section-header .btn { padding: 0.4rem 0.6rem; font-size: 0.78rem; }
+  .count-pill { display: none; }
+
+  /* На телефоне итог встаёт над кнопкой, кнопка — во всю ширину. */
+  .actionbar-inner {
+    padding: 0 0.85rem;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+  .actionbar-total { justify-content: space-between; }
+  .actionbar .gen-wrap { margin: 0; }
   .gen-btn { width: 100%; padding: 0.85rem; }
 }
