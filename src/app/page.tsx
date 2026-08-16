@@ -6,6 +6,7 @@ import productsData from '@/data/products.json'
 import { formatNum } from '@/lib/format'
 import { DELIVERY_TERMS, DeliveryTerm, buildTermsLines, getMoneyLabels } from '@/lib/delivery-terms'
 import { stockKey } from '@/lib/stock-match'
+import { normalizeModel } from '@/lib/reports/parse-utils'
 
 /** Ставка НДС в Узбекистане. Та же цифра идёт в спецификацию договора. */
 export const VAT_RATE = 12
@@ -473,7 +474,7 @@ const ModelSearchSelector = memo(({ value, onChange, cleanProducts }: { value: s
   );
 });
 
-const EquipmentRow = memo(({ item, products, cleanProducts, stock, onUpdate, onDelete, onClone, calculatePrice, currencyLabel, labels }: any) => {
+const EquipmentRow = memo(({ item, products, cleanProducts, stock, onUpdate, onDelete, onClone, calculatePrice, currencyLabel, labels, oldPriceMap }: any) => {
   const p = products.find((x: any) => x.id === item.productId);
   const [qty, setQty] = useState<number | string>(item.quantity);
   const [discount, setDiscount] = useState<number | string>(item.discount !== undefined ? item.discount : 0);
@@ -490,6 +491,13 @@ const EquipmentRow = memo(({ item, products, cleanProducts, stock, onUpdate, onD
   const discountVal = Number(discount) || 0;
   const finalUnitPrice = Math.round(baseUnitPrice * (1 + discountVal / 100));
   const finalSum = finalUnitPrice * (Number(qty) || 0);
+
+  // Старая цена (закупка Midea) — только у владельца отчётов, только для позиций
+  // с совпавшей моделью в старом прайсе. Не наценённая и не со скидкой — это
+  // ориентир по себестоимости, а не альтернативная отпускная цена.
+  const oldPriceUsd: number | undefined = oldPriceMap?.get(normalizeModel(p?.model));
+  const oldUnitPrice = oldPriceUsd !== undefined ? calculatePrice(oldPriceUsd) : null;
+  const marginPct = oldUnitPrice && oldUnitPrice > 0 ? ((finalUnitPrice - oldUnitPrice) / oldUnitPrice) * 100 : null;
 
   return (
     <tr>
@@ -513,6 +521,11 @@ const EquipmentRow = memo(({ item, products, cleanProducts, stock, onUpdate, onD
           <span className="price">{formatNum(finalUnitPrice)}</span>
           <span className="price-unit">{currencyLabel}</span>
         </span>
+        {oldUnitPrice !== null && marginPct !== null && (
+          <span className="old-price-hint" title="Старая цена — закупка Midea из старого прайса, без наценки и скидки">
+            старая {formatNum(oldUnitPrice)} · <span className={marginPct >= 0 ? 'margin-up' : 'margin-down'}>{marginPct >= 0 ? '+' : ''}{marginPct.toFixed(0)}%</span>
+          </span>
+        )}
       </td>
       <td data-label="Скидка %">
         <input 
@@ -620,6 +633,7 @@ export default function Home() {
   const [stock, setStock] = useState<Record<string, number> | null>(null)
   const [stockError, setStockError] = useState('')
   const [isReportsUser, setIsReportsUser] = useState(false)
+  const [oldPriceMap, setOldPriceMap] = useState<Map<string, number> | null>(null)
 
   const [options, setOptions] = useState({
     showImages: true,
@@ -707,9 +721,25 @@ export default function Home() {
       .catch(() => setStockError('Не удалось получить остатки'));
 
     // umbt_auth — httpOnly, чей это email клиент узнаёт только через этот роут.
+    // Старую цену запрашиваем только для владельца отчётов — остальным
+    // менеджерам этот запрос middleware всё равно вернёт 404, но незачем
+    // его даже отправлять с чужой сессией.
     fetch('/api/auth/me')
       .then(r => r.json())
-      .then(d => setIsReportsUser(!!d.isReportsUser))
+      .then(d => {
+        setIsReportsUser(!!d.isReportsUser);
+        if (!d.isReportsUser) return;
+        fetch('/api/reports/price-comparison')
+          .then(r => r.json())
+          .then(pc => {
+            const map = new Map<string, number>();
+            for (const row of pc.rows || []) {
+              if (row.oldPrice != null) map.set(normalizeModel(row.model), row.oldPrice);
+            }
+            setOldPriceMap(map);
+          })
+          .catch(() => setOldPriceMap(null));
+      })
       .catch(() => setIsReportsUser(false));
 
     setIsMounted(true)
@@ -771,6 +801,30 @@ export default function Home() {
     const finalUnitPrice = Math.round(baseUnitPrice * (1 + discountVal / 100));
     return sum + (finalUnitPrice * (item.quantity || 0));
   }, 0), [items, products, calculatePrice])
+
+  // Маржа к старому прайсу — только по позициям, где модель совпала со старым
+  // прайсом (oldPriceMap), иначе сравнение было бы наполовину выдуманным.
+  const oldPriceStats = useMemo(() => {
+    if (!oldPriceMap) return null;
+    let oldTotal = 0, currentMatchedTotal = 0, matchedQty = 0, totalQty = 0;
+    for (const item of items) {
+      const p = products.find(x => x.id === item.productId);
+      if (!p) continue;
+      const qty = Number(item.quantity) || 0;
+      totalQty += qty;
+      const oldUsd = oldPriceMap.get(normalizeModel(p.model));
+      if (oldUsd === undefined) continue;
+      const oldUnit = calculatePrice(oldUsd);
+      const discountVal = item.discount || 0;
+      const finalUnit = Math.round(calculatePrice(p.price) * (1 + discountVal / 100));
+      oldTotal += oldUnit * qty;
+      currentMatchedTotal += finalUnit * qty;
+      matchedQty += qty;
+    }
+    if (matchedQty === 0) return { oldTotal, currentMatchedTotal, matchedQty, totalQty, marginPct: null as number | null };
+    const marginPct = oldTotal > 0 ? ((currentMatchedTotal - oldTotal) / oldTotal) * 100 : null;
+    return { oldTotal, currentMatchedTotal, matchedQty, totalQty, marginPct };
+  }, [items, products, oldPriceMap, calculatePrice]);
 
   const capacityMetrics = useMemo(() => {
     let external = 0;
@@ -1109,7 +1163,7 @@ export default function Home() {
                   </thead>
                   <tbody>
                     {items.map(item => (
-                      <EquipmentRow key={item.id} item={item} products={products} cleanProducts={cleanProducts} stock={stock} onUpdate={updateItem} onDelete={deleteItem} onClone={cloneItem} calculatePrice={calculatePrice} currencyLabel={currencyLabel} labels={labels} />
+                      <EquipmentRow key={item.id} item={item} products={products} cleanProducts={cleanProducts} stock={stock} onUpdate={updateItem} onDelete={deleteItem} onClone={cloneItem} calculatePrice={calculatePrice} currencyLabel={currencyLabel} labels={labels} oldPriceMap={oldPriceMap} />
                     ))}
                   </tbody>
                 </table>
@@ -1130,6 +1184,22 @@ export default function Home() {
                 <span className="total-currency">{currencyLabel}</span>
               </div>
             </div>
+
+            {oldPriceStats && oldPriceStats.matchedQty > 0 && (
+              <div className="margin-bar">
+                <span className="margin-coverage">
+                  учтено {oldPriceStats.matchedQty} из {oldPriceStats.totalQty} шт (есть в старом прайсе)
+                </span>
+                <span className="total-label">По старому прайсу</span>
+                <span className="total-value" style={{ fontSize: '1.1rem', color: 'var(--text-secondary)' }}>{formatNum(oldPriceStats.oldTotal)}</span>
+                <span className="total-currency">{currencyLabel}</span>
+                {oldPriceStats.marginPct !== null && (
+                  <span className={`margin-value ${oldPriceStats.marginPct >= 0 ? 'up' : 'down'}`}>
+                    маржа {oldPriceStats.marginPct >= 0 ? '+' : ''}{oldPriceStats.marginPct.toFixed(1)}%
+                  </span>
+                )}
+              </div>
+            )}
 
             {showDan && (
               <>
@@ -1158,6 +1228,24 @@ export default function Home() {
                   <span className="total-value" style={{ fontSize: '1.25rem', color: 'var(--text-secondary)' }}>{formatNum((equipmentTotal - partnerBonusSum))}</span>
                   <span className="total-currency">{currencyLabel}</span>
                 </div>
+
+                {oldPriceStats && oldPriceStats.matchedQty > 0 && oldPriceStats.marginPct !== null && (() => {
+                  // Бонус партнёру считается со всего оборудования — на подмножество
+                  // с известной старой ценой распределяем пропорционально его доле в обороте.
+                  const bonusShare = equipmentTotal > 0 ? partnerBonusSum * (oldPriceStats.currentMatchedTotal / equipmentTotal) : 0;
+                  const netAfterBonus = oldPriceStats.currentMatchedTotal - bonusShare;
+                  const marginAfterBonusPct = oldPriceStats.oldTotal > 0 ? ((netAfterBonus - oldPriceStats.oldTotal) / oldPriceStats.oldTotal) * 100 : null;
+                  if (marginAfterBonusPct === null) return null;
+                  return (
+                    <div className="margin-bar">
+                      <span className="margin-coverage">оценка по позициям со старой ценой, бонус распределён пропорционально</span>
+                      <span className="total-label">Маржа после «Сдаём Дань»</span>
+                      <span className={`margin-value ${marginAfterBonusPct >= 0 ? 'up' : 'down'}`}>
+                        {marginAfterBonusPct >= 0 ? '+' : ''}{marginAfterBonusPct.toFixed(1)}%
+                      </span>
+                    </div>
+                  );
+                })()}
               </>
             )}
           </div>

@@ -468,6 +468,18 @@ body {
 
 .row-actions { display: flex; gap: 0.3rem; justify-content: flex-end; align-items: center; }
 
+/* Старая цена (закупка Midea, старый прайс) рядом с текущей — видно только
+   владельцу (REPORTS_ACCESS_EMAIL), остальным менеджерам этот блок не грузится. */
+.old-price-hint {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+  white-space: nowrap;
+}
+.old-price-hint .margin-up { color: var(--success); font-weight: 700; }
+.old-price-hint .margin-down { color: var(--error); font-weight: 700; }
+
 /* Значение ячейки одним элементом — иначе на мобильной сетке цена и её
    валюта разъезжаются по разным строкам. */
 .cell-value { display: inline-flex; align-items: baseline; gap: 2px; }
@@ -520,6 +532,22 @@ body {
 }
 
 .bonus-sum-value { font-weight: 700; color: var(--error); font-variant-numeric: tabular-nums; }
+
+.margin-bar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  border-top: 1px dashed var(--border);
+  padding-top: 0.7rem;
+  font-size: 0.82rem;
+}
+.margin-bar .total-label { font-size: 0.78rem; }
+.margin-value { font-weight: 700; font-variant-numeric: tabular-nums; }
+.margin-value.up { color: var(--success); }
+.margin-value.down { color: var(--error); }
+.margin-coverage { font-size: 0.72rem; color: var(--text-muted); }
 
 .btn-dan {
   font-size: 0.75rem;
