@@ -3,7 +3,9 @@ import path from 'path';
 import PizZip from 'pizzip';
 import Docxtemplater from 'docxtemplater';
 import ImageModule from 'docxtemplater-image-module-free';
+import { google } from 'googleapis';
 import { formatNum } from './format';
+import { getGoogleAuth } from './google-auth';
 import { buildTermsLines, getDeliverySpec, getMoneyLabels, getWarrantyLine } from './delivery-terms';
 
 /** Размер картинки товара в ячейке «Внешний вид», в пикселях при 96 dpi. */
@@ -26,16 +28,46 @@ export interface KpItem {
   isAdditional?: boolean;
 }
 
-/**
- * Приводит ссылку на картинку к прямому адресу, который отдаёт сами байты.
- * Ссылки вида `drive.google.com/file/d/<id>/view` возвращают HTML-страницу,
- * а не изображение, поэтому их надо переписать.
- */
-export function toDirectImageUrl(url: string): string | null {
+/** Идентификатор файла Google Drive из любой формы ссылки. */
+export function driveFileId(url: string): string | null {
   if (!url) return null;
-  const id = url.match(/[?&]id=([^&]+)/)?.[1] || url.match(/\/d\/([a-zA-Z0-9_-]+)/)?.[1];
-  if (id) return `https://lh3.googleusercontent.com/d/${id}`;
-  return url.startsWith('http') ? url : null;
+  return (
+    url.match(/[?&]id=([a-zA-Z0-9_-]+)/)?.[1] ||
+    url.match(/\/d\/([a-zA-Z0-9_-]+)/)?.[1] ||
+    url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/)?.[1] ||
+    null
+  );
+}
+
+/** Похожи ли первые байты на настоящее изображение (а не на HTML-страницу). */
+function looksLikeImage(b: Buffer): boolean {
+  if (b.length < 12) return false;
+  const jpeg = b[0] === 0xff && b[1] === 0xd8;
+  const png = b[0] === 0x89 && b[1] === 0x50 && b[2] === 0x4e && b[3] === 0x47;
+  const gif = b[0] === 0x47 && b[1] === 0x49 && b[2] === 0x46;
+  const webp = b.slice(0, 4).toString('ascii') === 'RIFF' && b.slice(8, 12).toString('ascii') === 'WEBP';
+  const bmp = b[0] === 0x42 && b[1] === 0x4d;
+  return jpeg || png || gif || webp || bmp;
+}
+
+/**
+ * Скачивает файл Google Drive авторизованно — тем же аккаунтом, которым
+ * приложение читает таблицы. Так берётся любое фото, к которому у аккаунта
+ * есть доступ, даже если оно не «публичное по ссылке». Анонимный запрос по
+ * lh3/uc в этом случае вернул бы HTML, и фото не вставлялось.
+ */
+async function fetchFromDrive(fileId: string): Promise<Buffer | null> {
+  try {
+    const drive = google.drive({ version: 'v3', auth: getGoogleAuth() });
+    const res = await drive.files.get(
+      { fileId, alt: 'media' },
+      { responseType: 'arraybuffer', signal: AbortSignal.timeout(12_000) as any }
+    );
+    const buf = Buffer.from(res.data as ArrayBuffer);
+    return looksLikeImage(buf) ? buf : null;
+  } catch {
+    return null;
+  }
 }
 
 /**
@@ -66,18 +98,21 @@ async function shrink(buffer: Buffer): Promise<Buffer | null> {
 
 async function fetchImage(url: string, origin: string): Promise<Buffer | null> {
   try {
-    const target = url.startsWith('/') ? `${origin}${url}` : toDirectImageUrl(url);
+    // 1. Google Drive — качаем авторизованно через API.
+    const id = driveFileId(url);
+    if (id) {
+      const buf = await fetchFromDrive(id);
+      return buf ? await shrink(buf) : null;
+    }
+
+    // 2. Локальный файл или прямой http — обычным запросом.
+    const target = url.startsWith('/') ? `${origin}${url}` : url.startsWith('http') ? url : null;
     if (!target) return null;
     const res = await fetch(target, { signal: AbortSignal.timeout(10_000) });
     if (!res.ok) return null;
-
-    // Мёртвая или непубличная ссылка Drive отдаёт HTML-страницу вместо
-    // картинки. Раньше эти байты вставлялись как «фото» — отсюда ⚠️ в ячейке.
-    // В документ идёт только настоящее изображение.
-    const ct = res.headers.get('content-type') || '';
-    if (!ct.startsWith('image/')) return null;
-
-    return await shrink(Buffer.from(await res.arrayBuffer()));
+    const buf = Buffer.from(await res.arrayBuffer());
+    if (!looksLikeImage(buf)) return null;
+    return await shrink(buf);
   } catch {
     return null;
   }
