@@ -7,8 +7,7 @@ export async function middleware(req: NextRequest) {
   const isProtectedPage = req.nextUrl.pathname === '/';
   const isProtectedApi = req.nextUrl.pathname.startsWith('/api/')
     && !req.nextUrl.pathname.startsWith('/api/auth')
-    && req.nextUrl.pathname !== '/api/health'
-    && req.nextUrl.pathname !== '/api/selftest';
+    && req.nextUrl.pathname !== '/api/health';
 
   if (!isProtectedPage && !isProtectedApi) {
     return NextResponse.next();
