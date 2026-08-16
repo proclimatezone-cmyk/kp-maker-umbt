@@ -1,4 +1,4 @@
-import { syncSheets } from '@/scripts/sync-sheets';
+import { syncSheets } from '@/scripts/sync-sheets.mjs';
 import fs from 'fs';
 import path from 'path';
 

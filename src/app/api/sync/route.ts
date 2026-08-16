@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { syncSheets } from '@/scripts/sync-sheets'
+import { syncSheets } from '@/scripts/sync-sheets.mjs'
 import { setCachedProducts } from '@/lib/products-cache'
 
 export const dynamic = 'force-dynamic';
