@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 export const dynamic = 'force-dynamic';
-export const maxDuration = 10;
 
 /**
  * Пошаговый диагностический прогон. ?step=N ограничивает, до какого шага
