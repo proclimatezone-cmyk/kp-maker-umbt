@@ -615,6 +615,7 @@ export default function Home() {
   const [products, setProducts] = useState<any[]>(productsData)
   const [isMounted, setIsMounted] = useState(false)
   const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved'>('idle')
+  const [baseUpdatedAt, setBaseUpdatedAt] = useState<number | null>(null)
   const [reqOpen, setReqOpen] = useState(true)
   const [stock, setStock] = useState<Record<string, number> | null>(null)
   const [stockError, setStockError] = useState('')
@@ -686,6 +687,7 @@ export default function Home() {
         const data = await res.json();
         if (data.success && data.products.length > 0) {
           setProducts(data.products);
+          setBaseUpdatedAt(Date.now());
         }
       } catch (e) {
         console.error('Failed to load products from API:', e);
@@ -694,12 +696,17 @@ export default function Home() {
 
     loadData();
 
+    // Возврат на вкладку — подтягиваем свежий прайс, чтобы не сидеть на старом.
+    const onFocus = () => { if (document.visibilityState === 'visible') loadData(); };
+    document.addEventListener('visibilitychange', onFocus);
+
     fetch('/api/stock')
       .then(r => r.json())
       .then(d => (d.success ? setStock(d.byArticle) : setStockError(d.error || 'Остатки недоступны')))
       .catch(() => setStockError('Не удалось получить остатки'));
 
     setIsMounted(true)
+    return () => document.removeEventListener('visibilitychange', onFocus);
   }, [uid])
 
 
@@ -856,6 +863,7 @@ export default function Home() {
       const r = await fetch('/api/sync', { method: 'POST' }); const d = await r.json()
       if (d.success && Array.isArray(d.products)) {
         setProducts(d.products)
+        setBaseUpdatedAt(Date.now())
         // Набранное КП не трогаем: обновляется только прайс.
         const missing = items.filter(i => !d.products.some((p: any) => p.id === i.productId)).length
         alert(missing > 0
@@ -908,18 +916,33 @@ export default function Home() {
   const handleGenerate = async () => {
     if (!manager.name || !client) { alert('Заполните ФИО менеджера и название объекта'); return }
     setLoading(true)
+
+    // Перед генерацией всегда берём свежий прайс: менеджер мог держать
+    // вкладку открытой часами, а цены в таблице поменялись. Так в КП всегда
+    // актуальные цены, и обновление не зависит от действий менеджера.
+    let live = products
+    try {
+      const pr = await fetch('/api/products')
+      const pd = await pr.json()
+      if (pd.success && Array.isArray(pd.products) && pd.products.length) {
+        live = pd.products
+        setProducts(pd.products)
+        setBaseUpdatedAt(Date.now())
+      }
+    } catch {}
+
     try {
       const r = await fetch('/api/generate', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
+        body: JSON.stringify({
           manager,
           client,
           cpName,
           cpDate,
           template: options.template || 'new',
           format: options.template === 'old' ? 'pdf' : (options.format || 'docx'),
-          items: items.map(i => { 
-            const p = products.find(x => x.id === i.productId); 
+          items: items.map(i => {
+            const p = live.find(x => x.id === i.productId);
             if (!p) return null;
             const baseUnitPrice = calculatePrice(p.price);
             const discountVal = i.discount || 0;
@@ -971,6 +994,11 @@ export default function Home() {
             </div>
           )}
           <div className="topbar-actions">
+            {baseUpdatedAt && (
+              <span className="base-updated" title="Прайс автоматически обновляется при заходе и перед каждой генерацией">
+                База: {new Date(baseUpdatedAt).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' })}
+              </span>
+            )}
             <button className="btn btn-ghost" onClick={handleSync} disabled={syncing}>
               <RefreshCw size={14} className={syncing ? 'spin' : ''} />
               {syncing ? 'Обновление...' : 'Обновить базу'}

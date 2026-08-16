@@ -962,3 +962,15 @@ body {
 
 .gen-secondary { min-height: 2.9rem; padding: 0.75rem 1.1rem; }
 @media (max-width: 720px) { .gen-secondary { width: 100%; } }
+
+.base-updated {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: var(--bg-input);
+  padding: 0.25rem 0.55rem;
+  border-radius: 20px;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+@media (max-width: 720px) { .base-updated { display: none; } }
