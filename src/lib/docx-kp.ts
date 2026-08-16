@@ -44,16 +44,23 @@ export function toDirectImageUrl(url: string): string | null {
  * перерастает лимит Vercel на размер ответа (4.5 МБ) — тогда вместо файла
  * приходит HTML-страница ошибки. Ширины 500px хватает для печати миниатюры.
  */
-async function shrink(buffer: Buffer): Promise<Buffer> {
+/**
+ * Ужимает фото и подкладывает белый фон. Возвращает null, если sharp не смог
+ * обработать байты — тогда фото просто не вставляется, а не попадает в
+ * документ мусором.
+ */
+async function shrink(buffer: Buffer): Promise<Buffer | null> {
   try {
     const sharp = (await import('sharp')).default;
     return await sharp(buffer)
       .resize({ width: 420, height: 420, fit: 'inside', withoutEnlargement: true })
-      .jpeg({ quality: 72 })
+      // Прозрачные пиксели PNG в JPEG становятся чёрными — подкладываем белый
+      // фон, как в каталоге, иначе фото товара выходит на чёрном.
+      .flatten({ background: '#ffffff' })
+      .jpeg({ quality: 80 })
       .toBuffer();
   } catch {
-    // Нет sharp — отдаём как есть, лучше крупное фото, чем никакого.
-    return buffer;
+    return null;
   }
 }
 
@@ -63,6 +70,13 @@ async function fetchImage(url: string, origin: string): Promise<Buffer | null> {
     if (!target) return null;
     const res = await fetch(target, { signal: AbortSignal.timeout(10_000) });
     if (!res.ok) return null;
+
+    // Мёртвая или непубличная ссылка Drive отдаёт HTML-страницу вместо
+    // картинки. Раньше эти байты вставлялись как «фото» — отсюда ⚠️ в ячейке.
+    // В документ идёт только настоящее изображение.
+    const ct = res.headers.get('content-type') || '';
+    if (!ct.startsWith('image/')) return null;
+
     return await shrink(Buffer.from(await res.arrayBuffer()));
   } catch {
     return null;
