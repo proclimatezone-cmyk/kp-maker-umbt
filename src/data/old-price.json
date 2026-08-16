@@ -1,0 +1,6967 @@
+[
+  {
+    "category": "V8",
+    "series": "V8 Master",
+    "model": "MV8-252WV2GN1(MA)",
+    "articleCode": "22027020002389",
+    "price": 6345
+  },
+  {
+    "category": "V8",
+    "series": "V8 Master",
+    "model": "MV8-280WV2GN1(MA)",
+    "articleCode": "22027020002392",
+    "price": 6538
+  },
+  {
+    "category": "V8",
+    "series": "V8 Master",
+    "model": "MV8-335WV2GN1(MA)",
+    "articleCode": "22027020002305",
+    "price": 7263
+  },
+  {
+    "category": "V8",
+    "series": "V8 Master",
+    "model": "MV8-400WV2GN1(MA)",
+    "articleCode": "22027020002397",
+    "price": 8493
+  },
+  {
+    "category": "V8",
+    "series": "V8 Master",
+    "model": "MV8-450WV2GN1(MA)",
+    "articleCode": "22027020002391",
+    "price": 8864
+  },
+  {
+    "category": "V8",
+    "series": "V8 Master",
+    "model": "MV8-500WV2GN1(MA)",
+    "articleCode": "22027020002265",
+    "price": 10622
+  },
+  {
+    "category": "V8",
+    "series": "V8 Master",
+    "model": "MV8-560WV2GN1(MA)",
+    "articleCode": "22027020002347",
+    "price": 10895
+  },
+  {
+    "category": "V8",
+    "series": "V8 Master",
+    "model": "MV8-615WV2GN1(MA)",
+    "articleCode": "22027020002346",
+    "price": 11631
+  },
+  {
+    "category": "V8",
+    "series": "V8 Master",
+    "model": "MV8-670WV2GN1(MA)",
+    "articleCode": "22027020002345",
+    "price": 13082
+  },
+  {
+    "category": "V8",
+    "series": "V8 Master",
+    "model": "MV8-730WV2GN1(MA)",
+    "articleCode": "22027020002365",
+    "price": 13690
+  },
+  {
+    "category": "V8",
+    "series": "V8 Master",
+    "model": "MV8-785WV2GN1(MA)",
+    "articleCode": "22027020002286",
+    "price": 14326
+  },
+  {
+    "category": "V8",
+    "series": "V8 Master",
+    "model": "MV8-850WV2GN1(MA)",
+    "articleCode": "22027020002285",
+    "price": 15452
+  },
+  {
+    "category": "V8",
+    "series": "V8 Master",
+    "model": "MV8-900WV2GN1(MA)",
+    "articleCode": "22027020002393",
+    "price": 15573
+  },
+  {
+    "category": "V8",
+    "series": "V8 Master",
+    "model": "MV8-950WV2GN1(MA)",
+    "articleCode": "22027020002390",
+    "price": 16111
+  },
+  {
+    "category": "V8",
+    "series": "V8 Master",
+    "model": "MV8-1010WV2GN1(MA)",
+    "articleCode": "22027020002386",
+    "price": 16302
+  },
+  {
+    "category": "V8",
+    "series": "V8 Master",
+    "model": "MV8-1060WV2GN1(MA)",
+    "articleCode": "22027020002425",
+    "price": 17583
+  },
+  {
+    "category": "V8",
+    "series": "V8 Master",
+    "model": "MV8-1120WV2GN1(MA)",
+    "articleCode": "22027020002325",
+    "price": 17984
+  },
+  {
+    "category": "V8",
+    "series": "V8i Master",
+    "model": "MV8i-252WV2GN1(MA)",
+    "articleCode": "22027020002647",
+    "price": 5221
+  },
+  {
+    "category": "V8",
+    "series": "V8i Master",
+    "model": "MV8i-280WV2GN1(MA)",
+    "articleCode": "22027020002633",
+    "price": 5319
+  },
+  {
+    "category": "V8",
+    "series": "V8i Master",
+    "model": "MV8i-335WV2GN1(MA)",
+    "articleCode": "22027020002646",
+    "price": 6109
+  },
+  {
+    "category": "V8",
+    "series": "V8i Master",
+    "model": "MV8i-400WV2GN1(MA)",
+    "articleCode": "22027020002637",
+    "price": 7144
+  },
+  {
+    "category": "V8",
+    "series": "V8i Master",
+    "model": "MV8i-450WV2GN1(MA)",
+    "articleCode": "22027020002623",
+    "price": 7257
+  },
+  {
+    "category": "V8",
+    "series": "V8i Master",
+    "model": "MV8i-500WV2GN1(MA)",
+    "articleCode": "22027020002645",
+    "price": 8083
+  },
+  {
+    "category": "V8",
+    "series": "V8i Master",
+    "model": "MV8i-560WV2GN1(MA)",
+    "articleCode": "22027020002629",
+    "price": 8565
+  },
+  {
+    "category": "V8",
+    "series": "V8i Master",
+    "model": "MV8i-615WV2GN1(MA)",
+    "articleCode": "22027020002630",
+    "price": 9335
+  },
+  {
+    "category": "V8",
+    "series": "V8i Master",
+    "model": "MV8i-670WV2GN1(MA)",
+    "articleCode": "22027020002627",
+    "price": 10225
+  },
+  {
+    "category": "V8",
+    "series": "V8i Master",
+    "model": "MV8i-730WV2GN1(MA)",
+    "articleCode": "22027020002608",
+    "price": 12837
+  },
+  {
+    "category": "V8",
+    "series": "V8i Master",
+    "model": "MV8i-785WV2GN1(MA)",
+    "articleCode": "22027020002609",
+    "price": 12941
+  },
+  {
+    "category": "V8",
+    "series": "V8i Master",
+    "model": "MV8i-850WV2GN1(MA)",
+    "articleCode": "22027020002619",
+    "price": 13362
+  },
+  {
+    "category": "V8",
+    "series": "V8i Master",
+    "model": "MV8i-900WV2GN1(MA)",
+    "articleCode": "22027020002618",
+    "price": 14215
+  },
+  {
+    "category": "V8",
+    "series": "V8i Master",
+    "model": "MV8i-950WV2GN1(MA)",
+    "articleCode": "22027020002626",
+    "price": 14445
+  },
+  {
+    "category": "V8",
+    "series": "V8i Master",
+    "model": "MV8i-1010WV2GN1(MA)",
+    "articleCode": "22027020002611",
+    "price": 15092
+  },
+  {
+    "category": "V8",
+    "series": "V8i Master",
+    "model": "MV8i-1060WV2GN1(MA)",
+    "articleCode": "22027020002616",
+    "price": 15712
+  },
+  {
+    "category": "V8",
+    "series": "V8i Master",
+    "model": "MV8i-1120WV2GN1(MA)",
+    "articleCode": "22027020002625",
+    "price": 16179
+  },
+  {
+    "category": "V8",
+    "series": "V8i Master",
+    "model": "MV8i-1170WV2GN1(MA)",
+    "articleCode": "22027020002614",
+    "price": 16380
+  },
+  {
+    "category": "V8",
+    "series": "VC MAX",
+    "model": "MVC-M224WV2GN1",
+    "articleCode": "22027020003247",
+    "price": 2973
+  },
+  {
+    "category": "V8",
+    "series": "VC MAX",
+    "model": "MVC-M280WV2GN1",
+    "articleCode": "22027020003245",
+    "price": 3190
+  },
+  {
+    "category": "V8",
+    "series": "VC MAX",
+    "model": "MVC-M335WV2GN1",
+    "articleCode": "22027020003225",
+    "price": 3297
+  },
+  {
+    "category": "V8",
+    "series": "VC MAX",
+    "model": "MVC-M400WV2GN1",
+    "articleCode": "22027020003246",
+    "price": 4332
+  },
+  {
+    "category": "V8",
+    "series": "VC MAX",
+    "model": "MVC-M450WV2GN1",
+    "articleCode": "22027020003165",
+    "price": 4347
+  },
+  {
+    "category": "V8",
+    "series": "VC MAX",
+    "model": "MVC-M500WV2GN1",
+    "articleCode": "22027020003188",
+    "price": 5723
+  },
+  {
+    "category": "V8",
+    "series": "VC MAX",
+    "model": "MVC-M560WV2GN1",
+    "articleCode": "22027020003205",
+    "price": 5733
+  },
+  {
+    "category": "V8",
+    "series": "VC MAX",
+    "model": "MVC-M615WV2GN1",
+    "articleCode": "22027020003189",
+    "price": 6358
+  },
+  {
+    "category": "V8",
+    "series": "VC MAX",
+    "model": "MVC-M670WV2GN1",
+    "articleCode": "22027020003190",
+    "price": 6942
+  },
+  {
+    "category": "V8",
+    "series": "VC MAX",
+    "model": "MVC-M730WV2GN1",
+    "articleCode": "22027020003185",
+    "price": 7020
+  },
+  {
+    "category": "V8",
+    "series": "VC MAX",
+    "model": "MVC-M785WV2GN1",
+    "articleCode": "22027020003187",
+    "price": 7272
+  },
+  {
+    "category": "V8",
+    "series": "VC MAX",
+    "model": "MVC-M850WV2GN1",
+    "articleCode": "22027020003186",
+    "price": 7706
+  },
+  {
+    "category": "V8",
+    "series": "V8S",
+    "model": "MV8S-252WV2GN1",
+    "articleCode": "22027020002412",
+    "price": 5487
+  },
+  {
+    "category": "V8",
+    "series": "V8S",
+    "model": "MV8S-280WV2GN1",
+    "articleCode": "22027020002413",
+    "price": 5835
+  },
+  {
+    "category": "V8",
+    "series": "V8S",
+    "model": "MV8S-335WV2GN1",
+    "articleCode": "22027020002410",
+    "price": 6460
+  },
+  {
+    "category": "V8",
+    "series": "V8S",
+    "model": "MV8S-400WV2GN1",
+    "articleCode": "22027020002407",
+    "price": 7062
+  },
+  {
+    "category": "V8",
+    "series": "V8S",
+    "model": "MV8S-450WV2GN1",
+    "articleCode": "22027020002408",
+    "price": 7632
+  },
+  {
+    "category": "V8",
+    "series": "V8S",
+    "model": "MV8S-500WV2GN1",
+    "articleCode": "22027020002411",
+    "price": 8296
+  },
+  {
+    "category": "V8",
+    "series": "V8S",
+    "model": "MV8S-560WV2GN1",
+    "articleCode": "22027020002406",
+    "price": 9315
+  },
+  {
+    "category": "V8",
+    "series": "V8S",
+    "model": "MV8S-615WV2GN1",
+    "articleCode": "22027020002405",
+    "price": 9898
+  },
+  {
+    "category": "V8",
+    "series": "V8S",
+    "model": "MV8S-670WV2GN1",
+    "articleCode": "22027020002409",
+    "price": 10810
+  },
+  {
+    "category": "V8",
+    "series": "Easyfit",
+    "model": "MVi-252WV2GN1(B)",
+    "articleCode": "22027020002998",
+    "price": 4661
+  },
+  {
+    "category": "V8",
+    "series": "Easyfit",
+    "model": "MVi-280WV2GN1(B)",
+    "articleCode": "22027020003000",
+    "price": 4772
+  },
+  {
+    "category": "V8",
+    "series": "Easyfit",
+    "model": "MVi-335WV2GN1(B)",
+    "articleCode": "22027020002999",
+    "price": 5453
+  },
+  {
+    "category": "V8",
+    "series": "Easyfit",
+    "model": "MVi-400WV2GN1(A)",
+    "articleCode": "22027020002588",
+    "price": 6321
+  },
+  {
+    "category": "V8",
+    "series": "Easyfit",
+    "model": "MVi-450WV2GN1(A)",
+    "articleCode": "22027020002589",
+    "price": 6637
+  },
+  {
+    "category": "V8",
+    "series": "Easyfit",
+    "model": "MVi-500WV2GN1(A)",
+    "articleCode": "22027020002587",
+    "price": 7215
+  },
+  {
+    "category": "V8",
+    "series": "Easyfit",
+    "model": "MVi-560WV2GN1(A)",
+    "articleCode": "22027020002585",
+    "price": 7760
+  },
+  {
+    "category": "V8",
+    "series": "Easyfit",
+    "model": "MVi-615WV2GN1(A)",
+    "articleCode": "22027020002586",
+    "price": 8333
+  },
+  {
+    "category": "V8",
+    "series": "Easyfit",
+    "model": "MVi-670WV2GN1(A)",
+    "articleCode": "22027020002590",
+    "price": 9126
+  },
+  {
+    "category": "V8",
+    "series": "R410a V8 Mini",
+    "model": "MV8M-120WV2GN1",
+    "articleCode": "22027020002868",
+    "price": 2569
+  },
+  {
+    "category": "V8",
+    "series": "R410a V8 Mini",
+    "model": "MV8M-140WV2GN1",
+    "articleCode": "22027020002866",
+    "price": 2802
+  },
+  {
+    "category": "V8",
+    "series": "R410a V8 Mini",
+    "model": "MV8M-160WV2GN1",
+    "articleCode": "22027020002667",
+    "price": 3153
+  },
+  {
+    "category": "V8",
+    "series": "R410a V8 Mini",
+    "model": "MV8M-170WV2GN1",
+    "articleCode": "22027020002667",
+    "price": 3229
+  },
+  {
+    "category": "V8",
+    "series": "R410a V8 Mini",
+    "model": "MV8M-80WV2HN1",
+    "articleCode": "22027020002867",
+    "price": 1530
+  },
+  {
+    "category": "V8",
+    "series": "R410a V8 Mini",
+    "model": "MV8M-100WV2HN1",
+    "articleCode": "22027020002666",
+    "price": 1781
+  },
+  {
+    "category": "V8",
+    "series": "R410a V8 Mini",
+    "model": "MV8M-120WV2HN1",
+    "articleCode": "22027020002869",
+    "price": 2140
+  },
+  {
+    "category": "V8",
+    "series": "R410a V8 Mini",
+    "model": "MV8M-140WV2HN1",
+    "articleCode": "22027020002865",
+    "price": 2334
+  },
+  {
+    "category": "V8",
+    "series": "R410a V8 Mini",
+    "model": "MV8M-160WV2HN1",
+    "articleCode": "22027020002665",
+    "price": 2628
+  },
+  {
+    "category": "V8",
+    "series": "R410a V8 Mini",
+    "model": "MV8M-170WV2HN1",
+    "articleCode": "22027020002665",
+    "price": 2863
+  },
+  {
+    "category": "V8",
+    "series": "R32 V8 Mini",
+    "model": "MV8M-120WV2RN8",
+    "articleCode": "22027020002530",
+    "price": 2544
+  },
+  {
+    "category": "V8",
+    "series": "R32 V8 Mini",
+    "model": "MV8M-140WV2RN8",
+    "articleCode": "22027020002529",
+    "price": 2776
+  },
+  {
+    "category": "V8",
+    "series": "R32 V8 Mini",
+    "model": "MV8M-160WV2RN8",
+    "articleCode": "22027020002526",
+    "price": 3123
+  },
+  {
+    "category": "V8",
+    "series": "R32 V8 Mini",
+    "model": "MV8M-180WV2RN8",
+    "articleCode": "22027020002245",
+    "price": 3321
+  },
+  {
+    "category": "V8",
+    "series": "R32 V8 Mini",
+    "model": "MV8M-80WV2N8",
+    "articleCode": "22027020002527",
+    "price": 1652
+  },
+  {
+    "category": "V8",
+    "series": "R32 V8 Mini",
+    "model": "MV8M-100WV2N8",
+    "articleCode": "22027020002246",
+    "price": 1695
+  },
+  {
+    "category": "V8",
+    "series": "R32 V8 Mini",
+    "model": "MV8M-120WV2N8",
+    "articleCode": "22027020002528",
+    "price": 2099
+  },
+  {
+    "category": "V8",
+    "series": "R32 V8 Mini",
+    "model": "MV8M-140WV2N8",
+    "articleCode": "22027020002531",
+    "price": 2270
+  },
+  {
+    "category": "V8",
+    "series": "R32 V8 Mini",
+    "model": "MV8M-160WV2N8",
+    "articleCode": "22027020002525",
+    "price": 2437
+  },
+  {
+    "category": "V8",
+    "series": "R32 V8 Mini",
+    "model": "MV8M-180WV2N8",
+    "articleCode": "22027020002225",
+    "price": 2550
+  },
+  {
+    "category": "V8",
+    "series": "Compact Four-way cassette",
+    "model": "MIH15Q4CHN18",
+    "articleCode": "22026012000977",
+    "price": 376
+  },
+  {
+    "category": "V8",
+    "series": "Compact Four-way cassette",
+    "model": "MIH22Q4CHN18",
+    "articleCode": "22026012000995",
+    "price": 415
+  },
+  {
+    "category": "V8",
+    "series": "Compact Four-way cassette",
+    "model": "MIH28Q4CHN18",
+    "articleCode": "22026012000994",
+    "price": 422
+  },
+  {
+    "category": "V8",
+    "series": "Compact Four-way cassette",
+    "model": "MIH36Q4CHN18",
+    "articleCode": "22026012000996",
+    "price": 452
+  },
+  {
+    "category": "V8",
+    "series": "Compact Four-way cassette",
+    "model": "MIH45Q4CHN18",
+    "articleCode": "22026012000980",
+    "price": 495
+  },
+  {
+    "category": "V8",
+    "series": "Compact Four-way cassette",
+    "model": "MIH56Q4CHN18",
+    "articleCode": "22026012000998",
+    "price": 517
+  },
+  {
+    "category": "V8",
+    "series": "Compact Four-way cassette",
+    "model": "MIH63Q4CHN18",
+    "articleCode": "22026012000979",
+    "price": 539
+  },
+  {
+    "category": "V8",
+    "series": "Compact Four-way cassette",
+    "model": "T-MBQ4-03F",
+    "articleCode": "22012900003270",
+    "price": 88
+  },
+  {
+    "category": "V8",
+    "series": "Compact Four-way cassette",
+    "model": "T-MBQ4C-8PC(HS)",
+    "articleCode": "22012900003270",
+    "price": 107
+  },
+  {
+    "category": "V8",
+    "series": "Four-way cassette",
+    "model": "MIH28Q4HN18",
+    "articleCode": "22026012001122",
+    "price": 454
+  },
+  {
+    "category": "V8",
+    "series": "Four-way cassette",
+    "model": "MIH36Q4HN18",
+    "articleCode": "22026012001130",
+    "price": 463
+  },
+  {
+    "category": "V8",
+    "series": "Four-way cassette",
+    "model": "MIH45Q4HN18",
+    "articleCode": "22026012001124",
+    "price": 526
+  },
+  {
+    "category": "V8",
+    "series": "Four-way cassette",
+    "model": "MIH56Q4HN18",
+    "articleCode": "22026012001115",
+    "price": 547
+  },
+  {
+    "category": "V8",
+    "series": "Four-way cassette",
+    "model": "MIH71Q4HN18",
+    "articleCode": "22026012001132",
+    "price": 712
+  },
+  {
+    "category": "V8",
+    "series": "Four-way cassette",
+    "model": "MIH80Q4HN18",
+    "articleCode": "22026012001129",
+    "price": 734
+  },
+  {
+    "category": "V8",
+    "series": "Four-way cassette",
+    "model": "MIH90Q4HN18",
+    "articleCode": "22026012001123",
+    "price": 749
+  },
+  {
+    "category": "V8",
+    "series": "Four-way cassette",
+    "model": "MIH100Q4HN18",
+    "articleCode": "22026012001128",
+    "price": 808
+  },
+  {
+    "category": "V8",
+    "series": "Four-way cassette",
+    "model": "MIH112Q4HN18",
+    "articleCode": "22026012001133",
+    "price": 953
+  },
+  {
+    "category": "V8",
+    "series": "Four-way cassette",
+    "model": "MIH140Q4HN18",
+    "articleCode": "22026012001121",
+    "price": 992
+  },
+  {
+    "category": "V8",
+    "series": "Four-way cassette",
+    "model": "MIH160Q4HN18",
+    "articleCode": "22026012001277",
+    "price": 1003
+  },
+  {
+    "category": "V8",
+    "series": "Four-way cassette",
+    "model": "MIH180Q4HN18",
+    "articleCode": "22026012001275",
+    "price": 1033
+  },
+  {
+    "category": "V8",
+    "series": "Four-way cassette",
+    "model": "T-MBQ4-01F",
+    "articleCode": "22012900003290",
+    "price": 131
+  },
+  {
+    "category": "V8",
+    "series": "Four-way cassette",
+    "model": "T-MBQ4-8PC(HS)",
+    "articleCode": "22012900003290",
+    "price": 157
+  },
+  {
+    "category": "V8",
+    "series": "Four-way cassette",
+    "model": "T-MBQ4-02E1",
+    "articleCode": "22012900003350",
+    "price": 185
+  },
+  {
+    "category": "V8",
+    "series": "ARC Duct",
+    "model": "MIH15T3HN18",
+    "articleCode": "22026011001494",
+    "price": 393
+  },
+  {
+    "category": "V8",
+    "series": "ARC Duct",
+    "model": "MIH22T3HN18",
+    "articleCode": "22026011001492",
+    "price": 420
+  },
+  {
+    "category": "V8",
+    "series": "ARC Duct",
+    "model": "MIH28T3HN18",
+    "articleCode": "22026011001491",
+    "price": 437
+  },
+  {
+    "category": "V8",
+    "series": "ARC Duct",
+    "model": "MIH36T3HN18",
+    "articleCode": "22026011001495",
+    "price": 443
+  },
+  {
+    "category": "V8",
+    "series": "ARC Duct",
+    "model": "MIH45T3HN18",
+    "articleCode": "22026011001496",
+    "price": 521
+  },
+  {
+    "category": "V8",
+    "series": "ARC Duct",
+    "model": "MIH56T3HN18",
+    "articleCode": "22026011001478",
+    "price": 556
+  },
+  {
+    "category": "V8",
+    "series": "ARC Duct",
+    "model": "MIH71T3HN18",
+    "articleCode": "22026011001490",
+    "price": 591
+  },
+  {
+    "category": "V8",
+    "series": "ARC Duct",
+    "model": "MIH80T3HN18",
+    "articleCode": "22026011001497",
+    "price": 582
+  },
+  {
+    "category": "V8",
+    "series": "ARC Duct",
+    "model": "MIH90T3HN18",
+    "articleCode": "22026011001485",
+    "price": 626
+  },
+  {
+    "category": "V8",
+    "series": "ARC Duct",
+    "model": "MIH112T3HN18",
+    "articleCode": "22026011001493",
+    "price": 686
+  },
+  {
+    "category": "V8",
+    "series": "Medium Static Pressure Duct",
+    "model": "MIH15T2HN18",
+    "articleCode": "22026011001510",
+    "price": 415
+  },
+  {
+    "category": "V8",
+    "series": "Medium Static Pressure Duct",
+    "model": "MIH22T2HN18",
+    "articleCode": "22026011001505",
+    "price": 437
+  },
+  {
+    "category": "V8",
+    "series": "Medium Static Pressure Duct",
+    "model": "MIH28T2HN18",
+    "articleCode": "22026011001515",
+    "price": 454
+  },
+  {
+    "category": "V8",
+    "series": "Medium Static Pressure Duct",
+    "model": "MIH36T2HN18",
+    "articleCode": "22026011001498",
+    "price": 461
+  },
+  {
+    "category": "V8",
+    "series": "Medium Static Pressure Duct",
+    "model": "MIH45T2HN18",
+    "articleCode": "22026011001503",
+    "price": 543
+  },
+  {
+    "category": "V8",
+    "series": "Medium Static Pressure Duct",
+    "model": "MIH56T2HN18",
+    "articleCode": "22026011001513",
+    "price": 578
+  },
+  {
+    "category": "V8",
+    "series": "Medium Static Pressure Duct",
+    "model": "MIH71T2HN18",
+    "articleCode": "22026011001518",
+    "price": 615
+  },
+  {
+    "category": "V8",
+    "series": "Medium Static Pressure Duct",
+    "model": "MIH80T2HN18",
+    "articleCode": "22026011001516",
+    "price": 606
+  },
+  {
+    "category": "V8",
+    "series": "Medium Static Pressure Duct",
+    "model": "MIH90T2HN18",
+    "articleCode": "22026011001499",
+    "price": 651
+  },
+  {
+    "category": "V8",
+    "series": "Medium Static Pressure Duct",
+    "model": "MIH112T2HN18",
+    "articleCode": "22026011001500",
+    "price": 715
+  },
+  {
+    "category": "V8",
+    "series": "Medium Static Pressure Duct",
+    "model": "MIH125T2HN18",
+    "articleCode": "22026011001511",
+    "price": 721
+  },
+  {
+    "category": "V8",
+    "series": "Medium Static Pressure Duct",
+    "model": "MIH140T2HN18",
+    "articleCode": "22026011001511",
+    "price": 736
+  },
+  {
+    "category": "V8",
+    "series": "Medium Static Pressure Duct",
+    "model": "MIH160T2HN18",
+    "articleCode": "22026011001511",
+    "price": 786
+  },
+  {
+    "category": "V8",
+    "series": "Small Airflow Rate ",
+    "model": "MIH90FASHN18",
+    "articleCode": "22026021000225",
+    "price": 841
+  },
+  {
+    "category": "V8",
+    "series": "Small Airflow Rate ",
+    "model": "MIH140FASHN18",
+    "articleCode": "22026021000224",
+    "price": 873
+  },
+  {
+    "category": "V8",
+    "series": "Small Airflow Rate ",
+    "model": "MIH160FASHN18",
+    "articleCode": "22026021000226",
+    "price": 940
+  },
+  {
+    "category": "V8",
+    "series": "Small Airflow Rate ",
+    "model": "MIH224FASHN18",
+    "articleCode": "22026021000223",
+    "price": 1202
+  },
+  {
+    "category": "V8",
+    "series": "Small Airflow Rate ",
+    "model": "MIH280FASHN18",
+    "articleCode": "22026021000245",
+    "price": 1297
+  },
+  {
+    "category": "V8",
+    "series": "Fresh Air Processing Unit",
+    "model": "MIH200FAHN18",
+    "articleCode": "22026021000206",
+    "price": 2157
+  },
+  {
+    "category": "V8",
+    "series": "Fresh Air Processing Unit",
+    "model": "MIH224FAHN18",
+    "articleCode": "22026021000207",
+    "price": 2196
+  },
+  {
+    "category": "V8",
+    "series": "Fresh Air Processing Unit",
+    "model": "MIH252FAHN18",
+    "articleCode": "22026021000210",
+    "price": 2227
+  },
+  {
+    "category": "V8",
+    "series": "Fresh Air Processing Unit",
+    "model": "MIH280FAHN18",
+    "articleCode": "22026021000205",
+    "price": 2249
+  },
+  {
+    "category": "V8",
+    "series": "Fresh Air Processing Unit",
+    "model": "MIH335FAHN18",
+    "articleCode": "22026021000203",
+    "price": 2283
+  },
+  {
+    "category": "V8",
+    "series": "Fresh Air Processing Unit",
+    "model": "MIH400FAHN18",
+    "articleCode": "22026021000204",
+    "price": 2781
+  },
+  {
+    "category": "V8",
+    "series": "Fresh Air Processing Unit",
+    "model": "MIH450FAHN18",
+    "articleCode": "22026021000208",
+    "price": 2904
+  },
+  {
+    "category": "V8",
+    "series": "Fresh Air Processing Unit",
+    "model": "MIH560FAHN18",
+    "articleCode": "22026021000209",
+    "price": 3231
+  },
+  {
+    "category": "V8",
+    "series": "Wall-mounted unit",
+    "model": "MIH15GHN18",
+    "articleCode": "22026010000509",
+    "price": 346
+  },
+  {
+    "category": "V8",
+    "series": "Wall-mounted unit",
+    "model": "MIH22GHN18",
+    "articleCode": "22026010000505",
+    "price": 367
+  },
+  {
+    "category": "V8",
+    "series": "Wall-mounted unit",
+    "model": "MIH28GHN18",
+    "articleCode": "22026010000510",
+    "price": 387
+  },
+  {
+    "category": "V8",
+    "series": "Wall-mounted unit",
+    "model": "MIH36GHN18",
+    "articleCode": "22026010000503",
+    "price": 430
+  },
+  {
+    "category": "V8",
+    "series": "Wall-mounted unit",
+    "model": "MIH45GHN18",
+    "articleCode": "22026010000499",
+    "price": 487
+  },
+  {
+    "category": "V8",
+    "series": "Wall-mounted unit",
+    "model": "MIH56GHN18",
+    "articleCode": "22026010000502",
+    "price": 498
+  },
+  {
+    "category": "V8",
+    "series": "Wall-mounted unit",
+    "model": "MIH71GHN18",
+    "articleCode": "22026010000601",
+    "price": 537
+  },
+  {
+    "category": "V8",
+    "series": "Wall-mounted unit",
+    "model": "MIH80GHN18",
+    "articleCode": "22026010000602",
+    "price": 547
+  },
+  {
+    "category": "V8",
+    "series": "Wall-mounted unit BLACK",
+    "model": "MIH15GHN18-B",
+    "articleCode": "22026010000509",
+    "price": 396
+  },
+  {
+    "category": "V8",
+    "series": "Wall-mounted unit BLACK",
+    "model": "MIH22GHN18-B",
+    "articleCode": "22026010000505",
+    "price": 456
+  },
+  {
+    "category": "V8",
+    "series": "Wall-mounted unit BLACK",
+    "model": "MIH28GHN18-B",
+    "articleCode": "22026010000510",
+    "price": 474
+  },
+  {
+    "category": "V8",
+    "series": "Wall-mounted unit BLACK",
+    "model": "MIH36GHN18-B",
+    "articleCode": "22026010000503",
+    "price": 509
+  },
+  {
+    "category": "V8",
+    "series": "Wall-mounted unit BLACK",
+    "model": "MIH45GHN18-B",
+    "articleCode": "22026010000499",
+    "price": 565
+  },
+  {
+    "category": "V8",
+    "series": "Wall-mounted unit BLACK",
+    "model": "MIH56GHN18-B",
+    "articleCode": "22026010000502",
+    "price": 580
+  },
+  {
+    "category": "V8",
+    "series": "Wall-mounted unit BLACK",
+    "model": "MIH71GHN18-B",
+    "articleCode": "22026010000601",
+    "price": 645
+  },
+  {
+    "category": "V8",
+    "series": "Wall-mounted unit BLACK",
+    "model": "MIH80GHN18-B",
+    "articleCode": "22026010000602",
+    "price": 656
+  },
+  {
+    "category": "V8",
+    "series": "Two-Way Cassette",
+    "model": "MIH22Q2HN18",
+    "articleCode": "22026012001196",
+    "price": 539
+  },
+  {
+    "category": "V8",
+    "series": "Two-Way Cassette",
+    "model": "MIH28Q2HN18",
+    "articleCode": "22026012001216",
+    "price": 578
+  },
+  {
+    "category": "V8",
+    "series": "Two-Way Cassette",
+    "model": "MIH36Q2HN18",
+    "articleCode": "22026012001218",
+    "price": 610
+  },
+  {
+    "category": "V8",
+    "series": "Two-Way Cassette",
+    "model": "MIH45Q2HN18",
+    "articleCode": "22026012001214",
+    "price": 626
+  },
+  {
+    "category": "V8",
+    "series": "Two-Way Cassette",
+    "model": "MIH56Q2HN18",
+    "articleCode": "22026012001194",
+    "price": 645
+  },
+  {
+    "category": "V8",
+    "series": "Two-Way Cassette",
+    "model": "MIH71Q2HN18",
+    "articleCode": "22026012001198",
+    "price": 671
+  },
+  {
+    "category": "V8",
+    "series": "Two-Way Cassette",
+    "model": "T-MBQ2-01A",
+    "articleCode": "22012900003432",
+    "price": 200
+  },
+  {
+    "category": "V8",
+    "series": "One-Way Cassette",
+    "model": "MIH18Q1HN18",
+    "articleCode": "22026012001237",
+    "price": 415
+  },
+  {
+    "category": "V8",
+    "series": "One-Way Cassette",
+    "model": "MIH22Q1HN18",
+    "articleCode": "22026012001234",
+    "price": 454
+  },
+  {
+    "category": "V8",
+    "series": "One-Way Cassette",
+    "model": "MIH28Q1HN18",
+    "articleCode": "22026012001254",
+    "price": 500
+  },
+  {
+    "category": "V8",
+    "series": "One-Way Cassette",
+    "model": "MIH36Q1HN18",
+    "articleCode": "22026012001240",
+    "price": 509
+  },
+  {
+    "category": "V8",
+    "series": "One-Way Cassette",
+    "model": "MIH45Q1HN18",
+    "articleCode": "22026012001236",
+    "price": 513
+  },
+  {
+    "category": "V8",
+    "series": "One-Way Cassette",
+    "model": "MIH56Q1HN18",
+    "articleCode": "22026012001241",
+    "price": 552
+  },
+  {
+    "category": "V8",
+    "series": "One-Way Cassette",
+    "model": "MIH71Q1HN18",
+    "articleCode": "22026012001238",
+    "price": 586
+  },
+  {
+    "category": "V8",
+    "series": "One-Way Cassette",
+    "model": "T-MBQ1-02E",
+    "articleCode": "22012900003431",
+    "price": 72
+  },
+  {
+    "category": "V8",
+    "series": "One-Way Cassette",
+    "model": "T-MBQ1-01E",
+    "articleCode": "22012900003430",
+    "price": 127
+  },
+  {
+    "category": "V8",
+    "series": "New One-Way Cassette",
+    "model": "MIH18Q1HN18(A)",
+    "articleCode": "22026012001376",
+    "price": 409
+  },
+  {
+    "category": "V8",
+    "series": "New One-Way Cassette",
+    "model": "MIH22Q1HN18(A)",
+    "articleCode": "22026012001356",
+    "price": 445
+  },
+  {
+    "category": "V8",
+    "series": "New One-Way Cassette",
+    "model": "MIH28Q1HN18(A)",
+    "articleCode": "22026012001375",
+    "price": 478
+  },
+  {
+    "category": "V8",
+    "series": "New One-Way Cassette",
+    "model": "MIH36Q1HN18(A)",
+    "articleCode": "22026012001354",
+    "price": 498
+  },
+  {
+    "category": "V8",
+    "series": "New One-Way Cassette",
+    "model": "MIH45Q1HN18(A)",
+    "articleCode": "22026012001377",
+    "price": 513
+  },
+  {
+    "category": "V8",
+    "series": "New One-Way Cassette",
+    "model": "MIH56Q1HN18(A)",
+    "articleCode": "22026012001374",
+    "price": 541
+  },
+  {
+    "category": "V8",
+    "series": "New One-Way Cassette",
+    "model": "MIH71Q1HN18(A)",
+    "articleCode": "22026012001355",
+    "price": 576
+  },
+  {
+    "category": "V8",
+    "series": "New One-Way Cassette",
+    "model": "T-MBQ1-01G",
+    "articleCode": "22013900000021",
+    "price": 72
+  },
+  {
+    "category": "V8",
+    "series": "New One-Way Cassette",
+    "model": "T-MBQ1-02G",
+    "articleCode": "22013900000023",
+    "price": 79
+  },
+  {
+    "category": "V8",
+    "series": "New One-Way Cassette",
+    "model": "T-MBQ1-03G",
+    "articleCode": "22013900000022",
+    "price": 113
+  },
+  {
+    "category": "V8",
+    "series": "Floor Standing",
+    "model": "MIH22F3HN18",
+    "articleCode": "22026014000292",
+    "price": 532
+  },
+  {
+    "category": "V8",
+    "series": "Floor Standing",
+    "model": "MIH28F3HN18",
+    "articleCode": "22026014000291",
+    "price": 545
+  },
+  {
+    "category": "V8",
+    "series": "Floor Standing",
+    "model": "MIH36F3HN18",
+    "articleCode": "22026014000287",
+    "price": 599
+  },
+  {
+    "category": "V8",
+    "series": "Floor Standing",
+    "model": "MIH45F3HN18",
+    "articleCode": "22026014000294",
+    "price": 634
+  },
+  {
+    "category": "V8",
+    "series": "Floor Standing",
+    "model": "MIH56F3HN18",
+    "articleCode": "22026014000296",
+    "price": 686
+  },
+  {
+    "category": "V8",
+    "series": "Floor Standing",
+    "model": "MIH71F3HN18",
+    "articleCode": "22026014000290",
+    "price": 708
+  },
+  {
+    "category": "V8",
+    "series": "Floor Standing",
+    "model": "MIH80F3HN18",
+    "articleCode": "22026014000290  customize",
+    "price": 738
+  },
+  {
+    "category": "V8",
+    "series": "Floor Standing",
+    "model": "MIH22F4HN18",
+    "articleCode": "22026014000295  customize",
+    "price": 574
+  },
+  {
+    "category": "V8",
+    "series": "Floor Standing",
+    "model": "MIH28F4HN18",
+    "articleCode": "22026014000289  customize",
+    "price": 593
+  },
+  {
+    "category": "V8",
+    "series": "Floor Standing",
+    "model": "MIH36F4HN18",
+    "articleCode": "22026014000288  customize",
+    "price": 645
+  },
+  {
+    "category": "V8",
+    "series": "Floor Standing",
+    "model": "MIH45F4HN18",
+    "articleCode": "22026014000293  customize",
+    "price": 686
+  },
+  {
+    "category": "V8",
+    "series": "Floor Standing",
+    "model": "MIH56F4HN18",
+    "articleCode": "22026014000285  customize",
+    "price": 736
+  },
+  {
+    "category": "V8",
+    "series": "Floor Standing",
+    "model": "MIH71F4HN18",
+    "articleCode": "22026014000286  customize",
+    "price": 760
+  },
+  {
+    "category": "V8",
+    "series": "Floor Standing",
+    "model": "MIH80F4HN18",
+    "articleCode": "22026014000286  customize",
+    "price": 799
+  },
+  {
+    "category": "V8",
+    "series": "Floor Standing ",
+    "model": "MIH22F5HN18",
+    "articleCode": "22026014000295",
+    "price": 574
+  },
+  {
+    "category": "V8",
+    "series": "Floor Standing ",
+    "model": "MIH28F5HN18",
+    "articleCode": "22026014000289",
+    "price": 593
+  },
+  {
+    "category": "V8",
+    "series": "Floor Standing ",
+    "model": "MIH36F5HN18",
+    "articleCode": "22026014000288",
+    "price": 645
+  },
+  {
+    "category": "V8",
+    "series": "Floor Standing ",
+    "model": "MIH45F5HN18",
+    "articleCode": "22026014000293",
+    "price": 686
+  },
+  {
+    "category": "V8",
+    "series": "Floor Standing ",
+    "model": "MIH56F5HN18",
+    "articleCode": "22026014000285",
+    "price": 736
+  },
+  {
+    "category": "V8",
+    "series": "Floor Standing ",
+    "model": "MIH71F5HN18",
+    "articleCode": "22026014000286",
+    "price": 760
+  },
+  {
+    "category": "V8",
+    "series": "Floor Standing ",
+    "model": "MIH80F5HN18",
+    "articleCode": "22026014000286  customize",
+    "price": 799
+  },
+  {
+    "category": "V8",
+    "series": "High static pressure duct",
+    "model": "MIH56T1HN18",
+    "articleCode": "22026011001660",
+    "price": 665
+  },
+  {
+    "category": "V8",
+    "series": "High static pressure duct",
+    "model": "MIH71T1HN18",
+    "articleCode": "22026011001661",
+    "price": 721
+  },
+  {
+    "category": "V8",
+    "series": "High static pressure duct",
+    "model": "MIH80T1HN18",
+    "articleCode": "22026011001639",
+    "price": 762
+  },
+  {
+    "category": "V8",
+    "series": "High static pressure duct",
+    "model": "MIH90T1HN18",
+    "articleCode": "22026011001662",
+    "price": 834
+  },
+  {
+    "category": "V8",
+    "series": "High static pressure duct",
+    "model": "MIH112T1HN18",
+    "articleCode": "22026011001663",
+    "price": 868
+  },
+  {
+    "category": "V8",
+    "series": "High static pressure duct",
+    "model": "MIH125T1HN18",
+    "articleCode": "22026011001664",
+    "price": 892
+  },
+  {
+    "category": "V8",
+    "series": "High static pressure duct",
+    "model": "MIH140T1HN18",
+    "articleCode": "22026011001642",
+    "price": 934
+  },
+  {
+    "category": "V8",
+    "series": "High static pressure duct",
+    "model": "MIH160T1HN18",
+    "articleCode": "22026011001658",
+    "price": 977
+  },
+  {
+    "category": "V8",
+    "series": "High static pressure duct",
+    "model": "MIH200T1HN18",
+    "articleCode": "22026011001702",
+    "price": 1385
+  },
+  {
+    "category": "V8",
+    "series": "High static pressure duct",
+    "model": "MIH224T1HN18",
+    "articleCode": "22026011001704",
+    "price": 1413
+  },
+  {
+    "category": "V8",
+    "series": "High static pressure duct",
+    "model": "MIH252T1HN18",
+    "articleCode": "22026011001700",
+    "price": 1424
+  },
+  {
+    "category": "V8",
+    "series": "High static pressure duct",
+    "model": "MIH280T1HN18",
+    "articleCode": "22026011001709",
+    "price": 1444
+  },
+  {
+    "category": "V8",
+    "series": "High static pressure duct",
+    "model": "MIH335T1HN18",
+    "articleCode": "22026011001678",
+    "price": 1967
+  },
+  {
+    "category": "V8",
+    "series": "High static pressure duct",
+    "model": "MIH400T1HN18",
+    "articleCode": "22026011001708",
+    "price": 2828
+  },
+  {
+    "category": "V8",
+    "series": "High static pressure duct",
+    "model": "MIH450T1HN18",
+    "articleCode": "22026011001703",
+    "price": 2947
+  },
+  {
+    "category": "V8",
+    "series": "High static pressure duct",
+    "model": "MIH560T1HN18",
+    "articleCode": "22026011001680",
+    "price": 3099
+  },
+  {
+    "category": "V8",
+    "series": "Ceiling&Floor",
+    "model": "MIH36DLHN18",
+    "articleCode": "22026013000450",
+    "price": 693
+  },
+  {
+    "category": "V8",
+    "series": "Ceiling&Floor",
+    "model": "MIH45DLHN18",
+    "articleCode": "22026013000455",
+    "price": 726
+  },
+  {
+    "category": "V8",
+    "series": "Ceiling&Floor",
+    "model": "MIH56DLHN18",
+    "articleCode": "22026013000454",
+    "price": 738
+  },
+  {
+    "category": "V8",
+    "series": "Ceiling&Floor",
+    "model": "MIH71DLHN18",
+    "articleCode": "22026013000462",
+    "price": 788
+  },
+  {
+    "category": "V8",
+    "series": "Ceiling&Floor",
+    "model": "MIH80DLHN18",
+    "articleCode": "22026013000460",
+    "price": 816
+  },
+  {
+    "category": "V8",
+    "series": "Ceiling&Floor",
+    "model": "MIH90DLHN18",
+    "articleCode": "22026013000457",
+    "price": 862
+  },
+  {
+    "category": "V8",
+    "series": "Ceiling&Floor",
+    "model": "MIH100DLHN18",
+    "articleCode": "22026013000465",
+    "price": 895
+  },
+  {
+    "category": "V8",
+    "series": "Ceiling&Floor",
+    "model": "MIH112DLHN18",
+    "articleCode": "22026013000467",
+    "price": 923
+  },
+  {
+    "category": "V8",
+    "series": "Ceiling&Floor",
+    "model": "MIH125DLHN18",
+    "articleCode": "22026013000461",
+    "price": 962
+  },
+  {
+    "category": "V8",
+    "series": "Ceiling&Floor",
+    "model": "MIH140DLHN18",
+    "articleCode": "22026013000469",
+    "price": 971
+  },
+  {
+    "category": "V8",
+    "series": "V8 HRV",
+    "model": "HRV-D200(C)",
+    "articleCode": "22026022000066",
+    "price": 1153
+  },
+  {
+    "category": "V8",
+    "series": "V8 HRV",
+    "model": "HRV-D300(C)",
+    "articleCode": "22026022000065",
+    "price": 1248
+  },
+  {
+    "category": "V8",
+    "series": "V8 HRV",
+    "model": "HRV-D400(C)",
+    "articleCode": "22026022000068",
+    "price": 1422
+  },
+  {
+    "category": "V8",
+    "series": "V8 HRV",
+    "model": "HRV-D500(C)",
+    "articleCode": "22026022000067",
+    "price": 1745
+  },
+  {
+    "category": "V8",
+    "series": "V8 HRV",
+    "model": "HRV-D800(C)",
+    "articleCode": "22026022000069",
+    "price": 2199
+  },
+  {
+    "category": "V8",
+    "series": "V8 HRV",
+    "model": "HRV-D1000(C)",
+    "articleCode": "22026022000070",
+    "price": 2689
+  },
+  {
+    "category": "V8",
+    "series": "V8 HRV",
+    "model": "HRV-D1500(C)",
+    "articleCode": "22026022000072",
+    "price": 4078
+  },
+  {
+    "category": "V8",
+    "series": "V8 HRV",
+    "model": "HRV-D2000(C)",
+    "articleCode": "22026022000071",
+    "price": 4544
+  },
+  {
+    "category": "V8",
+    "series": "V8 controller",
+    "model": "RM12F1",
+    "articleCode": "17317000010721",
+    "price": 31
+  },
+  {
+    "category": "V8",
+    "series": "V8 controller",
+    "model": "RM23A",
+    "articleCode": "17317000012384",
+    "price": 38
+  },
+  {
+    "category": "V8",
+    "series": "V8 controller",
+    "model": "WDC3-86S",
+    "articleCode": "17317100008335",
+    "price": 85
+  },
+  {
+    "category": "V8",
+    "series": "V8 controller",
+    "model": "WDC3-86T(white)",
+    "articleCode": "17317100009278",
+    "price": 113
+  },
+  {
+    "category": "V8",
+    "series": "V8 controller",
+    "model": "WDC3-86T-B",
+    "articleCode": "17317100009496",
+    "price": 113
+  },
+  {
+    "category": "V8",
+    "series": "V8 controller",
+    "model": "WDC3-120T（white）",
+    "articleCode": "17317100009479",
+    "price": 127
+  },
+  {
+    "category": "V8",
+    "series": "V8 controller",
+    "model": "WDC3-120T（Black）",
+    "articleCode": "17317100009482",
+    "price": 127
+  },
+  {
+    "category": "V8",
+    "series": "V8 controller",
+    "model": "GW3-KNX",
+    "articleCode": "17211200003566",
+    "price": 246
+  },
+  {
+    "category": "V8",
+    "series": "V8 controller",
+    "model": "GW3-LON",
+    "articleCode": "17211200003567",
+    "price": 3058
+  },
+  {
+    "category": "V8",
+    "series": "V8 controller",
+    "model": "GW3-BAC",
+    "articleCode": "17211200003362",
+    "price": 3058
+  },
+  {
+    "category": "V8",
+    "series": "V8 controller",
+    "model": "GW3-MOD",
+    "articleCode": "17211200003364",
+    "price": 3058
+  },
+  {
+    "category": "V8",
+    "series": "V8 controller",
+    "model": "GW3-CLOUD",
+    "articleCode": "17211200003401",
+    "price": 359
+  },
+  {
+    "category": "V8",
+    "series": "3rd central controller",
+    "model": "IMMPRO II",
+    "articleCode": "17213500003725",
+    "price": 3397
+  },
+  {
+    "category": "V8",
+    "series": "3rd central controller",
+    "model": "GW3-IMMProII-M0(WP)",
+    "articleCode": "17211200004481",
+    "price": 1075
+  },
+  {
+    "category": "V8",
+    "series": "3rd central controller",
+    "model": "TC3-7",
+    "articleCode": "17311500001581",
+    "price": 960
+  },
+  {
+    "category": "V8",
+    "series": "3rd central controller",
+    "model": "TC3-10.1",
+    "articleCode": "17311500001361",
+    "price": 1430
+  },
+  {
+    "category": "V8",
+    "series": "Controller assembly",
+    "model": "MA3-EK",
+    "articleCode": "17211200003481",
+    "price": 285
+  },
+  {
+    "category": "V8",
+    "series": "V8 Outdoor branch joints",
+    "model": "FQZHW-02N1E",
+    "articleCode": "15111700001468",
+    "price": 220
+  },
+  {
+    "category": "V8",
+    "series": "V8 Outdoor branch joints",
+    "model": "FQZHW-02N1G",
+    "articleCode": "15111700002054",
+    "price": 224
+  },
+  {
+    "category": "V8",
+    "series": "V8 Outdoor branch joints",
+    "model": "FQZHW-03N1E",
+    "articleCode": "15111700001467",
+    "price": 387
+  },
+  {
+    "category": "V8",
+    "series": "V8 Outdoor branch joints",
+    "model": "FQZHW-03N1G",
+    "articleCode": "15111700002055",
+    "price": 424
+  },
+  {
+    "category": "V8",
+    "series": "V8 Outdoor branch joints",
+    "model": "FQZHW-04N1D",
+    "articleCode": "15111700000331",
+    "price": 422
+  },
+  {
+    "category": "V8",
+    "series": "V8 Outdoor branch joints",
+    "model": "FQZHW-04N1G",
+    "articleCode": "15111700002174",
+    "price": 639
+  },
+  {
+    "category": "V8",
+    "series": "V8 Outdoor branch joints",
+    "model": "FQZHW-02N1E",
+    "articleCode": "15111700001468",
+    "price": 220
+  },
+  {
+    "category": "V8",
+    "series": "V8 Outdoor branch joints",
+    "model": "FQZHW-03N1E",
+    "articleCode": "15111700001467",
+    "price": 387
+  },
+  {
+    "category": "V8",
+    "series": "V8 Outdoor branch joints",
+    "model": "FQZHW-04N1G",
+    "articleCode": "15111700002174",
+    "price": 639
+  },
+  {
+    "category": "V8",
+    "series": "V8 Indoor branch joints",
+    "model": "FQZHN-01D",
+    "articleCode": "15111700000352",
+    "price": 42
+  },
+  {
+    "category": "V8",
+    "series": "V8 Indoor branch joints",
+    "model": "FQZHN-02D",
+    "articleCode": "15111700000376",
+    "price": 46
+  },
+  {
+    "category": "V8",
+    "series": "V8 Indoor branch joints",
+    "model": "FQZHN-03D",
+    "articleCode": "15111700000304",
+    "price": 90
+  },
+  {
+    "category": "V8",
+    "series": "V8 Indoor branch joints",
+    "model": "FQZHN-04D",
+    "articleCode": "15111700000390",
+    "price": 148
+  },
+  {
+    "category": "V8",
+    "series": "V8 Indoor branch joints",
+    "model": "FQZHN-05D",
+    "articleCode": "15111700000272",
+    "price": 155
+  },
+  {
+    "category": "V8",
+    "series": "V8 Indoor branch joints",
+    "model": "FQZHN-06D",
+    "articleCode": "15111700000311",
+    "price": 196
+  },
+  {
+    "category": "V8",
+    "series": "V8 Indoor branch joints",
+    "model": "FQZHN-07D",
+    "articleCode": "15111700001466",
+    "price": 211
+  },
+  {
+    "category": "V8",
+    "series": "V8 Indoor branch header",
+    "model": "DXFQT4-01",
+    "articleCode": "15111700A03090",
+    "price": 85
+  },
+  {
+    "category": "V8",
+    "series": "V8 Indoor branch header",
+    "model": "DXFQT8-01",
+    "articleCode": "15111700A03089",
+    "price": 183
+  },
+  {
+    "category": "V8",
+    "series": "V8 Q4-C filter",
+    "model": "T-MBQ4-03E.3",
+    "articleCode": "12126000003264",
+    "price": 155
+  },
+  {
+    "category": "V8",
+    "series": "V8 Q4 filter(only for EU models)",
+    "model": "T-MBQ4-01E.3A",
+    "articleCode": "12126000003365",
+    "price": 268
+  },
+  {
+    "category": "V8",
+    "series": "V8 Q4 filter(only for EU models)",
+    "model": "GLW-Q4E1G3",
+    "articleCode": "12112900A13530",
+    "price": 88
+  },
+  {
+    "category": "V8",
+    "series": "V8 Arc duct filter",
+    "model": "MDV-D22T2/BP4DN1-A-8",
+    "articleCode": "12125200001957",
+    "price": 14
+  },
+  {
+    "category": "V8",
+    "series": "V8 Arc duct filter",
+    "model": "MDV-D36T2/BP4DN1-A-8",
+    "articleCode": "12125200001962",
+    "price": 16
+  },
+  {
+    "category": "V8",
+    "series": "V8 Arc duct filter",
+    "model": "MDV-D56T2/BP4DN1-A-8",
+    "articleCode": "12125200001963",
+    "price": 24
+  },
+  {
+    "category": "V8",
+    "series": "V8 Arc duct filter",
+    "model": "MDV-D71T2/BP4DN1-A-8",
+    "articleCode": "12125200001959",
+    "price": 29
+  },
+  {
+    "category": "V8",
+    "series": "V8 Arc duct filter",
+    "model": "MDV-D112T2/BP4DN1-A-8",
+    "articleCode": "12125200001964",
+    "price": 38
+  },
+  {
+    "category": "V8",
+    "series": "V8 MSP duct filter",
+    "model": "MIA-FT2-01A",
+    "articleCode": "12126000003588",
+    "price": 233
+  },
+  {
+    "category": "V8",
+    "series": "V8 MSP duct filter",
+    "model": "MIA-FT2-02A",
+    "articleCode": "12126000003589",
+    "price": 268
+  },
+  {
+    "category": "V8",
+    "series": "V8 MSP duct filter",
+    "model": "MIA-FT2-03A",
+    "articleCode": "12126000003585",
+    "price": 404
+  },
+  {
+    "category": "V8",
+    "series": "V8 MSP duct filter",
+    "model": "MIA-FT2-04A",
+    "articleCode": "12126000003587",
+    "price": 469
+  },
+  {
+    "category": "V8",
+    "series": "V8 MSP duct filter",
+    "model": "MIA-FT2-01B",
+    "articleCode": "12126000003583",
+    "price": 287
+  },
+  {
+    "category": "V8",
+    "series": "V8 MSP duct filter",
+    "model": "MIA-FT2-02B",
+    "articleCode": "12126000003584",
+    "price": 337
+  },
+  {
+    "category": "V8",
+    "series": "V8 MSP duct filter",
+    "model": "MIA-FT2-03B",
+    "articleCode": "12126000003586",
+    "price": 509
+  },
+  {
+    "category": "V8",
+    "series": "V8 MSP duct filter",
+    "model": "MIA-FT2-04B",
+    "articleCode": "12126000003590",
+    "price": 604
+  },
+  {
+    "category": "V8",
+    "series": "MDV-Link Repeater",
+    "model": "REPE-01",
+    "articleCode": "17226000005739",
+    "price": 116
+  },
+  {
+    "category": "V8",
+    "series": "AHU Kit V8 series",
+    "model": "AHUKZ-00F",
+    "articleCode": "22012000000233",
+    "price": 300
+  },
+  {
+    "category": "V8",
+    "series": "AHU Kit V8 series",
+    "model": "AHUKZ-01F",
+    "articleCode": "22012000000232",
+    "price": 315
+  },
+  {
+    "category": "V8",
+    "series": "AHU Kit V8 series",
+    "model": "AHUKZ-02F",
+    "articleCode": "22012000000231",
+    "price": 352
+  },
+  {
+    "category": "V8",
+    "series": "AHU Kit V8 series",
+    "model": "AHUKZ-03F",
+    "articleCode": "22012000000234",
+    "price": 391
+  },
+  {
+    "category": "V8",
+    "series": "AHU Kit V8 series",
+    "model": "AHUKZ-04F",
+    "articleCode": "22012000000271",
+    "price": 519
+  },
+  {
+    "category": "V8",
+    "series": "V8 pre-installation kit",
+    "model": "MIA-RK",
+    "articleCode": "22012000000251",
+    "price": 157
+  },
+  {
+    "category": "V8",
+    "series": "EEV Kit for wall-mounted unit",
+    "model": "DZJLBJ-C-I",
+    "articleCode": "15417400A00751",
+    "price": 76
+  },
+  {
+    "category": "V8",
+    "series": "EEV Kit for wall-mounted unit",
+    "model": "DZJLBJ-C-II",
+    "articleCode": "15417400A00753",
+    "price": 81
+  },
+  {
+    "category": "V8",
+    "series": "EEV Kit for wall-mounted unit",
+    "model": "DZJLBJ-C-III",
+    "articleCode": "15417400A00754",
+    "price": 85
+  },
+  {
+    "category": "V8",
+    "series": "After-sales PCB checking kit",
+    "model": "MA3-APCB",
+    "articleCode": "17227000007201",
+    "price": 61
+  },
+  {
+    "category": "VRF",
+    "series": "V6R Series",
+    "model": "MV6-R252WV2GN1",
+    "articleCode": "22027020001825",
+    "price": 6902
+  },
+  {
+    "category": "VRF",
+    "series": "V6R Series",
+    "model": "MV6-R280WV2GN1",
+    "articleCode": "22027020001865",
+    "price": 7140
+  },
+  {
+    "category": "VRF",
+    "series": "V6R Series",
+    "model": "MV6-R335WV2GN1",
+    "articleCode": "22027020001866",
+    "price": 8101
+  },
+  {
+    "category": "VRF",
+    "series": "V6R Series",
+    "model": "MV6-R400WV2GN1",
+    "articleCode": "22027020001885",
+    "price": 9306
+  },
+  {
+    "category": "VRF",
+    "series": "V6R Series",
+    "model": "MV6-R450WV2GN1",
+    "articleCode": "22027020001886",
+    "price": 9789
+  },
+  {
+    "category": "VRF",
+    "series": "V6R Series",
+    "model": "MV6-R500WV2GN1",
+    "articleCode": "22027020001845",
+    "price": 10267
+  },
+  {
+    "category": "VRF",
+    "series": "V6R Series",
+    "model": "MV6-R560WV2GN1",
+    "articleCode": "22027020001965",
+    "price": 10989
+  },
+  {
+    "category": "VRF",
+    "series": "V6-i侧出风外机   VRF V6-i ODU",
+    "model": "MVi-200WV2GN1(A)",
+    "articleCode": "22027020002045",
+    "price": 3078
+  },
+  {
+    "category": "VRF",
+    "series": "V6-i侧出风外机   VRF V6-i ODU",
+    "model": "MVi-224WV2GN1(A)",
+    "articleCode": "22027020002046",
+    "price": 3176
+  },
+  {
+    "category": "VRF",
+    "series": "V6-i侧出风外机   VRF V6-i ODU",
+    "model": "MVi-260WV2GN1(A)",
+    "articleCode": "22027020002047",
+    "price": 3284
+  },
+  {
+    "category": "VRF",
+    "series": "V6-i侧出风外机   VRF V6-i ODU",
+    "model": "MVi-280WV2GN1(A)",
+    "articleCode": "22027020002048",
+    "price": 3419
+  },
+  {
+    "category": "VRF",
+    "series": "V6-i侧出风外机   VRF V6-i ODU",
+    "model": "MVi-335WV2GN1(A)",
+    "articleCode": "22027020002049",
+    "price": 3971
+  },
+  {
+    "category": "VRF",
+    "series": "VC-i - side discharge",
+    "model": "MDVC-V200W/DRN1",
+    "articleCode": "22027020001945",
+    "price": 2461
+  },
+  {
+    "category": "VRF",
+    "series": "VC-i - side discharge",
+    "model": "MDVC-V224W/DRN1",
+    "articleCode": "22027020001946",
+    "price": 2531
+  },
+  {
+    "category": "VRF",
+    "series": "VC-i - side discharge",
+    "model": "MDVC-V260W/DRN1",
+    "articleCode": "22027020001947",
+    "price": 2559
+  },
+  {
+    "category": "VRF",
+    "series": "VC-i - side discharge",
+    "model": "MDVC-V280W/DRN1",
+    "articleCode": "22027020001925",
+    "price": 2576
+  },
+  {
+    "category": "VRF",
+    "series": "Water source V4+ W series",
+    "model": "MDVS-252(8)W/DRN1",
+    "articleCode": "22027020000241",
+    "price": 4959
+  },
+  {
+    "category": "VRF",
+    "series": "Water source V4+ W series",
+    "model": "MDVS-280(10)W/DRN1",
+    "articleCode": "22027020000228",
+    "price": 5281
+  },
+  {
+    "category": "VRF",
+    "series": "Water source V4+ W series",
+    "model": "MDVS-335(12)W/DRN1",
+    "articleCode": "22027020000067",
+    "price": 5674
+  },
+  {
+    "category": "VRF",
+    "series": "3-Pipe VRF model switch box",
+    "model": "MS01N1-D",
+    "articleCode": "22010200000195",
+    "price": 876
+  },
+  {
+    "category": "VRF",
+    "series": "3-Pipe VRF model switch box",
+    "model": "MS04N1-D",
+    "articleCode": "22010200000219",
+    "price": 1729
+  },
+  {
+    "category": "VRF",
+    "series": "3-Pipe VRF model switch box",
+    "model": "MS06N1-D",
+    "articleCode": "22010200000218",
+    "price": 2338
+  },
+  {
+    "category": "VRF",
+    "series": "3-Pipe VRF model switch box",
+    "model": "MS08N1-D",
+    "articleCode": "22010200000217",
+    "price": 2931
+  },
+  {
+    "category": "VRF",
+    "series": "3-Pipe VRF model switch box",
+    "model": "MS10N1-D",
+    "articleCode": "22010200000216",
+    "price": 3484
+  },
+  {
+    "category": "VRF",
+    "series": "3-Pipe VRF model switch box",
+    "model": "MS12N1-D",
+    "articleCode": "22010200000215",
+    "price": 4012
+  },
+  {
+    "category": "VRF",
+    "series": "Mini C 2rd geneartion",
+    "model": "MDV-V80W/DHN1(D)",
+    "articleCode": "22027020002077",
+    "price": 1257
+  },
+  {
+    "category": "VRF",
+    "series": "Mini C 2rd geneartion",
+    "model": "MDV-V100W/DHN1(D)",
+    "articleCode": "22027020002078",
+    "price": 1627
+  },
+  {
+    "category": "VRF",
+    "series": "Mini C 2rd geneartion",
+    "model": "MDV-V120W/DHN1(D)",
+    "articleCode": "22027020002079",
+    "price": 1954
+  },
+  {
+    "category": "VRF",
+    "series": "Mini C 2rd geneartion",
+    "model": "MDV-V140W/DHN1(D)",
+    "articleCode": "22027020002080",
+    "price": 2132
+  },
+  {
+    "category": "VRF",
+    "series": "Mini C 2rd geneartion",
+    "model": "MDV-V160W/DHN1(D)",
+    "articleCode": "22027020002081",
+    "price": 2401
+  },
+  {
+    "category": "VRF",
+    "series": "Mini C 2rd geneartion",
+    "model": "MDV-V180W/DHN1(D)",
+    "articleCode": "22027020002105",
+    "price": 2442
+  },
+  {
+    "category": "VRF",
+    "series": "AC HRV",
+    "model": "HRV-200",
+    "articleCode": "22026022000019",
+    "price": 547
+  },
+  {
+    "category": "VRF",
+    "series": "AC HRV",
+    "model": "HRV-300",
+    "articleCode": "22026022000018",
+    "price": 659
+  },
+  {
+    "category": "VRF",
+    "series": "AC HRV",
+    "model": "HRV-400",
+    "articleCode": "22026022000011",
+    "price": 794
+  },
+  {
+    "category": "VRF",
+    "series": "AC HRV",
+    "model": "HRV-500",
+    "articleCode": "22026022000016",
+    "price": 1095
+  },
+  {
+    "category": "VRF",
+    "series": "AC HRV",
+    "model": "HRV-800",
+    "articleCode": "22026022000009",
+    "price": 1422
+  },
+  {
+    "category": "VRF",
+    "series": "AC HRV",
+    "model": "HRV-1000",
+    "articleCode": "22026022000012",
+    "price": 1660
+  },
+  {
+    "category": "VRF",
+    "series": "AC HRV",
+    "model": "HRV-1500",
+    "articleCode": "22026022000001",
+    "price": 2418
+  },
+  {
+    "category": "VRF",
+    "series": "AC HRV",
+    "model": "HRV-2000",
+    "articleCode": "22026022000017",
+    "price": 2830
+  },
+  {
+    "category": "VRF",
+    "series": "HRV controler",
+    "model": "KJR-27B/BGE(A)",
+    "articleCode": "17317100000131",
+    "price": 42
+  },
+  {
+    "category": "VRF",
+    "series": "HRV controler",
+    "model": "RM12A/BGEF",
+    "articleCode": "17317000002875",
+    "price": 37
+  },
+  {
+    "category": "VRF",
+    "series": "HRV controler",
+    "model": "KJR-29B1/BK-E",
+    "articleCode": "17317100000108",
+    "price": 96
+  },
+  {
+    "category": "VRF",
+    "series": "HRV controler",
+    "model": "KJR-86C-E",
+    "articleCode": "17317100000027",
+    "price": 46
+  },
+  {
+    "category": "VRF",
+    "series": "HRV controler",
+    "model": "CCM30/BKE-B(A)",
+    "articleCode": "17311500A07168",
+    "price": 219
+  },
+  {
+    "category": "VRF",
+    "series": "HRV controler",
+    "model": "CCM30",
+    "articleCode": "17311500A06527",
+    "price": 219
+  },
+  {
+    "category": "VRF",
+    "series": "HRV controler",
+    "model": "MD-CCM09/E",
+    "articleCode": "",
+    "price": 198
+  },
+  {
+    "category": "VRF",
+    "series": "HRV controler",
+    "model": "KJR-150A/M-E",
+    "articleCode": "17311500000071",
+    "price": 124
+  },
+  {
+    "category": "VRF",
+    "series": "HRV controler",
+    "model": "NIM01/E",
+    "articleCode": "",
+    "price": 44
+  },
+  {
+    "category": "VRF",
+    "series": "HRV controler",
+    "model": "MD-NIM09/E",
+    "articleCode": "",
+    "price": 144
+  },
+  {
+    "category": "VRF",
+    "series": "HRV controler",
+    "model": "CCM-18A/N(A)",
+    "articleCode": "17211200003281",
+    "price": 2067
+  },
+  {
+    "category": "VRF",
+    "series": "HRV controler",
+    "model": "GW-BAC(D)",
+    "articleCode": "17211200002582",
+    "price": 3085
+  },
+  {
+    "category": "VRF",
+    "series": "HRV controler",
+    "model": "CCM-15(A)",
+    "articleCode": "17211200003282",
+    "price": 325
+  },
+  {
+    "category": "VRF",
+    "series": "HRV controler",
+    "model": "IMM441V4PA58",
+    "articleCode": "",
+    "price": 3105
+  },
+  {
+    "category": "VRF",
+    "series": "HRV controler",
+    "model": "IMM-ENET-MA",
+    "articleCode": "",
+    "price": 2071
+  },
+  {
+    "category": "VRF",
+    "series": "HRV controler",
+    "model": "WDC-86E/K",
+    "articleCode": "17317100003095",
+    "price": 42
+  },
+  {
+    "category": "VRF",
+    "series": "HRV controler",
+    "model": "DTS343-3",
+    "articleCode": "17511100000227",
+    "price": 267
+  },
+  {
+    "category": "VRF",
+    "series": "HRV controler",
+    "model": "GW-KNX",
+    "articleCode": "17211200A02945",
+    "price": 302
+  },
+  {
+    "category": "VRF",
+    "series": "1st generation FCU control box",
+    "model": "CE-FCUKZ-01",
+    "articleCode": "22012000000004",
+    "price": 94
+  },
+  {
+    "category": "VRF",
+    "series": "1st generation FCU control box",
+    "model": "CE-FCUKZ-02",
+    "articleCode": "22012000000007",
+    "price": 105
+  },
+  {
+    "category": "VRF",
+    "series": "Branch pipes",
+    "model": "CE-FQZHW-02N1D",
+    "articleCode": "",
+    "price": 102
+  },
+  {
+    "category": "VRF",
+    "series": "Branch pipes",
+    "model": "CE-FQZHW-03N1D",
+    "articleCode": "",
+    "price": 195
+  },
+  {
+    "category": "VRF",
+    "series": "Branch pipes",
+    "model": "CE-FQZHW-04N1D",
+    "articleCode": "",
+    "price": 367
+  },
+  {
+    "category": "VRF",
+    "series": "Branch pipes",
+    "model": "CE-FQZHN-01D",
+    "articleCode": "15111700000352",
+    "price": 42
+  },
+  {
+    "category": "VRF",
+    "series": "Branch pipes",
+    "model": "CE-FQZHN-02D",
+    "articleCode": "15111700000376",
+    "price": 46
+  },
+  {
+    "category": "VRF",
+    "series": "Branch pipes",
+    "model": "CE-FQZHN-03D",
+    "articleCode": "15111700000304",
+    "price": 89
+  },
+  {
+    "category": "VRF",
+    "series": "Branch pipes",
+    "model": "CE-FQZHN-04D",
+    "articleCode": "15111700000390",
+    "price": 148
+  },
+  {
+    "category": "VRF",
+    "series": "Branch pipes",
+    "model": "CE-FQZHN-05D",
+    "articleCode": "15111700000272",
+    "price": 154
+  },
+  {
+    "category": "VRF",
+    "series": "Branch pipes",
+    "model": "CE-FQZHN-06D",
+    "articleCode": "15111700000311",
+    "price": 195
+  },
+  {
+    "category": "VRF",
+    "series": "Branch pipes",
+    "model": "FQZHW-02N1E",
+    "articleCode": "15111700001468",
+    "price": 219
+  },
+  {
+    "category": "VRF",
+    "series": "Branch pipes",
+    "model": "FQZHW-03N1E",
+    "articleCode": "15111700001467",
+    "price": 386
+  },
+  {
+    "category": "VRF",
+    "series": "Branch pipes",
+    "model": "FQZHD-01",
+    "articleCode": "15111700000307",
+    "price": 19
+  },
+  {
+    "category": "VRF",
+    "series": "Branch pipes",
+    "model": "FQZHD-02",
+    "articleCode": "15111700000341",
+    "price": 35
+  },
+  {
+    "category": "VRF",
+    "series": "Branch pipes",
+    "model": "FQZHD-03",
+    "articleCode": "15111700000277",
+    "price": 57
+  },
+  {
+    "category": "VRF",
+    "series": "Branch pipes",
+    "model": "FQZHD-04",
+    "articleCode": "15111700000265",
+    "price": 64
+  },
+  {
+    "category": "VRF",
+    "series": "Branch pipes",
+    "model": "MCAC-PIDU",
+    "articleCode": "17126000003949",
+    "price": 81
+  },
+  {
+    "category": "VRF",
+    "series": "Branch pipes",
+    "model": "MCAC-DSCK",
+    "articleCode": "17227000003201",
+    "price": 87
+  },
+  {
+    "category": "VRF",
+    "series": "Branch pipes",
+    "model": "MA-HKCW",
+    "articleCode": "17211300000229",
+    "price": 44
+  },
+  {
+    "category": "VRF",
+    "series": "Branch pipes",
+    "model": "MA-HKCS",
+    "articleCode": "17211300000231",
+    "price": 65
+  },
+  {
+    "category": "VRF",
+    "series": "Panel",
+    "model": "T-MBQ4-01E(S)",
+    "articleCode": "22012900002830",
+    "price": 129
+  },
+  {
+    "category": "VRF",
+    "series": "Panel",
+    "model": "T-MBQ4-03B",
+    "articleCode": "12112900000382",
+    "price": 48
+  },
+  {
+    "category": "VRF",
+    "series": "Panel",
+    "model": "CE-MBQ-03C4",
+    "articleCode": "22012900002851",
+    "price": 85
+  },
+  {
+    "category": "VRF",
+    "series": "Panel",
+    "model": "T-MBQ4-02B1",
+    "articleCode": "12112900A00616",
+    "price": 129
+  },
+  {
+    "category": "VRF",
+    "series": "Panel",
+    "model": "CE-MBQ2-01",
+    "articleCode": "22012900002618",
+    "price": 195
+  },
+  {
+    "category": "VRF",
+    "series": "Panel",
+    "model": "MBQ1-01D",
+    "articleCode": "22012900000410",
+    "price": 122
+  },
+  {
+    "category": "VRF",
+    "series": "Panel",
+    "model": "MBQ1-02D",
+    "articleCode": "12112900000376",
+    "price": 70
+  },
+  {
+    "category": "VRF",
+    "series": "Panel",
+    "model": "MA-EK",
+    "articleCode": "17111200001461",
+    "price": 226
+  },
+  {
+    "category": "VRF",
+    "series": "Panel",
+    "model": "CE-FP-42.5DLM/C1BP2XH-DJZJ",
+    "articleCode": "12126200000334",
+    "price": 17
+  },
+  {
+    "category": "VRF",
+    "series": "Panel",
+    "model": "CE-FP-204WA-Z-G30.ZL",
+    "articleCode": "15426200000368",
+    "price": 144
+  },
+  {
+    "category": "VRF",
+    "series": "Panel",
+    "model": "CE-FP-136WA-Y-G70.ZLA",
+    "articleCode": "15426200000389",
+    "price": 144
+  },
+  {
+    "category": "VRF",
+    "series": "Panel",
+    "model": "CE-FP-306WA-Z-G100.ZL",
+    "articleCode": "15426200000350",
+    "price": 144
+  },
+  {
+    "category": "VRF",
+    "series": "Panel",
+    "model": "CE-FP-238WA-Z-G70.ZL",
+    "articleCode": "15426200000390",
+    "price": 144
+  },
+  {
+    "category": "VRF",
+    "series": "Panel",
+    "model": "FP-68KBM/B2.ZL",
+    "articleCode": "15426200000331",
+    "price": 130
+  },
+  {
+    "category": "VRF",
+    "series": "Panel",
+    "model": "CE-FP-255KBM.ZLA",
+    "articleCode": "15426200000305",
+    "price": 137
+  },
+  {
+    "category": "VRF",
+    "series": "Panel",
+    "model": "CE-FP-42.5LM-Z/B.ZL",
+    "articleCode": "15426200000351",
+    "price": 144
+  },
+  {
+    "category": "VRF",
+    "series": "Panel",
+    "model": "CE-FP-42.5LM-Y/B.ZL",
+    "articleCode": "15426200000336",
+    "price": 144
+  },
+  {
+    "category": "VRF",
+    "series": "Panel",
+    "model": "TWVK92",
+    "articleCode": "15426200000492",
+    "price": 135
+  },
+  {
+    "category": "VRF",
+    "series": "Panel",
+    "model": "TWVK95",
+    "articleCode": "15426200000495",
+    "price": 135
+  },
+  {
+    "category": "VRF",
+    "series": "Panel",
+    "model": "CE-FP-68KBM/B2S.ZL.3",
+    "articleCode": "15426200000367",
+    "price": 246
+  },
+  {
+    "category": "VRF",
+    "series": "Panel",
+    "model": "CE-FP-12.5KBM/A1S.ZL",
+    "articleCode": "15426200000358",
+    "price": 254
+  },
+  {
+    "category": "VRF",
+    "series": "Panel",
+    "model": "CE-FP-34WA-Z3/S.ZL.1",
+    "articleCode": "15426200000334",
+    "price": 276
+  },
+  {
+    "category": "VRF",
+    "series": "Panel",
+    "model": "FQZHN-01SB1",
+    "articleCode": "15111700001736",
+    "price": 42
+  },
+  {
+    "category": "VRF",
+    "series": "Panel",
+    "model": "FQZHN-02SB1",
+    "articleCode": "15111700001738",
+    "price": 51
+  },
+  {
+    "category": "VRF",
+    "series": "Panel",
+    "model": "FQZHN-03SB1",
+    "articleCode": "15111700001734",
+    "price": 100
+  },
+  {
+    "category": "VRF",
+    "series": "Panel",
+    "model": "FQZHN-04SB1",
+    "articleCode": "15111700001735",
+    "price": 133
+  },
+  {
+    "category": "VRF",
+    "series": "Panel",
+    "model": "FQZHN-05SB1",
+    "articleCode": "15111700001737",
+    "price": 191
+  },
+  {
+    "category": "VRF",
+    "series": "Panel",
+    "model": "FQZHW-02SB1",
+    "articleCode": "15111700001754",
+    "price": 226
+  },
+  {
+    "category": "VRF",
+    "series": "Panel",
+    "model": "FQZHW-03SB1",
+    "articleCode": "15111700001761",
+    "price": 410
+  },
+  {
+    "category": "VRF",
+    "series": "Panel",
+    "model": "MA-IS",
+    "articleCode": "17211300000230",
+    "price": 89
+  },
+  {
+    "category": "VRF",
+    "series": "Panel",
+    "model": "RM12F",
+    "articleCode": "17317000008018",
+    "price": 24
+  },
+  {
+    "category": "VRF",
+    "series": "Panel",
+    "model": "KJRP-86A/BMFNKD-E",
+    "articleCode": "17317100004815",
+    "price": 61
+  },
+  {
+    "category": "VRF",
+    "series": "Panel",
+    "model": "KJRP-86I/MFK-E",
+    "articleCode": "17317100004857",
+    "price": 46
+  },
+  {
+    "category": "VRF",
+    "series": "Panel",
+    "model": "WDC-120G/WK(A)",
+    "articleCode": "17317100002915",
+    "price": 146
+  },
+  {
+    "category": "VRF",
+    "series": "Centralized controller",
+    "model": "CCM-180A/BWS(A)",
+    "articleCode": "17311500A04245",
+    "price": 982
+  },
+  {
+    "category": "VRF",
+    "series": "Centralized controller",
+    "model": "CCM-210G/BWS",
+    "articleCode": "17311500001141",
+    "price": 958
+  },
+  {
+    "category": "VRF",
+    "series": "Centralized controller",
+    "model": "CCM-270B/WS(B)",
+    "articleCode": "17311500001184",
+    "price": 3300
+  },
+  {
+    "category": "VRF",
+    "series": "Gateway & software",
+    "model": "IMMP-BAC(A)",
+    "articleCode": "17211200002364",
+    "price": 3085
+  },
+  {
+    "category": "VRF",
+    "series": "Gateway & software",
+    "model": "GW-MOD(A)",
+    "articleCode": "17211200002041",
+    "price": 3085
+  },
+  {
+    "category": "VRF",
+    "series": "Gateway & software",
+    "model": "GW-LON",
+    "articleCode": "17211200000921",
+    "price": 3085
+  },
+  {
+    "category": "VRF",
+    "series": "Gateway & software",
+    "model": "IMMP-S(A)",
+    "articleCode": "17211000000781",
+    "price": 2468
+  },
+  {
+    "category": "VRF",
+    "series": "Gateway & software",
+    "model": "MA-WK",
+    "articleCode": "17210900002678",
+    "price": 40
+  },
+  {
+    "category": "VRF",
+    "series": "Gateway & software",
+    "model": "GW-KNX",
+    "articleCode": "17211200001521",
+    "price": 260
+  },
+  {
+    "category": "VRF",
+    "series": "Gateway & software",
+    "model": "MCAC-DIAG-B",
+    "articleCode": "17211000000201",
+    "price": 319
+  },
+  {
+    "category": "VRF",
+    "series": "FCU control box",
+    "model": "CE-FCUKZ-03-B",
+    "articleCode": "22012000000004",
+    "price": 102
+  },
+  {
+    "category": "VRF",
+    "series": "FCU control box",
+    "model": "CE-FCUKZ-04-B",
+    "articleCode": "22012000000007",
+    "price": 113
+  },
+  {
+    "category": "Atom",
+    "series": "ATOM OU Cooling and Heating (Примечание : в прайсе с продажными ценами старшая модель \"V68\" ошибочно называется \"V72\"",
+    "model": "MDV-V12WDHN1(AtB)",
+    "articleCode": "22027020002147",
+    "price": 848
+  },
+  {
+    "category": "Atom",
+    "series": "ATOM OU Cooling and Heating (Примечание : в прайсе с продажными ценами старшая модель \"V68\" ошибочно называется \"V72\"",
+    "model": "MDV-V18WDHN1(AtB)",
+    "articleCode": "22027020002146",
+    "price": 912
+  },
+  {
+    "category": "Atom",
+    "series": "ATOM OU Cooling and Heating (Примечание : в прайсе с продажными ценами старшая модель \"V68\" ошибочно называется \"V72\"",
+    "model": "MDV-V21WDHN1(AtB)",
+    "articleCode": "22027020002145",
+    "price": 977
+  },
+  {
+    "category": "Atom",
+    "series": "ATOM OU Cooling and Heating (Примечание : в прайсе с продажными ценами старшая модель \"V68\" ошибочно называется \"V72\"",
+    "model": "MDV-V28WDHN1(AtB)",
+    "articleCode": "22027020002077",
+    "price": 1138
+  },
+  {
+    "category": "Atom",
+    "series": "ATOM OU Cooling and Heating (Примечание : в прайсе с продажными ценами старшая модель \"V68\" ошибочно называется \"V72\"",
+    "model": "MDV-V36WDHN1A(AtB)",
+    "articleCode": "22027020003485",
+    "price": 1345
+  },
+  {
+    "category": "Atom",
+    "series": "ATOM OU Cooling and Heating (Примечание : в прайсе с продажными ценами старшая модель \"V68\" ошибочно называется \"V72\"",
+    "model": "MDV-V42WDHN1A(AtB)",
+    "articleCode": "22027020003425",
+    "price": 1546
+  },
+  {
+    "category": "Atom",
+    "series": "ATOM OU Cooling and Heating (Примечание : в прайсе с продажными ценами старшая модель \"V68\" ошибочно называется \"V72\"",
+    "model": "MDV-V48WDHN1(AtB)",
+    "articleCode": "22027020002080",
+    "price": 1656
+  },
+  {
+    "category": "Atom",
+    "series": "ATOM OU Cooling and Heating (Примечание : в прайсе с продажными ценами старшая модель \"V68\" ошибочно называется \"V72\"",
+    "model": "MDV-V56WDHN1(AtB)",
+    "articleCode": "22027020002081",
+    "price": 1866
+  },
+  {
+    "category": "Atom",
+    "series": "ATOM OU Cooling and Heating (Примечание : в прайсе с продажными ценами старшая модель \"V68\" ошибочно называется \"V72\"",
+    "model": "MDV-V60WDHN1(AtB)",
+    "articleCode": "22027020002105",
+    "price": 2274
+  },
+  {
+    "category": "Atom",
+    "series": "ATOM OU Cooling and Heating (Примечание : в прайсе с продажными ценами старшая модель \"V68\" ошибочно называется \"V72\"",
+    "model": "MDV-V68WDHN1(AtB)",
+    "articleCode": "CBO 22027020003365",
+    "price": 2374
+  },
+  {
+    "category": "Atom",
+    "series": "ATOM Branch pipe assembly",
+    "model": "DXFQT2-02",
+    "articleCode": "15111700001940",
+    "price": 61
+  },
+  {
+    "category": "Atom",
+    "series": "ATOM Branch pipe assembly",
+    "model": "DXFQT3-02",
+    "articleCode": "15111700001936",
+    "price": 85
+  },
+  {
+    "category": "Atom",
+    "series": "ATOM Branch pipe assembly",
+    "model": "DXFQT4-02",
+    "articleCode": "15111700001942",
+    "price": 107
+  },
+  {
+    "category": "Atom",
+    "series": "ATOM Branch pipe assembly",
+    "model": "DXFQT5-02",
+    "articleCode": "15111700001934",
+    "price": 122
+  },
+  {
+    "category": "Atom",
+    "series": "ATOM Branch pipe assembly",
+    "model": "DXFQT6-02",
+    "articleCode": "15111700001938",
+    "price": 144
+  },
+  {
+    "category": "Atom",
+    "series": "ATOM Branch pipe assembly",
+    "model": "RM12F",
+    "articleCode": "17317000008018",
+    "price": 24
+  },
+  {
+    "category": "Atom",
+    "series": "ATOM Branch pipe assembly",
+    "model": "WDC-86E/K",
+    "articleCode": "17317100003095",
+    "price": 42
+  },
+  {
+    "category": "Atom",
+    "series": "ATOM CCU connection kit",
+    "model": "VCCUKZ-00(at)",
+    "articleCode": "22012000000134",
+    "price": 289
+  },
+  {
+    "category": "Atom",
+    "series": "ATOM CCU connection kit",
+    "model": "VCCUKZ-01(at)",
+    "articleCode": "22012000000133",
+    "price": 291
+  },
+  {
+    "category": "Atom",
+    "series": "Atom T ODU(EU Series)",
+    "model": "MDV-V80WHN8(At)",
+    "articleCode": "22027020003085",
+    "price": 1088
+  },
+  {
+    "category": "Atom",
+    "series": "Atom T ODU(EU Series)",
+    "model": "MDV-V100WHN8(At)",
+    "articleCode": "22027020003086",
+    "price": 1385
+  },
+  {
+    "category": "Atom",
+    "series": "Atom T ODU(EU Series)",
+    "model": "MDV-V120WHN8(At)",
+    "articleCode": "22027020003006",
+    "price": 1664
+  },
+  {
+    "category": "Atom",
+    "series": "Atom T ODU(EU Series)",
+    "model": "MDV-V140WHN8(At)",
+    "articleCode": "22027020003005",
+    "price": 1818
+  },
+  {
+    "category": "Atom",
+    "series": "Atom T ODU(EU Series)",
+    "model": "MDV-V160WHN8(At)",
+    "articleCode": "22027020003007",
+    "price": 2045
+  },
+  {
+    "category": "Atom",
+    "series": "Atom T IDU with water tank",
+    "model": "SMKT-D100/190CGN8(At)",
+    "articleCode": "22025314000831",
+    "price": 4044
+  },
+  {
+    "category": "Atom",
+    "series": "Atom T IDU with water tank",
+    "model": "SMKT-D160/240CGN8(At)",
+    "articleCode": "22025314000832",
+    "price": 4727
+  },
+  {
+    "category": "Atom",
+    "series": "hydraulic module",
+    "model": "SMK-D160N8(At)",
+    "articleCode": "22025314000811",
+    "price": 2231
+  },
+  {
+    "category": "Atom",
+    "series": "DHW Kit",
+    "model": "MHWK-120HN8",
+    "articleCode": "22012000000191",
+    "price": 311
+  },
+  {
+    "category": "Atom",
+    "series": "DHW Tank",
+    "model": "MT-200R26E20",
+    "articleCode": "22025331000101",
+    "price": 850
+  },
+  {
+    "category": "Atom",
+    "series": "DHW Tank",
+    "model": "MT-300R26E20",
+    "articleCode": "22025331000081",
+    "price": 1034
+  },
+  {
+    "category": "Atom",
+    "series": "AtomC VRF",
+    "model": "MDVC-V28WDHN1(AtC)",
+    "articleCode": "22027020003467",
+    "price": 889
+  },
+  {
+    "category": "Atom",
+    "series": "AtomC VRF",
+    "model": "MDVC-V36WDHN1(AtC)",
+    "articleCode": "22027020003465",
+    "price": 1153
+  },
+  {
+    "category": "Atom",
+    "series": "AtomC VRF",
+    "model": "MDVC-V42WDHN1(AtC)",
+    "articleCode": "22027020003466",
+    "price": 1387
+  },
+  {
+    "category": "Atom",
+    "series": "AtomC VRF",
+    "model": "MDVC-V48WDHN1(AtC)",
+    "articleCode": "22027020003446",
+    "price": 1515
+  },
+  {
+    "category": "Atom",
+    "series": "AtomC VRF",
+    "model": "MDVC-V56WDHN1(AtC)",
+    "articleCode": "22027020003447",
+    "price": 1705
+  },
+  {
+    "category": "Atom",
+    "series": "AtomC VRF",
+    "model": "MDVC-V60WDHN1(AtC)",
+    "articleCode": "22027020003445",
+    "price": 2041
+  },
+  {
+    "category": "Atom",
+    "series": "ATOM V8 IDU Wall-mounted",
+    "model": "MI2-05GDHN18(At)",
+    "articleCode": "22026010000581",
+    "price": 189
+  },
+  {
+    "category": "Atom",
+    "series": "ATOM V8 IDU Wall-mounted",
+    "model": "MI2-07GDHN18(At)",
+    "articleCode": "22026010000583",
+    "price": 198
+  },
+  {
+    "category": "Atom",
+    "series": "ATOM V8 IDU Wall-mounted",
+    "model": "MI2-09GDHN18(At)",
+    "articleCode": "22026010000580",
+    "price": 206
+  },
+  {
+    "category": "Atom",
+    "series": "ATOM V8 IDU Wall-mounted",
+    "model": "MI2-12GDHN18(At)",
+    "articleCode": "22026010000585",
+    "price": 226
+  },
+  {
+    "category": "Atom",
+    "series": "ATOM V8 IDU Wall-mounted",
+    "model": "MI2-15GDHN18(At)",
+    "articleCode": "22026010000559",
+    "price": 247
+  },
+  {
+    "category": "Atom",
+    "series": "ATOM V8 IDU Wall-mounted",
+    "model": "MI2-18GDHN18(At)",
+    "articleCode": "22026010000561",
+    "price": 256
+  },
+  {
+    "category": "Atom",
+    "series": "ATOM V8 IDU Wall-mounted",
+    "model": "MI2-24GDHN18(At)",
+    "articleCode": "22026010000601",
+    "price": 287
+  },
+  {
+    "category": "Atom",
+    "series": "ATOM V8 IDU Wall-mounted",
+    "model": "MI2-28GDHN18(At)",
+    "articleCode": "22026010000602",
+    "price": 297
+  },
+  {
+    "category": "Atom",
+    "series": "V8 Atom ",
+    "model": "MI2-06Q1DHN18(At)",
+    "articleCode": "CBO 22026012001394",
+    "price": 280
+  },
+  {
+    "category": "Atom",
+    "series": "V8 Atom ",
+    "model": "MI2-07Q1DHN18(At)",
+    "articleCode": "CBO 22026012001396",
+    "price": 282
+  },
+  {
+    "category": "Atom",
+    "series": "V8 Atom ",
+    "model": "T-MBQ1-01G",
+    "articleCode": "22013900000021",
+    "price": 68
+  },
+  {
+    "category": "Atom",
+    "series": "V8 Atom ",
+    "model": "MI2-09Q1DHN18(At)",
+    "articleCode": "CBO 22026012001397",
+    "price": 287
+  },
+  {
+    "category": "Atom",
+    "series": "V8 Atom ",
+    "model": "MI2-12Q1DHN18(At)",
+    "articleCode": "CBO 22026012001416",
+    "price": 295
+  },
+  {
+    "category": "Atom",
+    "series": "V8 Atom ",
+    "model": "T-MBQ1-02G",
+    "articleCode": "22013900000023",
+    "price": 68
+  },
+  {
+    "category": "Atom",
+    "series": "V8 Atom ",
+    "model": "MI2-15Q1DHN18(At)",
+    "articleCode": "CBO 22026012001415",
+    "price": 334
+  },
+  {
+    "category": "Atom",
+    "series": "V8 Atom ",
+    "model": "MI2-18Q1DHN18(At)",
+    "articleCode": "CBO 22026012001414",
+    "price": 339
+  },
+  {
+    "category": "Atom",
+    "series": "V8 Atom ",
+    "model": "MI2-24Q1DHN18(At)",
+    "articleCode": "CBO 22026012001417",
+    "price": 358
+  },
+  {
+    "category": "Atom",
+    "series": "V8 Atom ",
+    "model": "T-MBQ1-03G",
+    "articleCode": "22013900000022",
+    "price": 118
+  },
+  {
+    "category": "Atom",
+    "series": "V8 Atom DL",
+    "model": "MI2-12DLDHN18(At)",
+    "articleCode": "CBO 22026013000450",
+    "price": 520
+  },
+  {
+    "category": "Atom",
+    "series": "V8 Atom DL",
+    "model": "MI2-15DLDHN18(At)",
+    "articleCode": "CBO 22026013000455",
+    "price": 553
+  },
+  {
+    "category": "Atom",
+    "series": "V8 Atom DL",
+    "model": "MI2-18DLDHN18(At)",
+    "articleCode": "CBO 22026013000454",
+    "price": 555
+  },
+  {
+    "category": "Atom",
+    "series": "V8 Atom DL",
+    "model": "MI2-24DLDHN18(At)",
+    "articleCode": "CBO 22026013000462",
+    "price": 557
+  },
+  {
+    "category": "Atom",
+    "series": "V8 Atom DL",
+    "model": "MI2-28DLDHN18(At)",
+    "articleCode": "CBO 22026013000460",
+    "price": 648
+  },
+  {
+    "category": "Atom",
+    "series": "V8 Atom DL",
+    "model": "MI2-32DLDHN18(At)",
+    "articleCode": "CBO 22026013000457",
+    "price": 653
+  },
+  {
+    "category": "Atom",
+    "series": "V8 Atom DL",
+    "model": "MI2-40DLDHN18(At)",
+    "articleCode": "CBO 22026013000467",
+    "price": 802
+  },
+  {
+    "category": "Atom",
+    "series": "V8 Atom DL",
+    "model": "MI2-48DLDHN18(At)",
+    "articleCode": "CBO 22026013000469",
+    "price": 811
+  },
+  {
+    "category": "Atom",
+    "series": "V8 Atom 小冷霸",
+    "model": "MI2-05Q4CDHN18(At)",
+    "articleCode": "22026012001474",
+    "price": 263
+  },
+  {
+    "category": "Atom",
+    "series": "V8 Atom 小冷霸",
+    "model": "MI2-07Q4CDHN18(At)",
+    "articleCode": "22026012001478",
+    "price": 271
+  },
+  {
+    "category": "Atom",
+    "series": "V8 Atom 小冷霸",
+    "model": "MI2-09Q4CDHN18(At)",
+    "articleCode": "22026012001475",
+    "price": 282
+  },
+  {
+    "category": "Atom",
+    "series": "V8 Atom 小冷霸",
+    "model": "MI2-12Q4CDHN18(At)",
+    "articleCode": "22026012001477",
+    "price": 293
+  },
+  {
+    "category": "Atom",
+    "series": "V8 Atom 小冷霸",
+    "model": "MI2-15Q4CDHN18(At)",
+    "articleCode": "22026012001480",
+    "price": 315
+  },
+  {
+    "category": "Atom",
+    "series": "V8 Atom 小冷霸",
+    "model": "MI2-18Q4CDHN18(At)",
+    "articleCode": "22026012001476",
+    "price": 336
+  },
+  {
+    "category": "Atom",
+    "series": "V8 Atom 小冷霸",
+    "model": "MI2-21Q4CDHN18(At)",
+    "articleCode": "22026012001479",
+    "price": 406
+  },
+  {
+    "category": "Atom",
+    "series": "V8 Atom 小冷霸",
+    "model": "T-MBQ4-03F",
+    "articleCode": "22012900003270",
+    "price": 85
+  },
+  {
+    "category": "Atom",
+    "series": "V8 Atom 大冷霸",
+    "model": "MI2-09Q4DHN18(At)",
+    "articleCode": "CBO 22026012001122",
+    "price": 312
+  },
+  {
+    "category": "Atom",
+    "series": "V8 Atom 大冷霸",
+    "model": "MI2-12Q4DHN18(At)",
+    "articleCode": "CBO 22026012001130",
+    "price": 317
+  },
+  {
+    "category": "Atom",
+    "series": "V8 Atom 大冷霸",
+    "model": "MI2-15Q4DHN18(At)",
+    "articleCode": "CBO 22026012001124",
+    "price": 347
+  },
+  {
+    "category": "Atom",
+    "series": "V8 Atom 大冷霸",
+    "model": "MI2-18Q4DHN18(At)",
+    "articleCode": "CBO 22026012001115",
+    "price": 358
+  },
+  {
+    "category": "Atom",
+    "series": "V8 Atom 大冷霸",
+    "model": "MI2-24Q4DHN18(At)",
+    "articleCode": "CBO 22026012001132",
+    "price": 365
+  },
+  {
+    "category": "Atom",
+    "series": "V8 Atom 大冷霸",
+    "model": "MI2-28Q4DHN18(At)",
+    "articleCode": "CBO 22026012001129",
+    "price": 380
+  },
+  {
+    "category": "Atom",
+    "series": "V8 Atom 大冷霸",
+    "model": "MI2-32Q4DHN18(At)",
+    "articleCode": "CBO 22026012001123",
+    "price": 401
+  },
+  {
+    "category": "Atom",
+    "series": "V8 Atom 大冷霸",
+    "model": "MI2-36Q4DHN18(At)",
+    "articleCode": "CBO 22026012001128",
+    "price": 412
+  },
+  {
+    "category": "Atom",
+    "series": "V8 Atom 大冷霸",
+    "model": "MI2-40Q4DHN18(At)",
+    "articleCode": "CBO 22026012001133",
+    "price": 421
+  },
+  {
+    "category": "Atom",
+    "series": "V8 Atom 大冷霸",
+    "model": "MI2-48Q4DHN18(At)",
+    "articleCode": "CBO 22026012001121",
+    "price": 442
+  },
+  {
+    "category": "Atom",
+    "series": "V8 Atom 大冷霸",
+    "model": "MI2-56Q4DHN18(At)",
+    "articleCode": "CBO 22026012001277",
+    "price": 579
+  },
+  {
+    "category": "Atom",
+    "series": "V8 Atom 大冷霸",
+    "model": "MI2-60Q4DHN18(At)",
+    "articleCode": "CBO 22026012001275",
+    "price": 601
+  },
+  {
+    "category": "Atom",
+    "series": "V8 Atom 大冷霸",
+    "model": "T-MBQ4-01F",
+    "articleCode": "22012900003290",
+    "price": 129
+  },
+  {
+    "category": "Atom",
+    "series": "V8 Atom 大冷霸",
+    "model": "T-MBQ4-02E1",
+    "articleCode": "22012900003350",
+    "price": 139
+  },
+  {
+    "category": "Atom",
+    "series": "V8 Atom 风管机",
+    "model": "MI2-05T3DHN18(At)",
+    "articleCode": "22026011001887",
+    "price": 284
+  },
+  {
+    "category": "Atom",
+    "series": "V8 Atom 风管机",
+    "model": "MI2-06T3DHN18(At)",
+    "articleCode": "22026011001878",
+    "price": 293
+  },
+  {
+    "category": "Atom",
+    "series": "V8 Atom 风管机",
+    "model": "MI2-07T3DHN18(At)",
+    "articleCode": "22026011001886",
+    "price": 302
+  },
+  {
+    "category": "Atom",
+    "series": "V8 Atom 风管机",
+    "model": "MI2-09T3DHN18(At)",
+    "articleCode": "22026011001879",
+    "price": 311
+  },
+  {
+    "category": "Atom",
+    "series": "V8 Atom 风管机",
+    "model": "MI2-12T3DHN18(At)",
+    "articleCode": "22026011001881",
+    "price": 317
+  },
+  {
+    "category": "Atom",
+    "series": "V8 Atom 风管机",
+    "model": "MI2-15T3DHN18(At)",
+    "articleCode": "22026011001885",
+    "price": 325
+  },
+  {
+    "category": "Atom",
+    "series": "V8 Atom 风管机",
+    "model": "MI2-18T3DHN18(At)",
+    "articleCode": "22026011001883",
+    "price": 332
+  },
+  {
+    "category": "Atom",
+    "series": "V8 Atom 风管机",
+    "model": "MI2-24T3DHN18(At)",
+    "articleCode": "22026011001882",
+    "price": 376
+  },
+  {
+    "category": "Atom",
+    "series": "V8 Atom 风管机",
+    "model": "MI2-28T2DHN18(At)",
+    "articleCode": "22026011001880",
+    "price": 453
+  },
+  {
+    "category": "Atom",
+    "series": "V8 Atom 风管机",
+    "model": "MI2-32T2DHN18(At)",
+    "articleCode": "22026011001888",
+    "price": 464
+  },
+  {
+    "category": "Atom",
+    "series": "V8 Atom 风管机",
+    "model": "MI2-40T2DHN18(At)",
+    "articleCode": "22026011001889",
+    "price": 479
+  },
+  {
+    "category": "Atom",
+    "series": "V8 Atom 风管机",
+    "model": "MI2-42T2DHN18(At)",
+    "articleCode": "22026011001890",
+    "price": 512
+  },
+  {
+    "category": "Atom",
+    "series": "V8 Atom 风管机",
+    "model": "MI2-48T2DHN18(At)",
+    "articleCode": "22026011001884",
+    "price": 507
+  },
+  {
+    "category": "Atom",
+    "series": "V8 Atom 风管机",
+    "model": "MI2-56T2DHN18(At)",
+    "articleCode": "CBO 22026011001511",
+    "price": 774
+  },
+  {
+    "category": "Unitary",
+    "series": "Industrial floor standing indoor units",
+    "model": "MFSL-76HDN1",
+    "articleCode": "22026014000375",
+    "price": 1299
+  },
+  {
+    "category": "Unitary",
+    "series": "Industrial floor standing indoor units",
+    "model": "MFSL-96HDN1",
+    "articleCode": "22026014000385",
+    "price": 1337
+  },
+  {
+    "category": "Unitary",
+    "series": "Industrial floor standing indoor units",
+    "model": "MFSL-120HDN1",
+    "articleCode": "22026014000367",
+    "price": 1418
+  },
+  {
+    "category": "Unitary",
+    "series": "Industrial floor standing indoor units",
+    "model": "MFSL-150HDN1",
+    "articleCode": "22026014000370",
+    "price": 1532
+  },
+  {
+    "category": "Unitary",
+    "series": "Industrial floor standing indoor units",
+    "model": "MFSL-192HDN1",
+    "articleCode": "22026014000382",
+    "price": 1910
+  },
+  {
+    "category": "Unitary",
+    "series": "Industrial floor standing indoor units",
+    "model": "MFTL-76HDN1",
+    "articleCode": "22026014000365",
+    "price": 1272
+  },
+  {
+    "category": "Unitary",
+    "series": "Industrial floor standing indoor units",
+    "model": "MFTL-96HDN1",
+    "articleCode": "22026014000369",
+    "price": 1341
+  },
+  {
+    "category": "Unitary",
+    "series": "Industrial floor standing indoor units",
+    "model": "MFTL-120HDN1",
+    "articleCode": "22026014000376",
+    "price": 1389
+  },
+  {
+    "category": "Unitary",
+    "series": "Industrial floor standing indoor units",
+    "model": "MFTL-150HDN1",
+    "articleCode": "22026014000366",
+    "price": 1746
+  },
+  {
+    "category": "Unitary",
+    "series": "Industrial floor standing indoor units",
+    "model": "MFTL-192HDN1",
+    "articleCode": "22026014000380",
+    "price": 1868
+  },
+  {
+    "category": "Unitary",
+    "series": "Quantum duct indoor units",
+    "model": "MHG-28HAN1",
+    "articleCode": "借22026011001641",
+    "price": 703
+  },
+  {
+    "category": "Unitary",
+    "series": "Quantum duct indoor units",
+    "model": "MHG-48HAN1",
+    "articleCode": "借22026011001665",
+    "price": 906
+  },
+  {
+    "category": "Unitary",
+    "series": "Quantum duct indoor units",
+    "model": "MHG-68HAN1",
+    "articleCode": "借22026011001698",
+    "price": 1551
+  },
+  {
+    "category": "Unitary",
+    "series": "Quantum duct indoor units",
+    "model": "MHG-76HAN1",
+    "articleCode": "借22026011001699",
+    "price": 1631
+  },
+  {
+    "category": "Unitary",
+    "series": "Quantum duct indoor units",
+    "model": "MHG-96HAN1",
+    "articleCode": "借22026011001707",
+    "price": 1750
+  },
+  {
+    "category": "Unitary",
+    "series": "Quantum duct indoor units",
+    "model": "MHG-120HAN1",
+    "articleCode": "借22026011001679",
+    "price": 1935
+  },
+  {
+    "category": "Unitary",
+    "series": "Quantum duct indoor units",
+    "model": "MHG-140HAN1",
+    "articleCode": "借22026011001706",
+    "price": 2527
+  },
+  {
+    "category": "Unitary",
+    "series": "Quantum duct indoor units",
+    "model": "MHG-150HAN1",
+    "articleCode": "借22026011001705",
+    "price": 2592
+  },
+  {
+    "category": "Unitary",
+    "series": "Quantum duct indoor units",
+    "model": "MHG-192HAN1",
+    "articleCode": "借22026011001681",
+    "price": 2710
+  },
+  {
+    "category": "Unitary",
+    "series": "Universal outdoor units",
+    "model": "MOUG-28HD1N1-R",
+    "articleCode": "借22027020002077",
+    "price": 759
+  },
+  {
+    "category": "Unitary",
+    "series": "Universal outdoor units",
+    "model": "MOUG-48HD1N1-R",
+    "articleCode": "借22027020002080",
+    "price": 1181
+  },
+  {
+    "category": "Unitary",
+    "series": "Universal outdoor units",
+    "model": "MOUG-68HD1N1-R",
+    "articleCode": "借22027020002050",
+    "price": 2380
+  },
+  {
+    "category": "Unitary",
+    "series": "Universal outdoor units",
+    "model": "MOUG-76HD1N1-R",
+    "articleCode": "借22027020002051",
+    "price": 2472
+  },
+  {
+    "category": "Unitary",
+    "series": "Universal outdoor units",
+    "model": "MOUG-96HD1N1-R",
+    "articleCode": "借22027020002053",
+    "price": 3215
+  },
+  {
+    "category": "Unitary",
+    "series": "Universal outdoor units",
+    "model": "MOUG-120HD1N1-R",
+    "articleCode": "借22027020002054",
+    "price": 3804
+  },
+  {
+    "category": "Unitary",
+    "series": "Universal outdoor units",
+    "model": "MOUG-140HD1N1-R",
+    "articleCode": "借22027020002569",
+    "price": 4322
+  },
+  {
+    "category": "Unitary",
+    "series": "Universal outdoor units",
+    "model": "MOUG-150HD1N1-R",
+    "articleCode": "借22027020002574",
+    "price": 5307
+  },
+  {
+    "category": "Unitary",
+    "series": "Universal outdoor units",
+    "model": "MOUG-192HD1N1-R",
+    "articleCode": "借22027020002570",
+    "price": 6132
+  },
+  {
+    "category": "Unitary",
+    "series": "Quantum duct indoor units                                         CB certificate R410A",
+    "model": "MHL-68HDN1",
+    "articleCode": "借22026011001838",
+    "price": 1041
+  },
+  {
+    "category": "Unitary",
+    "series": "Quantum duct indoor units                                         CB certificate R410A",
+    "model": "MHL-76HDN1",
+    "articleCode": "借22026011001839",
+    "price": 1099
+  },
+  {
+    "category": "Unitary",
+    "series": "Quantum duct indoor units                                         CB certificate R410A",
+    "model": "MHL-96HDN1",
+    "articleCode": "借22026011001840",
+    "price": 1114
+  },
+  {
+    "category": "Unitary",
+    "series": "Quantum duct indoor units                                         CB certificate R410A",
+    "model": "MHL-120HDN1",
+    "articleCode": "借22026011001678",
+    "price": 1404
+  },
+  {
+    "category": "Unitary",
+    "series": "Quantum duct indoor units                                         CB certificate R410A",
+    "model": "MHL-150HDN1",
+    "articleCode": "借22026011001703",
+    "price": 1845
+  },
+  {
+    "category": "Unitary",
+    "series": "Quantum duct indoor units                                         CB certificate R410A",
+    "model": "MHL-192HDN1",
+    "articleCode": "借22026011001680",
+    "price": 1960
+  },
+  {
+    "category": "Unitary",
+    "series": "Quantum duct indoor units                                         CB certificate R410A",
+    "model": "MTL-24HDN1",
+    "articleCode": "借22026011001518",
+    "price": 392
+  },
+  {
+    "category": "Unitary",
+    "series": "Quantum duct indoor units                                         CB certificate R410A",
+    "model": "MTL-36HDN1",
+    "articleCode": "借22026011001500",
+    "price": 501
+  },
+  {
+    "category": "Unitary",
+    "series": "Quantum duct indoor units                                         CB certificate R410A",
+    "model": "MTL-40HDN1",
+    "articleCode": "借22026011001500",
+    "price": 510
+  },
+  {
+    "category": "Unitary",
+    "series": "Quantum duct indoor units                                         CB certificate R410A",
+    "model": "MTL-48HDN1",
+    "articleCode": "借22026011001511",
+    "price": 547
+  },
+  {
+    "category": "Unitary",
+    "series": "Universal outdoor units          CB certificate R410A",
+    "model": "MOUL-68HD1N1-G",
+    "articleCode": "借22027020002045",
+    "price": 2231
+  },
+  {
+    "category": "Unitary",
+    "series": "Universal outdoor units          CB certificate R410A",
+    "model": "MOUL-76HD1N1-G",
+    "articleCode": "借22027020002046",
+    "price": 2353
+  },
+  {
+    "category": "Unitary",
+    "series": "Universal outdoor units          CB certificate R410A",
+    "model": "MOUL-96HD1N1-G",
+    "articleCode": "借22027020002048",
+    "price": 2386
+  },
+  {
+    "category": "Unitary",
+    "series": "Universal outdoor units          CB certificate R410A",
+    "model": "MOUL-120HD1N1-G",
+    "articleCode": "借22027020002049",
+    "price": 2974
+  },
+  {
+    "category": "Unitary",
+    "series": "Universal outdoor units          CB certificate R410A",
+    "model": "MOUL-150HD1N1-G",
+    "articleCode": "借22027020002589",
+    "price": 4305
+  },
+  {
+    "category": "Unitary",
+    "series": "Universal outdoor units          CB certificate R410A",
+    "model": "MOUL-192HD1N1-G",
+    "articleCode": "借22027020002585",
+    "price": 5218
+  },
+  {
+    "category": "Unitary",
+    "series": "Universal outdoor units          CB certificate R410A",
+    "model": "MOUL-250HD1N1-G",
+    "articleCode": "借22027020002590",
+    "price": 5803
+  },
+  {
+    "category": "Unitary",
+    "series": "Universal outdoor units",
+    "model": "MOUL-68CD1N1-R",
+    "articleCode": "借22027020001945",
+    "price": 1689
+  },
+  {
+    "category": "Unitary",
+    "series": "Universal outdoor units",
+    "model": "MOUL-76CD1N1-R",
+    "articleCode": "借22027020001946",
+    "price": 1775
+  },
+  {
+    "category": "Unitary",
+    "series": "Universal outdoor units",
+    "model": "MOUL-96CD1N1-R",
+    "articleCode": "借22027020001925",
+    "price": 1842
+  },
+  {
+    "category": "Unitary",
+    "series": "Universal outdoor units",
+    "model": "MOUL-96HD1N1-G",
+    "articleCode": "",
+    "price": 3500
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "Duct",
+    "model": "MKT3-200G12-CR",
+    "articleCode": "CBO 22026211000561",
+    "price": 168
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "Duct",
+    "model": "MKT3-300G12-CR",
+    "articleCode": "CBO 22026211000540",
+    "price": 183
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "Duct",
+    "model": "MKT3-400G12-CR",
+    "articleCode": "CBO 22026211000564",
+    "price": 203
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "Duct",
+    "model": "MKT3-500G12-CR",
+    "articleCode": "CBO 22026211000580",
+    "price": 221
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "Duct",
+    "model": "MKT3-600G12-CR",
+    "articleCode": "CBO 22026211000560",
+    "price": 238
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "Duct",
+    "model": "MKT3-700G12-CR",
+    "articleCode": "CBO 22026211000562",
+    "price": 295
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "Duct",
+    "model": "MKT3-800G12-CR",
+    "articleCode": "CBO 22026211000542",
+    "price": 336
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "Duct",
+    "model": "MKT3-1000G12-CR",
+    "articleCode": "CBO 22026211000565",
+    "price": 354
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "Duct",
+    "model": "MKT3-1200G12-CR",
+    "articleCode": "CBO 22026211000566",
+    "price": 384
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "Duct",
+    "model": "MKT3-1400G12-CR",
+    "articleCode": "CBO 22026211000563",
+    "price": 425
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "Duct",
+    "model": "MKT3-200G30-CR",
+    "articleCode": "22026211000561",
+    "price": 164
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "Duct",
+    "model": "MKT3-300G30-CR",
+    "articleCode": "22026211000540",
+    "price": 186
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "Duct",
+    "model": "MKT3-400G30-CR",
+    "articleCode": "22026211000564",
+    "price": 198
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "Duct",
+    "model": "MKT3-500G30-CR",
+    "articleCode": "22026211000580",
+    "price": 213
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "Duct",
+    "model": "MKT3-600G30-CR",
+    "articleCode": "22026211000560",
+    "price": 235
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "Duct",
+    "model": "MKT3-700G30-CR",
+    "articleCode": "22026211000562",
+    "price": 304
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "Duct",
+    "model": "MKT3-800G30-CR",
+    "articleCode": "22026211000542",
+    "price": 331
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "Duct",
+    "model": "MKT3-1000G30-CR",
+    "articleCode": "22026211000565",
+    "price": 351
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "Duct",
+    "model": "MKT3-1200G30-CR",
+    "articleCode": "22026211000566",
+    "price": 391
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "Duct",
+    "model": "MKT3-1400G30-CR",
+    "articleCode": "22026211000563",
+    "price": 425
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "Duct",
+    "model": "MKT3-200G50-CR",
+    "articleCode": "CBO 22026211000561",
+    "price": 178
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "Duct",
+    "model": "MKT3-300G50-CR",
+    "articleCode": "CBO 22026211000540",
+    "price": 203
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "Duct",
+    "model": "MKT3-400G50-CR",
+    "articleCode": "CBO 22026211000564",
+    "price": 213
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "Duct",
+    "model": "MKT3-500G50-CR",
+    "articleCode": "CBO 22026211000580",
+    "price": 230
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "Duct",
+    "model": "MKT3-600G50-CR",
+    "articleCode": "CBO 22026211000560",
+    "price": 255
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "Duct",
+    "model": "MKT3-700G50-CR",
+    "articleCode": "CBO 22026211000562",
+    "price": 317
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "Duct",
+    "model": "MKT3-800G50-CR",
+    "articleCode": "CBO 22026211000542",
+    "price": 356
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "Duct",
+    "model": "MKT3-1000G50-CR",
+    "articleCode": "CBO 22026211000565",
+    "price": 379
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "Duct",
+    "model": "MKT3-1200G50-CR",
+    "articleCode": "CBO 22026211000566",
+    "price": 425
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "Duct",
+    "model": "MKT3-1400G50-CR",
+    "articleCode": "CBO 22026211000563",
+    "price": 458
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "HSP duct fancoil",
+    "model": "MKT3H-800G70",
+    "articleCode": "",
+    "price": 420
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "HSP duct fancoil",
+    "model": "MKT3H-1000G70",
+    "articleCode": "",
+    "price": 450
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "HSP duct fancoil",
+    "model": "MKT3H-1200G70",
+    "articleCode": "",
+    "price": 470
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "HSP duct fancoil",
+    "model": "MKT3H-1400G70",
+    "articleCode": "",
+    "price": 502
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "HSP duct fancoil",
+    "model": "MKT3H-1600G100",
+    "articleCode": "",
+    "price": 628
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "HSP duct fancoil",
+    "model": "MKT3H-1800G100",
+    "articleCode": "",
+    "price": 687
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "HSP duct fancoil",
+    "model": "MKT3H-2200G100",
+    "articleCode": "",
+    "price": 737
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "HSP duct fancoil",
+    "model": "MKT3H-800EG70",
+    "articleCode": "",
+    "price": 524
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "HSP duct fancoil",
+    "model": "MKT3H-1000EG70",
+    "articleCode": "",
+    "price": 556
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "HSP duct fancoil",
+    "model": "MKT3H-1200EG70",
+    "articleCode": "",
+    "price": 566
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "HSP duct fancoil",
+    "model": "MKT3H-1400EG70",
+    "articleCode": "",
+    "price": 603
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "HSP duct fancoil",
+    "model": "MKT3H-1600EG100",
+    "articleCode": "",
+    "price": 830
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "HSP duct fancoil",
+    "model": "MKT3H-1800EG100",
+    "articleCode": "",
+    "price": 840
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "HSP duct fancoil",
+    "model": "MKT3H-2200EG100",
+    "articleCode": "",
+    "price": 887
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "New 4 rows duct",
+    "model": "MKT4-200G30-CR",
+    "articleCode": "22026211000680",
+    "price": 188
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "New 4 rows duct",
+    "model": "MKT4-300G30-CR",
+    "articleCode": "22026211000683",
+    "price": 211
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "New 4 rows duct",
+    "model": "MKT4-400G30-CR",
+    "articleCode": "22026211000686",
+    "price": 243
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "New 4 rows duct",
+    "model": "MKT4-500G30-CR",
+    "articleCode": "22026211000685",
+    "price": 252
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "New 4 rows duct",
+    "model": "MKT4-600G30-CR",
+    "articleCode": "22026211000684",
+    "price": 292
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "New 4 rows duct",
+    "model": "MKT4-700G30-CR",
+    "articleCode": "22026211000689",
+    "price": 309
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "New 4 rows duct",
+    "model": "MKT4-800G30-CR",
+    "articleCode": "22026211000687",
+    "price": 371
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "New 4 rows duct",
+    "model": "MKT4-1000G30-CR",
+    "articleCode": "22026211000681",
+    "price": 393
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "New 4 rows duct",
+    "model": "MKT4-1200G30-CR",
+    "articleCode": "22026211000688",
+    "price": 425
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "New 4 rows duct",
+    "model": "MKT4-1400G30-CR",
+    "articleCode": "22026211000682",
+    "price": 445
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "New 4 rows duct",
+    "model": "MKT4-200G50-CR",
+    "articleCode": "22026211000680",
+    "price": 191
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "New 4 rows duct",
+    "model": "MKT4-300G50-CR",
+    "articleCode": "22026211000683",
+    "price": 218
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "New 4 rows duct",
+    "model": "MKT4-400G50-CR",
+    "articleCode": "22026211000686",
+    "price": 250
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "New 4 rows duct",
+    "model": "MKT4-500G50-CR",
+    "articleCode": "22026211000685",
+    "price": 252
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "New 4 rows duct",
+    "model": "MKT4-600G50-CR",
+    "articleCode": "22026211000684",
+    "price": 295
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "New 4 rows duct",
+    "model": "MKT4-700G50-CR",
+    "articleCode": "22026211000689",
+    "price": 314
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "New 4 rows duct",
+    "model": "MKT4-800G50-CR",
+    "articleCode": "22026211000687",
+    "price": 371
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "New 4 rows duct",
+    "model": "MKT4-1000G50-CR",
+    "articleCode": "22026211000681",
+    "price": 398
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "New 4 rows duct",
+    "model": "MKT4-1200G50-CR",
+    "articleCode": "22026211000688",
+    "price": 428
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "New 4 rows duct",
+    "model": "MKT4-1400G50-CR",
+    "articleCode": "22026211000682",
+    "price": 458
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "New 4 rows duct",
+    "model": "MKT4-200FG30-CR",
+    "articleCode": "22026211000661",
+    "price": 193
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "New 4 rows duct",
+    "model": "MKT4-300FG30-CR",
+    "articleCode": "22026211000662",
+    "price": 225
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "New 4 rows duct",
+    "model": "MKT4-400FG30-CR",
+    "articleCode": "22026211000667",
+    "price": 247
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "New 4 rows duct",
+    "model": "MKT4-500FG30-CR",
+    "articleCode": "22026211000660",
+    "price": 260
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "New 4 rows duct",
+    "model": "MKT4-600FG30-CR",
+    "articleCode": "22026211000668",
+    "price": 277
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "New 4 rows duct",
+    "model": "MKT4-700FG30-CR",
+    "articleCode": "22026211000669",
+    "price": 319
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "New 4 rows duct",
+    "model": "MKT4-800FG30-CR",
+    "articleCode": "22026211000666",
+    "price": 381
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "New 4 rows duct",
+    "model": "MKT4-1000FG30-CR",
+    "articleCode": "22026211000663",
+    "price": 411
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "New 4 rows duct",
+    "model": "MKT4-1200FG30-CR",
+    "articleCode": "22026211000665",
+    "price": 465
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "New 4 rows duct",
+    "model": "MKT4-1400FG30-CR",
+    "articleCode": "22026211000664",
+    "price": 502
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "New 4 rows duct",
+    "model": "MKT4-200FG50-CR",
+    "articleCode": "22026211000661",
+    "price": 196
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "New 4 rows duct",
+    "model": "MKT4-300FG50-CR",
+    "articleCode": "22026211000662",
+    "price": 230
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "New 4 rows duct",
+    "model": "MKT4-400FG50-CR",
+    "articleCode": "22026211000667",
+    "price": 252
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "New 4 rows duct",
+    "model": "MKT4-500FG50-CR",
+    "articleCode": "22026211000660",
+    "price": 260
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "New 4 rows duct",
+    "model": "MKT4-600FG50-CR",
+    "articleCode": "22026211000668",
+    "price": 280
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "New 4 rows duct",
+    "model": "MKT4-700FG50-CR",
+    "articleCode": "22026211000669",
+    "price": 324
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "New 4 rows duct",
+    "model": "MKT4-800FG50-CR",
+    "articleCode": "22026211000666",
+    "price": 384
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "New 4 rows duct",
+    "model": "MKT4-1000FG50-CR",
+    "articleCode": "22026211000663",
+    "price": 413
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "New 4 rows duct",
+    "model": "MKT4-1200FG50-CR",
+    "articleCode": "22026211000665",
+    "price": 468
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "New 4 rows duct",
+    "model": "MKT4-1400FG50-CR",
+    "articleCode": "22026211000664",
+    "price": 512
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "Thermostat",
+    "model": "KJRP-86A4/BMFNKD-E",
+    "articleCode": "17317100005098",
+    "price": 70
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "Thermostat",
+    "model": "KJRP-86A5/BMFNKD-E",
+    "articleCode": "17317100005102",
+    "price": 70
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "Thermostat",
+    "model": "KJRP-86A/BMFNKD-E",
+    "articleCode": "17317100004816",
+    "price": 70
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "Thermostat",
+    "model": "KJRP-86I/MFK-E",
+    "articleCode": "17317100004855",
+    "price": 53
+  },
+  {
+    "category": "FCU-Duct",
+    "series": "Thermostat",
+    "model": "KJRP-86I/MFKS-E",
+    "articleCode": "17317100005755",
+    "price": 57
+  },
+  {
+    "category": "FCU-other",
+    "series": "New appearance",
+    "model": "MKH1-150-R3",
+    "articleCode": "22026214000107",
+    "price": 270
+  },
+  {
+    "category": "FCU-other",
+    "series": "New appearance",
+    "model": "MKH1-250-R3",
+    "articleCode": "22026214000109",
+    "price": 290
+  },
+  {
+    "category": "FCU-other",
+    "series": "New appearance",
+    "model": "MKH1-350-R3",
+    "articleCode": "22026214000110",
+    "price": 336
+  },
+  {
+    "category": "FCU-other",
+    "series": "New appearance",
+    "model": "MKH1-500-R3",
+    "articleCode": "22026214000116",
+    "price": 376
+  },
+  {
+    "category": "FCU-other",
+    "series": "New appearance",
+    "model": "MKH1-700-R3",
+    "articleCode": "22026214000115",
+    "price": 406
+  },
+  {
+    "category": "FCU-other",
+    "series": "New appearance",
+    "model": "MKH1-800-R3",
+    "articleCode": "22026214000117",
+    "price": 448
+  },
+  {
+    "category": "FCU-other",
+    "series": "New appearance",
+    "model": "MKH1-150-R4",
+    "articleCode": "22026214000108",
+    "price": 275
+  },
+  {
+    "category": "FCU-other",
+    "series": "New appearance",
+    "model": "MKH1-250-R4",
+    "articleCode": "22026214000111",
+    "price": 304
+  },
+  {
+    "category": "FCU-other",
+    "series": "New appearance",
+    "model": "MKH1-350-R4",
+    "articleCode": "22026214000112",
+    "price": 351
+  },
+  {
+    "category": "FCU-other",
+    "series": "New appearance",
+    "model": "MKH1-500-R4",
+    "articleCode": "22026214000114",
+    "price": 384
+  },
+  {
+    "category": "FCU-other",
+    "series": "New appearance",
+    "model": "MKH1-700-R4",
+    "articleCode": "22026214000113",
+    "price": 430
+  },
+  {
+    "category": "FCU-other",
+    "series": "New appearance",
+    "model": "MKH1-800-R4",
+    "articleCode": "22026214000118",
+    "price": 472
+  },
+  {
+    "category": "FCU-other",
+    "series": "New appearance",
+    "model": "MKH2-150-R3",
+    "articleCode": "22026214000107",
+    "price": 270
+  },
+  {
+    "category": "FCU-other",
+    "series": "New appearance",
+    "model": "MKH2-250-R3",
+    "articleCode": "22026214000109",
+    "price": 290
+  },
+  {
+    "category": "FCU-other",
+    "series": "New appearance",
+    "model": "MKH2-350-R3",
+    "articleCode": "22026214000110",
+    "price": 336
+  },
+  {
+    "category": "FCU-other",
+    "series": "New appearance",
+    "model": "MKH2-500-R3",
+    "articleCode": "22026214000116",
+    "price": 376
+  },
+  {
+    "category": "FCU-other",
+    "series": "New appearance",
+    "model": "MKH2-700-R3",
+    "articleCode": "22026214000115",
+    "price": 406
+  },
+  {
+    "category": "FCU-other",
+    "series": "New appearance",
+    "model": "MKH2-800-R3",
+    "articleCode": "22026214000117",
+    "price": 448
+  },
+  {
+    "category": "FCU-other",
+    "series": "New appearance",
+    "model": "MKH2-150-R4",
+    "articleCode": "22026214000108",
+    "price": 275
+  },
+  {
+    "category": "FCU-other",
+    "series": "New appearance",
+    "model": "MKH2-250-R4",
+    "articleCode": "22026214000111",
+    "price": 304
+  },
+  {
+    "category": "FCU-other",
+    "series": "New appearance",
+    "model": "MKH2-350-R4",
+    "articleCode": "22026214000112",
+    "price": 351
+  },
+  {
+    "category": "FCU-other",
+    "series": "New appearance",
+    "model": "MKH2-500-R4",
+    "articleCode": "22026214000114",
+    "price": 384
+  },
+  {
+    "category": "FCU-other",
+    "series": "New appearance",
+    "model": "MKH2-700-R4",
+    "articleCode": "22026214000113",
+    "price": 430
+  },
+  {
+    "category": "FCU-other",
+    "series": "New appearance",
+    "model": "MKH2-800-R4",
+    "articleCode": "22026214000118",
+    "price": 472
+  },
+  {
+    "category": "FCU-other",
+    "series": "New appearance",
+    "model": "/",
+    "articleCode": "12126200000334",
+    "price": 18
+  },
+  {
+    "category": "FCU-other",
+    "series": "New appearance",
+    "model": "MKH2-150-R3 (A)",
+    "articleCode": "22026214000107",
+    "price": 307
+  },
+  {
+    "category": "FCU-other",
+    "series": "New appearance",
+    "model": "MKH2-250-R3 (A)",
+    "articleCode": "22026214000109",
+    "price": 327
+  },
+  {
+    "category": "FCU-other",
+    "series": "New appearance",
+    "model": "MKH2-350-R3 (A)",
+    "articleCode": "22026214000110",
+    "price": 374
+  },
+  {
+    "category": "FCU-other",
+    "series": "New appearance",
+    "model": "MKH2-500-R3 (A)",
+    "articleCode": "22026214000116",
+    "price": 413
+  },
+  {
+    "category": "FCU-other",
+    "series": "New appearance",
+    "model": "MKH2-700-R3 (A)",
+    "articleCode": "22026214000115",
+    "price": 443
+  },
+  {
+    "category": "FCU-other",
+    "series": "New appearance",
+    "model": "MKH2-800-R3 (A)",
+    "articleCode": "22026214000117",
+    "price": 485
+  },
+  {
+    "category": "FCU-other",
+    "series": "New appearance",
+    "model": "MKH2-150-R4 (A)",
+    "articleCode": "22026214000108",
+    "price": 309
+  },
+  {
+    "category": "FCU-other",
+    "series": "New appearance",
+    "model": "MKH2-250-R4 (A)",
+    "articleCode": "22026214000111",
+    "price": 339
+  },
+  {
+    "category": "FCU-other",
+    "series": "New appearance",
+    "model": "MKH2-350-R4 (A)",
+    "articleCode": "22026214000112",
+    "price": 388
+  },
+  {
+    "category": "FCU-other",
+    "series": "New appearance",
+    "model": "MKH2-500-R4 (A)",
+    "articleCode": "22026214000114",
+    "price": 418
+  },
+  {
+    "category": "FCU-other",
+    "series": "New appearance",
+    "model": "MKH2-700-R4 (A)",
+    "articleCode": "22026214000113",
+    "price": 468
+  },
+  {
+    "category": "FCU-other",
+    "series": "New appearance",
+    "model": "MKH2-800-R4 (A)",
+    "articleCode": "22026214000118",
+    "price": 509
+  },
+  {
+    "category": "FCU-other",
+    "series": "New appearance",
+    "model": "12126200000334",
+    "articleCode": "12126200000334",
+    "price": 18
+  },
+  {
+    "category": "FCU-other",
+    "series": "New appearance",
+    "model": "MKH3-150-R3",
+    "articleCode": "22026214000107",
+    "price": 257
+  },
+  {
+    "category": "FCU-other",
+    "series": "New appearance",
+    "model": "MKH3-250-R3",
+    "articleCode": "22026214000109",
+    "price": 275
+  },
+  {
+    "category": "FCU-other",
+    "series": "New appearance",
+    "model": "MKH3-350-R3",
+    "articleCode": "22026214000110",
+    "price": 324
+  },
+  {
+    "category": "FCU-other",
+    "series": "New appearance",
+    "model": "MKH3-500-R3",
+    "articleCode": "22026214000116",
+    "price": 359
+  },
+  {
+    "category": "FCU-other",
+    "series": "New appearance",
+    "model": "MKH3-700-R3",
+    "articleCode": "22026214000115",
+    "price": 388
+  },
+  {
+    "category": "FCU-other",
+    "series": "New appearance",
+    "model": "MKH3-800-R3",
+    "articleCode": "22026214000117",
+    "price": 430
+  },
+  {
+    "category": "FCU-other",
+    "series": "New appearance",
+    "model": "MKH3-150-R4",
+    "articleCode": "22026214000108",
+    "price": 262
+  },
+  {
+    "category": "FCU-other",
+    "series": "New appearance",
+    "model": "MKH3-250-R4",
+    "articleCode": "22026214000111",
+    "price": 290
+  },
+  {
+    "category": "FCU-other",
+    "series": "New appearance",
+    "model": "MKH3-350-R4",
+    "articleCode": "22026214000112",
+    "price": 336
+  },
+  {
+    "category": "FCU-other",
+    "series": "New appearance",
+    "model": "MKH3-500-R4",
+    "articleCode": "22026214000114",
+    "price": 369
+  },
+  {
+    "category": "FCU-other",
+    "series": "New appearance",
+    "model": "MKH3-700-R4",
+    "articleCode": "22026214000113",
+    "price": 408
+  },
+  {
+    "category": "FCU-other",
+    "series": "New appearance",
+    "model": "MKH3-800-R4",
+    "articleCode": "22026214000118",
+    "price": 455
+  },
+  {
+    "category": "FCU-other",
+    "series": "Additional drain pan for MDKH1 / MDKH2 / MDKH3 (for all models)",
+    "model": "12123000001687",
+    "articleCode": "12123000001687",
+    "price": 30
+  },
+  {
+    "category": "FCU-other",
+    "series": "Additional drain pan for MDKH1 / MDKH2 / MDKH3 (for all models)",
+    "model": "12123000001685",
+    "articleCode": "12123000001685",
+    "price": 435
+  },
+  {
+    "category": "FCUCassette",
+    "series": "AC Cassette Fancoil",
+    "model": "MKD-300",
+    "articleCode": "22026212000006",
+    "price": 391
+  },
+  {
+    "category": "FCUCassette",
+    "series": "AC Cassette Fancoil",
+    "model": "MKD-400",
+    "articleCode": "22026212000012",
+    "price": 423
+  },
+  {
+    "category": "FCUCassette",
+    "series": "AC Cassette Fancoil",
+    "model": "MKD-450",
+    "articleCode": "22026212000012",
+    "price": 423
+  },
+  {
+    "category": "FCUCassette",
+    "series": "AC Cassette Fancoil",
+    "model": "MKD-500",
+    "articleCode": "22026212000027",
+    "price": 460
+  },
+  {
+    "category": "FCUCassette",
+    "series": "AC Cassette Fancoil",
+    "model": "T-MBQ4-03B",
+    "articleCode": "12112900000382",
+    "price": 55
+  },
+  {
+    "category": "FCUCassette",
+    "series": "AC Cassette Fancoil",
+    "model": "12126200000215",
+    "articleCode": "",
+    "price": 10
+  },
+  {
+    "category": "FCUCassette",
+    "series": "AC Cassette Fancoil",
+    "model": "12126200000216",
+    "articleCode": "",
+    "price": 20
+  },
+  {
+    "category": "FCUCassette",
+    "series": "AC Cassette Fancoil",
+    "model": "MKA-600R",
+    "articleCode": "22026212000028",
+    "price": 448
+  },
+  {
+    "category": "FCUCassette",
+    "series": "AC Cassette Fancoil",
+    "model": "MKA-750R",
+    "articleCode": "22026212000004",
+    "price": 463
+  },
+  {
+    "category": "FCUCassette",
+    "series": "AC Cassette Fancoil",
+    "model": "MKA-850R",
+    "articleCode": "22026212000053",
+    "price": 556
+  },
+  {
+    "category": "FCUCassette",
+    "series": "AC Cassette Fancoil",
+    "model": "MKA-950R",
+    "articleCode": "22026212000023",
+    "price": 574
+  },
+  {
+    "category": "FCUCassette",
+    "series": "AC Cassette Fancoil",
+    "model": "MKA-1200R",
+    "articleCode": "22026212000034",
+    "price": 593
+  },
+  {
+    "category": "FCUCassette",
+    "series": "AC Cassette Fancoil",
+    "model": "MKA-1500R",
+    "articleCode": "22026212000034",
+    "price": 593
+  },
+  {
+    "category": "FCUCassette",
+    "series": "AC Cassette Fancoil",
+    "model": "T-MBQ4-02C",
+    "articleCode": "12112900000322",
+    "price": 109
+  },
+  {
+    "category": "FCUCassette",
+    "series": "AC Cassette Fancoil",
+    "model": "MKC-300R-B",
+    "articleCode": "",
+    "price": 403
+  },
+  {
+    "category": "FCUCassette",
+    "series": "AC Cassette Fancoil",
+    "model": "MKC-400R-B",
+    "articleCode": "",
+    "price": 415
+  },
+  {
+    "category": "FCUCassette",
+    "series": "AC Cassette Fancoil",
+    "model": "MKC-V600R-B",
+    "articleCode": "",
+    "price": 534
+  },
+  {
+    "category": "FCUCassette",
+    "series": "AC Cassette Fancoil",
+    "model": "MBQ1-02D",
+    "articleCode": "12112900000376",
+    "price": 84
+  },
+  {
+    "category": "FCUCassette",
+    "series": "AC Cassette Fancoil",
+    "model": "MBQ1-01D",
+    "articleCode": "22012900000410",
+    "price": 146
+  },
+  {
+    "category": "FCUCassette",
+    "series": "AC Cassette Fancoil",
+    "model": "MKD-300S",
+    "articleCode": "22026212000059",
+    "price": 445
+  },
+  {
+    "category": "FCUCassette",
+    "series": "AC Cassette Fancoil",
+    "model": "MKD-400S",
+    "articleCode": "22026212000055",
+    "price": 475
+  },
+  {
+    "category": "FCUCassette",
+    "series": "AC Cassette Fancoil",
+    "model": "MKD-450S",
+    "articleCode": "",
+    "price": 475
+  },
+  {
+    "category": "FCUCassette",
+    "series": "AC Cassette Fancoil",
+    "model": "MKD-500S",
+    "articleCode": "22026212000008",
+    "price": 509
+  },
+  {
+    "category": "FCUCassette",
+    "series": "AC Cassette Fancoil",
+    "model": "T-MBQ4-03B",
+    "articleCode": "12112900000382",
+    "price": 55
+  },
+  {
+    "category": "FCUCassette",
+    "series": "AC Cassette Fancoil",
+    "model": "12126200000215",
+    "articleCode": "",
+    "price": 10
+  },
+  {
+    "category": "FCUCassette",
+    "series": "AC Cassette Fancoil",
+    "model": "MKA-600F",
+    "articleCode": "22026212000031",
+    "price": 547
+  },
+  {
+    "category": "FCUCassette",
+    "series": "AC Cassette Fancoil",
+    "model": "MKA-750F",
+    "articleCode": "22026212000041",
+    "price": 621
+  },
+  {
+    "category": "FCUCassette",
+    "series": "AC Cassette Fancoil",
+    "model": "MKA-850F",
+    "articleCode": "22026212000009",
+    "price": 665
+  },
+  {
+    "category": "FCUCassette",
+    "series": "AC Cassette Fancoil",
+    "model": "MKA-950F",
+    "articleCode": "22026212000003",
+    "price": 692
+  },
+  {
+    "category": "FCUCassette",
+    "series": "AC Cassette Fancoil",
+    "model": "MKA-1200F",
+    "articleCode": "22026212000037",
+    "price": 744
+  },
+  {
+    "category": "FCUCassette",
+    "series": "AC Cassette Fancoil",
+    "model": "MKA-1500F",
+    "articleCode": "22026212000001",
+    "price": 781
+  },
+  {
+    "category": "FCUCassette",
+    "series": "AC Cassette Fancoil",
+    "model": "T-MBQ4-02C",
+    "articleCode": "12112900000322",
+    "price": 109
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Cassette",
+    "model": "MKD-V300",
+    "articleCode": "22026212000026",
+    "price": 379
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Cassette",
+    "model": "MKD-V400",
+    "articleCode": "22026212000021",
+    "price": 406
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Cassette",
+    "model": "MKD-V500",
+    "articleCode": "22026212000054",
+    "price": 443
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Cassette",
+    "model": "T-MBQ4-03B",
+    "articleCode": "",
+    "price": 55
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Cassette",
+    "model": "12126200000215",
+    "articleCode": "12126200000215",
+    "price": 10
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Cassette",
+    "model": "MKA-V600R",
+    "articleCode": "22026212000022",
+    "price": 433
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Cassette",
+    "model": "MKA-V750R",
+    "articleCode": "22026212000016",
+    "price": 460
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Cassette",
+    "model": "MKA-V850R",
+    "articleCode": "22026212000047",
+    "price": 507
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Cassette",
+    "model": "MKA-V950R",
+    "articleCode": "22026212000056",
+    "price": 539
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Cassette",
+    "model": "MKA-V1200R",
+    "articleCode": "22026212000032",
+    "price": 561
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Cassette",
+    "model": "MKA-V1500R",
+    "articleCode": "22026212000025",
+    "price": 591
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Cassette",
+    "model": "T-MBQ4-02C",
+    "articleCode": "12112900000322",
+    "price": 109
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Cassette",
+    "model": "MKC-V300R-B",
+    "articleCode": "22026212000073",
+    "price": 408
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Cassette",
+    "model": "MKC-V400R-B",
+    "articleCode": "22026212000072",
+    "price": 485
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Cassette",
+    "model": "MKC-V600R-B",
+    "articleCode": "22026212000071",
+    "price": 524
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Cassette",
+    "model": "MBQ1-02D",
+    "articleCode": "12112900000376",
+    "price": 84
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Cassette",
+    "model": "MBQ1-01D",
+    "articleCode": "22012900000410",
+    "price": 146
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Cassette",
+    "model": "MKG-V200C",
+    "articleCode": "22026213000016",
+    "price": 406
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Cassette",
+    "model": "MKG-V250C",
+    "articleCode": "22026213000016",
+    "price": 430
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Cassette",
+    "model": "MKG-V300C",
+    "articleCode": "22026213000017",
+    "price": 443
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Cassette",
+    "model": "MKG-V400C",
+    "articleCode": "22026213000018",
+    "price": 458
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Cassette",
+    "model": "MKG-V500C",
+    "articleCode": "22026213000019",
+    "price": 492
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Cassette",
+    "model": "MKG-V600C",
+    "articleCode": "22026213000020",
+    "price": 502
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "New",
+    "model": "MKH1-V150-R3",
+    "articleCode": "借22026214000069",
+    "price": 354
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "New",
+    "model": "MKH1-V250-R3",
+    "articleCode": "借22026214000077",
+    "price": 388
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "New",
+    "model": "MKH1-V350-R3",
+    "articleCode": "借22026214000068",
+    "price": 425
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "New",
+    "model": "MKH1-V500-R3",
+    "articleCode": "借22026214000075",
+    "price": 448
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "New",
+    "model": "MKH1-V700-R3",
+    "articleCode": "借22026214000088",
+    "price": 482
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "New",
+    "model": "MKH1-V800-R3",
+    "articleCode": "借22026214000074",
+    "price": 544
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "New",
+    "model": "MKH1-V150-R4",
+    "articleCode": "借22026214000073",
+    "price": 364
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "New",
+    "model": "MKH1-V250-R4",
+    "articleCode": "借22026214000078",
+    "price": 403
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "New",
+    "model": "MKH1-V350-R4",
+    "articleCode": "借22026214000076",
+    "price": 445
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "New",
+    "model": "MKH1-V500-R4",
+    "articleCode": "借22026214000070",
+    "price": 475
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "New",
+    "model": "MKH1-V700-R4",
+    "articleCode": "借22026214000087",
+    "price": 507
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "New",
+    "model": "MKH1-V800-R4",
+    "articleCode": "借22026214000067",
+    "price": 578
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "New",
+    "model": "MKH2-V150-R3",
+    "articleCode": "22026214000069",
+    "price": 354
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "New",
+    "model": "MKH2-V250-R3",
+    "articleCode": "22026214000077",
+    "price": 388
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "New",
+    "model": "MKH2-V350-R3",
+    "articleCode": "22026214000068",
+    "price": 425
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "New",
+    "model": "MKH2-V500-R3",
+    "articleCode": "22026214000075",
+    "price": 448
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "New",
+    "model": "MKH2-V700-R3",
+    "articleCode": "22026214000088",
+    "price": 482
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "New",
+    "model": "MKH2-V800-R3",
+    "articleCode": "22026214000074",
+    "price": 544
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "New",
+    "model": "MKH2-V150-R4",
+    "articleCode": "22026214000073",
+    "price": 364
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "New",
+    "model": "MKH2-V250-R4",
+    "articleCode": "22026214000078",
+    "price": 403
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "New",
+    "model": "MKH2-V350-R4",
+    "articleCode": "22026214000076",
+    "price": 445
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "New",
+    "model": "MKH2-V500-R4",
+    "articleCode": "22026214000070",
+    "price": 475
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "New",
+    "model": "MKH2-V700-R4",
+    "articleCode": "22026214000087",
+    "price": 507
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "New",
+    "model": "MKH2-V800-R4",
+    "articleCode": "22026214000067",
+    "price": 578
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "New",
+    "model": "MKH3-V150-R3",
+    "articleCode": "借22026214000069",
+    "price": 327
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "New",
+    "model": "MKH3-V250-R3",
+    "articleCode": "借22026214000077",
+    "price": 359
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "New",
+    "model": "MKH3-V350-R3",
+    "articleCode": "借22026214000068",
+    "price": 398
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "New",
+    "model": "MKH3-V500-R3",
+    "articleCode": "借22026214000075",
+    "price": 423
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "New",
+    "model": "MKH3-V700-R3",
+    "articleCode": "借22026214000088",
+    "price": 455
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "New",
+    "model": "MKH3-V800-R3",
+    "articleCode": "借22026214000074",
+    "price": 524
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "New",
+    "model": "MKH3-V150-R4",
+    "articleCode": "借22026214000073",
+    "price": 341
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "New",
+    "model": "MKH3-V250-R4",
+    "articleCode": "借22026214000078",
+    "price": 376
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "New",
+    "model": "MKH3-V350-R4",
+    "articleCode": "借22026214000076",
+    "price": 415
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "New",
+    "model": "MKH3-V500-R4",
+    "articleCode": "借22026214000070",
+    "price": 455
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "New",
+    "model": "MKH3-V700-R4",
+    "articleCode": "借22026214000087",
+    "price": 490
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "New",
+    "model": "MKH3-V800-R4",
+    "articleCode": "借22026214000067",
+    "price": 564
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Duct",
+    "model": "MKT3-V200G12-CR",
+    "articleCode": "22026211000620",
+    "price": 302
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Duct",
+    "model": "MKT3-V300G12-CR",
+    "articleCode": "22026211000626",
+    "price": 339
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Duct",
+    "model": "MKT3-V400G12-CR",
+    "articleCode": "22026211000627",
+    "price": 356
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Duct",
+    "model": "MKT3-V500G12-CR",
+    "articleCode": "22026211000623",
+    "price": 369
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Duct",
+    "model": "MKT3-V600G12-CR",
+    "articleCode": "22026211000625",
+    "price": 384
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Duct",
+    "model": "MKT3-V700G12-CR",
+    "articleCode": "22026211000624",
+    "price": 472
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Duct",
+    "model": "MKT3-V800G12-CR",
+    "articleCode": "22026211000621",
+    "price": 551
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Duct",
+    "model": "MKT3-V1000G12-CR",
+    "articleCode": "22026211000622",
+    "price": 571
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Duct",
+    "model": "MKT3-V1200G12-CR",
+    "articleCode": "22026211000628",
+    "price": 638
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Duct",
+    "model": "MKT3-V1400G12-CR",
+    "articleCode": "22026211000629",
+    "price": 712
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Cassette",
+    "model": "MKD-V300FA",
+    "articleCode": "22026212000011",
+    "price": 418
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Cassette",
+    "model": "MKD-V400FA",
+    "articleCode": "22026212000048",
+    "price": 450
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Cassette",
+    "model": "MKD-V500FA",
+    "articleCode": "22026212000042",
+    "price": 482
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Cassette",
+    "model": "T-MBQ4-03B",
+    "articleCode": "12112900000382",
+    "price": 55
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Cassette",
+    "model": "12126200000215",
+    "articleCode": "12126200000215",
+    "price": 10
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Cassette",
+    "model": "MKA-V600FA",
+    "articleCode": "22026212000005",
+    "price": 514
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Cassette",
+    "model": "MKA-V750FA",
+    "articleCode": "22026212000060",
+    "price": 586
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Cassette",
+    "model": "MKA-V850FA",
+    "articleCode": "22026212000029",
+    "price": 631
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Cassette",
+    "model": "MKA-V950FA",
+    "articleCode": "22026212000019",
+    "price": 658
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Cassette",
+    "model": "MKA-V1200FA",
+    "articleCode": "22026212000058",
+    "price": 707
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Cassette",
+    "model": "MKA-V1500FA",
+    "articleCode": "22026212000062",
+    "price": 739
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Cassette",
+    "model": "T-MBQ4-02C",
+    "articleCode": "12112900000322",
+    "price": 109
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Duct",
+    "model": "MKT4-V200FG30-CR",
+    "articleCode": "22026211000661",
+    "price": 302
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Duct",
+    "model": "MKT4-V300FG30-CR",
+    "articleCode": "22026211000662",
+    "price": 331
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Duct",
+    "model": "MKT4-V400FG30-CR",
+    "articleCode": "22026211000667",
+    "price": 354
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Duct",
+    "model": "MKT4-V500FG30-CR",
+    "articleCode": "22026211000660",
+    "price": 366
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Duct",
+    "model": "MKT4-V600FG30-CR",
+    "articleCode": "22026211000668",
+    "price": 381
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Duct",
+    "model": "MKT4-V700FG30-CR",
+    "articleCode": "22026211000669",
+    "price": 455
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Duct",
+    "model": "MKT4-V800FG30-CR",
+    "articleCode": "22026211000666",
+    "price": 564
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Duct",
+    "model": "MKT4-V1000FG30-CR",
+    "articleCode": "22026211000663",
+    "price": 578
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Duct",
+    "model": "MKT4-V1200FG30-CR",
+    "articleCode": "22026211000665",
+    "price": 648
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Duct",
+    "model": "MKT4-V1400FG30-CR",
+    "articleCode": "22026211000664",
+    "price": 712
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Ceiling&Floor",
+    "model": "MKH1-V150F-R4",
+    "articleCode": "借22026215000086",
+    "price": 384
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Ceiling&Floor",
+    "model": "MKH1-V250F-R4",
+    "articleCode": "借22026215000087",
+    "price": 430
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Ceiling&Floor",
+    "model": "MKH1-V350F-R4",
+    "articleCode": "借22026215000088",
+    "price": 470
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Ceiling&Floor",
+    "model": "MKH1-V500F-R4",
+    "articleCode": "借22026215000089",
+    "price": 482
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Ceiling&Floor",
+    "model": "MKH1-V700F-R4",
+    "articleCode": "借22026215000090",
+    "price": 544
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Ceiling&Floor",
+    "model": "MKH1-V800F-R4",
+    "articleCode": "借22026215000091",
+    "price": 616
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Ceiling&Floor",
+    "model": "MKH2-V150F-R4",
+    "articleCode": "借22026215000086定制\r\n可参考L2020011800002",
+    "price": 384
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Ceiling&Floor",
+    "model": "MKH2-V250F-R4",
+    "articleCode": "借22026215000087定制\r\n可参考L2020011800002",
+    "price": 430
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Ceiling&Floor",
+    "model": "MKH2-V350F-R4",
+    "articleCode": "借22026215000088定制\r\n可参考L2020011800002",
+    "price": 470
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Ceiling&Floor",
+    "model": "MKH2-V500F-R4",
+    "articleCode": "借22026215000089定制\r\n可参考L2020011800002",
+    "price": 482
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Ceiling&Floor",
+    "model": "MKH2-V700F-R4",
+    "articleCode": "借22026215000090定制\r\n可参考L2020011800002",
+    "price": 544
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Ceiling&Floor",
+    "model": "MKH2-V800F-R4",
+    "articleCode": "借22026215000091定制\r\n可参考L2020011800002",
+    "price": 616
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Ceiling&Floor",
+    "model": "MKH3-V150F-R4",
+    "articleCode": "借22026215000086",
+    "price": 376
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Ceiling&Floor",
+    "model": "MKH3-V250F-R4",
+    "articleCode": "借22026215000087",
+    "price": 423
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Ceiling&Floor",
+    "model": "MKH3-V350F-R4",
+    "articleCode": "借22026215000088",
+    "price": 458
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Ceiling&Floor",
+    "model": "MKH3-V500F-R4",
+    "articleCode": "借22026215000089",
+    "price": 475
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Ceiling&Floor",
+    "model": "MKH3-V700F-R4",
+    "articleCode": "借22026215000090",
+    "price": 537
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Ceiling&Floor",
+    "model": "MKH3-V800F-R4",
+    "articleCode": "借22026215000091",
+    "price": 603
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Accessories",
+    "model": "TWVK42",
+    "articleCode": "15426200000494",
+    "price": 443
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Accessories",
+    "model": "TWVK45",
+    "articleCode": "15426200000493",
+    "price": 250
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Accessories",
+    "model": "CE-FP-204K/CSBP2.2",
+    "articleCode": "12126200000673",
+    "price": 15
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Accessories",
+    "model": "CE-FP-204K/CBP2.ZL",
+    "articleCode": "15426200000796",
+    "price": 235
+  },
+  {
+    "category": "DC 2-4-Pipe FCU",
+    "series": "Accessories",
+    "model": "CE-FP-102K/CBP2.ZL",
+    "articleCode": "15426200000792",
+    "price": 230
+  },
+  {
+    "category": "Modular chiller",
+    "series": "Air cooled modular chiller",
+    "model": "MGBT-F180W/RN1",
+    "articleCode": "",
+    "price": 25074
+  },
+  {
+    "category": "Modular chiller",
+    "series": "Air cooled modular chiller",
+    "model": "MGBL-F200W/RN1",
+    "articleCode": "22027120000044",
+    "price": 22389
+  },
+  {
+    "category": "Modular chiller",
+    "series": "Air cooled modular chiller",
+    "model": "MC-SS35-RN1L-B",
+    "articleCode": "22027120000067",
+    "price": 5242
+  },
+  {
+    "category": "Modular chiller",
+    "series": "Air cooled modular chiller",
+    "model": "MC-SS65/RN1L",
+    "articleCode": "22027120000030",
+    "price": 8419
+  },
+  {
+    "category": "Modular chiller",
+    "series": "Air cooled modular chiller",
+    "model": "MC-SS80/RN1L",
+    "articleCode": "22027120000003",
+    "price": 11414
+  },
+  {
+    "category": "Modular chiller",
+    "series": "Chiller King Series",
+    "model": "MC-SS65/RN1",
+    "articleCode": "21027120000258",
+    "price": 7999
+  },
+  {
+    "category": "Modular chiller",
+    "series": "Chiller King Series",
+    "model": "MC-SS130/RN1",
+    "articleCode": "21027120000238",
+    "price": 14420
+  },
+  {
+    "category": "Modular chiller",
+    "series": "Chiller King Plus",
+    "model": "MC-SS130-RN1TL",
+    "articleCode": "22027120000458",
+    "price": 15099
+  },
+  {
+    "category": "Modular chiller",
+    "series": "Chiller King Plus",
+    "model": "MC-SS260-RN1TL",
+    "articleCode": "22027120000478",
+    "price": 29708
+  },
+  {
+    "category": "Modular chiller",
+    "series": "Chiller King Plus",
+    "model": "KJR-120A/MBTE",
+    "articleCode": "",
+    "price": 138
+  },
+  {
+    "category": "Modular chiller",
+    "series": "Chiller King Plus",
+    "model": "KJRM-120D/BMK-E",
+    "articleCode": "",
+    "price": 191
+  },
+  {
+    "category": "Modular chiller",
+    "series": "Chiller King Plus",
+    "model": "KJR-120H/BMWK03-E",
+    "articleCode": "17317100003115",
+    "price": 172
+  },
+  {
+    "category": "Modular chiller",
+    "series": "Chiller King Plus",
+    "model": "KJR-120K/BMKO-E",
+    "articleCode": "17317100006835",
+    "price": 220
+  },
+  {
+    "category": "Modular chiller",
+    "series": "Chiller King Plus",
+    "model": "WFS-1001-H",
+    "articleCode": "",
+    "price": 258
+  },
+  {
+    "category": "Modular chiller",
+    "series": "mini Chiller",
+    "model": "KJR-120F1/BMK-E",
+    "articleCode": "17317100000066",
+    "price": 191
+  },
+  {
+    "category": "Modular chiller",
+    "series": "mini Chiller",
+    "model": "MGC-V5WD2N8-B2",
+    "articleCode": "22025314000599",
+    "price": 2141
+  },
+  {
+    "category": "Modular chiller",
+    "series": "mini Chiller",
+    "model": "MGC-V7WD2N8-B2",
+    "articleCode": "22025314000591",
+    "price": 2373
+  },
+  {
+    "category": "Modular chiller",
+    "series": "mini Chiller",
+    "model": "MGC-V9WD2N8-B2",
+    "articleCode": "22025314000592",
+    "price": 3012
+  },
+  {
+    "category": "Modular chiller",
+    "series": "mini Chiller",
+    "model": "MGC-V12WD2N8-B2",
+    "articleCode": "借用22025314000593",
+    "price": 3336
+  },
+  {
+    "category": "Modular chiller",
+    "series": "mini Chiller",
+    "model": "MGC-V14WD2N8-B2",
+    "articleCode": "借用22025314000594",
+    "price": 3539
+  },
+  {
+    "category": "Modular chiller",
+    "series": "mini Chiller",
+    "model": "MGC-V16WD2N8-B2",
+    "articleCode": "借用22025314000595",
+    "price": 3731
+  },
+  {
+    "category": "Modular chiller",
+    "series": "mini Chiller",
+    "model": "MGC-V18WD2N8-B2",
+    "articleCode": "22025314000991",
+    "price": 3873
+  },
+  {
+    "category": "Modular chiller",
+    "series": "mini Chiller",
+    "model": "MGC-V12WD2RN8-B",
+    "articleCode": "22025314000596",
+    "price": 3873
+  },
+  {
+    "category": "Modular chiller",
+    "series": "mini Chiller",
+    "model": "MGC-V14WD2RN8-B",
+    "articleCode": "22025314000597",
+    "price": 3903
+  },
+  {
+    "category": "Modular chiller",
+    "series": "mini Chiller",
+    "model": "MGC-V16WD2RN8-B",
+    "articleCode": "22025314000598",
+    "price": 4275
+  },
+  {
+    "category": "Modular chiller",
+    "series": "Aqua thermal",
+    "model": "MC-SU75-RN8L-B",
+    "articleCode": "22027120000398",
+    "price": 8239
+  },
+  {
+    "category": "Modular chiller",
+    "series": "Aqua thermal",
+    "model": "MC-SU90-RN8L-B",
+    "articleCode": "22027120000378",
+    "price": 11757
+  },
+  {
+    "category": "Modular chiller",
+    "series": "Aqua thermal",
+    "model": "MC-SU140-RN8L-B",
+    "articleCode": "22027120000418",
+    "price": 15552
+  },
+  {
+    "category": "Modular chiller",
+    "series": "Aqua thermal",
+    "model": "MC-SU180-RN8L-B",
+    "articleCode": "22027120000438",
+    "price": 33449
+  },
+  {
+    "category": "Modular chiller",
+    "series": "Aqua thermal（M)",
+    "model": "MC-SU75M-RN8L-B",
+    "articleCode": "22027120000398",
+    "price": 10093
+  },
+  {
+    "category": "Modular chiller",
+    "series": "Aqua thermal（M)",
+    "model": "MC-SU90M-RN8L-B",
+    "articleCode": "22027120000378",
+    "price": 14334
+  },
+  {
+    "category": "Modular chiller",
+    "series": "Aqua thermal（M)",
+    "model": "MC-SU140M-RN8L-B",
+    "articleCode": "22027120000418",
+    "price": 19162
+  },
+  {
+    "category": "Modular chiller",
+    "series": "Aqua thermal（M)",
+    "model": "MC-SU180M-RN8L-B",
+    "articleCode": "22027120000438",
+    "price": 38950
+  },
+  {
+    "category": "Modular chiller",
+    "series": "Aqua thermal（M)",
+    "model": "GW-BAC(MC)",
+    "articleCode": "17211200002201",
+    "price": 2977
+  },
+  {
+    "category": "Modular chiller",
+    "series": "Aqua thermal Super",
+    "model": "MH-SU50-RN8L",
+    "articleCode": "借22025314000671\r\n方案号L2023071466341",
+    "price": 11945
+  },
+  {
+    "category": "Modular chiller",
+    "series": "Aqua thermal Super",
+    "model": "MH-SU65-RN8L",
+    "articleCode": "22025314000671",
+    "price": 12430
+  },
+  {
+    "category": "Modular chiller",
+    "series": "Aqua thermal Super",
+    "model": "MH-SU75-RN8L",
+    "articleCode": "借22025314000671\r\n方案号L2022122744465",
+    "price": 12886
+  },
+  {
+    "category": "Modular chiller",
+    "series": "Aqua thermal Super",
+    "model": "MH-SU110-RN8L",
+    "articleCode": "22025314000691",
+    "price": 20401
+  },
+  {
+    "category": "Modular chiller",
+    "series": "Aqua thermal Super",
+    "model": "MH-SU140-RN8L",
+    "articleCode": "借22025314000691\r\n方案号L2022122744465",
+    "price": 21022
+  },
+  {
+    "category": "Modular chiller",
+    "series": "Aqua thermal Super",
+    "model": "MH-SU50M-RN8L",
+    "articleCode": "借22025314000671",
+    "price": 15475
+  },
+  {
+    "category": "Modular chiller",
+    "series": "Aqua thermal Super",
+    "model": "MH-SU65M-RN8L",
+    "articleCode": "22025314000671",
+    "price": 16052
+  },
+  {
+    "category": "Modular chiller",
+    "series": "Aqua thermal Super",
+    "model": "MH-SU75M-RN8L",
+    "articleCode": "借22025314000671",
+    "price": 16871
+  },
+  {
+    "category": "Modular chiller",
+    "series": "Aqua thermal Super",
+    "model": "MH-SU110M-RN8L",
+    "articleCode": "22025314000691",
+    "price": 24067
+  },
+  {
+    "category": "Modular chiller",
+    "series": "Aqua thermal Super",
+    "model": "MH-SU140M-RN8L",
+    "articleCode": "借22025314000691",
+    "price": 25016
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Arctic",
+    "model": "MHC-V4W/D2N8-B",
+    "articleCode": "22025314000658",
+    "price": 2988
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Arctic",
+    "model": "MHC-V6W/D2N8-B",
+    "articleCode": "22025314000654",
+    "price": 3076
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Arctic",
+    "model": "MHC-V8W/D2N8-B",
+    "articleCode": "22025314000657",
+    "price": 3399
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Arctic",
+    "model": "MHC-V10W/D2N8-B",
+    "articleCode": "22025314000656",
+    "price": 3443
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Arctic",
+    "model": "MHC-V12W/D2N8-B",
+    "articleCode": "22025314000651",
+    "price": 4465
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Arctic",
+    "model": "MHC-V14W/D2N8-B",
+    "articleCode": "22025314000652",
+    "price": 4523
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Arctic",
+    "model": "MHC-V16W/D2N8-B",
+    "articleCode": "22025314000653",
+    "price": 4597
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Arctic",
+    "model": "MHC-V12W/D2RN8-B",
+    "articleCode": "22025314000659",
+    "price": 4634
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Arctic",
+    "model": "MHC-V14W/D2RN8-B",
+    "articleCode": "22025314000655",
+    "price": 4738
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Arctic",
+    "model": "MHC-V16W/D2RN8-B",
+    "articleCode": "22025314000660",
+    "price": 4885
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Arctic",
+    "model": "MHC-V18W/D2RN8",
+    "articleCode": "22025314000491",
+    "price": 6180
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Arctic",
+    "model": "MHC-V22W/D2RN8",
+    "articleCode": "22025314000493",
+    "price": 6347
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Arctic",
+    "model": "MHC-V26W/D2RN8",
+    "articleCode": "22025314000471",
+    "price": 6455
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Arctic",
+    "model": "MHC-V30W/D2RN8",
+    "articleCode": "22025314000492",
+    "price": 6563
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Arctic",
+    "model": "MHA-V4W/D2N8-B",
+    "articleCode": "22025314000618",
+    "price": 1415
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Arctic",
+    "model": "MHA-V6W/D2N8-B",
+    "articleCode": "22025314000613",
+    "price": 1417
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Arctic",
+    "model": "MHA-V8W/D2N8-B",
+    "articleCode": "22025314000616",
+    "price": 1614
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Arctic",
+    "model": "MHA-V10W/D2N8-B",
+    "articleCode": "22025314000614",
+    "price": 1716
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Arctic",
+    "model": "MHA-V12W/D2N8-B",
+    "articleCode": "22025314000634",
+    "price": 2502
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Arctic",
+    "model": "MHA-V14W/D2N8-B",
+    "articleCode": "22025314000615",
+    "price": 2617
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Arctic",
+    "model": "MHA-V16W/D2N8-B",
+    "articleCode": "借22025314000615",
+    "price": 2678
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Arctic",
+    "model": "MHA-V12W/D2RN8-B",
+    "articleCode": "22025314000611",
+    "price": 2780
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Arctic",
+    "model": "MHA-V14W/D2RN8-B",
+    "articleCode": "22025314000637",
+    "price": 2825
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Arctic",
+    "model": "MHA-V16W/D2RN8-B",
+    "articleCode": "借22025314000637",
+    "price": 2896
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Arctic",
+    "model": "HB-A60/CGN8-B",
+    "articleCode": "22025314000433",
+    "price": 1705
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Arctic",
+    "model": "HB-A100/CGN8-B",
+    "articleCode": "22025314000432",
+    "price": 1729
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Arctic",
+    "model": "HB-A160/CGN8-B",
+    "articleCode": "22025314000431",
+    "price": 1779
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Arctic",
+    "model": "HBT-A100/190CD30GN8-B",
+    "articleCode": "22025331000061",
+    "price": 3869
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Arctic",
+    "model": "HBT-A160/240CD30GN8-B",
+    "articleCode": "22025331000062",
+    "price": 4527
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Arctic",
+    "model": "HBT-A160/240CDS90GN8-B",
+    "articleCode": "22025331000062",
+    "price": 4746
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Arctic",
+    "model": "HBT-A100/240CD30GN8-B",
+    "articleCode": "22025331000062",
+    "price": 4601
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Arctic",
+    "model": "HBT-A100/240CDS90GN8-B",
+    "articleCode": "22025331000062",
+    "price": 4820
+  },
+  {
+    "category": "Heat Pump",
+    "series": "Commercial type Heat pump water heater",
+    "model": "RSJ-120/ZN1-540V1",
+    "articleCode": "22025310000369",
+    "price": 3131
+  },
+  {
+    "category": "Heat Pump",
+    "series": "Commercial type Heat pump water heater",
+    "model": "RSJ-200/SZN1-540V1",
+    "articleCode": "22025313000087",
+    "price": 3867
+  },
+  {
+    "category": "Heat Pump",
+    "series": "Commercial type Heat pump water heater",
+    "model": "RSJ-420/SZN1-H",
+    "articleCode": "22025313000006",
+    "price": 6679
+  },
+  {
+    "category": "Heat Pump",
+    "series": "Commercial type Heat pump water heater",
+    "model": "RSJ-800/SZN1-H",
+    "articleCode": "22025310000017",
+    "price": 13608
+  },
+  {
+    "category": "Heat Pump",
+    "series": "pool heat pump",
+    "model": "MSC-70D2N8-A",
+    "articleCode": "22025320000026",
+    "price": 1380
+  },
+  {
+    "category": "Heat Pump",
+    "series": "pool heat pump",
+    "model": "MSC-90D2N8-A",
+    "articleCode": "22025320000024",
+    "price": 1476
+  },
+  {
+    "category": "Heat Pump",
+    "series": "pool heat pump",
+    "model": "MSC-120D2N8-A",
+    "articleCode": "22025320000025",
+    "price": 1534
+  },
+  {
+    "category": "Heat Pump",
+    "series": "pool heat pump",
+    "model": "MSC-160D2N8-A",
+    "articleCode": "22025318000002",
+    "price": 1866
+  },
+  {
+    "category": "Heat Pump",
+    "series": "pool heat pump",
+    "model": "MSC-200D2N8-A",
+    "articleCode": "22025318000001",
+    "price": 1926
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Fit Series",
+    "model": "ORS6A8HCD-F",
+    "articleCode": "借用22025314001016",
+    "price": 1134
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Fit Series",
+    "model": "ORS8A8HCD-F",
+    "articleCode": "借用22025314001017",
+    "price": 1237
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Fit Series",
+    "model": "ORS11A8HCD-F",
+    "articleCode": "借用22025314001011",
+    "price": 1603
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Fit Series",
+    "model": "ORS14A8HCD-F",
+    "articleCode": "借用22025314001021",
+    "price": 2236
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Fit Series",
+    "model": "ORS16A8HCD-F",
+    "articleCode": "借用22025314001020",
+    "price": 2336
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Fit Series",
+    "model": "ORS14TA8HCD-F",
+    "articleCode": "借用22025314001013",
+    "price": 2412
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Fit Series",
+    "model": "ORS16TA8HCD-F",
+    "articleCode": "借用22025314001014",
+    "price": 2513
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Fit Series",
+    "model": "OW8A8-F",
+    "articleCode": "借用22010600000251",
+    "price": 1391
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Fit Series",
+    "model": "OW11A8-F",
+    "articleCode": "借用22010600000252",
+    "price": 1478
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Fit Series",
+    "model": "OW16A8-F",
+    "articleCode": "借用22010600000252",
+    "price": 1538
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Hygge Series",
+    "model": "ORS12A8HCD-H",
+    "articleCode": "22025314000932",
+    "price": 2550
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Hygge Series",
+    "model": "ORS14A8HCD-H",
+    "articleCode": "22025314000934",
+    "price": 2650
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Hygge Series",
+    "model": "ORS16A8HCD-H",
+    "articleCode": "22025314000935",
+    "price": 2704
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Hygge Series",
+    "model": "ORS12TA8HCD-H",
+    "articleCode": "22025314000936",
+    "price": 2775
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Hygge Series",
+    "model": "ORS14TA8HCD-H",
+    "articleCode": "22025314000933",
+    "price": 2823
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Hygge Series",
+    "model": "ORS16TA8HCD-H",
+    "articleCode": "22025314000931",
+    "price": 2860
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Hygge Series",
+    "model": "OW16A8-H",
+    "articleCode": "借用22010600000232",
+    "price": 1532
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Nature",
+    "model": "MHC-V8WD2N7-B",
+    "articleCode": "22025314000859",
+    "price": 4419
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Nature",
+    "model": "MHC-V10WD2N7-B",
+    "articleCode": "22025314000851",
+    "price": 4777
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Nature",
+    "model": "MHC-V12WD2N7-B",
+    "articleCode": "22025314000853",
+    "price": 5424
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Nature",
+    "model": "MHC-V14WD2N7-B",
+    "articleCode": "22025314000852",
+    "price": 5526
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Nature",
+    "model": "MHC-V16WD2N7-B",
+    "articleCode": "22025314000854",
+    "price": 5617
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Nature",
+    "model": "MHC-V8WD2RN7-B",
+    "articleCode": "22025314000860",
+    "price": 4922
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Nature",
+    "model": "MHC-V10WD2RN7-B",
+    "articleCode": "22025314000858",
+    "price": 5286
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Nature",
+    "model": "MHC-V12WD2RN7-B",
+    "articleCode": "22025314000856",
+    "price": 5624
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Nature",
+    "model": "MHC-V14WD2RN7-B",
+    "articleCode": "22025314000855",
+    "price": 5754
+  },
+  {
+    "category": "Heat Pump",
+    "series": "M thermal Nature",
+    "model": "MHC-V16WD2RN7-B",
+    "articleCode": "22025314000857",
+    "price": 5933
+  },
+  {
+    "category": "Heat Pump",
+    "series": "Mars",
+    "model": "MHC-V26WD2RN7",
+    "articleCode": "22025314001031",
+    "price": 8794
+  },
+  {
+    "category": "Heat Pump",
+    "series": "Mars",
+    "model": "MHC-V30WD2RN7",
+    "articleCode": "22025314000912",
+    "price": 9299
+  },
+  {
+    "category": "Heat Pump",
+    "series": "Mars",
+    "model": "MHC-V35WD2RN7",
+    "articleCode": "22025314000911",
+    "price": 9743
+  },
+  {
+    "category": "Rooftop",
+    "series": "Clima Creator",
+    "model": "MRC-075HWN1-R(C )",
+    "articleCode": "22027710000302",
+    "price": 3861
+  },
+  {
+    "category": "Rooftop",
+    "series": "Clima Creator",
+    "model": "MRC-100HWN1-R(C)",
+    "articleCode": "22027710000048",
+    "price": 5141
+  },
+  {
+    "category": "Rooftop",
+    "series": "Clima Creator",
+    "model": "MRC-125HWN1-R(C)",
+    "articleCode": "22027710000164",
+    "price": 7157
+  },
+  {
+    "category": "Rooftop",
+    "series": "Clima Creator",
+    "model": "MRC-150HWN1-R(C)",
+    "articleCode": "22027710000157",
+    "price": 8119
+  },
+  {
+    "category": "Rooftop",
+    "series": "Clima Creator",
+    "model": "MRC-175HWN1-R(C)",
+    "articleCode": "22027710000111",
+    "price": 9771
+  },
+  {
+    "category": "Rooftop",
+    "series": "Clima Creator",
+    "model": "MRC-200HWN1-R(C)",
+    "articleCode": "22027710000158",
+    "price": 10185
+  },
+  {
+    "category": "Rooftop",
+    "series": "Clima Creator",
+    "model": "MRC-250HWN1-R(C)",
+    "articleCode": "22027710000289",
+    "price": 12514
+  },
+  {
+    "category": "Rooftop",
+    "series": "Clima Creator",
+    "model": "MRC-300HWN1-R(C)",
+    "articleCode": "22027710000321",
+    "price": 16313
+  },
+  {
+    "category": "Rooftop",
+    "series": "Clima Creator",
+    "model": "MRCT-062CWN1-R(C)",
+    "articleCode": "22027710000020",
+    "price": 3650
+  },
+  {
+    "category": "Rooftop",
+    "series": "Clima Creator",
+    "model": "MRCT-075CWN1-R(C)",
+    "articleCode": "22027710000021",
+    "price": 4138
+  },
+  {
+    "category": "Rooftop",
+    "series": "Clima Creator",
+    "model": "MRCT-085CWN1-R(D)",
+    "articleCode": "22027710000351",
+    "price": 4751
+  },
+  {
+    "category": "Rooftop",
+    "series": "Clima Creator",
+    "model": "MRCT-100CWN1-R(D)",
+    "articleCode": "22027710000350",
+    "price": 4889
+  },
+  {
+    "category": "Rooftop",
+    "series": "Clima Creator",
+    "model": "MRCT-125CWN1-R(C)",
+    "articleCode": "22027710000029",
+    "price": 6739
+  },
+  {
+    "category": "Rooftop",
+    "series": "Clima Creator",
+    "model": "MRCT-150CWN1-R(C)",
+    "articleCode": "22027710000222",
+    "price": 8433
+  },
+  {
+    "category": "Rooftop",
+    "series": "Clima Creator",
+    "model": "MRCT-175CWN1-R(C)",
+    "articleCode": "22027710000094",
+    "price": 9408
+  },
+  {
+    "category": "Rooftop",
+    "series": "Clima Creator",
+    "model": "MRCT-200CWN1-R(C)",
+    "articleCode": "22027710000224",
+    "price": 10595
+  },
+  {
+    "category": "Rooftop",
+    "series": "Clima Creator",
+    "model": "MRCT-250CWN1-R(C)",
+    "articleCode": "22027710000364",
+    "price": 12213
+  },
+  {
+    "category": "Rooftop",
+    "series": "Clima Creator",
+    "model": "MRCT-300CWN1-R(C)",
+    "articleCode": "22027710000363",
+    "price": 16157
+  }
+]

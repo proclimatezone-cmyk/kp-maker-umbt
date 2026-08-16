@@ -3,12 +3,16 @@ import { jwtVerify } from 'jose';
 import { getJwtSecret } from '@/lib/auth-secret';
 
 export async function middleware(req: NextRequest) {
+  const isReportsPage = req.nextUrl.pathname === '/reports' || req.nextUrl.pathname.startsWith('/reports/');
+  const isReportsApi = req.nextUrl.pathname.startsWith('/api/reports/') || req.nextUrl.pathname === '/api/reports';
+
   // Only protect main application and specific APIs
-  const isProtectedPage = req.nextUrl.pathname === '/';
-  const isProtectedApi = req.nextUrl.pathname.startsWith('/api/')
+  const isProtectedPage = req.nextUrl.pathname === '/' || isReportsPage;
+  const isProtectedApi = (req.nextUrl.pathname.startsWith('/api/')
     && !req.nextUrl.pathname.startsWith('/api/auth')
     && req.nextUrl.pathname !== '/api/health'
-    && req.nextUrl.pathname !== '/api/photo-check';
+    && req.nextUrl.pathname !== '/api/photo-check')
+    || isReportsApi;
 
   if (!isProtectedPage && !isProtectedApi) {
     return NextResponse.next();
@@ -48,6 +52,18 @@ export async function middleware(req: NextRequest) {
        return res;
     }
 
+    // «Отчёты» — отдельный периметр внутри уже авторизованного whitelist:
+    // не подтверждаем посторонним, что раздел вообще существует (404, не 403).
+    if (isReportsPage || isReportsApi) {
+      const reportsEmail = (process.env.REPORTS_ACCESS_EMAIL || '').trim().toLowerCase();
+      const tokenEmail = typeof payload.email === 'string' ? payload.email.trim().toLowerCase() : '';
+      if (!reportsEmail || tokenEmail !== reportsEmail) {
+        return isReportsApi
+          ? NextResponse.json({ error: 'Not found' }, { status: 404 })
+          : NextResponse.redirect(new URL('/', req.url));
+      }
+    }
+
     return NextResponse.next();
   } catch (error) {
     console.error('JWT Verification failed:', error);
@@ -58,5 +74,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/', '/api/:path*'],
+  matcher: ['/', '/api/:path*', '/reports', '/reports/:path*'],
 };

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useMemo, useCallback, memo } from 'react'
-import { Plus, Trash2, FileText, User, Briefcase, Calculator, Search, RefreshCw, Building2, Phone, CheckCircle, CloudCheck, Loader2, Copy, Truck, ChevronDown, FileSignature } from 'lucide-react'
+import { Plus, Trash2, FileText, User, Briefcase, Calculator, Search, RefreshCw, Building2, Phone, CheckCircle, CloudCheck, Loader2, Copy, Truck, ChevronDown, FileSignature, BarChart3 } from 'lucide-react'
 import productsData from '@/data/products.json'
 import { formatNum } from '@/lib/format'
 import { DELIVERY_TERMS, DeliveryTerm, buildTermsLines, getMoneyLabels } from '@/lib/delivery-terms'
@@ -619,6 +619,7 @@ export default function Home() {
   const [reqOpen, setReqOpen] = useState(true)
   const [stock, setStock] = useState<Record<string, number> | null>(null)
   const [stockError, setStockError] = useState('')
+  const [isReportsUser, setIsReportsUser] = useState(false)
 
   const [options, setOptions] = useState({
     showImages: true,
@@ -704,6 +705,12 @@ export default function Home() {
       .then(r => r.json())
       .then(d => (d.success ? setStock(d.byArticle) : setStockError(d.error || 'Остатки недоступны')))
       .catch(() => setStockError('Не удалось получить остатки'));
+
+    // umbt_auth — httpOnly, чей это email клиент узнаёт только через этот роут.
+    fetch('/api/auth/me')
+      .then(r => r.json())
+      .then(d => setIsReportsUser(!!d.isReportsUser))
+      .catch(() => setIsReportsUser(false));
 
     setIsMounted(true)
     return () => document.removeEventListener('visibilitychange', onFocus);
@@ -1003,6 +1010,12 @@ export default function Home() {
               <RefreshCw size={14} className={syncing ? 'spin' : ''} />
               {syncing ? 'Обновление...' : 'Обновить базу'}
             </button>
+            {isReportsUser && (
+              <a className="btn btn-ghost" href="/reports">
+                <BarChart3 size={14} />
+                Отчёты
+              </a>
+            )}
             <button className="btn btn-ghost" onClick={async () => { await fetch('/api/auth/logout', { method: 'POST' }); window.location.href = '/login'; }}>
               Выйти
             </button>
