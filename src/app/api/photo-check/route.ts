@@ -48,7 +48,38 @@ export async function GET(req: NextRequest) {
       }
       const results = await Promise.all(urls.map(checkOne));
       const good = results.filter(x => x.ok).length;
-      return NextResponse.json({ ok: good > 0, tested: results.length, accessible: good, results });
+
+      // Сквозной тест: собираем КП с настоящим фото из прайса и считаем,
+      // сколько картинок реально вставилось в документ.
+      let buildTest: any = 'пропущен';
+      if (good > 0) {
+        try {
+          const { buildKpDocx } = await import('@/lib/docx-kp');
+          const PizZip = (await import('pizzip')).default;
+          const firstId = results.find(x => x.ok)!.id;
+          const buf = await buildKpDocx({
+            cpNumber: 'PHOTO-TEST', cpDate: '16.08.2026',
+            items: [{ model: 'TEST', category: 'Наружный блок', quantity: 1, price: 1000,
+              slidesImage: `https://drive.google.com/uc?id=${firstId}` }],
+            total: 1000,
+            options: { deliveryTerms: 'warehouse', warrantyMonths: 36, showImages: true },
+            origin: req.nextUrl.origin,
+          });
+          const zip = new PizZip(buf);
+          const media = Object.keys(zip.files).filter(f => f.includes('media/image_generated'));
+          // 70 байт = пустой BLANK_PNG (фото не легло); больше = реальное фото
+          const realPhotos = media.filter(f => zip.files[f].asUint8Array().length > 500).length;
+          buildTest = {
+            sizeMB: +(buf.length / 1048576).toFixed(2),
+            встроеноФото: realPhotos,
+            вердикт: realPhotos > 0 ? 'ФОТО ВСТАВЛЯЕТСЯ В КП ✓' : 'фото не легло',
+          };
+        } catch (e: any) {
+          buildTest = 'ошибка сборки: ' + e.message;
+        }
+      }
+
+      return NextResponse.json({ ok: good > 0, tested: results.length, accessible: good, buildTest, results: results.slice(0, 2) });
     } catch (e: any) {
       return NextResponse.json({ ok: false, error: 'Не удалось прочитать прайс: ' + e.message });
     }
