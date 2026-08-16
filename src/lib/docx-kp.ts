@@ -84,12 +84,12 @@ async function fetchFromDrive(fileId: string): Promise<Buffer | null> {
 async function shrink(buffer: Buffer): Promise<Buffer | null> {
   try {
     const sharp = (await import('sharp')).default;
+    // Сохраняем PNG с прозрачностью: фото товара без фона, виден только сам
+    // блок на фоне ячейки. Раньше конвертировали в JPEG с белым фоном —
+    // получался белый прямоугольник поверх голубой ячейки.
     return await sharp(buffer)
       .resize({ width: 420, height: 420, fit: 'inside', withoutEnlargement: true })
-      // Прозрачные пиксели PNG в JPEG становятся чёрными — подкладываем белый
-      // фон, как в каталоге, иначе фото товара выходит на чёрном.
-      .flatten({ background: '#ffffff' })
-      .jpeg({ quality: 80 })
+      .png({ compressionLevel: 9 })
       .toBuffer();
   } catch {
     return null;
@@ -208,7 +208,9 @@ export async function buildKpDocx(opts: BuildKpOptions): Promise<Buffer> {
       const qty = Number(String(item.quantity ?? '1').match(/[\d.,]+/)?.[0]?.replace(',', '.')) || 1;
       return {
         image: showImages && !item.isAdditional ? item.slidesImage || item.image || '' : '',
-        category: item.category || '',
+        // Доп. работы менеджер называет сам («Монтаж», «Воздуховоды») —
+        // приписку «Дополнительные работы и материалы» не дублируем.
+        category: item.isAdditional ? '' : item.category || '',
         model: item.model || '',
         qty: quantityLabel(item.quantity),
         price: formatNum(price),
@@ -220,7 +222,56 @@ export async function buildKpDocx(opts: BuildKpOptions): Promise<Buffer> {
     terms: buildTermsRows(opts.options),
   });
 
+  // У доп. работ фото нет — объединяем их ячейку «Внешний вид» с
+  // «Наименованием», чтобы название шло во всю ширину. Это последние строки
+  // таблицы (доп. работы идут после оборудования), перед строкой «Итого».
+  const additionalCount = opts.items.filter(i => i.isAdditional).length;
+  if (additionalCount > 0) {
+    const zip = doc.getZip();
+    const xml = zip.file('word/document.xml')!.asText();
+    zip.file('word/document.xml', mergeAdditionalRows(xml, additionalCount));
+    return zip.generate({ type: 'nodebuffer', compression: 'DEFLATE' });
+  }
+
   return doc.toBuffer();
+}
+
+/** Сливает первые две ячейки строки: удаляет первую, второй даёт gridSpan=2. */
+function mergeFirstTwoCells(row: string): string {
+  const cells = row.match(/<w:tc>[\s\S]*?<\/w:tc>/g);
+  if (!cells || cells.length < 2) return row;
+
+  let second = cells[1];
+  if (/<w:tcPr>/.test(second)) {
+    // gridSpan по схеме идёт после tcW.
+    second = /<\/w:tcW>/.test(second)
+      ? second.replace('</w:tcW>', '</w:tcW><w:gridSpan w:val="2"/>')
+      : second.replace('<w:tcPr>', '<w:tcPr><w:gridSpan w:val="2"/>');
+  } else {
+    second = second.replace('<w:tc>', '<w:tc><w:tcPr><w:gridSpan w:val="2"/></w:tcPr>');
+  }
+
+  return row.replace(cells[0], '').replace(cells[1], second);
+}
+
+/**
+ * Объединяет ячейку фото с наименованием у последних `count` строк данных
+ * (строки доп. работ), не трогая шапку и строку «Итого».
+ */
+function mergeAdditionalRows(xml: string, count: number): string {
+  const tbl = xml.match(/<w:tbl>[\s\S]*?<\/w:tbl>/);
+  if (!tbl) return xml;
+
+  const rows = tbl[0].match(/<w:tr\b[\s\S]*?<\/w:tr>/g);
+  if (!rows) return xml;
+
+  // Последняя строка — «Итого», перед ней идут строки доп. работ.
+  const targets = new Set<number>();
+  for (let k = 1; k <= count; k++) targets.add(rows.length - 1 - k);
+
+  const newRows = rows.map((r, i) => (targets.has(i) ? mergeFirstTwoCells(r) : r));
+  const newTbl = tbl[0].replace(rows.join(''), newRows.join(''));
+  return xml.replace(tbl[0], newTbl);
 }
 
 /** Сводка условий одной строкой — для интерфейса и логов. */
