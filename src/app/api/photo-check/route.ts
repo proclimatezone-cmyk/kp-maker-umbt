@@ -29,6 +29,42 @@ async function checkOne(id: string) {
 export async function GET(req: NextRequest) {
   const p = req.nextUrl.searchParams;
 
+  // ?flow=1 — проверяет РЕАЛЬНЫЙ путь генерации: берёт товары так же, как
+  // их получает фронтенд (getProducts), и смотрит, доступны ли их фото.
+  if (p.get('flow')) {
+    try {
+      const { getProducts } = await import('@/lib/products-cache');
+      const products = await getProducts(true);
+      const withImg = products
+        .filter((x: any) => (x.slidesImage || x.image || '').includes('drive'))
+        .slice(0, 5);
+      const drive = google.drive({ version: 'v3', auth: getGoogleAuth() });
+      const checked = await Promise.all(
+        withImg.map(async (x: any) => {
+          const url = x.slidesImage || x.image || '';
+          const id = driveFileId(url);
+          if (!id) return { model: x.model, url: url.slice(0, 60), ok: false, why: 'ID не извлекается' };
+          try {
+            const r = await drive.files.get({ fileId: id, alt: 'media' }, { responseType: 'arraybuffer' });
+            const b = Buffer.from(r.data as ArrayBuffer);
+            const ok = (b[0] === 0xff && b[1] === 0xd8) || (b[0] === 0x89 && b[1] === 0x50);
+            return { model: x.model, id, ok, sizeBytes: b.length };
+          } catch (e: any) {
+            return { model: x.model, id, ok: false, why: e.message };
+          }
+        })
+      );
+      return NextResponse.json({
+        productsTotal: products.length,
+        withDriveImage: products.filter((x: any) => (x.slidesImage || x.image || '').includes('drive')).length,
+        checked,
+        verdict: checked.some(c => c.ok) ? 'синхронизированные фото доступны ✓' : 'фото из синка недоступны',
+      });
+    } catch (e: any) {
+      return NextResponse.json({ ok: false, error: 'flow: ' + e.message });
+    }
+  }
+
   // Без параметров — берём актуальные ссылки на фото прямо из прайса
   // (колонка W «для кп»), а не из устаревшего products.json.
   if (!p.get('id') && !p.get('url')) {
