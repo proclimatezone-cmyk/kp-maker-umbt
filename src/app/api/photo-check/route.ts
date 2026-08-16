@@ -34,7 +34,7 @@ export async function GET(req: NextRequest) {
   if (p.get('flow')) {
     try {
       const { getProducts } = await import('@/lib/products-cache');
-      const products = await getProducts(true);
+      const products = (await getProducts(true)) || [];
       const withImg = products
         .filter((x: any) => (x.slidesImage || x.image || '').includes('drive'))
         .slice(0, 5);
@@ -103,11 +103,23 @@ export async function GET(req: NextRequest) {
           });
           const zip = new PizZip(buf);
           const media = Object.keys(zip.files).filter(f => f.includes('media/image_generated'));
-          // 70 байт = пустой BLANK_PNG (фото не легло); больше = реальное фото
-          const realPhotos = media.filter(f => zip.files[f].asUint8Array().length > 500).length;
+          const realFile = media.find(f => zip.files[f].asUint8Array().length > 500);
+          const realPhotos = realFile ? 1 : 0;
+
+          // Проверяем, что у встроенного фото прозрачные углы (фон убран).
+          let transparent = 'нет фото';
+          if (realFile) {
+            const sharp = (await import('sharp')).default;
+            const png = Buffer.from(zip.files[realFile].asUint8Array());
+            const { data, info } = await sharp(png).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+            const cornerAlpha = data[3]; // альфа пикселя (0,0)
+            transparent = cornerAlpha === 0 ? 'да, угол прозрачный ✓' : `нет, альфа угла ${cornerAlpha}`;
+          }
+
           buildTest = {
             sizeMB: +(buf.length / 1048576).toFixed(2),
             встроеноФото: realPhotos,
+            фонУбран: transparent,
             вердикт: realPhotos > 0 ? 'ФОТО ВСТАВЛЯЕТСЯ В КП ✓' : 'фото не легло',
           };
         } catch (e: any) {

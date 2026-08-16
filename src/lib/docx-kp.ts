@@ -81,14 +81,49 @@ async function fetchFromDrive(fileId: string): Promise<Buffer | null> {
  * обработать байты — тогда фото просто не вставляется, а не попадает в
  * документ мусором.
  */
+/**
+ * Делает белый фон прозрачным заливкой от краёв. Убирает только тот белый,
+ * что связан с краями картинки (фон вокруг блока), не трогая белые части
+ * самого товара внутри. Работает по сырым RGBA-пикселям.
+ */
+function removeWhiteBackground(data: Buffer, width: number, height: number): void {
+  const WHITE = 236; // всё, где R,G,B выше — считаем фоном
+  const idx = (x: number, y: number) => (y * width + x) * 4;
+  const isWhite = (i: number) => data[i] >= WHITE && data[i + 1] >= WHITE && data[i + 2] >= WHITE;
+
+  const stack: number[] = [];
+  const push = (x: number, y: number) => {
+    if (x < 0 || y < 0 || x >= width || y >= height) return;
+    const i = idx(x, y);
+    if (data[i + 3] === 0) return; // уже прозрачный — были тут
+    if (!isWhite(i)) return;
+    data[i + 3] = 0;
+    stack.push(x, y);
+  };
+
+  // старт от всех пикселей по периметру
+  for (let x = 0; x < width; x++) { push(x, 0); push(x, height - 1); }
+  for (let y = 0; y < height; y++) { push(0, y); push(width - 1, y); }
+
+  while (stack.length) {
+    const y = stack.pop()!;
+    const x = stack.pop()!;
+    push(x + 1, y); push(x - 1, y); push(x, y + 1); push(x, y - 1);
+  }
+}
+
 async function shrink(buffer: Buffer): Promise<Buffer | null> {
   try {
     const sharp = (await import('sharp')).default;
-    // Сохраняем PNG с прозрачностью: фото товара без фона, виден только сам
-    // блок на фоне ячейки. Раньше конвертировали в JPEG с белым фоном —
-    // получался белый прямоугольник поверх голубой ячейки.
-    return await sharp(buffer)
+    const base = sharp(buffer)
       .resize({ width: 420, height: 420, fit: 'inside', withoutEnlargement: true })
+      .ensureAlpha();
+
+    // Сырые пиксели, чтобы убрать белый фон и оставить только сам блок.
+    const { data, info } = await base.raw().toBuffer({ resolveWithObject: true });
+    removeWhiteBackground(data, info.width, info.height);
+
+    return await sharp(data, { raw: { width: info.width, height: info.height, channels: 4 } })
       .png({ compressionLevel: 9 })
       .toBuffer();
   } catch {
