@@ -77,14 +77,21 @@ async function readSheet(): Promise<StockRow[]> {
     );
   }
 
+  // «Наименование» заполнено точечно — только в первой строке серии, дальше
+  // до следующей серии ячейка пустая (та же раскладка, что в «Заказы»/«Бронь»,
+  // см. lib/reports/parse-matrix.ts). Без переноса вниз почти все позиции
+  // в договоре шли голым артикулом вместо описания.
   const out: StockRow[] = [];
+  let currentName = '';
   for (let i = cols.headerRow + 1; i < rows.length; i++) {
     const row = rows[i] || [];
     const model = String(row[cols.model] ?? '').trim();
-    if (!model) continue; // строки-категории («VRF») модели не имеют — пропускаем
+    const rawName = cols.name !== -1 ? String(row[cols.name] ?? '').trim() : '';
+    if (rawName && !/^итого/i.test(rawName)) currentName = rawName;
+    if (!model) continue; // строки-категории («VRF») и «Итого» модели не имеют — пропускаем
     // Артикул для сопоставления берём из самой колонки «Модель».
     out.push({
-      name: String(row[cols.name] ?? '').trim() || model,
+      name: currentName || model,
       article: model,
       qty: toNumber(row[cols.qty]),
       unit: 'шт',
@@ -121,7 +128,12 @@ export function indexNamesByArticle(rows: StockRow[]): Record<string, string> {
     const key = stockKey(r.article);
     if (!key) continue;
     // Названия двуязычные через слэш — для договора берём русскую часть.
-    const ru = r.name.split(/\s*\/\s*/)[0].trim();
+    // В ячейках попадаются переносы строк («2 трубный\nфанкойл») — схлопываем в пробелы.
+    let ru = r.name.split(/\s*\/\s*/)[0].replace(/\s+/g, ' ').trim();
+    // Название серии одно на всю группу моделей («VRF V8 кассетный 4-х
+    // поточный блок») — без артикула в конце разные позиции в спецификации
+    // выглядели бы одинаково. Добавляем модель, если её там ещё нет.
+    if (ru && !stockKey(ru).includes(key)) ru = `${ru} ${r.article}`;
     if (ru && (!map[key] || ru.length > map[key].length)) map[key] = ru;
   }
   return map;
