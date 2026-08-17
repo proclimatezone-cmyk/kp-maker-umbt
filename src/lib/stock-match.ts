@@ -26,3 +26,18 @@ export function extractArticle(name: string): string {
 export function stockKey(value: string): string {
   return (value || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
 }
+
+/**
+ * Ключ склада для позиции прайса — включая комплекты вида
+ * «MI2-32T2DHN18(At)S + Midea-V36WDHN1A(AtB)» (фанкойл/фен + наружный блок,
+ * или фанкойл + пульт KJRP-...). Наружные блоки и пульты универсальные и
+ * отдельно на складе не считаются — остаток смотрим по внутреннему блоку
+ * (фену), который и является дефицитной частью комплекта.
+ *
+ * Дополнительно снимаем одиночную «S» на конце модели фена (служебный
+ * суффикс варианта, не встречающийся в названиях инвентаризации).
+ */
+export function stockModelKey(model: string): string {
+  const indoorPart = (model || '').split(' + ')[0].trim().replace(/\)S$/, ')');
+  return stockKey(indoorPart);
+}

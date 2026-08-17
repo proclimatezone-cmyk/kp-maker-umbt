@@ -1,5 +1,5 @@
 import { amountToWordsUZS } from './number-to-words';
-import { stockKey } from './stock-match';
+import { stockModelKey } from './stock-match';
 
 /** Ставка НДС в Узбекистане. */
 export const VAT_RATE = 0.12;
@@ -139,7 +139,7 @@ export function withInventoryNames<T extends { model: string; name?: string }>(
   const keys = Object.keys(namesByArticle);
 
   return items.map(item => {
-    const key = stockKey(item.model);
+    const key = stockModelKey(item.model);
     if (!key) return item;
 
     // Точное совпадение.

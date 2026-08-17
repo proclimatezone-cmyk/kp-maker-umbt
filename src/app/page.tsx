@@ -5,7 +5,7 @@ import { Plus, Trash2, FileText, User, Briefcase, Calculator, Search, RefreshCw,
 import productsData from '@/data/products.json'
 import { formatNum } from '@/lib/format'
 import { DELIVERY_TERMS, DeliveryTerm, buildTermsLines, getMoneyLabels } from '@/lib/delivery-terms'
-import { stockKey } from '@/lib/stock-match'
+import { stockModelKey } from '@/lib/stock-match'
 import { normalizeModel } from '@/lib/reports/parse-utils'
 
 /** Ставка НДС в Узбекистане. Та же цифра идёт в спецификацию договора. */
@@ -267,18 +267,22 @@ const ContractSection = memo(({ contract, onChange }: any) => {
     <div className="section">
       <SectionHeader icon={FileSignature} title="Договор поставки" color="purple" />
       <div className="row cols-3">
-        {CONTRACT_FIELDS.map(([key, label, placeholder]) => (
-          <div className="field" key={key}>
-            <label className="field-label">{label}</label>
-            <input
-              className="field-input"
-              placeholder={placeholder}
-              value={local[key] || ''}
-              onChange={e => setLocal({ ...local, [key]: e.target.value })}
-              onBlur={blur}
-            />
-          </div>
-        ))}
+        {CONTRACT_FIELDS.map(([key, label, placeholder]) => {
+          const isDateField = key === 'date' || key === 'validUntil';
+          return (
+            <div className="field" key={key}>
+              <label className="field-label">{label}</label>
+              <input
+                className="field-input"
+                type={isDateField ? 'date' : 'text'}
+                placeholder={isDateField ? undefined : placeholder}
+                value={local[key] || ''}
+                onChange={e => setLocal({ ...local, [key]: e.target.value })}
+                onBlur={blur}
+              />
+            </div>
+          );
+        })}
       </div>
     </div>
   );
@@ -484,7 +488,7 @@ const EquipmentRow = memo(({ item, products, cleanProducts, stock, onUpdate, onD
 
   // Остаток по складу: null — таблица ещё не прочитана, undefined — модели там нет.
   const available: number | undefined | null =
-    stock === null ? null : stock[stockKey(p?.model || '')];
+    stock === null ? null : stock[stockModelKey(p?.model || '')];
   const shortage = typeof available === 'number' && Number(qty) > available;
 
   const baseUnitPrice = calculatePrice(p?.price || 0);

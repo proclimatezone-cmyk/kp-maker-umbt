@@ -5,6 +5,7 @@ import PizZip from 'pizzip';
 import Docxtemplater from 'docxtemplater';
 import { buildSpec, splitKits, withInventoryNames, missingInventoryNames, ContractInput } from '@/lib/contract';
 import { getStock, indexNamesByArticle } from '@/lib/stock';
+import { formatRuDate } from '@/lib/format';
 
 
 const DOCX_MIME = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
@@ -63,8 +64,8 @@ export async function POST(req: NextRequest) {
 
     doc.render({
       contract_number: contract.number || '',
-      contract_date: contract.date || '',
-      valid_until: contract.validUntil || '',
+      contract_date: formatRuDate(contract.date),
+      valid_until: formatRuDate(contract.validUntil),
       spec_number: contract.specNumber || '1',
       buyer_name: contract.buyerName || '',
       buyer_director: contract.buyerDirector || '',
