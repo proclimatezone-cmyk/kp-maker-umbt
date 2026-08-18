@@ -3,8 +3,8 @@ import { Readable } from 'stream';
 import { getOAuthOnlyAuth } from './google-auth';
 
 /**
- * Архив всех КП, сгенерированных через сайт: копия файла на Диск (папки
- * «Все кп новые от UMBT» → Word / PDF) + строка в листе «все кпшки»
+ * Архив всех КП, сгенерированных через сайт: копия файла на Диск (папка
+ * «все новые кп от UMBT» → WORD / PDF) + строка в листе «все кпшки»
  * (кто, с какого логина, когда, на что — чтобы владелец мог быстро найти
  * нужный файл, не копаясь в почте менеджеров).
  */
@@ -12,8 +12,8 @@ import { getOAuthOnlyAuth } from './google-auth';
 const ARCHIVE_SHEET_ID = '1O5aeKAbSc_UkDk7expSqaDO5dpUaQLyqWI40Vhp4MhE';
 const ARCHIVE_SHEET_TAB = 'все кпшки';
 
-const WORD_FOLDER_ID = '1xzBUz1j74KZS0ne3iKs9yvzdyXP0iC-b';
-const PDF_FOLDER_ID = '1TGYgxSZXytFVA9omnel2QR5v2EDHt5U8';
+const WORD_FOLDER_ID = '1JVf3LGLtiyFiMAD7Uo4qGVUIjQHDo7rC';
+const PDF_FOLDER_ID = '1yjXBJasIcmoou-uTnYfU_wBDFkZ1HGAd';
 
 const DOCX_MIME = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
 const PDF_MIME = 'application/pdf';
