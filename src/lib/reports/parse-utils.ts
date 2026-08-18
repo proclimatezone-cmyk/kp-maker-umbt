@@ -1,5 +1,7 @@
 /** Общие разборщики для отчётов: даты в формате ДД.ММ.ГГ и суммы вида «7 938,00». */
 
+import { stockKey } from '../stock-match';
+
 export interface ParsedDate {
   iso: string;
   monthKey: string; // YYYY-MM
@@ -27,6 +29,12 @@ export function parseRuNumber(raw: string | undefined | null): number | null {
   return Number.isFinite(n) ? n : null;
 }
 
+/**
+ * Ключ сопоставления модели со старым прайсом — та же логика, что и для
+ * остатков (stockKey): без этого «Midea-V56WDHN1(AtB)» (так оно подписано
+ * в КП) не находило «MDV-V56WDHN1(AtB)» (так оно подписано в старом
+ * прайсе) — разный бренд-префикс у той же самой позиции серии ATOM.
+ */
 export function normalizeModel(raw: string | undefined | null): string {
-  return String(raw || '').trim().toUpperCase().replace(/\s+/g, '');
+  return stockKey(String(raw || ''));
 }
