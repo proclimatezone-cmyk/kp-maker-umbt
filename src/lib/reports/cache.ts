@@ -2,6 +2,7 @@ import { fetchReportSheets } from './sheet-source';
 import { computeSalesReport, type SalesReport } from './sales';
 import { computeBookingsReport, type BookingsReport } from './bookings';
 import { computePriceComparison, type PriceComparisonReport } from './price-comparison';
+import { computeWelkinComparison, type WelkinComparisonReport } from './welkin-comparison';
 import { getProducts } from '@/lib/products-cache';
 
 // Данные склада/цен не меняются поминутно — 10 минут, как у products-cache.ts,
@@ -16,6 +17,7 @@ interface CacheEntry<T> {
 let salesCache: CacheEntry<SalesReport> | null = null;
 let bookingsCache: CacheEntry<BookingsReport> | null = null;
 let priceCache: CacheEntry<PriceComparisonReport> | null = null;
+let welkinCache: CacheEntry<WelkinComparisonReport> | null = null;
 
 function isFresh<T>(entry: CacheEntry<T> | null): entry is CacheEntry<T> {
   return !!entry && Date.now() - entry.fetchedAt < CACHE_TTL;
@@ -44,5 +46,15 @@ export async function getPriceComparisonReport(): Promise<PriceComparisonReport>
     (products as any[]).map((p) => ({ model: p.model, category: p.category, price: Number(p.price) || 0 }))
   );
   priceCache = { data, fetchedAt: Date.now() };
+  return data;
+}
+
+export async function getWelkinComparisonReport(): Promise<WelkinComparisonReport> {
+  if (isFresh(welkinCache)) return welkinCache!.data;
+  const products = await getProducts();
+  const data = computeWelkinComparison(
+    (products as any[]).map((p) => ({ model: p.model, category: p.category, price: Number(p.price) || 0 }))
+  );
+  welkinCache = { data, fetchedAt: Date.now() };
   return data;
 }

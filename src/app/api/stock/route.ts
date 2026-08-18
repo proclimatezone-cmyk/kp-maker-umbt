@@ -1,9 +1,23 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getStock, indexByArticle, indexNamesByArticle } from '@/lib/stock';
+import { getSessionEmail } from '@/lib/auth-session';
 
 export const dynamic = 'force-dynamic';
 
+/**
+ * Остатки на складе — конфиденциальные данные, видит только админ
+ * (тот же email, что открывает «Отчёты»). Раньше отдавались любому
+ * залогиненному менеджеру — договор/спецификация их не используют
+ * через этот роут (там прямой импорт lib/stock.ts на сервере), так
+ * что закрытие роута ничего не ломает, кроме самой утечки.
+ */
 export async function GET(req: NextRequest) {
+  const email = (await getSessionEmail(req)).trim().toLowerCase();
+  const adminEmail = (process.env.REPORTS_ACCESS_EMAIL || '').trim().toLowerCase();
+  if (!adminEmail || email !== adminEmail) {
+    return NextResponse.json({ success: false, error: 'Not found' }, { status: 404 });
+  }
+
   try {
     const force = req.nextUrl.searchParams.get('refresh') === 'true';
     const rows = await getStock(force);

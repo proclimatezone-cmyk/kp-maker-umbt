@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useMemo, useCallback, memo } from 'react'
-import { Plus, Trash2, FileText, User, Briefcase, Calculator, Search, RefreshCw, Building2, Phone, CheckCircle, CloudCheck, Loader2, Copy, Truck, ChevronDown, FileSignature, BarChart3 } from 'lucide-react'
+import { Plus, Trash2, FileText, User, Briefcase, Calculator, Search, RefreshCw, Building2, Phone, CheckCircle, CloudCheck, Loader2, Copy, Truck, ChevronDown, FileSignature, BarChart3, Lock, Unlock } from 'lucide-react'
 import productsData from '@/data/products.json'
 import { formatNum, formatShortRuDate, toIsoDate } from '@/lib/format'
 import { DELIVERY_TERMS, DeliveryTerm, buildTermsLines, getMoneyLabels } from '@/lib/delivery-terms'
@@ -478,7 +478,7 @@ const ModelSearchSelector = memo(({ value, onChange, cleanProducts }: { value: s
   );
 });
 
-const EquipmentRow = memo(({ item, products, cleanProducts, stock, onUpdate, onDelete, onClone, calculatePrice, currencyLabel, labels, oldPriceMap }: any) => {
+const EquipmentRow = memo(({ item, products, cleanProducts, stock, onUpdate, onDelete, onClone, calculatePrice, currencyLabel, labels, oldPriceMap, welkinMap, showDiscount, showStock, showOldPrice, showWelkin }: any) => {
   const p = products.find((x: any) => x.id === item.productId);
   const [qty, setQty] = useState<number | string>(item.quantity);
   const [discount, setDiscount] = useState<number | string>(item.discount !== undefined ? item.discount : 0);
@@ -503,12 +503,28 @@ const EquipmentRow = memo(({ item, products, cleanProducts, stock, onUpdate, onD
   const oldUnitPrice = oldPriceUsd !== undefined ? calculatePrice(oldPriceUsd) : null;
   const marginPct = oldUnitPrice && oldUnitPrice > 0 ? ((finalUnitPrice - oldUnitPrice) / oldUnitPrice) * 100 : null;
 
+  // Welkin (Hisense OEM) — приблизительный аналог по мощности внутри класса
+  // оборудования, не тот же артикул (сопоставление офлайн, см. sync-welkin.mjs).
+  // Цена Welkin в исходнике в у.е. — конвертируем тем же курсом, что и нашу,
+  // иначе сравнение бессмысленно.
+  const welkin = welkinMap?.get(normalizeModel(p?.model));
+  const welkinUnitPrice = welkin ? calculatePrice(welkin.price) : null;
+  const welkinDeltaPct = welkinUnitPrice && welkinUnitPrice > 0 ? ((finalUnitPrice - welkinUnitPrice) / welkinUnitPrice) * 100 : null;
+
   return (
     <tr>
       <td data-label="Модель">
         <ModelSearchSelector value={item.productId} onChange={val => onUpdate(item.id, { productId: val })} cleanProducts={cleanProducts} />
-        <div className="cat-label">
-          {p?.series || p?.category}
+        <div className="cat-label">{p?.series || p?.category}</div>
+      </td>
+      <td data-label={labels.price}>
+        <span className="cell-value">
+          <span className="price">{formatNum(finalUnitPrice)}</span>
+          <span className="price-unit">{currencyLabel}</span>
+        </span>
+      </td>
+      {showStock && (
+        <td data-label="Остатки">
           {available !== null && (
             <span className={`stock-tag ${shortage ? 'short' : available ? 'ok' : 'none'}`}>
               {typeof available === 'number' && available > 0
@@ -518,51 +534,60 @@ const EquipmentRow = memo(({ item, products, cleanProducts, stock, onUpdate, onD
                   : 'нет в инвентаризации'}
             </span>
           )}
-        </div>
-      </td>
-      <td data-label={labels.price}>
-        <span className="cell-value">
-          <span className="price">{formatNum(finalUnitPrice)}</span>
-          <span className="price-unit">{currencyLabel}</span>
-        </span>
-        {oldUnitPrice !== null && marginPct !== null && (
-          <span className="old-price-hint" title="Старая цена — закупка Midea из старого прайса, без наценки и скидки">
-            старая {formatNum(oldUnitPrice)} · <span className={marginPct >= 0 ? 'margin-up' : 'margin-down'}>{marginPct >= 0 ? '+' : ''}{marginPct.toFixed(0)}%</span>
-          </span>
-        )}
-      </td>
-      <td data-label="Скидка %">
-        <input 
-          className="qty-input" 
-          type="number" 
-          step="any"
-          value={discount === 0 ? '' : discount} 
-          placeholder="0"
-          onChange={e => {
-            const val = e.target.value;
-            setDiscount(val === '' ? '' : val);
-          }} 
-          onFocus={e => {
-            if (Number(discount) === 0) {
-              setDiscount('');
-            } else {
-              e.target.select();
-            }
-          }}
-          onBlur={() => {
-            const finalDiscount = discount === '' ? 0 : Number(discount);
-            setDiscount(finalDiscount);
-            if (finalDiscount !== (item.discount || 0)) {
-              onUpdate(item.id, { discount: finalDiscount });
-            }
-          }}
-          style={{
-            color: discountVal < 0 ? 'var(--success)' : discountVal > 0 ? 'var(--error)' : 'inherit',
-            fontWeight: discountVal !== 0 ? 600 : 400
-          }}
-          title="Скидка (-) или наценка (+)"
-        />
-      </td>
+        </td>
+      )}
+      {showOldPrice && (
+        <td data-label="Старая цена">
+          {oldUnitPrice !== null && marginPct !== null && (
+            <span className="old-price-hint" title="Старая цена — закупка Midea из старого прайса, без наценки и скидки">
+              {formatNum(oldUnitPrice)} {currencyLabel} · <span className={marginPct >= 0 ? 'margin-up' : 'margin-down'}>{marginPct >= 0 ? '+' : ''}{marginPct.toFixed(0)}%</span>
+            </span>
+          )}
+        </td>
+      )}
+      {showWelkin && (
+        <td data-label="Welkin">
+          {welkinUnitPrice !== null && welkinDeltaPct !== null && (
+            <span className="old-price-hint" title={`Welkin (Hisense OEM), приблизительный аналог по мощности: ${welkin.model}. Точность сопоставления: ±${welkin.deltaPct}%`}>
+              ≈ {formatNum(welkinUnitPrice)} {currencyLabel} · <span className={welkinDeltaPct >= 0 ? 'margin-down' : 'margin-up'}>{welkinDeltaPct >= 0 ? '+' : ''}{welkinDeltaPct.toFixed(0)}%</span>
+            </span>
+          )}
+        </td>
+      )}
+      {showDiscount && (
+        <td data-label="Скидка %">
+          <input
+            className="qty-input"
+            type="number"
+            step="any"
+            value={discount === 0 ? '' : discount}
+            placeholder="0"
+            onChange={e => {
+              const val = e.target.value;
+              setDiscount(val === '' ? '' : val);
+            }}
+            onFocus={e => {
+              if (Number(discount) === 0) {
+                setDiscount('');
+              } else {
+                e.target.select();
+              }
+            }}
+            onBlur={() => {
+              const finalDiscount = discount === '' ? 0 : Number(discount);
+              setDiscount(finalDiscount);
+              if (finalDiscount !== (item.discount || 0)) {
+                onUpdate(item.id, { discount: finalDiscount });
+              }
+            }}
+            style={{
+              color: discountVal < 0 ? 'var(--success)' : discountVal > 0 ? 'var(--error)' : 'inherit',
+              fontWeight: discountVal !== 0 ? 600 : 400
+            }}
+            title="Скидка (-) или наценка (+)"
+          />
+        </td>
+      )}
       <td data-label="Кол-во">
         <input className="qty-input" type="number" min="1" 
           value={qty} 
@@ -638,6 +663,16 @@ export default function Home() {
   const [stockError, setStockError] = useState('')
   const [isReportsUser, setIsReportsUser] = useState(false)
   const [oldPriceMap, setOldPriceMap] = useState<Map<string, number> | null>(null)
+  const [welkinMap, setWelkinMap] = useState<Map<string, { price: number; model: string; deltaPct: number }> | null>(null)
+
+  // Конфиденциальные колонки — скидка, остатки, старая цена, Welkin.
+  // Намеренно НЕ в localStorage: должны сбрасываться на «скрыто» при каждой
+  // загрузке страницы, иначе первый же случайный скриншот их раскроет.
+  const [showDiscount, setShowDiscount] = useState(false)
+  const [showStock, setShowStock] = useState(false)
+  const [showOldPrice, setShowOldPrice] = useState(false)
+  const [showWelkin, setShowWelkin] = useState(false)
+  const adminColsOn = showStock && showOldPrice && showWelkin
 
   const [options, setOptions] = useState({
     showImages: true,
@@ -721,20 +756,21 @@ export default function Home() {
     const onFocus = () => { if (document.visibilityState === 'visible') loadData(); };
     document.addEventListener('visibilitychange', onFocus);
 
-    fetch('/api/stock')
-      .then(r => r.json())
-      .then(d => (d.success ? setStock(d.byArticle) : setStockError(d.error || 'Остатки недоступны')))
-      .catch(() => setStockError('Не удалось получить остатки'));
-
     // umbt_auth — httpOnly, чей это email клиент узнаёт только через этот роут.
-    // Старую цену запрашиваем только для владельца отчётов — остальным
-    // менеджерам этот запрос middleware всё равно вернёт 404, но незачем
-    // его даже отправлять с чужой сессией.
+    // Остатки/старую цену/Welkin запрашиваем только для админа — остальным
+    // менеджерам эти роуты middleware/сам роут всё равно вернут 404, но
+    // незачем даже отправлять запрос с чужой сессией, и не в бандл, а по сети.
     fetch('/api/auth/me')
       .then(r => r.json())
       .then(d => {
         setIsReportsUser(!!d.isReportsUser);
         if (!d.isReportsUser) return;
+
+        fetch('/api/stock')
+          .then(r => r.json())
+          .then(d => (d.success ? setStock(d.byArticle) : setStockError(d.error || 'Остатки недоступны')))
+          .catch(() => setStockError('Не удалось получить остатки'));
+
         fetch('/api/reports/price-comparison')
           .then(r => r.json())
           .then(pc => {
@@ -745,6 +781,17 @@ export default function Home() {
             setOldPriceMap(map);
           })
           .catch(() => setOldPriceMap(null));
+
+        fetch('/api/reports/welkin-comparison')
+          .then(r => r.json())
+          .then(wc => {
+            const map = new Map<string, { price: number; model: string; deltaPct: number }>();
+            for (const row of wc.rows || []) {
+              map.set(normalizeModel(row.model), { price: row.welkinPrice, model: row.welkinModel, deltaPct: row.matchDeltaPct });
+            }
+            setWelkinMap(map);
+          })
+          .catch(() => setWelkinMap(null));
       })
       .catch(() => setIsReportsUser(false));
 
@@ -1155,13 +1202,42 @@ export default function Home() {
                 </div>
               </div>
 
+              <div className="confidential-toolbar">
+                <button className={`chip ${showDiscount ? 'on' : ''}`} onClick={() => setShowDiscount(v => !v)} title="Колонка видна только пока включена — не остаётся на скриншоте по умолчанию">
+                  {showDiscount ? <Unlock size={13} /> : <Lock size={13} />} Скидка
+                </button>
+                {isReportsUser && (
+                  <>
+                    <span className="toolbar-sep" />
+                    <button className={`chip ${showStock ? 'on' : ''}`} onClick={() => setShowStock(v => !v)}>
+                      {showStock ? <Unlock size={13} /> : <Lock size={13} />} Остатки
+                    </button>
+                    <button className={`chip ${showOldPrice ? 'on' : ''}`} onClick={() => setShowOldPrice(v => !v)}>
+                      {showOldPrice ? <Unlock size={13} /> : <Lock size={13} />} Старая цена
+                    </button>
+                    <button className={`chip ${showWelkin ? 'on' : ''}`} onClick={() => setShowWelkin(v => !v)}>
+                      {showWelkin ? <Unlock size={13} /> : <Lock size={13} />} Welkin
+                    </button>
+                    <button
+                      className={`chip chip-all ${adminColsOn ? 'on' : ''}`}
+                      onClick={() => { const next = !adminColsOn; setShowStock(next); setShowOldPrice(next); setShowWelkin(next); }}
+                    >
+                      Показать всё
+                    </button>
+                  </>
+                )}
+              </div>
+
               <div className="tbl-wrap">
                 <table className="tbl">
                   <thead>
                     <tr>
-                      <th style={{ width: '40%' }}>Модель</th>
-                      <th style={{ width: '14%', textAlign: 'center' }}>{labels.price}</th>
-                      <th style={{ width: '12%', textAlign: 'center' }}>Скидка %</th>
+                      <th style={{ width: '30%' }}>Модель</th>
+                      <th style={{ width: '12%', textAlign: 'center' }}>{labels.price}</th>
+                      {showStock && <th style={{ width: '12%', textAlign: 'center' }}>Остатки</th>}
+                      {showOldPrice && <th style={{ width: '14%', textAlign: 'center' }}>Старая цена</th>}
+                      {showWelkin && <th style={{ width: '14%', textAlign: 'center' }}>Welkin</th>}
+                      {showDiscount && <th style={{ width: '10%', textAlign: 'center' }}>Скидка %</th>}
                       <th style={{ width: '10%', textAlign: 'center' }}>Кол-во</th>
                       <th style={{ width: '16%', textAlign: 'right' }}>{labels.sum}</th>
                       <th style={{ width: '8%' }}></th>
@@ -1169,7 +1245,12 @@ export default function Home() {
                   </thead>
                   <tbody>
                     {items.map(item => (
-                      <EquipmentRow key={item.id} item={item} products={products} cleanProducts={cleanProducts} stock={stock} onUpdate={updateItem} onDelete={deleteItem} onClone={cloneItem} calculatePrice={calculatePrice} currencyLabel={currencyLabel} labels={labels} oldPriceMap={oldPriceMap} />
+                      <EquipmentRow
+                        key={item.id} item={item} products={products} cleanProducts={cleanProducts} stock={stock}
+                        onUpdate={updateItem} onDelete={deleteItem} onClone={cloneItem} calculatePrice={calculatePrice}
+                        currencyLabel={currencyLabel} labels={labels} oldPriceMap={oldPriceMap} welkinMap={welkinMap}
+                        showDiscount={showDiscount} showStock={showStock} showOldPrice={showOldPrice} showWelkin={showWelkin}
+                      />
                     ))}
                   </tbody>
                 </table>
@@ -1191,7 +1272,7 @@ export default function Home() {
               </div>
             </div>
 
-            {oldPriceStats && oldPriceStats.matchedQty > 0 && (
+            {showOldPrice && oldPriceStats && oldPriceStats.matchedQty > 0 && (
               <div className="margin-bar">
                 <span className="margin-coverage">
                   учтено {oldPriceStats.matchedQty} из {oldPriceStats.totalQty} шт (есть в старом прайсе)
@@ -1235,7 +1316,7 @@ export default function Home() {
                   <span className="total-currency">{currencyLabel}</span>
                 </div>
 
-                {oldPriceStats && oldPriceStats.matchedQty > 0 && oldPriceStats.marginPct !== null && (() => {
+                {showOldPrice && oldPriceStats && oldPriceStats.matchedQty > 0 && oldPriceStats.marginPct !== null && (() => {
                   // Бонус партнёру считается со всего оборудования — на подмножество
                   // с известной старой ценой распределяем пропорционально его доле в обороте.
                   const bonusShare = equipmentTotal > 0 ? partnerBonusSum * (oldPriceStats.currentMatchedTotal / equipmentTotal) : 0;

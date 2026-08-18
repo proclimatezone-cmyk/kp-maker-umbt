@@ -406,6 +406,51 @@ body {
 .metric-value.ok  { color: var(--success); }
 .metric-value.bad { color: var(--error); }
 
+/* ===== Конфиденциальные колонки: скидка/остатки/старая цена/Welkin ===== */
+/* Выключены при каждой загрузке страницы — чтобы случайный скриншот их не раскрыл. */
+.confidential-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.6rem;
+}
+.toolbar-sep {
+  width: 1px;
+  height: 1.1rem;
+  background: var(--border);
+  margin: 0 0.15rem;
+}
+.confidential-toolbar .chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--bg-sunken);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.confidential-toolbar .chip:hover { color: var(--text); border-color: var(--text-muted); }
+.confidential-toolbar .chip.on {
+  background: var(--success-bg);
+  border-color: var(--success);
+  color: var(--success);
+}
+.confidential-toolbar .chip.chip-all {
+  background: transparent;
+  border-style: dashed;
+}
+.confidential-toolbar .chip.chip-all.on {
+  background: var(--success);
+  border-style: solid;
+  color: #fff;
+}
+
 /* ===== TABLE ===== */
 .tbl-wrap {
   overflow-x: auto;
