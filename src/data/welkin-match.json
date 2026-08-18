@@ -726,5 +726,29 @@
     "matchedKw": 7.1,
     "productKw": 7.1,
     "deltaPct": 0
+  },
+  "MC-SS130/RN1": {
+    "welkinModel": "WJGTR-130E/S2G",
+    "hisenseModel": "HFRE-130W/A2F",
+    "priceUsd": 16362,
+    "matchedKw": 130,
+    "productKw": 130,
+    "deltaPct": 0
+  },
+  "MC-SU75-RN8L-B": {
+    "welkinModel": "WJGTR-65E/S2G",
+    "hisenseModel": "HFRE-65W/A2F",
+    "priceUsd": 8551,
+    "matchedKw": 65,
+    "productKw": 75,
+    "deltaPct": 13.3
+  },
+  "MC-SU140-RN8L-B": {
+    "welkinModel": "WJGTR-130E/S2G",
+    "hisenseModel": "HFRE-130W/A2F",
+    "priceUsd": 16362,
+    "matchedKw": 130,
+    "productKw": 140,
+    "deltaPct": 7.1
   }
 }

@@ -53,12 +53,14 @@ function classifyWelkinSeries(series) {
   if (s.includes('4-way cassette') || s.includes('4-way casset')) return 'cassette-4way';
   if (s.includes('wall mounted')) return 'wall';
   if (s.includes('ceiling ducted')) return 'duct';
+  if (s.includes('chiller')) return 'chiller';
   return null;
 }
 
 /** Класс оборудования Midea по тексту категории — см. products.json. */
 function classifyMideaCategory(category) {
   const c = (category || '').toLowerCase();
+  if (c.includes('чиллер')) return 'chiller';
   if (!c.includes('vrf') && !c.includes('atom') && !c.includes('mini-vrf')) return null;
   if (c.includes('наружный') || c.includes('компрессорно-конденсаторный')) return 'vrf-outdoor';
   if (c.includes('кассетный 4х-поточный') || c.includes('кассетный комплект')) return 'cassette-4way';
@@ -70,6 +72,17 @@ function classifyMideaCategory(category) {
 
 function parseKw(raw) {
   const n = parseFloat(String(raw || '').replace(',', '.').replace(/\s/g, ''));
+  return isFinite(n) && n > 0 ? n : null;
+}
+
+/**
+ * У чиллеров Welkin колонка «Capacity (KW)» пустая — мощность зашита прямо
+ * в код модели («HFRE-65W/A2F» → 65, «HFRWE-130DGF/AE» → 130). Больше нигде
+ * такое доставать не нужно — у остальных классов колонка заполнена.
+ */
+function parseKwFromModel(model) {
+  const m = String(model || '').match(/-(\d{2,4})[A-Za-z]/);
+  const n = m ? parseInt(m[1], 10) : NaN;
   return isFinite(n) && n > 0 ? n : null;
 }
 
@@ -95,7 +108,7 @@ async function main() {
     if (row[0]) currentSeries = row[0];
     const cls = classifyWelkinSeries(currentSeries);
     if (!cls) continue;
-    const kw = parseKw(row[3]);
+    const kw = parseKw(row[3]) || (cls === 'chiller' ? parseKwFromModel(row[1]) : null);
     const price = parsePrice(row[7]);
     if (!kw || !price) continue;
     pool.push({ class: cls, hisenseModel: row[1] || '', welkinModel: row[2] || '', kw, price });

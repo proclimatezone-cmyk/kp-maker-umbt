@@ -478,7 +478,7 @@ const ModelSearchSelector = memo(({ value, onChange, cleanProducts }: { value: s
   );
 });
 
-const EquipmentRow = memo(({ item, products, cleanProducts, stock, onUpdate, onDelete, onClone, calculatePrice, currencyLabel, labels, oldPriceMap, welkinMap, showDiscount, showStock, showOldPrice, showWelkin }: any) => {
+const EquipmentRow = memo(({ item, products, cleanProducts, stock, onUpdate, onDelete, onClone, calculatePrice, currencyLabel, labels, oldPriceMap, welkinMap, showDiscount, showOldPrice, showWelkin }: any) => {
   const p = products.find((x: any) => x.id === item.productId);
   const [qty, setQty] = useState<number | string>(item.quantity);
   const [discount, setDiscount] = useState<number | string>(item.discount !== undefined ? item.discount : 0);
@@ -523,19 +523,6 @@ const EquipmentRow = memo(({ item, products, cleanProducts, stock, onUpdate, onD
           <span className="price-unit">{currencyLabel}</span>
         </span>
       </td>
-      {showStock && (
-        <td data-label="Остатки">
-          {available !== null && (
-            <span className={`stock-tag ${shortage ? 'short' : available ? 'ok' : 'none'}`}>
-              {typeof available === 'number' && available > 0
-                ? `на складе ${available}`
-                : typeof available === 'number'
-                  ? 'нет на складе'
-                  : 'нет в инвентаризации'}
-            </span>
-          )}
-        </td>
-      )}
       {showOldPrice && (
         <td data-label="Старая цена">
           {oldUnitPrice !== null && marginPct !== null && (
@@ -628,6 +615,17 @@ const EquipmentRow = memo(({ item, products, cleanProducts, stock, onUpdate, onD
           </button>
         </div>
       </td>
+      <td data-label="Остатки">
+        {available !== null && (
+          <span className={`stock-tag ${shortage ? 'short' : available ? 'ok' : 'none'}`}>
+            {typeof available === 'number' && available > 0
+              ? `на складе ${available}`
+              : typeof available === 'number'
+                ? 'нет на складе'
+                : 'нет в инвентаризации'}
+          </span>
+        )}
+      </td>
     </tr>
   );
 });
@@ -665,14 +663,16 @@ export default function Home() {
   const [oldPriceMap, setOldPriceMap] = useState<Map<string, number> | null>(null)
   const [welkinMap, setWelkinMap] = useState<Map<string, { price: number; model: string; deltaPct: number }> | null>(null)
 
-  // Конфиденциальные колонки — скидка, остатки, старая цена, Welkin.
-  // Намеренно НЕ в localStorage: должны сбрасываться на «скрыто» при каждой
-  // загрузке страницы, иначе первый же случайный скриншот их раскроет.
+  // Конфиденциальные колонки — скидка, старая цена, Welkin. Намеренно НЕ
+  // в localStorage: должны сбрасываться на «скрыто» при каждой загрузке
+  // страницы, иначе первый же случайный скриншот их раскроет.
+  // Остатки — исключение по решению владельца: видны всем всегда, но
+  // колонка всегда крайняя правая в таблице (см. вёрстку ниже), чтобы
+  // обычный скриншот по ширине её не захватывал.
   const [showDiscount, setShowDiscount] = useState(false)
-  const [showStock, setShowStock] = useState(false)
   const [showOldPrice, setShowOldPrice] = useState(false)
   const [showWelkin, setShowWelkin] = useState(false)
-  const adminColsOn = showStock && showOldPrice && showWelkin
+  const adminColsOn = showOldPrice && showWelkin
 
   const [options, setOptions] = useState({
     showImages: true,
@@ -756,8 +756,14 @@ export default function Home() {
     const onFocus = () => { if (document.visibilityState === 'visible') loadData(); };
     document.addEventListener('visibilitychange', onFocus);
 
+    // Остатки — видны всем залогиненным (см. .confidential-toolbar ниже).
+    fetch('/api/stock')
+      .then(r => r.json())
+      .then(d => (d.success ? setStock(d.byArticle) : setStockError(d.error || 'Остатки недоступны')))
+      .catch(() => setStockError('Не удалось получить остатки'));
+
     // umbt_auth — httpOnly, чей это email клиент узнаёт только через этот роут.
-    // Остатки/старую цену/Welkin запрашиваем только для админа — остальным
+    // Старую цену/Welkin запрашиваем только для админа — остальным
     // менеджерам эти роуты middleware/сам роут всё равно вернут 404, но
     // незачем даже отправлять запрос с чужой сессией, и не в бандл, а по сети.
     fetch('/api/auth/me')
@@ -765,11 +771,6 @@ export default function Home() {
       .then(d => {
         setIsReportsUser(!!d.isReportsUser);
         if (!d.isReportsUser) return;
-
-        fetch('/api/stock')
-          .then(r => r.json())
-          .then(d => (d.success ? setStock(d.byArticle) : setStockError(d.error || 'Остатки недоступны')))
-          .catch(() => setStockError('Не удалось получить остатки'));
 
         fetch('/api/reports/price-comparison')
           .then(r => r.json())
@@ -1209,9 +1210,6 @@ export default function Home() {
                 {isReportsUser && (
                   <>
                     <span className="toolbar-sep" />
-                    <button className={`chip ${showStock ? 'on' : ''}`} onClick={() => setShowStock(v => !v)}>
-                      {showStock ? <Unlock size={13} /> : <Lock size={13} />} Остатки
-                    </button>
                     <button className={`chip ${showOldPrice ? 'on' : ''}`} onClick={() => setShowOldPrice(v => !v)}>
                       {showOldPrice ? <Unlock size={13} /> : <Lock size={13} />} Старая цена
                     </button>
@@ -1220,7 +1218,7 @@ export default function Home() {
                     </button>
                     <button
                       className={`chip chip-all ${adminColsOn ? 'on' : ''}`}
-                      onClick={() => { const next = !adminColsOn; setShowStock(next); setShowOldPrice(next); setShowWelkin(next); }}
+                      onClick={() => { const next = !adminColsOn; setShowOldPrice(next); setShowWelkin(next); }}
                     >
                       Показать всё
                     </button>
@@ -1234,13 +1232,15 @@ export default function Home() {
                     <tr>
                       <th style={{ width: '30%' }}>Модель</th>
                       <th style={{ width: '12%', textAlign: 'center' }}>{labels.price}</th>
-                      {showStock && <th style={{ width: '12%', textAlign: 'center' }}>Остатки</th>}
                       {showOldPrice && <th style={{ width: '14%', textAlign: 'center' }}>Старая цена</th>}
                       {showWelkin && <th style={{ width: '14%', textAlign: 'center' }}>Welkin</th>}
                       {showDiscount && <th style={{ width: '10%', textAlign: 'center' }}>Скидка %</th>}
                       <th style={{ width: '10%', textAlign: 'center' }}>Кол-во</th>
                       <th style={{ width: '16%', textAlign: 'right' }}>{labels.sum}</th>
                       <th style={{ width: '8%' }}></th>
+                      {/* Остатки — всегда крайний правый столбец: за пределами типичного
+                          скриншота по ширине, но не спрятан за тумблером (видно всем). */}
+                      <th style={{ width: '12%', textAlign: 'center' }}>Остатки</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -1249,7 +1249,7 @@ export default function Home() {
                         key={item.id} item={item} products={products} cleanProducts={cleanProducts} stock={stock}
                         onUpdate={updateItem} onDelete={deleteItem} onClone={cloneItem} calculatePrice={calculatePrice}
                         currencyLabel={currencyLabel} labels={labels} oldPriceMap={oldPriceMap} welkinMap={welkinMap}
-                        showDiscount={showDiscount} showStock={showStock} showOldPrice={showOldPrice} showWelkin={showWelkin}
+                        showDiscount={showDiscount} showOldPrice={showOldPrice} showWelkin={showWelkin}
                       />
                     ))}
                   </tbody>
