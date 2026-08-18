@@ -3,752 +3,713 @@
     "welkinModel": "WSBEY-76JLG5",
     "hisenseModel": "AVWT-76HKF5",
     "priceUsd": 3935,
-    "matchedKw": 22.4,
-    "productKw": 25.2,
+    "source": "hisense-approx",
     "deltaPct": 11.1
   },
   "MV8i-280WV2GN1(MA)": {
     "welkinModel": "WSBEY-96JLG5",
     "hisenseModel": "AVWT-96HKF5",
     "priceUsd": 4013,
-    "matchedKw": 28,
-    "productKw": 28,
+    "source": "hisense-approx",
     "deltaPct": 0
   },
   "MV8i-335WV2GN1(MA)": {
     "welkinModel": "WSBEY-114JLG5",
     "hisenseModel": "AVWT-114HKF5",
     "priceUsd": 4266,
-    "matchedKw": 33.5,
-    "productKw": 33.5,
+    "source": "hisense-approx",
     "deltaPct": 0
   },
   "MV8i-400WV2GN1(MA)": {
     "welkinModel": "WSBEY-136JLG5",
     "hisenseModel": "AVWT-136HKF5",
     "priceUsd": 5021,
-    "matchedKw": 40,
-    "productKw": 40,
+    "source": "hisense-approx",
     "deltaPct": 0
   },
   "MV8i-450WV2GN1(MA)": {
     "welkinModel": "WSBEY-154JLG5",
     "hisenseModel": "AVWT-154HKF5",
     "priceUsd": 5356,
-    "matchedKw": 45,
-    "productKw": 45,
+    "source": "hisense-approx",
     "deltaPct": 0
   },
   "MV8i-500WV2GN1(MA)": {
     "welkinModel": "WSBEY-170GLGDS",
     "hisenseModel": "AVWT-170FKFSA",
     "priceUsd": 6878,
-    "matchedKw": 50,
-    "productKw": 50,
+    "source": "hisense-approx",
     "deltaPct": 0
   },
   "MV8i-560WV2GN1(MA)": {
     "welkinModel": "WSBEY-190JLG5",
     "hisenseModel": "AVWT-190HKF5",
     "priceUsd": 6832,
-    "matchedKw": 56,
-    "productKw": 56,
+    "source": "hisense-approx",
     "deltaPct": 0
   },
   "MV8i-615WV2GN1(MA)": {
     "welkinModel": "WSBEY-212JLG5",
     "hisenseModel": "AVWT-212HKF5",
     "priceUsd": 7253,
-    "matchedKw": 61.5,
-    "productKw": 61.5,
+    "source": "hisense-approx",
     "deltaPct": 0
   },
   "MV8i-670WV2GN1(MA)": {
     "welkinModel": "WSBEY-232JLG5",
     "hisenseModel": "AVWT-232HKF5",
     "priceUsd": 7711,
-    "matchedKw": 68,
-    "productKw": 67,
+    "source": "hisense-approx",
     "deltaPct": 1.5
   },
   "MV8i-730WV2GN1(MA)": {
     "welkinModel": "WSBEY-250JLG5",
     "hisenseModel": "AVWT-250HKF5",
     "priceUsd": 7980,
-    "matchedKw": 73.5,
-    "productKw": 73,
+    "source": "hisense-approx",
     "deltaPct": 0.7
   },
   "MV8i-785WV2GN1(MA)": {
     "welkinModel": "WSBEY-272JLG5",
     "hisenseModel": "AVWT-272HKF5",
     "priceUsd": 8313,
-    "matchedKw": 78.5,
-    "productKw": 78.5,
+    "source": "hisense-approx",
     "deltaPct": 0
   },
   "MV8i-850WV2GN1(MA)": {
     "welkinModel": "WSBEY-290JLG5",
     "hisenseModel": "AVWT-290HKF5",
     "priceUsd": 9168,
-    "matchedKw": 85,
-    "productKw": 85,
+    "source": "hisense-approx",
     "deltaPct": 0
   },
   "MV8i-900WV2GN1(MA)": {
     "welkinModel": "WSBEY-307JLG5",
     "hisenseModel": "AVWT-307HKF5",
     "priceUsd": 10121,
-    "matchedKw": 90,
-    "productKw": 90,
+    "source": "hisense-approx",
     "deltaPct": 0
   },
   "MV8i-950WV2GN1(MA)": {
     "welkinModel": "WSBEY-324JLG5",
     "hisenseModel": "AVWT-324HKF5",
     "priceUsd": 10186,
-    "matchedKw": 95.4,
-    "productKw": 95,
+    "source": "hisense-approx",
     "deltaPct": 0.4
   },
   "MV8i-1010WV2GN1(MA)": {
     "welkinModel": "WSBEY-343JLG5",
     "hisenseModel": "AVWT-343HKF5",
     "priceUsd": 10368,
-    "matchedKw": 101,
-    "productKw": 101,
+    "source": "hisense-approx",
     "deltaPct": 0
   },
   "MV8i-1060WV2GN1(MA)": {
     "welkinModel": "WSBEY-365JLG5",
     "hisenseModel": "AVWT-365HKF5",
     "priceUsd": 10946,
-    "matchedKw": 106.5,
-    "productKw": 106,
+    "source": "hisense-approx",
     "deltaPct": 0.5
   },
   "MV8i-1120WV2GN1(MA)": {
     "welkinModel": "WSBEY-386JLG5",
     "hisenseModel": "AVWT-386HKF5",
     "priceUsd": 11092,
-    "matchedKw": 112,
-    "productKw": 112,
+    "source": "hisense-approx",
     "deltaPct": 0
   },
   "MV8i-1170WV2GN1(MA)": {
     "welkinModel": "WSBEY-404JLG5",
     "hisenseModel": "AVWT-404HKF5",
     "priceUsd": 11115,
-    "matchedKw": 117.5,
-    "productKw": 117,
+    "source": "hisense-approx",
     "deltaPct": 0.4
-  },
-  "MVi-252WV2GN1(B)": {
-    "welkinModel": "WSBEY-76JLG5",
-    "hisenseModel": "AVWT-76HKF5",
-    "priceUsd": 3935,
-    "matchedKw": 22.4,
-    "productKw": 25.2,
-    "deltaPct": 11.1
-  },
-  "MVi-280WV2GN1(B)": {
-    "welkinModel": "WSBEY-96JLG5",
-    "hisenseModel": "AVWT-96HKF5",
-    "priceUsd": 4013,
-    "matchedKw": 28,
-    "productKw": 28,
-    "deltaPct": 0
-  },
-  "MVi-335WV2GN1(B)": {
-    "welkinModel": "WSBEY-114JLG5",
-    "hisenseModel": "AVWT-114HKF5",
-    "priceUsd": 4266,
-    "matchedKw": 33.5,
-    "productKw": 33.5,
-    "deltaPct": 0
-  },
-  "MVi-400WV2GN1(A)": {
-    "welkinModel": "WSBEY-136JLG5",
-    "hisenseModel": "AVWT-136HKF5",
-    "priceUsd": 5021,
-    "matchedKw": 40,
-    "productKw": 40,
-    "deltaPct": 0
-  },
-  "MVi-450WV2GN1(A)": {
-    "welkinModel": "WSBEY-154JLG5",
-    "hisenseModel": "AVWT-154HKF5",
-    "priceUsd": 5356,
-    "matchedKw": 45,
-    "productKw": 45,
-    "deltaPct": 0
-  },
-  "MVi-500WV2GN1(A)": {
-    "welkinModel": "WSBEY-170GLGDS",
-    "hisenseModel": "AVWT-170FKFSA",
-    "priceUsd": 6878,
-    "matchedKw": 50,
-    "productKw": 50,
-    "deltaPct": 0
-  },
-  "MVi-560WV2GN1(A)": {
-    "welkinModel": "WSBEY-190JLG5",
-    "hisenseModel": "AVWT-190HKF5",
-    "priceUsd": 6832,
-    "matchedKw": 56,
-    "productKw": 56,
-    "deltaPct": 0
-  },
-  "MVi-615WV2GN1(A)": {
-    "welkinModel": "WSBEY-212JLG5",
-    "hisenseModel": "AVWT-212HKF5",
-    "priceUsd": 7253,
-    "matchedKw": 61.5,
-    "productKw": 61.5,
-    "deltaPct": 0
-  },
-  "MVi-670WV2GN1(A)": {
-    "welkinModel": "WSBEY-232JLG5",
-    "hisenseModel": "AVWT-232HKF5",
-    "priceUsd": 7711,
-    "matchedKw": 68,
-    "productKw": 67,
-    "deltaPct": 1.5
-  },
-  "MV8M-100WV2HN1": {
-    "welkinModel": "WSBE-34JKGJ",
-    "hisenseModel": "AVW-34HJFH",
-    "priceUsd": 1523,
-    "matchedKw": 10,
-    "productKw": 10,
-    "deltaPct": 0
-  },
-  "MV8M-140WV2HN1": {
-    "welkinModel": "WSBE-48JKGJ",
-    "hisenseModel": "AVW-48HJFH",
-    "priceUsd": 2054,
-    "matchedKw": 14,
-    "productKw": 14,
-    "deltaPct": 0
-  },
-  "MV8M-160WV2HN1": {
-    "welkinModel": "WSBE-54JKGJ",
-    "hisenseModel": "AVW-54HJFH",
-    "priceUsd": 2073,
-    "matchedKw": 15.5,
-    "productKw": 16,
-    "deltaPct": 3.1
-  },
-  "Midea-V28WDHN1(AtB)": {
-    "welkinModel": "WSBE-28JKGJ",
-    "hisenseModel": "AVW-28HJFH",
-    "priceUsd": 1379,
-    "matchedKw": 8,
-    "productKw": 8,
-    "deltaPct": 0
   },
   "Midea-V36WDHN1A(AtB)": {
     "welkinModel": "WSBE-34JKGJ",
     "hisenseModel": "AVW-34HJFH",
     "priceUsd": 1523,
-    "matchedKw": 10,
-    "productKw": 10.5,
+    "source": "hisense-approx",
     "deltaPct": 4.8
   },
   "Midea-V42WDHN1A(AtB)": {
     "welkinModel": "WSBE-43JKGJ",
     "hisenseModel": "AVW-43HJFH",
     "priceUsd": 1593,
-    "matchedKw": 12.5,
-    "productKw": 12,
+    "source": "hisense-approx",
     "deltaPct": 4.2
-  },
-  "Midea-V48WDHN1(AtB)": {
-    "welkinModel": "WSBE-48JKGJ",
-    "hisenseModel": "AVW-48HJFH",
-    "priceUsd": 2054,
-    "matchedKw": 14,
-    "productKw": 14,
-    "deltaPct": 0
-  },
-  "Midea-V56WDHN1(AtB)": {
-    "welkinModel": "WSBE-54JKGJ",
-    "hisenseModel": "AVW-54HJFH",
-    "priceUsd": 2073,
-    "matchedKw": 15.5,
-    "productKw": 16,
-    "deltaPct": 3.1
-  },
-  "Midea-V60WDHN1(AtB)": {
-    "welkinModel": "WSBE-54JKGJ",
-    "hisenseModel": "AVW-54HJFH",
-    "priceUsd": 2073,
-    "matchedKw": 15.5,
-    "productKw": 17.5,
-    "deltaPct": 11.4
   },
   "Midea-V68WDHN1(AtB)": {
     "welkinModel": "WSBEY-76JLG5",
     "hisenseModel": "AVWT-76HKF5",
     "priceUsd": 3935,
-    "matchedKw": 22.4,
-    "productKw": 20,
+    "source": "hisense-approx",
     "deltaPct": 12
-  },
-  "MIH22GHN18": {
-    "welkinModel": "WSBD-07JKGYRF\nпульт WJUR-BF01",
-    "hisenseModel": "AVS-07HJFTED\nпульт HYE-VD01",
-    "priceUsd": 337,
-    "matchedKw": 2.2,
-    "productKw": 2.2,
-    "deltaPct": 0
-  },
-  "MIH28GHN18": {
-    "welkinModel": "WSBD-09JKGYRF\nпульт WJUR-BF01",
-    "hisenseModel": "AVS-09HJFTED\nпульт HYE-VD01",
-    "priceUsd": 341,
-    "matchedKw": 2.8,
-    "productKw": 2.8,
-    "deltaPct": 0
-  },
-  "MIH36GHN18": {
-    "welkinModel": "WSBD-12JKGYRF\nпульт WJUR-BF01",
-    "hisenseModel": "AVS-12HJFTED\nпульт HYE-VD01",
-    "priceUsd": 347,
-    "matchedKw": 3.6,
-    "productKw": 3.6,
-    "deltaPct": 0
-  },
-  "MIH45GHN18": {
-    "welkinModel": "WSBD-15JKGYRF\nпульт WJUR-BF01",
-    "hisenseModel": "AVS-15HJFTED\nпульт HYE-VD01",
-    "priceUsd": 363,
-    "matchedKw": 4.5,
-    "productKw": 4.5,
-    "deltaPct": 0
-  },
-  "MIH56GHN18": {
-    "welkinModel": "WSBD-18JKGYRF\nпульт WJUR-BF01",
-    "hisenseModel": "AVS-18HJFTED\nпульт HYE-VD01",
-    "priceUsd": 383,
-    "matchedKw": 5.6,
-    "productKw": 5.6,
-    "deltaPct": 0
-  },
-  "MIH71GHN18": {
-    "welkinModel": "WSBD-24JKGYRF\nпульт WJUR-BF01",
-    "hisenseModel": "AVS-24HJFTED\nпульт HYE-VD01",
-    "priceUsd": 398,
-    "matchedKw": 7.1,
-    "productKw": 7.1,
-    "deltaPct": 0
-  },
-  "MIH80GHN18": {
-    "welkinModel": "WSBD-28JKGYRF\nпульт WJUR-BF01",
-    "hisenseModel": "AVS-28HJFTED\nпульт HYE-VD01",
-    "priceUsd": 408,
-    "matchedKw": 8.4,
-    "productKw": 8,
-    "deltaPct": 5
-  },
-  "MIH22T2HN18": {
-    "welkinModel": "WSBR-07JKFFJ\nпульт WJUCR-BV01",
-    "hisenseModel": "AVE-07HJDDH\nпульт HYXE-VC01",
-    "priceUsd": 415,
-    "matchedKw": 2.2,
-    "productKw": 2.2,
-    "deltaPct": 0
-  },
-  "MIH28T2HN18": {
-    "welkinModel": "WSBR-09JKFFJ\nпульт WJUCR-BV01",
-    "hisenseModel": "AVE-09HJDDH\nпульт HYXE-VC01",
-    "priceUsd": 418,
-    "matchedKw": 2.8,
-    "productKw": 2.8,
-    "deltaPct": 0
-  },
-  "MIH36T2HN18": {
-    "welkinModel": "WSBR-12JKFFJ\nпульт WJUCR-BV01",
-    "hisenseModel": "AVE-12HJDDH\nпульт HYXE-VC01",
-    "priceUsd": 429,
-    "matchedKw": 3.6,
-    "productKw": 3.6,
-    "deltaPct": 0
-  },
-  "MIH45T2HN18": {
-    "welkinModel": "WSBR-15JKFFJ\nпульт WJUCR-BV01",
-    "hisenseModel": "AVE-15HJDDH\nпульт HYXE-VC01",
-    "priceUsd": 442,
-    "matchedKw": 4.5,
-    "productKw": 4.5,
-    "deltaPct": 0
-  },
-  "MIH56T2HN18": {
-    "welkinModel": "WSBR-19JKFFJ\nпульт WJUCR-BV01",
-    "hisenseModel": "AVE-19HJDDH\nпульт HYXE-VC01",
-    "priceUsd": 503,
-    "matchedKw": 5.6,
-    "productKw": 5.6,
-    "deltaPct": 0
-  },
-  "MIH71T2HN18": {
-    "welkinModel": "WSBR-24JKFFJ\nпульт WJUCR-BV01",
-    "hisenseModel": "AVE-24HJDDH\nпульт HYXE-VC01",
-    "priceUsd": 517,
-    "matchedKw": 7.1,
-    "productKw": 7.1,
-    "deltaPct": 0
-  },
-  "MIH80T2HN18": {
-    "welkinModel": "WSBF-27JVGVZ\nпульт WJUCR-BV01",
-    "hisenseModel": "AVD-27HCFCL\nпульт HYXE-VC01",
-    "priceUsd": 684,
-    "matchedKw": 8,
-    "productKw": 8,
-    "deltaPct": 0
-  },
-  "MIH90T2HN18": {
-    "welkinModel": "WSBF-30JVGVZ\nпульт WJUCR-BV01",
-    "hisenseModel": "AVD-30HCFCL\nпульт HYXE-VC01",
-    "priceUsd": 691,
-    "matchedKw": 9,
-    "productKw": 9,
-    "deltaPct": 0
-  },
-  "MIH112T2HN18": {
-    "welkinModel": "WSBF-38JVGVZ\nпульт WJUCR-BV01",
-    "hisenseModel": "AVD-38HCFCL\nпульт HYXE-VC01",
-    "priceUsd": 704,
-    "matchedKw": 11.2,
-    "productKw": 11.2,
-    "deltaPct": 0
   },
   "MIH125T2HN18": {
     "welkinModel": "WSBF-38JVGVZ\nпульт WJUCR-BV01",
     "hisenseModel": "AVD-38HCFCL\nпульт HYXE-VC01",
     "priceUsd": 704,
-    "matchedKw": 11.2,
-    "productKw": 12.5,
+    "source": "hisense-approx",
     "deltaPct": 10.4
-  },
-  "MIH140T2HN18": {
-    "welkinModel": "WSBF-48JKFJ\nпульт WJUCR-BV01",
-    "hisenseModel": "AVD-48HJDH\nпульт HYXE-VC01",
-    "priceUsd": 926,
-    "matchedKw": 14,
-    "productKw": 14,
-    "deltaPct": 0
-  },
-  "MIH160T2HN18": {
-    "welkinModel": "WSBF-54JVGVZ\nпульт WJUCR-BV01",
-    "hisenseModel": "AVD-54HCFCL\nпульт HYXE-VC01",
-    "priceUsd": 824,
-    "matchedKw": 16,
-    "productKw": 16,
-    "deltaPct": 0
-  },
-  "MIH28Q4HN18": {
-    "welkinModel": "WSBV-09JKFNS / WJARR-F-ML\nпульт WJUTR-X01J /  WJUR-BF01",
-    "hisenseModel": "AVC-09HJDBA / HPEE-D-NK\nпульт HYRE-Z01H /  HYE-VD01",
-    "priceUsd": 568,
-    "matchedKw": 2.8,
-    "productKw": 2.8,
-    "deltaPct": 0
-  },
-  "MIH36Q4HN18": {
-    "welkinModel": "WSBV-12JKFNS / WJARR-F-ML\nпульт WJUTR-X01J /  WJUR-BF01",
-    "hisenseModel": "AVC-12HJDBA / HPEE-D-NK\nпульт HYRE-Z01H /  HYE-VD01",
-    "priceUsd": 580,
-    "matchedKw": 3.6,
-    "productKw": 3.6,
-    "deltaPct": 0
-  },
-  "MIH45Q4HN18": {
-    "welkinModel": "WSBV-15JKFNS / WJARR-F-ML\nпульт WJUTR-X01J /  WJUR-BF01",
-    "hisenseModel": "AVC-15HJDBA / HPEE-D-NK\nпульт HYRE-Z01H /  HYE-VD01",
-    "priceUsd": 593,
-    "matchedKw": 4.3,
-    "productKw": 4.5,
-    "deltaPct": 4.4
-  },
-  "MIH56Q4HN18": {
-    "welkinModel": "WSBV-19JKFNS / WJARR-F-ML\nпульт WJUTR-X01J /  WJUR-BF01",
-    "hisenseModel": "AVC-19HJDBA / HPEE-D-NK\nпульт HYRE-Z01H /  HYE-VD01",
-    "priceUsd": 609,
-    "matchedKw": 5.6,
-    "productKw": 5.6,
-    "deltaPct": 0
-  },
-  "MIH71Q4HN18": {
-    "welkinModel": "WSBNV-24JKFNS / WJARR-H-ML\nпульт WJUTR-Y03J /  WJUR-BF01",
-    "hisenseModel": "AVBC-24HJDBA / HPEE-G-NK\nпульт EYRE-T03H / HYE-VD01",
-    "priceUsd": 693,
-    "matchedKw": 7.1,
-    "productKw": 7.1,
-    "deltaPct": 0
-  },
-  "MIH80Q4HN18": {
-    "welkinModel": "WSBNV-27JKFNS / WJARR-H-ML\nпульт WJUTR-Y03J /  WJUR-BF01",
-    "hisenseModel": "AVBC-27HJDBA / HPEE-G-NK\nпульт EYRE-T03H / HYE-VD01",
-    "priceUsd": 697,
-    "matchedKw": 8.4,
-    "productKw": 8,
-    "deltaPct": 5
-  },
-  "MIH90Q4HN18": {
-    "welkinModel": "WSBNV-30JKFNS / WJARR-H-ML\nпульт WJUTR-Y03J /  WJUR-BF01",
-    "hisenseModel": "AVBC-30HJDBA / HPEE-G-NK\nпульт EYRE-T03H / HYE-VD01",
-    "priceUsd": 701,
-    "matchedKw": 9,
-    "productKw": 9,
-    "deltaPct": 0
-  },
-  "MIH100Q4HN18": {
-    "welkinModel": "WSBNV-30JKFNS / WJARR-H-ML\nпульт WJUTR-Y03J /  WJUR-BF01",
-    "hisenseModel": "AVBC-30HJDBA / HPEE-G-NK\nпульт EYRE-T03H / HYE-VD01",
-    "priceUsd": 701,
-    "matchedKw": 9,
-    "productKw": 10,
-    "deltaPct": 10
-  },
-  "MIH112Q4HN18": {
-    "welkinModel": "WSBNV-38JKFNS / WJARR-H-ML\nпульт WJUTR-Y03J /  WJUR-BF01",
-    "hisenseModel": "AVBC-38HJDBA / HPEE-G-NK\nпульт EYRE-T03H / HYE-VD01",
-    "priceUsd": 744,
-    "matchedKw": 11.2,
-    "productKw": 11.2,
-    "deltaPct": 0
-  },
-  "MIH140Q4HN18": {
-    "welkinModel": "WSBNV-48JKFNS / WJARR-H-ML\nпульт WJUTR-Y03J /  WJUR-BF01",
-    "hisenseModel": "AVBC-48HJDBA / HPEE-G-NK\nпульт EYRE-T03H / HYE-VD01",
-    "priceUsd": 751,
-    "matchedKw": 14.2,
-    "productKw": 14,
-    "deltaPct": 1.4
-  },
-  "MIH160Q4HN18": {
-    "welkinModel": "WSBNV-54JKFNS / WJARR-H-ML\nпульт WJUTR-Y03J /  WJUR-BF01",
-    "hisenseModel": "AVBC-54HJDBA / HPEE-G-NK\nпульт EYRE-T03H / HYE-VD01",
-    "priceUsd": 772,
-    "matchedKw": 16,
-    "productKw": 16,
-    "deltaPct": 0
-  },
-  "MIH180Q4HN18": {
-    "welkinModel": "WSBNV-54JKFNS / WJARR-H-ML\nпульт WJUTR-Y03J /  WJUR-BF01",
-    "hisenseModel": "AVBC-54HJDBA / HPEE-G-NK\nпульт EYRE-T03H / HYE-VD01",
-    "priceUsd": 772,
-    "matchedKw": 16,
-    "productKw": 18,
-    "deltaPct": 11.1
-  },
-  "MIH22Q1HN18(A)": {
-    "welkinModel": "WSBU-07ICKDKS / WJA-F-MS\nпульт WJUTR-C01J / WJUR-BF01",
-    "hisenseModel": "AVY-07UXJSJA / HP-D-NA\nпульт HYRE-X01H / HYE-VD01",
-    "priceUsd": 587,
-    "matchedKw": 2.2,
-    "productKw": 2.2,
-    "deltaPct": 0
-  },
-  "MIH28Q1HN18(A)": {
-    "welkinModel": "WSBU-09ICKDKS / WJA-F-MS\nпульт WJUTR-C01J / WJUR-BF01",
-    "hisenseModel": "AVY-09UXJSJA / HP-D-NA\nпульт HYRE-X01H / HYE-VD01",
-    "priceUsd": 596,
-    "matchedKw": 2.8,
-    "productKw": 2.8,
-    "deltaPct": 0
-  },
-  "MIH36Q1HN18(A)": {
-    "welkinModel": "WSBU-12ICKDKS / WJA-F-MS\nпульт WJUTR-C01J / WJUR-BF01",
-    "hisenseModel": "AVY-12UXJSJA / HP-D-NA\nпульт HYRE-X01H / HYE-VD01",
-    "priceUsd": 602,
-    "matchedKw": 3.6,
-    "productKw": 3.6,
-    "deltaPct": 0
-  },
-  "MIH45Q1HN18(A)": {
-    "welkinModel": "WSBU-15ICKDKS / WJA-F-MS\nпульт WJUTR-C01J / WJUR-BF01",
-    "hisenseModel": "AVY-14UXJSJA / HP-D-NA\nпульт HYRE-X01H / HYE-VD01",
-    "priceUsd": 613,
-    "matchedKw": 4.5,
-    "productKw": 4.5,
-    "deltaPct": 0
-  },
-  "MIH56Q1HN18(A)": {
-    "welkinModel": "WSBU-19ICKDKS / WJA-R-MS\nпульт WJUTR-C01J / WJUR-BF01",
-    "hisenseModel": "AVY-18UXJSKA / HP-E-NA\nпульт HYRE-X01H / HYE-VD01",
-    "priceUsd": 675,
-    "matchedKw": 5.6,
-    "productKw": 5.6,
-    "deltaPct": 0
-  },
-  "MIH71Q1HN18(A)": {
-    "welkinModel": "WSBU-24ICKDKS / WJA-R-MS\nпульт WJUTR-C01J / WJUR-BF01",
-    "hisenseModel": "AVY-24UXJSKA / HP-E-NA\nпульт HYRE-X01H / HYE-VD01",
-    "priceUsd": 683,
-    "matchedKw": 7.1,
-    "productKw": 7.1,
-    "deltaPct": 0
-  },
-  "MI2-09GDHN18(At)": {
-    "welkinModel": "WSBD-07JKGYRF\nпульт WJUR-BF01",
-    "hisenseModel": "AVS-07HJFTED\nпульт HYE-VD01",
-    "priceUsd": 337,
-    "matchedKw": 2.2,
-    "productKw": 2.2,
-    "deltaPct": 0
-  },
-  "MI2-12GDHN18(At)": {
-    "welkinModel": "WSBD-12JKGYRF\nпульт WJUR-BF01",
-    "hisenseModel": "AVS-12HJFTED\nпульт HYE-VD01",
-    "priceUsd": 347,
-    "matchedKw": 3.6,
-    "productKw": 3.6,
-    "deltaPct": 0
-  },
-  "MI2-18GDHN18(At)": {
-    "welkinModel": "WSBD-18JKGYRF\nпульт WJUR-BF01",
-    "hisenseModel": "AVS-18HJFTED\nпульт HYE-VD01",
-    "priceUsd": 383,
-    "matchedKw": 5.6,
-    "productKw": 5.6,
-    "deltaPct": 0
-  },
-  "MI2-24GDHN18(At)": {
-    "welkinModel": "WSBD-24JKGYRF\nпульт WJUR-BF01",
-    "hisenseModel": "AVS-24HJFTED\nпульт HYE-VD01",
-    "priceUsd": 398,
-    "matchedKw": 7.1,
-    "productKw": 7.1,
-    "deltaPct": 0
   },
   "MI2-09T3DHN18(At)": {
     "welkinModel": "WSBR-07JKFFJ\nпульт WJUCR-BV01",
     "hisenseModel": "AVE-07HJDDH\nпульт HYXE-VC01",
     "priceUsd": 415,
-    "matchedKw": 2.2,
-    "productKw": 2.2,
+    "source": "hisense-approx",
     "deltaPct": 0
   },
   "MI2-12T3DHN18(At)": {
     "welkinModel": "WSBR-12JKFFJ\nпульт WJUCR-BV01",
     "hisenseModel": "AVE-12HJDDH\nпульт HYXE-VC01",
     "priceUsd": 429,
-    "matchedKw": 3.6,
-    "productKw": 3.6,
+    "source": "hisense-approx",
     "deltaPct": 0
   },
   "MI2-15T3DHN18(At)": {
     "welkinModel": "WSBR-15JKFFJ\nпульт WJUCR-BV01",
     "hisenseModel": "AVE-15HJDDH\nпульт HYXE-VC01",
     "priceUsd": 442,
-    "matchedKw": 4.5,
-    "productKw": 4.5,
+    "source": "hisense-approx",
     "deltaPct": 0
   },
   "MI2-18T3DHN18(At)": {
     "welkinModel": "WSBR-19JKFFJ\nпульт WJUCR-BV01",
     "hisenseModel": "AVE-19HJDDH\nпульт HYXE-VC01",
     "priceUsd": 503,
-    "matchedKw": 5.6,
-    "productKw": 5.6,
+    "source": "hisense-approx",
     "deltaPct": 0
   },
   "MI2-24T3DHN18(At)": {
     "welkinModel": "WSBR-24JKFFJ\nпульт WJUCR-BV01",
     "hisenseModel": "AVE-24HJDDH\nпульт HYXE-VC01",
     "priceUsd": 517,
-    "matchedKw": 7.1,
-    "productKw": 7.1,
+    "source": "hisense-approx",
     "deltaPct": 0
   },
   "MI2-09Q4DHN18(At)": {
     "welkinModel": "WSBV-07JKFNS / WJARR-F-ML\nпульт WJUTR-X01J /  WJUR-BF01",
     "hisenseModel": "AVC-07HJDBA / HPEE-D-NK\nпульт HYRE-Z01H /  HYE-VD01",
     "priceUsd": 554,
-    "matchedKw": 2.2,
-    "productKw": 2.2,
+    "source": "hisense-approx",
     "deltaPct": 0
   },
   "MI2-12Q4DHN18(At)": {
     "welkinModel": "WSBV-12JKFNS / WJARR-F-ML\nпульт WJUTR-X01J /  WJUR-BF01",
     "hisenseModel": "AVC-12HJDBA / HPEE-D-NK\nпульт HYRE-Z01H /  HYE-VD01",
     "priceUsd": 580,
-    "matchedKw": 3.6,
-    "productKw": 3.6,
+    "source": "hisense-approx",
     "deltaPct": 0
   },
   "MI2-18Q4DHN18(At)": {
     "welkinModel": "WSBV-19JKFNS / WJARR-F-ML\nпульт WJUTR-X01J /  WJUR-BF01",
     "hisenseModel": "AVC-19HJDBA / HPEE-D-NK\nпульт HYRE-Z01H /  HYE-VD01",
     "priceUsd": 609,
-    "matchedKw": 5.6,
-    "productKw": 5.6,
+    "source": "hisense-approx",
     "deltaPct": 0
   },
   "MI2-24Q4DHN18(At)": {
     "welkinModel": "WSBNV-24JKFNS / WJARR-H-ML\nпульт WJUTR-Y03J /  WJUR-BF01",
     "hisenseModel": "AVBC-24HJDBA / HPEE-G-NK\nпульт EYRE-T03H / HYE-VD01",
     "priceUsd": 693,
-    "matchedKw": 7.1,
-    "productKw": 7.1,
+    "source": "hisense-approx",
     "deltaPct": 0
   },
   "MI2-09Q1DHN18(At)": {
     "welkinModel": "WSBU-07ICKDKS / WJA-F-MS\nпульт WJUTR-C01J / WJUR-BF01",
     "hisenseModel": "AVY-07UXJSJA / HP-D-NA\nпульт HYRE-X01H / HYE-VD01",
     "priceUsd": 587,
-    "matchedKw": 2.2,
-    "productKw": 2.2,
+    "source": "hisense-approx",
     "deltaPct": 0
   },
   "MI2-12Q1DHN18(At)": {
     "welkinModel": "WSBU-12ICKDKS / WJA-F-MS\nпульт WJUTR-C01J / WJUR-BF01",
     "hisenseModel": "AVY-12UXJSJA / HP-D-NA\nпульт HYRE-X01H / HYE-VD01",
     "priceUsd": 602,
-    "matchedKw": 3.6,
-    "productKw": 3.6,
+    "source": "hisense-approx",
     "deltaPct": 0
   },
   "MI2-18Q1DHN18(At)": {
     "welkinModel": "WSBU-19ICKDKS / WJA-R-MS\nпульт WJUTR-C01J / WJUR-BF01",
     "hisenseModel": "AVY-18UXJSKA / HP-E-NA\nпульт HYRE-X01H / HYE-VD01",
     "priceUsd": 675,
-    "matchedKw": 5.6,
-    "productKw": 5.6,
+    "source": "hisense-approx",
     "deltaPct": 0
   },
   "MI2-24Q1DHN18(At)": {
     "welkinModel": "WSBU-24ICKDKS / WJA-R-MS\nпульт WJUTR-C01J / WJUR-BF01",
     "hisenseModel": "AVY-24UXJSKA / HP-E-NA\nпульт HYRE-X01H / HYE-VD01",
     "priceUsd": 683,
-    "matchedKw": 7.1,
-    "productKw": 7.1,
+    "source": "hisense-approx",
+    "deltaPct": 0
+  },
+  "MIH335FAHN18": {
+    "welkinModel": "WLKFARKR335",
+    "priceUsd": 1903,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MIH400FAHN18": {
+    "welkinModel": "WLKFARKR400",
+    "priceUsd": 2362,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MIH450FAHN18": {
+    "welkinModel": "WLKFARKR450",
+    "priceUsd": 2360,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MIH280FASHN18": {
+    "welkinModel": "WLKFARСKR280",
+    "priceUsd": 977,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MV8M-100WV2HN1": {
+    "welkinModel": "WLKMVRF8-100H",
+    "priceUsd": 1634,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MV8M-140WV2HN1": {
+    "welkinModel": "WLKMVRF8-140H",
+    "priceUsd": 2047,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MV8M-160WV2HN1": {
+    "welkinModel": "WLKMVRF8-160H",
+    "priceUsd": 2232,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MVC-M280WV2GN1": {
+    "welkinModel": "WLKVRFVCM280",
+    "priceUsd": 3627,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MVC-M335WV2GN1": {
+    "welkinModel": "WLKVRFVCM335",
+    "priceUsd": 3692,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MVC-M450WV2GN1": {
+    "welkinModel": "WLKVRFVCM450",
+    "priceUsd": 4297,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MVC-M500WV2GN1": {
+    "welkinModel": "WLKVRFVCM500",
+    "priceUsd": 5474,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MVC-M560WV2GN1": {
+    "welkinModel": "WLKVRFVCM560",
+    "priceUsd": 5583,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MVi-252WV2GN1(B)": {
+    "welkinModel": "WLKVRVi-252",
+    "priceUsd": 3248,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MVi-280WV2GN1(B)": {
+    "welkinModel": "WLKVRVi-280",
+    "priceUsd": 3483,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MVi-335WV2GN1(B)": {
+    "welkinModel": "WLKVRVi-335",
+    "priceUsd": 3678,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MVi-400WV2GN1(A)": {
+    "welkinModel": "WLKVRVi-400",
+    "priceUsd": 4228,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MVi-450WV2GN1(A)": {
+    "welkinModel": "WLKVRVi-450",
+    "priceUsd": 4769,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MVi-500WV2GN1(A)": {
+    "welkinModel": "WLKVRVi-500",
+    "priceUsd": 5760,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MVi-560WV2GN1(A)": {
+    "welkinModel": "WLKVRVi-560",
+    "priceUsd": 5945,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MVi-615WV2GN1(A)": {
+    "welkinModel": "WLKVRVi-615",
+    "priceUsd": 6046,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MVi-670WV2GN1(A)": {
+    "welkinModel": "WLKVRVi-670",
+    "priceUsd": 6876,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MIH22Q1HN18(A)": {
+    "welkinModel": "WLKVRF8-22KAS1(A) / WPANO1-01J",
+    "priceUsd": 448,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MIH28Q1HN18(A)": {
+    "welkinModel": "WLKVRF8-28KAS1(A) / WPANO1-02J",
+    "priceUsd": 510,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MIH36Q1HN18(A)": {
+    "welkinModel": "WLKVRF8-36KAS1(A) / WPANO1-02J",
+    "priceUsd": 545,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MIH45Q1HN18(A)": {
+    "welkinModel": "WLKVRF8-45KAS1(A) / WPANC1-03J",
+    "priceUsd": 604,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MIH56Q1HN18(A)": {
+    "welkinModel": "WLKVRF8-56KAS1(A) / WPANC1-03J",
+    "priceUsd": 609,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MIH71Q1HN18(A)": {
+    "welkinModel": "WLKVRF8-71KAS1(A) / WPANC1-03J",
+    "priceUsd": 628,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MIH28Q4HN18": {
+    "welkinModel": "WLKVRF8-28KAS4 / WPANC4-01V",
+    "priceUsd": 544,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MIH36Q4HN18": {
+    "welkinModel": "WLKVRF8-36KAS4 / WPANC4-01V",
+    "priceUsd": 560,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MIH45Q4HN18": {
+    "welkinModel": "WLKVRF8-45KAS4 / WPANC4-01V",
+    "priceUsd": 610,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MIH56Q4HN18": {
+    "welkinModel": "WLKVRF8-56KAS4 / WPANC4-01V",
+    "priceUsd": 622,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MIH71Q4HN18": {
+    "welkinModel": "WLKVRF8-71KAS4 / WPANC4-01V",
+    "priceUsd": 637,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MIH80Q4HN18": {
+    "welkinModel": "WLKVRF8-80KAS4 / WPANC4-01V",
+    "priceUsd": 655,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MIH90Q4HN18": {
+    "welkinModel": "WLKVRF8-90KAS4 / WPANC4-01V",
+    "priceUsd": 713,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MIH100Q4HN18": {
+    "welkinModel": "WLKVRF8-100KAS4 / WPANC4-01V",
+    "priceUsd": 723,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MIH112Q4HN18": {
+    "welkinModel": "WLKVRF8-112KAS4 / WPANC4-01V",
+    "priceUsd": 750,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MIH140Q4HN18": {
+    "welkinModel": "WLKVRF8-140KAS4 / WPANC4-01V",
+    "priceUsd": 776,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MIH160Q4HN18": {
+    "welkinModel": "WLKVRF8-160KAS4 / WPANC4-02Y1",
+    "priceUsd": 964,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MIH180Q4HN18": {
+    "welkinModel": "WLKVRF8-180KAS4 / WPANC4-02Y1",
+    "priceUsd": 980,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MIH22T2HN18": {
+    "welkinModel": "WLKVRF8-22MKAN2",
+    "priceUsd": 379,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MIH28T2HN18": {
+    "welkinModel": "WLKVRF8-28MKAN2",
+    "priceUsd": 384,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MIH36T2HN18": {
+    "welkinModel": "WLKVRF8-36MKAN2",
+    "priceUsd": 388,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MIH45T2HN18": {
+    "welkinModel": "WLKVRF8-45MKAN2",
+    "priceUsd": 444,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MIH56T2HN18": {
+    "welkinModel": "WLKVRF8-56MKAN2",
+    "priceUsd": 467,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MIH71T2HN18": {
+    "welkinModel": "WLKVRF8-71MKAN2",
+    "priceUsd": 506,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MIH80T2HN18": {
+    "welkinModel": "WLKVRF8-80MKAN2",
+    "priceUsd": 655,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MIH90T2HN18": {
+    "welkinModel": "WLKVRF8-90MKAN2",
+    "priceUsd": 685,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MIH112T2HN18": {
+    "welkinModel": "WLKVRF8-112MKAN2",
+    "priceUsd": 724,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MIH140T2HN18": {
+    "welkinModel": "WLKVRF8-140MKAN2",
+    "priceUsd": 747,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MIH160T2HN18": {
+    "welkinModel": "WLKVRF8-160MKAN2",
+    "priceUsd": 829,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MIH22GHN18": {
+    "welkinModel": "WLKVRF8WM22",
+    "priceUsd": 285,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MIH28GHN18": {
+    "welkinModel": "WLKVRF8WM28",
+    "priceUsd": 308,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MIH36GHN18": {
+    "welkinModel": "WLKVRF8WM36",
+    "priceUsd": 335,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MIH45GHN18": {
+    "welkinModel": "WLKVRF8WM45",
+    "priceUsd": 381,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MIH56GHN18": {
+    "welkinModel": "WLKVRF8WM56",
+    "priceUsd": 389,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MIH71GHN18": {
+    "welkinModel": "WLKVRF8WM71",
+    "priceUsd": 417,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MIH80GHN18": {
+    "welkinModel": "WLKVRF8WM80",
+    "priceUsd": 425,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "WDC3-86S": {
+    "welkinModel": "WLKVFC-86S",
+    "priceUsd": 78,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "Midea-V28WDHN1(AtB)": {
+    "welkinModel": "WLKATBVRF-28",
+    "priceUsd": 862,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "Midea-V48WDHN1(AtB)": {
+    "welkinModel": "WLKATBVRF-48",
+    "priceUsd": 1300,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "Midea-V56WDHN1(AtB)": {
+    "welkinModel": "WLKATBVRF-56",
+    "priceUsd": 1350,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "Midea-V60WDHN1(AtB)": {
+    "welkinModel": "WLKATBVRF-60",
+    "priceUsd": 1600,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MI2-09GDHN18(At)": {
+    "welkinModel": "WLKATTWM-09",
+    "priceUsd": 249,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MI2-12GDHN18(At)": {
+    "welkinModel": "WLKATTWM-12",
+    "priceUsd": 268,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MI2-18GDHN18(At)": {
+    "welkinModel": "WLKATTWM-18",
+    "priceUsd": 323,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MI2-24GDHN18(At)": {
+    "welkinModel": "WLKATTWM-24",
+    "priceUsd": 407,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MKH2-150-R4": {
+    "welkinModel": "WLKNAP4-150",
+    "priceUsd": 276,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MKH2-250-R4": {
+    "welkinModel": "WLKNAP4-250",
+    "priceUsd": 317,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MKH2-350-R4": {
+    "welkinModel": "WLKNAP4-350",
+    "priceUsd": 361,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MKH2-500-R4": {
+    "welkinModel": "WLKNAP4-500",
+    "priceUsd": 373,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MKH2-700-R4": {
+    "welkinModel": "WLKNAP4-700",
+    "priceUsd": 416,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MKH2-800-R4": {
+    "welkinModel": "WLKNAP4-800",
+    "priceUsd": 480,
+    "source": "midea-exact",
     "deltaPct": 0
   },
   "MC-SS130/RN1": {
-    "welkinModel": "WJGTR-130E/S2G",
-    "hisenseModel": "HFRE-130W/A2F",
-    "priceUsd": 16362,
-    "matchedKw": 130,
-    "productKw": 130,
+    "welkinModel": "WLKCH-CC130M1",
+    "priceUsd": 15968,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MC-SS260-RN1TL": {
+    "welkinModel": "WLKCH-CC260M1",
+    "priceUsd": 33372,
+    "source": "midea-exact",
     "deltaPct": 0
   },
   "MC-SU75-RN8L-B": {
-    "welkinModel": "WJGTR-65E/S2G",
-    "hisenseModel": "HFRE-65W/A2F",
-    "priceUsd": 8551,
-    "matchedKw": 65,
-    "productKw": 75,
-    "deltaPct": 13.3
+    "welkinModel": "WLKMCHAIC75M8",
+    "priceUsd": 11429,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MC-SU90-RN8L-B": {
+    "welkinModel": "WLKMCHAIC90M8",
+    "priceUsd": 16467,
+    "source": "midea-exact",
+    "deltaPct": 0
   },
   "MC-SU140-RN8L-B": {
-    "welkinModel": "WJGTR-130E/S2G",
-    "hisenseModel": "HFRE-130W/A2F",
-    "priceUsd": 16362,
-    "matchedKw": 130,
-    "productKw": 140,
-    "deltaPct": 7.1
+    "welkinModel": "WLKMCHAIC140M8",
+    "priceUsd": 19307,
+    "source": "midea-exact",
+    "deltaPct": 0
+  },
+  "MC-SU180-RN8L-B": {
+    "welkinModel": "WLKMCHAIC180M8",
+    "priceUsd": 33937,
+    "source": "midea-exact",
+    "deltaPct": 0
   }
 }

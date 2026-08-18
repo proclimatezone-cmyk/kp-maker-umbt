@@ -1,20 +1,23 @@
 import welkinMatchData from '@/data/welkin-match.json';
 
 /**
- * Сравнение с конкурентом Welkin (Hisense OEM) — сопоставление заранее
- * посчитано офлайн (node src/scripts/sync-welkin.mjs) по ближайшей
- * холодопроизводительности внутри класса оборудования: общего артикула
- * у брендов нет, только приблизительное соответствие («≈»). Здесь —
- * только join с ТЕКУЩЕЙ ценой прайса, она меняется чаще, чем список
- * моделей.
+ * Сравнение с конкурентом Welkin — сопоставление заранее посчитано офлайн
+ * (node src/scripts/sync-welkin.mjs) двумя способами:
+ *  - midea-exact: то же железо Midea под маркой Welkin, точное совпадение
+ *    по артикулу (лист «welkin. CAC на СКЛАДЕ - НОВЫЙ сток»);
+ *  - hisense-approx: чужое железо (Hisense OEM), общего артикула нет,
+ *    только приблизительное соответствие по мощности внутри класса
+ *    оборудования — используется, только если точного совпадения нет.
+ * Здесь — только join с ТЕКУЩЕЙ ценой прайса, она меняется чаще, чем
+ * список моделей.
  */
 
 interface WelkinMatch {
   welkinModel: string;
-  hisenseModel: string;
+  hisenseModel?: string;
   priceUsd: number;
-  matchedKw: number;
-  productKw: number;
+  source: 'midea-exact' | 'hisense-approx';
+  /** Насколько точно совпала мощность при офлайн-сопоставлении (0 — точно, только hisense-approx). */
   deltaPct: number;
 }
 
@@ -34,6 +37,7 @@ export interface WelkinComparisonRow {
   welkinPrice: number;
   deltaAbs: number;
   deltaPct: number;
+  source: 'midea-exact' | 'hisense-approx';
   /** Насколько точно совпала мощность при офлайн-сопоставлении (0 — точно). */
   matchDeltaPct: number;
   /** true — мы дороже Welkin */
@@ -64,6 +68,7 @@ export function computeWelkinComparison(currentProducts: CurrentProduct[]): Welk
       welkinPrice: m.priceUsd,
       deltaAbs,
       deltaPct,
+      source: m.source,
       matchDeltaPct: m.deltaPct,
       weAreMoreExpensive: deltaAbs > 0,
     });

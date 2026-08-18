@@ -536,8 +536,13 @@ const EquipmentRow = memo(({ item, products, cleanProducts, stock, onUpdate, onD
       {showWelkin && (
         <td data-label="Welkin">
           {welkinUnitPrice !== null && welkinDeltaPct !== null ? (
-            <span className="price-compare" title={`Welkin (Hisense OEM), приблизительный аналог по мощности: ${welkin.model}. Точность сопоставления: ±${welkin.deltaPct}%`}>
-              <span className="price-compare-value">≈ {formatNum(welkinUnitPrice)} {currencyLabel}</span>
+            <span
+              className="price-compare"
+              title={welkin.source === 'midea-exact'
+                ? `Welkin by Midea — то же железо, тот же артикул: ${welkin.model}`
+                : `Welkin by Hisense — чужое железо, приблизительный аналог по мощности: ${welkin.model}. Точность сопоставления: ±${welkin.deltaPct}%`}
+            >
+              <span className="price-compare-value">{welkin.source === 'hisense-approx' ? '≈ ' : ''}{formatNum(welkinUnitPrice)} {currencyLabel}</span>
               <span className={`price-compare-delta ${welkinDeltaPct >= 0 ? 'bad' : 'good'}`}>{welkinDeltaPct >= 0 ? '+' : ''}{welkinDeltaPct.toFixed(0)}%</span>
             </span>
           ) : <span className="price-compare-empty">—</span>}
@@ -663,7 +668,7 @@ export default function Home() {
   const [stockError, setStockError] = useState('')
   const [isReportsUser, setIsReportsUser] = useState(false)
   const [oldPriceMap, setOldPriceMap] = useState<Map<string, number> | null>(null)
-  const [welkinMap, setWelkinMap] = useState<Map<string, { price: number; model: string; deltaPct: number }> | null>(null)
+  const [welkinMap, setWelkinMap] = useState<Map<string, { price: number; model: string; deltaPct: number; source: 'midea-exact' | 'hisense-approx' }> | null>(null)
 
   // Конфиденциальные колонки — скидка, старая цена, Welkin. Намеренно НЕ
   // в localStorage: должны сбрасываться на «скрыто» при каждой загрузке
@@ -788,9 +793,9 @@ export default function Home() {
         fetch('/api/reports/welkin-comparison')
           .then(r => r.json())
           .then(wc => {
-            const map = new Map<string, { price: number; model: string; deltaPct: number }>();
+            const map = new Map<string, { price: number; model: string; deltaPct: number; source: 'midea-exact' | 'hisense-approx' }>();
             for (const row of wc.rows || []) {
-              map.set(normalizeModel(row.model), { price: row.welkinPrice, model: row.welkinModel, deltaPct: row.matchDeltaPct });
+              map.set(normalizeModel(row.model), { price: row.welkinPrice, model: row.welkinModel, deltaPct: row.matchDeltaPct, source: row.source });
             }
             setWelkinMap(map);
           })

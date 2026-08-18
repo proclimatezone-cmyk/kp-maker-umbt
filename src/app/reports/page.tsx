@@ -340,11 +340,15 @@ function PriceTab() {
 function WelkinTab() {
   const { data, error, loading } = useReportData<WelkinComparisonReport>('/api/reports/welkin-comparison')
   const [onlyMoreExpensive, setOnlyMoreExpensive] = useState(false)
+  const [sourceFilter, setSourceFilter] = useState<'' | 'midea-exact' | 'hisense-approx'>('')
 
   const rows = useMemo(() => {
     if (!data) return []
-    return onlyMoreExpensive ? data.rows.filter(r => r.weAreMoreExpensive) : data.rows
-  }, [data, onlyMoreExpensive])
+    return data.rows.filter(r => (!onlyMoreExpensive || r.weAreMoreExpensive) && (!sourceFilter || r.source === sourceFilter))
+  }, [data, onlyMoreExpensive, sourceFilter])
+
+  const exactCount = useMemo(() => data ? data.rows.filter(r => r.source === 'midea-exact').length : 0, [data])
+  const approxCount = useMemo(() => data ? data.rows.filter(r => r.source === 'hisense-approx').length : 0, [data])
 
   if (loading) return <div className="reports-loading"><RefreshCw className="spin" size={20} /></div>
   if (error || !data) return <div className="reports-error">{error || 'Нет данных'}</div>
@@ -353,20 +357,26 @@ function WelkinTab() {
     <>
       <div className="completeness-banner">
         <AlertTriangle size={16} />
-        Welkin (Hisense OEM) — чужой бренд, общего артикула с Midea нет. Сопоставление офлайн по ближайшей
-        холодопроизводительности внутри своего класса оборудования (наружные блоки/кассеты/каналки/настенные) —
-        это ПРИБЛИЗИТЕЛЬНЫЙ аналог, не гарантированно тот же класс. Источник — только позиции «в наличии»
-        (лист «Welkin CAC by HS на СКЛАДЕ»), «под заказ» сознательно не берём.
+        Два источника: <b>Welkin by Midea</b> — то же железо Midea под маркой Welkin, точное совпадение по
+        артикулу ({exactCount} шт). <b>Welkin by Hisense</b> — чужое железо, общего артикула нет, только
+        приблизительный аналог по ближайшей холодопроизводительности внутри класса оборудования ({approxCount} шт),
+        используется только там, где точного совпадения по Midea нет. Источник — только позиции «в наличии»,
+        «под заказ» сознательно не берём.
       </div>
 
       <div className="stat-grid">
-        <StatTile label="Сопоставлено моделей" value={String(data.matchedCount)} />
+        <StatTile label="Сопоставлено моделей" value={String(data.matchedCount)} hint={`${exactCount} точных · ${approxCount} приблизительных`} />
         <StatTile label="Мы дороже" value={String(data.weAreMoreExpensiveCount)} />
         <StatTile label="Мы дешевле" value={String(data.weAreCheaperCount)} />
         <StatTile label="Средняя дельта" value={data.avgDeltaPct !== null ? `${data.avgDeltaPct >= 0 ? '+' : ''}${data.avgDeltaPct.toFixed(1)}%` : '—'} hint="наша цена относительно Welkin" />
       </div>
 
       <div className="report-filters">
+        <select value={sourceFilter} onChange={e => setSourceFilter(e.target.value as any)}>
+          <option value="">Оба источника</option>
+          <option value="midea-exact">Только Welkin by Midea (точно)</option>
+          <option value="hisense-approx">Только Welkin by Hisense (приблизительно)</option>
+        </select>
         <label style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: '0.82rem', color: 'var(--text-secondary)' }}>
           <input type="checkbox" checked={onlyMoreExpensive} onChange={e => setOnlyMoreExpensive(e.target.checked)} />
           Только где мы дороже
@@ -378,7 +388,7 @@ function WelkinTab() {
           <table className="report-table">
             <thead>
               <tr>
-                <th>Наша модель</th><th>Модель Welkin</th><th>Категория</th>
+                <th>Наша модель</th><th>Модель Welkin</th><th>Категория</th><th>Источник</th>
                 <th className="num">Наша цена, $</th><th className="num">Welkin, $</th><th className="num">Дельта</th><th className="num">Точность сопоставления</th>
               </tr>
             </thead>
@@ -388,12 +398,17 @@ function WelkinTab() {
                   <td>{r.model}</td>
                   <td>{r.welkinModel}</td>
                   <td>{r.category}</td>
+                  <td>
+                    {r.source === 'midea-exact'
+                      ? <span className="badge down">by Midea</span>
+                      : <span className="badge unlinked">by Hisense</span>}
+                  </td>
                   <td className="num">{formatNum(r.ourPrice)}</td>
                   <td className="num">{formatNum(r.welkinPrice)}</td>
                   <td className="num">
                     <span className={`badge ${r.deltaPct >= 0 ? 'up' : 'down'}`}>{r.deltaPct >= 0 ? '+' : ''}{r.deltaPct.toFixed(1)}%</span>
                   </td>
-                  <td className="num">±{r.matchDeltaPct}%</td>
+                  <td className="num">{r.source === 'midea-exact' ? 'точно' : `±${r.matchDeltaPct}%`}</td>
                 </tr>
               ))}
             </tbody>
