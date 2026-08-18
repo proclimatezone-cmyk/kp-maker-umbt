@@ -513,17 +513,34 @@ body {
 
 .row-actions { display: flex; gap: 0.3rem; justify-content: flex-end; align-items: center; }
 
-/* Старая цена (закупка Midea, старый прайс) рядом с текущей — видно только
-   владельцу (REPORTS_ACCESS_EMAIL), остальным менеджерам этот блок не грузится. */
-.old-price-hint {
-  display: block;
-  font-size: 0.7rem;
-  color: var(--text-muted);
-  margin-top: 2px;
-  white-space: nowrap;
+/* Старая цена / Welkin — сравнительные колонки, видны только админу.
+   Хорошо/плохо у них означает разное (маржа vs «мы дороже конкурента»),
+   поэтому класс нейтральный — good/bad, а не up/down. */
+.price-compare {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  line-height: 1.25;
 }
-.old-price-hint .margin-up { color: var(--success); font-weight: 700; }
-.old-price-hint .margin-down { color: var(--error); font-weight: 700; }
+.price-compare-value {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.price-compare-delta {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 0 0.4rem;
+  border-radius: 999px;
+  font-variant-numeric: tabular-nums;
+}
+.price-compare-delta.good { background: var(--success-bg); color: var(--success); }
+.price-compare-delta.bad  { background: var(--error-bg);   color: var(--error); }
+.price-compare-empty { color: var(--text-muted); font-size: 0.8rem; }
 
 /* Значение ячейки одним элементом — иначе на мобильной сетке цена и её
    валюта разъезжаются по разным строкам. */
@@ -593,6 +610,59 @@ body {
 .margin-value.up { color: var(--success); }
 .margin-value.down { color: var(--error); }
 .margin-coverage { font-size: 0.72rem; color: var(--text-muted); }
+
+/* Отдельная карточка сравнения (старый прайс / Welkin) под таблицей —
+   заменяет старый однострочный margin-bar, когда сравнений больше одного. */
+.compare-panel {
+  border-top: 1px dashed var(--border);
+  padding-top: 0.8rem;
+}
+.compare-panel-title {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin-bottom: 0.5rem;
+}
+.compare-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.6rem;
+}
+.compare-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-sunken);
+}
+.compare-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+.compare-card-title { font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); }
+.compare-card-coverage { font-size: 0.68rem; color: var(--text-muted); white-space: nowrap; }
+.compare-card-value {
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+.compare-card-currency { font-size: 0.78rem; font-weight: 600; color: var(--text-secondary); }
+.compare-delta {
+  align-self: flex-start;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+}
+.compare-delta.good { background: var(--success-bg); color: var(--success); }
+.compare-delta.bad  { background: var(--error-bg);   color: var(--error); }
 
 .btn-dan {
   font-size: 0.75rem;

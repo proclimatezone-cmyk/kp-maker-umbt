@@ -525,20 +525,22 @@ const EquipmentRow = memo(({ item, products, cleanProducts, stock, onUpdate, onD
       </td>
       {showOldPrice && (
         <td data-label="Старая цена">
-          {oldUnitPrice !== null && marginPct !== null && (
-            <span className="old-price-hint" title="Старая цена — закупка Midea из старого прайса, без наценки и скидки">
-              {formatNum(oldUnitPrice)} {currencyLabel} · <span className={marginPct >= 0 ? 'margin-up' : 'margin-down'}>{marginPct >= 0 ? '+' : ''}{marginPct.toFixed(0)}%</span>
+          {oldUnitPrice !== null && marginPct !== null ? (
+            <span className="price-compare" title="Закупка Midea из старого прайса, без наценки и скидки">
+              <span className="price-compare-value">{formatNum(oldUnitPrice)} {currencyLabel}</span>
+              <span className={`price-compare-delta ${marginPct >= 0 ? 'good' : 'bad'}`}>{marginPct >= 0 ? '+' : ''}{marginPct.toFixed(0)}%</span>
             </span>
-          )}
+          ) : <span className="price-compare-empty">—</span>}
         </td>
       )}
       {showWelkin && (
         <td data-label="Welkin">
-          {welkinUnitPrice !== null && welkinDeltaPct !== null && (
-            <span className="old-price-hint" title={`Welkin (Hisense OEM), приблизительный аналог по мощности: ${welkin.model}. Точность сопоставления: ±${welkin.deltaPct}%`}>
-              ≈ {formatNum(welkinUnitPrice)} {currencyLabel} · <span className={welkinDeltaPct >= 0 ? 'margin-down' : 'margin-up'}>{welkinDeltaPct >= 0 ? '+' : ''}{welkinDeltaPct.toFixed(0)}%</span>
+          {welkinUnitPrice !== null && welkinDeltaPct !== null ? (
+            <span className="price-compare" title={`Welkin (Hisense OEM), приблизительный аналог по мощности: ${welkin.model}. Точность сопоставления: ±${welkin.deltaPct}%`}>
+              <span className="price-compare-value">≈ {formatNum(welkinUnitPrice)} {currencyLabel}</span>
+              <span className={`price-compare-delta ${welkinDeltaPct >= 0 ? 'bad' : 'good'}`}>{welkinDeltaPct >= 0 ? '+' : ''}{welkinDeltaPct.toFixed(0)}%</span>
             </span>
-          )}
+          ) : <span className="price-compare-empty">—</span>}
         </td>
       )}
       {showDiscount && (
@@ -879,6 +881,31 @@ export default function Home() {
     const marginPct = oldTotal > 0 ? ((currentMatchedTotal - oldTotal) / oldTotal) * 100 : null;
     return { oldTotal, currentMatchedTotal, matchedQty, totalQty, marginPct };
   }, [items, products, oldPriceMap, calculatePrice]);
+
+  // То же самое, но против Welkin: сколько позиций реально сопоставлено
+  // (не все — Welkin не покрывает все классы/мощности) и на сколько мы
+  // в среднем дороже/дешевле по тем, что сопоставлены.
+  const welkinStats = useMemo(() => {
+    if (!welkinMap) return null;
+    let welkinTotal = 0, currentMatchedTotal = 0, matchedQty = 0, totalQty = 0;
+    for (const item of items) {
+      const p = products.find(x => x.id === item.productId);
+      if (!p) continue;
+      const qty = Number(item.quantity) || 0;
+      totalQty += qty;
+      const w = welkinMap.get(normalizeModel(p.model));
+      if (!w) continue;
+      const welkinUnit = calculatePrice(w.price);
+      const discountVal = item.discount || 0;
+      const finalUnit = Math.round(calculatePrice(p.price) * (1 + discountVal / 100));
+      welkinTotal += welkinUnit * qty;
+      currentMatchedTotal += finalUnit * qty;
+      matchedQty += qty;
+    }
+    if (matchedQty === 0) return { welkinTotal, currentMatchedTotal, matchedQty, totalQty, deltaPct: null as number | null };
+    const deltaPct = welkinTotal > 0 ? ((currentMatchedTotal - welkinTotal) / welkinTotal) * 100 : null;
+    return { welkinTotal, currentMatchedTotal, matchedQty, totalQty, deltaPct };
+  }, [items, products, welkinMap, calculatePrice]);
 
   const capacityMetrics = useMemo(() => {
     let external = 0;
@@ -1272,19 +1299,43 @@ export default function Home() {
               </div>
             </div>
 
-            {showOldPrice && oldPriceStats && oldPriceStats.matchedQty > 0 && (
-              <div className="margin-bar">
-                <span className="margin-coverage">
-                  учтено {oldPriceStats.matchedQty} из {oldPriceStats.totalQty} шт (есть в старом прайсе)
-                </span>
-                <span className="total-label">По старому прайсу</span>
-                <span className="total-value" style={{ fontSize: '1.1rem', color: 'var(--text-secondary)' }}>{formatNum(oldPriceStats.oldTotal)}</span>
-                <span className="total-currency">{currencyLabel}</span>
-                {oldPriceStats.marginPct !== null && (
-                  <span className={`margin-value ${oldPriceStats.marginPct >= 0 ? 'up' : 'down'}`}>
-                    маржа {oldPriceStats.marginPct >= 0 ? '+' : ''}{oldPriceStats.marginPct.toFixed(1)}%
-                  </span>
-                )}
+            {((showOldPrice && oldPriceStats && oldPriceStats.matchedQty > 0) || (showWelkin && welkinStats && welkinStats.matchedQty > 0)) && (
+              <div className="compare-panel">
+                <div className="compare-panel-title">Сравнение цен по текущему подбору</div>
+                <div className="compare-grid">
+                  {showOldPrice && oldPriceStats && oldPriceStats.matchedQty > 0 && (
+                    <div className="compare-card">
+                      <div className="compare-card-head">
+                        <span className="compare-card-title">Старый прайс Midea</span>
+                        <span className="compare-card-coverage">{oldPriceStats.matchedQty} из {oldPriceStats.totalQty} шт</span>
+                      </div>
+                      <div className="compare-card-value">
+                        {formatNum(oldPriceStats.oldTotal)} <span className="compare-card-currency">{currencyLabel}</span>
+                      </div>
+                      {oldPriceStats.marginPct !== null && (
+                        <span className={`compare-delta ${oldPriceStats.marginPct >= 0 ? 'good' : 'bad'}`}>
+                          наша маржа {oldPriceStats.marginPct >= 0 ? '+' : ''}{oldPriceStats.marginPct.toFixed(1)}%
+                        </span>
+                      )}
+                    </div>
+                  )}
+                  {showWelkin && welkinStats && welkinStats.matchedQty > 0 && (
+                    <div className="compare-card">
+                      <div className="compare-card-head">
+                        <span className="compare-card-title">Welkin (Hisense OEM)</span>
+                        <span className="compare-card-coverage">{welkinStats.matchedQty} из {welkinStats.totalQty} шт</span>
+                      </div>
+                      <div className="compare-card-value">
+                        ≈ {formatNum(welkinStats.welkinTotal)} <span className="compare-card-currency">{currencyLabel}</span>
+                      </div>
+                      {welkinStats.deltaPct !== null && (
+                        <span className={`compare-delta ${welkinStats.deltaPct >= 0 ? 'bad' : 'good'}`}>
+                          мы {welkinStats.deltaPct >= 0 ? 'дороже' : 'дешевле'} на {Math.abs(welkinStats.deltaPct).toFixed(1)}%
+                        </span>
+                      )}
+                    </div>
+                  )}
+                </div>
               </div>
             )}
 
