@@ -840,7 +840,11 @@ export default function Home() {
     return () => clearTimeout(timer)
   }, [manager, client, company, address, objectType, registrationDate, equipmentType, contactPerson, contract, items, additionalItems, options, cpName, cpDate, partnerBonusType, partnerBonusValue, showDan, reqOpen, isMounted])
 
-  const cleanProducts = useMemo(() => products.filter(p => p.model && !p.model.startsWith('---') && p.id && !p.id.startsWith('---')), [products])
+  // p.price > 0 — в базе есть ~165 «битых» дублей строк (SEO-заготовки для
+  // другого канала листинга): у них в поле model маркетинговый текст вместо
+  // артикула и price: 0. Раньше отсекались только по id.startsWith('---'),
+  // но одна такая запись (id "superslim...") этот фильтр проходила.
+  const cleanProducts = useMemo(() => products.filter(p => p.model && !p.model.startsWith('---') && p.id && !p.id.startsWith('---') && Number(p.price) > 0), [products])
   const filteredProducts = useMemo(() => {
     if (!searchTerm) return cleanProducts.slice(0, 50)
     const t = searchTerm.toLowerCase()
