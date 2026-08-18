@@ -24,7 +24,13 @@ export function extractArticle(name: string): string {
 
 /** Ключ сопоставления: только буквы и цифры, регистр не важен. */
 export function stockKey(value: string): string {
-  return (value || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+  const key = (value || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+  // Наружные блоки серии ATOM в прайсе КП намеренно подписаны «Midea-V…»
+  // (чтобы у клиента не возникал вопрос, почему Midea продаёт «MDV»), а в
+  // инвентаризации и остатках те же блоки числятся под настоящим кодом
+  // «MDV-V…». Без сведения к одному ключу остатки и названия в договоре
+  // для этих позиций не находились.
+  return /^MIDEAV\d/.test(key) ? key.replace(/^MIDEA/, 'MDV') : key;
 }
 
 /**
