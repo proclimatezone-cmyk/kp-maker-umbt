@@ -1,48 +1,53 @@
 /* ===================================================================
    KP Maker — design system
-   Палитра взята из фирменного шаблона КП: глубокий синий UMBT,
-   светло-голубая заливка шапок таблиц, нейтрали с холодным уклоном.
+   Направление «Stripe Dashboard» — согласовано с владельцем 2026-08-18:
+   мягкий сине-серый фон, белые карточки на лёгкой многослойной тени,
+   фирменный индиго-фиолет как единственный акцент, крупные уверенные
+   суммы. Токены ниже управляют всем приложением разом — все страницы
+   (конструктор КП, /reports, /login, SVG-графики) берут цвета только
+   отсюда, своей палитры не заводят.
    =================================================================== */
 
 :root {
   /* Ground & surfaces */
-  --bg: #f4f6f9;
+  --bg: #f6f9fc;
   --bg-card: #ffffff;
-  --bg-input: #f2f5f8;
-  --bg-hover: #eaeff5;
-  --bg-sunken: #e9eef4;
+  --bg-input: #f6f9fc;
+  --bg-hover: #edf1f7;
+  --bg-sunken: #eef2f7;
 
   /* Brand */
-  --accent: #0f6fb8;
-  --accent-dark: #0b5590;
-  --accent-light: #e4f0fa;
-  --accent-ring: rgba(15, 111, 184, 0.16);
+  --accent: #635bff;
+  --accent-dark: #4f46e0;
+  --accent-light: #eeecff;
+  --accent-ring: rgba(99, 91, 255, 0.18);
 
   /* Ink */
-  --text: #101a24;
-  --text-secondary: #4a5b6d;
-  --text-muted: #6b7d90;
+  --text: #1a1f36;
+  --text-secondary: #4f5875;
+  --text-muted: #6b7396;
 
   /* Lines */
-  --border: #dde4ed;
-  --border-strong: #c5d0dc;
+  --border: #e3e8ee;
+  --border-strong: #c7d0dd;
   --border-focus: var(--accent);
 
   /* Semantic */
-  --error: #c2374b;
-  --error-bg: #fceef0;
-  --success: #12805c;
-  --success-bg: #e3f4ee;
+  --error: #c0123c;
+  --error-bg: #fce8ed;
+  --success: #1a8a5f;
+  --success-bg: #e3f5ec;
   --warning: #9a6206;
   --warning-bg: #fbf2e0;
 
-  /* Elevation — намеренно сдержанная */
-  --shadow-sm: 0 1px 2px rgba(16, 26, 36, 0.05);
-  --shadow-md: 0 4px 14px rgba(16, 26, 36, 0.07);
-  --shadow-lg: 0 12px 32px rgba(16, 26, 36, 0.10);
+  /* Elevation — мягкая, многослойная (как в Stripe Dashboard):
+     тонкий контактный слой + широкий рассеянный. */
+  --shadow-sm: 0 1px 1px rgba(60, 66, 87, 0.05), 0 2px 5px rgba(60, 66, 87, 0.06);
+  --shadow-md: 0 2px 6px rgba(60, 66, 87, 0.07), 0 8px 20px rgba(60, 66, 87, 0.08);
+  --shadow-lg: 0 6px 16px rgba(60, 66, 87, 0.09), 0 16px 40px rgba(60, 66, 87, 0.10);
 
-  --radius: 10px;
-  --radius-sm: 7px;
+  --radius: 12px;
+  --radius-sm: 8px;
 
   --topbar-h: 56px;
 
@@ -141,9 +146,9 @@ body {
   white-space: nowrap;
 }
 
-.btn-primary { background: var(--accent); color: #fff; }
+.btn-primary { background: var(--accent); color: #fff; box-shadow: 0 1px 2px rgba(99, 91, 255, 0.35); }
 .btn-primary:hover:not(:disabled) { background: var(--accent-dark); }
-.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; box-shadow: none; }
 
 .btn-ghost {
   background: var(--bg-card);
@@ -212,8 +217,11 @@ body {
   flex-shrink: 0;
 }
 
-.section-icon.purple { background: #eceaff; color: #5b4bcc; }
-.section-icon.blue   { background: var(--accent-light); color: var(--accent); }
+/* .blue и .purple — разные категории разделов (см. вызовы SectionHeader),
+   поэтому у .blue свой синий, а не alias на --accent-light: тот теперь
+   фиолетовый и совпал бы с .purple, размыв цветовую навигацию по разделам. */
+.section-icon.purple { background: var(--accent-light); color: var(--accent-dark); }
+.section-icon.blue   { background: #e7f0fe; color: #2f6fe4; }
 .section-icon.green  { background: var(--success-bg); color: var(--success); }
 .section-icon.orange { background: var(--warning-bg); color: var(--warning); }
 .section-icon.pink   { background: #fbe9ee; color: #b5386a; }
@@ -888,7 +896,7 @@ body {
   align-items: center;
   justify-content: center;
   gap: 0.55rem;
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-md), 0 1px 2px rgba(99, 91, 255, 0.35);
   transition: background 0.15s ease;
 }
 
