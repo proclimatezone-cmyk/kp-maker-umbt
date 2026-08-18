@@ -108,24 +108,22 @@ async function main() {
 
   const productsPath = path.join(ROOT, 'src', 'data', 'products.json');
   const products = JSON.parse(fs.readFileSync(productsPath, 'utf-8'));
-  const byModel = new Map(products.map(p => [p.model, p]));
 
   const match = {};
   let matched = 0, skippedNoClass = 0, skippedNoCapacity = 0, skippedTooFar = 0;
 
+  let skippedKit = 0;
   for (const p of products) {
+    // Комплекты «внутренний + наружный» стоят как пара, а сопоставить есть
+    // возможность только один компонент (по мощности наружного блока) —
+    // сравнение «цена пары» vs «цена одного блока Welkin» врёт (+100% и
+    // больше на ровном месте). Честнее не показывать вовсе.
+    if (String(p.model || '').includes(' + ')) { skippedKit++; continue; }
+
     const cls = classifyMideaCategory(p.category);
     if (!cls) { skippedNoClass++; continue; }
 
-    let kw = Number(p.coolingCapacity) || 0;
-    // Комплекты «внутренний + наружный» (серия ATOM) не несут собственной
-    // мощности в прайсе — берём её с наружного блока комплекта, он же и
-    // определяет производительность пары.
-    if (!kw && String(p.model || '').includes(' + ')) {
-      const outdoorModel = p.model.split(' + ')[1]?.trim();
-      const outdoor = outdoorModel && byModel.get(outdoorModel);
-      kw = outdoor ? Number(outdoor.coolingCapacity) || 0 : 0;
-    }
+    const kw = Number(p.coolingCapacity) || 0;
     if (!kw) { skippedNoCapacity++; continue; }
 
     const candidates = pool.filter(r => r.class === cls);
@@ -151,7 +149,7 @@ async function main() {
 
   const outPath = path.join(ROOT, 'src', 'data', 'welkin-match.json');
   fs.writeFileSync(outPath, JSON.stringify(match, null, 2), 'utf-8');
-  console.log(`Сопоставлено: ${matched}. Без класса: ${skippedNoClass}. Без мощности: ${skippedNoCapacity}. Слишком далеко (>${MAX_DELTA_PCT}%): ${skippedTooFar}.`);
+  console.log(`Сопоставлено: ${matched}. Без класса: ${skippedNoClass}. Без мощности: ${skippedNoCapacity}. Слишком далеко (>${MAX_DELTA_PCT}%): ${skippedTooFar}. Комплекты (пропущены намеренно): ${skippedKit}.`);
   console.log(`Записано: ${outPath}`);
 }
 

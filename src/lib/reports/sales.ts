@@ -37,6 +37,11 @@ export interface SaleRecord {
   model: string;
   qty: number;
   orderCode: string;
+  /** Буквенный префикс кода заказа («K03» → «K», «MN01» → «MN») — заполнен
+   *  у 100% заказов, в отличие от manager (реестр «Объекты» привязан частично).
+   *  Не «менеджер» в чистом виде — это код, за которым может стоять один
+   *  человек или группа, сопоставление кодов с именами знает только админ. */
+  codePrefix: string;
   linked: boolean;
   date: string | null;
   monthKey: string | null;
@@ -51,9 +56,28 @@ export interface SalesReport {
   byMonth: { monthKey: string; qty: number }[];
   byManager: { manager: string; qty: number }[];
   byCategory: { category: string; qty: number }[];
+  byCodePrefix: { prefix: string; qty: number }[];
 }
 
 const UNLINKED = 'Не указано';
+
+// Кириллица и латиница визуально неразличимы для части букв — в исходнике
+// один и тот же код где-то набран «K» (латиница), где-то «К» (кириллица).
+// Без этой нормализации это две разные группы вместо одной.
+const CYRILLIC_TO_LATIN_LOOKALIKE: Record<string, string> = {
+  А: 'A', В: 'B', Е: 'E', К: 'K', М: 'M', Н: 'H', О: 'O', Р: 'P', С: 'C', Т: 'T', Х: 'X',
+};
+
+/** «K03»/«К03» → «K», «MN01» → «MN», «ЭС01» → «ЭС», «MN03+MN04» → «MN». */
+function extractCodePrefix(orderCode: string): string {
+  const m = String(orderCode || '').match(/^([A-Za-zА-Яа-яЁё]+)/);
+  if (!m) return UNLINKED;
+  return m[1]
+    .toUpperCase()
+    .split('')
+    .map(ch => CYRILLIC_TO_LATIN_LOOKALIKE[ch] || ch)
+    .join('');
+}
 
 export function computeSalesReport(orders: SheetGrid, objects: SheetGrid): SalesReport {
   const registry = parseObjectsRegistry(objects);
@@ -77,6 +101,7 @@ export function computeSalesReport(orders: SheetGrid, objects: SheetGrid): Sales
         model: row.model,
         qty: cell.qty,
         orderCode: cell.header,
+        codePrefix: extractCodePrefix(cell.header),
         linked,
         date: parsedDate?.iso ?? null,
         monthKey: parsedDate?.monthKey ?? null,
@@ -90,6 +115,7 @@ export function computeSalesReport(orders: SheetGrid, objects: SheetGrid): Sales
   const byMonthMap = new Map<string, number>();
   const byManagerMap = new Map<string, number>();
   const byCategoryMap = new Map<string, number>();
+  const byCodePrefixMap = new Map<string, number>();
 
   for (const rec of records) {
     totals.qty += rec.qty;
@@ -102,6 +128,7 @@ export function computeSalesReport(orders: SheetGrid, objects: SheetGrid): Sales
     byManagerMap.set(manager, (byManagerMap.get(manager) || 0) + rec.qty);
 
     byCategoryMap.set(rec.category, (byCategoryMap.get(rec.category) || 0) + rec.qty);
+    byCodePrefixMap.set(rec.codePrefix, (byCodePrefixMap.get(rec.codePrefix) || 0) + rec.qty);
   }
 
   const byMonth = [...byMonthMap.entries()]
@@ -116,6 +143,10 @@ export function computeSalesReport(orders: SheetGrid, objects: SheetGrid): Sales
     .map(([category, qty]) => ({ category, qty }))
     .sort((a, b) => b.qty - a.qty);
 
+  const byCodePrefix = [...byCodePrefixMap.entries()]
+    .map(([prefix, qty]) => ({ prefix, qty }))
+    .sort((a, b) => b.qty - a.qty);
+
   const total = totalCodes.size;
   const linked = linkedCodes.size;
 
@@ -126,5 +157,6 @@ export function computeSalesReport(orders: SheetGrid, objects: SheetGrid): Sales
     byMonth,
     byManager,
     byCategory,
+    byCodePrefix,
   };
 }

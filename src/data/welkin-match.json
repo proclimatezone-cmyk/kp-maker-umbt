@@ -726,53 +726,5 @@
     "matchedKw": 7.1,
     "productKw": 7.1,
     "deltaPct": 0
-  },
-  "MI2-32T2DHN18(At)S + Midea-V36WDHN1A(AtB)": {
-    "welkinModel": "WSBF-38JVGVZ\nпульт WJUCR-BV01",
-    "hisenseModel": "AVD-38HCFCL\nпульт HYXE-VC01",
-    "priceUsd": 704,
-    "matchedKw": 11.2,
-    "productKw": 10.5,
-    "deltaPct": 6.7
-  },
-  "MI2-48T2DHN18(At)S + Midea-V48WDHN1(AtB)": {
-    "welkinModel": "WSBF-48JKFJ\nпульт WJUCR-BV01",
-    "hisenseModel": "AVD-48HJDH\nпульт HYXE-VC01",
-    "priceUsd": 926,
-    "matchedKw": 14,
-    "productKw": 14,
-    "deltaPct": 0
-  },
-  "MI2-56T2DHN18(At)S + Midea-V56WDHN1(AtB)": {
-    "welkinModel": "WSBF-54JVGVZ\nпульт WJUCR-BV01",
-    "hisenseModel": "AVD-54HCFCL\nпульт HYXE-VC01",
-    "priceUsd": 824,
-    "matchedKw": 16,
-    "productKw": 16,
-    "deltaPct": 0
-  },
-  "MI2-36Q4DHN18(At) + Midea-V36WDHN1A(AtB)": {
-    "welkinModel": "WSBNV-38JKFNS / WJARR-H-ML\nпульт WJUTR-Y03J /  WJUR-BF01",
-    "hisenseModel": "AVBC-38HJDBA / HPEE-G-NK\nпульт EYRE-T03H / HYE-VD01",
-    "priceUsd": 744,
-    "matchedKw": 11.2,
-    "productKw": 10.5,
-    "deltaPct": 6.7
-  },
-  "MI2-48Q4DHN18(At) + Midea-V48WDHN1(AtB)": {
-    "welkinModel": "WSBNV-48JKFNS / WJARR-H-ML\nпульт WJUTR-Y03J /  WJUR-BF01",
-    "hisenseModel": "AVBC-48HJDBA / HPEE-G-NK\nпульт EYRE-T03H / HYE-VD01",
-    "priceUsd": 751,
-    "matchedKw": 14.2,
-    "productKw": 14,
-    "deltaPct": 1.4
-  },
-  "MI2-56Q4DHN18(At) + Midea-V56WDHN1(AtB)": {
-    "welkinModel": "WSBNV-54JKFNS / WJARR-H-ML\nпульт WJUTR-Y03J /  WJUR-BF01",
-    "hisenseModel": "AVBC-54HJDBA / HPEE-G-NK\nпульт EYRE-T03H / HYE-VD01",
-    "priceUsd": 772,
-    "matchedKw": 16,
-    "productKw": 16,
-    "deltaPct": 0
   }
 }
