@@ -29,3 +29,23 @@ export function formatRuDate(value: string | null | undefined): string {
   const date = new Date(Number(y), Number(mo) - 1, Number(d));
   return RU_DATE_FORMAT.format(date).replace(' г.', '');
 }
+
+/**
+ * ISO-дата («2026-08-15») → короткий формат «15.08.2026» для КП.
+ * Не-ISO строку (старые значения, набранные вручную до календаря)
+ * отдаём как есть.
+ */
+export function formatShortRuDate(value: string | null | undefined): string {
+  const m = String(value || '').trim().match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (!m) return value || '';
+  const [, y, mo, d] = m;
+  return `${d}.${mo}.${y}`;
+}
+
+/** «15.08.2026» → ISO «2026-08-15», для заполнения `<input type="date">` старыми значениями. */
+export function toIsoDate(value: string | null | undefined): string {
+  const m = String(value || '').trim().match(/^(\d{2})\.(\d{2})\.(\d{4})$/);
+  if (!m) return String(value || '');
+  const [, d, mo, y] = m;
+  return `${y}-${mo}-${d}`;
+}

@@ -1,7 +1,9 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextRequest, NextResponse, after } from 'next/server'
 import { generateSlidesKP } from '@/lib/google-slides'
 import { buildKpDocx } from '@/lib/docx-kp'
 import { convertDocxToPdf } from '@/lib/docx-to-pdf'
+import { archiveKp } from '@/lib/kp-archive'
+import { getSessionEmail } from '@/lib/auth-session'
 
 const DOCX_MIME =
   'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
@@ -34,6 +36,7 @@ export async function POST(req: NextRequest) {
     } = data
 
     const origin = clientOrigin || req.nextUrl.origin
+    const login = await getSessionEmail(req)
 
     // --- Старый вид: прежний путь через Google Slides, на выходе PDF ---
     if (template === 'old') {
@@ -43,6 +46,14 @@ export async function POST(req: NextRequest) {
       })
 
       if (!pdfBuffer) throw new Error('Не удалось получить PDF из презентации')
+
+      // Старый вид собирается через Slides — Word-версии для него нет,
+      // в архив уходит только PDF. after() — чтобы не задерживать отдачу
+      // готового файла менеджеру ожиданием загрузки на Диск.
+      after(() => archiveKp({
+        cpNumber: cpName || '', client: client || '', manager: manager?.name || '', login,
+        total, pdf: pdfBuffer,
+      }))
 
       return new NextResponse(new Uint8Array(pdfBuffer), {
         headers: {
@@ -90,8 +101,12 @@ export async function POST(req: NextRequest) {
       sizeWarning = 'Слишком много фото для одного файла — КП собрано без изображений'
     }
 
+    const archiveMeta = { cpNumber: cpName || '', client: client || '', manager: manager?.name || '', login, total }
+
     if (format === 'pdf') {
       const pdf = await convertDocxToPdf(docx, cpName || 'КП')
+      // В архив уходят оба формата, даже если менеджер скачал только PDF.
+      after(() => archiveKp({ ...archiveMeta, docx, pdf }))
       return new NextResponse(new Uint8Array(pdf), {
         headers: {
           'Content-Type': 'application/pdf',
@@ -99,6 +114,16 @@ export async function POST(req: NextRequest) {
         },
       })
     }
+
+    // Менеджер скачивает .docx — PDF для архива дособирается уже после
+    // ответа, чтобы конвертация через Диск (несколько секунд) не задерживала скачивание.
+    after(async () => {
+      let pdf: Buffer | undefined
+      try { pdf = await convertDocxToPdf(docx, cpName || 'КП') } catch (err) {
+        console.error('Архив КП: не удалось получить PDF-копию', err)
+      }
+      await archiveKp({ ...archiveMeta, docx, pdf })
+    })
 
     return new NextResponse(new Uint8Array(docx), {
       headers: {

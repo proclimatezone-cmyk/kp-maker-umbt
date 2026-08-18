@@ -3,7 +3,7 @@
 import { useState, useEffect, useMemo, useCallback, memo } from 'react'
 import { Plus, Trash2, FileText, User, Briefcase, Calculator, Search, RefreshCw, Building2, Phone, CheckCircle, CloudCheck, Loader2, Copy, Truck, ChevronDown, FileSignature, BarChart3 } from 'lucide-react'
 import productsData from '@/data/products.json'
-import { formatNum } from '@/lib/format'
+import { formatNum, formatShortRuDate, toIsoDate } from '@/lib/format'
 import { DELIVERY_TERMS, DeliveryTerm, buildTermsLines, getMoneyLabels } from '@/lib/delivery-terms'
 import { stockModelKey } from '@/lib/stock-match'
 import { normalizeModel } from '@/lib/reports/parse-utils'
@@ -184,7 +184,7 @@ const SettingsSection = memo(({ cpName, setCpName, cpDate, setCpDate, equipmentT
         </div>
         <div className="field">
           <label className="field-label">Дата КП</label>
-          <input className="field-input" placeholder="14.08.2026" value={lDate} onChange={e => setLDate(e.target.value)} onBlur={() => lDate !== cpDate && setCpDate(lDate)} />
+          <input type="date" className="field-input" value={lDate} onChange={e => { setLDate(e.target.value); setCpDate(e.target.value); }} />
         </div>
       </div>
       <div className="field">
@@ -686,14 +686,16 @@ export default function Home() {
         setOptions(prev => ({ ...prev, ...parsed }))
       }
       const savedCp = s('umbt_cpName'); if (savedCp) setCpName(savedCp)
-      const savedDate = s('umbt_cpDate'); if (savedDate) setCpDate(savedDate)
+      // Старые значения хранились как «14.08.2026» (свободный ввод) — календарь
+      // работает только с ISO, переводим один раз при загрузке.
+      const savedDate = s('umbt_cpDate'); if (savedDate) setCpDate(toIsoDate(savedDate))
       if (s('umbt_bonusType')) setPartnerBonusType(s('umbt_bonusType') as 'percent' | 'fixed')
       if (s('umbt_bonusValue')) setPartnerBonusValue(Number(s('umbt_bonusValue')) || 0)
       if (s('umbt_showDan')) setShowDan(s('umbt_showDan') === 'true')
       if (s('umbt_reqOpen')) setReqOpen(s('umbt_reqOpen') === 'true')
     } catch {}
     if (!s('umbt_cpDate')) {
-      setCpDate(new Date().toLocaleDateString('ru-RU'))
+      setCpDate(new Date().toISOString().slice(0, 10))
     }
     if (!s('umbt_cpName')) {
       const d = new Date()
@@ -1003,7 +1005,7 @@ export default function Home() {
           manager,
           client,
           cpName,
-          cpDate,
+          cpDate: formatShortRuDate(cpDate),
           template: options.template || 'new',
           format: options.template === 'old' ? 'pdf' : (options.format || 'docx'),
           items: items.map(i => {
@@ -1088,7 +1090,7 @@ export default function Home() {
             <span className="requisites-title">Реквизиты КП</span>
             {!reqOpen && (
               <span className="requisites-summary">
-                {[cpName, cpDate, client, manager.name].filter(Boolean).join(' · ') || 'не заполнены'}
+                {[cpName, formatShortRuDate(cpDate), client, manager.name].filter(Boolean).join(' · ') || 'не заполнены'}
               </span>
             )}
             <span className="requisites-action">{reqOpen ? 'Свернуть' : 'Изменить'}</span>

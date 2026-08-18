@@ -29,3 +29,23 @@ export function getGoogleAuth() {
   oauth2Client.setCredentials({ refresh_token: process.env.GOOGLE_REFRESH_TOKEN?.trim() });
   return oauth2Client;
 }
+
+/**
+ * Авторизация строго от живого человека (OAuth), никогда сервис-аккаунтом.
+ *
+ * Нужна для загрузки обычных (не Google-нативных) файлов на личный Диск:
+ * у сервис-аккаунта нет своей квоты на хранение, и Google отказывает в
+ * загрузке («Service Accounts do not have storage quota») даже если у него
+ * есть права Редактора на папку. Работает только реальный аккаунт с квотой.
+ */
+export function getOAuthOnlyAuth() {
+  if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET || !process.env.GOOGLE_REFRESH_TOKEN) {
+    throw new Error('OAuth не настроен (GOOGLE_CLIENT_ID/GOOGLE_CLIENT_SECRET/GOOGLE_REFRESH_TOKEN) — загрузка на Диск недоступна');
+  }
+  const oauth2Client = new google.auth.OAuth2(
+    process.env.GOOGLE_CLIENT_ID,
+    process.env.GOOGLE_CLIENT_SECRET
+  );
+  oauth2Client.setCredentials({ refresh_token: process.env.GOOGLE_REFRESH_TOKEN.trim() });
+  return oauth2Client;
+}
