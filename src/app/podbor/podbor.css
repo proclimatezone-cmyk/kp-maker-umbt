@@ -1,0 +1,153 @@
+/* Раздел «Подбор» — стили только этой страницы, переиспользуют токены
+   и .btn/.field-input из globals.css (см. CLAUDE.md: не раздувать общий файл). */
+
+.podbor-shell { max-width: 1320px; margin: 0 auto; padding: 24px 20px 80px; }
+
+.podbor-topbar {
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+  margin-bottom: 18px;
+}
+.podbor-topbar h1 { font-size: 22px; font-weight: 800; margin: 0; letter-spacing: -0.01em; }
+.podbor-lede { color: var(--text-secondary); font-size: 13.5px; line-height: 1.6; max-width: 82ch; margin: 8px 0 22px; }
+
+.podbor-layout { display: grid; grid-template-columns: 1fr 320px; gap: 22px; align-items: start; }
+@media (max-width: 980px) { .podbor-layout { grid-template-columns: 1fr; } }
+
+.podbor-card {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+  box-shadow: 0 1px 2px rgba(26,31,54,.04), 0 8px 24px rgba(26,31,54,.06);
+}
+
+.room-card { padding: 20px 22px; border-bottom: 1px solid var(--border); }
+.room-card:last-of-type { border-bottom: none; }
+.room-card.attention { background: var(--warning-bg); }
+
+.room-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; margin-bottom: 16px; }
+.room-name-wrap { display: flex; flex-direction: column; gap: 5px; flex: 1 1 auto; min-width: 0; }
+.room-index { font-size: 10.5px; font-weight: 700; color: var(--text-muted); letter-spacing: .06em; text-transform: uppercase; }
+.room-name-input {
+  font-size: 16.5px; font-weight: 700; border: none; background: transparent; padding: 0;
+  color: var(--text); font-family: inherit; width: 100%; max-width: 260px;
+}
+.room-name-input:focus { outline: none; }
+.room-remove-btn {
+  width: 28px; height: 28px; border-radius: 8px; border: 1px solid var(--border);
+  background: var(--bg-card); color: var(--text-muted); font-size: 15px; line-height: 1;
+  display: flex; align-items: center; justify-content: center; cursor: pointer; flex: none;
+}
+.room-remove-btn:hover { border-color: var(--border-strong); color: var(--text); }
+
+.type-row { margin-bottom: 16px; display: flex; flex-direction: column; gap: 6px; }
+
+.podbor-label {
+  display: block; font-size: 10.5px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: .05em; color: var(--text-muted);
+}
+
+.segmented {
+  display: inline-flex; flex-wrap: wrap; background: var(--bg-sunken); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 3px; gap: 3px; max-width: 100%;
+}
+.segmented button {
+  flex: none; border: none; background: transparent; font-size: 12.5px; font-weight: 600;
+  padding: 7px 12px; border-radius: 7px; color: var(--text-muted); cursor: pointer;
+  font-family: inherit; white-space: nowrap;
+}
+.segmented button.active { background: var(--bg-card); color: var(--accent-dark); box-shadow: 0 1px 2px rgba(26,31,54,.12); }
+.segmented button:disabled { opacity: .4; cursor: default; }
+.segmented.wide button { padding: 9px 14px; font-size: 13px; }
+
+.room-field-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 16px; align-items: start;
+}
+.room-field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.room-field input.field-input, .room-field select.field-input { margin: 0; width: 100%; }
+
+.kw-box {
+  background: var(--bg-sunken); border: 1px solid var(--border); border-radius: var(--radius-sm);
+  padding: 8px 10px; font-weight: 700; font-size: 15px; font-variant-numeric: tabular-nums;
+  text-align: center; color: var(--text-secondary);
+}
+.kw-box.used { background: var(--accent-light); border-color: var(--accent-ring); color: var(--accent-dark); }
+.kw-used-tag { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: var(--accent-dark); }
+.kw-note { font-size: 11.5px; color: var(--text-muted); }
+.formula-input { font-variant-numeric: tabular-nums; font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 13px; }
+
+.classify-row {
+  display: flex; flex-wrap: wrap; gap: 24px; margin-top: 16px;
+  padding-top: 16px; border-top: 1px dashed var(--border);
+}
+
+.result-strip {
+  margin-top: 16px; padding: 14px 16px; border-radius: var(--radius-sm);
+  background: var(--bg-sunken); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+}
+.result-strip.manual { background: var(--accent-light); border-color: var(--accent-ring); }
+.result-strip.no-data { background: var(--error-bg); border-color: var(--error); }
+.result-left { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; min-width: 0; }
+.result-model-block { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.result-eyebrow { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--text-muted); }
+.result-model-select {
+  font-size: 14px; font-weight: 700; border: 1px solid var(--border-strong); border-radius: var(--radius-sm);
+  padding: 6px 8px; background: var(--bg-card); color: var(--text); font-family: inherit; max-width: 340px;
+}
+.result-meta { font-size: 12px; color: var(--text-secondary); font-variant-numeric: tabular-nums; }
+.result-note { font-size: 11.5px; color: var(--text-muted); max-width: 32ch; }
+.result-note.warn { color: var(--error); font-weight: 600; }
+.result-right { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.result-sum-block { text-align: right; }
+.result-sum-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--text-muted); }
+.result-sum { font-size: 18px; font-weight: 800; font-variant-numeric: tabular-nums; color: var(--accent-dark); }
+
+.stock-badge {
+  display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 700;
+  padding: 4px 9px; border-radius: 999px; white-space: nowrap;
+}
+.stock-badge .dot { width: 6px; height: 6px; border-radius: 50%; }
+.stock-badge.ok { background: var(--success-bg); color: var(--success); }
+.stock-badge.ok .dot { background: var(--success); }
+.stock-badge.warn { background: var(--warning-bg); color: var(--warning); }
+.stock-badge.warn .dot { background: var(--warning); }
+.stock-badge.danger { background: var(--error-bg); color: var(--error); }
+.stock-badge.danger .dot { background: var(--error); }
+
+.add-room-row { padding: 16px 22px; }
+.btn-add-room {
+  width: 100%; padding: 11px; border-radius: var(--radius-sm); border: 1.5px dashed var(--border-strong);
+  background: transparent; color: var(--text-secondary); font-size: 13px; font-weight: 600;
+  font-family: inherit; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px;
+}
+.btn-add-room:hover { border-color: var(--accent); color: var(--accent-dark); }
+
+.podbor-summary { position: sticky; top: 20px; display: flex; flex-direction: column; gap: 14px; }
+.summary-card { padding: 18px; }
+.summary-title {
+  font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em;
+  color: var(--text-muted); margin: 0 0 14px;
+}
+.kpi-row { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 11px; }
+.kpi-row:last-child { margin-bottom: 0; }
+.kpi-label { font-size: 12.5px; color: var(--text-secondary); }
+.kpi-value { font-size: 16px; font-weight: 800; font-variant-numeric: tabular-nums; }
+.kpi-value.accent { color: var(--accent-dark); }
+.kpi-divider { height: 1px; background: var(--border); margin: 10px 0; }
+
+.alert-line {
+  display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--warning);
+  background: var(--warning-bg); padding: 9px 11px; border-radius: var(--radius-sm); font-weight: 600;
+}
+
+.transfer-note { font-size: 12px; color: var(--text-secondary); line-height: 1.5; margin: 10px 0 0; }
+
+.podbor-empty { padding: 40px 22px; text-align: center; color: var(--text-muted); font-size: 13.5px; }
+
+@media (max-width: 720px) {
+  .podbor-shell { padding: 16px 12px 60px; }
+  .room-card { padding: 16px 14px; }
+  .room-field-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .result-strip { flex-direction: column; align-items: stretch; }
+  .result-sum-block { text-align: left; }
+  .podbor-summary { position: static; }
+}

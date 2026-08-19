@@ -5,9 +5,11 @@ import { getJwtSecret } from '@/lib/auth-secret';
 export async function middleware(req: NextRequest) {
   const isReportsPage = req.nextUrl.pathname === '/reports' || req.nextUrl.pathname.startsWith('/reports/');
   const isReportsApi = req.nextUrl.pathname.startsWith('/api/reports/') || req.nextUrl.pathname === '/api/reports';
+  // «Подбор» — доступен всем залогиненным (не только владельцу, в отличие от /reports).
+  const isPodborPage = req.nextUrl.pathname === '/podbor' || req.nextUrl.pathname.startsWith('/podbor/');
 
   // Only protect main application and specific APIs
-  const isProtectedPage = req.nextUrl.pathname === '/' || isReportsPage;
+  const isProtectedPage = req.nextUrl.pathname === '/' || isReportsPage || isPodborPage;
   const isProtectedApi = (req.nextUrl.pathname.startsWith('/api/')
     && !req.nextUrl.pathname.startsWith('/api/auth')
     && req.nextUrl.pathname !== '/api/health'
@@ -74,5 +76,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/', '/api/:path*', '/reports', '/reports/:path*'],
+  matcher: ['/', '/api/:path*', '/reports', '/reports/:path*', '/podbor', '/podbor/:path*'],
 };

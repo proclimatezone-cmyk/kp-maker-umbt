@@ -1,7 +1,7 @@
 'use client'
 
-import { useState, useEffect, useMemo, useCallback, memo } from 'react'
-import { Plus, Trash2, FileText, User, Briefcase, Calculator, Search, RefreshCw, Building2, Phone, CheckCircle, CloudCheck, Loader2, Copy, Truck, ChevronDown, FileSignature, BarChart3, Lock, Unlock } from 'lucide-react'
+import { useState, useEffect, useMemo, useCallback, useRef, memo } from 'react'
+import { Plus, Trash2, FileText, User, Briefcase, Calculator, Search, RefreshCw, Building2, Phone, CheckCircle, CloudCheck, Loader2, Copy, Truck, ChevronDown, FileSignature, BarChart3, Lock, Unlock, Ruler } from 'lucide-react'
 import productsData from '@/data/products.json'
 import { formatNum, formatShortRuDate, toIsoDate } from '@/lib/format'
 import { DELIVERY_TERMS, DeliveryTerm, buildTermsLines, getMoneyLabels } from '@/lib/delivery-terms'
@@ -714,9 +714,23 @@ export default function Home() {
 
   const uid = useCallback(() => Math.random().toString(36).substr(2, 9), [])
 
+  // React Strict Mode в dev монтирует этот эффект дважды подряд (тот же
+  // инстанс компонента). Перенос из «Подбора» читает sessionStorage и сразу
+  // удаляет ключ — не идемпотентно: второй прогон находит пустой ключ и
+  // тихо перетирает setItems() без перенесённых позиций. Ref переживает
+  // оба прогона, поэтому вторая попытка инициализации — просто no-op.
+  const initRanRef = useRef(false)
+
   // --- Initial Load ---
   useEffect(() => {
     const s = (k: string) => localStorage.getItem(k)
+    // Guard — только вокруг восстановления состояния (см. комментарий у
+    // initRanRef выше). Слушатель visibilitychange и сетевые запросы ниже
+    // (loadData/стоки/отчёты) идемпотентны и должны отрабатывать на каждом
+    // прогоне, иначе после двойного монтирования Strict Mode в dev
+    // «возврат на вкладку» перестаёт обновлять прайс.
+    if (!initRanRef.current) {
+    initRanRef.current = true
     try {
       const m = s('umbt_manager'); if (m) setManager(JSON.parse(m))
       if (s('umbt_client')) setClient(s('umbt_client')!)
@@ -733,8 +747,25 @@ export default function Home() {
       if (s('umbt_equipType')) setEquipmentType(s('umbt_equipType')!)
       const c = s('umbt_contact'); if (c) setContactPerson(JSON.parse(c))
       const dg = s('umbt_contract'); if (dg) setContract(JSON.parse(dg))
-      const it = s('umbt_items'); if (it) setItems(JSON.parse(it))
-      else if (productsData.length > 0) setItems([{ id: uid(), productId: productsData[0].id, quantity: 1 }])
+      let loadedItems: Item[] = []
+      const it = s('umbt_items')
+      if (it) loadedItems = JSON.parse(it)
+      else if (productsData.length > 0) loadedItems = [{ id: uid(), productId: productsData[0].id, quantity: 1 }]
+
+      // Перенос позиций из раздела «Подбор» (sessionStorage — одноразово,
+      // очищается сразу после чтения, чтобы повторный визит на / не задваивал).
+      try {
+        const transfer = sessionStorage.getItem('umbt_podbor_transfer')
+        if (transfer) {
+          const incoming: { productId: string; quantity: number }[] = JSON.parse(transfer)
+          if (Array.isArray(incoming) && incoming.length > 0) {
+            loadedItems = [...loadedItems, ...incoming.map(x => ({ id: uid(), productId: x.productId, quantity: x.quantity || 1 }))]
+          }
+          sessionStorage.removeItem('umbt_podbor_transfer')
+        }
+      } catch { /* повреждённый sessionStorage — просто пропускаем перенос */ }
+
+      setItems(loadedItems)
       const addIt = s('umbt_additional_items'); if (addIt) setAdditionalItems(JSON.parse(addIt))
       const savedOptions = s('umbt_options')
       if (savedOptions) {
@@ -755,6 +786,7 @@ export default function Home() {
       if (s('umbt_showDan')) setShowDan(s('umbt_showDan') === 'true')
       if (s('umbt_reqOpen')) setReqOpen(s('umbt_reqOpen') === 'true')
     } catch {}
+    }
     if (!s('umbt_cpDate')) {
       setCpDate(new Date().toISOString().slice(0, 10))
     }
@@ -1206,6 +1238,10 @@ export default function Home() {
               <RefreshCw size={14} className={syncing ? 'spin' : ''} />
               {syncing ? 'Обновление...' : 'Обновить базу'}
             </button>
+            <a className="btn btn-ghost" href="/podbor">
+              <Ruler size={14} />
+              Подбор
+            </a>
             {isReportsUser && (
               <a className="btn btn-ghost" href="/reports">
                 <BarChart3 size={14} />
