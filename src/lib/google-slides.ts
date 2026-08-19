@@ -25,6 +25,22 @@ const TABLE_STYLE = {
     fontSize: { magnitude: 10, unit: 'PT' }
 };
 
+/**
+ * Денежные колонки таблицы («Цена»/«Сумма», а также итоговая строка) —
+ * фиксированной ширины (COL_WIDTHS_*), рассчитаны на суммы в у.е. (5-6
+ * знаков). В суммах Google Slides переносит слишком длинный текст в
+ * ячейке посимвольно, не по пробелу — «437 310 888» превращалось
+ * в «437 310 88» + «8» на новой строке. Раз ширину колонки не увеличить
+ * без перекройки всей таблицы, уменьшаем кегль под длину числа.
+ */
+function scaledFontSize(text: string, base: number): number {
+    const len = text.length;
+    if (len <= 7) return base;
+    if (len <= 9) return base - 1;
+    if (len <= 11) return base - 2;
+    return base - 3;
+}
+
 // Layout Constants
 const PRODUCT_ROW_H_FIRST = 600000;
 const PRODUCT_ROW_H_SUBSEQUENT = 300000;
@@ -984,11 +1000,12 @@ export async function generateSlidesKP(data: {
               tableReqs.push({ insertText: { objectId: tableId, cellLocation: { rowIndex: r, columnIndex: qCol }, text: m.quantity.toString() || '0' } });
 
               const adjustedPrice = Math.round(m.price);
+              const priceText = formatNum(adjustedPrice);
+              tableReqs.push({ insertText: { objectId: tableId, cellLocation: { rowIndex: r, columnIndex: pCol }, text: priceText } });
 
-              tableReqs.push({ insertText: { objectId: tableId, cellLocation: { rowIndex: r, columnIndex: pCol }, text:formatNum(adjustedPrice) } });
-              
               const parsedQty = parseQuantity(m.quantity);
-              tableReqs.push({ insertText: { objectId: tableId, cellLocation: { rowIndex: r, columnIndex: sCol }, text:formatNum((adjustedPrice * parsedQty)) } });
+              const sumText = formatNum(adjustedPrice * parsedQty);
+              tableReqs.push({ insertText: { objectId: tableId, cellLocation: { rowIndex: r, columnIndex: sCol }, text: sumText } });
 
               // Cell styling
               for (let col = 0; col < numCols; col++) {
@@ -1000,6 +1017,17 @@ export async function generateSlidesKP(data: {
                       tableReqs.push({ updateTextStyle: { objectId: tableId, cellLocation: { rowIndex: r, columnIndex: col }, style: TABLE_STYLE, fields: 'fontFamily,italic,fontSize' }});
                       tableReqs.push({ updateParagraphStyle: { objectId: tableId, cellLocation: { rowIndex: r, columnIndex: col }, style: { alignment: 'CENTER' }, fields: 'alignment' }});
                   }
+              }
+
+              // Длинные суммы (сумы) — переопределяем кегль после общего цикла
+              // стилизации выше, иначе он тут же затирает это обратно на 10pt.
+              const pSize = scaledFontSize(priceText, 10);
+              if (pSize < 10) {
+                  tableReqs.push({ updateTextStyle: { objectId: tableId, cellLocation: { rowIndex: r, columnIndex: pCol }, style: { ...TABLE_STYLE, fontSize: { magnitude: pSize, unit: 'PT' } }, fields: 'fontFamily,italic,fontSize' }});
+              }
+              const sSize = scaledFontSize(sumText, 10);
+              if (sSize < 10) {
+                  tableReqs.push({ updateTextStyle: { objectId: tableId, cellLocation: { rowIndex: r, columnIndex: sCol }, style: { ...TABLE_STYLE, fontSize: { magnitude: sSize, unit: 'PT' } }, fields: 'fontFamily,italic,fontSize' }});
               }
 
               if (isGroupAdditional) {
@@ -1034,15 +1062,17 @@ export async function generateSlidesKP(data: {
               const rowIdx = r + fIdx;
               
               // Запись текста
+              const footerValueText = formatNum(frow.value);
               tableReqs.push({ insertText: { objectId: tableId, cellLocation: { rowIndex: rowIdx, columnIndex: totIdxL }, text: frow.label } });
-              tableReqs.push({ insertText: { objectId: tableId, cellLocation: { rowIndex: rowIdx, columnIndex: totIdxR }, text:formatNum(frow.value) } });
-              
+              tableReqs.push({ insertText: { objectId: tableId, cellLocation: { rowIndex: rowIdx, columnIndex: totIdxR }, text: footerValueText } });
+
               // Цвет фона
               tableReqs.push({ updateTableCellProperties: { objectId: tableId, tableRange: { location: { rowIndex: rowIdx, columnIndex: totIdxL }, rowSpan: 1, columnSpan: 1 }, tableCellProperties: { tableCellBackgroundFill: { solidFill: { color: { rgbColor: frow.colorL } } }, contentAlignment: 'MIDDLE' }, fields: 'tableCellBackgroundFill,contentAlignment' }});
               tableReqs.push({ updateTableCellProperties: { objectId: tableId, tableRange: { location: { rowIndex: rowIdx, columnIndex: totIdxR }, rowSpan: 1, columnSpan: 1 }, tableCellProperties: { tableCellBackgroundFill: { solidFill: { color: { rgbColor: frow.colorR } } }, contentAlignment: 'MIDDLE' }, fields: 'tableCellBackgroundFill,contentAlignment' }});
-              
-              // Стиль текста
-              const fontSize = frow.isGrand ? 12 : 10;
+
+              // Стиль текста — как и в строках выше, длинные суммы (сумы) не
+              // помещаются в фиксированную ширину колонки при базовом кегле.
+              const fontSize = scaledFontSize(footerValueText, frow.isGrand ? 12 : 10);
               const isBold = frow.isGrand || frow.label.includes('Итого');
               const textRgb = { red: 0, green: 0, blue: 0 };
               
