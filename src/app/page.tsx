@@ -92,7 +92,7 @@ const AdditionalRow = memo(({ item, onUpdate, onDelete, onClone, calculatePrice,
           <span className="price-unit">{currencyLabel}</span>
         </div>
       </td>
-      <td data-label="Сумма">
+      <td data-label="Сумма" className="sum-cell">
         <span className="sum">{formatNum(calculatedSum)}</span>
       </td>
       <td data-label="">
@@ -202,7 +202,7 @@ const SettingsSection = memo(({ cpName, setCpName, cpDate, setCpDate, equipmentT
         <div className="field">
           <label className="field-label">Формат файла</label>
           <div className="toggle-group">
-            <button className={options.format !== 'pdf' ? 'on' : ''} onClick={() => setOptions({ ...options, format: 'docx' })} disabled={options.template === 'old'}>Word</button>
+            <button className={options.format !== 'pdf' ? 'on' : ''} onClick={() => setOptions({ ...options, format: 'docx' })}>Word</button>
             <button className={options.format === 'pdf' ? 'on' : ''} onClick={() => setOptions({ ...options, format: 'pdf' })}>PDF</button>
           </div>
         </div>
@@ -622,7 +622,7 @@ const EquipmentRow = memo(({ item, products, cleanProducts, stock, onUpdate, onD
           }}
         />
       </td>
-      <td data-label={labels.sum}>
+      <td data-label={labels.sum} className="sum-cell">
         <span className="sum">{formatNum(finalSum)}</span>
       </td>
       <td data-label="">
@@ -1175,7 +1175,7 @@ export default function Home() {
           cpName,
           cpDate: formatShortRuDate(cpDate),
           template: options.template || 'new',
-          format: options.template === 'old' ? 'pdf' : (options.format || 'docx'),
+          format: options.format || 'docx',
           items: items.map(i => {
             const p = live.find(x => x.id === i.productId);
             if (!p) return null;
@@ -1202,10 +1202,9 @@ export default function Home() {
         if (auditErr) {
           alert('⚠️ Документ готов, но данные НЕ записаны в таблицу аудита!\nОшибка: ' + decodeURIComponent(auditErr));
         }
-        // Старый вид всегда отдаёт PDF, у нового расширение зависит от выбора.
         const sizeWarn = decodeURIComponent(r.headers.get('X-Size-Warning') || '');
         if (sizeWarn) alert('⚠️ ' + sizeWarn);
-        const ext = options.template === 'old' || options.format === 'pdf' ? 'pdf' : 'docx';
+        const ext = options.format === 'pdf' ? 'pdf' : 'docx';
         const b = await r.blob();
         const url = URL.createObjectURL(b);
         setLastFile({ url, ext });
@@ -1364,7 +1363,7 @@ export default function Home() {
                       {showMideaCac && <th style={{ width: '13%', textAlign: 'center' }}>Midea</th>}
                       {showDiscount && <th style={{ width: '10%', textAlign: 'center' }}>Скидка %</th>}
                       <th style={{ width: '10%', textAlign: 'center' }}>Кол-во</th>
-                      <th style={{ width: '16%', textAlign: 'right' }}>{labels.sum}</th>
+                      <th style={{ width: '16%', textAlign: 'center' }}>{labels.sum}</th>
                       <th style={{ width: '8%' }}></th>
                       {/* Остатки — всегда крайний правый столбец: за пределами типичного
                           скриншота по ширине, но не спрятан за тумблером (видно всем). */}
@@ -1527,7 +1526,7 @@ export default function Home() {
                     <th style={{ width: '48%' }}>Наименование</th>
                     <th style={{ width: '15%', textAlign: 'center' }}>Кол-во</th>
                     <th style={{ width: '17%', textAlign: 'center' }}>{labels.price}</th>
-                    <th style={{ width: '10%', textAlign: 'right' }}>{labels.sum}</th>
+                    <th style={{ width: '10%', textAlign: 'center' }}>{labels.sum}</th>
                     <th style={{ width: '10%' }}></th>
                   </tr>
                 </thead>
@@ -1621,7 +1620,7 @@ export default function Home() {
               {loading ? <RefreshCw className="spin" size={20} /> : <FileText size={20} />}
               {loading
                 ? 'Собираем КП...'
-                : `Сформировать ${options.template === 'old' || options.format === 'pdf' ? 'PDF' : 'Word'}`}
+                : `Сформировать ${options.format === 'pdf' ? 'PDF' : 'Word'}`}
             </button>
           ) : (
             <>

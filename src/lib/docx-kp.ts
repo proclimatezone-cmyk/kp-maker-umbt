@@ -244,9 +244,13 @@ export async function buildKpDocx(opts: BuildKpOptions): Promise<Buffer> {
       return {
         image: showImages && !item.isAdditional ? item.slidesImage || item.image || '' : '',
         // Доп. работы менеджер называет сам («Монтаж», «Воздуховоды») —
-        // приписку «Дополнительные работы и материалы» не дублируем.
-        category: item.isAdditional ? '' : item.category || '',
-        model: item.model || '',
+        // приписку «Дополнительные работы и материалы» не дублируем, а
+        // само название кладём в «Наименование», а не в «Модель»: в
+        // kp-old.docx это разные колонки, и строка вроде «Монтаж» —
+        // не модель оборудования. В kp-new.docx (где обе колонки объединены
+        // в одну «{category}\n{model}») визуально ничего не меняется.
+        category: item.isAdditional ? (item.model || '') : (item.category || ''),
+        model: item.isAdditional ? '' : (item.model || ''),
         qty: quantityLabel(item.quantity),
         price: formatNum(price),
         sum: formatNum(price * qty),
@@ -255,6 +259,12 @@ export async function buildKpDocx(opts: BuildKpOptions): Promise<Buffer> {
     total_label: money.total() + ':',
     total_value: formatNum(opts.total),
     terms: buildTermsRows(opts.options),
+    // Ниже — теги только для «старого вида» (templates/kp-old.docx). В
+    // kp-new.docx таких тегов в разметке нет, docxtemplater лишние ключи
+    // в данных просто игнорирует — на новый вид это никак не влияет.
+    price_label: money.price,
+    sum_label: money.sum,
+    termLines: buildTermsLines(opts.options),
   });
 
   // У доп. работ фото нет — объединяем их ячейку «Внешний вид» с

@@ -1,5 +1,5 @@
+import path from 'path'
 import { NextRequest, NextResponse, after } from 'next/server'
-import { generateSlidesKP } from '@/lib/google-slides'
 import { buildKpDocx } from '@/lib/docx-kp'
 import { convertDocxToPdf } from '@/lib/docx-to-pdf'
 import { archiveKp } from '@/lib/kp-archive'
@@ -38,37 +38,10 @@ export async function POST(req: NextRequest) {
     const origin = clientOrigin || req.nextUrl.origin
     const login = await getSessionEmail(req)
 
-    // --- Старый вид: прежний путь через Google Slides, на выходе PDF ---
-    if (template === 'old') {
-      const { presentationId, pdfUrl, pdfBuffer, auditError } = await generateSlidesKP({
-        cpName, client, items, additionalItems, equipmentTotal, partnerBonus,
-        additionalTotal, total, manager, extraData, options, origin,
-      })
-
-      if (!pdfBuffer) throw new Error('Не удалось получить PDF из презентации')
-
-      // Старый вид собирается через Slides — Word-версии для него нет,
-      // в архив уходит только PDF. after() — чтобы не задерживать отдачу
-      // готового файла менеджеру ожиданием загрузки на Диск.
-      after(() => archiveKp({
-        cpNumber: cpName || '', client: client || '', manager: manager?.name || '', login,
-        total, pdf: pdfBuffer,
-      }))
-
-      return new NextResponse(new Uint8Array(pdfBuffer), {
-        headers: {
-          'Content-Type': 'application/pdf',
-          'Content-Disposition': contentDisposition(cpName || 'КП', 'pdf'),
-          'X-Presentation-Id': presentationId,
-          'X-PDF-Url': pdfUrl || '',
-          // Заголовки принимают только latin1, а ошибка приходит от Google
-          // и может содержать что угодно.
-          'X-Audit-Error': encodeURIComponent(auditError || ''),
-        },
-      })
-    }
-
-    // --- Новый вид: сборка .docx из шаблона ---
+    // Оба вида КП собираются одинаково — .docx из шаблона через
+    // docxtemplater. Разница только в файле шаблона: раньше «старый вид»
+    // шёл через Google Slides (медленно, риск таймаута на Hobby-плане,
+    // не собрать локально); теперь оба вида одинаково надёжны.
     const allItems = [
       ...(items || []),
       ...(additionalItems || []).map((a: any) => ({
@@ -87,6 +60,9 @@ export async function POST(req: NextRequest) {
       total,
       options: options || {},
       origin,
+      templatePath: template === 'old'
+        ? path.join(process.cwd(), 'templates', 'kp-old.docx')
+        : undefined,
     }
 
     let docx = await buildKpDocx(baseArgs)

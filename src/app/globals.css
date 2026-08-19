@@ -518,6 +518,9 @@ body {
 .tbl .price { font-weight: 600; color: var(--text-secondary); font-variant-numeric: tabular-nums; }
 .tbl .price-unit { font-size: 0.68rem; color: var(--text-muted); margin-left: 3px; }
 .tbl .sum { font-weight: 700; font-size: 0.98rem; font-variant-numeric: tabular-nums; }
+/* Раньше «Сумма» — единственная колонка без text-align (наследовала left),
+   пока заголовок и соседние колонки (Цена/Кол-во) стояли по центру. */
+.tbl td.sum-cell { text-align: center; }
 
 .row-actions { display: flex; gap: 0.3rem; justify-content: flex-end; align-items: center; }
 
