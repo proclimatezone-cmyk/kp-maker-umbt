@@ -76,11 +76,14 @@ function computeRoom(room: Room, stock: Record<string, number> | null) {
   return { area, formulaKw, manualKwValid, factKw, qty, candidates, auto, matched, isManual, sum, stockQty }
 }
 
+const ROOMS_STORAGE_KEY = 'umbt_podbor_rooms'
+
 export default function PodborPage() {
   const router = useRouter()
   const [rooms, setRooms] = useState<Room[]>(() => [newRoom('Комната 1')])
   const [stock, setStock] = useState<Record<string, number> | null>(null)
   const [transferring, setTransferring] = useState(false)
+  const [isMounted, setIsMounted] = useState(false)
 
   useEffect(() => {
     fetch('/api/stock')
@@ -88,6 +91,29 @@ export default function PodborPage() {
       .then(d => { if (d.success) setStock(d.byArticle) })
       .catch(() => {})
   }, [])
+
+  // Черновик комнат раньше жил только в памяти React — уходишь со страницы
+  // (назад в каталог, обновление, переход по ссылке) и весь ввод пропадал.
+  // Восстанавливаем при заходе и сохраняем при каждом изменении — тот же
+  // паттерн, что и автосохранение основного КП в page.tsx.
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(ROOMS_STORAGE_KEY)
+      if (saved) {
+        const parsed: Room[] = JSON.parse(saved)
+        if (Array.isArray(parsed) && parsed.length > 0) setRooms(parsed)
+      }
+    } catch { /* повреждённый черновик — остаёмся с пустой комнатой по умолчанию */ }
+    setIsMounted(true)
+  }, [])
+
+  useEffect(() => {
+    if (!isMounted) return
+    const timer = setTimeout(() => {
+      try { localStorage.setItem(ROOMS_STORAGE_KEY, JSON.stringify(rooms)) } catch { /* квота/приватный режим — не критично */ }
+    }, 500)
+    return () => clearTimeout(timer)
+  }, [rooms, isMounted])
 
   const updateRoom = useCallback((id: string, patch: Partial<Room>) => {
     setRooms(prev => prev.map(r => (r.id === id ? { ...r, ...patch } : r)))
