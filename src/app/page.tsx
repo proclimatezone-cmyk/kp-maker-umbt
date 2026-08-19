@@ -478,7 +478,7 @@ const ModelSearchSelector = memo(({ value, onChange, cleanProducts }: { value: s
   );
 });
 
-const EquipmentRow = memo(({ item, products, cleanProducts, stock, onUpdate, onDelete, onClone, calculatePrice, currencyLabel, labels, oldPriceMap, welkinMap, showDiscount, showOldPrice, showWelkin }: any) => {
+const EquipmentRow = memo(({ item, products, cleanProducts, stock, onUpdate, onDelete, onClone, calculatePrice, currencyLabel, labels, oldPriceMap, welkinMap, mideaCacMap, showDiscount, showOldPrice, showWelkin, showMideaCac }: any) => {
   const p = products.find((x: any) => x.id === item.productId);
   const [qty, setQty] = useState<number | string>(item.quantity);
   const [discount, setDiscount] = useState<number | string>(item.discount !== undefined ? item.discount : 0);
@@ -510,6 +510,13 @@ const EquipmentRow = memo(({ item, products, cleanProducts, stock, onUpdate, onD
   const welkin = welkinMap?.get(normalizeModel(p?.model));
   const welkinUnitPrice = welkin ? calculatePrice(welkin.price) : null;
   const welkinDeltaPct = welkinUnitPrice && welkinUnitPrice > 0 ? ((finalUnitPrice - welkinUnitPrice) / welkinUnitPrice) * 100 : null;
+
+  // Прайс завода Midea («Midea CAC на складе») — точное совпадение по
+  // артикулу, тот же бренд. Не путать со «Старой ценой» (статичный
+  // прайс-лист от 03.08.2026) — это текущий прайс из той же таблицы, где и Welkin.
+  const mideaCac = mideaCacMap?.get(normalizeModel(p?.model));
+  const mideaCacUnitPrice = mideaCac !== undefined ? calculatePrice(mideaCac) : null;
+  const mideaCacDeltaPct = mideaCacUnitPrice && mideaCacUnitPrice > 0 ? ((finalUnitPrice - mideaCacUnitPrice) / mideaCacUnitPrice) * 100 : null;
 
   return (
     <tr>
@@ -544,6 +551,16 @@ const EquipmentRow = memo(({ item, products, cleanProducts, stock, onUpdate, onD
             >
               <span className="price-compare-value">{welkin.source === 'hisense-approx' ? '≈ ' : ''}{formatNum(welkinUnitPrice)} {currencyLabel}</span>
               <span className={`price-compare-delta ${welkinDeltaPct >= 0 ? 'bad' : 'good'}`}>{welkinDeltaPct >= 0 ? '+' : ''}{welkinDeltaPct.toFixed(0)}%</span>
+            </span>
+          ) : <span className="price-compare-empty">—</span>}
+        </td>
+      )}
+      {showMideaCac && (
+        <td data-label="Midea">
+          {mideaCacUnitPrice !== null && mideaCacDeltaPct !== null ? (
+            <span className="price-compare" title="Прайс завода Midea («Midea CAC на складе») — точное совпадение по артикулу">
+              <span className="price-compare-value">{formatNum(mideaCacUnitPrice)} {currencyLabel}</span>
+              <span className={`price-compare-delta ${mideaCacDeltaPct >= 0 ? 'bad' : 'good'}`}>{mideaCacDeltaPct >= 0 ? '+' : ''}{mideaCacDeltaPct.toFixed(0)}%</span>
             </span>
           ) : <span className="price-compare-empty">—</span>}
         </td>
@@ -669,6 +686,7 @@ export default function Home() {
   const [isReportsUser, setIsReportsUser] = useState(false)
   const [oldPriceMap, setOldPriceMap] = useState<Map<string, number> | null>(null)
   const [welkinMap, setWelkinMap] = useState<Map<string, { price: number; model: string; deltaPct: number; source: 'midea-exact' | 'hisense-approx' }> | null>(null)
+  const [mideaCacMap, setMideaCacMap] = useState<Map<string, number> | null>(null)
 
   // Конфиденциальные колонки — скидка, старая цена, Welkin. Намеренно НЕ
   // в localStorage: должны сбрасываться на «скрыто» при каждой загрузке
@@ -679,7 +697,8 @@ export default function Home() {
   const [showDiscount, setShowDiscount] = useState(false)
   const [showOldPrice, setShowOldPrice] = useState(false)
   const [showWelkin, setShowWelkin] = useState(false)
-  const adminColsOn = showOldPrice && showWelkin
+  const [showMideaCac, setShowMideaCac] = useState(false)
+  const adminColsOn = showOldPrice && showWelkin && showMideaCac
 
   const [options, setOptions] = useState({
     showImages: true,
@@ -800,6 +819,17 @@ export default function Home() {
             setWelkinMap(map);
           })
           .catch(() => setWelkinMap(null));
+
+        fetch('/api/reports/midea-cac-comparison')
+          .then(r => r.json())
+          .then(mc => {
+            const map = new Map<string, number>();
+            for (const row of mc.rows || []) {
+              map.set(normalizeModel(row.model), row.mideaPrice);
+            }
+            setMideaCacMap(map);
+          })
+          .catch(() => setMideaCacMap(null));
       })
       .catch(() => setIsReportsUser(false));
 
@@ -915,6 +945,28 @@ export default function Home() {
     const deltaPct = welkinTotal > 0 ? ((currentMatchedTotal - welkinTotal) / welkinTotal) * 100 : null;
     return { welkinTotal, currentMatchedTotal, matchedQty, totalQty, deltaPct };
   }, [items, products, welkinMap, calculatePrice]);
+
+  const mideaCacStats = useMemo(() => {
+    if (!mideaCacMap) return null;
+    let mideaTotal = 0, currentMatchedTotal = 0, matchedQty = 0, totalQty = 0;
+    for (const item of items) {
+      const p = products.find(x => x.id === item.productId);
+      if (!p) continue;
+      const qty = Number(item.quantity) || 0;
+      totalQty += qty;
+      const mideaUsd = mideaCacMap.get(normalizeModel(p.model));
+      if (mideaUsd === undefined) continue;
+      const mideaUnit = calculatePrice(mideaUsd);
+      const discountVal = item.discount || 0;
+      const finalUnit = Math.round(calculatePrice(p.price) * (1 + discountVal / 100));
+      mideaTotal += mideaUnit * qty;
+      currentMatchedTotal += finalUnit * qty;
+      matchedQty += qty;
+    }
+    if (matchedQty === 0) return { mideaTotal, currentMatchedTotal, matchedQty, totalQty, deltaPct: null as number | null };
+    const deltaPct = mideaTotal > 0 ? ((currentMatchedTotal - mideaTotal) / mideaTotal) * 100 : null;
+    return { mideaTotal, currentMatchedTotal, matchedQty, totalQty, deltaPct };
+  }, [items, products, mideaCacMap, calculatePrice]);
 
   const capacityMetrics = useMemo(() => {
     let external = 0;
@@ -1252,9 +1304,12 @@ export default function Home() {
                     <button className={`chip ${showWelkin ? 'on' : ''}`} onClick={() => setShowWelkin(v => !v)}>
                       {showWelkin ? <Unlock size={13} /> : <Lock size={13} />} Welkin
                     </button>
+                    <button className={`chip ${showMideaCac ? 'on' : ''}`} onClick={() => setShowMideaCac(v => !v)}>
+                      {showMideaCac ? <Unlock size={13} /> : <Lock size={13} />} Midea
+                    </button>
                     <button
                       className={`chip chip-all ${adminColsOn ? 'on' : ''}`}
-                      onClick={() => { const next = !adminColsOn; setShowOldPrice(next); setShowWelkin(next); }}
+                      onClick={() => { const next = !adminColsOn; setShowOldPrice(next); setShowWelkin(next); setShowMideaCac(next); }}
                     >
                       Показать всё
                     </button>
@@ -1266,10 +1321,11 @@ export default function Home() {
                 <table className="tbl">
                   <thead>
                     <tr>
-                      <th style={{ width: '30%' }}>Модель</th>
-                      <th style={{ width: '12%', textAlign: 'center' }}>{labels.price}</th>
-                      {showOldPrice && <th style={{ width: '14%', textAlign: 'center' }}>Старая цена</th>}
-                      {showWelkin && <th style={{ width: '14%', textAlign: 'center' }}>Welkin</th>}
+                      <th style={{ width: '26%' }}>Модель</th>
+                      <th style={{ width: '11%', textAlign: 'center' }}>{labels.price}</th>
+                      {showOldPrice && <th style={{ width: '13%', textAlign: 'center' }}>Старая цена</th>}
+                      {showWelkin && <th style={{ width: '13%', textAlign: 'center' }}>Welkin</th>}
+                      {showMideaCac && <th style={{ width: '13%', textAlign: 'center' }}>Midea</th>}
                       {showDiscount && <th style={{ width: '10%', textAlign: 'center' }}>Скидка %</th>}
                       <th style={{ width: '10%', textAlign: 'center' }}>Кол-во</th>
                       <th style={{ width: '16%', textAlign: 'right' }}>{labels.sum}</th>
@@ -1284,8 +1340,8 @@ export default function Home() {
                       <EquipmentRow
                         key={item.id} item={item} products={products} cleanProducts={cleanProducts} stock={stock}
                         onUpdate={updateItem} onDelete={deleteItem} onClone={cloneItem} calculatePrice={calculatePrice}
-                        currencyLabel={currencyLabel} labels={labels} oldPriceMap={oldPriceMap} welkinMap={welkinMap}
-                        showDiscount={showDiscount} showOldPrice={showOldPrice} showWelkin={showWelkin}
+                        currencyLabel={currencyLabel} labels={labels} oldPriceMap={oldPriceMap} welkinMap={welkinMap} mideaCacMap={mideaCacMap}
+                        showDiscount={showDiscount} showOldPrice={showOldPrice} showWelkin={showWelkin} showMideaCac={showMideaCac}
                       />
                     ))}
                   </tbody>
@@ -1308,7 +1364,7 @@ export default function Home() {
               </div>
             </div>
 
-            {((showOldPrice && oldPriceStats && oldPriceStats.matchedQty > 0) || (showWelkin && welkinStats && welkinStats.matchedQty > 0)) && (
+            {((showOldPrice && oldPriceStats && oldPriceStats.matchedQty > 0) || (showWelkin && welkinStats && welkinStats.matchedQty > 0) || (showMideaCac && mideaCacStats && mideaCacStats.matchedQty > 0)) && (
               <div className="compare-panel">
                 <div className="compare-panel-title">Сравнение цен по текущему подбору</div>
                 <div className="compare-grid">
@@ -1331,7 +1387,7 @@ export default function Home() {
                   {showWelkin && welkinStats && welkinStats.matchedQty > 0 && (
                     <div className="compare-card">
                       <div className="compare-card-head">
-                        <span className="compare-card-title">Welkin (Hisense OEM)</span>
+                        <span className="compare-card-title">Welkin</span>
                         <span className="compare-card-coverage">{welkinStats.matchedQty} из {welkinStats.totalQty} шт</span>
                       </div>
                       <div className="compare-card-value">
@@ -1340,6 +1396,22 @@ export default function Home() {
                       {welkinStats.deltaPct !== null && (
                         <span className={`compare-delta ${welkinStats.deltaPct >= 0 ? 'bad' : 'good'}`}>
                           мы {welkinStats.deltaPct >= 0 ? 'дороже' : 'дешевле'} на {Math.abs(welkinStats.deltaPct).toFixed(1)}%
+                        </span>
+                      )}
+                    </div>
+                  )}
+                  {showMideaCac && mideaCacStats && mideaCacStats.matchedQty > 0 && (
+                    <div className="compare-card">
+                      <div className="compare-card-head">
+                        <span className="compare-card-title">Прайс завода Midea</span>
+                        <span className="compare-card-coverage">{mideaCacStats.matchedQty} из {mideaCacStats.totalQty} шт</span>
+                      </div>
+                      <div className="compare-card-value">
+                        {formatNum(mideaCacStats.mideaTotal)} <span className="compare-card-currency">{currencyLabel}</span>
+                      </div>
+                      {mideaCacStats.deltaPct !== null && (
+                        <span className={`compare-delta ${mideaCacStats.deltaPct >= 0 ? 'bad' : 'good'}`}>
+                          мы {mideaCacStats.deltaPct >= 0 ? 'дороже' : 'дешевле'} на {Math.abs(mideaCacStats.deltaPct).toFixed(1)}%
                         </span>
                       )}
                     </div>

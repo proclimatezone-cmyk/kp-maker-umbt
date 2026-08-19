@@ -8,9 +8,10 @@ import type { SalesReport, SaleRecord } from '@/lib/reports/sales'
 import type { BookingsReport } from '@/lib/reports/bookings'
 import type { PriceComparisonReport } from '@/lib/reports/price-comparison'
 import type { WelkinComparisonReport } from '@/lib/reports/welkin-comparison'
+import type { MideaCacComparisonReport } from '@/lib/reports/midea-cac-comparison'
 import './reports.css'
 
-type Tab = 'sales' | 'bookings' | 'price' | 'welkin'
+type Tab = 'sales' | 'bookings' | 'price' | 'welkin' | 'midea-cac'
 
 function useReportData<T>(url: string) {
   const [data, setData] = useState<T | null>(null)
@@ -48,12 +49,14 @@ export default function ReportsPage() {
         <button className={`reports-tab ${tab === 'bookings' ? 'active' : ''}`} onClick={() => setTab('bookings')}>Бронь</button>
         <button className={`reports-tab ${tab === 'price' ? 'active' : ''}`} onClick={() => setTab('price')}>Прайс</button>
         <button className={`reports-tab ${tab === 'welkin' ? 'active' : ''}`} onClick={() => setTab('welkin')}>Welkin</button>
+        <button className={`reports-tab ${tab === 'midea-cac' ? 'active' : ''}`} onClick={() => setTab('midea-cac')}>Midea (завод)</button>
       </div>
 
       {tab === 'sales' && <SalesTab />}
       {tab === 'bookings' && <BookingsTab />}
       {tab === 'price' && <PriceTab />}
       {tab === 'welkin' && <WelkinTab />}
+      {tab === 'midea-cac' && <MideaCacTab />}
     </div>
   )
 }
@@ -409,6 +412,74 @@ function WelkinTab() {
                     <span className={`badge ${r.deltaPct >= 0 ? 'up' : 'down'}`}>{r.deltaPct >= 0 ? '+' : ''}{r.deltaPct.toFixed(1)}%</span>
                   </td>
                   <td className="num">{r.source === 'midea-exact' ? 'точно' : `±${r.matchDeltaPct}%`}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          {rows.length > 400 && <div className="stat-tile-hint" style={{ marginTop: 8 }}>Показаны первые 400 из {rows.length} строк.</div>}
+        </div>
+      </div>
+    </>
+  )
+}
+
+// ---------------------------------------------------------------------------
+// Midea (завод) — сравнение с текущим прайсом производителя
+// ---------------------------------------------------------------------------
+
+function MideaCacTab() {
+  const { data, error, loading } = useReportData<MideaCacComparisonReport>('/api/reports/midea-cac-comparison')
+  const [onlyMoreExpensive, setOnlyMoreExpensive] = useState(false)
+
+  const rows = useMemo(() => {
+    if (!data) return []
+    return onlyMoreExpensive ? data.rows.filter(r => r.weAreMoreExpensive) : data.rows
+  }, [data, onlyMoreExpensive])
+
+  if (loading) return <div className="reports-loading"><RefreshCw className="spin" size={20} /></div>
+  if (error || !data) return <div className="reports-error">{error || 'Нет данных'}</div>
+
+  return (
+    <>
+      <div className="completeness-banner">
+        <AlertTriangle size={16} />
+        Текущий прайс завода Midea (лист «Midea CAC на СКЛАДЕ») — тот же бренд, точное совпадение по артикулу.
+        Не путать со «Старой ценой» (вкладка «Прайс») — это отдельный статичный прайс-лист от 03.08.2026, а здесь —
+        текущий, из той же таблицы, что и Welkin. Только позиции «в наличии».
+      </div>
+
+      <div className="stat-grid">
+        <StatTile label="Сопоставлено моделей" value={String(data.matchedCount)} />
+        <StatTile label="Мы дороже" value={String(data.weAreMoreExpensiveCount)} />
+        <StatTile label="Мы дешевле" value={String(data.weAreCheaperCount)} />
+        <StatTile label="Средняя дельта" value={data.avgDeltaPct !== null ? `${data.avgDeltaPct >= 0 ? '+' : ''}${data.avgDeltaPct.toFixed(1)}%` : '—'} hint="наша цена относительно завода" />
+      </div>
+
+      <div className="report-filters">
+        <label style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: '0.82rem', color: 'var(--text-secondary)' }}>
+          <input type="checkbox" checked={onlyMoreExpensive} onChange={e => setOnlyMoreExpensive(e.target.checked)} />
+          Только где мы дороже
+        </label>
+      </div>
+
+      <div className="report-section">
+        <div className="report-table-wrap">
+          <table className="report-table">
+            <thead>
+              <tr>
+                <th>Модель</th><th>Категория</th><th className="num">Наша цена, $</th><th className="num">Midea, $</th><th className="num">Дельта</th>
+              </tr>
+            </thead>
+            <tbody>
+              {rows.slice(0, 400).map((r, i) => (
+                <tr key={i}>
+                  <td>{r.model}</td>
+                  <td>{r.category}</td>
+                  <td className="num">{formatNum(r.ourPrice)}</td>
+                  <td className="num">{formatNum(r.mideaPrice)}</td>
+                  <td className="num">
+                    <span className={`badge ${r.deltaPct >= 0 ? 'up' : 'down'}`}>{r.deltaPct >= 0 ? '+' : ''}{r.deltaPct.toFixed(1)}%</span>
+                  </td>
                 </tr>
               ))}
             </tbody>

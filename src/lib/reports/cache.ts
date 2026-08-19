@@ -3,6 +3,7 @@ import { computeSalesReport, type SalesReport } from './sales';
 import { computeBookingsReport, type BookingsReport } from './bookings';
 import { computePriceComparison, type PriceComparisonReport } from './price-comparison';
 import { computeWelkinComparison, type WelkinComparisonReport } from './welkin-comparison';
+import { computeMideaCacComparison, type MideaCacComparisonReport } from './midea-cac-comparison';
 import { getProducts } from '@/lib/products-cache';
 
 // Данные склада/цен не меняются поминутно — 10 минут, как у products-cache.ts,
@@ -18,6 +19,7 @@ let salesCache: CacheEntry<SalesReport> | null = null;
 let bookingsCache: CacheEntry<BookingsReport> | null = null;
 let priceCache: CacheEntry<PriceComparisonReport> | null = null;
 let welkinCache: CacheEntry<WelkinComparisonReport> | null = null;
+let mideaCacCache: CacheEntry<MideaCacComparisonReport> | null = null;
 
 function isFresh<T>(entry: CacheEntry<T> | null): entry is CacheEntry<T> {
   return !!entry && Date.now() - entry.fetchedAt < CACHE_TTL;
@@ -56,5 +58,15 @@ export async function getWelkinComparisonReport(): Promise<WelkinComparisonRepor
     (products as any[]).map((p) => ({ model: p.model, category: p.category, price: Number(p.price) || 0 }))
   );
   welkinCache = { data, fetchedAt: Date.now() };
+  return data;
+}
+
+export async function getMideaCacComparisonReport(): Promise<MideaCacComparisonReport> {
+  if (isFresh(mideaCacCache)) return mideaCacCache!.data;
+  const products = await getProducts();
+  const data = computeMideaCacComparison(
+    (products as any[]).map((p) => ({ model: p.model, category: p.category, price: Number(p.price) || 0 }))
+  );
+  mideaCacCache = { data, fetchedAt: Date.now() };
   return data;
 }
