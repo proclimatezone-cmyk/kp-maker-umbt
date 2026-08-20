@@ -127,6 +127,12 @@ export default function PodborPage() {
     setRooms(prev => [...prev, newRoom(`Комната ${prev.length + 1}`)])
   }, [])
 
+  const clearRooms = useCallback(() => {
+    if (!window.confirm('Очистить весь подбор? Все введённые комнаты будут удалены.')) return
+    setRooms([newRoom('Комната 1')])
+    try { localStorage.removeItem(ROOMS_STORAGE_KEY) } catch { /* приватный режим — не критично */ }
+  }, [])
+
   const setFamily = useCallback((id: string, family: Family) => {
     const formFactor = formFactorOptions(family)[0] || null
     const seriesOrPipe = formFactor
@@ -151,7 +157,11 @@ export default function PodborPage() {
     for (const { room, c } of computed) {
       rooms_ += 1
       area += c.area || 0
-      kw += c.factKw || 0
+      // factKw — требуемая мощность ОДНОЙ единицы в комнате (см. "запас X кВт
+      // к требуемым Y" у результата подбора), а qty — сколько таких единиц в
+      // комнате стоит. Без умножения на qty «Суммарная мощность» занижала
+      // общий итог на каждой комнате, где выбрано больше одной единицы.
+      kw += (c.factKw || 0) * c.qty
       qty += c.qty
       sum += c.sum
     }
@@ -190,7 +200,7 @@ export default function PodborPage() {
       const rows = computed.map(({ room, c }) => ({
         'Комната': room.name,
         'Площадь, м²': c.area ?? '',
-        'кВт (факт)': c.factKw,
+        'кВт (факт)': Math.round(c.factKw * c.qty * 10) / 10,
         'Кол-во, шт': c.qty,
         'Модель': c.matched?.model || '—',
         'Цена, у.е.': c.matched?.price || 0,
@@ -234,6 +244,7 @@ export default function PodborPage() {
           </a>
           <h1>Подбор оборудования по комнатам</h1>
         </div>
+        <button className="btn btn-ghost" onClick={clearRooms}><Trash2 size={14} /> Очистить подбор</button>
       </div>
       <p className="podbor-lede">
         Площадь считается как в Excel — число или формула (8*5, =8*5, 20+20). Площадь × 0,135 даёт кВт по формуле;
@@ -404,6 +415,7 @@ function RoomCard({ index, room, c, onUpdate, onRemove, onFamily, onFormFactor, 
             value={room.qty}
             onChange={e => onUpdate({ qty: e.target.value.replace(/[^\d]/g, '') })}
           />
+          {c.qty > 1 && <span className="kw-note">= {formatDecimal(c.factKw * c.qty)} кВт всего</span>}
         </div>
       </div>
 
