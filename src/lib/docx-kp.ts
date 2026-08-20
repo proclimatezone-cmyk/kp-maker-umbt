@@ -173,6 +173,41 @@ function quantityLabel(quantity: unknown): string {
   return /^\d+([.,]\d+)?$/.test(raw) ? `${raw} шт.` : raw;
 }
 
+/**
+ * Схлопывает строки одинакового оборудования (та же модель, цена и
+ * картинка) в одну — с суммарным количеством. Менеджер добавляет позицию
+ * по кнопке «+» на каждую единицу, и без этого один и тот же MIH28Q4HN18
+ * печатался бы двумя одинаковыми строками вместо одной с «2 шт.».
+ * Доп. работы (isAdditional) и позиции с нечисловым количеством
+ * («работа», «12 м.п.») не трогаем — там количество не складывается.
+ */
+function mergeIdenticalItems(items: KpItem[]): KpItem[] {
+  const merged: KpItem[] = [];
+  const indexByKey = new Map<string, number>();
+
+  for (const item of items) {
+    const rawQty = String(item.quantity ?? '').trim();
+    const isPlainNumber = /^\d+([.,]\d+)?$/.test(rawQty);
+    if (item.isAdditional || !isPlainNumber) {
+      merged.push(item);
+      continue;
+    }
+
+    const key = [item.category, item.model, item.price, item.image, item.slidesImage].join('|');
+    const existingIndex = indexByKey.get(key);
+    if (existingIndex === undefined) {
+      indexByKey.set(key, merged.length);
+      merged.push({ ...item });
+    } else {
+      const existing = merged[existingIndex];
+      const existingQty = Number(String(existing.quantity).replace(',', '.')) || 0;
+      existing.quantity = existingQty + Number(rawQty.replace(',', '.'));
+    }
+  }
+
+  return merged;
+}
+
 export interface BuildKpOptions {
   cpNumber: string;
   cpDate: string;
@@ -218,8 +253,9 @@ export async function buildKpDocx(opts: BuildKpOptions): Promise<Buffer> {
     throw new Error(`Шаблон не найден: ${templatePath}`);
   }
 
+  const items = mergeIdenticalItems(opts.items);
   const showImages = opts.options.showImages !== false;
-  const images = showImages ? await preloadImages(opts.items, opts.origin) : new Map<string, Buffer>();
+  const images = showImages ? await preloadImages(items, opts.origin) : new Map<string, Buffer>();
   const money = getMoneyLabels(opts.options);
 
   const imageModule = new ImageModule({
@@ -238,7 +274,7 @@ export async function buildKpDocx(opts: BuildKpOptions): Promise<Buffer> {
   doc.render({
     cp_number: opts.cpNumber,
     cp_date: opts.cpDate,
-    items: opts.items.map(item => {
+    items: items.map(item => {
       const price = Math.round(Number(item.price) || 0);
       const qty = Number(String(item.quantity ?? '1').match(/[\d.,]+/)?.[0]?.replace(',', '.')) || 1;
       return {
@@ -270,7 +306,7 @@ export async function buildKpDocx(opts: BuildKpOptions): Promise<Buffer> {
   // У доп. работ фото нет — объединяем их ячейку «Внешний вид» с
   // «Наименованием», чтобы название шло во всю ширину. Это последние строки
   // таблицы (доп. работы идут после оборудования), перед строкой «Итого».
-  const additionalCount = opts.items.filter(i => i.isAdditional).length;
+  const additionalCount = items.filter(i => i.isAdditional).length;
   if (additionalCount > 0) {
     const zip = doc.getZip();
     const xml = zip.file('word/document.xml')!.asText();
