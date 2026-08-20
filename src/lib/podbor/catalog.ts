@@ -9,6 +9,10 @@ import productsData from '@/data/products.json';
  */
 
 export type Family = 'vrf' | 'fancoil' | 'split';
+// Наружные блоки VRF отдельным «псевдосемейством» — не показываются в выборе
+// оборудования для комнаты (там нужны только внутренние блоки), но лежат
+// в общем каталоге для подбора агрегата по сумме мощностей (см. matchOutdoorUnit).
+type OutdoorFamily = 'vrf_outdoor';
 export type FormFactor = 'cassette' | 'wall' | 'duct' | 'floor_ceiling';
 export type Series = 'v8' | 'atom_b';
 export type PipeType = '2p' | '4p';
@@ -20,7 +24,7 @@ export interface PodborProduct {
   coolingCapacity: number;
   category: string;
   image?: string;
-  family: Family;
+  family: Family | OutdoorFamily;
   formFactor: FormFactor | null;
   series: Series | null;
   pipeType: PipeType | null;
@@ -57,7 +61,18 @@ function classify(p: any): PodborProduct | null {
   const cat = (p.category || '').trim();
   if (!cat) return null;
 
-  // Внутренние блоки VRF/mini-VRF — наружные блоки на комнату не подбираются.
+  // Наружные блоки VRF/mini-VRF — не привязаны к комнате, их подбирают по
+  // сумме мощностей внутренних блоков одной серии (см. matchOutdoorUnit).
+  // «V8 Master» / «V8 Easyfit» / «mini-VRF V8» — все подлинейки V8 сведены
+  // в один пул кандидатов по серии: у внутренних блоков в прайсе подлинейка
+  // не указывается, различить их для конкретной комнаты нельзя.
+  if (/^Наружный блок (VRF|mini-VRF)/i.test(cat)) {
+    const series: Series | null = /серии V8/i.test(cat) ? 'v8' : /серии ATOM B/i.test(cat) ? 'atom_b' : null;
+    if (!series) return null;
+    return { ...base(p), family: 'vrf_outdoor', formFactor: null, series, pipeType: null };
+  }
+
+  // Внутренние блоки VRF/mini-VRF.
   if (/VRF|mini-VRF/i.test(cat) && !/^Наружный/i.test(cat) && !/Компрессорно-конденсаторный/i.test(cat)) {
     let formFactor: FormFactor | null = null;
     if (/кассетн/i.test(cat)) formFactor = 'cassette';
@@ -148,6 +163,58 @@ export function matchByPower(candidates: PodborProduct[], requiredKw: number): M
   if (withCapacity.length === 0) return { product: null, reason: 'no_capacity_data' };
   const fit = withCapacity.find(p => p.coolingCapacity >= requiredKw);
   return { product: fit || withCapacity[withCapacity.length - 1], reason: 'ok' };
+}
+
+/** Наружные блоки VRF выбранной серии, отсортированные по мощности. */
+export function outdoorCandidates(series: Series): PodborProduct[] {
+  // У серии V8 в одном пуле сразу три физически разных линейки — Master,
+  // Easyfit и mini-VRF (в прайсе у внутренних блоков подлинейка не указана,
+  // разделить их для конкретного проекта нечем, см. classify()). На
+  // пересекающихся мощностях (25–67 кВт Master/Easyfit) сортировка по цене
+  // вторым ключом выбирает более дешёвый Easyfit — это черновой подбор,
+  // менеджер проверяет и меняет вручную под реальные требования проекта
+  // (длина трасс, число подключаемых блоков).
+  return PODBOR_CATALOG
+    .filter(p => p.family === 'vrf_outdoor' && p.series === series && p.coolingCapacity > 0)
+    .sort((a, b) => a.coolingCapacity - b.coolingCapacity || a.price - b.price);
+}
+
+// Коэффициент комбинации VRF: сумма мощности внутренних блоков должна
+// укладываться в 90–115% от паспортной мощности наружного блока — значения
+// приняты по практике компании, не из даташита конкретной линейки.
+const COMBINATION_RATIO_MIN = 0.9;
+const COMBINATION_RATIO_MAX = 1.15;
+
+export interface OutdoorMatchResult {
+  product: PodborProduct | null;
+  ratio: number | null; // indoorKw / product.coolingCapacity
+  reason: 'ok' | 'over_capacity' | 'no_candidates';
+}
+
+/**
+ * Наружный блок под сумму мощностей внутренних блоков одной серии: берём
+ * наименьший, для которого indoorKw укладывается в 90–115% его мощности.
+ * Если даже самый мощный блок в линейке даёт коэффициент выше 115% —
+ * одного блока не хватает (мультизональность несколькими наружными блоками
+ * не считаем — это отдельная задача проектирования, выбор остаётся ручным).
+ */
+export function matchOutdoorUnit(series: Series, indoorKw: number): OutdoorMatchResult {
+  const candidates = outdoorCandidates(series);
+  if (candidates.length === 0) return { product: null, ratio: null, reason: 'no_candidates' };
+  if (indoorKw <= 0) return { product: null, ratio: null, reason: 'no_candidates' };
+
+  const fit = candidates.find(p => {
+    const ratio = indoorKw / p.coolingCapacity;
+    return ratio >= COMBINATION_RATIO_MIN && ratio <= COMBINATION_RATIO_MAX;
+  });
+  if (fit) return { product: fit, ratio: indoorKw / fit.coolingCapacity, reason: 'ok' };
+
+  const largest = candidates[candidates.length - 1];
+  const largestRatio = indoorKw / largest.coolingCapacity;
+  if (largestRatio > COMBINATION_RATIO_MAX) return { product: null, ratio: largestRatio, reason: 'over_capacity' };
+  // Мощности не хватает даже наименьшему блоку (коэффициент ниже 90%) —
+  // всё равно предлагаем наименьший как отправную точку для ручной правки.
+  return { product: candidates[0], ratio: indoorKw / candidates[0].coolingCapacity, reason: 'ok' };
 }
 
 export function productLabel(p: PodborProduct): string {

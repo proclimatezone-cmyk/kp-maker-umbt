@@ -9,8 +9,8 @@ import { evalAreaFormula } from '@/lib/podbor/formula'
 import {
   PODBOR_CATALOG, FAMILY_LABEL, FORM_FACTOR_LABEL, SERIES_LABEL, PIPE_LABEL,
   familyProducts, formFactorOptions, seriesOptions, pipeTypeOptions,
-  candidatesFor, matchByPower, productLabel,
-  Family, FormFactor, PodborProduct,
+  candidatesFor, matchByPower, matchOutdoorUnit, outdoorCandidates, productLabel,
+  Family, FormFactor, Series, PodborProduct,
 } from '@/lib/podbor/catalog'
 import './podbor.css'
 
@@ -77,6 +77,7 @@ function computeRoom(room: Room, stock: Record<string, number> | null) {
 }
 
 const ROOMS_STORAGE_KEY = 'umbt_podbor_rooms'
+const OUTDOOR_STORAGE_KEY = 'umbt_podbor_outdoor'
 
 export default function PodborPage() {
   const router = useRouter()
@@ -84,6 +85,10 @@ export default function PodborPage() {
   const [stock, setStock] = useState<Record<string, number> | null>(null)
   const [transferring, setTransferring] = useState(false)
   const [isMounted, setIsMounted] = useState(false)
+  // Ручной выбор наружного блока по серии (v8 / atom_b) — перекрывает
+  // авто-подбор по сумме кВт внутренних блоков этой серии. null/отсутствие
+  // ключа = используется авто-подбор (matchOutdoorUnit).
+  const [outdoorPicks, setOutdoorPicks] = useState<Record<string, string | null>>({})
 
   useEffect(() => {
     fetch('/api/stock')
@@ -103,6 +108,11 @@ export default function PodborPage() {
         const parsed: Room[] = JSON.parse(saved)
         if (Array.isArray(parsed) && parsed.length > 0) setRooms(parsed)
       }
+      const savedOutdoor = localStorage.getItem(OUTDOOR_STORAGE_KEY)
+      if (savedOutdoor) {
+        const parsed = JSON.parse(savedOutdoor)
+        if (parsed && typeof parsed === 'object') setOutdoorPicks(parsed)
+      }
     } catch { /* повреждённый черновик — остаёмся с пустой комнатой по умолчанию */ }
     setIsMounted(true)
   }, [])
@@ -110,10 +120,13 @@ export default function PodborPage() {
   useEffect(() => {
     if (!isMounted) return
     const timer = setTimeout(() => {
-      try { localStorage.setItem(ROOMS_STORAGE_KEY, JSON.stringify(rooms)) } catch { /* квота/приватный режим — не критично */ }
+      try {
+        localStorage.setItem(ROOMS_STORAGE_KEY, JSON.stringify(rooms))
+        localStorage.setItem(OUTDOOR_STORAGE_KEY, JSON.stringify(outdoorPicks))
+      } catch { /* квота/приватный режим — не критично */ }
     }, 500)
     return () => clearTimeout(timer)
-  }, [rooms, isMounted])
+  }, [rooms, outdoorPicks, isMounted])
 
   const updateRoom = useCallback((id: string, patch: Partial<Room>) => {
     setRooms(prev => prev.map(r => (r.id === id ? { ...r, ...patch } : r)))
@@ -130,7 +143,11 @@ export default function PodborPage() {
   const clearRooms = useCallback(() => {
     if (!window.confirm('Очистить весь подбор? Все введённые комнаты будут удалены.')) return
     setRooms([newRoom('Комната 1')])
-    try { localStorage.removeItem(ROOMS_STORAGE_KEY) } catch { /* приватный режим — не критично */ }
+    setOutdoorPicks({})
+    try {
+      localStorage.removeItem(ROOMS_STORAGE_KEY)
+      localStorage.removeItem(OUTDOOR_STORAGE_KEY)
+    } catch { /* приватный режим — не критично */ }
   }, [])
 
   const setFamily = useCallback((id: string, family: Family) => {
@@ -174,6 +191,30 @@ export default function PodborPage() {
     return { area, kw, qty, sum, rooms: rooms_, fancoil: group(fancoil), units: group(units) }
   }, [computed])
 
+  // Наружные блоки VRF не выбираются на комнату — один агрегат обслуживает
+  // все внутренние блоки одной серии (v8 / atom_b) проекта. Группируем кВт
+  // внутренних блоков family='vrf' по серии и подбираем наружный блок под
+  // сумму (matchOutdoorUnit, коэффициент комбинации 90–115%).
+  const outdoorGroups = useMemo(() => {
+    const indoorKwBySeries = new Map<Series, number>()
+    for (const { room, c } of computed) {
+      if (room.family !== 'vrf' || !room.seriesOrPipe) continue
+      const series = room.seriesOrPipe as Series
+      indoorKwBySeries.set(series, (indoorKwBySeries.get(series) || 0) + c.factKw * c.qty)
+    }
+    return [...indoorKwBySeries.entries()].map(([series, indoorKw]) => {
+      const candidates = outdoorCandidates(series)
+      const auto = matchOutdoorUnit(series, indoorKw)
+      const manualId = outdoorPicks[series] || null
+      const manual = manualId ? candidates.find(p => p.id === manualId) || null : null
+      const product = manual || auto.product
+      const ratio = product ? indoorKw / product.coolingCapacity : auto.ratio
+      return { series, indoorKw, candidates, auto, isManual: !!manual, product, ratio }
+    })
+  }, [computed, outdoorPicks])
+
+  const outdoorSum = outdoorGroups.reduce((s, g) => s + (g.product?.price || 0), 0)
+
   const stockAlerts = useMemo(() => {
     let low = 0, none = 0
     for (const { c } of computed) {
@@ -188,11 +229,15 @@ export default function PodborPage() {
     const items = computed
       .filter(x => x.c.matched)
       .map(x => ({ productId: x.c.matched!.id, quantity: x.c.qty }))
-    if (items.length === 0) return
+    const outdoorItems = outdoorGroups
+      .filter(g => g.product)
+      .map(g => ({ productId: g.product!.id, quantity: 1 }))
+    const allItems = [...items, ...outdoorItems]
+    if (allItems.length === 0) return
     setTransferring(true)
-    sessionStorage.setItem('umbt_podbor_transfer', JSON.stringify(items))
+    sessionStorage.setItem('umbt_podbor_transfer', JSON.stringify(allItems))
     router.push('/')
-  }, [computed, router])
+  }, [computed, outdoorGroups, router])
 
   const exportExcel = useCallback(async (mode: 'client' | 'work') => {
     const XLSX = await import('xlsx')
@@ -284,6 +329,12 @@ export default function PodborPage() {
             <div className="kpi-row"><span className="kpi-label">Суммарная мощность</span><span className="kpi-value">{formatDecimal(totals.kw)} кВт</span></div>
             <div className="kpi-divider" />
             <div className="kpi-row"><span className="kpi-label">Стоимость оборудования</span><span className="kpi-value accent">{formatNum(totals.sum)} у.е.</span></div>
+            {outdoorGroups.length > 0 && (
+              <>
+                <div className="kpi-row"><span className="kpi-label">Наружные блоки</span><span className="kpi-value">{formatNum(outdoorSum)} у.е.</span></div>
+                <div className="kpi-row"><span className="kpi-label">Итого с наружными блоками</span><span className="kpi-value accent">{formatNum(totals.sum + outdoorSum)} у.е.</span></div>
+              </>
+            )}
           </div>
 
           <div className="podbor-card summary-card">
@@ -291,6 +342,46 @@ export default function PodborPage() {
             <div className="kpi-row"><span className="kpi-label">Фанкойлы</span><span className="kpi-value">{totals.fancoil.qty} шт · {formatNum(totals.fancoil.sum)} у.е.</span></div>
             <div className="kpi-row"><span className="kpi-label">Агрегаты (VRF + сплит)</span><span className="kpi-value">{totals.units.qty} шт · {formatNum(totals.units.sum)} у.е.</span></div>
           </div>
+
+          {outdoorGroups.length > 0 && (
+            <div className="podbor-card summary-card">
+              <p className="summary-title">Наружные блоки VRF — по сумме внутренних</p>
+              {outdoorGroups.map(g => (
+                <div key={g.series} className="outdoor-group" style={{ marginBottom: 10 }}>
+                  <div className="kpi-row">
+                    <span className="kpi-label">{SERIES_LABEL[g.series]} · внутри</span>
+                    <span className="kpi-value">{formatDecimal(g.indoorKw)} кВт</span>
+                  </div>
+                  <select
+                    className="field-input"
+                    style={{ width: '100%', marginTop: 4 }}
+                    value={g.product?.id || ''}
+                    onChange={e => setOutdoorPicks(prev => ({ ...prev, [g.series]: e.target.value || null }))}
+                  >
+                    <option value="">— авто по мощности —</option>
+                    {g.candidates.map(p => (
+                      <option key={p.id} value={p.id}>{productLabel(p)}</option>
+                    ))}
+                  </select>
+                  {g.product ? (
+                    <p className="kw-note" style={{ marginTop: 4 }}>
+                      {g.product.model} · {formatDecimal(g.product.coolingCapacity)} кВт · {formatNum(g.product.price)} у.е.
+                      {g.ratio != null && <> · загрузка {Math.round(g.ratio * 100)}%</>}
+                      {g.ratio != null && (g.ratio < 0.9 || g.ratio > 1.15) && (
+                        <span style={{ color: 'var(--error)' }}> — вне 90–115%, проверьте вручную</span>
+                      )}
+                    </p>
+                  ) : (
+                    <p className="result-note warn" style={{ marginTop: 4 }}>
+                      ⚠ {g.auto.reason === 'over_capacity'
+                        ? `даже самого мощного блока серии не хватает (потребовалось бы ${Math.round((g.auto.ratio || 0) * 100)}% от него) — выберите вручную или разбейте на несколько систем`
+                        : 'нет наружных блоков этой серии в каталоге — выберите вручную'}
+                    </p>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
 
           {(stockAlerts.low > 0 || stockAlerts.none > 0) && (
             <div className="podbor-card summary-card">
