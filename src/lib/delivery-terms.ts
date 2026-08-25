@@ -64,6 +64,7 @@ export interface ManagerInfo {
  * Подпись менеджера отдельным текстом в конце КП — не строка в таблице
  * условий, а самостоятельный блок вроде концовки делового письма:
  *   С уважением,
+ *   Менеджер UMBT
  *   Иванов Иван
  *   +998 90 000-00-00
  * Пустой массив, если у менеджера не заполнено ФИО — печатать нечего.
@@ -72,7 +73,9 @@ export function buildSignatureLines(manager?: ManagerInfo): string[] {
   const name = manager?.name?.trim();
   if (!name) return [];
   const phone = manager?.phone?.trim();
-  return phone ? ['С уважением,', name, phone] : ['С уважением,', name];
+  const lines = ['С уважением,', 'Менеджер UMBT', name];
+  if (phone) lines.push(phone);
+  return lines;
 }
 
 export function getDeliverySpec(term: unknown): DeliveryTermSpec {
