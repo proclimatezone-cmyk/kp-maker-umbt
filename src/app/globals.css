@@ -370,6 +370,19 @@ body {
 
 .terms-list li { font-size: 0.86rem; color: var(--text); }
 
+.signature-preview {
+  margin-top: 0.75rem;
+  padding-top: 0.65rem;
+  border-top: 1px dashed var(--border);
+}
+
+.signature-preview p {
+  margin: 0;
+  font-size: 0.86rem;
+  color: var(--text);
+  line-height: 1.4;
+}
+
 .toggle-group button.on {
   background: #fff;
   color: var(--accent);

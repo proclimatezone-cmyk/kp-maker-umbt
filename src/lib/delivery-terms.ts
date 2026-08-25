@@ -60,12 +60,19 @@ export interface ManagerInfo {
   phone?: string;
 }
 
-/** «Иванов Иван, тел. +998 90 000-00-00» — пусто, если у менеджера нет имени. */
-export function managerSignatureLine(manager?: ManagerInfo): string {
+/**
+ * Подпись менеджера отдельным текстом в конце КП — не строка в таблице
+ * условий, а самостоятельный блок вроде концовки делового письма:
+ *   С уважением,
+ *   Иванов Иван
+ *   +998 90 000-00-00
+ * Пустой массив, если у менеджера не заполнено ФИО — печатать нечего.
+ */
+export function buildSignatureLines(manager?: ManagerInfo): string[] {
   const name = manager?.name?.trim();
-  if (!name) return '';
+  if (!name) return [];
   const phone = manager?.phone?.trim();
-  return phone ? `${name}, тел. ${phone}` : name;
+  return phone ? ['С уважением,', name, phone] : ['С уважением,', name];
 }
 
 export function getDeliverySpec(term: unknown): DeliveryTermSpec {
@@ -85,8 +92,6 @@ export function getWarrantyLine(months: unknown): string {
 export function buildTermsLines(opts: {
   deliveryTerms?: unknown;
   warrantyMonths?: unknown;
-  includeManagerSignature?: boolean;
-  manager?: ManagerInfo;
 }): string[] {
   const spec = getDeliverySpec(opts.deliveryTerms);
 
@@ -102,15 +107,6 @@ export function buildTermsLines(opts: {
     // Пункт про национальную валюту всегда идёт последним.
     points[points.length - 1] = 'Срок действия предложения: 1 неделя с момента подачи;';
     points.push(`${NATIONAL_CURRENCY_CLAUSE}`);
-  }
-
-  const signature = opts.includeManagerSignature ? managerSignatureLine(opts.manager) : '';
-  if (signature) {
-    // Точка с запятой у предыдущего пункта — на «менеджера» это не переносим,
-    // это уже не условие, а подпись.
-    const last = points.length - 1;
-    points[last] = points[last].replace(/;$/, '.');
-    points.push(`Менеджер: ${signature}`);
   }
 
   return points.map((text, i) => `${i + 1}. ${text}`);

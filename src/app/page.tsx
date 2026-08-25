@@ -4,7 +4,7 @@ import { useState, useEffect, useMemo, useCallback, useRef, memo } from 'react'
 import { Plus, Trash2, FileText, User, Briefcase, Calculator, Search, RefreshCw, Building2, Phone, CheckCircle, CloudCheck, Loader2, Copy, Truck, ChevronDown, FileSignature, BarChart3, Lock, Unlock, Ruler } from 'lucide-react'
 import productsData from '@/data/products.json'
 import { formatNum, formatShortRuDate, toIsoDate } from '@/lib/format'
-import { DELIVERY_TERMS, DeliveryTerm, buildTermsLines, getMoneyLabels } from '@/lib/delivery-terms'
+import { DELIVERY_TERMS, DeliveryTerm, buildTermsLines, buildSignatureLines, getMoneyLabels } from '@/lib/delivery-terms'
 import { stockModelKey } from '@/lib/stock-match'
 import { normalizeModel } from '@/lib/reports/parse-utils'
 
@@ -288,7 +288,7 @@ const ContractSection = memo(({ contract, onChange }: any) => {
   );
 });
 
-const DeliverySection = memo(({ options, setOptions, termsLines, manager }: any) => (
+const DeliverySection = memo(({ options, setOptions, termsLines, signatureLines, manager }: any) => (
   <div className="section">
     <SectionHeader icon={Truck} title="Условия поставки" color="blue" />
     <div className="row cols-2">
@@ -334,6 +334,11 @@ const DeliverySection = memo(({ options, setOptions, termsLines, manager }: any)
           <li key={i}>{line.replace(/^\d+\.\s*/, '')}</li>
         ))}
       </ol>
+      {signatureLines.length > 0 && (
+        <div className="signature-preview">
+          {signatureLines.map((line: string, i: number) => <p key={i}>{line}</p>)}
+        </div>
+      )}
     </div>
   </div>
 ));
@@ -1061,7 +1066,11 @@ export default function Home() {
     total: money.total(),
   }), [money]);
 
-  const termsLines = useMemo(() => buildTermsLines({ ...options, manager }), [options, manager]);
+  const termsLines = useMemo(() => buildTermsLines(options), [options]);
+  const signatureLines = useMemo(
+    () => (options.includeManagerSignature ? buildSignatureLines(manager) : []),
+    [options.includeManagerSignature, manager]
+  );
 
   const currencyLabel = options.currency === 'sum' ? 'сум' : 'у.е.'
 
@@ -1289,7 +1298,7 @@ export default function Home() {
 
         <ObjectSection client={client} setClient={setClient} company={company} setCompany={setCompany} objectType={objectType} setObjectType={setObjectType} registrationDate={registrationDate} setRegistrationDate={setRegistrationDate} address={address} setAddress={setAddress} />
         <ContactSection data={contactPerson} onChange={setContactPerson} />
-              <DeliverySection options={options} setOptions={setOptions} termsLines={termsLines} manager={manager} />
+              <DeliverySection options={options} setOptions={setOptions} termsLines={termsLines} signatureLines={signatureLines} manager={manager} />
               <ContractSection contract={contract} onChange={setContract} />
             </div>
           )}
