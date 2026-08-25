@@ -55,6 +55,19 @@ const NATIONAL_CURRENCY_CLAUSE =
   'Цены указаны в у.е. (доллар США). Оплата производится в национальной валюте ' +
   'по актуальному курсу на момент оплаты';
 
+export interface ManagerInfo {
+  name?: string;
+  phone?: string;
+}
+
+/** «Иванов Иван, тел. +998 90 000-00-00» — пусто, если у менеджера нет имени. */
+export function managerSignatureLine(manager?: ManagerInfo): string {
+  const name = manager?.name?.trim();
+  if (!name) return '';
+  const phone = manager?.phone?.trim();
+  return phone ? `${name}, тел. ${phone}` : name;
+}
+
 export function getDeliverySpec(term: unknown): DeliveryTermSpec {
   return DELIVERY_TERMS[(term as DeliveryTerm)] || DELIVERY_TERMS.warehouse;
 }
@@ -72,6 +85,8 @@ export function getWarrantyLine(months: unknown): string {
 export function buildTermsLines(opts: {
   deliveryTerms?: unknown;
   warrantyMonths?: unknown;
+  includeManagerSignature?: boolean;
+  manager?: ManagerInfo;
 }): string[] {
   const spec = getDeliverySpec(opts.deliveryTerms);
 
@@ -87,6 +102,15 @@ export function buildTermsLines(opts: {
     // Пункт про национальную валюту всегда идёт последним.
     points[points.length - 1] = 'Срок действия предложения: 1 неделя с момента подачи;';
     points.push(`${NATIONAL_CURRENCY_CLAUSE}`);
+  }
+
+  const signature = opts.includeManagerSignature ? managerSignatureLine(opts.manager) : '';
+  if (signature) {
+    // Точка с запятой у предыдущего пункта — на «менеджера» это не переносим,
+    // это уже не условие, а подпись.
+    const last = points.length - 1;
+    points[last] = points[last].replace(/;$/, '.');
+    points.push(`Менеджер: ${signature}`);
   }
 
   return points.map((text, i) => `${i + 1}. ${text}`);

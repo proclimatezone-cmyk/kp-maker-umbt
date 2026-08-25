@@ -288,7 +288,7 @@ const ContractSection = memo(({ contract, onChange }: any) => {
   );
 });
 
-const DeliverySection = memo(({ options, setOptions, termsLines }: any) => (
+const DeliverySection = memo(({ options, setOptions, termsLines, manager }: any) => (
   <div className="section">
     <SectionHeader icon={Truck} title="Условия поставки" color="blue" />
     <div className="row cols-2">
@@ -312,6 +312,18 @@ const DeliverySection = memo(({ options, setOptions, termsLines }: any) => (
           <button className={Number(options.warrantyMonths) !== 36 ? 'on' : ''} onClick={() => setOptions({ ...options, warrantyMonths: 18 })}>18 месяцев</button>
           <button className={Number(options.warrantyMonths) === 36 ? 'on' : ''} onClick={() => setOptions({ ...options, warrantyMonths: 36 })}>36 месяцев</button>
         </div>
+      </div>
+    </div>
+    <div className="row cols-2">
+      <div className="field">
+        <label className="field-label">Подпись менеджера в КП</label>
+        <div className="toggle-group">
+          <button className={options.includeManagerSignature ? 'on' : ''} onClick={() => setOptions({ ...options, includeManagerSignature: true })}>Добавить</button>
+          <button className={!options.includeManagerSignature ? 'on' : ''} onClick={() => setOptions({ ...options, includeManagerSignature: false })}>Не добавлять</button>
+        </div>
+        {options.includeManagerSignature && !manager?.name && (
+          <span className="field-hint">Заполните ФИО в разделе «Менеджер» — иначе строка в КП не появится</span>
+        )}
       </div>
     </div>
 
@@ -709,7 +721,8 @@ export default function Home() {
     deliveryTerms: 'warehouse',
     warrantyMonths: 18,
     template: 'new',
-    format: 'docx'
+    format: 'docx',
+    includeManagerSignature: true,
   })
 
   const uid = useCallback(() => Math.random().toString(36).substr(2, 9), [])
@@ -1048,7 +1061,7 @@ export default function Home() {
     total: money.total(),
   }), [money]);
 
-  const termsLines = useMemo(() => buildTermsLines(options), [options]);
+  const termsLines = useMemo(() => buildTermsLines({ ...options, manager }), [options, manager]);
 
   const currencyLabel = options.currency === 'sum' ? 'сум' : 'у.е.'
 
@@ -1276,7 +1289,7 @@ export default function Home() {
 
         <ObjectSection client={client} setClient={setClient} company={company} setCompany={setCompany} objectType={objectType} setObjectType={setObjectType} registrationDate={registrationDate} setRegistrationDate={setRegistrationDate} address={address} setAddress={setAddress} />
         <ContactSection data={contactPerson} onChange={setContactPerson} />
-              <DeliverySection options={options} setOptions={setOptions} termsLines={termsLines} />
+              <DeliverySection options={options} setOptions={setOptions} termsLines={termsLines} manager={manager} />
               <ContractSection contract={contract} onChange={setContract} />
             </div>
           )}

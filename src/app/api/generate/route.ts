@@ -58,6 +58,7 @@ export async function POST(req: NextRequest) {
       cpDate: cpDate || new Date().toLocaleDateString('ru-RU'),
       items: allItems,
       total,
+      manager,
       options: options || {},
       origin,
       templatePath: template === 'old'

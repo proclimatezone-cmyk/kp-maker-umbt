@@ -6,7 +6,7 @@ import ImageModule from 'docxtemplater-image-module-free';
 import { google } from 'googleapis';
 import { formatNum } from './format';
 import { getGoogleAuth } from './google-auth';
-import { buildTermsLines, getDeliverySpec, getMoneyLabels, getWarrantyLine } from './delivery-terms';
+import { buildTermsLines, getDeliverySpec, getMoneyLabels, getWarrantyLine, managerSignatureLine } from './delivery-terms';
 
 /** Размер картинки товара в ячейке «Внешний вид», в пикселях при 96 dpi. */
 const IMAGE_BOX = { width: 150, height: 110 };
@@ -213,19 +213,24 @@ export interface BuildKpOptions {
   cpDate: string;
   items: KpItem[];
   total: number;
+  manager?: { name?: string; phone?: string };
   options: {
     deliveryTerms?: string;
     warrantyMonths?: number;
     currency?: string;
     paymentType?: string;
     showImages?: boolean;
+    includeManagerSignature?: boolean;
   };
   origin: string;
   templatePath?: string;
 }
 
 /** Строки блока условий: подпись слева, значение справа. */
-export function buildTermsRows(opts: BuildKpOptions['options']): { label: string; value: string }[] {
+export function buildTermsRows(
+  opts: BuildKpOptions['options'],
+  manager?: BuildKpOptions['manager']
+): { label: string; value: string }[] {
   const spec = getDeliverySpec(opts.deliveryTerms);
   const rows = [
     { label: 'Условия поставки', value: spec.delivery },
@@ -234,6 +239,10 @@ export function buildTermsRows(opts: BuildKpOptions['options']): { label: string
     { label: 'Гарантия', value: getWarrantyLine(opts.warrantyMonths) },
     { label: 'Срок действия КП', value: '1 неделя с момента подачи' },
   ];
+  if (opts.includeManagerSignature) {
+    const signature = managerSignatureLine(manager);
+    if (signature) rows.push({ label: 'Менеджер', value: signature });
+  }
   if (spec.nationalCurrencyClause) {
     rows.push({
       label: 'Валюта расчётов',
@@ -294,13 +303,13 @@ export async function buildKpDocx(opts: BuildKpOptions): Promise<Buffer> {
     }),
     total_label: money.total() + ':',
     total_value: formatNum(opts.total),
-    terms: buildTermsRows(opts.options),
+    terms: buildTermsRows(opts.options, opts.manager),
     // Ниже — теги только для «старого вида» (templates/kp-old.docx). В
     // kp-new.docx таких тегов в разметке нет, docxtemplater лишние ключи
     // в данных просто игнорирует — на новый вид это никак не влияет.
     price_label: money.price,
     sum_label: money.sum,
-    termLines: buildTermsLines(opts.options),
+    termLines: buildTermsLines({ ...opts.options, manager: opts.manager }),
   });
 
   // У доп. работ фото нет — объединяем их ячейку «Внешний вид» с

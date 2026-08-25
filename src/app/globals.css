@@ -286,6 +286,13 @@ body {
   color: var(--text-secondary);
 }
 
+.field-hint {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
 .field-input {
   width: 100%;
   padding: 0.6rem 0.8rem;
