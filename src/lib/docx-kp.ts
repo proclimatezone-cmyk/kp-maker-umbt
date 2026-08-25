@@ -140,7 +140,18 @@ async function fetchImage(url: string, origin: string): Promise<Buffer | null> {
       return buf ? await shrink(buf) : null;
     }
 
-    // 2. Локальный файл или прямой http — обычным запросом.
+    // 2а. Локальный файл из public/ — читаем прямо с диска, без лишнего
+    // сетевого прыжка через собственный HTTP (та же серверная функция и так
+    // видит эти файлы — они в бандле).
+    if (url.startsWith('/')) {
+      try {
+        const localPath = path.join(process.cwd(), 'public', url);
+        const buf = await fs.promises.readFile(localPath);
+        if (looksLikeImage(buf)) return await shrink(buf);
+      } catch { /* нет файла на диске — попробуем как обычный URL ниже */ }
+    }
+
+    // 2б. Прямой http (или локальный путь, если fs-чтение выше не сработало).
     const target = url.startsWith('/') ? `${origin}${url}` : url.startsWith('http') ? url : null;
     if (!target) return null;
     const res = await fetch(target, { signal: AbortSignal.timeout(10_000) });
@@ -153,9 +164,17 @@ async function fetchImage(url: string, origin: string): Promise<Buffer | null> {
   }
 }
 
-/** Заранее выкачивает все картинки параллельно: рендер docxtemplater синхронный. */
+/**
+ * Заранее выкачивает все картинки параллельно: рендер docxtemplater синхронный.
+ * `image` (локальный файл из public/images/products, см. sync-sheets.mjs) —
+ * в приоритете перед `slidesImage` (прямая ссылка на Google Drive): это
+ * файл с диска против авторизованного API-запроса в Google на каждую
+ * картинку на каждой генерации. `slidesImage` — наследие старого пайплайна
+ * через Google Slides (см. коммит про локальную сборку взамен Slides),
+ * держим как запасной вариант на случай, если для товара нет локального фото.
+ */
 async function preloadImages(items: KpItem[], origin: string): Promise<Map<string, Buffer>> {
-  const urls = [...new Set(items.map(i => i.slidesImage || i.image || '').filter(Boolean))];
+  const urls = [...new Set(items.map(i => i.image || i.slidesImage || '').filter(Boolean))];
   const loaded = new Map<string, Buffer>();
   await Promise.all(
     urls.map(async url => {
@@ -280,7 +299,7 @@ export async function buildKpDocx(opts: BuildKpOptions): Promise<Buffer> {
       const price = Math.round(Number(item.price) || 0);
       const qty = Number(String(item.quantity ?? '1').match(/[\d.,]+/)?.[0]?.replace(',', '.')) || 1;
       return {
-        image: showImages && !item.isAdditional ? item.slidesImage || item.image || '' : '',
+        image: showImages && !item.isAdditional ? item.image || item.slidesImage || '' : '',
         // Доп. работы менеджер называет сам («Монтаж», «Воздуховоды») —
         // приписку «Дополнительные работы и материалы» не дублируем, а
         // само название кладём в «Наименование», а не в «Модель»: в
