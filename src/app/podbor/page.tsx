@@ -364,13 +364,18 @@ export default function PodborPage() {
                     ))}
                   </select>
                   {g.product ? (
-                    <p className="kw-note" style={{ marginTop: 4 }}>
-                      {g.product.model} · {formatDecimal(g.product.coolingCapacity)} кВт · {formatNum(g.product.price)} у.е.
-                      {g.ratio != null && <> · загрузка {Math.round(g.ratio * 100)}%</>}
-                      {g.ratio != null && (g.ratio < 0.9 || g.ratio > 1.15) && (
-                        <span style={{ color: 'var(--error)' }}> — вне 90–115%, проверьте вручную</span>
+                    <div className="outdoor-product-row" style={{ marginTop: 4 }}>
+                      {g.product.image && (
+                        <img className="outdoor-product-thumb" src={g.product.image} alt={g.product.model} />
                       )}
-                    </p>
+                      <p className="kw-note" style={{ margin: 0 }}>
+                        {g.product.model} · {formatDecimal(g.product.coolingCapacity)} кВт · {formatNum(g.product.price)} у.е.
+                        {g.ratio != null && <> · загрузка {Math.round(g.ratio * 100)}%</>}
+                        {g.ratio != null && (g.ratio < 0.9 || g.ratio > 1.15) && (
+                          <span style={{ color: 'var(--error)' }}> — вне 90–115%, проверьте вручную</span>
+                        )}
+                      </p>
+                    </div>
                   ) : (
                     <p className="result-note warn" style={{ marginTop: 4 }}>
                       ⚠ {g.auto.reason === 'over_capacity'

@@ -72,6 +72,11 @@
 .kw-box.used { background: var(--accent-light); border-color: var(--accent-ring); color: var(--accent-dark); }
 .kw-used-tag { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: var(--accent-dark); }
 .kw-note { font-size: 11.5px; color: var(--text-muted); }
+.outdoor-product-row { display: flex; align-items: center; gap: 8px; }
+.outdoor-product-thumb {
+  width: 40px; height: 40px; object-fit: contain; flex: none;
+  background: var(--bg-input); border: 1px solid var(--border); border-radius: 6px;
+}
 .formula-input { font-variant-numeric: tabular-nums; font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 13px; }
 
 .classify-row {
