@@ -6,7 +6,7 @@ import ImageModule from 'docxtemplater-image-module-free';
 import { google } from 'googleapis';
 import { formatNum } from './format';
 import { getGoogleAuth } from './google-auth';
-import { buildTermsLines, buildSignatureLines, getDeliverySpec, getMoneyLabels, getWarrantyLine } from './delivery-terms';
+import { buildTermsLines, buildSignatureLines, COMPANY_ADDRESS_LINES, getDeliverySpec, getMoneyLabels, getWarrantyLine } from './delivery-terms';
 
 /** Размер картинки товара в ячейке «Внешний вид», в пикселях при 96 dpi. */
 const IMAGE_BOX = { width: 150, height: 110 };
@@ -112,7 +112,14 @@ function removeWhiteBackground(data: Buffer, width: number, height: number): voi
   }
 }
 
-async function shrink(buffer: Buffer): Promise<Buffer | null> {
+interface ShrunkImage {
+  buffer: Buffer;
+  /** Реальные пропорции после ресайза — чтобы вписать в ячейку без искажения. */
+  width: number;
+  height: number;
+}
+
+async function shrink(buffer: Buffer): Promise<ShrunkImage | null> {
   try {
     const sharp = (await import('sharp')).default;
     const base = sharp(buffer)
@@ -123,15 +130,16 @@ async function shrink(buffer: Buffer): Promise<Buffer | null> {
     const { data, info } = await base.raw().toBuffer({ resolveWithObject: true });
     removeWhiteBackground(data, info.width, info.height);
 
-    return await sharp(data, { raw: { width: info.width, height: info.height, channels: 4 } })
+    const png = await sharp(data, { raw: { width: info.width, height: info.height, channels: 4 } })
       .png({ compressionLevel: 9 })
       .toBuffer();
+    return { buffer: png, width: info.width, height: info.height };
   } catch {
     return null;
   }
 }
 
-async function fetchImage(url: string, origin: string): Promise<Buffer | null> {
+async function fetchImage(url: string, origin: string): Promise<ShrunkImage | null> {
   try {
     // 1. Google Drive — качаем авторизованно через API.
     const id = driveFileId(url);
@@ -165,7 +173,7 @@ async function fetchImage(url: string, origin: string): Promise<Buffer | null> {
 }
 
 /** Пробует источники по очереди — первый успешный побеждает. */
-async function fetchImageWithFallback(candidates: string[], origin: string): Promise<Buffer | null> {
+async function fetchImageWithFallback(candidates: string[], origin: string): Promise<ShrunkImage | null> {
   for (const url of candidates) {
     const buf = await fetchImage(url, origin);
     if (buf) return buf;
@@ -183,7 +191,7 @@ async function fetchImageWithFallback(candidates: string[], origin: string): Pro
  * источником. Раньше был выбор только ОДНОГО источника: если он не
  * срабатывал, картинка молча пропадала, даже когда второй источник рабочий.
  */
-async function preloadImages(items: KpItem[], origin: string): Promise<Map<string, Buffer>> {
+async function preloadImages(items: KpItem[], origin: string): Promise<Map<string, ShrunkImage>> {
   // Ключ карты — то же значение, что попадёт в тег {image} при рендере
   // (item.image || item.slidesImage, см. ниже в doc.render()); кандидаты на
   // скачивание для этого ключа — оба источника, в порядке приоритета.
@@ -193,7 +201,7 @@ async function preloadImages(items: KpItem[], origin: string): Promise<Map<strin
     if (!key || byKey.has(key)) continue;
     byKey.set(key, [i.image, i.slidesImage].filter((u): u is string => !!u));
   }
-  const loaded = new Map<string, Buffer>();
+  const loaded = new Map<string, ShrunkImage>();
   await Promise.all(
     [...byKey.entries()].map(async ([key, candidates]) => {
       const buf = await fetchImageWithFallback(candidates, origin);
@@ -294,14 +302,21 @@ export async function buildKpDocx(opts: BuildKpOptions): Promise<Buffer> {
 
   const items = mergeIdenticalItems(opts.items);
   const showImages = opts.options.showImages !== false;
-  const images = showImages ? await preloadImages(items, opts.origin) : new Map<string, Buffer>();
+  const images = showImages ? await preloadImages(items, opts.origin) : new Map<string, ShrunkImage>();
   const money = getMoneyLabels(opts.options);
 
   const imageModule = new ImageModule({
     centered: true,
-    getImage: (tagValue: string) => images.get(tagValue) || BLANK_PNG,
-    getSize: (_img: Buffer, tagValue: string) =>
-      images.has(tagValue) ? [IMAGE_BOX.width, IMAGE_BOX.height] : [1, 1],
+    getImage: (tagValue: string) => images.get(tagValue)?.buffer || BLANK_PNG,
+    // «Впихиваем» реальные пропорции фото в ячейку (150×110), не растягивая
+    // до прямоугольника — раньше любое фото, не совпавшее с этим соотношением
+    // сторон, ехало сплюснутым/растянутым по обеим осям до полного заполнения.
+    getSize: (_img: Buffer, tagValue: string) => {
+      const found = images.get(tagValue);
+      if (!found) return [1, 1];
+      const scale = Math.min(IMAGE_BOX.width / found.width, IMAGE_BOX.height / found.height);
+      return [Math.round(found.width * scale), Math.round(found.height * scale)];
+    },
   });
 
   const doc = new Docxtemplater(new PizZip(fs.readFileSync(templatePath)), {
@@ -309,6 +324,8 @@ export async function buildKpDocx(opts: BuildKpOptions): Promise<Buffer> {
     paragraphLoop: true,
     linebreaks: true,
   });
+
+  const signatureLines = opts.options.includeManagerSignature ? buildSignatureLines(opts.manager) : [];
 
   doc.render({
     cp_number: opts.cpNumber,
@@ -344,7 +361,16 @@ export async function buildKpDocx(opts: BuildKpOptions): Promise<Buffer> {
     // ФИО / телефон»), а не строка в таблице условий. Пустой массив, если
     // тумблер выключен или ФИО не заполнено — тег {#signature} ничего не
     // напечатает.
-    signature: opts.options.includeManagerSignature ? buildSignatureLines(opts.manager) : [],
+    signature: signatureLines,
+    address: COMPANY_ADDRESS_LINES,
+    // Адрес компании стоит рядом с подписью (справа), а когда подписи нет —
+    // занимает её место слева, чтобы страница не оставалась перекошенной.
+    // {^signature} тут не подходит: docxtemplater трактует «^» как обычный
+    // цикл, а не «если пусто» — с непустым массивом адрес печатался по разу
+    // на каждую строку подписи. Поэтому явные булевы флаги, а не инверсия
+    // массива.
+    showAddressLeft: signatureLines.length === 0,
+    showAddressRight: signatureLines.length > 0,
   });
 
   // У доп. работ фото нет — объединяем их ячейку «Внешний вид» с
