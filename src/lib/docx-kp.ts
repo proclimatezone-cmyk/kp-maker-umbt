@@ -164,22 +164,40 @@ async function fetchImage(url: string, origin: string): Promise<Buffer | null> {
   }
 }
 
+/** Пробует источники по очереди — первый успешный побеждает. */
+async function fetchImageWithFallback(candidates: string[], origin: string): Promise<Buffer | null> {
+  for (const url of candidates) {
+    const buf = await fetchImage(url, origin);
+    if (buf) return buf;
+  }
+  return null;
+}
+
 /**
  * Заранее выкачивает все картинки параллельно: рендер docxtemplater синхронный.
  * `image` (локальный файл из public/images/products, см. sync-sheets.mjs) —
- * в приоритете перед `slidesImage` (прямая ссылка на Google Drive): это
- * файл с диска против авторизованного API-запроса в Google на каждую
- * картинку на каждой генерации. `slidesImage` — наследие старого пайплайна
- * через Google Slides (см. коммит про локальную сборку взамен Slides),
- * держим как запасной вариант на случай, если для товара нет локального фото.
+ * в приоритете перед `slidesImage` (прямая ссылка на Google Drive): файл с
+ * диска против авторизованного API-запроса в Google. Но если локального
+ * файла для товара нет (не закоммичен, не успел засинхроситься) или его
+ * почему-то не прочитать — не сдаёмся молча, а пробуем slidesImage вторым
+ * источником. Раньше был выбор только ОДНОГО источника: если он не
+ * срабатывал, картинка молча пропадала, даже когда второй источник рабочий.
  */
 async function preloadImages(items: KpItem[], origin: string): Promise<Map<string, Buffer>> {
-  const urls = [...new Set(items.map(i => i.image || i.slidesImage || '').filter(Boolean))];
+  // Ключ карты — то же значение, что попадёт в тег {image} при рендере
+  // (item.image || item.slidesImage, см. ниже в doc.render()); кандидаты на
+  // скачивание для этого ключа — оба источника, в порядке приоритета.
+  const byKey = new Map<string, string[]>();
+  for (const i of items) {
+    const key = i.image || i.slidesImage || '';
+    if (!key || byKey.has(key)) continue;
+    byKey.set(key, [i.image, i.slidesImage].filter((u): u is string => !!u));
+  }
   const loaded = new Map<string, Buffer>();
   await Promise.all(
-    urls.map(async url => {
-      const buf = await fetchImage(url, origin);
-      if (buf) loaded.set(url, buf);
+    [...byKey.entries()].map(async ([key, candidates]) => {
+      const buf = await fetchImageWithFallback(candidates, origin);
+      if (buf) loaded.set(key, buf);
     })
   );
   return loaded;
