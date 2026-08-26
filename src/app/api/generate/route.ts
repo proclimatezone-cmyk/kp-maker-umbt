@@ -88,6 +88,10 @@ export async function POST(req: NextRequest) {
         headers: {
           'Content-Type': 'application/pdf',
           'Content-Disposition': contentDisposition(cpName || 'КП', 'pdf'),
+          // Без этого заголовка предупреждение «собрано без изображений»
+          // (см. LIMIT выше) виделось только при скачивании .docx — при
+          // выгрузке в PDF фото так же молча выпадали, а менеджер не узнавал.
+          'X-Size-Warning': encodeURIComponent(sizeWarning),
         },
       })
     }
