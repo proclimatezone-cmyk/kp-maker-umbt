@@ -6,7 +6,7 @@ import ImageModule from 'docxtemplater-image-module-free';
 import { google } from 'googleapis';
 import { formatNum } from './format';
 import { getGoogleAuth } from './google-auth';
-import { buildTermsLines, buildSignatureLines, COMPANY_ADDRESS_LINES, getDeliverySpec, getMoneyLabels, getWarrantyLine } from './delivery-terms';
+import { buildTermsLines, buildSignatureLines, getDeliverySpec, getMoneyLabels, getWarrantyLine } from './delivery-terms';
 
 /** Размер картинки товара в ячейке «Внешний вид», в пикселях при 96 dpi. */
 const IMAGE_BOX = { width: 150, height: 110 };
@@ -362,15 +362,6 @@ export async function buildKpDocx(opts: BuildKpOptions): Promise<Buffer> {
     // тумблер выключен или ФИО не заполнено — тег {#signature} ничего не
     // напечатает.
     signature: signatureLines,
-    address: COMPANY_ADDRESS_LINES,
-    // Адрес компании стоит рядом с подписью (справа), а когда подписи нет —
-    // занимает её место слева, чтобы страница не оставалась перекошенной.
-    // {^signature} тут не подходит: docxtemplater трактует «^» как обычный
-    // цикл, а не «если пусто» — с непустым массивом адрес печатался по разу
-    // на каждую строку подписи. Поэтому явные булевы флаги, а не инверсия
-    // массива.
-    showAddressLeft: signatureLines.length === 0,
-    showAddressRight: signatureLines.length > 0,
   });
 
   // У доп. работ фото нет — объединяем их ячейку «Внешний вид» с
