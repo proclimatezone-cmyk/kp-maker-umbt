@@ -29,6 +29,32 @@ if (!isVercel && !fs.existsSync(IMG_DIR)) {
   }
 }
 
+// На Vercel файловая система под public/ доступна только на чтение — новые
+// картинки туда не скачать (см. ветки isVercel ниже, которые вместо этого
+// подставляют прямую ссылку на Drive). Но то, что уже закоммичено и
+// задеплоено вместе с приложением, читать можно: раньше isVercel-ветка
+// подставляла Drive-ссылку даже для товаров, чья картинка уже лежит в
+// репозитории — и КП на проде каждый раз тянул её из Drive по сети (а при
+// сбое API — без фото вовсе), хотя рядом на диске уже был готовый файл.
+let existingImageFiles = null;
+if (isVercel) {
+  try {
+    existingImageFiles = new Set(fs.existsSync(IMG_DIR) ? fs.readdirSync(IMG_DIR) : []);
+  } catch (err) {
+    console.warn('Could not read images directory on Vercel:', err.message);
+    existingImageFiles = new Set();
+  }
+}
+
+/** Уже закоммиченный файл `${id}.*` в public/images/products, если он есть. */
+function findExistingLocalImage(id) {
+  if (!existingImageFiles) return null;
+  for (const name of existingImageFiles) {
+    if (name.startsWith(`${id}.`)) return `/images/products/${name}`;
+  }
+  return null;
+}
+
 function getDriveFileId(url) {
   if (!url) return null;
   const idMatch = url.match(/[?&]id=([^&]+)/);
@@ -193,7 +219,7 @@ export async function syncSheets() {
                 }
 
                 if (isVercel) {
-                  localImagePath = slidesImage;
+                  localImagePath = findExistingLocalImage(folderId) || slidesImage;
                 } else {
                   const ext = folderFiles.data.files[0].fileExtension || 'png';
                   const fileName = `${folderId}.${ext}`;
@@ -263,7 +289,7 @@ export async function syncSheets() {
                 }
 
                 if (isVercel) {
-                  localImagePath = slidesImage;
+                  localImagePath = findExistingLocalImage(fileId) || slidesImage;
                 } else {
                   const fileInfo = await drive.files.get({
                     fileId: fileId,
