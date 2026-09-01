@@ -1,6 +1,6 @@
 import { google } from 'googleapis';
 import { Readable } from 'stream';
-import { getGoogleAuth } from './google-auth';
+import { getOAuthOnlyAuth } from './google-auth';
 
 /**
  * Превращает .docx в PDF руками Google: файл заливается на Drive с
@@ -10,9 +10,13 @@ import { getGoogleAuth } from './google-auth';
  * на своей машине или платный сервис. Поэтому путь медленный (несколько
  * секунд и зависимость от сети) и включается только по явному выбору
  * формата, а не при каждой генерации.
+ *
+ * Авторизация — строго OAuth (getOAuthOnlyAuth), не сервис-аккаунт: у
+ * сервис-аккаунта нет квоты на хранение файлов на Drive, загрузка .docx
+ * падает с storageQuotaExceeded ещё до конвертации.
  */
 export async function convertDocxToPdf(docx: Buffer, fileName: string): Promise<Buffer> {
-  const drive = google.drive({ version: 'v3', auth: getGoogleAuth() });
+  const drive = google.drive({ version: 'v3', auth: getOAuthOnlyAuth() });
 
   const uploaded = await drive.files.create({
     requestBody: {
