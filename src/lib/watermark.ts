@@ -56,23 +56,45 @@ function xmlEscape(s: string): string {
  * произвольный текст) — единая повёрнутая надпись позади таблицы,
  * тот же приём, что и у встроенного в Word инструмента «Подложка».
  */
+// Левое поле секции, в которой лежит таблица позиций (см. w:pgMar в первом
+// w:sectPr шаблона — это секция co своими header/footer, не «хвостовая»
+// секция с подписью). Индента у самой таблицы нет (w:tblInd отсутствует),
+// значит её левый край физически совпадает с левым полем страницы —
+// от этого и считаем абсолютную горизонтальную позицию водяного знака.
+const SECTION_LEFT_MARGIN_TWIPS = 851;
+
 export function buildWatermarkDrawingXml(initials: string, itemCount: number): string {
   const tableHeightTwips =
     HEADER_ROW_HEIGHT_TWIPS + itemCount * ITEM_ROW_HEIGHT_TWIPS + TOTAL_ROW_HEIGHT_TWIPS;
 
   // Бокс крупнее самой таблицы — после поворота на −22° угол таблицы
-  // не должен остаться непокрытым узором.
-  const oversize = 1.6;
-  const boxWidthTwips = Math.round(ITEMS_TABLE_WIDTH_TWIPS * oversize);
-  const boxHeightTwips = Math.round(tableHeightTwips * oversize);
-  const offsetXTwips = -Math.round((boxWidthTwips - ITEMS_TABLE_WIDTH_TWIPS) / 2);
+  // не должен остаться непокрытым узором. Считаем не «на глаз» (первая
+  // версия так и не легла на стол — column-относительное позиционирование
+  // внутри ячейки таблицы вело себя непредсказуемо), а по формуле
+  // минимального прямоугольника, который после поворота на угол θ
+  // покрывает исходный W×H:
+  //   W' = W·cosθ + H·sinθ,  H' = W·sinθ + H·cosθ
+  const rotDeg = 22;
+  const rad = (rotDeg * Math.PI) / 180;
+  const cos = Math.cos(rad);
+  const sin = Math.sin(rad);
+  const boxWidthTwips = Math.round(ITEMS_TABLE_WIDTH_TWIPS * cos + tableHeightTwips * sin);
+  const boxHeightTwips = Math.round(ITEMS_TABLE_WIDTH_TWIPS * sin + tableHeightTwips * cos);
+
+  // Горизонталь — абсолютно от левого края страницы (relativeFrom="page"):
+  // центр бокса совмещаем с центром таблицы. Вертикаль — по-прежнему
+  // относительно абзаца в шапке таблицы (relativeFrom="paragraph" валиден
+  // только для V, не для H — в этом и была ошибка версии 1, «column»
+  // относительно ячейки таблицы вело себя не так, как рассчитывалось).
+  const tableCenterXTwips = SECTION_LEFT_MARGIN_TWIPS + ITEMS_TABLE_WIDTH_TWIPS / 2;
+  const offsetXTwips = Math.round(tableCenterXTwips - boxWidthTwips / 2);
   const offsetYTwips = -Math.round((boxHeightTwips - tableHeightTwips) / 2);
 
   const widthEmu = boxWidthTwips * TWIP_TO_EMU;
   const heightEmu = boxHeightTwips * TWIP_TO_EMU;
   const offsetXEmu = offsetXTwips * TWIP_TO_EMU;
   const offsetYEmu = offsetYTwips * TWIP_TO_EMU;
-  const rot = -22 * 60000; // −22°, в 60000-х долях градуса
+  const rot = -rotDeg * 60000; // −22°, в 60000-х долях градуса
 
   const label = xmlEscape(initials);
   // Сетка строк: одна и та же надпись через равный интервал, вся сетка
@@ -102,7 +124,7 @@ export function buildWatermarkDrawingXml(initials: string, itemCount: number): s
     '<w:drawing><wp:anchor distT="0" distB="0" distL="0" distR="0" simplePos="0" ' +
     'relativeHeight="2" behindDoc="1" locked="0" layoutInCell="1" allowOverlap="1">' +
     '<wp:simplePos x="0" y="0"/>' +
-    `<wp:positionH relativeFrom="column"><wp:posOffset>${offsetXEmu}</wp:posOffset></wp:positionH>` +
+    `<wp:positionH relativeFrom="page"><wp:posOffset>${offsetXEmu}</wp:posOffset></wp:positionH>` +
     `<wp:positionV relativeFrom="paragraph"><wp:posOffset>${offsetYEmu}</wp:posOffset></wp:positionV>` +
     `<wp:extent cx="${widthEmu}" cy="${heightEmu}"/>` +
     '<wp:effectExtent l="0" t="0" r="0" b="0"/><wp:wrapNone/>' +
