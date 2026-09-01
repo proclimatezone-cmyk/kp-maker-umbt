@@ -7,7 +7,7 @@ import { google } from 'googleapis';
 import { formatNum } from './format';
 import { getGoogleAuth } from './google-auth';
 import { buildTermsLines, buildSignatureLines, COMPANY_ADDRESS_LINES, getDeliverySpec, getMoneyLabels, getWarrantyLine } from './delivery-terms';
-import { managerWatermarkInitials, buildWatermarkDrawingXml } from './watermark';
+import { managerWatermarkInitials, buildRowWatermarkXml } from './watermark';
 
 /** Размер картинки товара в ячейке «Внешний вид», в пикселях при 96 dpi. */
 const IMAGE_BOX = { width: 150, height: 110 };
@@ -386,7 +386,7 @@ export async function buildKpDocx(opts: BuildKpOptions): Promise<Buffer> {
     const zip = doc.getZip();
     let xml = zip.file('word/document.xml')!.asText();
     if (additionalCount > 0) xml = mergeAdditionalRows(xml, additionalCount);
-    if (watermarkInitials) xml = insertWatermark(xml, watermarkInitials, items.length);
+    if (watermarkInitials) xml = insertWatermark(xml, watermarkInitials);
     zip.file('word/document.xml', xml);
     return zip.generate({ type: 'nodebuffer', compression: 'DEFLATE' });
   }
@@ -394,15 +394,73 @@ export async function buildKpDocx(opts: BuildKpOptions): Promise<Buffer> {
   return doc.toBuffer();
 }
 
-/** Вставляет разметку водяного знака сразу за текстом «Внешний вид» в шапке
- * таблицы позиций — см. buildWatermarkDrawingXml для деталей позиционирования. */
-function insertWatermark(xml: string, initials: string, itemCount: number): string {
-  const anchor = '<w:t>Внешний вид</w:t></w:r></w:p>';
-  const idx = xml.indexOf(anchor);
-  if (idx === -1) return xml; // разметка шапки изменилась — не ломаем документ молча
-  const insertAt = idx + anchor.length - '</w:p>'.length;
-  const drawing = buildWatermarkDrawingXml(initials, itemCount);
-  return xml.slice(0, insertAt) + drawing + xml.slice(insertAt);
+/**
+ * Вставляет водяной знак в КАЖДУЮ строку таблицы позиций (шапка, каждая
+ * позиция, «Итого») — по одной маленькой фигуре на строку, а не одну
+ * большую на всю таблицу (см. комментарий у buildRowWatermarkXml: оценка
+ * высоты всей таблицы по количеству позиций копила ошибку и знак либо не
+ * доставал до низа, либо нахлёстывал на блок условий).
+ *
+ * Таблицу находим по уже отрендеренному тексту «Внешний вид» (тег
+ * {#items} после render() резолвится и пропадает — искать его как раньше
+ * нельзя), дальше по границе первого встречного </w:tbl>. Строки внутри
+ * — обычным regexp по <w:tr>, они не вкладываются друг в друга. Высота
+ * строки: первая (шапка) — HEADER, последняя — TOTAL, все остальные —
+ * ITEM (номинальные trHeight из шаблона, см. watermark.ts).
+ */
+function insertWatermark(xml: string, initials: string): string {
+  const HEADER_ROW_HEIGHT_TWIPS = 1794;
+  const ITEM_ROW_HEIGHT_TWIPS = 907;
+  const TOTAL_ROW_HEIGHT_TWIPS = 907;
+
+  const headerAnchor = '<w:t>Внешний вид</w:t>';
+  const headerIdx = xml.indexOf(headerAnchor);
+  if (headerIdx === -1) return xml; // разметка шапки изменилась — не ломаем документ молча
+  const tblStart = xml.lastIndexOf('<w:tbl>', headerIdx);
+  if (tblStart === -1) return xml;
+  const tblEndTag = '</w:tbl>';
+  const tblEndIdx = xml.indexOf(tblEndTag, headerIdx);
+  if (tblEndIdx === -1) return xml;
+  const tblEnd = tblEndIdx + tblEndTag.length;
+
+  const rowRe = /<w:tr\b[^>]*>[\s\S]*?<\/w:tr>/g;
+  const table = xml.slice(tblStart, tblEnd);
+
+  const matches = [...table.matchAll(rowRe)];
+  if (matches.length === 0) return xml;
+
+  // Собираем таблицу заново по точным индексам совпадений (не String.replace
+  // по тексту строки — у двух позиций в КП может случайно совпасть весь
+  // текст строки, тогда replace задел бы не ту строку).
+  let docPrId = 700001;
+  let rebuiltTable = '';
+  let cursor = 0;
+  matches.forEach((m, i) => {
+    const row = m[0];
+    const isHeader = i === 0;
+    const isTotal = i === matches.length - 1;
+    const rowHeight = isHeader
+      ? HEADER_ROW_HEIGHT_TWIPS
+      : isTotal
+        ? TOTAL_ROW_HEIGHT_TWIPS
+        : ITEM_ROW_HEIGHT_TWIPS;
+    rebuiltTable += table.slice(cursor, m.index);
+    const firstCellParaEnd = row.indexOf('</w:p>');
+    if (firstCellParaEnd === -1) {
+      rebuiltTable += row; // не должно случиться — в каждой ячейке есть параграф
+    } else {
+      // 3 узкие фигуры (трети ширины таблицы), не одна на всю ширину —
+      // см. SEGMENTS_PER_ROW в watermark.ts.
+      const drawings = [0, 1, 2]
+        .map(segmentIndex => buildRowWatermarkXml(initials, rowHeight, docPrId++, segmentIndex))
+        .join('');
+      rebuiltTable += row.slice(0, firstCellParaEnd) + drawings + row.slice(firstCellParaEnd);
+    }
+    cursor = m.index + row.length;
+  });
+  rebuiltTable += table.slice(cursor);
+
+  return xml.slice(0, tblStart) + rebuiltTable + xml.slice(tblEnd);
 }
 
 /** Сливает первые две ячейки строки: удаляет первую, второй даёт gridSpan=2. */

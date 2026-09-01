@@ -36,17 +36,6 @@ export function managerWatermarkInitials(fullName?: string): string | null {
 const TWIP_TO_EMU = 635;
 /** Ширина таблицы позиций в kp-new.docx — см. tblW в шаблоне. */
 const ITEMS_TABLE_WIDTH_TWIPS = 10623;
-const HEADER_ROW_HEIGHT_TWIPS = 1794;
-// 907 — это МИНИМУМ строки (w:trHeight в шаблоне), а не факт: реальная
-// высота растёт под перенос длинных названий моделей («Внутренний кассетный
-// 1-поточный блок VRF-системы серии ATOM B» — 5-6 строк). Судя по реальному
-// рендеру в Word (не на глаз — открывал через Word/AppleScript), для
-// типичных длинных названий строка растёт примерно до ~1450 twips.
-// Это оценка, не точный расчёт (зависит от конкретного названия) — только
-// чтобы бокс водяного знака не расходился с реальной высотой таблицы
-// в разы, как было с голым w:trHeight.
-const ITEM_ROW_HEIGHT_TWIPS = 1450;
-const TOTAL_ROW_HEIGHT_TWIPS = 907;
 
 function xmlEscape(s: string): string {
   return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -59,10 +48,15 @@ function xmlEscape(s: string): string {
  * прозрачность через w14:textFill/w14:alpha — не имитация цветом, отсюда
  * не «плывёт» при смене заливки строки (шапка/чёт/нечет/итого — все разные).
  *
- * Не WordArt-изображение и не заливка ячеек (последняя в docx поддерживает
- * только сплошной цвет или готовую геометрическую штриховку, но не
- * произвольный текст) — единая повёрнутая надпись позади таблицы,
- * тот же приём, что и у встроенного в Word инструмента «Подложка».
+ * Не одна фигура на всю таблицу (первые версии) — при оценке высоты
+ * таблицы по количеству позиций ошибка накапливалась и знак либо не
+ * доставал до низа, либо нахлёстывал на блок условий. Не одна фигура даже
+ * на строку — широкая (во всю таблицу) фигура после поворота на угол θ
+ * «утекает» в высоту сильнее, чем даёт сам текст (H' = W·sinθ + H·cosθ,
+ * член от ширины доминирует). Три узких фигуры НА КАЖДУЮ строку таблицы
+ * (шапка, каждая позиция, итого), каждая — своя треть ширины: и нахлёст
+ * от поворота меньше, и рост отдельной строки под перенос длинного
+ * названия не разъезжает всю картину целиком.
  */
 // Левое поле секции, в которой лежит таблица позиций (см. w:pgMar в первом
 // w:sectPr шаблона — это секция co своими header/footer, не «хвостовая»
@@ -71,33 +65,51 @@ function xmlEscape(s: string): string {
 // от этого и считаем абсолютную горизонтальную позицию водяного знака.
 const SECTION_LEFT_MARGIN_TWIPS = 851;
 
-export function buildWatermarkDrawingXml(initials: string, itemCount: number): string {
-  const tableHeightTwips =
-    HEADER_ROW_HEIGHT_TWIPS + itemCount * ITEM_ROW_HEIGHT_TWIPS + TOTAL_ROW_HEIGHT_TWIPS;
+/**
+ * Число сегментов, на которые режем ширину таблицы под один водяной знак.
+ * Не одна фигура на всю ширину: при повороте на угол θ лишняя высота от
+ * поворота растёт линейно с шириной фигуры (H' = W·sinθ + H·cosθ) — широкая
+ * низкая фигура (таблица) после поворота «утекает» в высоту сильнее, чем
+ * даёт сам текст, и знак нахлёстывает на соседние блоки сверху/снизу.
+ * Три узких фигуры на строку вместо одной широкой — тот же член W·sinθ
+ * втрое меньше на каждую, значит и нахлёст втрое меньше при той же
+ * визуальной плотности узора по всей ширине.
+ */
+const SEGMENTS_PER_ROW = 3;
 
-  // Бокс чуть крупнее самой таблицы — небольшой запас на угол поворота,
-  // но НЕ полная геометрия покрытия повёрнутого прямоугольника (тот
-  // вариант — верно с точки зрения математики, но раздувал высоту почти
-  // вдвое для широкой/невысокой таблицы позиций и уезжал далеко за её
-  // нижний край; при behindDoc="0" это стало прямо видно поверх блока
-  // условий). Крайние уголки таблицы могут чуть недополучить узор —
-  // приемлемо, лучше, чем нахлёст на соседний блок.
+/**
+ * @param rowHeightTwips номинальная высота ЭТОЙ строки (trHeight из
+ *   шаблона) — не обязана совпадать с реальной (растёт под перенос текста),
+ *   фигура на неё лишь ориентируется, не обрезается по ней.
+ * @param docPrId у каждой плавающей фигуры в документе должен быть свой
+ *   уникальный id — иначе Word путает их при перерисовке.
+ * @param segmentIndex 0..SEGMENTS_PER_ROW-1 — какую по счёту треть ширины
+ *   таблицы покрывает эта фигура (см. SEGMENTS_PER_ROW).
+ */
+export function buildRowWatermarkXml(
+  initials: string,
+  rowHeightTwips: number,
+  docPrId: number,
+  segmentIndex: number
+): string {
   const rotDeg = 22;
-  const boxWidthTwips = Math.round(ITEMS_TABLE_WIDTH_TWIPS * 1.1);
-  const boxHeightTwips = Math.round(tableHeightTwips * 1.05);
+  const segmentWidthTwips = ITEMS_TABLE_WIDTH_TWIPS / SEGMENTS_PER_ROW;
+  const boxWidthTwips = Math.round(segmentWidthTwips * 1.3);
+  const boxHeightTwips = Math.round(rowHeightTwips * 1.2);
 
   // Горизонталь — абсолютно от левого края страницы (relativeFrom="page"):
-  // центр бокса совмещаем с центром таблицы. Вертикаль — по-прежнему
-  // относительно абзаца в шапке таблицы (relativeFrom="paragraph" валиден
-  // только для V, не для H — в этом и была ошибка версии 1, «column»
-  // относительно ячейки таблицы вело себя не так, как рассчитывалось).
-  const tableCenterXTwips = SECTION_LEFT_MARGIN_TWIPS + ITEMS_TABLE_WIDTH_TWIPS / 2;
-  const offsetXTwips = Math.round(tableCenterXTwips - boxWidthTwips / 2);
-  // По вертикали: точка отсчёта (paragraph, верх ячейки шапки) на практике
-  // (проверено рендером в Word, не на глаз) оказалась чуть выше физического
-  // верха таблицы — с offsetY=0 знак на ~1 строку вылезал над шапкой.
-  // Сдвигаем вниз на компенсирующую величину.
-  const offsetYTwips = 1000;
+  // центр бокса совмещаем с центром СВОЕГО сегмента (не всей таблицы).
+  // Вертикаль — относительно абзаца в первой ячейке ЭТОЙ строки
+  // (relativeFrom="paragraph" валиден только для V, не для H — «column»
+  // внутри ячейки таблицы вело себя непредсказуемо, поэтому H — абсолютно).
+  const segmentCenterXTwips =
+    SECTION_LEFT_MARGIN_TWIPS + segmentWidthTwips * (segmentIndex + 0.5);
+  const offsetXTwips = Math.round(segmentCenterXTwips - boxWidthTwips / 2);
+  // Точка отсчёта (paragraph) внутри ячейки с vAlign="center" на практике
+  // сидит выше физического верха строки — без сдвига знак вылезал над
+  // строкой (проверено рендером в Word). Сдвигаем вниз пропорционально
+  // запасу бокса над строкой.
+  const offsetYTwips = Math.round((boxHeightTwips - rowHeightTwips) * 0.8);
 
   const widthEmu = boxWidthTwips * TWIP_TO_EMU;
   const heightEmu = boxHeightTwips * TWIP_TO_EMU;
@@ -107,8 +119,9 @@ export function buildWatermarkDrawingXml(initials: string, itemCount: number): s
 
   const label = xmlEscape(initials);
   // Сетка строк: одна и та же надпись через равный интервал, вся сетка
-  // поворачивается как единое целое вместе с текстбоксом.
-  const repeatsPerLine = 8;
+  // поворачивается как единое целое вместе с текстбоксом. Повторов меньше,
+  // чем в версии «одна фигура на всю таблицу» — сегмент втрое уже.
+  const repeatsPerLine = 3;
   const lineText = Array.from({ length: repeatsPerLine }, () => label).join('      ');
   const runProps =
     '<w:rFonts w:ascii="Century Gothic" w:hAnsi="Century Gothic"/><w:b/>' +
@@ -126,7 +139,7 @@ export function buildWatermarkDrawingXml(initials: string, itemCount: number): s
   // высота строки при sz=34/line=360/lineRule=auto (single×1.5 ≈ 20.4pt×1.5),
   // подобрано рендером в Word.
   const LINE_HEIGHT_TWIPS = 612;
-  const linesCount = Math.max(6, Math.ceil((tableHeightTwips / LINE_HEIGHT_TWIPS) * 1.05));
+  const linesCount = Math.max(3, Math.ceil((boxHeightTwips / LINE_HEIGHT_TWIPS) * 1.05));
   const paragraphs = Array.from({ length: linesCount }, (_, i) => {
     const shifted = i % 2 === 1 ? `   ${lineText}` : lineText;
     return (
@@ -149,13 +162,13 @@ export function buildWatermarkDrawingXml(initials: string, itemCount: number): s
     // проступал только там, где вокруг таблицы пусто (видно на скрине —
     // фрагменты ровно вне таблицы). При 14% непрозрачности поверх текста
     // это не мешает читать цифры.
-    'relativeHeight="2" behindDoc="0" locked="0" layoutInCell="1" allowOverlap="1">' +
+    `relativeHeight="${docPrId}" behindDoc="0" locked="0" layoutInCell="1" allowOverlap="1">` +
     '<wp:simplePos x="0" y="0"/>' +
     `<wp:positionH relativeFrom="page"><wp:posOffset>${offsetXEmu}</wp:posOffset></wp:positionH>` +
     `<wp:positionV relativeFrom="paragraph"><wp:posOffset>${offsetYEmu}</wp:posOffset></wp:positionV>` +
     `<wp:extent cx="${widthEmu}" cy="${heightEmu}"/>` +
     '<wp:effectExtent l="0" t="0" r="0" b="0"/><wp:wrapNone/>' +
-    '<wp:docPr id="777001" name="watermark-manager"/><wp:cNvGraphicFramePr/>' +
+    `<wp:docPr id="${docPrId}" name="watermark-manager-${docPrId}"/><wp:cNvGraphicFramePr/>` +
     '<a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">' +
     '<a:graphicData uri="http://schemas.microsoft.com/office/word/2010/wordprocessingShape">' +
     '<wps:wsp><wps:cNvSpPr txBox="1"/><wps:spPr>' +
