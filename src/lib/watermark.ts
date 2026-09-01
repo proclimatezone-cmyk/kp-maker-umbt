@@ -88,7 +88,15 @@ export function buildWatermarkDrawingXml(initials: string, itemCount: number): s
   // относительно ячейки таблицы вело себя не так, как рассчитывалось).
   const tableCenterXTwips = SECTION_LEFT_MARGIN_TWIPS + ITEMS_TABLE_WIDTH_TWIPS / 2;
   const offsetXTwips = Math.round(tableCenterXTwips - boxWidthTwips / 2);
-  const offsetYTwips = -Math.round((boxHeightTwips - tableHeightTwips) / 2);
+  // По вертикали симметричное центрирование (боксHeight-tableHeight)/2 вверх
+  // увело знак выше таблицы, местами и выше края страницы — похоже, точка
+  // отсчёта абзаца (paragraph) внутри ячейки с vAlign="center" сама сидит
+  // ощутимо ниже физического верха строки, а не совпадает с ним, как
+  // предполагалось. Раз наверх счёт ненадёжен, а вниз — безопасен (там либо
+  // ещё строки таблицы, либо просто пустое место под ней), не поднимаем
+  // бокс вовсе: верх бокса — на уровне точки отсчёта, весь запас высоты
+  // уходит вниз.
+  const offsetYTwips = 0;
 
   const widthEmu = boxWidthTwips * TWIP_TO_EMU;
   const heightEmu = boxHeightTwips * TWIP_TO_EMU;
