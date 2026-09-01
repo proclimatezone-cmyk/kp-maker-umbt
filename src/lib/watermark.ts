@@ -37,7 +37,15 @@ const TWIP_TO_EMU = 635;
 /** Ширина таблицы позиций в kp-new.docx — см. tblW в шаблоне. */
 const ITEMS_TABLE_WIDTH_TWIPS = 10623;
 const HEADER_ROW_HEIGHT_TWIPS = 1794;
-const ITEM_ROW_HEIGHT_TWIPS = 907;
+// 907 — это МИНИМУМ строки (w:trHeight в шаблоне), а не факт: реальная
+// высота растёт под перенос длинных названий моделей («Внутренний кассетный
+// 1-поточный блок VRF-системы серии ATOM B» — 5-6 строк). Судя по реальному
+// рендеру в Word (не на глаз — открывал через Word/AppleScript), для
+// типичных длинных названий строка растёт примерно до ~1450 twips.
+// Это оценка, не точный расчёт (зависит от конкретного названия) — только
+// чтобы бокс водяного знака не расходился с реальной высотой таблицы
+// в разы, как было с голым w:trHeight.
+const ITEM_ROW_HEIGHT_TWIPS = 1450;
 const TOTAL_ROW_HEIGHT_TWIPS = 907;
 
 function xmlEscape(s: string): string {
@@ -67,19 +75,16 @@ export function buildWatermarkDrawingXml(initials: string, itemCount: number): s
   const tableHeightTwips =
     HEADER_ROW_HEIGHT_TWIPS + itemCount * ITEM_ROW_HEIGHT_TWIPS + TOTAL_ROW_HEIGHT_TWIPS;
 
-  // Бокс крупнее самой таблицы — после поворота на −22° угол таблицы
-  // не должен остаться непокрытым узором. Считаем не «на глаз» (первая
-  // версия так и не легла на стол — column-относительное позиционирование
-  // внутри ячейки таблицы вело себя непредсказуемо), а по формуле
-  // минимального прямоугольника, который после поворота на угол θ
-  // покрывает исходный W×H:
-  //   W' = W·cosθ + H·sinθ,  H' = W·sinθ + H·cosθ
+  // Бокс чуть крупнее самой таблицы — небольшой запас на угол поворота,
+  // но НЕ полная геометрия покрытия повёрнутого прямоугольника (тот
+  // вариант — верно с точки зрения математики, но раздувал высоту почти
+  // вдвое для широкой/невысокой таблицы позиций и уезжал далеко за её
+  // нижний край; при behindDoc="0" это стало прямо видно поверх блока
+  // условий). Крайние уголки таблицы могут чуть недополучить узор —
+  // приемлемо, лучше, чем нахлёст на соседний блок.
   const rotDeg = 22;
-  const rad = (rotDeg * Math.PI) / 180;
-  const cos = Math.cos(rad);
-  const sin = Math.sin(rad);
-  const boxWidthTwips = Math.round(ITEMS_TABLE_WIDTH_TWIPS * cos + tableHeightTwips * sin);
-  const boxHeightTwips = Math.round(ITEMS_TABLE_WIDTH_TWIPS * sin + tableHeightTwips * cos);
+  const boxWidthTwips = Math.round(ITEMS_TABLE_WIDTH_TWIPS * 1.1);
+  const boxHeightTwips = Math.round(tableHeightTwips * 1.05);
 
   // Горизонталь — абсолютно от левого края страницы (relativeFrom="page"):
   // центр бокса совмещаем с центром таблицы. Вертикаль — по-прежнему
@@ -88,15 +93,11 @@ export function buildWatermarkDrawingXml(initials: string, itemCount: number): s
   // относительно ячейки таблицы вело себя не так, как рассчитывалось).
   const tableCenterXTwips = SECTION_LEFT_MARGIN_TWIPS + ITEMS_TABLE_WIDTH_TWIPS / 2;
   const offsetXTwips = Math.round(tableCenterXTwips - boxWidthTwips / 2);
-  // По вертикали симметричное центрирование (боксHeight-tableHeight)/2 вверх
-  // увело знак выше таблицы, местами и выше края страницы — похоже, точка
-  // отсчёта абзаца (paragraph) внутри ячейки с vAlign="center" сама сидит
-  // ощутимо ниже физического верха строки, а не совпадает с ним, как
-  // предполагалось. Раз наверх счёт ненадёжен, а вниз — безопасен (там либо
-  // ещё строки таблицы, либо просто пустое место под ней), не поднимаем
-  // бокс вовсе: верх бокса — на уровне точки отсчёта, весь запас высоты
-  // уходит вниз.
-  const offsetYTwips = 0;
+  // По вертикали: точка отсчёта (paragraph, верх ячейки шапки) на практике
+  // (проверено рендером в Word, не на глаз) оказалась чуть выше физического
+  // верха таблицы — с offsetY=0 знак на ~1 строку вылезал над шапкой.
+  // Сдвигаем вниз на компенсирующую величину.
+  const offsetYTwips = 1000;
 
   const widthEmu = boxWidthTwips * TWIP_TO_EMU;
   const heightEmu = boxHeightTwips * TWIP_TO_EMU;
@@ -107,13 +108,25 @@ export function buildWatermarkDrawingXml(initials: string, itemCount: number): s
   const label = xmlEscape(initials);
   // Сетка строк: одна и та же надпись через равный интервал, вся сетка
   // поворачивается как единое целое вместе с текстбоксом.
-  const lineText = `${label}      ${label}      ${label}      ${label}`;
+  const repeatsPerLine = 8;
+  const lineText = Array.from({ length: repeatsPerLine }, () => label).join('      ');
   const runProps =
     '<w:rFonts w:ascii="Century Gothic" w:hAnsi="Century Gothic"/><w:b/>' +
     '<w:sz w:val="34"/><w:szCs w:val="34"/>' +
     '<w14:textFill><w14:solidFill><w14:srgbClr w14:val="123A5E">' +
     '<w14:alpha w14:val="14000"/></w14:srgbClr></w14:solidFill></w14:textFill>';
-  const linesCount = 10;
+  // ВАЖНО: bodyPr ниже стоит noAutofit + wrap="none" — значит реальную
+  // видимую высоту текста определяет ЧИСЛО СТРОК (linesCount × высота
+  // строки), а не boxHeightTwips/wp:extent: контент не сжимается и не
+  // обрезается по границам заявленного бокса, просто центрируется в нём
+  // (bodyPr anchor="ctr"). Фиксированное число строк давало нормальный
+  // результат на таблице из 3 позиций, но на короткой (1 позиция) знак
+  // нахлёстывал на блок условий гораздо сильнее — высота контента должна
+  // расти вместе с таблицей, а не быть константой. LINE_HEIGHT_TWIPS —
+  // высота строки при sz=34/line=360/lineRule=auto (single×1.5 ≈ 20.4pt×1.5),
+  // подобрано рендером в Word.
+  const LINE_HEIGHT_TWIPS = 612;
+  const linesCount = Math.max(6, Math.ceil((tableHeightTwips / LINE_HEIGHT_TWIPS) * 1.05));
   const paragraphs = Array.from({ length: linesCount }, (_, i) => {
     const shifted = i % 2 === 1 ? `   ${lineText}` : lineText;
     return (
@@ -130,7 +143,13 @@ export function buildWatermarkDrawingXml(initials: string, itemCount: number): s
   return (
     '<w:r><w:rPr><w:noProof/></w:rPr>' +
     '<w:drawing><wp:anchor distT="0" distB="0" distL="0" distR="0" simplePos="0" ' +
-    'relativeHeight="2" behindDoc="1" locked="0" layoutInCell="1" allowOverlap="1">' +
+    // behindDoc="0", не "1": заливка ячеек таблицы (DBEFF9/45B0E1) рисуется
+    // ПОВЕРХ слоя «за текстом» — с behindDoc="1" знак был не смещён, а
+    // попросту закрашен насквозь везде, где на него легла ячейка, и
+    // проступал только там, где вокруг таблицы пусто (видно на скрине —
+    // фрагменты ровно вне таблицы). При 14% непрозрачности поверх текста
+    // это не мешает читать цифры.
+    'relativeHeight="2" behindDoc="0" locked="0" layoutInCell="1" allowOverlap="1">' +
     '<wp:simplePos x="0" y="0"/>' +
     `<wp:positionH relativeFrom="page"><wp:posOffset>${offsetXEmu}</wp:posOffset></wp:positionH>` +
     `<wp:positionV relativeFrom="paragraph"><wp:posOffset>${offsetYEmu}</wp:posOffset></wp:positionV>` +
