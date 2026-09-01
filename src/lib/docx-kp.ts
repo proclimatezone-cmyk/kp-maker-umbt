@@ -7,6 +7,7 @@ import { google } from 'googleapis';
 import { formatNum } from './format';
 import { getGoogleAuth } from './google-auth';
 import { buildTermsLines, buildSignatureLines, COMPANY_ADDRESS_LINES, getDeliverySpec, getMoneyLabels, getWarrantyLine } from './delivery-terms';
+import { managerWatermarkInitials, buildWatermarkDrawingXml } from './watermark';
 
 /** Размер картинки товара в ячейке «Внешний вид», в пикселях при 96 dpi. */
 const IMAGE_BOX = { width: 150, height: 110 };
@@ -375,14 +376,33 @@ export async function buildKpDocx(opts: BuildKpOptions): Promise<Buffer> {
   // «Наименованием», чтобы название шло во всю ширину. Это последние строки
   // таблицы (доп. работы идут после оборудования), перед строкой «Итого».
   const additionalCount = items.filter(i => i.isAdditional).length;
-  if (additionalCount > 0) {
+  // Водяной знак с инициалами менеджера — только «новый вид» (там же
+  // размечена сама таблица позиций, под которую посчитаны отступы/высоты
+  // в watermark.ts); в «старом виде» такой таблицы нет.
+  const isOldTemplate = templatePath.endsWith('kp-old.docx');
+  const watermarkInitials = !isOldTemplate ? managerWatermarkInitials(opts.manager?.name) : null;
+
+  if (additionalCount > 0 || watermarkInitials) {
     const zip = doc.getZip();
-    const xml = zip.file('word/document.xml')!.asText();
-    zip.file('word/document.xml', mergeAdditionalRows(xml, additionalCount));
+    let xml = zip.file('word/document.xml')!.asText();
+    if (additionalCount > 0) xml = mergeAdditionalRows(xml, additionalCount);
+    if (watermarkInitials) xml = insertWatermark(xml, watermarkInitials, items.length);
+    zip.file('word/document.xml', xml);
     return zip.generate({ type: 'nodebuffer', compression: 'DEFLATE' });
   }
 
   return doc.toBuffer();
+}
+
+/** Вставляет разметку водяного знака сразу за текстом «Внешний вид» в шапке
+ * таблицы позиций — см. buildWatermarkDrawingXml для деталей позиционирования. */
+function insertWatermark(xml: string, initials: string, itemCount: number): string {
+  const anchor = '<w:t>Внешний вид</w:t></w:r></w:p>';
+  const idx = xml.indexOf(anchor);
+  if (idx === -1) return xml; // разметка шапки изменилась — не ломаем документ молча
+  const insertAt = idx + anchor.length - '</w:p>'.length;
+  const drawing = buildWatermarkDrawingXml(initials, itemCount);
+  return xml.slice(0, insertAt) + drawing + xml.slice(insertAt);
 }
 
 /** Сливает первые две ячейки строки: удаляет первую, второй даёт gridSpan=2. */
