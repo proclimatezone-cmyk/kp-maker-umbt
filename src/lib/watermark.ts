@@ -123,11 +123,20 @@ export function buildRowWatermarkXml(
   // чем в версии «одна фигура на всю таблицу» — сегмент втрое уже.
   const repeatsPerLine = 3;
   const lineText = Array.from({ length: repeatsPerLine }, () => label).join('      ');
+  // w14:textFill/w14:alpha — НЕ РАБОТАЕТ: замерил пиксели рендера (не на
+  // глаз) в двух версиях, 14% и 6%, — идентичные, полностью непрозрачные,
+  // местами буквально чёрные (0,0,0), а не заданный тёмно-синий. Word эту
+  // связку в run properties тихо игнорирует (нужен явный запасной
+  // <w:color>, которого не было, — без него весь блок w14:textFill не
+  // применяется вообще, включая базовый цвет, не только альфу). Так
+  // настоящую прозрачность text run в Word не сделать, а «Подложка»
+  // у Word свой знак тоже красит не альфой, а просто светлым сплошным
+  // цветом — это и повторяем: бледно-серо-голубой, ближе к цвету линий
+  // таблицы, чем к тёмному «123A5E».
   const runProps =
     '<w:rFonts w:ascii="Century Gothic" w:hAnsi="Century Gothic"/><w:b/>' +
     '<w:sz w:val="34"/><w:szCs w:val="34"/>' +
-    '<w14:textFill><w14:solidFill><w14:srgbClr w14:val="123A5E">' +
-    '<w14:alpha w14:val="14000"/></w14:srgbClr></w14:solidFill></w14:textFill>';
+    '<w:color w:val="B9C9DA"/>';
   // ВАЖНО: bodyPr ниже стоит noAutofit + wrap="none" — значит реальную
   // видимую высоту текста определяет ЧИСЛО СТРОК (linesCount × высота
   // строки), а не boxHeightTwips/wp:extent: контент не сжимается и не
