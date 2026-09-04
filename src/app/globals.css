@@ -1179,3 +1179,27 @@ body {
 }
 .modal-table td { padding: 0.5rem 0.6rem; border-bottom: 1px solid var(--bg-input); }
 .modal-table tr:last-child td { border-bottom: none; }
+
+/* «Под заказ» — позиции без остатка на складе, дольше ждать поставку.
+   Один и тот же бейдж в выпадающем списке модели, в верхнем поиске и в
+   уже добавленной строке КП — чтобы менеджер видел это везде одинаково. */
+.order-only-badge {
+  display: inline-block;
+  margin-left: 0.5em;
+  padding: 0.05rem 0.45rem;
+  border-radius: 20px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  background: var(--warning-bg);
+  color: var(--warning);
+  white-space: nowrap;
+  vertical-align: middle;
+}
+.order-only-toggle {
+  display: flex; align-items: center; gap: 0.4rem;
+  font-size: 0.78rem; color: var(--text-muted);
+  white-space: nowrap; cursor: pointer; user-select: none;
+}
+.order-only-toggle input { cursor: pointer; }

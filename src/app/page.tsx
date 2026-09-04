@@ -412,8 +412,12 @@ const ContactSection = memo(({ data, onChange }: any) => {
   );
 });
 
-const ModelSearchSelector = memo(({ value, onChange, cleanProducts }: { value: string, onChange: (val: string) => void, cleanProducts: any[] }) => {
-  const currentProduct = cleanProducts.find((p: any) => p.id === value);
+const ModelSearchSelector = memo(({ value, onChange, cleanProducts, allProducts }: { value: string, onChange: (val: string) => void, cleanProducts: any[], allProducts?: any[] }) => {
+  // Строку уже выбранной позиции ищем в ПОЛНОМ списке, не в отфильтрованном
+  // cleanProducts — иначе при включённом/выключенном тумблере «под заказ»
+  // (см. showOrderOnly в Home) уже выбранная позиция «под заказ» пропадала
+  // бы из инпута сама по себе, когда тумблер скрывает такие товары из поиска.
+  const currentProduct = (allProducts || cleanProducts).find((p: any) => p.id === value);
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState('');
   const containerRef = useRef<HTMLDivElement>(null);
@@ -530,7 +534,10 @@ const ModelSearchSelector = memo(({ value, onChange, cleanProducts }: { value: s
                   setIsOpen(false);
                 }}
               >
-                <div className="dropdown-item-model">{p.model}</div>
+                <div className="dropdown-item-model">
+                  {p.model}
+                  {p.orderOnly && <span className="order-only-badge">под заказ</span>}
+                </div>
                 <div className="dropdown-item-meta">{p.series || p.category}</div>
               </div>
             ))
@@ -585,8 +592,11 @@ const EquipmentRow = memo(({ item, products, cleanProducts, stock, onUpdate, onD
   return (
     <tr>
       <td data-label="Модель">
-        <ModelSearchSelector value={item.productId} onChange={val => onUpdate(item.id, { productId: val })} cleanProducts={cleanProducts} />
-        <div className="cat-label">{p?.series || p?.category}</div>
+        <ModelSearchSelector value={item.productId} onChange={val => onUpdate(item.id, { productId: val })} cleanProducts={cleanProducts} allProducts={products} />
+        <div className="cat-label">
+          {p?.series || p?.category}
+          {p?.orderOnly && <span className="order-only-badge" title="Позиция под заказ — нет на складе, срок поставки дольше">под заказ</span>}
+        </div>
       </td>
       <td data-label={labels.price}>
         <span className="cell-value">
@@ -975,7 +985,14 @@ export default function Home() {
   // другого канала листинга): у них в поле model маркетинговый текст вместо
   // артикула и price: 0. Раньше отсекались только по id.startsWith('---'),
   // но одна такая запись (id "superslim...") этот фильтр проходила.
-  const cleanProducts = useMemo(() => products.filter(p => p.model && !p.model.startsWith('---') && p.id && !p.id.startsWith('---') && Number(p.price) > 0), [products])
+  // Позиции «под заказ» (добавлены сверх основного прайса — дольше ждать
+  // поставку) по умолчанию скрыты из поиска: их 627 против 365 «в наличии»,
+  // без фильтра менеджер тонет в них при подборе обычного товара. Тумблер
+  // ниже их показывает — и там, и в самой строке КП они помечены значком,
+  // чтобы не спутать с тем, что есть на складе.
+  const [showOrderOnly, setShowOrderOnly] = useState(false)
+  const cleanProductsAll = useMemo(() => products.filter(p => p.model && !p.model.startsWith('---') && p.id && !p.id.startsWith('---') && Number(p.price) > 0), [products])
+  const cleanProducts = useMemo(() => showOrderOnly ? cleanProductsAll : cleanProductsAll.filter(p => !p.orderOnly), [cleanProductsAll, showOrderOnly])
   const filteredProducts = useMemo(() => {
     if (!searchTerm) return cleanProducts.slice(0, 50)
     const t = searchTerm.toLowerCase()
@@ -1709,12 +1726,19 @@ export default function Home() {
         <div className="search-bar">
           <Search size={18} color="var(--text-muted)" />
           <input placeholder="Поиск по базе (модель, категория)..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} />
+          <label className="order-only-toggle" title="Позиции, которых нет на складе — под заказ, дольше ждать поставку">
+            <input type="checkbox" checked={showOrderOnly} onChange={e => setShowOrderOnly(e.target.checked)} />
+            Показывать «под заказ»
+          </label>
         </div>
         {searchTerm && (
           <div className="section search-results">
             {filteredProducts.map(p => (
               <div key={p.id} className="search-item" onClick={() => { setItems([...items, { id: uid(), productId: p.id, quantity: 1 }]); setSearchTerm('') }}>
-                <div className="si-model">{p.model}</div>
+                <div className="si-model">
+                  {p.model}
+                  {p.orderOnly && <span className="order-only-badge">под заказ</span>}
+                </div>
                 <div className="si-meta">{p.series || p.category} · {formatNum(calculatePrice(p.price))} {currencyLabel}</div>
               </div>
             ))}

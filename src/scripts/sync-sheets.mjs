@@ -127,6 +127,12 @@ export async function syncSheets() {
       console.warn('Failed to load existing products cache:', err.message);
     }
 
+    // Строка-разделитель «под заказ» в листе делит позиции на «есть на
+    // складе» (выше) и «под заказ» (ниже, дольше ждать) — не отдельная
+    // колонка, просто маркер в самой таблице. Ловим её тут и красим все
+    // строки после неё, чтобы на сайте можно было фильтровать/подсвечивать.
+    let orderOnlySection = false;
+
     for (let i = 0; i < rows.length; i++) {
       const row = rows[i];
       const category = row[0];
@@ -134,7 +140,12 @@ export async function syncSheets() {
       const model = row[2];     // Column C = Model
       const imageUrl = row[22]; // Column W = Photo URL
       const price = row[21];    // Column V = Price
-      
+
+      if (category && category.trim().toLowerCase() === 'под заказ') {
+        orderOnlySection = true;
+        continue;
+      }
+
       if (!model) continue;
 
       const pId = model.toLowerCase().replace(/[^a-z0-9]/g, '-');
@@ -363,7 +374,8 @@ export async function syncSheets() {
         slidesImage: slidesImage || imageUrl,
         driveImage: imageUrl,
         coolingCapacity: isNaN(coolingCap) ? 0 : coolingCap,
-        specs: ""
+        specs: "",
+        orderOnly: orderOnlySection
       });
     }
 
