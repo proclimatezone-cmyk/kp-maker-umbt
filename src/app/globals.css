@@ -967,11 +967,10 @@ body {
 }
 .copy-btn:hover { color: var(--accent); background: var(--bg-hover); }
 
+/* position (fixed/top|bottom/left/width) идёт инлайн из ModelSearchSelector —
+   список рендерится порталом в document.body, координаты считаются от
+   инпута через getBoundingClientRect, см. комментарий в page.tsx. */
 .model-selector-dropdown {
-  position: absolute;
-  top: calc(100% + 3px);
-  left: 0;
-  right: 0;
   min-width: 16rem;
   max-height: 240px;
   overflow-y: auto;
@@ -1148,3 +1147,35 @@ body {
   font-variant-numeric: tabular-nums;
 }
 @media (max-width: 720px) { .base-updated { display: none; } }
+
+/* ===================================================================
+   СОХРАНЁННЫЕ КП — модалка со списком */
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.45);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 2000; padding: 1rem;
+}
+.modal-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md, 12px);
+  box-shadow: var(--shadow-lg);
+  width: 100%; max-width: 56rem; max-height: 85vh;
+  overflow-y: auto; padding: 1.25rem;
+}
+.modal-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+.modal-header h3 { margin: 0; font-size: 1rem; }
+.modal-empty {
+  padding: 2rem 1rem; text-align: center; color: var(--text-muted);
+  display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+}
+.modal-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+.modal-table th {
+  text-align: left; padding: 0.5rem 0.6rem; color: var(--text-muted);
+  font-weight: 600; font-size: 0.75rem; border-bottom: 1px solid var(--border-strong);
+}
+.modal-table td { padding: 0.5rem 0.6rem; border-bottom: 1px solid var(--bg-input); }
+.modal-table tr:last-child td { border-bottom: none; }

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useMemo, useCallback, useRef, memo } from 'react'
+import { createPortal } from 'react-dom'
 import { Plus, Trash2, FileText, User, Briefcase, Calculator, Search, RefreshCw, Building2, Phone, CheckCircle, CloudCheck, Loader2, Copy, Truck, ChevronDown, FileSignature, BarChart3, Lock, Unlock, Ruler } from 'lucide-react'
 import productsData from '@/data/products.json'
 import { formatNum, formatShortRuDate, toIsoDate } from '@/lib/format'
@@ -415,28 +416,64 @@ const ModelSearchSelector = memo(({ value, onChange, cleanProducts }: { value: s
   const currentProduct = cleanProducts.find((p: any) => p.id === value);
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState('');
-  
+  const containerRef = useRef<HTMLDivElement>(null);
+  // Позиция и направление списка считаются от инпута и хранятся отдельно от
+  // самого DOM-дерева инпута — список рендерится порталом в document.body,
+  // а не внутри строки таблицы. Строка живёт в горизонтально скроллящейся
+  // таблице (overflow-x auto), и обычный position:absolute обрезался её
+  // границами — приходилось скроллить страницу вниз, чтобы увидеть весь
+  // список. Портал + fixed-координаты от getBoundingClientRect убирают это
+  // ограничение начисто, независимо от того, сколько overflow-контейнеров
+  // над строкой.
+  const [dropdownRect, setDropdownRect] = useState<{ left: number; top: number; width: number; openUp: boolean } | null>(null);
+
   useEffect(() => {
     if (currentProduct) {
       setQuery(currentProduct.model);
     }
   }, [currentProduct]);
 
+  const updatePosition = useCallback(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const maxDropdownHeight = 240;
+    const spaceBelow = window.innerHeight - rect.bottom;
+    const openUp = spaceBelow < maxDropdownHeight && rect.top > spaceBelow;
+    setDropdownRect({
+      left: rect.left,
+      top: openUp ? rect.top : rect.bottom,
+      width: rect.width,
+      openUp,
+    });
+  }, []);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    updatePosition();
+    window.addEventListener('scroll', updatePosition, true);
+    window.addEventListener('resize', updatePosition);
+    return () => {
+      window.removeEventListener('scroll', updatePosition, true);
+      window.removeEventListener('resize', updatePosition);
+    };
+  }, [isOpen, updatePosition]);
+
   const filtered = useMemo(() => {
     if (!query) return cleanProducts.slice(0, 50);
     const q = query.toLowerCase();
-    return cleanProducts.filter((p: any) => 
-      p.model.toLowerCase().includes(q) || 
-      (p.series || '').toLowerCase().includes(q) || 
+    return cleanProducts.filter((p: any) =>
+      p.model.toLowerCase().includes(q) ||
+      (p.series || '').toLowerCase().includes(q) ||
       (p.category || '').toLowerCase().includes(q)
     ).slice(0, 50);
   }, [query, cleanProducts]);
 
   return (
-    <div className="model-selector-container" style={{ position: 'relative' }}>
-      <input 
+    <div className="model-selector-container" style={{ position: 'relative' }} ref={containerRef}>
+      <input
         className="model-search-input"
-        type="text" 
+        type="text"
         value={query}
         onChange={e => {
           setQuery(e.target.value);
@@ -458,7 +495,7 @@ const ModelSearchSelector = memo(({ value, onChange, cleanProducts }: { value: s
         style={{ paddingRight: '2.2rem' }}
       />
       {currentProduct && !isOpen && (
-        <button 
+        <button
           onClick={(e) => {
             e.stopPropagation();
             navigator.clipboard.writeText(currentProduct.model);
@@ -469,14 +506,23 @@ const ModelSearchSelector = memo(({ value, onChange, cleanProducts }: { value: s
           <Copy size={13} />
         </button>
       )}
-      {isOpen && (
-        <div className="model-selector-dropdown">
+      {isOpen && dropdownRect && typeof document !== 'undefined' && createPortal(
+        <div
+          className="model-selector-dropdown"
+          style={{
+            position: 'fixed',
+            left: dropdownRect.left,
+            width: dropdownRect.width,
+            top: dropdownRect.openUp ? undefined : dropdownRect.top + 3,
+            bottom: dropdownRect.openUp ? window.innerHeight - dropdownRect.top + 3 : undefined,
+          }}
+        >
           {filtered.length === 0 ? (
             <div className="dropdown-no-results">Ничего не найдено</div>
           ) : (
             filtered.map((p: any) => (
-              <div 
-                key={p.id} 
+              <div
+                key={p.id}
                 className="dropdown-item"
                 onMouseDown={() => {
                   onChange(p.id);
@@ -489,7 +535,8 @@ const ModelSearchSelector = memo(({ value, onChange, cleanProducts }: { value: s
               </div>
             ))
           )}
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   );
@@ -701,6 +748,10 @@ export default function Home() {
   const [stock, setStock] = useState<Record<string, number> | null>(null)
   const [stockError, setStockError] = useState('')
   const [isReportsUser, setIsReportsUser] = useState(false)
+  const [savedKpOpen, setSavedKpOpen] = useState(false)
+  const [savedKpList, setSavedKpList] = useState<any[]>([])
+  const [savedKpLoading, setSavedKpLoading] = useState(false)
+  const [savedKpOpeningNumber, setSavedKpOpeningNumber] = useState<string | null>(null)
   const [oldPriceMap, setOldPriceMap] = useState<Map<string, number> | null>(null)
   const [welkinMap, setWelkinMap] = useState<Map<string, { price: number; model: string; deltaPct: number; source: 'midea-exact' | 'hisense-approx' }> | null>(null)
   const [mideaCacMap, setMideaCacMap] = useState<Map<string, number> | null>(null)
@@ -1131,6 +1182,45 @@ export default function Home() {
     } catch { alert('Ошибка сети') } finally { setSyncing(false) }
   }
 
+  const openSavedKpPanel = async () => {
+    setSavedKpOpen(true)
+    setSavedKpLoading(true)
+    try {
+      const r = await fetch('/api/kp')
+      const d = await r.json()
+      if (d.success) setSavedKpList(d.list)
+      else alert('Ошибка: ' + (d.error || 'не удалось получить список'))
+    } catch { alert('Ошибка сети') } finally { setSavedKpLoading(false) }
+  }
+
+  /** Загружает сохранённый подбор в билдер — полностью заменяет текущий набор. */
+  const openSavedKp = async (kpNumber: string) => {
+    if (items.length > 0 && !confirm('Текущий набор позиций будет заменён сохранённым КП. Продолжить?')) return
+    setSavedKpOpeningNumber(kpNumber)
+    try {
+      const r = await fetch(`/api/kp/${encodeURIComponent(kpNumber)}`)
+      const d = await r.json()
+      if (!d.success) { alert('Ошибка: ' + d.error); return }
+      const kp = d.kp
+      setManager({ name: kp.manager?.name || '', phone: kp.manager?.phone || '', email: kp.manager?.email || '' })
+      setClient(kp.client || '')
+      setCompany(kp.extra?.company || '')
+      setAddress(kp.extra?.address || '')
+      setObjectType(kp.extra?.objectType || '')
+      setRegistrationDate(kp.extra?.registrationDate || '')
+      setEquipmentType(kp.extra?.equipmentType || '')
+      setContactPerson(kp.extra?.contactPerson || { name: '', phone: '', position: '' })
+      setCpName(kp.kpNumber || '')
+      // kpDate хранится в формате «ДД.ММ.ГГГГ» (как в самом документе) —
+      // полю <input type="date"> нужен ISO, конвертируем обратно.
+      setCpDate(toIsoDate(kp.kpDate) || '')
+      setItems(kp.items || [])
+      setAdditionalItems(kp.additionalItems || [])
+      if (kp.options && Object.keys(kp.options).length > 0) setOptions((prev: any) => ({ ...prev, ...kp.options }))
+      setSavedKpOpen(false)
+    } catch { alert('Не удалось открыть сохранённый КП') } finally { setSavedKpOpeningNumber(null) }
+  }
+
   const handleContract = async () => {
     if (!contract.number || !contract.buyerName) {
       alert('Заполните номер договора и покупателя в разделе «Договор поставки»')
@@ -1198,6 +1288,10 @@ export default function Home() {
           cpDate: formatShortRuDate(cpDate),
           template: options.template || 'new',
           format: options.format || 'docx',
+          // «Сырые» строки билдера (id/productId/quantity/discount) — для
+          // сохранения подбора на повторное открытие, отдельно от items ниже
+          // (те уже развёрнуты и без discount, годятся только для документа).
+          rawItems: items,
           items: items.map(i => {
             const p = live.find(x => x.id === i.productId);
             if (!p) return null;
@@ -1263,6 +1357,10 @@ export default function Home() {
               <Ruler size={14} />
               Подбор
             </a>
+            <button className="btn btn-ghost" onClick={openSavedKpPanel}>
+              <FileText size={14} />
+              Сохранённые КП
+            </button>
             {isReportsUser && (
               <a className="btn btn-ghost" href="/reports">
                 <BarChart3 size={14} />
@@ -1655,6 +1753,44 @@ export default function Home() {
         </div>
         </div>
       </div>
+
+      {savedKpOpen && (
+        <div className="modal-overlay" onClick={() => setSavedKpOpen(false)}>
+          <div className="modal-panel" onClick={e => e.stopPropagation()}>
+            <div className="modal-header">
+              <h3>Сохранённые КП</h3>
+              <button className="btn btn-ghost" onClick={() => setSavedKpOpen(false)}>Закрыть</button>
+            </div>
+            {savedKpLoading ? (
+              <div className="modal-empty"><Loader2 className="spin" size={18} /> Загрузка...</div>
+            ) : savedKpList.length === 0 ? (
+              <div className="modal-empty">Пока ничего не сохранено — подборы сохраняются автоматически при генерации КП.</div>
+            ) : (
+              <table className="modal-table">
+                <thead>
+                  <tr><th>№ КП</th><th>Дата</th><th>Клиент</th><th>Менеджер</th><th>Сумма</th><th></th></tr>
+                </thead>
+                <tbody>
+                  {savedKpList.map((kp: any) => (
+                    <tr key={kp.kpNumber}>
+                      <td>{kp.kpNumber}</td>
+                      <td>{kp.kpDate}</td>
+                      <td>{kp.client || '—'}</td>
+                      <td>{kp.manager || '—'}</td>
+                      <td>{formatNum(kp.total)}</td>
+                      <td>
+                        <button className="btn btn-ghost" onClick={() => openSavedKp(kp.kpNumber)} disabled={savedKpOpeningNumber === kp.kpNumber}>
+                          {savedKpOpeningNumber === kp.kpNumber ? <Loader2 className="spin" size={14} /> : 'Открыть'}
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+          </div>
+        </div>
+      )}
     </>
   )
 }

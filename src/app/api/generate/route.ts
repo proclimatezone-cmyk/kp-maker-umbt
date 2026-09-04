@@ -3,6 +3,7 @@ import { NextRequest, NextResponse, after } from 'next/server'
 import { buildKpDocx } from '@/lib/docx-kp'
 import { convertDocxToPdf } from '@/lib/docx-to-pdf'
 import { archiveKp } from '@/lib/kp-archive'
+import { saveKpSelection } from '@/lib/saved-kp'
 import { getSessionEmail } from '@/lib/auth-session'
 
 const DOCX_MIME =
@@ -23,6 +24,7 @@ export async function POST(req: NextRequest) {
       cpName,
       cpDate,
       items,
+      rawItems,
       additionalItems,
       equipmentTotal,
       partnerBonus,
@@ -80,10 +82,29 @@ export async function POST(req: NextRequest) {
 
     const archiveMeta = { cpNumber: cpName || '', client: client || '', manager: manager?.name || '', login, total }
 
+    // Отдельно от архива файла (см. archiveKp) — структурированный подбор
+    // (позиции/скидки/клиент), чтобы КП можно было открыть на сайте заново,
+    // а не только скачать готовый файл. rawItems — «сырые» билдер-строки
+    // ({productId, quantity, discount}), а не развёрнутые items из docx —
+    // без них скидку по каждой позиции обратно не восстановить.
+    const saveSelection = () => saveKpSelection({
+      kpNumber: cpName || '',
+      kpDate: cpDate || '',
+      manager: manager || {},
+      client: client || '',
+      extra: extraData || {},
+      items: rawItems || [],
+      additionalItems: additionalItems || [],
+      options: options || {},
+      total: Number(total) || 0,
+      source: 'generated',
+    })
+
     if (format === 'pdf') {
       const pdf = await convertDocxToPdf(docx, cpName || 'КП')
       // В архив уходят оба формата, даже если менеджер скачал только PDF.
       after(() => archiveKp({ ...archiveMeta, docx, pdf }))
+      after(saveSelection)
       return new NextResponse(new Uint8Array(pdf), {
         headers: {
           'Content-Type': 'application/pdf',
@@ -105,6 +126,7 @@ export async function POST(req: NextRequest) {
       }
       await archiveKp({ ...archiveMeta, docx, pdf })
     })
+    after(saveSelection)
 
     return new NextResponse(new Uint8Array(docx), {
       headers: {
