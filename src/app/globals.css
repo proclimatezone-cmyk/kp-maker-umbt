@@ -1197,9 +1197,11 @@ body {
   white-space: nowrap;
   vertical-align: middle;
 }
-.order-only-toggle {
-  display: flex; align-items: center; gap: 0.4rem;
-  font-size: 0.78rem; color: var(--text-muted);
-  white-space: nowrap; cursor: pointer; user-select: none;
+/* Кнопка-тумблер в topbar — до этого была мелким чекбоксом внизу страницы
+   у второстепенного поиска, менеджеры её физически не находили (см. фидбек
+   «где кнопка показать под заказ»). Топбар виден всегда, без скролла. */
+.order-only-btn.active {
+  background: var(--warning-bg);
+  color: var(--warning);
+  border-color: var(--warning);
 }
-.order-only-toggle input { cursor: pointer; }

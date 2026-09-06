@@ -1404,6 +1404,14 @@ export default function Home() {
               <RefreshCw size={14} className={syncing ? 'spin' : ''} />
               {syncing ? 'Обновление...' : 'Обновить базу'}
             </button>
+            <button
+              className={`btn btn-ghost order-only-btn ${showOrderOnly ? 'active' : ''}`}
+              onClick={() => setShowOrderOnly(v => !v)}
+              title="Позиции, которых нет на складе — под заказ, дольше ждать поставку"
+            >
+              {showOrderOnly ? <CheckCircle size={14} /> : <Truck size={14} />}
+              {showOrderOnly ? 'Под заказ: показаны' : 'Показать «под заказ»'}
+            </button>
             <a className="btn btn-ghost" href="/podbor">
               <Ruler size={14} />
               Подбор
@@ -1760,10 +1768,6 @@ export default function Home() {
         <div className="search-bar">
           <Search size={18} color="var(--text-muted)" />
           <input placeholder="Поиск по базе (модель, категория)..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} />
-          <label className="order-only-toggle" title="Позиции, которых нет на складе — под заказ, дольше ждать поставку">
-            <input type="checkbox" checked={showOrderOnly} onChange={e => setShowOrderOnly(e.target.checked)} />
-            Показывать «под заказ»
-          </label>
         </div>
         {searchTerm && (
           <div className="section search-results">
