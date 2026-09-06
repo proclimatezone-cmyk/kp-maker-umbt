@@ -762,6 +762,10 @@ export default function Home() {
   const [savedKpList, setSavedKpList] = useState<any[]>([])
   const [savedKpLoading, setSavedKpLoading] = useState(false)
   const [savedKpOpeningNumber, setSavedKpOpeningNumber] = useState<string | null>(null)
+  const [importLoading, setImportLoading] = useState(false)
+  const [importResult, setImportResult] = useState<any>(null)
+  const [importError, setImportError] = useState('')
+  const importFileRef = useRef<HTMLInputElement>(null)
   const [oldPriceMap, setOldPriceMap] = useState<Map<string, number> | null>(null)
   const [welkinMap, setWelkinMap] = useState<Map<string, { price: number; model: string; deltaPct: number; source: 'midea-exact' | 'hisense-approx' }> | null>(null)
   const [mideaCacMap, setMideaCacMap] = useState<Map<string, number> | null>(null)
@@ -1236,6 +1240,36 @@ export default function Home() {
       if (kp.options && Object.keys(kp.options).length > 0) setOptions((prev: any) => ({ ...prev, ...kp.options }))
       setSavedKpOpen(false)
     } catch { alert('Не удалось открыть сохранённый КП') } finally { setSavedKpOpeningNumber(null) }
+  }
+
+  /** Загрузка готового КП (.docx/.pdf) — распознанное сначала показываем на
+   *  проверку (см. kp-import.ts: поиск по тексту не даёт гарантий), а не
+   *  сразу подставляем в подбор. */
+  const handleImportFile = async (file: File) => {
+    setImportLoading(true)
+    setImportError('')
+    setImportResult(null)
+    try {
+      const form = new FormData()
+      form.append('file', file)
+      const r = await fetch('/api/kp/import', { method: 'POST', body: form })
+      const d = await r.json()
+      if (!d.success) { setImportError(d.error || 'Не удалось разобрать файл'); return }
+      setImportResult(d.result)
+    } catch { setImportError('Ошибка сети') } finally {
+      setImportLoading(false)
+      if (importFileRef.current) importFileRef.current.value = ''
+    }
+  }
+
+  const applyImportResult = () => {
+    if (!importResult) return
+    if (items.length > 0 && !confirm('Текущий набор позиций будет заменён распознанным из файла. Продолжить?')) return
+    setItems(importResult.items.map((it: any) => ({ id: uid(), productId: it.productId, quantity: it.quantity })))
+    if (importResult.cpNumber) setCpName(importResult.cpNumber)
+    if (importResult.cpDate) setCpDate(toIsoDate(importResult.cpDate) || '')
+    setImportResult(null)
+    setSavedKpOpen(false)
   }
 
   const handleContract = async () => {
@@ -1779,13 +1813,42 @@ export default function Home() {
       </div>
 
       {savedKpOpen && (
-        <div className="modal-overlay" onClick={() => setSavedKpOpen(false)}>
+        <div className="modal-overlay" onClick={() => { setSavedKpOpen(false); setImportResult(null); setImportError('') }}>
           <div className="modal-panel" onClick={e => e.stopPropagation()}>
             <div className="modal-header">
               <h3>Сохранённые КП</h3>
-              <button className="btn btn-ghost" onClick={() => setSavedKpOpen(false)}>Закрыть</button>
+              <div style={{ display: 'flex', gap: '0.5rem' }}>
+                <input ref={importFileRef} type="file" accept=".docx,.pdf" style={{ display: 'none' }}
+                  onChange={e => { const f = e.target.files?.[0]; if (f) handleImportFile(f) }} />
+                <button className="btn btn-ghost" onClick={() => importFileRef.current?.click()} disabled={importLoading}>
+                  {importLoading ? <Loader2 className="spin" size={14} /> : 'Загрузить КП (docx/pdf)'}
+                </button>
+                <button className="btn btn-ghost" onClick={() => { setSavedKpOpen(false); setImportResult(null); setImportError('') }}>Закрыть</button>
+              </div>
             </div>
-            {savedKpLoading ? (
+
+            {importError && <div className="modal-empty" style={{ color: 'var(--danger, #b91c1c)' }}>{importError}</div>}
+
+            {importResult ? (
+              <>
+                <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)', marginTop: 0 }}>
+                  Распознано по тексту файла — не структура таблицы, поэтому проверь перед тем, как открыть.
+                  {importResult.uncertainCount > 0 && ` У ${importResult.uncertainCount} поз. не нашлось количества рядом — стоит "1", поправь при необходимости.`}
+                </p>
+                <table className="modal-table">
+                  <thead><tr><th>Модель</th><th>Кол-во (распознано)</th></tr></thead>
+                  <tbody>
+                    {importResult.items.map((it: any, i: number) => (
+                      <tr key={i}><td>{it.model}</td><td>{it.quantity}</td></tr>
+                    ))}
+                  </tbody>
+                </table>
+                <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.75rem' }}>
+                  <button className="gen-btn" onClick={applyImportResult}>Открыть в подборе</button>
+                  <button className="btn btn-ghost" onClick={() => setImportResult(null)}>Отмена</button>
+                </div>
+              </>
+            ) : savedKpLoading ? (
               <div className="modal-empty"><Loader2 className="spin" size={18} /> Загрузка...</div>
             ) : savedKpList.length === 0 ? (
               <div className="modal-empty">Пока ничего не сохранено — подборы сохраняются автоматически при генерации КП.</div>
