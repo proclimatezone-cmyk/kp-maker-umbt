@@ -4833,7 +4833,7 @@
     "image": "/images/products/1lDruX5hnDjzJ3D6-9YRcRoEoSJxroDM7.png",
     "slidesImage": "https://drive.google.com/uc?id=1npw_kivb9CpvaiIfmcJ1xVYDpr2VRBiu",
     "driveImage": "https://drive.google.com/drive/folders/1lDruX5hnDjzJ3D6-9YRcRoEoSJxroDM7?usp=sharing",
-    "coolingCapacity": 0,
+    "coolingCapacity": 12,
     "specs": "",
     "orderOnly": true
   },
@@ -4847,7 +4847,7 @@
     "image": "/images/products/1lDruX5hnDjzJ3D6-9YRcRoEoSJxroDM7.png",
     "slidesImage": "https://drive.google.com/uc?id=1npw_kivb9CpvaiIfmcJ1xVYDpr2VRBiu",
     "driveImage": "https://drive.google.com/drive/folders/1lDruX5hnDjzJ3D6-9YRcRoEoSJxroDM7?usp=sharing",
-    "coolingCapacity": 0,
+    "coolingCapacity": 14,
     "specs": "",
     "orderOnly": true
   },
@@ -4861,7 +4861,7 @@
     "image": "/images/products/1lDruX5hnDjzJ3D6-9YRcRoEoSJxroDM7.png",
     "slidesImage": "https://drive.google.com/uc?id=1npw_kivb9CpvaiIfmcJ1xVYDpr2VRBiu",
     "driveImage": "https://drive.google.com/drive/folders/1lDruX5hnDjzJ3D6-9YRcRoEoSJxroDM7?usp=sharing",
-    "coolingCapacity": 0,
+    "coolingCapacity": 15.5,
     "specs": "",
     "orderOnly": true
   },
@@ -4875,7 +4875,7 @@
     "image": "/images/products/1lDruX5hnDjzJ3D6-9YRcRoEoSJxroDM7.png",
     "slidesImage": "https://drive.google.com/uc?id=1npw_kivb9CpvaiIfmcJ1xVYDpr2VRBiu",
     "driveImage": "https://drive.google.com/drive/folders/1lDruX5hnDjzJ3D6-9YRcRoEoSJxroDM7?usp=sharing",
-    "coolingCapacity": 0,
+    "coolingCapacity": 17,
     "specs": "",
     "orderOnly": true
   },
@@ -4889,7 +4889,7 @@
     "image": "/images/products/1lDruX5hnDjzJ3D6-9YRcRoEoSJxroDM7.png",
     "slidesImage": "https://drive.google.com/uc?id=1npw_kivb9CpvaiIfmcJ1xVYDpr2VRBiu",
     "driveImage": "https://drive.google.com/drive/folders/1lDruX5hnDjzJ3D6-9YRcRoEoSJxroDM7?usp=sharing",
-    "coolingCapacity": 0,
+    "coolingCapacity": 8,
     "specs": "",
     "orderOnly": true
   },
@@ -4903,7 +4903,7 @@
     "image": "/images/products/1lDruX5hnDjzJ3D6-9YRcRoEoSJxroDM7.png",
     "slidesImage": "https://drive.google.com/uc?id=1npw_kivb9CpvaiIfmcJ1xVYDpr2VRBiu",
     "driveImage": "https://drive.google.com/drive/folders/1lDruX5hnDjzJ3D6-9YRcRoEoSJxroDM7?usp=sharing",
-    "coolingCapacity": 0,
+    "coolingCapacity": 12,
     "specs": "",
     "orderOnly": true
   },
@@ -4917,7 +4917,7 @@
     "image": "/images/products/1lDruX5hnDjzJ3D6-9YRcRoEoSJxroDM7.png",
     "slidesImage": "https://drive.google.com/uc?id=1npw_kivb9CpvaiIfmcJ1xVYDpr2VRBiu",
     "driveImage": "https://drive.google.com/drive/folders/1lDruX5hnDjzJ3D6-9YRcRoEoSJxroDM7?usp=sharing",
-    "coolingCapacity": 0,
+    "coolingCapacity": 17,
     "specs": "",
     "orderOnly": true
   },
@@ -6133,7 +6133,7 @@
     "model": "MV8-252WV2GN1(MA)",
     "price": 6980,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 25.2,
     "specs": "",
     "orderOnly": true
   },
@@ -6145,7 +6145,7 @@
     "model": "MV8-280WV2GN1(MA)",
     "price": 7192,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 28,
     "specs": "",
     "orderOnly": true
   },
@@ -6157,7 +6157,7 @@
     "model": "MV8-335WV2GN1(MA)",
     "price": 7989,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 33.5,
     "specs": "",
     "orderOnly": true
   },
@@ -6169,7 +6169,7 @@
     "model": "MV8-400WV2GN1(MA)",
     "price": 9342,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 40,
     "specs": "",
     "orderOnly": true
   },
@@ -6181,7 +6181,7 @@
     "model": "MV8-450WV2GN1(MA)",
     "price": 9750,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 45,
     "specs": "",
     "orderOnly": true
   },
@@ -6193,7 +6193,7 @@
     "model": "MV8-500WV2GN1(MA)",
     "price": 11684,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 50,
     "specs": "",
     "orderOnly": true
   },
@@ -6205,7 +6205,7 @@
     "model": "MV8-560WV2GN1(MA)",
     "price": 11985,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 56,
     "specs": "",
     "orderOnly": true
   },
@@ -6217,7 +6217,7 @@
     "model": "MV8-615WV2GN1(MA)",
     "price": 12794,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 61.5,
     "specs": "",
     "orderOnly": true
   },
@@ -6229,7 +6229,7 @@
     "model": "MV8-670WV2GN1(MA)",
     "price": 14390,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 67,
     "specs": "",
     "orderOnly": true
   },
@@ -6241,7 +6241,7 @@
     "model": "MV8-730WV2GN1(MA)",
     "price": 15059,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 73,
     "specs": "",
     "orderOnly": true
   },
@@ -6253,7 +6253,7 @@
     "model": "MV8-785WV2GN1(MA)",
     "price": 15759,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 78.5,
     "specs": "",
     "orderOnly": true
   },
@@ -6265,7 +6265,7 @@
     "model": "MV8-850WV2GN1(MA)",
     "price": 16997,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 85,
     "specs": "",
     "orderOnly": true
   },
@@ -6277,7 +6277,7 @@
     "model": "MV8-900WV2GN1(MA)",
     "price": 17130,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 90,
     "specs": "",
     "orderOnly": true
   },
@@ -6289,7 +6289,7 @@
     "model": "MV8-950WV2GN1(MA)",
     "price": 17722,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 95.2,
     "specs": "",
     "orderOnly": true
   },
@@ -6301,7 +6301,7 @@
     "model": "MV8-1010WV2GN1(MA)",
     "price": 17932,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 101,
     "specs": "",
     "orderOnly": true
   },
@@ -6313,7 +6313,7 @@
     "model": "MV8-1060WV2GN1(MA)",
     "price": 19341,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 106,
     "specs": "",
     "orderOnly": true
   },
@@ -6325,7 +6325,7 @@
     "model": "MV8-1120WV2GN1(MA)",
     "price": 19782,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 112,
     "specs": "",
     "orderOnly": true
   },
@@ -6337,7 +6337,7 @@
     "model": "MV8S-252WV2GN1",
     "price": 6036,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 25.2,
     "specs": "",
     "orderOnly": true
   },
@@ -6349,7 +6349,7 @@
     "model": "MV8S-280WV2GN1",
     "price": 6419,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 28,
     "specs": "",
     "orderOnly": true
   },
@@ -6361,7 +6361,7 @@
     "model": "MV8S-335WV2GN1",
     "price": 7106,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 33.5,
     "specs": "",
     "orderOnly": true
   },
@@ -6373,7 +6373,7 @@
     "model": "MV8S-400WV2GN1",
     "price": 7768,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 40,
     "specs": "",
     "orderOnly": true
   },
@@ -6385,7 +6385,7 @@
     "model": "MV8S-450WV2GN1",
     "price": 8395,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 45,
     "specs": "",
     "orderOnly": true
   },
@@ -6397,7 +6397,7 @@
     "model": "MV8S-500WV2GN1",
     "price": 9126,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 50,
     "specs": "",
     "orderOnly": true
   },
@@ -6409,7 +6409,7 @@
     "model": "MV8S-560WV2GN1",
     "price": 10247,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 56,
     "specs": "",
     "orderOnly": true
   },
@@ -6421,7 +6421,7 @@
     "model": "MV8S-615WV2GN1",
     "price": 10888,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 61.5,
     "specs": "",
     "orderOnly": true
   },
@@ -6433,7 +6433,7 @@
     "model": "MV8S-670WV2GN1",
     "price": 11891,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 67,
     "specs": "",
     "orderOnly": true
   },
@@ -6445,7 +6445,7 @@
     "model": "MV8M-120WV2RN8",
     "price": 2798,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 12,
     "specs": "",
     "orderOnly": true
   },
@@ -6457,7 +6457,7 @@
     "model": "MV8M-140WV2RN8",
     "price": 3054,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 14,
     "specs": "",
     "orderOnly": true
   },
@@ -6469,7 +6469,7 @@
     "model": "MV8M-160WV2RN8",
     "price": 3435,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 15.5,
     "specs": "",
     "orderOnly": true
   },
@@ -6493,7 +6493,7 @@
     "model": "MV8M-80WV2N8",
     "price": 1817,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 8,
     "specs": "",
     "orderOnly": true
   },
@@ -6505,7 +6505,7 @@
     "model": "MV8M-100WV2N8",
     "price": 1865,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 10,
     "specs": "",
     "orderOnly": true
   },
@@ -6517,7 +6517,7 @@
     "model": "MV8M-120WV2N8",
     "price": 2309,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 12,
     "specs": "",
     "orderOnly": true
   },
@@ -6529,7 +6529,7 @@
     "model": "MV8M-140WV2N8",
     "price": 2497,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 14,
     "specs": "",
     "orderOnly": true
   },
@@ -6541,7 +6541,7 @@
     "model": "MV8M-160WV2N8",
     "price": 2681,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 15.5,
     "specs": "",
     "orderOnly": true
   },
@@ -7717,7 +7717,7 @@
     "model": "MV6-R252WV2GN1",
     "price": 7789,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 25.2,
+    "coolingCapacity": 22.4,
     "specs": "",
     "orderOnly": true
   },
@@ -7909,7 +7909,7 @@
     "model": "MDVS-252(8)W/DRN1",
     "price": 5455,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 25.2,
     "specs": "",
     "orderOnly": true
   },
@@ -7921,7 +7921,7 @@
     "model": "MDVS-280(10)W/DRN1",
     "price": 5809,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 28,
     "specs": "",
     "orderOnly": true
   },
@@ -7933,7 +7933,7 @@
     "model": "MDVS-335(12)W/DRN1",
     "price": 6241,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 33.5,
     "specs": "",
     "orderOnly": true
   },
