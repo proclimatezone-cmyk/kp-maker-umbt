@@ -98,6 +98,7 @@ export async function POST(req: NextRequest) {
       options: options || {},
       total: Number(total) || 0,
       source: 'generated',
+      login,
     })
 
     if (format === 'pdf') {

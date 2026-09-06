@@ -17,7 +17,7 @@ import { getGoogleAuth } from './google-auth';
 
 const SPREADSHEET_ID = '1O5aeKAbSc_UkDk7expSqaDO5dpUaQLyqWI40Vhp4MhE';
 const SHEET_TAB = 'Сохранённые КП';
-const RANGE = `'${SHEET_TAB}'!A2:K`;
+const RANGE = `'${SHEET_TAB}'!A2:L`;
 
 export interface SavedKpRecord {
   kpNumber: string;
@@ -37,6 +37,10 @@ export interface SavedKpRecord {
   options: Record<string, unknown>;
   total: number;
   source: 'generated' | 'imported';
+  /** Email вошедшего пользователя (из сессии) — каждый видит только свои
+   *  сохранённые КП, см. listKpSelections. Пусто, если сохранено до этого
+   *  поля или сессия не определилась. */
+  login?: string;
 }
 
 export interface SavedKpListItem {
@@ -67,6 +71,7 @@ function toRow(rec: SavedKpRecord, createdAt: string, updatedAt: string): string
     rec.source || 'generated',
     createdAt,
     updatedAt,
+    rec.login || '',
   ];
 }
 
@@ -89,6 +94,7 @@ function fromRow(row: string[]): (SavedKpRecord & { createdAt: string; updatedAt
       source: (row[8] as 'generated' | 'imported') || 'generated',
       createdAt: row[9] || '',
       updatedAt: row[10] || '',
+      login: row[11] || '',
     };
   } catch (err) {
     console.error('Сохранённые КП: не удалось разобрать строку', err);
@@ -142,7 +148,12 @@ export async function getKpSelection(kpNumber: string) {
   return row ? fromRow(row as string[]) : null;
 }
 
-export async function listKpSelections(): Promise<SavedKpListItem[]> {
+/**
+ * @param login если задан — только КП этого пользователя (у каждого
+ *   менеджера свой список, чтобы не видеть чужие подборы). Без него —
+ *   все записи (для сценариев без сессии/отладки).
+ */
+export async function listKpSelections(login?: string): Promise<SavedKpListItem[]> {
   const sheets = sheetsClient();
   const resp = await sheets.spreadsheets.values.get({ spreadsheetId: SPREADSHEET_ID, range: RANGE });
   const rows = (resp.data.values || []) as string[][];
@@ -150,6 +161,7 @@ export async function listKpSelections(): Promise<SavedKpListItem[]> {
   for (const row of rows) {
     const parsed = fromRow(row);
     if (!parsed) continue;
+    if (login && parsed.login !== login) continue;
     list.push({
       kpNumber: parsed.kpNumber,
       kpDate: parsed.kpDate,
