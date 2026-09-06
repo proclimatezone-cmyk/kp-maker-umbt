@@ -714,7 +714,9 @@ const EquipmentRow = memo(({ item, products, cleanProducts, stock, onUpdate, onD
         </div>
       </td>
       <td data-label="Остатки">
-        {available !== null && (
+        {p?.orderOnly ? (
+          <span className="order-only-badge" title="Позиция под заказ — нет на складе, срок поставки дольше">под заказ</span>
+        ) : available !== null && (
           <span className={`stock-tag ${shortage ? 'short' : available ? 'ok' : 'none'}`}>
             {typeof available === 'number' && available > 0
               ? `на складе ${available}`
@@ -1404,14 +1406,6 @@ export default function Home() {
               <RefreshCw size={14} className={syncing ? 'spin' : ''} />
               {syncing ? 'Обновление...' : 'Обновить базу'}
             </button>
-            <button
-              className={`btn btn-ghost order-only-btn ${showOrderOnly ? 'active' : ''}`}
-              onClick={() => setShowOrderOnly(v => !v)}
-              title="Позиции, которых нет на складе — под заказ, дольше ждать поставку"
-            >
-              {showOrderOnly ? <CheckCircle size={14} /> : <Truck size={14} />}
-              {showOrderOnly ? 'Под заказ: показаны' : 'Показать «под заказ»'}
-            </button>
             <a className="btn btn-ghost" href="/podbor">
               <Ruler size={14} />
               Подбор
@@ -1466,7 +1460,16 @@ export default function Home() {
             <div className="section-icon pink"><Calculator size={15} /></div>
             <h2>Оборудование</h2>
             <span className="count-pill">{items.length} поз.</span>
-            <button className="btn btn-primary" style={{ marginLeft: 'auto' }} onClick={() => setItems([...items, { id: uid(), productId: products[0]?.id || '', quantity: 1 }])}>
+            <button
+              className={`btn btn-ghost order-only-btn ${showOrderOnly ? 'active' : ''}`}
+              style={{ marginLeft: 'auto' }}
+              onClick={() => setShowOrderOnly(v => !v)}
+              title="Позиции, которых нет на складе — под заказ, дольше ждать поставку"
+            >
+              {showOrderOnly ? <CheckCircle size={14} /> : <Truck size={14} />}
+              {showOrderOnly ? 'Под заказ: показаны' : 'Показать «под заказ»'}
+            </button>
+            <button className="btn btn-primary" onClick={() => setItems([...items, { id: uid(), productId: products[0]?.id || '', quantity: 1 }])}>
               <Plus size={15} /> Добавить
             </button>
           </div>
