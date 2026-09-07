@@ -10969,7 +10969,7 @@
     "model": "MGBL-F200W/RN1",
     "price": 24628,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 185,
     "specs": "",
     "orderOnly": true
   },
@@ -10981,7 +10981,7 @@
     "model": "MC-SS35-RN1L-B",
     "price": 5766,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 35,
     "specs": "",
     "orderOnly": true
   },
@@ -10993,7 +10993,7 @@
     "model": "MC-SS65/RN1L",
     "price": 9261,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 65,
     "specs": "",
     "orderOnly": true
   },
@@ -11005,7 +11005,7 @@
     "model": "MC-SS80/RN1L",
     "price": 12555,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 80,
     "specs": "",
     "orderOnly": true
   },
@@ -11017,7 +11017,7 @@
     "model": "MC-SS65/RN1",
     "price": 8799,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 65,
     "specs": "",
     "orderOnly": true
   },
@@ -11029,7 +11029,7 @@
     "model": "MC-SS130-RN1TL",
     "price": 16473,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 130,
     "specs": "",
     "orderOnly": true
   },
@@ -11113,7 +11113,7 @@
     "model": "MGC-V5WD2N8-B2",
     "price": 2355,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 5.5,
     "specs": "",
     "orderOnly": true
   },
@@ -11125,7 +11125,7 @@
     "model": "MGC-V7WD2N8-B2",
     "price": 2610,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 7.4,
     "specs": "",
     "orderOnly": true
   },
@@ -11137,7 +11137,7 @@
     "model": "MGC-V9WD2N8-B2",
     "price": 3313,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 9,
     "specs": "",
     "orderOnly": true
   },
@@ -11197,7 +11197,7 @@
     "model": "MGC-V12WD2RN8-B",
     "price": 4260,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 11.6,
     "specs": "",
     "orderOnly": true
   },
@@ -11209,7 +11209,7 @@
     "model": "MGC-V14WD2RN8-B",
     "price": 4293,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 13.4,
     "specs": "",
     "orderOnly": true
   },
@@ -11221,7 +11221,7 @@
     "model": "MGC-V16WD2RN8-B",
     "price": 4703,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 14,
     "specs": "",
     "orderOnly": true
   },
@@ -11233,7 +11233,7 @@
     "model": "MC-SU75M-RN8L-B",
     "price": 11102,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 70,
     "specs": "",
     "orderOnly": true
   },
@@ -11245,7 +11245,7 @@
     "model": "MC-SU90M-RN8L-B",
     "price": 15767,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 82,
     "specs": "",
     "orderOnly": true
   },
@@ -11257,7 +11257,7 @@
     "model": "MC-SU140M-RN8L-B",
     "price": 21078,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 130,
     "specs": "",
     "orderOnly": true
   },
@@ -11269,7 +11269,7 @@
     "model": "MC-SU180M-RN8L-B",
     "price": 42845,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 164,
     "specs": "",
     "orderOnly": true
   },
@@ -11413,7 +11413,7 @@
     "model": "MHC-V4W/D2N8-B",
     "price": 3287,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 4.25,
     "specs": "",
     "orderOnly": true
   },
@@ -11425,7 +11425,7 @@
     "model": "MHC-V6W/D2N8-B",
     "price": 3384,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 6.2,
     "specs": "",
     "orderOnly": true
   },
@@ -11437,7 +11437,7 @@
     "model": "MHC-V8W/D2N8-B",
     "price": 3739,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 8.3,
     "specs": "",
     "orderOnly": true
   },
@@ -11449,7 +11449,7 @@
     "model": "MHC-V10W/D2N8-B",
     "price": 3787,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 10,
     "specs": "",
     "orderOnly": true
   },
@@ -11461,7 +11461,7 @@
     "model": "MHC-V12W/D2N8-B",
     "price": 4912,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 12.1,
     "specs": "",
     "orderOnly": true
   },
@@ -11473,7 +11473,7 @@
     "model": "MHC-V14W/D2N8-B",
     "price": 4975,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 14.5,
     "specs": "",
     "orderOnly": true
   },
@@ -11485,7 +11485,7 @@
     "model": "MHC-V16W/D2N8-B",
     "price": 5057,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 16,
     "specs": "",
     "orderOnly": true
   },
@@ -11497,7 +11497,7 @@
     "model": "MHC-V12W/D2RN8-B",
     "price": 5097,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 12.1,
     "specs": "",
     "orderOnly": true
   },
@@ -11509,7 +11509,7 @@
     "model": "MHC-V14W/D2RN8-B",
     "price": 5212,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 14.5,
     "specs": "",
     "orderOnly": true
   },
@@ -11521,7 +11521,7 @@
     "model": "MHC-V16W/D2RN8-B",
     "price": 5374,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 16,
     "specs": "",
     "orderOnly": true
   },
@@ -11569,7 +11569,7 @@
     "model": "MHA-V4W/D2N8-B",
     "price": 1557,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 4.25,
     "specs": "",
     "orderOnly": true
   },
@@ -11581,7 +11581,7 @@
     "model": "MHA-V6W/D2N8-B",
     "price": 1559,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 6.2,
     "specs": "",
     "orderOnly": true
   },
@@ -11593,7 +11593,7 @@
     "model": "MHA-V8W/D2N8-B",
     "price": 1775,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 8.3,
     "specs": "",
     "orderOnly": true
   },
@@ -11605,7 +11605,7 @@
     "model": "MHA-V10W/D2N8-B",
     "price": 1888,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 10,
     "specs": "",
     "orderOnly": true
   },
@@ -11617,7 +11617,7 @@
     "model": "MHA-V12W/D2N8-B",
     "price": 2752,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 12.1,
     "specs": "",
     "orderOnly": true
   },
@@ -11629,7 +11629,7 @@
     "model": "MHA-V14W/D2N8-B",
     "price": 2879,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 14.5,
     "specs": "",
     "orderOnly": true
   },
@@ -11641,7 +11641,7 @@
     "model": "MHA-V16W/D2N8-B",
     "price": 2946,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 16,
     "specs": "",
     "orderOnly": true
   },
@@ -11653,7 +11653,7 @@
     "model": "MHA-V12W/D2RN8-B",
     "price": 3058,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 12.1,
     "specs": "",
     "orderOnly": true
   },
@@ -11665,7 +11665,7 @@
     "model": "MHA-V14W/D2RN8-B",
     "price": 3108,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 14.5,
     "specs": "",
     "orderOnly": true
   },
@@ -11773,7 +11773,7 @@
     "model": "RSJ-120/ZN1-540V1",
     "price": 3444,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 11.8,
     "specs": "",
     "orderOnly": true
   },
@@ -11785,7 +11785,7 @@
     "model": "RSJ-200/SZN1-540V1",
     "price": 4254,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 20.4,
     "specs": "",
     "orderOnly": true
   },
@@ -11797,7 +11797,7 @@
     "model": "RSJ-420/SZN1-H",
     "price": 7347,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 39,
     "specs": "",
     "orderOnly": true
   },
@@ -11809,7 +11809,7 @@
     "model": "RSJ-800/SZN1-H",
     "price": 14969,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 80,
     "specs": "",
     "orderOnly": true
   },
@@ -11821,7 +11821,7 @@
     "model": "MSC-70D2N8-A",
     "price": 1518,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 7.16,
     "specs": "",
     "orderOnly": true
   },
@@ -11833,7 +11833,7 @@
     "model": "MSC-90D2N8-A",
     "price": 1624,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 9.15,
     "specs": "",
     "orderOnly": true
   },
@@ -11845,7 +11845,7 @@
     "model": "MSC-120D2N8-A",
     "price": 1687,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 12.5,
     "specs": "",
     "orderOnly": true
   },
@@ -11857,7 +11857,7 @@
     "model": "MSC-160D2N8-A",
     "price": 2053,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 16,
     "specs": "",
     "orderOnly": true
   },
@@ -11869,7 +11869,7 @@
     "model": "MSC-200D2N8-A",
     "price": 2119,
     "image": "/images/products/placeholder.png",
-    "coolingCapacity": 0,
+    "coolingCapacity": 18.8,
     "specs": "",
     "orderOnly": true
   },
