@@ -768,6 +768,8 @@ export default function Home() {
   const [importResult, setImportResult] = useState<any>(null)
   const [importError, setImportError] = useState('')
   const importFileRef = useRef<HTMLInputElement>(null)
+  const [isDraggingFile, setIsDraggingFile] = useState(false)
+  const dragCounter = useRef(0)
   const [oldPriceMap, setOldPriceMap] = useState<Map<string, number> | null>(null)
   const [welkinMap, setWelkinMap] = useState<Map<string, { price: number; model: string; deltaPct: number; source: 'midea-exact' | 'hisense-approx' }> | null>(null)
   const [mideaCacMap, setMideaCacMap] = useState<Map<string, number> | null>(null)
@@ -1262,6 +1264,32 @@ export default function Home() {
       setImportLoading(false)
       if (importFileRef.current) importFileRef.current.value = ''
     }
+  }
+
+  // Drag&drop файла КП прямо на модалку — альтернатива системному диалогу
+  // выбора файла (кнопка ниже открывает его тоже, через ref). Счётчик, а не
+  // просто флаг on/off: dragenter/dragleave стреляют на каждом дочернем
+  // элементе модалки, без счётчика подсветка мигала бы при движении мыши
+  // внутри окна.
+  const handleDragEnter = (e: React.DragEvent) => {
+    e.preventDefault()
+    dragCounter.current++
+    if (e.dataTransfer.types.includes('Files')) setIsDraggingFile(true)
+  }
+  const handleDragLeave = (e: React.DragEvent) => {
+    e.preventDefault()
+    dragCounter.current--
+    if (dragCounter.current <= 0) { dragCounter.current = 0; setIsDraggingFile(false) }
+  }
+  const handleDragOver = (e: React.DragEvent) => { e.preventDefault() }
+  const handleFileDrop = (e: React.DragEvent) => {
+    e.preventDefault()
+    dragCounter.current = 0
+    setIsDraggingFile(false)
+    const file = e.dataTransfer.files?.[0]
+    if (!file) return
+    if (!/\.(docx|pdf)$/i.test(file.name)) { setImportError('Поддерживаются только .docx и .pdf'); return }
+    handleImportFile(file)
   }
 
   const applyImportResult = () => {
@@ -1821,7 +1849,17 @@ export default function Home() {
 
       {savedKpOpen && (
         <div className="modal-overlay" onClick={() => { setSavedKpOpen(false); setImportResult(null); setImportError('') }}>
-          <div className="modal-panel" onClick={e => e.stopPropagation()}>
+          <div
+            className={`modal-panel ${isDraggingFile ? 'drag-active' : ''}`}
+            onClick={e => e.stopPropagation()}
+            onDragEnter={handleDragEnter}
+            onDragLeave={handleDragLeave}
+            onDragOver={handleDragOver}
+            onDrop={handleFileDrop}
+          >
+            {isDraggingFile && (
+              <div className="drop-overlay">Отпусти файл — распознаю позиции</div>
+            )}
             <div className="modal-header">
               <h3>Сохранённые КП</h3>
               <div style={{ display: 'flex', gap: '0.5rem' }}>
@@ -1833,6 +1871,8 @@ export default function Home() {
                 <button className="btn btn-ghost" onClick={() => { setSavedKpOpen(false); setImportResult(null); setImportError('') }}>Закрыть</button>
               </div>
             </div>
+
+            <p className="drop-hint">Или перетащи .docx/.pdf прямо сюда.</p>
 
             {importError && <div className="modal-empty" style={{ color: 'var(--danger, #b91c1c)' }}>{importError}</div>}
 
