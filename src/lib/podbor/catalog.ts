@@ -28,6 +28,8 @@ export interface PodborProduct {
   formFactor: FormFactor | null;
   series: Series | null;
   pipeType: PipeType | null;
+  /** Позиции без остатка на складе — добавлены сентябрь 2026, см. products.json/orderOnly. */
+  orderOnly: boolean;
 }
 
 export const FAMILY_LABEL: Record<Family, string> = {
@@ -54,6 +56,7 @@ function base(p: any) {
     coolingCapacity: Number(p.coolingCapacity) || 0,
     category: (p.category || '').trim(),
     image: p.image as string | undefined,
+    orderOnly: !!p.orderOnly,
   };
 }
 

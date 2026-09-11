@@ -2,10 +2,11 @@
 
 import { useState, useEffect, useMemo, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
-import { ArrowLeft, Plus, Trash2 } from 'lucide-react'
+import { ArrowLeft, Plus, Trash2, Truck, CheckCircle } from 'lucide-react'
 import { formatNum } from '@/lib/format'
 import { stockModelKey } from '@/lib/stock-match'
 import { evalAreaFormula } from '@/lib/podbor/formula'
+import { ModelSearchSelector } from '@/components/ModelSearchSelector'
 import {
   PODBOR_CATALOG, FAMILY_LABEL, FORM_FACTOR_LABEL, SERIES_LABEL, PIPE_LABEL,
   familyProducts, formFactorOptions, seriesOptions, pipeTypeOptions,
@@ -89,6 +90,11 @@ export default function PodborPage() {
   // авто-подбор по сумме кВт внутренних блоков этой серии. null/отсутствие
   // ключа = используется авто-подбор (matchOutdoorUnit).
   const [outdoorPicks, setOutdoorPicks] = useState<Record<string, string | null>>({})
+  // Позиции «под заказ» (нет на складе — см. orderOnly в products.json)
+  // по умолчанию скрыты из поиска моделей — их сотни, в общем списке легко
+  // случайно подобрать не то, что реально есть. См. тот же тумблер на
+  // главной странице.
+  const [showOrderOnly, setShowOrderOnly] = useState(false)
 
   useEffect(() => {
     fetch('/api/stock')
@@ -289,6 +295,14 @@ export default function PodborPage() {
           </a>
           <h1>Подбор оборудования по комнатам</h1>
         </div>
+        <button
+          className={`btn btn-ghost order-only-btn ${showOrderOnly ? 'active' : ''}`}
+          onClick={() => setShowOrderOnly(v => !v)}
+          title="Позиции, которых нет на складе — под заказ, дольше ждать поставку"
+        >
+          {showOrderOnly ? <CheckCircle size={14} /> : <Truck size={14} />}
+          {showOrderOnly ? 'Под заказ: показаны' : 'Показать «под заказ»'}
+        </button>
         <button className="btn btn-ghost" onClick={clearRooms}><Trash2 size={14} /> Очистить подбор</button>
       </div>
       <p className="podbor-lede">
@@ -312,6 +326,7 @@ export default function PodborPage() {
                 onFamily={family => setFamily(room.id, family)}
                 onFormFactor={ff => setFormFactor(room.id, room, ff)}
                 canRemove={rooms.length > 1}
+                showOrderOnly={showOrderOnly}
               />
             ))}
             <div className="add-room-row">
@@ -359,9 +374,11 @@ export default function PodborPage() {
                     onChange={e => setOutdoorPicks(prev => ({ ...prev, [g.series]: e.target.value || null }))}
                   >
                     <option value="">— авто по мощности —</option>
-                    {g.candidates.map(p => (
-                      <option key={p.id} value={p.id}>{productLabel(p)}</option>
-                    ))}
+                    {g.candidates
+                      .filter(p => showOrderOnly || !p.orderOnly || p.id === g.product?.id)
+                      .map(p => (
+                        <option key={p.id} value={p.id}>{productLabel(p)}{p.orderOnly ? ' · под заказ' : ''}</option>
+                      ))}
                   </select>
                   {g.product ? (
                     <div className="outdoor-product-row" style={{ marginTop: 4 }}>
@@ -374,6 +391,7 @@ export default function PodborPage() {
                         {g.ratio != null && (g.ratio < 0.9 || g.ratio > 1.15) && (
                           <span style={{ color: 'var(--error)' }}> — вне 90–115%, проверьте вручную</span>
                         )}
+                        {g.product.orderOnly && <span className="order-only-badge">под заказ</span>}
                       </p>
                     </div>
                   ) : (
@@ -418,7 +436,7 @@ export default function PodborPage() {
   )
 }
 
-function RoomCard({ index, room, c, onUpdate, onRemove, onFamily, onFormFactor, canRemove }: {
+function RoomCard({ index, room, c, onUpdate, onRemove, onFamily, onFormFactor, canRemove, showOrderOnly }: {
   index: number
   room: Room
   c: ReturnType<typeof computeRoom>
@@ -427,8 +445,24 @@ function RoomCard({ index, room, c, onUpdate, onRemove, onFamily, onFormFactor, 
   onFamily: (family: Family) => void
   onFormFactor: (ff: FormFactor) => void
   canRemove: boolean
+  showOrderOnly: boolean
 }) {
   const families: Family[] = ['vrf', 'fancoil', 'split']
+  // Ручной подбор — по любой модели из каталога, независимо от того, что
+  // выбрано в фильтрах комнаты (см. комментарий у самого пикера ниже).
+  // Список — плоский, с меткой семейства вместо optgroup (тот не годится
+  // для поиска по тексту), под заказ скрыт по тумблеру, но уже выбранная
+  // позиция всегда остаётся видна через allOptions.
+  const allManualOptions = useMemo(
+    () => families.flatMap(fam => familyProducts(fam).map(p => ({
+      id: p.id, model: p.model, category: `${FAMILY_LABEL[fam]} · ${p.category}`, orderOnly: p.orderOnly,
+    }))),
+    []
+  )
+  const manualOptions = useMemo(
+    () => showOrderOnly ? allManualOptions : allManualOptions.filter(p => !p.orderOnly),
+    [allManualOptions, showOrderOnly]
+  )
   const formFactors = formFactorOptions(room.family)
   const seriesOrPipeOptions = room.family === 'vrf'
     ? (room.formFactor ? seriesOptions(room.family, room.formFactor) : [])
@@ -548,21 +582,19 @@ function RoomCard({ index, room, c, onUpdate, onRemove, onFamily, onFormFactor, 
         <div className="result-left">
           <div className="result-model-block">
             <span className="result-eyebrow">{c.isManual ? 'Выбрано вручную' : 'Подобрано'} {c.qty > 1 ? `· ${c.qty} шт` : ''}</span>
-            <select
-              className="result-model-select"
+            <ModelSearchSelector
               value={c.matched?.id || ''}
-              onChange={e => onUpdate({ manualModelId: e.target.value || null })}
-            >
-              <option value="">— выбрать модель —</option>
-              {(['vrf', 'fancoil', 'split'] as Family[]).map(fam => (
-                <optgroup key={fam} label={FAMILY_LABEL[fam]}>
-                  {familyProducts(fam).map(p => (
-                    <option key={p.id} value={p.id}>{productLabel(p)}</option>
-                  ))}
-                </optgroup>
-              ))}
-            </select>
-            {c.matched && <span className="result-meta">{c.matched.coolingCapacity > 0 ? `${formatDecimal(c.matched.coolingCapacity)} кВт · ` : ''}{formatNum(c.matched.price)} у.е. / шт</span>}
+              onChange={val => onUpdate({ manualModelId: val || null })}
+              options={manualOptions}
+              allOptions={allManualOptions}
+              placeholder="Поиск модели вручную..."
+            />
+            {c.matched && (
+              <span className="result-meta">
+                {c.matched.coolingCapacity > 0 ? `${formatDecimal(c.matched.coolingCapacity)} кВт · ` : ''}{formatNum(c.matched.price)} у.е. / шт
+                {c.matched.orderOnly && <span className="order-only-badge">под заказ</span>}
+              </span>
+            )}
           </div>
           {noCapacityData && <span className="result-note warn">⚠ в каталоге не указана мощность для этой категории — выберите модель вручную</span>}
           {noCandidates && <span className="result-note warn">⚠ для этой комбинации нет моделей в каталоге</span>}

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useMemo, useCallback, useRef, memo } from 'react'
-import { createPortal } from 'react-dom'
+import { ModelSearchSelector } from '@/components/ModelSearchSelector'
 import { Plus, Trash2, FileText, User, Briefcase, Calculator, Search, RefreshCw, Building2, Phone, CheckCircle, CloudCheck, Loader2, Copy, Truck, ChevronDown, FileSignature, BarChart3, Lock, Unlock, Ruler } from 'lucide-react'
 import productsData from '@/data/products.json'
 import { formatNum, formatShortRuDate, toIsoDate } from '@/lib/format'
@@ -412,143 +412,6 @@ const ContactSection = memo(({ data, onChange }: any) => {
   );
 });
 
-const ModelSearchSelector = memo(({ value, onChange, cleanProducts, allProducts }: { value: string, onChange: (val: string) => void, cleanProducts: any[], allProducts?: any[] }) => {
-  // Строку уже выбранной позиции ищем в ПОЛНОМ списке, не в отфильтрованном
-  // cleanProducts — иначе при включённом/выключенном тумблере «под заказ»
-  // (см. showOrderOnly в Home) уже выбранная позиция «под заказ» пропадала
-  // бы из инпута сама по себе, когда тумблер скрывает такие товары из поиска.
-  const currentProduct = (allProducts || cleanProducts).find((p: any) => p.id === value);
-  const [isOpen, setIsOpen] = useState(false);
-  const [query, setQuery] = useState('');
-  const containerRef = useRef<HTMLDivElement>(null);
-  // Позиция и направление списка считаются от инпута и хранятся отдельно от
-  // самого DOM-дерева инпута — список рендерится порталом в document.body,
-  // а не внутри строки таблицы. Строка живёт в горизонтально скроллящейся
-  // таблице (overflow-x auto), и обычный position:absolute обрезался её
-  // границами — приходилось скроллить страницу вниз, чтобы увидеть весь
-  // список. Портал + fixed-координаты от getBoundingClientRect убирают это
-  // ограничение начисто, независимо от того, сколько overflow-контейнеров
-  // над строкой.
-  const [dropdownRect, setDropdownRect] = useState<{ left: number; top: number; width: number; openUp: boolean } | null>(null);
-
-  useEffect(() => {
-    if (currentProduct) {
-      setQuery(currentProduct.model);
-    }
-  }, [currentProduct]);
-
-  const updatePosition = useCallback(() => {
-    const el = containerRef.current;
-    if (!el) return;
-    const rect = el.getBoundingClientRect();
-    const maxDropdownHeight = 240;
-    const spaceBelow = window.innerHeight - rect.bottom;
-    const openUp = spaceBelow < maxDropdownHeight && rect.top > spaceBelow;
-    setDropdownRect({
-      left: rect.left,
-      top: openUp ? rect.top : rect.bottom,
-      width: rect.width,
-      openUp,
-    });
-  }, []);
-
-  useEffect(() => {
-    if (!isOpen) return;
-    updatePosition();
-    window.addEventListener('scroll', updatePosition, true);
-    window.addEventListener('resize', updatePosition);
-    return () => {
-      window.removeEventListener('scroll', updatePosition, true);
-      window.removeEventListener('resize', updatePosition);
-    };
-  }, [isOpen, updatePosition]);
-
-  const filtered = useMemo(() => {
-    if (!query) return cleanProducts.slice(0, 50);
-    const q = query.toLowerCase();
-    return cleanProducts.filter((p: any) =>
-      p.model.toLowerCase().includes(q) ||
-      (p.series || '').toLowerCase().includes(q) ||
-      (p.category || '').toLowerCase().includes(q)
-    ).slice(0, 50);
-  }, [query, cleanProducts]);
-
-  return (
-    <div className="model-selector-container" style={{ position: 'relative' }} ref={containerRef}>
-      <input
-        className="model-search-input"
-        type="text"
-        value={query}
-        onChange={e => {
-          setQuery(e.target.value);
-          setIsOpen(true);
-        }}
-        onFocus={() => {
-          setIsOpen(true);
-          setQuery('');
-        }}
-        onBlur={() => {
-          setTimeout(() => {
-            setIsOpen(false);
-            if (currentProduct) {
-              setQuery(currentProduct.model);
-            }
-          }, 200);
-        }}
-        placeholder="Поиск модели..."
-        style={{ paddingRight: '2.2rem' }}
-      />
-      {currentProduct && !isOpen && (
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            navigator.clipboard.writeText(currentProduct.model);
-          }}
-          title="Копировать название модели"
-          className="copy-btn"
-        >
-          <Copy size={13} />
-        </button>
-      )}
-      {isOpen && dropdownRect && typeof document !== 'undefined' && createPortal(
-        <div
-          className="model-selector-dropdown"
-          style={{
-            position: 'fixed',
-            left: dropdownRect.left,
-            width: dropdownRect.width,
-            top: dropdownRect.openUp ? undefined : dropdownRect.top + 3,
-            bottom: dropdownRect.openUp ? window.innerHeight - dropdownRect.top + 3 : undefined,
-          }}
-        >
-          {filtered.length === 0 ? (
-            <div className="dropdown-no-results">Ничего не найдено</div>
-          ) : (
-            filtered.map((p: any) => (
-              <div
-                key={p.id}
-                className="dropdown-item"
-                onMouseDown={() => {
-                  onChange(p.id);
-                  setQuery(p.model);
-                  setIsOpen(false);
-                }}
-              >
-                <div className="dropdown-item-model">
-                  {p.model}
-                  {p.orderOnly && <span className="order-only-badge">под заказ</span>}
-                </div>
-                <div className="dropdown-item-meta">{p.series || p.category}</div>
-              </div>
-            ))
-          )}
-        </div>,
-        document.body
-      )}
-    </div>
-  );
-});
-
 const EquipmentRow = memo(({ item, products, cleanProducts, stock, onUpdate, onDelete, onClone, calculatePrice, currencyLabel, labels, oldPriceMap, welkinMap, mideaCacMap, showDiscount, showOldPrice, showWelkin, showMideaCac }: any) => {
   const p = products.find((x: any) => x.id === item.productId);
   const [qty, setQty] = useState<number | string>(item.quantity);
@@ -592,7 +455,7 @@ const EquipmentRow = memo(({ item, products, cleanProducts, stock, onUpdate, onD
   return (
     <tr>
       <td data-label="Модель">
-        <ModelSearchSelector value={item.productId} onChange={val => onUpdate(item.id, { productId: val })} cleanProducts={cleanProducts} allProducts={products} />
+        <ModelSearchSelector value={item.productId} onChange={val => onUpdate(item.id, { productId: val })} options={cleanProducts} allOptions={products} />
         <div className="cat-label">
           {p?.series || p?.category}
           {p?.orderOnly && <span className="order-only-badge" title="Позиция под заказ — нет на складе, срок поставки дольше">под заказ</span>}
