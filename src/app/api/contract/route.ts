@@ -5,7 +5,9 @@ import PizZip from 'pizzip';
 import Docxtemplater from 'docxtemplater';
 import { buildSpec, splitKits, withInventoryNames, missingInventoryNames, ContractInput } from '@/lib/contract';
 import { getStock, indexNamesByArticle } from '@/lib/stock';
+import { stockKey } from '@/lib/stock-match';
 import { formatRuDate } from '@/lib/format';
+import invoiceNamesRaw from '@/data/invoice-names.json';
 
 
 const DOCX_MIME = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
@@ -37,8 +39,13 @@ export async function POST(req: NextRequest) {
     // Комплекты «внутренний + наружный» расписываются двумя строками.
     const split = splitKits(priced);
 
-    // Полные названия берём из инвентаризации; если её нет — не падаем,
-    // а оставляем короткие артикулы и говорим об этом в заголовке ответа.
+    // Полные названия — приоритет за формулировками из реальных таможенных
+    // инвойсов (invoice-finder.vercel.app, см. src/scripts/scrape-invoice-names.mjs):
+    // склад даёт короткие/неточные названия («VRF серии V8 Easy Fit наружний
+    // блок»), инвойс — официальную таможенную формулировку («Наружный блок
+    // промышленной мультизональной VRF системы MV8-...»). Склад — только
+    // фоллбэк для того, чего в инвойсах ещё не было (новые позиции «под
+    // заказ», которые физически ещё не завозили).
     let names: Record<string, string> = {};
     let stockNote = '';
     try {
@@ -46,6 +53,9 @@ export async function POST(req: NextRequest) {
     } catch (err: any) {
       stockNote = 'Инвентаризация недоступна, позиции названы артикулами';
       console.warn('Договор: не удалось прочитать инвентаризацию:', err?.message);
+    }
+    for (const [model, name] of Object.entries(invoiceNamesRaw as Record<string, string | null>)) {
+      if (name) names[stockKey(model)] = name;
     }
 
     const named = withInventoryNames(split, names);
