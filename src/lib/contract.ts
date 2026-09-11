@@ -79,8 +79,16 @@ export function splitKits(items: ContractInput[]): ContractInput[] {
  * общая стоимость — цена за единицу без НДС на количество,
  * НДС — 12% от неё, округлённые до сума,
  * стоимость с НДС — их сумма.
+ *
+ * @param priceIncludesVat При оплате переводом КП уже показывает клиенту
+ *   цену «с НДС» (см. calculatePrice/paymentType==='transfer' в page.tsx,
+ *   getMoneyLabels — оттуда и подпись столбца). Раньше договор всегда
+ *   считал входящую цену чистой (без НДС) и начислял 12% ещё раз поверх —
+ *   итог в договоре не совпадал с суммой, которую видел клиент в КП
+ *   (искусственно на 12% больше). Когда true — входящая unitPrice это уже
+ *   валовая (с НДС) цена, НДС из неё выделяется, а не начисляется заново.
  */
-export function buildSpec(items: ContractInput[]) {
+export function buildSpec(items: ContractInput[], opts: { priceIncludesVat?: boolean } = {}) {
   const rows: SpecRow[] = [];
   let totalNet = 0;
   let totalVat = 0;
@@ -89,9 +97,17 @@ export function buildSpec(items: ContractInput[]) {
     const qty = Number(item.quantity) || 0;
     const price = Number(item.unitPrice) || 0;
 
-    const net = Math.round(price * qty * 100) / 100;
-    const vat = Math.round(net * VAT_RATE);
-    const gross = net + vat;
+    let net: number, vat: number, gross: number;
+    if (opts.priceIncludesVat) {
+      gross = Math.round(price * qty * 100) / 100;
+      net = Math.round((gross / (1 + VAT_RATE)) * 100) / 100;
+      vat = Math.round(gross - net);
+      gross = net + vat;
+    } else {
+      net = Math.round(price * qty * 100) / 100;
+      vat = Math.round(net * VAT_RATE);
+      gross = net + vat;
+    }
 
     totalNet += net;
     totalVat += vat;

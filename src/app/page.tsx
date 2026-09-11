@@ -1316,15 +1316,25 @@ export default function Home() {
         body: JSON.stringify({
           contract,
           exchangeRate: options.exchangeRate,
-          // В договор уходит цена в у.е. без НДС: со скидкой, но без
-          // накрутки и пересчёта в сумы — это делает сервер по курсу.
+          // При оплате переводом calculatePrice уже включает наценку «с
+          // НДС» (см. getMoneyLabels/paymentType) — ту же цену, что видит
+          // клиент в КП, со скидкой, без пересчёта в сумы (это делает
+          // сервер по курсу). Раньше сюда всегда уходила голая p.price без
+          // наценки — сумма в договоре не совпадала с суммой в КП, НДС
+          // считался дважды. Флаг priceIncludesVat говорит серверу, что
+          // делать с этой ценой: выделять НДС из неё, а не начислять заново.
+          priceIncludesVat: options.paymentType === 'transfer',
           items: items.map(i => {
             const p = products.find(x => x.id === i.productId)
             if (!p) return null
+            // Наценка «с НДС» без пересчёта в сумы (тот отдельно делает
+            // сервер по курсу) — calculatePrice целиком сюда не годится,
+            // она бы при currency==='sum' сконвертировала дважды.
+            const vatMarkup = options.paymentType === 'transfer' ? (1 + options.transferFee / 100) : 1
             return {
               model: p.model,
               quantity: i.quantity,
-              unitPriceUe: Math.round(p.price * (1 + (i.discount || 0) / 100)),
+              unitPriceUe: Math.round(p.price * vatMarkup * (1 + (i.discount || 0) / 100)),
             }
           }).filter(Boolean),
         }),
