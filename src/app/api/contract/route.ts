@@ -14,7 +14,7 @@ const DOCX_MIME = 'application/vnd.openxmlformats-officedocument.wordprocessingm
 
 export async function POST(req: NextRequest) {
   try {
-    const { contract = {}, items = [], exchangeRate } = await req.json();
+    const { contract = {}, items = [], exchangeRate, alreadyInSum = false } = await req.json();
 
     const rate = Number(exchangeRate);
     if (!rate || rate <= 0) {
@@ -28,12 +28,18 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'В договоре нет ни одной позиции' }, { status: 400 });
     }
 
-    // Цены в КП — в у.е., уже итоговые (валовые, с НДС — см. buildSpec).
-    // В договоре всё в сумах, конвертация курсом ниже.
+    // Цены — уже итоговые (валовые, с НДС — см. buildSpec), ровно как в
+    // КП на экране. Курсом переводим только если КП была в у.е.: если она
+    // уже в сумах (alreadyInSum), цена пересчитана и округлена на клиенте
+    // тем же порядком, что и в самой таблице КП — конвертировать её здесь
+    // заново было бы вторым независимым округлением, из-за которого сумма
+    // в договоре расходилась с КП на пару сотен-тысяч сум.
     const priced: ContractInput[] = items.map((i: any) => ({
       model: i.model,
       quantity: Number(i.quantity) || 0,
-      unitPrice: Math.round((Number(i.unitPriceUe) || 0) * rate * 100) / 100,
+      unitPrice: alreadyInSum
+        ? Number(i.unitPriceUe) || 0
+        : Math.round((Number(i.unitPriceUe) || 0) * rate * 100) / 100,
     }));
 
     // Комплекты «внутренний + наружный» расписываются двумя строками.

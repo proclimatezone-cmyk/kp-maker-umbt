@@ -1316,26 +1316,25 @@ export default function Home() {
         body: JSON.stringify({
           contract,
           exchangeRate: options.exchangeRate,
-          // При оплате переводом calculatePrice уже включает наценку «с
-          // НДС» (см. getMoneyLabels/paymentType) — ту же цену, что видит
-          // клиент в КП, со скидкой, без пересчёта в сумы (это делает
-          // сервер по курсу). Раньше сюда всегда уходила голая p.price без
-          // наценки — сумма в договоре не совпадала с суммой в КП, НДС
-          // считался дважды. Флаг priceIncludesVat говорит серверу, что
-          // делать с этой ценой: выделять НДС из неё, а не начислять заново.
+          // Курс сум сервер применяет, только если КП сейчас в у.е.
+          // (currency !== 'sum'). Когда КП уже в сумах, calculatePrice сам
+          // округляет ПОСЛЕ конвертации, а скидка применяется ещё раз
+          // поверх — если пересчитывать курс заново на сервере из «сырой»
+          // цены в у.е., порядок округлений другой и итог в договоре
+          // расходится с тем, что менеджер уже видел в КП на пару сотен
+          // сум. Поэтому шлём готовую цену за штуку ровно как на экране.
+          alreadyInSum: options.currency === 'sum',
           items: items.map(i => {
             const p = products.find(x => x.id === i.productId)
             if (!p) return null
-            // Ровно та же итоговая цена за штуку, что видна в КП (какая бы
-            // наценка ни была — перевод +transferFee%, наличные 1:1, любой
-            // процент), без пересчёта в сумы (тот отдельно делает сервер
-            // по курсу) — calculatePrice целиком сюда не годится, она бы
-            // при currency==='sum' сконвертировала дважды.
-            const markup = options.paymentType === 'transfer' ? (1 + options.transferFee / 100) : 1
+            // Та же цена за штуку, что в столбце «Цена»/«Цена с НДС» КП —
+            // calculatePrice целиком (наценка + конвертация), затем скидка,
+            // тем же порядком округления, что и в EquipmentRow.
+            const unitDisplay = Math.round(calculatePrice(p.price) * (1 + (i.discount || 0) / 100))
             return {
               model: p.model,
               quantity: i.quantity,
-              unitPriceUe: Math.round(p.price * markup * (1 + (i.discount || 0) / 100)),
+              unitPriceUe: unitDisplay,
             }
           }).filter(Boolean),
         }),
