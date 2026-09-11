@@ -1,5 +1,6 @@
 import oldPriceData from '@/data/old-price.json';
 import { normalizeModel } from './parse-utils';
+import { getKitAddon } from '../kit-addon';
 
 interface OldPriceItem {
   category: string;
@@ -12,7 +13,9 @@ interface OldPriceItem {
 interface CurrentProduct {
   model: string;
   category?: string;
+  series?: string;
   price: number;
+  coolingCapacity?: number;
 }
 
 export interface PriceComparisonRow {
@@ -52,12 +55,19 @@ export function computePriceComparison(currentProducts: CurrentProduct[]): Price
     const current = currentByModel.get(key);
     seen.add(key);
     if (current) {
-      const deltaAbs = current.price - oldItem.price;
-      const deltaPct = oldItem.price > 0 ? (deltaAbs / oldItem.price) * 100 : null;
+      // «Старая цена» — цена ГОЛОГО блока у Midea (old-price.json), а
+      // current.price — цена КОМПЛЕКТА (панель/пульт уже внутри для
+      // кассет/фанкойлов, см. kit-addon.ts). Без надбавки маржа завышалась
+      // ровно на стоимость аксессуара — кассета показывала +40% вместо
+      // реальных ~10-15%.
+      const addon = getKitAddon(oldItem.model, current.category || oldItem.category, current.series || oldItem.series, current.coolingCapacity);
+      const oldKitPrice = oldItem.price + addon;
+      const deltaAbs = current.price - oldKitPrice;
+      const deltaPct = oldKitPrice > 0 ? (deltaAbs / oldKitPrice) * 100 : null;
       rows.push({
         model: oldItem.model,
         category: current.category || oldItem.category,
-        oldPrice: oldItem.price,
+        oldPrice: oldKitPrice,
         currentPrice: current.price,
         deltaAbs,
         deltaPct,

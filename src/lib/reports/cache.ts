@@ -45,7 +45,13 @@ export async function getPriceComparisonReport(): Promise<PriceComparisonReport>
   if (isFresh(priceCache)) return priceCache!.data;
   const products = await getProducts();
   const data = computePriceComparison(
-    (products as any[]).map((p) => ({ model: p.model, category: p.category, price: Number(p.price) || 0 }))
+    (products as any[]).map((p) => ({
+      model: p.model,
+      category: p.category,
+      series: p.series,
+      price: Number(p.price) || 0,
+      coolingCapacity: Number(p.coolingCapacity) || undefined,
+    }))
   );
   priceCache = { data, fetchedAt: Date.now() };
   return data;
