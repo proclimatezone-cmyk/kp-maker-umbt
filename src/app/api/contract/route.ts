@@ -14,7 +14,7 @@ const DOCX_MIME = 'application/vnd.openxmlformats-officedocument.wordprocessingm
 
 export async function POST(req: NextRequest) {
   try {
-    const { contract = {}, items = [], exchangeRate, priceIncludesVat = false } = await req.json();
+    const { contract = {}, items = [], exchangeRate } = await req.json();
 
     const rate = Number(exchangeRate);
     if (!rate || rate <= 0) {
@@ -28,9 +28,8 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'В договоре нет ни одной позиции' }, { status: 400 });
     }
 
-    // Цены в КП — в у.е.; при оплате переводом это уже цена «с НДС»
-    // (priceIncludesVat, см. buildSpec) — тогда НДС из неё выделяется, а
-    // не начисляется заново поверх. В договоре всё в сумах.
+    // Цены в КП — в у.е., уже итоговые (валовые, с НДС — см. buildSpec).
+    // В договоре всё в сумах, конвертация курсом ниже.
     const priced: ContractInput[] = items.map((i: any) => ({
       model: i.model,
       quantity: Number(i.quantity) || 0,
@@ -61,7 +60,7 @@ export async function POST(req: NextRequest) {
 
     const named = withInventoryNames(split, names);
     const missing = missingInventoryNames(named);
-    const { rows, totals } = buildSpec(named, { priceIncludesVat: !!priceIncludesVat });
+    const { rows, totals } = buildSpec(named);
 
     const templatePath = path.join(process.cwd(), 'templates', 'contract.docx');
     if (!fs.existsSync(templatePath)) {

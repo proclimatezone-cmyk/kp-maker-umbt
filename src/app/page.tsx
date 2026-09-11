@@ -1323,18 +1323,19 @@ export default function Home() {
           // наценки — сумма в договоре не совпадала с суммой в КП, НДС
           // считался дважды. Флаг priceIncludesVat говорит серверу, что
           // делать с этой ценой: выделять НДС из неё, а не начислять заново.
-          priceIncludesVat: options.paymentType === 'transfer',
           items: items.map(i => {
             const p = products.find(x => x.id === i.productId)
             if (!p) return null
-            // Наценка «с НДС» без пересчёта в сумы (тот отдельно делает
-            // сервер по курсу) — calculatePrice целиком сюда не годится,
-            // она бы при currency==='sum' сконвертировала дважды.
-            const vatMarkup = options.paymentType === 'transfer' ? (1 + options.transferFee / 100) : 1
+            // Ровно та же итоговая цена за штуку, что видна в КП (какая бы
+            // наценка ни была — перевод +transferFee%, наличные 1:1, любой
+            // процент), без пересчёта в сумы (тот отдельно делает сервер
+            // по курсу) — calculatePrice целиком сюда не годится, она бы
+            // при currency==='sum' сконвертировала дважды.
+            const markup = options.paymentType === 'transfer' ? (1 + options.transferFee / 100) : 1
             return {
               model: p.model,
               quantity: i.quantity,
-              unitPriceUe: Math.round(p.price * vatMarkup * (1 + (i.discount || 0) / 100)),
+              unitPriceUe: Math.round(p.price * markup * (1 + (i.discount || 0) / 100)),
             }
           }).filter(Boolean),
         }),
