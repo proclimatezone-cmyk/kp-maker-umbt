@@ -14,7 +14,8 @@
   "atom-b-2026": {
     "title": "ATOM B Catalog 2026",
     "filename": "ATOM B CATALOG 2026.pdf",
-    "description": "Mini VRF ATOM B и совместимые внутренние блоки."
+    "driveFileId": "1aUHeEGw4cmcn8dhY_Jj_Vv2UF7HcjHlm",
+    "description": "Mini VRF ATOM B и совместимые внутренние блоки (каталог ATOM 2026)."
   },
   "chiller-2026": {
     "title": "Каталог Midea Chiller 2026",
@@ -25,6 +26,7 @@
   "fcu-2026": {
     "title": "Каталог Midea FCU 2025-2026",
     "filename": "FCU Midea.pdf",
-    "description": "Фанкойлы AC/DC: кассетные, канальные, напольно-потолочные и настенные."
+    "driveFileId": "1CV-c2OuhUClKHWHCLR0FxxXoWorreUEq",
+    "description": "Фанкойлы и гидронические модули Midea."
   }
 }

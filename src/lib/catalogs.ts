@@ -5,6 +5,7 @@ export interface CatalogSource {
   title: string
   filename: string
   description: string
+  driveFileId?: string
 }
 
 export interface CatalogMatch {
@@ -27,6 +28,15 @@ export const catalogPages = catalogPagesData as CatalogPagesFile
 export function getCatalogSource(key: string | undefined): CatalogSource | null {
   if (!key) return null
   return catalogSources[key] || null
+}
+
+export function getCatalogDriveUrl(key: string | undefined): string | null {
+  if (!key) return null
+  const source = catalogSources[key]
+  if (source?.driveFileId) {
+    return `https://drive.google.com/file/d/${source.driveFileId}/view`
+  }
+  return null
 }
 
 export function getCatalogMatch(productId: string): CatalogMatch | null {

@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import productsData from '@/data/products.json'
 import { formatNum } from '@/lib/format'
-import { getCatalogMatch, getCatalogPdfUrl, getCatalogSource, inferCatalogKey } from '@/lib/catalogs'
+import { getCatalogDriveUrl, getCatalogMatch, getCatalogPdfUrl, getCatalogSource, inferCatalogKey } from '@/lib/catalogs'
 import { resolveProductImage } from '@/lib/product-images'
 import {
   ArrowLeft, BookOpen, ExternalLink, FileText, CheckCircle2,
@@ -47,6 +47,7 @@ export default async function EquipmentPage({ params }: { params: Promise<{ id: 
   const catalogKey = match?.catalogKey || fallbackKey
   const catalog = getCatalogSource(catalogKey || undefined)
   const pdfUrl = catalogKey ? getCatalogPdfUrl(catalogKey, match?.page) : null
+  const driveUrl = getCatalogDriveUrl(catalogKey || undefined)
   const image = resolveProductImage(product)
 
   // Primary highlight metrics
@@ -110,6 +111,12 @@ export default async function EquipmentPage({ params }: { params: Promise<{ id: 
                 Сверить с каталогом {match?.page ? `(стр. ${match.page})` : ''}
               </a>
             )}
+            {driveUrl && (
+              <a className="btn btn-ghost" href={driveUrl} target="_blank" rel="noreferrer" title="Открыть каталог на Google Диске">
+                <ExternalLink size={15} />
+                Google Диск
+              </a>
+            )}
           </div>
         </div>
       </header>
@@ -156,14 +163,18 @@ export default async function EquipmentPage({ params }: { params: Promise<{ id: 
             )}
 
             {/* ACTION BUTTON TO VERIFY WITH PDF CATALOG */}
-            <div className="equipment-actions" style={{ marginTop: '1.25rem' }}>
-              {pdfUrl ? (
+            <div className="equipment-actions" style={{ marginTop: '1.25rem', display: 'flex', gap: '0.6rem', flexWrap: 'wrap' }}>
+              {pdfUrl && (
                 <a className="btn btn-primary" href={pdfUrl} target="_blank" rel="noreferrer">
                   <BookOpen size={16} />
                   Сверить с каталогом {match?.page ? `(стр. ${match.page})` : ''}
                 </a>
-              ) : (
-                <span className="notice-inline">Официальный каталог Midea 2026</span>
+              )}
+              {driveUrl && (
+                <a className="btn btn-ghost" href={driveUrl} target="_blank" rel="noreferrer" title="Открыть полный каталог на Google Диске">
+                  <ExternalLink size={15} />
+                  Каталог на Диске
+                </a>
               )}
             </div>
           </div>

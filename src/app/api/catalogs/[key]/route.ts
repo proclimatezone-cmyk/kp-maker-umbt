@@ -10,14 +10,20 @@ import { Readable } from 'stream'
 const DEFAULT_CATALOGS_DIR = '/Users/muhammadjonaka/MN OG MAC v/каталоги'
 const CATALOGS_DRIVE_FOLDER_ID = process.env.CATALOGS_DRIVE_FOLDER_ID || '1apqOc0vFI1ftTYdDQX4WYXuVFEjuKp6a'
 
-export async function GET(_req: Request, context: { params: Promise<{ key: string }> }) {
+export async function GET(req: Request, context: { params: Promise<{ key: string }> }) {
   const { key } = await context.params
   const source = (catalogSources as Record<string, any>)[key]
   if (!source) {
     return NextResponse.json({ error: 'Каталог не найден' }, { status: 404 })
   }
 
-  // 1. Try local filesystem if available (fast dev mode)
+  const { searchParams } = new URL(req.url)
+  // Direct redirect to Google Drive preview if requested
+  if (searchParams.get('drive') === '1' && source.driveFileId) {
+    return NextResponse.redirect(`https://drive.google.com/file/d/${source.driveFileId}/view`, 307)
+  }
+
+  // 1. Try local filesystem if available (fast dev mode on local machine)
   const catalogsDir = path.resolve(process.env.CATALOGS_DIR || DEFAULT_CATALOGS_DIR)
   const localFilePath = path.resolve(catalogsDir, source.filename)
   if (fsSync.existsSync(localFilePath) && localFilePath.startsWith(catalogsDir + path.sep)) {
@@ -74,7 +80,10 @@ export async function GET(_req: Request, context: { params: Promise<{ key: strin
       },
     })
   } catch (err: any) {
-    console.error('Error fetching catalog from Google Drive:', err)
+    console.error('Error fetching catalog from Google Drive, redirecting to Drive preview:', err)
+    if (source.driveFileId) {
+      return NextResponse.redirect(`https://drive.google.com/file/d/${source.driveFileId}/view`, 307)
+    }
     return NextResponse.json({
       error: `Ошибка загрузки каталога с Google Диска: ${err?.message || err}`,
     }, { status: 500 })
