@@ -122,7 +122,7 @@ export async function saveKpSelection(rec: SavedKpRecord): Promise<void> {
       const sheetRow = idx + 2; // +2: заголовок (1) + 1-индексация
       await sheets.spreadsheets.values.update({
         spreadsheetId: SPREADSHEET_ID,
-        range: `'${SHEET_TAB}'!A${sheetRow}:K${sheetRow}`,
+        range: `'${SHEET_TAB}'!A${sheetRow}:L${sheetRow}`,
         valueInputOption: 'RAW',
         requestBody: { values: [row] },
       });

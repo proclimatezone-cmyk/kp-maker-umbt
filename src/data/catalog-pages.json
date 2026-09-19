@@ -1,0 +1,3364 @@
+{
+  "generatedAt": "2026-09-19T10:22:50.029Z",
+  "catalogsDir": "/Users/muhammadjonaka/MN OG MAC v/каталоги",
+  "coverage": {
+    "totalProducts": 819,
+    "matchedProducts": 559
+  },
+  "products": {
+    "mv8i-252wv2gn1-ma-": {
+      "catalogKey": "vrf-2026",
+      "page": 46,
+      "matchedTerm": "mv8i+252wv2gn1",
+      "matchedModel": "MV8i-252WV2GN1(MA)"
+    },
+    "mv8i-280wv2gn1-ma-": {
+      "catalogKey": "vrf-2026",
+      "page": 46,
+      "matchedTerm": "mv8i+280wv2gn1",
+      "matchedModel": "MV8i-280WV2GN1(MA)"
+    },
+    "mv8i-335wv2gn1-ma-": {
+      "catalogKey": "vrf-2026",
+      "page": 46,
+      "matchedTerm": "mv8i+335wv2gn1",
+      "matchedModel": "MV8i-335WV2GN1(MA)"
+    },
+    "mv8i-400wv2gn1-ma-": {
+      "catalogKey": "vrf-2026",
+      "page": 46,
+      "matchedTerm": "mv8i+400wv2gn1",
+      "matchedModel": "MV8i-400WV2GN1(MA)"
+    },
+    "mv8i-450wv2gn1-ma-": {
+      "catalogKey": "vrf-2026",
+      "page": 46,
+      "matchedTerm": "mv8i+450wv2gn1",
+      "matchedModel": "MV8i-450WV2GN1(MA)"
+    },
+    "mv8i-500wv2gn1-ma-": {
+      "catalogKey": "vrf-2026",
+      "page": 46,
+      "matchedTerm": "mv8i+500wv2gn1ma",
+      "matchedModel": "MV8i-500WV2GN1(MA)"
+    },
+    "mv8i-560wv2gn1-ma-": {
+      "catalogKey": "vrf-2026",
+      "page": 47,
+      "matchedTerm": "mv8i560wv2gn1",
+      "matchedModel": "MV8i-560WV2GN1(MA)"
+    },
+    "mv8i-615wv2gn1-ma-": {
+      "catalogKey": "vrf-2026",
+      "page": 47,
+      "matchedTerm": "mv8i+615wv2gn1",
+      "matchedModel": "MV8i-615WV2GN1(MA)"
+    },
+    "mv8i-670wv2gn1-ma-": {
+      "catalogKey": "vrf-2026",
+      "page": 47,
+      "matchedTerm": "mv8i+670wv2gn1",
+      "matchedModel": "MV8i-670WV2GN1(MA)"
+    },
+    "mv8i-730wv2gn1-ma-": {
+      "catalogKey": "vrf-2026",
+      "page": 47,
+      "matchedTerm": "mv8i+730wv2gn1",
+      "matchedModel": "MV8i-730WV2GN1(MA)"
+    },
+    "mv8i-785wv2gn1-ma-": {
+      "catalogKey": "vrf-2026",
+      "page": 47,
+      "matchedTerm": "mv8i+785wv2gn1",
+      "matchedModel": "MV8i-785WV2GN1(MA)"
+    },
+    "mv8i-850wv2gn1-ma-": {
+      "catalogKey": "vrf-2026",
+      "page": 47,
+      "matchedTerm": "mv8i+850wv2gn1",
+      "matchedModel": "MV8i-850WV2GN1(MA)"
+    },
+    "mv8i-900wv2gn1-ma-": {
+      "catalogKey": "vrf-2026",
+      "page": 47,
+      "matchedTerm": "mv8i900wv2gn1",
+      "matchedModel": "MV8i-900WV2GN1(MA)"
+    },
+    "mv8i-950wv2gn1-ma-": {
+      "catalogKey": "vrf-2026",
+      "page": 47,
+      "matchedTerm": "mv8i+950wv2gn1",
+      "matchedModel": "MV8i-950WV2GN1(MA)"
+    },
+    "mv8i-1010wv2gn1-ma-": {
+      "catalogKey": "vrf-2026",
+      "page": 47,
+      "matchedTerm": "mv8i+1010wv2gn1",
+      "matchedModel": "MV8i-1010WV2GN1(MA)"
+    },
+    "mv8i-1060wv2gn1-ma-": {
+      "catalogKey": "vrf-2026",
+      "page": 47,
+      "matchedTerm": "mv8i+1060wv2gn1",
+      "matchedModel": "MV8i-1060WV2GN1(MA)"
+    },
+    "mv8i-1120wv2gn1-ma-": {
+      "catalogKey": "vrf-2026",
+      "page": 47,
+      "matchedTerm": "mv8i+1120wv2gn1",
+      "matchedModel": "MV8i-1120WV2GN1(MA)"
+    },
+    "mv8i-1170wv2gn1-ma-": {
+      "catalogKey": "vrf-2026",
+      "page": 47,
+      "matchedTerm": "mv8i+1170wv2gn1",
+      "matchedModel": "MV8i-1170WV2GN1(MA)"
+    },
+    "mvc-m280wv2gn1": {
+      "catalogKey": "vrf-2026",
+      "page": 49,
+      "matchedTerm": "mvc+m280wv2gn1",
+      "matchedModel": "MVC-M280WV2GN1"
+    },
+    "mvc-m335wv2gn1": {
+      "catalogKey": "vrf-2026",
+      "page": 49,
+      "matchedTerm": "mvc+m335wv2gn1",
+      "matchedModel": "MVC-M335WV2GN1"
+    },
+    "mvc-m450wv2gn1": {
+      "catalogKey": "vrf-2026",
+      "page": 49,
+      "matchedTerm": "mvc+m450wv2gn1",
+      "matchedModel": "MVC-M450WV2GN1"
+    },
+    "mvc-m500wv2gn1": {
+      "catalogKey": "vrf-2026",
+      "page": 49,
+      "matchedTerm": "mvc+m500wv2gn1",
+      "matchedModel": "MVC-M500WV2GN1"
+    },
+    "mvc-m560wv2gn1": {
+      "catalogKey": "vrf-2026",
+      "page": 49,
+      "matchedTerm": "mvc+m560wv2gn1",
+      "matchedModel": "MVC-M560WV2GN1"
+    },
+    "mvi-252wv2gn1-b-": {
+      "catalogKey": "vrf-2026",
+      "page": 61,
+      "matchedTerm": "mvi+252wv2gn1b",
+      "matchedModel": "MVi-252WV2GN1(B)"
+    },
+    "mvi-280wv2gn1-b-": {
+      "catalogKey": "vrf-2026",
+      "page": 61,
+      "matchedTerm": "mvi+280wv2gn1b",
+      "matchedModel": "MVi-280WV2GN1(B)"
+    },
+    "mvi-335wv2gn1-b-": {
+      "catalogKey": "vrf-2026",
+      "page": 61,
+      "matchedTerm": "mvi+335wv2gn1b",
+      "matchedModel": "MVi-335WV2GN1(B)"
+    },
+    "mvi-400wv2gn1-a-": {
+      "catalogKey": "vrf-2026",
+      "page": 61,
+      "matchedTerm": "mvi+400wv2gn1a",
+      "matchedModel": "MVi-400WV2GN1(A)"
+    },
+    "mvi-450wv2gn1-a-": {
+      "catalogKey": "vrf-2026",
+      "page": 61,
+      "matchedTerm": "mvi+450wv2gn1a",
+      "matchedModel": "MVi-450WV2GN1(A)"
+    },
+    "mvi-500wv2gn1-a-": {
+      "catalogKey": "vrf-2026",
+      "page": 61,
+      "matchedTerm": "mvi+500wv2gn1a",
+      "matchedModel": "MVi-500WV2GN1(A)"
+    },
+    "mvi-560wv2gn1-a-": {
+      "catalogKey": "vrf-2026",
+      "page": 61,
+      "matchedTerm": "mvi+560wv2gn1a",
+      "matchedModel": "MVi-560WV2GN1(A)"
+    },
+    "mvi-615wv2gn1-a-": {
+      "catalogKey": "vrf-2026",
+      "page": 61,
+      "matchedTerm": "mvi+615wv2gn1a",
+      "matchedModel": "MVi-615WV2GN1(A)"
+    },
+    "mvi-670wv2gn1-a-": {
+      "catalogKey": "vrf-2026",
+      "page": 61,
+      "matchedTerm": "mvi+670wv2gn1a",
+      "matchedModel": "MVi-670WV2GN1(A)"
+    },
+    "midea-v28wdhn1-atb-": {
+      "catalogKey": "atom-b-2026",
+      "page": 15,
+      "matchedTerm": "v28wdhn1atb",
+      "matchedModel": "Midea-V28WDHN1(AtB)"
+    },
+    "midea-v36wdhn1a-atb-": {
+      "catalogKey": "atom-b-2026",
+      "page": 15,
+      "matchedTerm": "v36wdhn1aatb",
+      "matchedModel": "Midea-V36WDHN1A(AtB)"
+    },
+    "midea-v42wdhn1a-atb-": {
+      "catalogKey": "atom-b-2026",
+      "page": 15,
+      "matchedTerm": "v42wdhn1aatb",
+      "matchedModel": "Midea-V42WDHN1A(AtB)"
+    },
+    "midea-v48wdhn1-atb-": {
+      "catalogKey": "atom-b-2026",
+      "page": 15,
+      "matchedTerm": "v48wdhn1atb",
+      "matchedModel": "Midea-V48WDHN1(AtB)"
+    },
+    "midea-v56wdhn1-atb-": {
+      "catalogKey": "atom-b-2026",
+      "page": 15,
+      "matchedTerm": "v56wdhn1atb",
+      "matchedModel": "Midea-V56WDHN1(AtB)"
+    },
+    "midea-v60wdhn1-atb-": {
+      "catalogKey": "atom-b-2026",
+      "page": 15,
+      "matchedTerm": "v60wdhn1atb",
+      "matchedModel": "Midea-V60WDHN1(AtB)"
+    },
+    "mih22ghn18": {
+      "catalogKey": "vrf-2026",
+      "page": 82,
+      "matchedTerm": "mih22ghn18",
+      "matchedModel": "MIH22GHN18"
+    },
+    "mih28ghn18": {
+      "catalogKey": "vrf-2026",
+      "page": 82,
+      "matchedTerm": "mih28ghn18",
+      "matchedModel": "MIH28GHN18"
+    },
+    "mih36ghn18": {
+      "catalogKey": "vrf-2026",
+      "page": 82,
+      "matchedTerm": "mih36ghn18",
+      "matchedModel": "MIH36GHN18"
+    },
+    "mih45ghn18": {
+      "catalogKey": "vrf-2026",
+      "page": 82,
+      "matchedTerm": "mih45ghn18",
+      "matchedModel": "MIH45GHN18"
+    },
+    "mih56ghn18": {
+      "catalogKey": "vrf-2026",
+      "page": 82,
+      "matchedTerm": "mih56ghn18",
+      "matchedModel": "MIH56GHN18"
+    },
+    "mih71ghn18": {
+      "catalogKey": "vrf-2026",
+      "page": 82,
+      "matchedTerm": "mih71ghn18",
+      "matchedModel": "MIH71GHN18"
+    },
+    "mih80ghn18": {
+      "catalogKey": "vrf-2026",
+      "page": 82,
+      "matchedTerm": "mih80ghn18",
+      "matchedModel": "MIH80GHN18"
+    },
+    "mih22t2hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 163,
+      "matchedTerm": "mih22t2hn18",
+      "matchedModel": "MIH22T2HN18"
+    },
+    "mih28t2hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 163,
+      "matchedTerm": "mih28t2hn18",
+      "matchedModel": "MIH28T2HN18"
+    },
+    "mih36t2hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 163,
+      "matchedTerm": "mih36t2hn18",
+      "matchedModel": "MIH36T2HN18"
+    },
+    "mih45t2hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 163,
+      "matchedTerm": "mih45t2hn18",
+      "matchedModel": "MIH45T2HN18"
+    },
+    "mih56t2hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 163,
+      "matchedTerm": "mih56t2hn18",
+      "matchedModel": "MIH56T2HN18"
+    },
+    "mih71t2hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 89,
+      "matchedTerm": "mih71t2hn18",
+      "matchedModel": "MIH71T2HN18"
+    },
+    "mih80t2hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 163,
+      "matchedTerm": "mih80t2hn18",
+      "matchedModel": "MIH80T2HN18"
+    },
+    "mih90t2hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 163,
+      "matchedTerm": "mih90t2hn18",
+      "matchedModel": "MIH90T2HN18"
+    },
+    "mih112t2hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 163,
+      "matchedTerm": "mih112t2hn18",
+      "matchedModel": "MIH112T2HN18"
+    },
+    "mih125t2hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 163,
+      "matchedTerm": "mih125t2hn18",
+      "matchedModel": "MIH125T2HN18"
+    },
+    "mih140t2hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 163,
+      "matchedTerm": "mih140t2hn18",
+      "matchedModel": "MIH140T2HN18"
+    },
+    "mih160t2hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 89,
+      "matchedTerm": "mih160t2hn18",
+      "matchedModel": "MIH160T2HN18"
+    },
+    "mih280fashn18": {
+      "catalogKey": "vrf-2026",
+      "page": 92,
+      "matchedTerm": "mih280fashn18",
+      "matchedModel": "MIH280FASHN18"
+    },
+    "mih335fahn18": {
+      "catalogKey": "vrf-2026",
+      "page": 164,
+      "matchedTerm": "mih335fahn18",
+      "matchedModel": "MIH335FAHN18"
+    },
+    "mih400fahn18": {
+      "catalogKey": "vrf-2026",
+      "page": 164,
+      "matchedTerm": "mih400fahn18",
+      "matchedModel": "MIH400FAHN18"
+    },
+    "mih450fahn18": {
+      "catalogKey": "vrf-2026",
+      "page": 164,
+      "matchedTerm": "mih450fahn18",
+      "matchedModel": "MIH450FAHN18"
+    },
+    "mih28q4hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 162,
+      "matchedTerm": "mih28q4hn18",
+      "matchedModel": "MIH28Q4HN18"
+    },
+    "mih36q4hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 162,
+      "matchedTerm": "mih36q4hn18",
+      "matchedModel": "MIH36Q4HN18"
+    },
+    "mih45q4hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 162,
+      "matchedTerm": "mih45q4hn18",
+      "matchedModel": "MIH45Q4HN18"
+    },
+    "mih56q4hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 162,
+      "matchedTerm": "mih56q4hn18",
+      "matchedModel": "MIH56Q4HN18"
+    },
+    "mih71q4hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 162,
+      "matchedTerm": "mih71q4hn18",
+      "matchedModel": "MIH71Q4HN18"
+    },
+    "mih80q4hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 87,
+      "matchedTerm": "mih80q4hn18",
+      "matchedModel": "MIH80Q4HN18"
+    },
+    "mih90q4hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 162,
+      "matchedTerm": "mih90q4hn18",
+      "matchedModel": "MIH90Q4HN18"
+    },
+    "mih100q4hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 162,
+      "matchedTerm": "mih100q4hn18",
+      "matchedModel": "MIH100Q4HN18"
+    },
+    "mih112q4hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 162,
+      "matchedTerm": "mih112q4hn18",
+      "matchedModel": "MIH112Q4HN18"
+    },
+    "mih140q4hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 162,
+      "matchedTerm": "mih140q4hn18",
+      "matchedModel": "MIH140Q4HN18"
+    },
+    "mih160q4hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 162,
+      "matchedTerm": "mih160q4hn18",
+      "matchedModel": "MIH160Q4HN18"
+    },
+    "mih180q4hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 87,
+      "matchedTerm": "mih180q4hn18",
+      "matchedModel": "MIH180Q4HN18"
+    },
+    "mih22q1hn18-a-": {
+      "catalogKey": "vrf-2026",
+      "page": 84,
+      "matchedTerm": "mih22q1hn18a",
+      "matchedModel": "MIH22Q1HN18(A)"
+    },
+    "mih28q1hn18-a-": {
+      "catalogKey": "vrf-2026",
+      "page": 84,
+      "matchedTerm": "mih28q1hn18a",
+      "matchedModel": "MIH28Q1HN18(A)"
+    },
+    "mih36q1hn18-a-": {
+      "catalogKey": "vrf-2026",
+      "page": 84,
+      "matchedTerm": "mih36q1hn18a",
+      "matchedModel": "MIH36Q1HN18(A)"
+    },
+    "mih45q1hn18-a-": {
+      "catalogKey": "vrf-2026",
+      "page": 84,
+      "matchedTerm": "mih45q1hn18a",
+      "matchedModel": "MIH45Q1HN18(A)"
+    },
+    "mih56q1hn18-a-": {
+      "catalogKey": "vrf-2026",
+      "page": 84,
+      "matchedTerm": "mih56q1hn18a",
+      "matchedModel": "MIH56Q1HN18(A)"
+    },
+    "mih71q1hn18-a-": {
+      "catalogKey": "vrf-2026",
+      "page": 84,
+      "matchedTerm": "mih71q1hn18a",
+      "matchedModel": "MIH71Q1HN18(A)"
+    },
+    "mi2-09gdhn18-at-": {
+      "catalogKey": "atom-b-2026",
+      "page": 33,
+      "matchedTerm": "mi209gdhn18at",
+      "matchedModel": "MI2-09GDHN18(At)"
+    },
+    "mi2-12gdhn18-at-": {
+      "catalogKey": "atom-b-2026",
+      "page": 33,
+      "matchedTerm": "mi212gdhn18at",
+      "matchedModel": "MI2-12GDHN18(At)"
+    },
+    "mi2-18gdhn18-at-": {
+      "catalogKey": "atom-b-2026",
+      "page": 33,
+      "matchedTerm": "mi218gdhn18at",
+      "matchedModel": "MI2-18GDHN18(At)"
+    },
+    "mi2-24gdhn18-at-": {
+      "catalogKey": "atom-b-2026",
+      "page": 33,
+      "matchedTerm": "mi224gdhn18at",
+      "matchedModel": "MI2-24GDHN18(At)"
+    },
+    "mi2-09t3dhn18-at-": {
+      "catalogKey": "atom-b-2026",
+      "page": 30,
+      "matchedTerm": "mi209t3dhn18at",
+      "matchedModel": "MI2-09T3DHN18(At)"
+    },
+    "mi2-12t3dhn18-at-": {
+      "catalogKey": "atom-b-2026",
+      "page": 30,
+      "matchedTerm": "mi212t3dhn18at",
+      "matchedModel": "MI2-12T3DHN18(At)"
+    },
+    "mi2-15t3dhn18-at-": {
+      "catalogKey": "atom-b-2026",
+      "page": 30,
+      "matchedTerm": "mi215t3dhn18at",
+      "matchedModel": "MI2-15T3DHN18(At)"
+    },
+    "mi2-18t3dhn18-at-": {
+      "catalogKey": "atom-b-2026",
+      "page": 30,
+      "matchedTerm": "mi218t3dhn18at",
+      "matchedModel": "MI2-18T3DHN18(At)"
+    },
+    "mi2-24t3dhn18-at-": {
+      "catalogKey": "atom-b-2026",
+      "page": 31,
+      "matchedTerm": "mi224t3dhn18at",
+      "matchedModel": "MI2-24T3DHN18(At)"
+    },
+    "mi2-09q4dhn18-at-": {
+      "catalogKey": "atom-b-2026",
+      "page": 25,
+      "matchedTerm": "mi209q4dhn18at",
+      "matchedModel": "MI2-09Q4DHN18(At)"
+    },
+    "mi2-12q4dhn18-at-": {
+      "catalogKey": "atom-b-2026",
+      "page": 25,
+      "matchedTerm": "mi212q4dhn18at",
+      "matchedModel": "MI2-12Q4DHN18(At)"
+    },
+    "mi2-18q4dhn18-at-": {
+      "catalogKey": "atom-b-2026",
+      "page": 25,
+      "matchedTerm": "mi218q4dhn18at",
+      "matchedModel": "MI2-18Q4DHN18(At)"
+    },
+    "mi2-24q4dhn18-at-": {
+      "catalogKey": "atom-b-2026",
+      "page": 25,
+      "matchedTerm": "mi224q4dhn18at",
+      "matchedModel": "MI2-24Q4DHN18(At)"
+    },
+    "mi2-56q4dhn18-at-": {
+      "catalogKey": "atom-b-2026",
+      "page": 26,
+      "matchedTerm": "mi256q4dhn18at",
+      "matchedModel": "MI2-56Q4DHN18(At)"
+    },
+    "mi2-09q1dhn18-at-": {
+      "catalogKey": "atom-b-2026",
+      "page": 23,
+      "matchedTerm": "mi209q1dhn18at",
+      "matchedModel": "MI2-09Q1DHN18(At)"
+    },
+    "mi2-12q1dhn18-at-": {
+      "catalogKey": "atom-b-2026",
+      "page": 23,
+      "matchedTerm": "mi212q1dhn18at",
+      "matchedModel": "MI2-12Q1DHN18(At)"
+    },
+    "mi2-18q1dhn18-at-": {
+      "catalogKey": "atom-b-2026",
+      "page": 23,
+      "matchedTerm": "mi218q1dhn18at",
+      "matchedModel": "MI2-18Q1DHN18(At)"
+    },
+    "mi2-24q1dhn18-at-": {
+      "catalogKey": "atom-b-2026",
+      "page": 23,
+      "matchedTerm": "mi224q1dhn18at",
+      "matchedModel": "MI2-24Q1DHN18(At)"
+    },
+    "mi2-32t2dhn18-at-s---midea-v36wdhn1a-atb-": {
+      "catalogKey": "atom-b-2026",
+      "page": 15,
+      "matchedTerm": "v36wdhn1aatb",
+      "matchedModel": "MI2-32T2DHN18(At)S + Midea-V36WDHN1A(AtB)"
+    },
+    "mi2-48t2dhn18-at-s---midea-v48wdhn1-atb-": {
+      "catalogKey": "atom-b-2026",
+      "page": 15,
+      "matchedTerm": "v48wdhn1atb",
+      "matchedModel": "MI2-48T2DHN18(At)S + Midea-V48WDHN1(AtB)"
+    },
+    "mi2-56t2dhn18-at-s---midea-v56wdhn1-atb-": {
+      "catalogKey": "atom-b-2026",
+      "page": 15,
+      "matchedTerm": "v56wdhn1atb",
+      "matchedModel": "MI2-56T2DHN18(At)S + Midea-V56WDHN1(AtB)"
+    },
+    "mi2-36q4dhn18-at----midea-v36wdhn1a-atb-": {
+      "catalogKey": "atom-b-2026",
+      "page": 26,
+      "matchedTerm": "mi236q4dhn18at",
+      "matchedModel": "MI2-36Q4DHN18(At) + Midea-V36WDHN1A(AtB)"
+    },
+    "mi2-48q4dhn18-at----midea-v48wdhn1-atb-": {
+      "catalogKey": "atom-b-2026",
+      "page": 26,
+      "matchedTerm": "mi248q4dhn18at",
+      "matchedModel": "MI2-48Q4DHN18(At) + Midea-V48WDHN1(AtB)"
+    },
+    "mi2-56q4dhn18-at----midea-v56wdhn1-atb-": {
+      "catalogKey": "atom-b-2026",
+      "page": 26,
+      "matchedTerm": "mi256q4dhn18at",
+      "matchedModel": "MI2-56Q4DHN18(At) + Midea-V56WDHN1(AtB)"
+    },
+    "mc-ss130-rn1": {
+      "catalogKey": "chiller-2026",
+      "page": 43,
+      "matchedTerm": "mcss130rn1",
+      "matchedModel": "MC-SS130/RN1"
+    },
+    "mc-ss260-rn1tl": {
+      "catalogKey": "chiller-2026",
+      "page": 46,
+      "matchedTerm": "mcss260rn1tl",
+      "matchedModel": "MC-SS260-RN1TL"
+    },
+    "mc-su75-rn8l-b": {
+      "catalogKey": "chiller-2026",
+      "page": 35,
+      "matchedTerm": "mcsu75rn8lb",
+      "matchedModel": "MC-SU75-RN8L-B"
+    },
+    "mc-su90-rn8l-b": {
+      "catalogKey": "chiller-2026",
+      "page": 35,
+      "matchedTerm": "mcsu90rn8lb",
+      "matchedModel": "MC-SU90-RN8L-B"
+    },
+    "mc-su140-rn8l-b": {
+      "catalogKey": "chiller-2026",
+      "page": 35,
+      "matchedTerm": "mcsu140rn8lb",
+      "matchedModel": "MC-SU140-RN8L-B"
+    },
+    "mc-su180-rn8l-b": {
+      "catalogKey": "chiller-2026",
+      "page": 35,
+      "matchedTerm": "mcsu180rn8lb",
+      "matchedModel": "MC-SU180-RN8L-B"
+    },
+    "mhc-v30w-d2rn8": {
+      "catalogKey": "chiller-2026",
+      "page": 26,
+      "matchedTerm": "mhcv30wd2rn8",
+      "matchedModel": "MHC-V30W/D2RN8"
+    },
+    "mkt3-200g50-cr---kjrp-86i-mfk-e-m-": {
+      "catalogKey": "chiller-2026",
+      "page": 107,
+      "matchedTerm": "kjrp86imfke",
+      "matchedModel": "MKT3-200G50-CR + KJRP-86I/MFK-E(M)"
+    },
+    "mkt3-300g50-cr---kjrp-86i-mfk-e-m-": {
+      "catalogKey": "chiller-2026",
+      "page": 107,
+      "matchedTerm": "kjrp86imfke",
+      "matchedModel": "MKT3-300G50-CR + KJRP-86I/MFK-E(M)"
+    },
+    "mkt3-400g50-cr---kjrp-86i-mfk-e-m-": {
+      "catalogKey": "chiller-2026",
+      "page": 107,
+      "matchedTerm": "kjrp86imfke",
+      "matchedModel": "MKT3-400G50-CR + KJRP-86I/MFK-E(M)"
+    },
+    "mkt3-500g50-cr---kjrp-86i-mfk-e-m-": {
+      "catalogKey": "chiller-2026",
+      "page": 107,
+      "matchedTerm": "kjrp86imfke",
+      "matchedModel": "MKT3-500G50-CR + KJRP-86I/MFK-E(M)"
+    },
+    "mkt3-600g50-cr---kjrp-86i-mfk-e-m-": {
+      "catalogKey": "chiller-2026",
+      "page": 107,
+      "matchedTerm": "kjrp86imfke",
+      "matchedModel": "MKT3-600G50-CR + KJRP-86I/MFK-E(M)"
+    },
+    "mkt3-700g50-cr---kjrp-86i-mfk-e-m-": {
+      "catalogKey": "chiller-2026",
+      "page": 107,
+      "matchedTerm": "kjrp86imfke",
+      "matchedModel": "MKT3-700G50-CR + KJRP-86I/MFK-E(M)"
+    },
+    "mkt3-800g50-cr---kjrp-86i-mfk-e-m-": {
+      "catalogKey": "chiller-2026",
+      "page": 107,
+      "matchedTerm": "kjrp86imfke",
+      "matchedModel": "MKT3-800G50-CR + KJRP-86I/MFK-E(M)"
+    },
+    "mkt3-1000g50-cr---kjrp-86i-mfk-e-m-": {
+      "catalogKey": "chiller-2026",
+      "page": 107,
+      "matchedTerm": "kjrp86imfke",
+      "matchedModel": "MKT3-1000G50-CR + KJRP-86I/MFK-E(M)"
+    },
+    "mkt3-1200g50-cr---kjrp-86i-mfk-e-m-": {
+      "catalogKey": "chiller-2026",
+      "page": 107,
+      "matchedTerm": "kjrp86imfke",
+      "matchedModel": "MKT3-1200G50-CR + KJRP-86I/MFK-E(M)"
+    },
+    "mkt3-1400g50-cr---kjrp-86i-mfk-e-m-": {
+      "catalogKey": "chiller-2026",
+      "page": 107,
+      "matchedTerm": "kjrp86imfke",
+      "matchedModel": "MKT3-1400G50-CR + KJRP-86I/MFK-E(M)"
+    },
+    "mkt4-200fg50-cr---kjrp-86a-bmfnkd-e-m-": {
+      "catalogKey": "fcu-2026",
+      "page": 171,
+      "matchedTerm": "kjrp86abmfnkde",
+      "matchedModel": "MKT4-200FG50-CR + KJRP-86A/BMFNKD-E(M)"
+    },
+    "mkt4-300fg50-cr---kjrp-86a-bmfnkd-e-m-": {
+      "catalogKey": "fcu-2026",
+      "page": 171,
+      "matchedTerm": "kjrp86abmfnkde",
+      "matchedModel": "MKT4-300FG50-CR + KJRP-86A/BMFNKD-E(M)"
+    },
+    "mkt4-400fg50-cr---kjrp-86a-bmfnkd-e-m-": {
+      "catalogKey": "fcu-2026",
+      "page": 171,
+      "matchedTerm": "kjrp86abmfnkde",
+      "matchedModel": "MKT4-400FG50-CR + KJRP-86A/BMFNKD-E(M)"
+    },
+    "mkt4-500fg50-cr---kjrp-86a-bmfnkd-e-m-": {
+      "catalogKey": "fcu-2026",
+      "page": 171,
+      "matchedTerm": "kjrp86abmfnkde",
+      "matchedModel": "MKT4-500FG50-CR + KJRP-86A/BMFNKD-E(M)"
+    },
+    "mkt4-600fg50-cr---kjrp-86a-bmfnkd-e-m-": {
+      "catalogKey": "fcu-2026",
+      "page": 171,
+      "matchedTerm": "kjrp86abmfnkde",
+      "matchedModel": "MKT4-600FG50-CR + KJRP-86A/BMFNKD-E(M)"
+    },
+    "mkt4-700fg50-cr---kjrp-86a-bmfnkd-e-m-": {
+      "catalogKey": "fcu-2026",
+      "page": 171,
+      "matchedTerm": "kjrp86abmfnkde",
+      "matchedModel": "MKT4-700FG50-CR + KJRP-86A/BMFNKD-E(M)"
+    },
+    "mkt4-800fg50-cr---kjrp-86a-bmfnkd-e-m-": {
+      "catalogKey": "fcu-2026",
+      "page": 171,
+      "matchedTerm": "kjrp86abmfnkde",
+      "matchedModel": "MKT4-800FG50-CR + KJRP-86A/BMFNKD-E(M)"
+    },
+    "mkt4-1000fg50-cr---kjrp-86a-bmfnkd-e-m-": {
+      "catalogKey": "fcu-2026",
+      "page": 171,
+      "matchedTerm": "kjrp86abmfnkde",
+      "matchedModel": "MKT4-1000FG50-CR + KJRP-86A/BMFNKD-E(M)"
+    },
+    "mkt4-1200fg50-cr---kjrp-86a-bmfnkd-e-m-": {
+      "catalogKey": "fcu-2026",
+      "page": 171,
+      "matchedTerm": "kjrp86abmfnkde",
+      "matchedModel": "MKT4-1200FG50-CR + KJRP-86A/BMFNKD-E(M)"
+    },
+    "mkt4-1400fg50-cr---kjrp-86a-bmfnkd-e-m-": {
+      "catalogKey": "fcu-2026",
+      "page": 171,
+      "matchedTerm": "kjrp86abmfnkde",
+      "matchedModel": "MKT4-1400FG50-CR + KJRP-86A/BMFNKD-E(M)"
+    },
+    "mka-600r": {
+      "catalogKey": "fcu-2026",
+      "page": 169,
+      "matchedTerm": "mka600r",
+      "matchedModel": "MKA-600R"
+    },
+    "mka-750r": {
+      "catalogKey": "fcu-2026",
+      "page": 169,
+      "matchedTerm": "mka750r",
+      "matchedModel": "MKA-750R"
+    },
+    "mka-850r": {
+      "catalogKey": "fcu-2026",
+      "page": 169,
+      "matchedTerm": "mka850r",
+      "matchedModel": "MKA-850R"
+    },
+    "mka-950r": {
+      "catalogKey": "fcu-2026",
+      "page": 169,
+      "matchedTerm": "mka950r",
+      "matchedModel": "MKA-950R"
+    },
+    "mka-1200r": {
+      "catalogKey": "fcu-2026",
+      "page": 169,
+      "matchedTerm": "mka1200r",
+      "matchedModel": "MKA-1200R"
+    },
+    "mka-1500r": {
+      "catalogKey": "fcu-2026",
+      "page": 169,
+      "matchedTerm": "mka1500r",
+      "matchedModel": "MKA-1500R"
+    },
+    "mka-600f": {
+      "catalogKey": "fcu-2026",
+      "page": 170,
+      "matchedTerm": "mka600f",
+      "matchedModel": "MKA-600F"
+    },
+    "mka-750f": {
+      "catalogKey": "fcu-2026",
+      "page": 170,
+      "matchedTerm": "mka750f",
+      "matchedModel": "MKA-750F"
+    },
+    "mka-850f": {
+      "catalogKey": "fcu-2026",
+      "page": 170,
+      "matchedTerm": "mka850f",
+      "matchedModel": "MKA-850F"
+    },
+    "mka-950f": {
+      "catalogKey": "fcu-2026",
+      "page": 170,
+      "matchedTerm": "mka950f",
+      "matchedModel": "MKA-950F"
+    },
+    "mka-1200f": {
+      "catalogKey": "fcu-2026",
+      "page": 170,
+      "matchedTerm": "mka1200f",
+      "matchedModel": "MKA-1200F"
+    },
+    "mka-1500f": {
+      "catalogKey": "fcu-2026",
+      "page": 170,
+      "matchedTerm": "mka1500f",
+      "matchedModel": "MKA-1500F"
+    },
+    "mkd-300": {
+      "catalogKey": "fcu-2026",
+      "page": 167,
+      "matchedTerm": "mkd300",
+      "matchedModel": "MKD-300"
+    },
+    "mkd-400": {
+      "catalogKey": "fcu-2026",
+      "page": 167,
+      "matchedTerm": "mkd400",
+      "matchedModel": "MKD-400"
+    },
+    "mkd-450": {
+      "catalogKey": "chiller-2026",
+      "page": 115,
+      "matchedTerm": "mkd450",
+      "matchedModel": "MKD-450"
+    },
+    "mkd-500": {
+      "catalogKey": "fcu-2026",
+      "page": 167,
+      "matchedTerm": "mkd500",
+      "matchedModel": "MKD-500"
+    },
+    "mkd-300s": {
+      "catalogKey": "fcu-2026",
+      "page": 168,
+      "matchedTerm": "mkd300s",
+      "matchedModel": "MKD-300S"
+    },
+    "mkd-400s": {
+      "catalogKey": "fcu-2026",
+      "page": 168,
+      "matchedTerm": "mkd400s",
+      "matchedModel": "MKD-400S"
+    },
+    "mkd-500s": {
+      "catalogKey": "fcu-2026",
+      "page": 168,
+      "matchedTerm": "mkd500s",
+      "matchedModel": "MKD-500S"
+    },
+    "mkh2-150-r4": {
+      "catalogKey": "fcu-2026",
+      "page": 186,
+      "matchedTerm": "mkh2150r4",
+      "matchedModel": "MKH2-150-R4"
+    },
+    "mkh2-250-r4": {
+      "catalogKey": "fcu-2026",
+      "page": 186,
+      "matchedTerm": "mkh2250r4",
+      "matchedModel": "MKH2-250-R4"
+    },
+    "mkh2-350-r4": {
+      "catalogKey": "fcu-2026",
+      "page": 186,
+      "matchedTerm": "mkh2350r4",
+      "matchedModel": "MKH2-350-R4"
+    },
+    "mkh2-500-r4": {
+      "catalogKey": "fcu-2026",
+      "page": 186,
+      "matchedTerm": "mkh2500r4",
+      "matchedModel": "MKH2-500-R4"
+    },
+    "mkh2-700-r4": {
+      "catalogKey": "fcu-2026",
+      "page": 186,
+      "matchedTerm": "mkh2700r4",
+      "matchedModel": "MKH2-700-R4"
+    },
+    "mkh2-800-r4": {
+      "catalogKey": "fcu-2026",
+      "page": 186,
+      "matchedTerm": "mkh2800r4",
+      "matchedModel": "MKH2-800-R4"
+    },
+    "mkh2-v150f-r4": {
+      "catalogKey": "chiller-2026",
+      "page": 139,
+      "matchedTerm": "mkh2v150fr4",
+      "matchedModel": "MKH2-V150F-R4"
+    },
+    "mkh2-v250f-r4": {
+      "catalogKey": "chiller-2026",
+      "page": 139,
+      "matchedTerm": "mkh2v+250fr4",
+      "matchedModel": "MKH2-V250F-R4"
+    },
+    "mkh2-v350f-r4": {
+      "catalogKey": "chiller-2026",
+      "page": 139,
+      "matchedTerm": "mkh2v+350fr4",
+      "matchedModel": "MKH2-V350F-R4"
+    },
+    "mkh2-v500f-r4": {
+      "catalogKey": "chiller-2026",
+      "page": 139,
+      "matchedTerm": "mkh2v+500fr4",
+      "matchedModel": "MKH2-V500F-R4"
+    },
+    "mkh2-v700f-r4": {
+      "catalogKey": "chiller-2026",
+      "page": 139,
+      "matchedTerm": "mkh2v+700fr4",
+      "matchedModel": "MKH2-V700F-R4"
+    },
+    "mkh2-v800f-r4": {
+      "catalogKey": "chiller-2026",
+      "page": 139,
+      "matchedTerm": "mkh2v+800fr4",
+      "matchedModel": "MKH2-V800F-R4"
+    },
+    "t-mbq4-02e1": {
+      "catalogKey": "vrf-2026",
+      "page": 87,
+      "matchedTerm": "tmbq402e1",
+      "matchedModel": "T-MBQ4-02E1"
+    },
+    "t-mbq4-02c": {
+      "catalogKey": "fcu-2026",
+      "page": 169,
+      "matchedTerm": "tmbq402c",
+      "matchedModel": "T-MBQ4-02C"
+    },
+    "t-mbq4-03b": {
+      "catalogKey": "fcu-2026",
+      "page": 167,
+      "matchedTerm": "tmbq403b",
+      "matchedModel": "T-MBQ4-03B"
+    },
+    "t-mbq1-01g": {
+      "catalogKey": "vrf-2026",
+      "page": 84,
+      "matchedTerm": "tmbq101g",
+      "matchedModel": "T-MBQ1-01G"
+    },
+    "t-mbq1-02g": {
+      "catalogKey": "vrf-2026",
+      "page": 84,
+      "matchedTerm": "tmbq102g",
+      "matchedModel": "T-MBQ1-02G"
+    },
+    "t-mbq1-03g": {
+      "catalogKey": "vrf-2026",
+      "page": 84,
+      "matchedTerm": "tmbq103g",
+      "matchedModel": "T-MBQ1-03G"
+    },
+    "kjrp-86i-mfk-e": {
+      "catalogKey": "chiller-2026",
+      "page": 107,
+      "matchedTerm": "kjrp86imfke",
+      "matchedModel": "KJRP-86I/MFK-E"
+    },
+    "kjrp-86a-bmfnkd-e": {
+      "catalogKey": "fcu-2026",
+      "page": 171,
+      "matchedTerm": "kjrp86abmfnkde",
+      "matchedModel": "KJRP-86A/BMFNKD-E"
+    },
+    "kjrp-75-bk-e": {
+      "catalogKey": "chiller-2026",
+      "page": 107,
+      "matchedTerm": "kjrp75abke",
+      "matchedModel": "KJRP-75АBK-E"
+    },
+    "wdc3-86s": {
+      "catalogKey": "vrf-2026",
+      "page": 17,
+      "matchedTerm": "wdc386s",
+      "matchedModel": "WDC3-86S"
+    },
+    "ccm30-bke-b-a-": {
+      "catalogKey": "atom-b-2026",
+      "page": 36,
+      "matchedTerm": "ccm30bkeba",
+      "matchedModel": "CCM30/BKE-B(A)"
+    },
+    "wdc3-86t-white-": {
+      "catalogKey": "vrf-2026",
+      "page": 17,
+      "matchedTerm": "wdc386t",
+      "matchedModel": "WDC3-86T(white)"
+    },
+    "fqzhn-01d": {
+      "catalogKey": "vrf-2026",
+      "page": 170,
+      "matchedTerm": "fqzhn01d",
+      "matchedModel": "FQZHN-01D"
+    },
+    "fqzhn-02d": {
+      "catalogKey": "vrf-2026",
+      "page": 170,
+      "matchedTerm": "fqzhn02d",
+      "matchedModel": "FQZHN-02D"
+    },
+    "fqzhn-03d": {
+      "catalogKey": "vrf-2026",
+      "page": 172,
+      "matchedTerm": "fqzhn03d",
+      "matchedModel": "FQZHN-03D"
+    },
+    "ahukz-00f-m-": {
+      "catalogKey": "vrf-2026",
+      "page": 98,
+      "matchedTerm": "ahukz00f",
+      "matchedModel": "AHUKZ-00F(M)"
+    },
+    "ahukz-01f-m-": {
+      "catalogKey": "vrf-2026",
+      "page": 98,
+      "matchedTerm": "ahukz01f",
+      "matchedModel": "AHUKZ-01F(M)"
+    },
+    "ahukz-02f-m-": {
+      "catalogKey": "vrf-2026",
+      "page": 98,
+      "matchedTerm": "ahukz02f",
+      "matchedModel": "AHUKZ-02F(M)"
+    },
+    "ahukz-03f-m-": {
+      "catalogKey": "vrf-2026",
+      "page": 98,
+      "matchedTerm": "ahukz03f",
+      "matchedModel": "AHUKZ-03F(M)"
+    },
+    "ahukz-04f-m-": {
+      "catalogKey": "vrf-2026",
+      "page": 98,
+      "matchedTerm": "ahukz04f",
+      "matchedModel": "AHUKZ-04F(M)"
+    },
+    "gw3-mod": {
+      "catalogKey": "vrf-2026",
+      "page": 16,
+      "matchedTerm": "gw3mod",
+      "matchedModel": "GW3-MOD"
+    },
+    "tc3-10-1": {
+      "catalogKey": "vrf-2026",
+      "page": 16,
+      "matchedTerm": "tc3101",
+      "matchedModel": "TC3-10.1"
+    },
+    "mvc-m224wv2gn1": {
+      "catalogKey": "vrf-2026",
+      "page": 49,
+      "matchedTerm": "mvc+m224wv2gn1",
+      "matchedModel": "MVC-M224WV2GN1"
+    },
+    "mvc-m400wv2gn1": {
+      "catalogKey": "vrf-2026",
+      "page": 49,
+      "matchedTerm": "mvc+m400wv2gn1",
+      "matchedModel": "MVC-M400WV2GN1"
+    },
+    "mvc-m615wv2gn1": {
+      "catalogKey": "vrf-2026",
+      "page": 49,
+      "matchedTerm": "mvc+m615wv2gn1",
+      "matchedModel": "MVC-M615WV2GN1"
+    },
+    "mvc-m670wv2gn1": {
+      "catalogKey": "vrf-2026",
+      "page": 49,
+      "matchedTerm": "mvc+m670wv2gn1",
+      "matchedModel": "MVC-M670WV2GN1"
+    },
+    "mvc-m730wv2gn1": {
+      "catalogKey": "vrf-2026",
+      "page": 49,
+      "matchedTerm": "mvc+m730wv2gn1",
+      "matchedModel": "MVC-M730WV2GN1"
+    },
+    "mvc-m785wv2gn1": {
+      "catalogKey": "vrf-2026",
+      "page": 49,
+      "matchedTerm": "mvc+m785wv2gn1",
+      "matchedModel": "MVC-M785WV2GN1"
+    },
+    "mvc-m850wv2gn1": {
+      "catalogKey": "vrf-2026",
+      "page": 49,
+      "matchedTerm": "mvc+m850wv2gn1",
+      "matchedModel": "MVC-M850WV2GN1"
+    },
+    "mv8m-120wv2gn1": {
+      "catalogKey": "vrf-2026",
+      "page": 67,
+      "matchedTerm": "mv8m120wv2gn1",
+      "matchedModel": "MV8M-120WV2GN1"
+    },
+    "mv8m-140wv2gn1": {
+      "catalogKey": "vrf-2026",
+      "page": 67,
+      "matchedTerm": "mv8m140wv2gn1",
+      "matchedModel": "MV8M-140WV2GN1"
+    },
+    "mv8m-160wv2gn1": {
+      "catalogKey": "vrf-2026",
+      "page": 67,
+      "matchedTerm": "mv8m160wv2gn1",
+      "matchedModel": "MV8M-160WV2GN1"
+    },
+    "mv8m-170wv2gn1": {
+      "catalogKey": "vrf-2026",
+      "page": 67,
+      "matchedTerm": "mv8m170wv2gn1",
+      "matchedModel": "MV8M-170WV2GN1"
+    },
+    "mih90fashn18": {
+      "catalogKey": "vrf-2026",
+      "page": 164,
+      "matchedTerm": "mih90fashn18",
+      "matchedModel": "MIH90FASHN18"
+    },
+    "mih140fashn18": {
+      "catalogKey": "vrf-2026",
+      "page": 164,
+      "matchedTerm": "mih140fashn18",
+      "matchedModel": "MIH140FASHN18"
+    },
+    "mih160fashn18": {
+      "catalogKey": "vrf-2026",
+      "page": 164,
+      "matchedTerm": "mih160fashn18",
+      "matchedModel": "MIH160FASHN18"
+    },
+    "mih224fashn18": {
+      "catalogKey": "vrf-2026",
+      "page": 164,
+      "matchedTerm": "mih224fashn18",
+      "matchedModel": "MIH224FASHN18"
+    },
+    "mih200fahn18": {
+      "catalogKey": "vrf-2026",
+      "page": 164,
+      "matchedTerm": "mih200fahn18",
+      "matchedModel": "MIH200FAHN18"
+    },
+    "mih224fahn18": {
+      "catalogKey": "vrf-2026",
+      "page": 164,
+      "matchedTerm": "mih224fahn18",
+      "matchedModel": "MIH224FAHN18"
+    },
+    "mih252fahn18": {
+      "catalogKey": "vrf-2026",
+      "page": 164,
+      "matchedTerm": "mih252fahn18",
+      "matchedModel": "MIH252FAHN18"
+    },
+    "mih280fahn18": {
+      "catalogKey": "vrf-2026",
+      "page": 164,
+      "matchedTerm": "mih280fahn18",
+      "matchedModel": "MIH280FAHN18"
+    },
+    "mih560fahn18": {
+      "catalogKey": "vrf-2026",
+      "page": 92,
+      "matchedTerm": "mih560fahn18",
+      "matchedModel": "MIH560FAHN18"
+    },
+    "mi2-05gdhn18-at-": {
+      "catalogKey": "atom-b-2026",
+      "page": 33,
+      "matchedTerm": "mi205gdhn18at",
+      "matchedModel": "MI2-05GDHN18(At)"
+    },
+    "mi2-07gdhn18-at-": {
+      "catalogKey": "atom-b-2026",
+      "page": 33,
+      "matchedTerm": "mi207gdhn18at",
+      "matchedModel": "MI2-07GDHN18(At)"
+    },
+    "mi2-15gdhn18-at-": {
+      "catalogKey": "atom-b-2026",
+      "page": 33,
+      "matchedTerm": "mi215gdhn18at",
+      "matchedModel": "MI2-15GDHN18(At)"
+    },
+    "mi2-28gdhn18-at-": {
+      "catalogKey": "atom-b-2026",
+      "page": 33,
+      "matchedTerm": "mi228gdhn18at",
+      "matchedModel": "MI2-28GDHN18(At)"
+    },
+    "mi2-05t3dhn18-at-": {
+      "catalogKey": "atom-b-2026",
+      "page": 30,
+      "matchedTerm": "mi205t3dhn18at",
+      "matchedModel": "MI2-05T3DHN18(At)"
+    },
+    "mi2-06t3dhn18-at-": {
+      "catalogKey": "atom-b-2026",
+      "page": 30,
+      "matchedTerm": "mi206t3dhn18at",
+      "matchedModel": "MI2-06T3DHN18(At)"
+    },
+    "mi2-07t3dhn18-at-": {
+      "catalogKey": "atom-b-2026",
+      "page": 30,
+      "matchedTerm": "mi207t3dhn18at",
+      "matchedModel": "MI2-07T3DHN18(At)"
+    },
+    "mi2-28t2dhn18-at-": {
+      "catalogKey": "atom-b-2026",
+      "page": 31,
+      "matchedTerm": "mi228t2dhn18at",
+      "matchedModel": "MI2-28T2DHN18(At)"
+    },
+    "mi2-32t2dhn18-at-": {
+      "catalogKey": "atom-b-2026",
+      "page": 31,
+      "matchedTerm": "mi232t2dhn18at",
+      "matchedModel": "MI2-32T2DHN18(At)"
+    },
+    "mi2-40t2dhn18-at-": {
+      "catalogKey": "atom-b-2026",
+      "page": 31,
+      "matchedTerm": "mi240t2dhn18at",
+      "matchedModel": "MI2-40T2DHN18(At)"
+    },
+    "mi2-42t2dhn18-at-": {
+      "catalogKey": "atom-b-2026",
+      "page": 31,
+      "matchedTerm": "mi242t2dhn18at",
+      "matchedModel": "MI2-42T2DHN18(At)"
+    },
+    "mi2-48t2dhn18-at-": {
+      "catalogKey": "atom-b-2026",
+      "page": 31,
+      "matchedTerm": "mi248t2dhn18at",
+      "matchedModel": "MI2-48T2DHN18(At)"
+    },
+    "mi2-56t2dhn18-at-": {
+      "catalogKey": "atom-b-2026",
+      "page": 31,
+      "matchedTerm": "mi256t2dhn18at",
+      "matchedModel": "MI2-56T2DHN18(At)"
+    },
+    "mi2-15q4dhn18-at-": {
+      "catalogKey": "atom-b-2026",
+      "page": 25,
+      "matchedTerm": "mi215q4dhn18at",
+      "matchedModel": "MI2-15Q4DHN18(At)"
+    },
+    "mi2-28q4dhn18-at-": {
+      "catalogKey": "atom-b-2026",
+      "page": 26,
+      "matchedTerm": "mi228q4dhn18at",
+      "matchedModel": "MI2-28Q4DHN18(At)"
+    },
+    "mi2-32q4dhn18-at-": {
+      "catalogKey": "atom-b-2026",
+      "page": 26,
+      "matchedTerm": "mi232q4dhn18at",
+      "matchedModel": "MI2-32Q4DHN18(At)"
+    },
+    "mi2-36q4dhn18-at-": {
+      "catalogKey": "atom-b-2026",
+      "page": 26,
+      "matchedTerm": "mi236q4dhn18at",
+      "matchedModel": "MI2-36Q4DHN18(At)"
+    },
+    "mi2-40q4dhn18-at-": {
+      "catalogKey": "atom-b-2026",
+      "page": 26,
+      "matchedTerm": "mi240q4dhn18at",
+      "matchedModel": "MI2-40Q4DHN18(At)"
+    },
+    "mi2-48q4dhn18-at-": {
+      "catalogKey": "atom-b-2026",
+      "page": 26,
+      "matchedTerm": "mi248q4dhn18at",
+      "matchedModel": "MI2-48Q4DHN18(At)"
+    },
+    "mi2-60q4dhn18-at-": {
+      "catalogKey": "atom-b-2026",
+      "page": 26,
+      "matchedTerm": "mi260q4dhn18at",
+      "matchedModel": "MI2-60Q4DHN18(At)"
+    },
+    "mi2-06q1dhn18-at-": {
+      "catalogKey": "atom-b-2026",
+      "page": 23,
+      "matchedTerm": "mi206q1dhn18at",
+      "matchedModel": "MI2-06Q1DHN18(At)"
+    },
+    "mi2-07q1dhn18-at-": {
+      "catalogKey": "atom-b-2026",
+      "page": 23,
+      "matchedTerm": "mi207q1dhn18at",
+      "matchedModel": "MI2-07Q1DHN18(At)"
+    },
+    "mi2-15q1dhn18-at-": {
+      "catalogKey": "atom-b-2026",
+      "page": 23,
+      "matchedTerm": "mi215q1dhn18at",
+      "matchedModel": "MI2-15Q1DHN18(At)"
+    },
+    "mkh1-150-r3": {
+      "catalogKey": "fcu-2026",
+      "page": 182,
+      "matchedTerm": "mkh1150r3",
+      "matchedModel": "MKH1-150-R3"
+    },
+    "mkh1-250-r3": {
+      "catalogKey": "fcu-2026",
+      "page": 182,
+      "matchedTerm": "mkh1250r3",
+      "matchedModel": "MKH1-250-R3"
+    },
+    "mkh1-350-r3": {
+      "catalogKey": "fcu-2026",
+      "page": 182,
+      "matchedTerm": "mkh1350r3",
+      "matchedModel": "MKH1-350-R3"
+    },
+    "mkh1-500-r3": {
+      "catalogKey": "fcu-2026",
+      "page": 182,
+      "matchedTerm": "mkh1500r3",
+      "matchedModel": "MKH1-500-R3"
+    },
+    "mkh1-700-r3": {
+      "catalogKey": "fcu-2026",
+      "page": 182,
+      "matchedTerm": "mkh1700r3",
+      "matchedModel": "MKH1-700-R3"
+    },
+    "mkh1-800-r3": {
+      "catalogKey": "fcu-2026",
+      "page": 182,
+      "matchedTerm": "mkh1800r3",
+      "matchedModel": "MKH1-800-R3"
+    },
+    "mkh1-150-r4": {
+      "catalogKey": "fcu-2026",
+      "page": 183,
+      "matchedTerm": "mkh1150r4",
+      "matchedModel": "MKH1-150-R4"
+    },
+    "mkh1-250-r4": {
+      "catalogKey": "fcu-2026",
+      "page": 183,
+      "matchedTerm": "mkh1250r4",
+      "matchedModel": "MKH1-250-R4"
+    },
+    "mkh1-350-r4": {
+      "catalogKey": "fcu-2026",
+      "page": 183,
+      "matchedTerm": "mkh1350r4",
+      "matchedModel": "MKH1-350-R4"
+    },
+    "mkh1-500-r4": {
+      "catalogKey": "fcu-2026",
+      "page": 183,
+      "matchedTerm": "mkh1500r4",
+      "matchedModel": "MKH1-500-R4"
+    },
+    "mkh1-700-r4": {
+      "catalogKey": "fcu-2026",
+      "page": 183,
+      "matchedTerm": "mkh1700r4",
+      "matchedModel": "MKH1-700-R4"
+    },
+    "mkh1-800-r4": {
+      "catalogKey": "fcu-2026",
+      "page": 183,
+      "matchedTerm": "mkh1800r4",
+      "matchedModel": "MKH1-800-R4"
+    },
+    "mkh2-150-r3": {
+      "catalogKey": "fcu-2026",
+      "page": 185,
+      "matchedTerm": "mkh2150r3",
+      "matchedModel": "MKH2-150-R3"
+    },
+    "mkh2-250-r3": {
+      "catalogKey": "fcu-2026",
+      "page": 185,
+      "matchedTerm": "mkh2250r3",
+      "matchedModel": "MKH2-250-R3"
+    },
+    "mkh2-350-r3": {
+      "catalogKey": "fcu-2026",
+      "page": 185,
+      "matchedTerm": "mkh2350r3",
+      "matchedModel": "MKH2-350-R3"
+    },
+    "mkh2-500-r3": {
+      "catalogKey": "fcu-2026",
+      "page": 185,
+      "matchedTerm": "mkh2500r3",
+      "matchedModel": "MKH2-500-R3"
+    },
+    "mkh2-700-r3": {
+      "catalogKey": "fcu-2026",
+      "page": 185,
+      "matchedTerm": "mkh2700r3",
+      "matchedModel": "MKH2-700-R3"
+    },
+    "mkh2-800-r3": {
+      "catalogKey": "fcu-2026",
+      "page": 185,
+      "matchedTerm": "mkh2800r3",
+      "matchedModel": "MKH2-800-R3"
+    },
+    "mkh2-150-r3--a-": {
+      "catalogKey": "fcu-2026",
+      "page": 185,
+      "matchedTerm": "mkh2150r3",
+      "matchedModel": "MKH2-150-R3 (A)"
+    },
+    "mkh2-250-r3--a-": {
+      "catalogKey": "fcu-2026",
+      "page": 185,
+      "matchedTerm": "mkh2250r3",
+      "matchedModel": "MKH2-250-R3 (A)"
+    },
+    "mkh2-350-r3--a-": {
+      "catalogKey": "fcu-2026",
+      "page": 185,
+      "matchedTerm": "mkh2350r3",
+      "matchedModel": "MKH2-350-R3 (A)"
+    },
+    "mkh2-500-r3--a-": {
+      "catalogKey": "fcu-2026",
+      "page": 185,
+      "matchedTerm": "mkh2500r3",
+      "matchedModel": "MKH2-500-R3 (A)"
+    },
+    "mkh2-700-r3--a-": {
+      "catalogKey": "fcu-2026",
+      "page": 185,
+      "matchedTerm": "mkh2700r3",
+      "matchedModel": "MKH2-700-R3 (A)"
+    },
+    "mkh2-800-r3--a-": {
+      "catalogKey": "fcu-2026",
+      "page": 185,
+      "matchedTerm": "mkh2800r3",
+      "matchedModel": "MKH2-800-R3 (A)"
+    },
+    "mkh2-150-r4--a-": {
+      "catalogKey": "fcu-2026",
+      "page": 186,
+      "matchedTerm": "mkh2150r4",
+      "matchedModel": "MKH2-150-R4 (A)"
+    },
+    "mkh2-250-r4--a-": {
+      "catalogKey": "fcu-2026",
+      "page": 186,
+      "matchedTerm": "mkh2250r4",
+      "matchedModel": "MKH2-250-R4 (A)"
+    },
+    "mkh2-350-r4--a-": {
+      "catalogKey": "fcu-2026",
+      "page": 186,
+      "matchedTerm": "mkh2350r4",
+      "matchedModel": "MKH2-350-R4 (A)"
+    },
+    "mkh2-500-r4--a-": {
+      "catalogKey": "fcu-2026",
+      "page": 186,
+      "matchedTerm": "mkh2500r4",
+      "matchedModel": "MKH2-500-R4 (A)"
+    },
+    "mkh2-700-r4--a-": {
+      "catalogKey": "fcu-2026",
+      "page": 186,
+      "matchedTerm": "mkh2700r4",
+      "matchedModel": "MKH2-700-R4 (A)"
+    },
+    "mkh2-800-r4--a-": {
+      "catalogKey": "fcu-2026",
+      "page": 186,
+      "matchedTerm": "mkh2800r4",
+      "matchedModel": "MKH2-800-R4 (A)"
+    },
+    "mkh3-150-r3": {
+      "catalogKey": "fcu-2026",
+      "page": 188,
+      "matchedTerm": "mkh3150r3",
+      "matchedModel": "MKH3-150-R3"
+    },
+    "mkh3-250-r3": {
+      "catalogKey": "fcu-2026",
+      "page": 188,
+      "matchedTerm": "mkh3250r3",
+      "matchedModel": "MKH3-250-R3"
+    },
+    "mkh3-350-r3": {
+      "catalogKey": "fcu-2026",
+      "page": 188,
+      "matchedTerm": "mkh3350r3",
+      "matchedModel": "MKH3-350-R3"
+    },
+    "mkh3-500-r3": {
+      "catalogKey": "fcu-2026",
+      "page": 188,
+      "matchedTerm": "mkh3500r3",
+      "matchedModel": "MKH3-500-R3"
+    },
+    "mkh3-700-r3": {
+      "catalogKey": "fcu-2026",
+      "page": 188,
+      "matchedTerm": "mkh3700r3",
+      "matchedModel": "MKH3-700-R3"
+    },
+    "mkh3-800-r3": {
+      "catalogKey": "fcu-2026",
+      "page": 188,
+      "matchedTerm": "mkh3800r3",
+      "matchedModel": "MKH3-800-R3"
+    },
+    "mkh3-150-r4": {
+      "catalogKey": "fcu-2026",
+      "page": 189,
+      "matchedTerm": "mkh3150r4",
+      "matchedModel": "MKH3-150-R4"
+    },
+    "mkh3-250-r4": {
+      "catalogKey": "fcu-2026",
+      "page": 189,
+      "matchedTerm": "mkh3250r4",
+      "matchedModel": "MKH3-250-R4"
+    },
+    "mkh3-350-r4": {
+      "catalogKey": "fcu-2026",
+      "page": 189,
+      "matchedTerm": "mkh3350r4",
+      "matchedModel": "MKH3-350-R4"
+    },
+    "mkh3-500-r4": {
+      "catalogKey": "fcu-2026",
+      "page": 189,
+      "matchedTerm": "mkh3500r4",
+      "matchedModel": "MKH3-500-R4"
+    },
+    "mkh3-700-r4": {
+      "catalogKey": "fcu-2026",
+      "page": 189,
+      "matchedTerm": "mkh3700r4",
+      "matchedModel": "MKH3-700-R4"
+    },
+    "mkh3-800-r4": {
+      "catalogKey": "fcu-2026",
+      "page": 189,
+      "matchedTerm": "mkh3800r4",
+      "matchedModel": "MKH3-800-R4"
+    },
+    "mkh1-v150f-r4": {
+      "catalogKey": "chiller-2026",
+      "page": 137,
+      "matchedTerm": "mkh1v150fr4",
+      "matchedModel": "MKH1-V150F-R4"
+    },
+    "mkh1-v250f-r4": {
+      "catalogKey": "chiller-2026",
+      "page": 137,
+      "matchedTerm": "mkh1v+250fr4",
+      "matchedModel": "MKH1-V250F-R4"
+    },
+    "mkh1-v350f-r4": {
+      "catalogKey": "chiller-2026",
+      "page": 137,
+      "matchedTerm": "mkh1v+350fr4",
+      "matchedModel": "MKH1-V350F-R4"
+    },
+    "mkh1-v500f-r4": {
+      "catalogKey": "chiller-2026",
+      "page": 137,
+      "matchedTerm": "mkh1v+500fr4",
+      "matchedModel": "MKH1-V500F-R4"
+    },
+    "mkh1-v700f-r4": {
+      "catalogKey": "chiller-2026",
+      "page": 137,
+      "matchedTerm": "mkh1v+700fr4",
+      "matchedModel": "MKH1-V700F-R4"
+    },
+    "mkh1-v800f-r4": {
+      "catalogKey": "chiller-2026",
+      "page": 137,
+      "matchedTerm": "mkh1v+800fr4",
+      "matchedModel": "MKH1-V800F-R4"
+    },
+    "mkh3-v150f-r4": {
+      "catalogKey": "chiller-2026",
+      "page": 141,
+      "matchedTerm": "mkh3v150fr4",
+      "matchedModel": "MKH3-V150F-R4"
+    },
+    "mkh3-v250f-r4": {
+      "catalogKey": "chiller-2026",
+      "page": 141,
+      "matchedTerm": "mkh3v+250fr4",
+      "matchedModel": "MKH3-V250F-R4"
+    },
+    "mkh3-v350f-r4": {
+      "catalogKey": "chiller-2026",
+      "page": 141,
+      "matchedTerm": "mkh3v+350fr4",
+      "matchedModel": "MKH3-V350F-R4"
+    },
+    "mkh3-v500f-r4": {
+      "catalogKey": "chiller-2026",
+      "page": 141,
+      "matchedTerm": "mkh3v+500fr4",
+      "matchedModel": "MKH3-V500F-R4"
+    },
+    "mkh3-v700f-r4": {
+      "catalogKey": "chiller-2026",
+      "page": 141,
+      "matchedTerm": "mkh3v+700fr4",
+      "matchedModel": "MKH3-V700F-R4"
+    },
+    "mkh3-v800f-r4": {
+      "catalogKey": "chiller-2026",
+      "page": 141,
+      "matchedTerm": "mkh3v+800fr4",
+      "matchedModel": "MKH3-V800F-R4"
+    },
+    "mv8-252wv2gn1-ma-": {
+      "catalogKey": "vrf-2026",
+      "page": 12,
+      "matchedTerm": "mv8252wv2gn1ma",
+      "matchedModel": "MV8-252WV2GN1(MA)"
+    },
+    "mv8-560wv2gn1-ma-": {
+      "catalogKey": "vrf-2026",
+      "page": 45,
+      "matchedTerm": "mv8560wv2gn1",
+      "matchedModel": "MV8-560WV2GN1(MA)"
+    },
+    "mv8-900wv2gn1-ma-": {
+      "catalogKey": "vrf-2026",
+      "page": 45,
+      "matchedTerm": "mv8900wv2gn1",
+      "matchedModel": "MV8-900WV2GN1(MA)"
+    },
+    "mv8-1010wv2gn1-ma-": {
+      "catalogKey": "vrf-2026",
+      "page": 45,
+      "matchedTerm": "mv8+1010wv2gn1",
+      "matchedModel": "MV8-1010WV2GN1(MA)"
+    },
+    "mv8-1060wv2gn1-ma-": {
+      "catalogKey": "vrf-2026",
+      "page": 45,
+      "matchedTerm": "mv8+1060wv2gn1",
+      "matchedModel": "MV8-1060WV2GN1(MA)"
+    },
+    "mv8-1120wv2gn1-ma-": {
+      "catalogKey": "vrf-2026",
+      "page": 45,
+      "matchedTerm": "mv8+1120wv2gn1",
+      "matchedModel": "MV8-1120WV2GN1(MA)"
+    },
+    "mv8s-252wv2gn1": {
+      "catalogKey": "vrf-2026",
+      "page": 60,
+      "matchedTerm": "mv8s+252wv2gn1",
+      "matchedModel": "MV8S-252WV2GN1"
+    },
+    "mv8s-280wv2gn1": {
+      "catalogKey": "vrf-2026",
+      "page": 60,
+      "matchedTerm": "mv8s+280wv2gn1",
+      "matchedModel": "MV8S-280WV2GN1"
+    },
+    "mv8s-335wv2gn1": {
+      "catalogKey": "vrf-2026",
+      "page": 60,
+      "matchedTerm": "mv8s+335wv2gn1",
+      "matchedModel": "MV8S-335WV2GN1"
+    },
+    "mv8s-400wv2gn1": {
+      "catalogKey": "vrf-2026",
+      "page": 60,
+      "matchedTerm": "mv8s+400wv2gn1",
+      "matchedModel": "MV8S-400WV2GN1"
+    },
+    "mv8s-450wv2gn1": {
+      "catalogKey": "vrf-2026",
+      "page": 60,
+      "matchedTerm": "mv8s+450wv2gn1",
+      "matchedModel": "MV8S-450WV2GN1"
+    },
+    "mv8s-500wv2gn1": {
+      "catalogKey": "vrf-2026",
+      "page": 60,
+      "matchedTerm": "mv8s+500wv2gn1",
+      "matchedModel": "MV8S-500WV2GN1"
+    },
+    "mv8s-560wv2gn1": {
+      "catalogKey": "vrf-2026",
+      "page": 60,
+      "matchedTerm": "mv8s+560wv2gn1",
+      "matchedModel": "MV8S-560WV2GN1"
+    },
+    "mv8s-615wv2gn1": {
+      "catalogKey": "vrf-2026",
+      "page": 60,
+      "matchedTerm": "mv8s+615wv2gn1",
+      "matchedModel": "MV8S-615WV2GN1"
+    },
+    "mv8s-670wv2gn1": {
+      "catalogKey": "vrf-2026",
+      "page": 60,
+      "matchedTerm": "mv8s+670wv2gn1",
+      "matchedModel": "MV8S-670WV2GN1"
+    },
+    "mih15q4chn18": {
+      "catalogKey": "vrf-2026",
+      "page": 86,
+      "matchedTerm": "mih15q4chn18",
+      "matchedModel": "MIH15Q4CHN18"
+    },
+    "mih22q4chn18": {
+      "catalogKey": "vrf-2026",
+      "page": 86,
+      "matchedTerm": "mih22q4chn18",
+      "matchedModel": "MIH22Q4CHN18"
+    },
+    "mih28q4chn18": {
+      "catalogKey": "vrf-2026",
+      "page": 86,
+      "matchedTerm": "mih28q4chn18",
+      "matchedModel": "MIH28Q4CHN18"
+    },
+    "mih36q4chn18": {
+      "catalogKey": "vrf-2026",
+      "page": 86,
+      "matchedTerm": "mih36q4chn18",
+      "matchedModel": "MIH36Q4CHN18"
+    },
+    "mih45q4chn18": {
+      "catalogKey": "vrf-2026",
+      "page": 86,
+      "matchedTerm": "mih45q4chn18",
+      "matchedModel": "MIH45Q4CHN18"
+    },
+    "mih56q4chn18": {
+      "catalogKey": "vrf-2026",
+      "page": 86,
+      "matchedTerm": "mih56q4chn18",
+      "matchedModel": "MIH56Q4CHN18"
+    },
+    "mih63q4chn18": {
+      "catalogKey": "vrf-2026",
+      "page": 86,
+      "matchedTerm": "mih63q4chn18",
+      "matchedModel": "MIH63Q4CHN18"
+    },
+    "mih15t3hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 163,
+      "matchedTerm": "mih15t3hn18",
+      "matchedModel": "MIH15T3HN18"
+    },
+    "mih22t3hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 163,
+      "matchedTerm": "mih22t3hn18",
+      "matchedModel": "MIH22T3HN18"
+    },
+    "mih28t3hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 163,
+      "matchedTerm": "mih28t3hn18",
+      "matchedModel": "MIH28T3HN18"
+    },
+    "mih36t3hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 163,
+      "matchedTerm": "mih36t3hn18",
+      "matchedModel": "MIH36T3HN18"
+    },
+    "mih45t3hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 88,
+      "matchedTerm": "mih45t3hn18",
+      "matchedModel": "MIH45T3HN18"
+    },
+    "mih56t3hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 163,
+      "matchedTerm": "mih56t3hn18",
+      "matchedModel": "MIH56T3HN18"
+    },
+    "mih71t3hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 163,
+      "matchedTerm": "mih71t3hn18",
+      "matchedModel": "MIH71T3HN18"
+    },
+    "mih80t3hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 163,
+      "matchedTerm": "mih80t3hn18",
+      "matchedModel": "MIH80T3HN18"
+    },
+    "mih90t3hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 163,
+      "matchedTerm": "mih90t3hn18",
+      "matchedModel": "MIH90T3HN18"
+    },
+    "mih112t3hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 88,
+      "matchedTerm": "mih112t3hn18",
+      "matchedModel": "MIH112T3HN18"
+    },
+    "mih15t2hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 163,
+      "matchedTerm": "mih15t2hn18",
+      "matchedModel": "MIH15T2HN18"
+    },
+    "mih15ghn18": {
+      "catalogKey": "vrf-2026",
+      "page": 82,
+      "matchedTerm": "mih15ghn18",
+      "matchedModel": "MIH15GHN18"
+    },
+    "mih22q2hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 85,
+      "matchedTerm": "mih22q2hn18",
+      "matchedModel": "MIH22Q2HN18"
+    },
+    "mih28q2hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 85,
+      "matchedTerm": "mih28q2hn18",
+      "matchedModel": "MIH28Q2HN18"
+    },
+    "mih36q2hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 85,
+      "matchedTerm": "mih36q2hn18",
+      "matchedModel": "MIH36Q2HN18"
+    },
+    "mih45q2hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 85,
+      "matchedTerm": "mih45q2hn18",
+      "matchedModel": "MIH45Q2HN18"
+    },
+    "mih56q2hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 85,
+      "matchedTerm": "mih56q2hn18",
+      "matchedModel": "MIH56Q2HN18"
+    },
+    "mih71q2hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 85,
+      "matchedTerm": "mih71q2hn18",
+      "matchedModel": "MIH71Q2HN18"
+    },
+    "mih18q1hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 84,
+      "matchedTerm": "mih18q1hn18",
+      "matchedModel": "MIH18Q1HN18"
+    },
+    "mih22q1hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 84,
+      "matchedTerm": "mih22q1hn18",
+      "matchedModel": "MIH22Q1HN18"
+    },
+    "mih28q1hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 84,
+      "matchedTerm": "mih28q1hn18",
+      "matchedModel": "MIH28Q1HN18"
+    },
+    "mih36q1hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 84,
+      "matchedTerm": "mih36q1hn18",
+      "matchedModel": "MIH36Q1HN18"
+    },
+    "mih45q1hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 84,
+      "matchedTerm": "mih45q1hn18",
+      "matchedModel": "MIH45Q1HN18"
+    },
+    "mih56q1hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 84,
+      "matchedTerm": "mih56q1hn18",
+      "matchedModel": "MIH56Q1HN18"
+    },
+    "mih71q1hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 84,
+      "matchedTerm": "mih71q1hn18",
+      "matchedModel": "MIH71Q1HN18"
+    },
+    "mih18q1hn18-a-": {
+      "catalogKey": "vrf-2026",
+      "page": 84,
+      "matchedTerm": "mih18q1hn18a",
+      "matchedModel": "MIH18Q1HN18(A)"
+    },
+    "mih22f3hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 93,
+      "matchedTerm": "mih22f3hn18",
+      "matchedModel": "MIH22F3HN18"
+    },
+    "mih28f3hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 93,
+      "matchedTerm": "mih28f3hn18",
+      "matchedModel": "MIH28F3HN18"
+    },
+    "mih36f3hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 93,
+      "matchedTerm": "mih36f3hn18",
+      "matchedModel": "MIH36F3HN18"
+    },
+    "mih45f3hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 93,
+      "matchedTerm": "mih45f3hn18",
+      "matchedModel": "MIH45F3HN18"
+    },
+    "mih56f3hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 93,
+      "matchedTerm": "mih56f3hn18",
+      "matchedModel": "MIH56F3HN18"
+    },
+    "mih71f3hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 93,
+      "matchedTerm": "mih71f3hn18",
+      "matchedModel": "MIH71F3HN18"
+    },
+    "mih80f3hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 93,
+      "matchedTerm": "mih80f3hn18",
+      "matchedModel": "MIH80F3HN18"
+    },
+    "mih22f4hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 165,
+      "matchedTerm": "mih22f4hn18",
+      "matchedModel": "MIH22F4HN18"
+    },
+    "mih28f4hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 165,
+      "matchedTerm": "mih28f4hn18",
+      "matchedModel": "MIH28F4HN18"
+    },
+    "mih36f4hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 165,
+      "matchedTerm": "mih36f4hn18",
+      "matchedModel": "MIH36F4HN18"
+    },
+    "mih45f4hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 165,
+      "matchedTerm": "mih45f4hn18",
+      "matchedModel": "MIH45F4HN18"
+    },
+    "mih56f4hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 165,
+      "matchedTerm": "mih56f4hn18",
+      "matchedModel": "MIH56F4HN18"
+    },
+    "mih71f4hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 165,
+      "matchedTerm": "mih71f4hn18",
+      "matchedModel": "MIH71F4HN18"
+    },
+    "mih80f4hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 165,
+      "matchedTerm": "mih80f4hn18",
+      "matchedModel": "MIH80F4HN18"
+    },
+    "mih22f5hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 94,
+      "matchedTerm": "mih22f5hn18",
+      "matchedModel": "MIH22F5HN18"
+    },
+    "mih28f5hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 94,
+      "matchedTerm": "mih28f5hn18",
+      "matchedModel": "MIH28F5HN18"
+    },
+    "mih36f5hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 94,
+      "matchedTerm": "mih36f5hn18",
+      "matchedModel": "MIH36F5HN18"
+    },
+    "mih45f5hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 94,
+      "matchedTerm": "mih45f5hn18",
+      "matchedModel": "MIH45F5HN18"
+    },
+    "mih56f5hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 94,
+      "matchedTerm": "mih56f5hn18",
+      "matchedModel": "MIH56F5HN18"
+    },
+    "mih71f5hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 94,
+      "matchedTerm": "mih71f5hn18",
+      "matchedModel": "MIH71F5HN18"
+    },
+    "mih80f5hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 94,
+      "matchedTerm": "mih80f5hn18",
+      "matchedModel": "MIH80F5HN18"
+    },
+    "mih56t1hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 163,
+      "matchedTerm": "mih56t1hn18",
+      "matchedModel": "MIH56T1HN18"
+    },
+    "mih71t1hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 163,
+      "matchedTerm": "mih71t1hn18",
+      "matchedModel": "MIH71T1HN18"
+    },
+    "mih80t1hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 163,
+      "matchedTerm": "mih80t1hn18",
+      "matchedModel": "MIH80T1HN18"
+    },
+    "mih90t1hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 163,
+      "matchedTerm": "mih90t1hn18",
+      "matchedModel": "MIH90T1HN18"
+    },
+    "mih112t1hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 163,
+      "matchedTerm": "mih112t1hn18",
+      "matchedModel": "MIH112T1HN18"
+    },
+    "mih125t1hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 163,
+      "matchedTerm": "mih125t1hn18",
+      "matchedModel": "MIH125T1HN18"
+    },
+    "mih140t1hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 163,
+      "matchedTerm": "mih140t1hn18",
+      "matchedModel": "MIH140T1HN18"
+    },
+    "mih160t1hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 90,
+      "matchedTerm": "mih160t1hn18",
+      "matchedModel": "MIH160T1HN18"
+    },
+    "mih200t1hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 163,
+      "matchedTerm": "mih200t1hn18",
+      "matchedModel": "MIH200T1HN18"
+    },
+    "mih224t1hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 163,
+      "matchedTerm": "mih224t1hn18",
+      "matchedModel": "MIH224T1HN18"
+    },
+    "mih252t1hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 163,
+      "matchedTerm": "mih252t1hn18",
+      "matchedModel": "MIH252T1HN18"
+    },
+    "mih280t1hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 91,
+      "matchedTerm": "mih280t1hn18",
+      "matchedModel": "MIH280T1HN18"
+    },
+    "mih335t1hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 163,
+      "matchedTerm": "mih335t1hn18",
+      "matchedModel": "MIH335T1HN18"
+    },
+    "mih400t1hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 163,
+      "matchedTerm": "mih400t1hn18",
+      "matchedModel": "MIH400T1HN18"
+    },
+    "mih450t1hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 163,
+      "matchedTerm": "mih450t1hn18",
+      "matchedModel": "MIH450T1HN18"
+    },
+    "mih560t1hn18": {
+      "catalogKey": "vrf-2026",
+      "page": 90,
+      "matchedTerm": "mih560t1hn18",
+      "matchedModel": "MIH560T1HN18"
+    },
+    "mih36dlhn18": {
+      "catalogKey": "vrf-2026",
+      "page": 165,
+      "matchedTerm": "mih36dlhn18",
+      "matchedModel": "MIH36DLHN18"
+    },
+    "mih45dlhn18": {
+      "catalogKey": "vrf-2026",
+      "page": 165,
+      "matchedTerm": "mih45dlhn18",
+      "matchedModel": "MIH45DLHN18"
+    },
+    "mih56dlhn18": {
+      "catalogKey": "vrf-2026",
+      "page": 165,
+      "matchedTerm": "mih56dlhn18",
+      "matchedModel": "MIH56DLHN18"
+    },
+    "mih71dlhn18": {
+      "catalogKey": "vrf-2026",
+      "page": 165,
+      "matchedTerm": "mih71dlhn18",
+      "matchedModel": "MIH71DLHN18"
+    },
+    "mih80dlhn18": {
+      "catalogKey": "vrf-2026",
+      "page": 96,
+      "matchedTerm": "mih80dlhn18",
+      "matchedModel": "MIH80DLHN18"
+    },
+    "mih90dlhn18": {
+      "catalogKey": "vrf-2026",
+      "page": 165,
+      "matchedTerm": "mih90dlhn18",
+      "matchedModel": "MIH90DLHN18"
+    },
+    "mih100dlhn18": {
+      "catalogKey": "vrf-2026",
+      "page": 165,
+      "matchedTerm": "mih100dlhn18",
+      "matchedModel": "MIH100DLHN18"
+    },
+    "mih112dlhn18": {
+      "catalogKey": "vrf-2026",
+      "page": 165,
+      "matchedTerm": "mih112dlhn18",
+      "matchedModel": "MIH112DLHN18"
+    },
+    "mih125dlhn18": {
+      "catalogKey": "vrf-2026",
+      "page": 165,
+      "matchedTerm": "mih125dlhn18",
+      "matchedModel": "MIH125DLHN18"
+    },
+    "mih140dlhn18": {
+      "catalogKey": "vrf-2026",
+      "page": 165,
+      "matchedTerm": "mih140dlhn18",
+      "matchedModel": "MIH140DLHN18"
+    },
+    "mih160dlhn18": {
+      "catalogKey": "vrf-2026",
+      "page": 96,
+      "matchedTerm": "mih160dlhn18",
+      "matchedModel": "MIH160DLHN18"
+    },
+    "mv6-r252wv2gn1": {
+      "catalogKey": "vrf-2026",
+      "page": 114,
+      "matchedTerm": "mv6+r252wv2gn1",
+      "matchedModel": "MV6-R252WV2GN1"
+    },
+    "mv6-r280wv2gn1": {
+      "catalogKey": "vrf-2026",
+      "page": 114,
+      "matchedTerm": "mv6+r280wv2gn1",
+      "matchedModel": "MV6-R280WV2GN1"
+    },
+    "mv6-r335wv2gn1": {
+      "catalogKey": "vrf-2026",
+      "page": 114,
+      "matchedTerm": "mv6+r335wv2gn1",
+      "matchedModel": "MV6-R335WV2GN1"
+    },
+    "mv6-r400wv2gn1": {
+      "catalogKey": "vrf-2026",
+      "page": 114,
+      "matchedTerm": "mv6+r400wv2gn1",
+      "matchedModel": "MV6-R400WV2GN1"
+    },
+    "mv6-r450wv2gn1": {
+      "catalogKey": "vrf-2026",
+      "page": 114,
+      "matchedTerm": "mv6+r450wv2gn1",
+      "matchedModel": "MV6-R450WV2GN1"
+    },
+    "mv6-r500wv2gn1": {
+      "catalogKey": "vrf-2026",
+      "page": 114,
+      "matchedTerm": "mv6+r500wv2gn1",
+      "matchedModel": "MV6-R500WV2GN1"
+    },
+    "mv6-r560wv2gn1": {
+      "catalogKey": "vrf-2026",
+      "page": 114,
+      "matchedTerm": "mv6+r560wv2gn1",
+      "matchedModel": "MV6-R560WV2GN1"
+    },
+    "mvi-200wv2gn1-a-": {
+      "catalogKey": "vrf-2026",
+      "page": 29,
+      "matchedTerm": "mvi+200wv2gn1a",
+      "matchedModel": "MVi-200WV2GN1(A)"
+    },
+    "mvi-224wv2gn1-a-": {
+      "catalogKey": "vrf-2026",
+      "page": 29,
+      "matchedTerm": "mvi+224wv2gn1a",
+      "matchedModel": "MVi-224WV2GN1(A)"
+    },
+    "mvi-260wv2gn1-a-": {
+      "catalogKey": "vrf-2026",
+      "page": 29,
+      "matchedTerm": "mvi+260wv2gn1a",
+      "matchedModel": "MVi-260WV2GN1(A)"
+    },
+    "mvi-280wv2gn1-a-": {
+      "catalogKey": "vrf-2026",
+      "page": 29,
+      "matchedTerm": "mvi+280wv2gn1a",
+      "matchedModel": "MVi-280WV2GN1(A)"
+    },
+    "mvi-335wv2gn1-a-": {
+      "catalogKey": "vrf-2026",
+      "page": 29,
+      "matchedTerm": "mvi+335wv2gn1a",
+      "matchedModel": "MVi-335WV2GN1(A)"
+    },
+    "mdvs-252-8-w-drn1": {
+      "catalogKey": "vrf-2026",
+      "page": 117,
+      "matchedTerm": "mdvs2528wdrn1",
+      "matchedModel": "MDVS-252(8)W/DRN1"
+    },
+    "mdvs-280-10-w-drn1": {
+      "catalogKey": "vrf-2026",
+      "page": 117,
+      "matchedTerm": "mdvs2+8010wdrn1",
+      "matchedModel": "MDVS-280(10)W/DRN1"
+    },
+    "ccm-180a-bws-a-": {
+      "catalogKey": "vrf-2026",
+      "page": 157,
+      "matchedTerm": "ccm180abwsa",
+      "matchedModel": "CCM-180A/BWS(A)"
+    },
+    "ccm-210g-bws": {
+      "catalogKey": "vrf-2026",
+      "page": 102,
+      "matchedTerm": "ccm210gbws",
+      "matchedModel": "CCM-210G/BWS"
+    },
+    "ccm-270b-ws-b-": {
+      "catalogKey": "vrf-2026",
+      "page": 102,
+      "matchedTerm": "ccm270bwsb",
+      "matchedModel": "CCM-270B/WS(B)"
+    },
+    "mdv-v12wdhn1-atb-": {
+      "catalogKey": "atom-b-2026",
+      "page": 15,
+      "matchedTerm": "mdvv12wdhn1atb",
+      "matchedModel": "MDV-V12WDHN1(AtB)"
+    },
+    "mdv-v18wdhn1-atb-": {
+      "catalogKey": "atom-b-2026",
+      "page": 15,
+      "matchedTerm": "mdvv18wdhn1atb",
+      "matchedModel": "MDV-V18WDHN1(AtB)"
+    },
+    "mdv-v21wdhn1-atb-": {
+      "catalogKey": "atom-b-2026",
+      "page": 15,
+      "matchedTerm": "mdvv21wdhn1atb",
+      "matchedModel": "MDV-V21WDHN1(AtB)"
+    },
+    "mdv-v28wdhn1-atb-": {
+      "catalogKey": "atom-b-2026",
+      "page": 15,
+      "matchedTerm": "mdvv28wdhn1atb",
+      "matchedModel": "MDV-V28WDHN1(AtB)"
+    },
+    "mdv-v36wdhn1a-atb-": {
+      "catalogKey": "atom-b-2026",
+      "page": 15,
+      "matchedTerm": "mdvv36wdhn1aatb",
+      "matchedModel": "MDV-V36WDHN1A(AtB)"
+    },
+    "mdv-v42wdhn1a-atb-": {
+      "catalogKey": "atom-b-2026",
+      "page": 15,
+      "matchedTerm": "mdvv42wdhn1aatb",
+      "matchedModel": "MDV-V42WDHN1A(AtB)"
+    },
+    "mdv-v48wdhn1-atb-": {
+      "catalogKey": "atom-b-2026",
+      "page": 15,
+      "matchedTerm": "mdvv48wdhn1atb",
+      "matchedModel": "MDV-V48WDHN1(AtB)"
+    },
+    "mdv-v56wdhn1-atb-": {
+      "catalogKey": "atom-b-2026",
+      "page": 15,
+      "matchedTerm": "mdvv56wdhn1atb",
+      "matchedModel": "MDV-V56WDHN1(AtB)"
+    },
+    "mdv-v60wdhn1-atb-": {
+      "catalogKey": "atom-b-2026",
+      "page": 15,
+      "matchedTerm": "mdvv60wdhn1atb",
+      "matchedModel": "MDV-V60WDHN1(AtB)"
+    },
+    "smkt-d160-240cgn8-at-": {
+      "catalogKey": "atom-2026",
+      "page": 35,
+      "matchedTerm": "smktd160240cgn8at",
+      "matchedModel": "SMKT-D160/240CGN8(At)"
+    },
+    "smk-d160n8-at-": {
+      "catalogKey": "atom-2026",
+      "page": 34,
+      "matchedTerm": "smkd160n8at",
+      "matchedModel": "SMK-D160N8(At)"
+    },
+    "mdvc-v28wdhn1-atc-": {
+      "catalogKey": "atom-b-2026",
+      "page": 18,
+      "matchedTerm": "mdvcv28wdhn1atc",
+      "matchedModel": "MDVC-V28WDHN1(AtC)"
+    },
+    "mdvc-v36wdhn1-atc-": {
+      "catalogKey": "atom-b-2026",
+      "page": 18,
+      "matchedTerm": "mdvcv36wdhn1atc",
+      "matchedModel": "MDVC-V36WDHN1(AtC)"
+    },
+    "mdvc-v42wdhn1-atc-": {
+      "catalogKey": "atom-b-2026",
+      "page": 18,
+      "matchedTerm": "mdvcv42wdhn1atc",
+      "matchedModel": "MDVC-V42WDHN1(AtC)"
+    },
+    "mdvc-v48wdhn1-atc-": {
+      "catalogKey": "atom-b-2026",
+      "page": 18,
+      "matchedTerm": "mdvcv48wdhn1atc",
+      "matchedModel": "MDVC-V48WDHN1(AtC)"
+    },
+    "mdvc-v56wdhn1-atc-": {
+      "catalogKey": "atom-b-2026",
+      "page": 18,
+      "matchedTerm": "mdvcv56wdhn1atc",
+      "matchedModel": "MDVC-V56WDHN1(AtC)"
+    },
+    "mdvc-v60wdhn1-atc-": {
+      "catalogKey": "atom-b-2026",
+      "page": 18,
+      "matchedTerm": "mdvcv60wdhn1atc",
+      "matchedModel": "MDVC-V60WDHN1(AtC)"
+    },
+    "mi2-48dldhn18-at-": {
+      "catalogKey": "atom-2026",
+      "page": 48,
+      "matchedTerm": "mi248dldhn18at",
+      "matchedModel": "MI2-48DLDHN18(At)"
+    },
+    "mi2-05q4cdhn18-at-": {
+      "catalogKey": "atom-b-2026",
+      "page": 29,
+      "matchedTerm": "mi205q4cdhn18at",
+      "matchedModel": "MI2-05Q4CDHN18(At)"
+    },
+    "mi2-07q4cdhn18-at-": {
+      "catalogKey": "atom-b-2026",
+      "page": 29,
+      "matchedTerm": "mi207q4cdhn18at",
+      "matchedModel": "MI2-07Q4CDHN18(At)"
+    },
+    "mi2-09q4cdhn18-at-": {
+      "catalogKey": "atom-b-2026",
+      "page": 29,
+      "matchedTerm": "mi209q4cdhn18at",
+      "matchedModel": "MI2-09Q4CDHN18(At)"
+    },
+    "mi2-12q4cdhn18-at-": {
+      "catalogKey": "atom-b-2026",
+      "page": 29,
+      "matchedTerm": "mi212q4cdhn18at",
+      "matchedModel": "MI2-12Q4CDHN18(At)"
+    },
+    "mi2-15q4cdhn18-at-": {
+      "catalogKey": "atom-b-2026",
+      "page": 29,
+      "matchedTerm": "mi215q4cdhn18at",
+      "matchedModel": "MI2-15Q4CDHN18(At)"
+    },
+    "mi2-18q4cdhn18-at-": {
+      "catalogKey": "atom-b-2026",
+      "page": 29,
+      "matchedTerm": "mi218q4cdhn18at",
+      "matchedModel": "MI2-18Q4CDHN18(At)"
+    },
+    "mi2-21q4cdhn18-at-": {
+      "catalogKey": "atom-b-2026",
+      "page": 29,
+      "matchedTerm": "mi221q4cdhn18at",
+      "matchedModel": "MI2-21Q4CDHN18(At)"
+    },
+    "mfsl-76hdn1": {
+      "catalogKey": "vrf-2026",
+      "page": 97,
+      "matchedTerm": "mfsl76hdn1",
+      "matchedModel": "MFSL-76HDN1"
+    },
+    "mfsl-96hdn1": {
+      "catalogKey": "vrf-2026",
+      "page": 165,
+      "matchedTerm": "mfsl96hdn1",
+      "matchedModel": "MFSL-96HDN1"
+    },
+    "mfsl-120hdn1": {
+      "catalogKey": "vrf-2026",
+      "page": 165,
+      "matchedTerm": "mfsl120hdn1",
+      "matchedModel": "MFSL-120HDN1"
+    },
+    "mfsl-150hdn1": {
+      "catalogKey": "vrf-2026",
+      "page": 165,
+      "matchedTerm": "mfsl150hdn1",
+      "matchedModel": "MFSL-150HDN1"
+    },
+    "mfsl-192hdn1": {
+      "catalogKey": "vrf-2026",
+      "page": 165,
+      "matchedTerm": "mfsl192hdn1",
+      "matchedModel": "MFSL-192HDN1"
+    },
+    "mftl-76hdn1": {
+      "catalogKey": "vrf-2026",
+      "page": 165,
+      "matchedTerm": "mftl76hdn1",
+      "matchedModel": "MFTL-76HDN1"
+    },
+    "mftl-96hdn1": {
+      "catalogKey": "vrf-2026",
+      "page": 165,
+      "matchedTerm": "mftl96hdn1",
+      "matchedModel": "MFTL-96HDN1"
+    },
+    "mftl-120hdn1": {
+      "catalogKey": "vrf-2026",
+      "page": 165,
+      "matchedTerm": "mftl120hdn1",
+      "matchedModel": "MFTL-120HDN1"
+    },
+    "mftl-150hdn1": {
+      "catalogKey": "vrf-2026",
+      "page": 165,
+      "matchedTerm": "mftl150hdn1",
+      "matchedModel": "MFTL-150HDN1"
+    },
+    "mftl-192hdn1": {
+      "catalogKey": "vrf-2026",
+      "page": 165,
+      "matchedTerm": "mftl192hdn1",
+      "matchedModel": "MFTL-192HDN1"
+    },
+    "mhl-68hdn1": {
+      "catalogKey": "vrf-2026",
+      "page": 134,
+      "matchedTerm": "mhl68hdn1",
+      "matchedModel": "MHL-68HDN1"
+    },
+    "mhl-76hdn1": {
+      "catalogKey": "vrf-2026",
+      "page": 134,
+      "matchedTerm": "mhl76hdn1",
+      "matchedModel": "MHL-76HDN1"
+    },
+    "mhl-96hdn1": {
+      "catalogKey": "vrf-2026",
+      "page": 134,
+      "matchedTerm": "mhl96hdn1",
+      "matchedModel": "MHL-96HDN1"
+    },
+    "mhl-120hdn1": {
+      "catalogKey": "vrf-2026",
+      "page": 134,
+      "matchedTerm": "mhl120hdn1",
+      "matchedModel": "MHL-120HDN1"
+    },
+    "mhl-150hdn1": {
+      "catalogKey": "vrf-2026",
+      "page": 134,
+      "matchedTerm": "mhl150hdn1",
+      "matchedModel": "MHL-150HDN1"
+    },
+    "mhl-192hdn1": {
+      "catalogKey": "vrf-2026",
+      "page": 134,
+      "matchedTerm": "mhl192hdn1",
+      "matchedModel": "MHL-192HDN1"
+    },
+    "moul-68hd1n1-g": {
+      "catalogKey": "vrf-2026",
+      "page": 171,
+      "matchedTerm": "moul68hd1n1g",
+      "matchedModel": "MOUL-68HD1N1-G"
+    },
+    "moul-76hd1n1-g": {
+      "catalogKey": "vrf-2026",
+      "page": 171,
+      "matchedTerm": "moul76hd1n1g",
+      "matchedModel": "MOUL-76HD1N1-G"
+    },
+    "moul-96hd1n1-g": {
+      "catalogKey": "vrf-2026",
+      "page": 171,
+      "matchedTerm": "moul96hd1n1g",
+      "matchedModel": "MOUL-96HD1N1-G"
+    },
+    "moul-120hd1n1-g": {
+      "catalogKey": "vrf-2026",
+      "page": 172,
+      "matchedTerm": "moul120hd1n1g",
+      "matchedModel": "MOUL-120HD1N1-G"
+    },
+    "moul-150hd1n1-g": {
+      "catalogKey": "vrf-2026",
+      "page": 124,
+      "matchedTerm": "moul150hd1n1g",
+      "matchedModel": "MOUL-150HD1N1-G"
+    },
+    "moul-192hd1n1-g": {
+      "catalogKey": "vrf-2026",
+      "page": 124,
+      "matchedTerm": "moul192hd1n1g",
+      "matchedModel": "MOUL-192HD1N1-G"
+    },
+    "moul-250hd1n1-g": {
+      "catalogKey": "vrf-2026",
+      "page": 124,
+      "matchedTerm": "moul250hd1n1g",
+      "matchedModel": "MOUL-250HD1N1-G"
+    },
+    "moul-68cd1n1-r": {
+      "catalogKey": "vrf-2026",
+      "page": 123,
+      "matchedTerm": "moul68cd1n1r",
+      "matchedModel": "MOUL-68CD1N1-R"
+    },
+    "moul-76cd1n1-r": {
+      "catalogKey": "vrf-2026",
+      "page": 123,
+      "matchedTerm": "moul76cd1n1r",
+      "matchedModel": "MOUL-76CD1N1-R"
+    },
+    "moul-96cd1n1-r": {
+      "catalogKey": "vrf-2026",
+      "page": 123,
+      "matchedTerm": "moul96cd1n1r",
+      "matchedModel": "MOUL-96CD1N1-R"
+    },
+    "mkt3-1000g12-cr": {
+      "catalogKey": "chiller-2026",
+      "page": 127,
+      "matchedTerm": "mkt3+1000g12cr",
+      "matchedModel": "MKT3-1000G12-CR"
+    },
+    "mkt3-1200g12-cr": {
+      "catalogKey": "chiller-2026",
+      "page": 127,
+      "matchedTerm": "mkt3+1200g12cr",
+      "matchedModel": "MKT3-1200G12-CR"
+    },
+    "mkt3-1400g12-cr": {
+      "catalogKey": "chiller-2026",
+      "page": 127,
+      "matchedTerm": "mkt3+1400g12cr",
+      "matchedModel": "MKT3-1400G12-CR"
+    },
+    "mkt3h-800g70": {
+      "catalogKey": "fcu-2026",
+      "page": 179,
+      "matchedTerm": "mkt3h800g70",
+      "matchedModel": "MKT3H-800G70"
+    },
+    "mkt3h-1000g70": {
+      "catalogKey": "fcu-2026",
+      "page": 179,
+      "matchedTerm": "mkt3h1000g70",
+      "matchedModel": "MKT3H-1000G70"
+    },
+    "mkt3h-1200g70": {
+      "catalogKey": "fcu-2026",
+      "page": 179,
+      "matchedTerm": "mkt3h1200g70",
+      "matchedModel": "MKT3H-1200G70"
+    },
+    "mkt3h-1400g70": {
+      "catalogKey": "fcu-2026",
+      "page": 179,
+      "matchedTerm": "mkt3h1400g70",
+      "matchedModel": "MKT3H-1400G70"
+    },
+    "mkt3h-1600g100": {
+      "catalogKey": "fcu-2026",
+      "page": 180,
+      "matchedTerm": "mkt3h1600g100",
+      "matchedModel": "MKT3H-1600G100"
+    },
+    "mkt3h-1800g100": {
+      "catalogKey": "fcu-2026",
+      "page": 180,
+      "matchedTerm": "mkt3h1800g100",
+      "matchedModel": "MKT3H-1800G100"
+    },
+    "mkt3h-2200g100": {
+      "catalogKey": "fcu-2026",
+      "page": 180,
+      "matchedTerm": "mkt3h2200g100",
+      "matchedModel": "MKT3H-2200G100"
+    },
+    "mkt4-1000fg30-cr": {
+      "catalogKey": "chiller-2026",
+      "page": 129,
+      "matchedTerm": "mkt4+1000fg30cr",
+      "matchedModel": "MKT4-1000FG30-CR"
+    },
+    "mkt4-1200fg30-cr": {
+      "catalogKey": "chiller-2026",
+      "page": 129,
+      "matchedTerm": "mkt4+1200fg30cr",
+      "matchedModel": "MKT4-1200FG30-CR"
+    },
+    "mkt4-1400fg30-cr": {
+      "catalogKey": "chiller-2026",
+      "page": 129,
+      "matchedTerm": "mkt4+1400fg30cr",
+      "matchedModel": "MKT4-1400FG30-CR"
+    },
+    "mkc-300r-b": {
+      "catalogKey": "fcu-2026",
+      "page": 166,
+      "matchedTerm": "mkc300rb",
+      "matchedModel": "MKC-300R-B"
+    },
+    "mkc-400r-b": {
+      "catalogKey": "fcu-2026",
+      "page": 166,
+      "matchedTerm": "mkc400rb",
+      "matchedModel": "MKC-400R-B"
+    },
+    "mkc-v600r-b": {
+      "catalogKey": "fcu-2026",
+      "page": 193,
+      "matchedTerm": "mkcv600rb",
+      "matchedModel": "MKC-V600R-B"
+    },
+    "mkh1-v150-r3": {
+      "catalogKey": "chiller-2026",
+      "page": 137,
+      "matchedTerm": "mkh1v150r3",
+      "matchedModel": "MKH1-V150-R3"
+    },
+    "mkh1-v250-r3": {
+      "catalogKey": "chiller-2026",
+      "page": 137,
+      "matchedTerm": "mkh1v+250r3",
+      "matchedModel": "MKH1-V250-R3"
+    },
+    "mkh1-v350-r3": {
+      "catalogKey": "chiller-2026",
+      "page": 137,
+      "matchedTerm": "mkh1v+350r3",
+      "matchedModel": "MKH1-V350-R3"
+    },
+    "mkh1-v500-r3": {
+      "catalogKey": "chiller-2026",
+      "page": 137,
+      "matchedTerm": "mkh1v500r3",
+      "matchedModel": "MKH1-V500-R3"
+    },
+    "mkh1-v700-r3": {
+      "catalogKey": "chiller-2026",
+      "page": 137,
+      "matchedTerm": "mkh1v+700r3",
+      "matchedModel": "MKH1-V700-R3"
+    },
+    "mkh1-v800-r3": {
+      "catalogKey": "chiller-2026",
+      "page": 137,
+      "matchedTerm": "mkh1v+800r3",
+      "matchedModel": "MKH1-V800-R3"
+    },
+    "mkh1-v150-r4": {
+      "catalogKey": "chiller-2026",
+      "page": 137,
+      "matchedTerm": "mkh1v+150r4",
+      "matchedModel": "MKH1-V150-R4"
+    },
+    "mkh1-v250-r4": {
+      "catalogKey": "chiller-2026",
+      "page": 137,
+      "matchedTerm": "mkh1v+250r4",
+      "matchedModel": "MKH1-V250-R4"
+    },
+    "mkh1-v350-r4": {
+      "catalogKey": "chiller-2026",
+      "page": 137,
+      "matchedTerm": "mkh1v+350r4",
+      "matchedModel": "MKH1-V350-R4"
+    },
+    "mkh1-v500-r4": {
+      "catalogKey": "chiller-2026",
+      "page": 137,
+      "matchedTerm": "mkh1v+500r4",
+      "matchedModel": "MKH1-V500-R4"
+    },
+    "mkh1-v700-r4": {
+      "catalogKey": "chiller-2026",
+      "page": 137,
+      "matchedTerm": "mkh1v+700r4",
+      "matchedModel": "MKH1-V700-R4"
+    },
+    "mkh1-v800-r4": {
+      "catalogKey": "chiller-2026",
+      "page": 137,
+      "matchedTerm": "mkh1v+800r4",
+      "matchedModel": "MKH1-V800-R4"
+    },
+    "mkh2-v150-r3": {
+      "catalogKey": "chiller-2026",
+      "page": 139,
+      "matchedTerm": "mkh2v150r3",
+      "matchedModel": "MKH2-V150-R3"
+    },
+    "mkh2-v250-r3": {
+      "catalogKey": "chiller-2026",
+      "page": 139,
+      "matchedTerm": "mkh2v+250r3",
+      "matchedModel": "MKH2-V250-R3"
+    },
+    "mkh2-v350-r3": {
+      "catalogKey": "chiller-2026",
+      "page": 139,
+      "matchedTerm": "mkh2v+350r3",
+      "matchedModel": "MKH2-V350-R3"
+    },
+    "mkh2-v500-r3": {
+      "catalogKey": "chiller-2026",
+      "page": 139,
+      "matchedTerm": "mkh2v500r3",
+      "matchedModel": "MKH2-V500-R3"
+    },
+    "mkh2-v700-r3": {
+      "catalogKey": "chiller-2026",
+      "page": 139,
+      "matchedTerm": "mkh2v+700r3",
+      "matchedModel": "MKH2-V700-R3"
+    },
+    "mkh2-v800-r3": {
+      "catalogKey": "chiller-2026",
+      "page": 139,
+      "matchedTerm": "mkh2v+800r3",
+      "matchedModel": "MKH2-V800-R3"
+    },
+    "mkh2-v150-r4": {
+      "catalogKey": "chiller-2026",
+      "page": 139,
+      "matchedTerm": "mkh2v+150r4",
+      "matchedModel": "MKH2-V150-R4"
+    },
+    "mkh2-v250-r4": {
+      "catalogKey": "chiller-2026",
+      "page": 139,
+      "matchedTerm": "mkh2v+250r4",
+      "matchedModel": "MKH2-V250-R4"
+    },
+    "mkh2-v350-r4": {
+      "catalogKey": "chiller-2026",
+      "page": 139,
+      "matchedTerm": "mkh2v+350r4",
+      "matchedModel": "MKH2-V350-R4"
+    },
+    "mkh2-v500-r4": {
+      "catalogKey": "chiller-2026",
+      "page": 139,
+      "matchedTerm": "mkh2v+500r4",
+      "matchedModel": "MKH2-V500-R4"
+    },
+    "mkh2-v700-r4": {
+      "catalogKey": "chiller-2026",
+      "page": 139,
+      "matchedTerm": "mkh2v+700r4",
+      "matchedModel": "MKH2-V700-R4"
+    },
+    "mkh2-v800-r4": {
+      "catalogKey": "chiller-2026",
+      "page": 139,
+      "matchedTerm": "mkh2v+800r4",
+      "matchedModel": "MKH2-V800-R4"
+    },
+    "mkh3-v150-r3": {
+      "catalogKey": "chiller-2026",
+      "page": 141,
+      "matchedTerm": "mkh3v150r3",
+      "matchedModel": "MKH3-V150-R3"
+    },
+    "mkh3-v250-r3": {
+      "catalogKey": "chiller-2026",
+      "page": 141,
+      "matchedTerm": "mkh3v+250r3",
+      "matchedModel": "MKH3-V250-R3"
+    },
+    "mkh3-v350-r3": {
+      "catalogKey": "chiller-2026",
+      "page": 141,
+      "matchedTerm": "mkh3v+350r3",
+      "matchedModel": "MKH3-V350-R3"
+    },
+    "mkh3-v500-r3": {
+      "catalogKey": "chiller-2026",
+      "page": 141,
+      "matchedTerm": "mkh3v500r3",
+      "matchedModel": "MKH3-V500-R3"
+    },
+    "mkh3-v700-r3": {
+      "catalogKey": "chiller-2026",
+      "page": 141,
+      "matchedTerm": "mkh3v+700r3",
+      "matchedModel": "MKH3-V700-R3"
+    },
+    "mkh3-v800-r3": {
+      "catalogKey": "chiller-2026",
+      "page": 141,
+      "matchedTerm": "mkh3v+800r3",
+      "matchedModel": "MKH3-V800-R3"
+    },
+    "mkh3-v150-r4": {
+      "catalogKey": "chiller-2026",
+      "page": 141,
+      "matchedTerm": "mkh3v+150r4",
+      "matchedModel": "MKH3-V150-R4"
+    },
+    "mkh3-v250-r4": {
+      "catalogKey": "chiller-2026",
+      "page": 141,
+      "matchedTerm": "mkh3v+250r4",
+      "matchedModel": "MKH3-V250-R4"
+    },
+    "mkh3-v350-r4": {
+      "catalogKey": "chiller-2026",
+      "page": 141,
+      "matchedTerm": "mkh3v+350r4",
+      "matchedModel": "MKH3-V350-R4"
+    },
+    "mkh3-v500-r4": {
+      "catalogKey": "chiller-2026",
+      "page": 141,
+      "matchedTerm": "mkh3v+500r4",
+      "matchedModel": "MKH3-V500-R4"
+    },
+    "mkh3-v700-r4": {
+      "catalogKey": "chiller-2026",
+      "page": 141,
+      "matchedTerm": "mkh3v+700r4",
+      "matchedModel": "MKH3-V700-R4"
+    },
+    "mkh3-v800-r4": {
+      "catalogKey": "chiller-2026",
+      "page": 141,
+      "matchedTerm": "mkh3v+800r4",
+      "matchedModel": "MKH3-V800-R4"
+    },
+    "mkt3-v200g12-cr": {
+      "catalogKey": "chiller-2026",
+      "page": 127,
+      "matchedTerm": "mkt3v200g12cr",
+      "matchedModel": "MKT3-V200G12-CR"
+    },
+    "mkt3-v300g12-cr": {
+      "catalogKey": "chiller-2026",
+      "page": 127,
+      "matchedTerm": "mkt3v+300g12cr",
+      "matchedModel": "MKT3-V300G12-CR"
+    },
+    "mkt3-v400g12-cr": {
+      "catalogKey": "chiller-2026",
+      "page": 127,
+      "matchedTerm": "mkt3v+400g12cr",
+      "matchedModel": "MKT3-V400G12-CR"
+    },
+    "mkt3-v500g12-cr": {
+      "catalogKey": "chiller-2026",
+      "page": 127,
+      "matchedTerm": "mkt3v+500g12cr",
+      "matchedModel": "MKT3-V500G12-CR"
+    },
+    "mkt3-v600g12-cr": {
+      "catalogKey": "chiller-2026",
+      "page": 127,
+      "matchedTerm": "mkt3v+600g12cr",
+      "matchedModel": "MKT3-V600G12-CR"
+    },
+    "mkt3-v700g12-cr": {
+      "catalogKey": "chiller-2026",
+      "page": 127,
+      "matchedTerm": "mkt3v700g12cr",
+      "matchedModel": "MKT3-V700G12-CR"
+    },
+    "mkt3-v800g12-cr": {
+      "catalogKey": "chiller-2026",
+      "page": 127,
+      "matchedTerm": "mkt3v+800g12cr",
+      "matchedModel": "MKT3-V800G12-CR"
+    },
+    "mkt3-v1000g12-cr": {
+      "catalogKey": "chiller-2026",
+      "page": 127,
+      "matchedTerm": "mkt3v+1000g12cr",
+      "matchedModel": "MKT3-V1000G12-CR"
+    },
+    "mkt3-v1200g12-cr": {
+      "catalogKey": "chiller-2026",
+      "page": 127,
+      "matchedTerm": "mkt3v+1200g12cr",
+      "matchedModel": "MKT3-V1200G12-CR"
+    },
+    "mkt3-v1400g12-cr": {
+      "catalogKey": "chiller-2026",
+      "page": 127,
+      "matchedTerm": "mkt3v+1400g12cr",
+      "matchedModel": "MKT3-V1400G12-CR"
+    },
+    "mkt4-v200fg30-cr": {
+      "catalogKey": "chiller-2026",
+      "page": 109,
+      "matchedTerm": "mkt4v200fg30cr",
+      "matchedModel": "MKT4-V200FG30-CR"
+    },
+    "mkt4-v300fg30-cr": {
+      "catalogKey": "chiller-2026",
+      "page": 129,
+      "matchedTerm": "mkt4v+300fg30cr",
+      "matchedModel": "MKT4-V300FG30-CR"
+    },
+    "mkt4-v400fg30-cr": {
+      "catalogKey": "chiller-2026",
+      "page": 129,
+      "matchedTerm": "mkt4v+400fg30cr",
+      "matchedModel": "MKT4-V400FG30-CR"
+    },
+    "mkt4-v500fg30-cr": {
+      "catalogKey": "chiller-2026",
+      "page": 129,
+      "matchedTerm": "mkt4v+500fg30cr",
+      "matchedModel": "MKT4-V500FG30-CR"
+    },
+    "mkt4-v600fg30-cr": {
+      "catalogKey": "chiller-2026",
+      "page": 129,
+      "matchedTerm": "mkt4v+600fg30cr",
+      "matchedModel": "MKT4-V600FG30-CR"
+    },
+    "mkt4-v700fg30-cr": {
+      "catalogKey": "chiller-2026",
+      "page": 129,
+      "matchedTerm": "mkt4v700fg30cr",
+      "matchedModel": "MKT4-V700FG30-CR"
+    },
+    "mkt4-v800fg30-cr": {
+      "catalogKey": "chiller-2026",
+      "page": 129,
+      "matchedTerm": "mkt4v+800fg30cr",
+      "matchedModel": "MKT4-V800FG30-CR"
+    },
+    "mkt4-v1000fg30-cr": {
+      "catalogKey": "chiller-2026",
+      "page": 129,
+      "matchedTerm": "mkt4v+1000fg30cr",
+      "matchedModel": "MKT4-V1000FG30-CR"
+    },
+    "mkt4-v1200fg30-cr": {
+      "catalogKey": "chiller-2026",
+      "page": 129,
+      "matchedTerm": "mkt4v+1200fg30cr",
+      "matchedModel": "MKT4-V1200FG30-CR"
+    },
+    "mkt4-v1400fg30-cr": {
+      "catalogKey": "chiller-2026",
+      "page": 129,
+      "matchedTerm": "mkt4v+1400fg30cr",
+      "matchedModel": "MKT4-V1400FG30-CR"
+    },
+    "mgbl-f200w-rn1": {
+      "catalogKey": "chiller-2026",
+      "page": 46,
+      "matchedTerm": "mgblf200wrn1",
+      "matchedModel": "MGBL-F200W/RN1"
+    },
+    "mc-ss35-rn1l-b": {
+      "catalogKey": "chiller-2026",
+      "page": 29,
+      "matchedTerm": "mcss35rn1lb",
+      "matchedModel": "MC-SS35-RN1L-B"
+    },
+    "mc-ss65-rn1l": {
+      "catalogKey": "chiller-2026",
+      "page": 29,
+      "matchedTerm": "mcss65rn1l",
+      "matchedModel": "MC-SS65/RN1L"
+    },
+    "mc-ss80-rn1l": {
+      "catalogKey": "chiller-2026",
+      "page": 29,
+      "matchedTerm": "mcss80rn1l",
+      "matchedModel": "MC-SS80/RN1L"
+    },
+    "mc-ss65-rn1": {
+      "catalogKey": "chiller-2026",
+      "page": 29,
+      "matchedTerm": "mcss65rn1",
+      "matchedModel": "MC-SS65/RN1"
+    },
+    "mc-ss130-rn1tl": {
+      "catalogKey": "chiller-2026",
+      "page": 46,
+      "matchedTerm": "mcss130rn1tl",
+      "matchedModel": "MC-SS130-RN1TL"
+    },
+    "kjrm-120d-bmk-e": {
+      "catalogKey": "chiller-2026",
+      "page": 14,
+      "matchedTerm": "kjrm120dbmke",
+      "matchedModel": "KJRM-120D/BMK-E"
+    },
+    "mgc-v5wd2n8-b2": {
+      "catalogKey": "chiller-2026",
+      "page": 23,
+      "matchedTerm": "mgcv5wd2n8b2",
+      "matchedModel": "MGC-V5WD2N8-B2"
+    },
+    "mgc-v7wd2n8-b2": {
+      "catalogKey": "chiller-2026",
+      "page": 23,
+      "matchedTerm": "mgcv7wd2n8b2",
+      "matchedModel": "MGC-V7WD2N8-B2"
+    },
+    "mgc-v9wd2n8-b2": {
+      "catalogKey": "chiller-2026",
+      "page": 23,
+      "matchedTerm": "mgcv9wd2n8b2",
+      "matchedModel": "MGC-V9WD2N8-B2"
+    },
+    "mgc-v12wd2rn8-b": {
+      "catalogKey": "chiller-2026",
+      "page": 23,
+      "matchedTerm": "mgcv12wd2rn8b",
+      "matchedModel": "MGC-V12WD2RN8-B"
+    },
+    "mgc-v14wd2rn8-b": {
+      "catalogKey": "chiller-2026",
+      "page": 23,
+      "matchedTerm": "mgcv14wd2rn8b",
+      "matchedModel": "MGC-V14WD2RN8-B"
+    },
+    "mgc-v16wd2rn8-b": {
+      "catalogKey": "chiller-2026",
+      "page": 15,
+      "matchedTerm": "mgcv16wd2rn8b",
+      "matchedModel": "MGC-V16WD2RN8-B"
+    },
+    "mc-su75m-rn8l-b": {
+      "catalogKey": "chiller-2026",
+      "page": 16,
+      "matchedTerm": "mcsu75mrn8lb",
+      "matchedModel": "MC-SU75M-RN8L-B"
+    },
+    "gw-bac-mc-": {
+      "catalogKey": "chiller-2026",
+      "page": 142,
+      "matchedTerm": "gwbac",
+      "matchedModel": "GW-BAC(MC)"
+    },
+    "mh-su50-rn8l": {
+      "catalogKey": "chiller-2026",
+      "page": 40,
+      "matchedTerm": "mhsu50rn8l",
+      "matchedModel": "MH-SU50-RN8L"
+    },
+    "mh-su65-rn8l": {
+      "catalogKey": "chiller-2026",
+      "page": 40,
+      "matchedTerm": "mhsu+65rn8l",
+      "matchedModel": "MH-SU65-RN8L"
+    },
+    "mh-su75-rn8l": {
+      "catalogKey": "chiller-2026",
+      "page": 40,
+      "matchedTerm": "mhsu+75rn8l",
+      "matchedModel": "MH-SU75-RN8L"
+    },
+    "mh-su110-rn8l": {
+      "catalogKey": "chiller-2026",
+      "page": 40,
+      "matchedTerm": "mhsu+110rn8l",
+      "matchedModel": "MH-SU110-RN8L"
+    },
+    "mh-su140-rn8l": {
+      "catalogKey": "chiller-2026",
+      "page": 40,
+      "matchedTerm": "mhsu+140rn8l",
+      "matchedModel": "MH-SU140-RN8L"
+    },
+    "mh-su50m-rn8l": {
+      "catalogKey": "chiller-2026",
+      "page": 40,
+      "matchedTerm": "mhsu50mrn8l",
+      "matchedModel": "MH-SU50M-RN8L"
+    },
+    "mhc-v18w-d2rn8": {
+      "catalogKey": "chiller-2026",
+      "page": 26,
+      "matchedTerm": "mhcv18wd2rn8",
+      "matchedModel": "MHC-V18W/D2RN8"
+    },
+    "mhc-v22w-d2rn8": {
+      "catalogKey": "chiller-2026",
+      "page": 26,
+      "matchedTerm": "mhcv22wd2rn8",
+      "matchedModel": "MHC-V22W/D2RN8"
+    },
+    "mhc-v26w-d2rn8": {
+      "catalogKey": "chiller-2026",
+      "page": 26,
+      "matchedTerm": "mhcv26wd2rn8",
+      "matchedModel": "MHC-V26W/D2RN8"
+    },
+    "hb-a60-cgn8-b": {
+      "catalogKey": "chiller-2026",
+      "page": 153,
+      "matchedTerm": "hba60cgn8b",
+      "matchedModel": "HB-A60/CGN8-B"
+    },
+    "hb-a100-cgn8-b": {
+      "catalogKey": "chiller-2026",
+      "page": 153,
+      "matchedTerm": "hba100cgn8b",
+      "matchedModel": "HB-A100/CGN8-B"
+    },
+    "hb-a160-cgn8-b": {
+      "catalogKey": "chiller-2026",
+      "page": 153,
+      "matchedTerm": "hba160cgn8b",
+      "matchedModel": "HB-A160/CGN8-B"
+    },
+    "hbt-a100-190cd30gn8-b": {
+      "catalogKey": "chiller-2026",
+      "page": 153,
+      "matchedTerm": "hbta100190cd30gn8b",
+      "matchedModel": "HBT-A100/190CD30GN8-B"
+    },
+    "hbt-a160-240cd30gn8-b": {
+      "catalogKey": "chiller-2026",
+      "page": 153,
+      "matchedTerm": "hbta160240cd30gn8b",
+      "matchedModel": "HBT-A160/240CD30GN8-B"
+    },
+    "hbt-a100-240cd30gn8-b": {
+      "catalogKey": "chiller-2026",
+      "page": 153,
+      "matchedTerm": "hbta100240cd30gn8b",
+      "matchedModel": "HBT-A100/240CD30GN8-B"
+    },
+    "rsj-120-zn1-540v1": {
+      "catalogKey": "chiller-2026",
+      "page": 158,
+      "matchedTerm": "rsj120zn1540v1",
+      "matchedModel": "RSJ-120/ZN1-540V1"
+    },
+    "rsj-200-szn1-540v1": {
+      "catalogKey": "chiller-2026",
+      "page": 158,
+      "matchedTerm": "rsj200szn1540v1",
+      "matchedModel": "RSJ-200/SZN1-540V1"
+    },
+    "rsj-420-szn1-h": {
+      "catalogKey": "chiller-2026",
+      "page": 158,
+      "matchedTerm": "rsj420szn1h",
+      "matchedModel": "RSJ-420/SZN1-H"
+    },
+    "rsj-800-szn1-h": {
+      "catalogKey": "chiller-2026",
+      "page": 158,
+      "matchedTerm": "rsj800szn1h",
+      "matchedModel": "RSJ-800/SZN1-H"
+    },
+    "msc-70d2n8-a": {
+      "catalogKey": "chiller-2026",
+      "page": 156,
+      "matchedTerm": "msc70d2n8a",
+      "matchedModel": "MSC-70D2N8-A"
+    },
+    "mrc-075hwn1-r-c--": {
+      "catalogKey": "vrf-2026",
+      "page": 139,
+      "matchedTerm": "mrc075hwn1rc",
+      "matchedModel": "MRC-075HWN1-R(C )"
+    },
+    "mrc-100hwn1-r-c-": {
+      "catalogKey": "vrf-2026",
+      "page": 139,
+      "matchedTerm": "mrc100hwn1rc",
+      "matchedModel": "MRC-100HWN1-R(C)"
+    },
+    "mrc-125hwn1-r-c-": {
+      "catalogKey": "vrf-2026",
+      "page": 139,
+      "matchedTerm": "mrc125hwn1rc",
+      "matchedModel": "MRC-125HWN1-R(C)"
+    },
+    "mrc-150hwn1-r-c-": {
+      "catalogKey": "vrf-2026",
+      "page": 140,
+      "matchedTerm": "mrc+150hwn1rc",
+      "matchedModel": "MRC-150HWN1-R(C)"
+    },
+    "mrc-175hwn1-r-c-": {
+      "catalogKey": "vrf-2026",
+      "page": 140,
+      "matchedTerm": "mrc+175hwn1rc",
+      "matchedModel": "MRC-175HWN1-R(C)"
+    },
+    "mrc-200hwn1-r-c-": {
+      "catalogKey": "vrf-2026",
+      "page": 140,
+      "matchedTerm": "mrc+200hwn1rc",
+      "matchedModel": "MRC-200HWN1-R(C)"
+    },
+    "mrc-250hwn1-r-c-": {
+      "catalogKey": "vrf-2026",
+      "page": 140,
+      "matchedTerm": "mrc+250hwn1rc",
+      "matchedModel": "MRC-250HWN1-R(C)"
+    },
+    "mrc-300hwn1-r-c-": {
+      "catalogKey": "vrf-2026",
+      "page": 140,
+      "matchedTerm": "mrc+300hwn1rc",
+      "matchedModel": "MRC-300HWN1-R(C)"
+    }
+  }
+}

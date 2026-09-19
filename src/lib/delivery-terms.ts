@@ -52,8 +52,7 @@ export const DELIVERY_TERMS: Record<DeliveryTerm, DeliveryTermSpec> = {
 };
 
 const NATIONAL_CURRENCY_CLAUSE =
-  'Цены указаны в у.е. (доллар США). Оплата производится в национальной валюте ' +
-  'по актуальному курсу на момент оплаты';
+  'Цены указаны в у.е. (1 у.е. = 1 доллар США). Все расчеты производятся в национальной валюте по курсу ЦБ РУз на день оплаты.';
 
 export interface ManagerInfo {
   name?: string;
@@ -105,24 +104,28 @@ export function getWarrantyLine(months: unknown): string {
  * Нумерованные пункты блока «Условия предложения» в том порядке,
  * в котором они печатаются в КП.
  */
-export function buildTermsLines(opts: {
+export function buildTermsLines(opts?: {
   deliveryTerms?: unknown;
   warrantyMonths?: unknown;
+  currency?: string;
+  paymentType?: string;
 }): string[] {
-  const spec = getDeliverySpec(opts.deliveryTerms);
+  const spec = getDeliverySpec(opts?.deliveryTerms);
+  const isUe = opts?.currency !== 'sum';
 
   const points = [
     `Условия поставки: ${spec.delivery};`,
     `Срок поставки: ${spec.leadTime};`,
     'Условия оплаты: 100% предоплата;',
-    `Гарантия: ${getWarrantyLine(opts.warrantyMonths)};`,
+    `Гарантия: ${getWarrantyLine(opts?.warrantyMonths)};`,
     'Срок действия предложения: 1 неделя с момента подачи',
   ];
 
-  if (spec.nationalCurrencyClause) {
-    // Пункт про национальную валюту всегда идёт последним.
+  // Ремарка про у.е. и курс ЦБ РУз всегда обязательна при расчетах в у.е.
+  // (а также при базисах CIP / DDP).
+  if (isUe || spec.nationalCurrencyClause) {
     points[points.length - 1] = 'Срок действия предложения: 1 неделя с момента подачи;';
-    points.push(`${NATIONAL_CURRENCY_CLAUSE}`);
+    points.push(NATIONAL_CURRENCY_CLAUSE);
   }
 
   return points.map((text, i) => `${i + 1}. ${text}`);
@@ -130,19 +133,33 @@ export function buildTermsLines(opts: {
 
 /**
  * Подписи денежных колонок и итогов.
- * Базовая единица зависит от валюты и способа оплаты, к ней добавляется
- * базис поставки: «Цена CIP, у.е.». Для склада и заказа базиса нет.
+ * Базовая единица зависит от валюты и способа оплаты:
+ * - У.Е. + Перечисление = «у.е. с НДС»
+ * - У.Е. + Наличные = «у.е.»
+ * - СУМ + Перечисление = «сум с НДС»
+ * - СУМ + Наличные = «сум»
+ * К ним при необходимости добавляется базис поставки: «Цена CIP, у.е. с НДС».
  */
-export function getMoneyLabels(opts: {
+export function getMoneyLabels(opts?: {
   deliveryTerms?: unknown;
   currency?: string;
   paymentType?: string;
 }) {
-  const { incoterm } = getDeliverySpec(opts.deliveryTerms);
+  const spec = getDeliverySpec(opts?.deliveryTerms);
+  const incoterm = spec.incoterm;
+  const isSum = opts?.currency === 'sum';
+  const isTransfer = opts?.paymentType === 'transfer';
 
   let unit = 'у.е.';
-  if (opts.paymentType === 'transfer') unit = 'с НДС';
-  else if (opts.currency === 'sum') unit = 'СУМ';
+  if (isSum && isTransfer) {
+    unit = 'сум с НДС';
+  } else if (isSum) {
+    unit = 'сум';
+  } else if (isTransfer) {
+    unit = 'у.е. с НДС';
+  } else {
+    unit = 'у.е.';
+  }
 
   const suffix = incoterm ? `${incoterm}, ${unit}` : unit;
 
@@ -154,7 +171,7 @@ export function getMoneyLabels(opts: {
     /** Шапка колонки с суммой по строке */
     sum: `Сумма ${suffix}`,
     /**
-     * Подпись строки итога. `Итого CIP, у.е.` / `Итого доп. раздел CIP, у.е.`
+     * Подпись строки итога. `Итого CIP, у.е. с НДС` / `Итого сум с НДС`
      * @param what уточнение вроде «кондиционирование» или «доп. раздел»
      */
     total: (what?: string) => `Итого${what ? ' ' + what : ''} ${suffix}`,

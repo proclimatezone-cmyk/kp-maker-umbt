@@ -967,6 +967,35 @@ body {
 }
 .copy-btn:hover { color: var(--accent); background: var(--bg-hover); }
 
+.model-meta-line {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+.model-meta-line .cat-label {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.tech-link {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.15rem 0.42rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--accent);
+  background: var(--bg-card);
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-decoration: none;
+  line-height: 1.2;
+}
+.tech-link:hover { background: var(--accent-light); border-color: var(--accent); }
+
 /* position (fixed/top|bottom/left/width) идёт инлайн из ModelSearchSelector —
    список рендерится порталом в document.body, координаты считаются от
    инпута через getBoundingClientRect, см. комментарий в page.tsx. */
@@ -1217,4 +1246,224 @@ body {
   background: var(--warning-bg);
   color: var(--warning);
   border-color: var(--warning);
+}
+
+/* ===== EQUIPMENT TECH CARD ===== */
+.equipment-brand { color: inherit; text-decoration: none; }
+.equipment-page { gap: 1rem; }
+.equipment-hero {
+  display: grid;
+  grid-template-columns: minmax(15rem, 0.9fr) minmax(0, 1.4fr);
+  gap: 1rem;
+  align-items: stretch;
+}
+.equipment-photo,
+.equipment-summary {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+}
+.equipment-photo {
+  min-height: 18rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  overflow: hidden;
+}
+.equipment-photo img {
+  max-width: 100%;
+  max-height: 20rem;
+  object-fit: contain;
+}
+.equipment-summary {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.equipment-kicker {
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+.equipment-summary h1 {
+  margin: 0.35rem 0;
+  font-size: 2rem;
+  line-height: 1.1;
+  letter-spacing: 0;
+}
+.equipment-summary p {
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+.equipment-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.equipment-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.8fr);
+  gap: 1rem;
+}
+.spec-list {
+  display: grid;
+  gap: 0.55rem;
+}
+.spec-list div {
+  display: grid;
+  grid-template-columns: minmax(10rem, 0.6fr) minmax(0, 1fr);
+  gap: 0.75rem;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid var(--bg-input);
+}
+.spec-list dt {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+.spec-list dd {
+  color: var(--text);
+  font-weight: 650;
+}
+.equipment-card-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 1.25rem;
+  box-shadow: var(--shadow-sm);
+}
+.equipment-kicker-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+.equipment-subtitle {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin-bottom: 1.25rem;
+  line-height: 1.4;
+}
+.equipment-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: 0.65rem;
+  margin: 0.85rem 0;
+}
+.metric-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.65rem 0.85rem;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+.metric-chip-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+.metric-chip-val {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.2;
+}
+.metric-icon {
+  flex-shrink: 0;
+}
+.metric-icon.cool { color: #38bdf8; }
+.metric-icon.heat { color: #f97316; }
+.metric-icon.area { color: #34d399; }
+.metric-icon.power { color: #fbbf24; }
+
+.equipment-specs-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+.specs-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.specs-table tr {
+  border-bottom: 1px solid var(--border-light, #f1f5f9);
+}
+.specs-table tr:nth-child(even) {
+  background: var(--bg-card-alt, rgba(0, 0, 0, 0.015));
+}
+.specs-table tr:last-child {
+  border-bottom: none;
+}
+.specs-table td {
+  padding: 0.8rem 1.25rem;
+  font-size: 0.92rem;
+}
+.spec-name {
+  color: var(--text-secondary);
+  font-weight: 600;
+  width: 45%;
+}
+.spec-val {
+  color: var(--text);
+  font-weight: 700;
+  text-align: left;
+}
+.spec-unit {
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-left: 0.2rem;
+}
+
+.equipment-desc-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 1.25rem 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+.equipment-desc-header {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+.equipment-desc-body {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+@media (max-width: 720px) {
+  .equipment-topbar .topbar-inner {
+    flex-wrap: wrap;
+    padding: 0.65rem 1rem;
+  }
+  .equipment-topbar .topbar-actions {
+    width: 100%;
+    margin-left: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  }
+  .equipment-topbar .btn {
+    width: 100%;
+    min-width: 0;
+    white-space: normal;
+    text-align: center;
+    line-height: 1.2;
+  }
+  .model-meta-line { align-items: flex-start; }
+  .equipment-hero,
+  .equipment-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .equipment-summary h1 { font-size: 1.45rem; }
+  .spec-list div { grid-template-columns: minmax(0, 1fr); gap: 0.15rem; }
+  .catalog-frame { height: 70vh; }
 }

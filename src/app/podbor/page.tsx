@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useMemo, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
-import { ArrowLeft, Plus, Trash2, Truck, CheckCircle } from 'lucide-react'
+import { ArrowLeft, Plus, Trash2, Truck, CheckCircle, BookOpen } from 'lucide-react'
 import { formatNum } from '@/lib/format'
 import { stockModelKey } from '@/lib/stock-match'
 import { evalAreaFormula } from '@/lib/podbor/formula'
@@ -593,6 +593,17 @@ function RoomCard({ index, room, c, onUpdate, onRemove, onFamily, onFormFactor, 
               <span className="result-meta">
                 {c.matched.coolingCapacity > 0 ? `${formatDecimal(c.matched.coolingCapacity)} кВт · ` : ''}{formatNum(c.matched.price)} у.е. / шт
                 {c.matched.orderOnly && <span className="order-only-badge">под заказ</span>}
+                <a
+                  className="tech-link"
+                  href={`/equipment/${encodeURIComponent(c.matched.id)}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  title="Открыть технические характеристики и страницу каталога"
+                  style={{ marginLeft: 6 }}
+                >
+                  <BookOpen size={13} />
+                  ТТХ
+                </a>
               </span>
             )}
           </div>

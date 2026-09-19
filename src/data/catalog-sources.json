@@ -1,0 +1,30 @@
+{
+  "vrf-2026": {
+    "title": "Каталог Midea VRF 2026",
+    "filename": "Katalog Midea VRF 2026_Web.pdf",
+    "driveFileId": "1w0K6z8AqArb2WWYf7cK95YLbevx805Lk",
+    "description": "VRF V8, mini-VRF V8, внутренние блоки, автоматика и refnet."
+  },
+  "atom-2026": {
+    "title": "Каталог Midea ATOM 2026",
+    "filename": "Katalog Midea_2026_ATOM.pdf",
+    "driveFileId": "1aUHeEGw4cmcn8dhY_Jj_Vv2UF7HcjHlm",
+    "description": "Мини VRF-системы ATOM, ATOM Cold и ATOM Thermo."
+  },
+  "atom-b-2026": {
+    "title": "ATOM B Catalog 2026",
+    "filename": "ATOM B CATALOG 2026.pdf",
+    "description": "Mini VRF ATOM B и совместимые внутренние блоки."
+  },
+  "chiller-2026": {
+    "title": "Каталог Midea Chiller 2026",
+    "filename": "Каталог Midea CHILLER 2026_Web.pdf",
+    "driveFileId": "1CV-c2OuhUClKHWHCLR0FxxXoWorreUEq",
+    "description": "Чиллеры, тепловые насосы и гидромодули."
+  },
+  "fcu-2026": {
+    "title": "Каталог Midea FCU 2025-2026",
+    "filename": "FCU Midea.pdf",
+    "description": "Фанкойлы AC/DC: кассетные, канальные, напольно-потолочные и настенные."
+  }
+}

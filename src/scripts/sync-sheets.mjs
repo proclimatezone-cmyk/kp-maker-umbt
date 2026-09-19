@@ -156,24 +156,8 @@ export async function syncSheets() {
       // Fast path: check image cache by full URL first
       if (imageUrl && imageCache.has(imageUrl)) {
         const cached = imageCache.get(imageUrl);
-        let isValid = true;
-        const checkId = getDriveFileId(cached.slidesImage);
-        if (checkId) {
-          try {
-            await drive.files.get({ fileId: checkId, fields: 'id' });
-          } catch (e) {
-            console.log(`[Cache Invalidation] File ID ${checkId} no longer exists. Re-fetching.`);
-            isValid = false;
-          }
-        }
-        if (isValid) {
-          localImagePath = cached.localImagePath;
-          slidesImage = cached.slidesImage;
-        } else {
-          imageCache.delete(imageUrl);
-          if (checkId) imageCache.delete(checkId);
-          forceDownload = true;
-        }
+        localImagePath = cached.localImagePath;
+        slidesImage = cached.slidesImage;
       }
       // Handle Google Drive Folder/File URLs
       if (!slidesImage && imageUrl && imageUrl.includes('drive.google.com')) {
@@ -362,6 +346,78 @@ export async function syncSheets() {
       }
 
       const coolingCap = row[3] ? parseFloat(String(row[3]).replace(',', '.')) : 0;
+      const heatingCap = row[4] ? parseFloat(String(row[4]).replace(',', '.')) : 0;
+      const recArea = row[5] ? parseFloat(String(row[5]).replace(',', '.')) : 0;
+      const powerCons = row[6] ? parseFloat(String(row[6]).replace(',', '.')) : 0;
+      const airflow = row[7] ? String(row[7]).trim() : '';
+      const noise = row[8] ? String(row[8]).trim() : '';
+      const dimensions = row[9] ? String(row[9]).trim() : '';
+      const weight = row[10] ? parseFloat(String(row[10]).replace(',', '.')) : 0;
+      const liquidPipe = row[11] ? String(row[11]).trim() : '';
+      const gasPipe = row[12] ? String(row[12]).trim() : '';
+      const powerSupply = row[13] ? String(row[13]).trim() : '';
+      const refrigerant = row[14] ? String(row[14]).trim() : '';
+      const descHeader = row[15] ? String(row[15]).trim() : '';
+      const description = row[16] ? String(row[16]).trim() : '';
+
+      // Ensure localImagePath is always realistic if no image in sheet
+      if (!localImagePath || localImagePath.includes('placeholder.png')) {
+        const hay = `${category || ''} ${series || ''} ${model || ''}`.toLowerCase();
+        const m = (model || '').toLowerCase();
+        if (hay.includes('разветвитель') || hay.includes('refnet') || m.startsWith('fqz')) {
+          localImagePath = '/images/products/16Xte96EFOqvrQ9N2iZgq_9-8CD3nZk85.png';
+        } else if (hay.includes('rooftop') || hay.includes('крышн') || hay.includes('clima creator')) {
+          localImagePath = '/images/products/rooftop-clima.png';
+        } else if (hay.includes('ahu') || hay.includes('приточн') || hay.includes('hrv') || m.startsWith('ahukz')) {
+          localImagePath = '/images/products/ahu-kit.png';
+        } else if (hay.includes('водяное') || hay.includes('v4+ w') || m.includes('w/rn1')) {
+          localImagePath = '/images/products/v4w-water-cooled.png';
+        } else if (hay.includes('atom t') || hay.includes('гвс') || hay.includes('гидромодуль') || hay.includes('бак')) {
+          localImagePath = '/images/products/atom-t.png';
+        } else if (hay.includes('чиллер') || hay.includes('chiller') || hay.includes('aqua thermal') || m.startsWith('mc-') || m.startsWith('aqua')) {
+          localImagePath = '/images/products/chiller-aqua.png';
+        } else if (hay.includes('тепловой насос') || hay.includes('m thermal') || hay.includes('бассейн') || hay.includes('mars')) {
+          localImagePath = '/images/products/1GIyfhFdtk7-vmem9nkTRyay547bcmgEu.png';
+        } else if (hay.includes('atom b') && hay.includes('кассет')) {
+          localImagePath = '/images/manual/cas-atom-b.png';
+        } else if (hay.includes('atom b') && hay.includes('канал')) {
+          localImagePath = '/images/manual/duct-atom-b.png';
+        } else if (hay.includes('v8 master') || hay.includes('v8s') || (hay.includes('v8') && hay.includes('наружный')) || m.startsWith('mv8')) {
+          localImagePath = '/images/products/1f_lFlRNEcVxXB47oOAg4B3eZnh7kaSoI.png';
+        } else if (hay.includes('mini-vrf') || hay.includes('mini c') || hay.includes('mvi') || m.startsWith('mvi-')) {
+          localImagePath = '/images/products/1B9cIw4WHso6oUUKuRbPY4dS4T_jpNRjy.png';
+        } else if (hay.includes('v6r') || hay.includes('v6-i') || hay.includes('vc-i') || hay.includes('mvc')) {
+          localImagePath = '/images/products/1OJk2PgJ958tZthzIAI24zMOOwsJ46b4Y.png';
+        } else if (hay.includes('atom') && hay.includes('наружный')) {
+          localImagePath = '/images/products/1ZsneXTFxjuOxyIsL6PcEQUsuWGrMt_Hi.png';
+        } else if (hay.includes('фанкойл') || m.startsWith('mk')) {
+          if (hay.includes('кассет') || m.startsWith('mka') || m.startsWith('mkd')) {
+            localImagePath = '/images/products/1sXaLxea_jWHqGKweTTtXWzPgyDYewho7.jpg';
+          } else if (hay.includes('напольно-потолочн') || hay.includes('напольн') || m.startsWith('mkh')) {
+            localImagePath = '/images/products/1TT1Xr-Xpt1dmYWMK8hVOlCRzcflXW3G0.jpg';
+          } else if (hay.includes('4-х') || hay.includes('4-ряд') || m.startsWith('mkt4')) {
+            localImagePath = '/images/products/1G_qMZZUpiPUPQGim2oLuFtdZ1D44OMl8.jpg';
+          } else {
+            localImagePath = '/images/products/1VqqiScP5oGEl4WKv4MNQzAFzqBrIwKXm.jpg';
+          }
+        } else if (hay.includes('кассетный 1-поточный') || m.includes('q1')) {
+          localImagePath = '/images/products/1sga2V-XXQ7pyG4GOFtyo6LUTR2mT_Myk.png';
+        } else if (hay.includes('кассетный') || m.includes('q4') || m.includes('q2')) {
+          localImagePath = '/images/products/14FPwgNd0VJpYpib0UabCHJWRe-LTb5Ft.png';
+        } else if (hay.includes('настенный') || m.includes('gdh')) {
+          localImagePath = '/images/products/1UEfwU6bgLsbifXQaflvkxOgKYFqvrxQc.png';
+        } else if (hay.includes('канальный') || m.includes('t1') || m.includes('t2') || m.includes('t3')) {
+          localImagePath = '/images/products/1j37_gSERZBDgYQNjzMd42QHZVwTrERRs.png';
+        } else if (hay.includes('напольный') || hay.includes('напольно-потолочный') || m.includes('dl') || m.includes('f1')) {
+          localImagePath = '/images/products/1TT1Xr-Xpt1dmYWMK8hVOlCRzcflXW3G0.jpg';
+        } else if (hay.includes('unitary') || hay.includes('quantum') || hay.includes('сплит')) {
+          localImagePath = '/images/products/1dcX4fUmN10OsV3ix_sRMPjirFDvxedl7.png';
+        } else if (hay.includes('пульт') || hay.includes('автоматика') || hay.includes('контроллер') || m.startsWith('ccm') || m.startsWith('wdc') || m.startsWith('kjr')) {
+          localImagePath = '/images/products/ahu-kit.png';
+        } else {
+          localImagePath = '/images/products/14FPwgNd0VJpYpib0UabCHJWRe-LTb5Ft.png';
+        }
+      }
 
       products.push({
         id: pId,
@@ -374,6 +430,19 @@ export async function syncSheets() {
         slidesImage: slidesImage || imageUrl,
         driveImage: imageUrl,
         coolingCapacity: isNaN(coolingCap) ? 0 : coolingCap,
+        heatingCapacity: isNaN(heatingCap) ? 0 : heatingCap,
+        recommendedArea: isNaN(recArea) ? 0 : recArea,
+        powerConsumption: isNaN(powerCons) ? 0 : powerCons,
+        airflow: airflow || undefined,
+        noiseLevel: noise || undefined,
+        dimensions: dimensions || undefined,
+        weight: isNaN(weight) || weight <= 0 ? undefined : weight,
+        liquidPipe: liquidPipe || undefined,
+        gasPipe: gasPipe || undefined,
+        powerSupply: powerSupply || undefined,
+        refrigerant: refrigerant || undefined,
+        descHeader: descHeader || undefined,
+        description: description || undefined,
         specs: "",
         orderOnly: orderOnlySection
       });

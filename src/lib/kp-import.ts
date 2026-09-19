@@ -46,13 +46,30 @@ export function extractTextFromDocx(buffer: Buffer): string {
 
 export async function extractTextFromPdf(buffer: Buffer): Promise<string> {
   // pdf-parse 2.x — класс поверх pdfjs-dist, не функция как в 1.x.
-  const { PDFParse } = await import('pdf-parse');
-  const parser = new PDFParse({ data: buffer });
+  // На Vercel/serverless может вести себя иначе — оборачиваем в try/catch
+  // и пробуем оба API (v2 class и v1 default-функция).
   try {
-    const result = await parser.getText();
-    return result.text || '';
-  } finally {
-    await parser.destroy();
+    const mod = await import('pdf-parse');
+    if (mod.PDFParse) {
+      const parser = new mod.PDFParse({ data: buffer });
+      try {
+        const result = await parser.getText();
+        return result.text || '';
+      } finally {
+        await parser.destroy();
+      }
+    }
+    // Fallback: pdf-parse v1 API (default export — функция)
+    const fallback = (mod as any).default;
+    if (typeof fallback === 'function') {
+      const result = await fallback(buffer);
+      return result.text || '';
+    }
+    throw new Error('pdf-parse: не найден ни PDFParse, ни default export');
+  } catch (err: any) {
+    // Если pdf-parse совсем не работает (canvas/worker на serverless),
+    // даём понятную ошибку вместо стектрейса.
+    throw new Error(`Не удалось прочитать PDF: ${err.message}`);
   }
 }
 
@@ -71,11 +88,13 @@ export function parseKpFromText(
 ): ImportResult {
   const flatText = normalizeForSearch(text);
 
-  // Номер КП в собственном шаблоне на обложке идёт слитно со словом "Дата:"
-  // следом (соседние текстовые поля без пробела в исходной разметке) —
-  // отрезаем именно по этому известному слову, не по кириллице вообще
-  // (сам номер КП вполне может её содержать).
-  const numberMatch = text.match(/№\s*(\S+?)(?=Дата|\s|$)/);
+  // Номер КП: несколько форматов из разных шаблонов:
+  //   «№ КП-240826/01MN»       → с символом №
+  //   «Коммерческое предложение 010726-01MN»  → старый шаблон без №
+  //   «КП-240826/01MNДата:»    → слитно с "Дата:" (без пробела в XML)
+  const numberMatch =
+    text.match(/№\s*(\S+?)(?=Дата|\s|$)/) ||
+    text.match(/[Кк]оммерческое\s+предложение\s+(\S+?)(?=Дата|\s|$)/i);
   const dateMatch = text.match(/(\d{2}\.\d{2}\.\d{4})/);
 
   const items: ImportedItem[] = [];
@@ -104,12 +123,21 @@ export function parseKpFromText(
       if (overlaps(idx, end)) continue;
       claimedRanges.push([idx, end]);
 
-      // Количество — число сразу после модели (в пределах ~40 символов),
-      // за которым (не обязательно вплотную) идёт «шт» — так выглядит и в
-      // собственном шаблоне, и в большинстве ручных таблиц.
+      // Количество — ищем в окне ~60 символов после модели:
+      //   1) число + «шт» (собственный шаблон и ручные таблицы)
+      //   2) просто голое целое число (1-999) — для старых шаблонов, где
+      //      количество стоит в отдельной ячейке/колонке без «шт».
       const windowText = flatText.slice(end, end + 60);
-      const qtyMatch = windowText.match(/(\d+(?:[.,]\d+)?)\s*шт/);
-      const qty = qtyMatch ? parseFloat(qtyMatch[1].replace(',', '.')) : null;
+      const qtyWithUnit = windowText.match(/(\d+(?:[.,]\d+)?)\s*шт/);
+      let qty: number | null = null;
+      if (qtyWithUnit) {
+        qty = parseFloat(qtyWithUnit[1].replace(',', '.'));
+      } else {
+        // Берём первое число от 1 до 999 — более крупные числа
+        // скорее всего цены, а не количества.
+        const bareNum = windowText.match(/(?:^|\s)(\d{1,3})(?=\s|$)/);
+        if (bareNum) qty = parseInt(bareNum[1], 10);
+      }
 
       items.push({ productId: p.id, model: p.model, quantity: qty ?? 1 });
       if (qty !== null) confidentCount++; else uncertainCount++;

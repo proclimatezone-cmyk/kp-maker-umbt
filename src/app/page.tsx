@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useMemo, useCallback, useRef, memo } from 'react'
 import { ModelSearchSelector } from '@/components/ModelSearchSelector'
-import { Plus, Trash2, FileText, User, Briefcase, Calculator, Search, RefreshCw, Building2, Phone, CheckCircle, CloudCheck, Loader2, Copy, Truck, ChevronDown, FileSignature, BarChart3, Lock, Unlock, Ruler } from 'lucide-react'
+import { Plus, Trash2, FileText, User, Briefcase, Calculator, Search, RefreshCw, Building2, Phone, CheckCircle, CloudCheck, Loader2, Copy, Truck, ChevronDown, FileSignature, BarChart3, Lock, Unlock, Ruler, BookOpen } from 'lucide-react'
 import productsData from '@/data/products.json'
 import { formatNum, formatShortRuDate, toIsoDate } from '@/lib/format'
 import { DELIVERY_TERMS, DeliveryTerm, buildTermsLines, buildSignatureLines, getMoneyLabels } from '@/lib/delivery-terms'
@@ -456,9 +456,23 @@ const EquipmentRow = memo(({ item, products, cleanProducts, stock, onUpdate, onD
     <tr>
       <td data-label="Модель">
         <ModelSearchSelector value={item.productId} onChange={val => onUpdate(item.id, { productId: val })} options={cleanProducts} allOptions={products} />
-        <div className="cat-label">
-          {p?.series || p?.category}
-          {p?.orderOnly && <span className="order-only-badge" title="Позиция под заказ — нет на складе, срок поставки дольше">под заказ</span>}
+        <div className="model-meta-line">
+          <div className="cat-label">
+            {p?.series || p?.category}
+            {p?.orderOnly && <span className="order-only-badge" title="Позиция под заказ — нет на складе, срок поставки дольше">под заказ</span>}
+          </div>
+          {p?.id && (
+            <a
+              className="tech-link"
+              href={`/equipment/${encodeURIComponent(p.id)}`}
+              target="_blank"
+              rel="noreferrer"
+              title="Открыть технические характеристики и страницу каталога"
+            >
+              <BookOpen size={13} />
+              ТТХ
+            </a>
+          )}
         </div>
       </td>
       <td data-label={labels.price}>
@@ -1011,7 +1025,9 @@ export default function Home() {
     [options.includeManagerSignature, manager]
   );
 
-  const currencyLabel = options.currency === 'sum' ? 'сум' : 'у.е.'
+  const currencyLabel = options.currency === 'sum'
+    ? (options.paymentType === 'transfer' ? 'сум с НДС' : 'сум')
+    : (options.paymentType === 'transfer' ? 'у.е. с НДС' : 'у.е.')
 
   const updateItem = useCallback((id: string, updates: Partial<Item>) => {
     setItems(prev => prev.map(i => i.id === id ? { ...i, ...updates } : i))

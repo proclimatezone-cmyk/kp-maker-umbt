@@ -7,9 +7,10 @@ export async function middleware(req: NextRequest) {
   const isReportsApi = req.nextUrl.pathname.startsWith('/api/reports/') || req.nextUrl.pathname === '/api/reports';
   // «Подбор» — доступен всем залогиненным (не только владельцу, в отличие от /reports).
   const isPodborPage = req.nextUrl.pathname === '/podbor' || req.nextUrl.pathname.startsWith('/podbor/');
+  const isEquipmentPage = req.nextUrl.pathname === '/equipment' || req.nextUrl.pathname.startsWith('/equipment/');
 
   // Only protect main application and specific APIs
-  const isProtectedPage = req.nextUrl.pathname === '/' || isReportsPage || isPodborPage;
+  const isProtectedPage = req.nextUrl.pathname === '/' || isReportsPage || isPodborPage || isEquipmentPage;
   const isProtectedApi = (req.nextUrl.pathname.startsWith('/api/')
     && !req.nextUrl.pathname.startsWith('/api/auth')
     && req.nextUrl.pathname !== '/api/health'
@@ -76,5 +77,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/', '/api/:path*', '/reports', '/reports/:path*', '/podbor', '/podbor/:path*'],
+  matcher: ['/', '/api/:path*', '/reports', '/reports/:path*', '/podbor', '/podbor/:path*', '/equipment', '/equipment/:path*'],
 };
