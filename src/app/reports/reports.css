@@ -205,3 +205,28 @@
   text-align: center;
   color: var(--text-muted);
 }
+
+/* --- Аналитика по менеджерам --- */
+.period-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; margin-bottom: 14px; }
+.period-presets { display: flex; flex-wrap: wrap; gap: 6px; }
+.period-chip {
+  padding: 6px 12px; border-radius: 100px; border: 1px solid var(--border-strong);
+  background: var(--bg-card); color: var(--text-secondary); font-size: 0.8rem; font-weight: 600; cursor: pointer;
+}
+.period-chip.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+.period-custom { display: flex; align-items: center; gap: 6px; }
+.period-custom input { padding: 6px 8px; border-radius: var(--radius-sm); border: 1px solid var(--border-strong); background: var(--bg-input); color: var(--text); font-size: 0.82rem; }
+.period-meta { display: flex; align-items: center; gap: 8px; margin-left: auto; font-size: 0.82rem; color: var(--text-muted); }
+.report-check { display: flex; align-items: center; gap: 6px; font-size: 0.82rem; color: var(--text-secondary); }
+.report-table tr.clickable { cursor: pointer; }
+.report-table tr.selected td { background: var(--bg-hover); font-weight: 600; }
+.report-table tr.total-row td { font-weight: 700; color: var(--text); border-top: 1px solid var(--border-strong); }
+.report-table .muted, .muted { color: var(--text-muted); font-weight: 400; }
+.report-table .badge { margin-left: 4px; }
+.report-table td:first-child .badge:first-child { margin-left: 0; margin-right: 4px; background: var(--bg-sunken); color: var(--text-secondary); }
+.section-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+.section-head h2 { margin-bottom: 0; }
+@media (max-width: 640px) {
+  .period-meta { margin-left: 0; }
+  .stat-grid { grid-template-columns: repeat(2, 1fr); }
+}

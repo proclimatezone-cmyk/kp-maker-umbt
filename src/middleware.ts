@@ -14,7 +14,9 @@ export async function middleware(req: NextRequest) {
   const isProtectedApi = (req.nextUrl.pathname.startsWith('/api/')
     && !req.nextUrl.pathname.startsWith('/api/auth')
     && req.nextUrl.pathname !== '/api/health'
-    && req.nextUrl.pathname !== '/api/photo-check')
+    && req.nextUrl.pathname !== '/api/photo-check'
+    // cron-роут проверяет CRON_SECRET сам — у Vercel Cron нет куки входа.
+    && !req.nextUrl.pathname.startsWith('/api/cron/'))
     || isReportsApi;
 
   if (!isProtectedPage && !isProtectedApi) {

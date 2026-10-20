@@ -8,7 +8,7 @@ export interface SheetGrid {
   values: string[][];
 }
 
-/** Одним запросом тянет «Заказы», «Бронь» и «Объекты» — вместо трёх отдельных round-trip'ов. */
+/** Одним запросом тянет (колонки до ZZ: заказов уже больше 150, прежний диапазон до EE обрезал свежие) «Заказы», «Бронь» и «Объекты» — вместо трёх отдельных round-trip'ов. */
 export async function fetchReportSheets(): Promise<{
   orders: SheetGrid;
   bookings: SheetGrid;
@@ -18,7 +18,7 @@ export async function fetchReportSheets(): Promise<{
 
   const res = await sheets.spreadsheets.values.batchGet({
     spreadsheetId: REPORTS_SPREADSHEET_ID,
-    ranges: ["'Заказы'!A1:EE400", "'Бронь'!A1:EE400", "'Объекты'!A1:Q1000"],
+    ranges: ["'Заказы'!A1:ZZ600", "'Бронь'!A1:ZZ600", "'Объекты'!A1:Q1000"],
   });
 
   const [orders, bookings, objects] = res.data.valueRanges || [];

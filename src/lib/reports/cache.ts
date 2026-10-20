@@ -5,6 +5,7 @@ import { computePriceComparison, type PriceComparisonReport } from './price-comp
 import { computeWelkinComparison, type WelkinComparisonReport } from './welkin-comparison';
 import { computeMideaCacComparison, type MideaCacComparisonReport } from './midea-cac-comparison';
 import { getProducts } from '@/lib/products-cache';
+import { computeManagerAnalytics, type ManagerAnalytics } from './manager-analytics';
 
 // Данные склада/цен не меняются поминутно — 10 минут, как у products-cache.ts,
 // чтобы открытие каждой вкладки дашборда не било по Google Sheets API.
@@ -74,5 +75,21 @@ export async function getMideaCacComparisonReport(): Promise<MideaCacComparisonR
     (products as any[]).map((p) => ({ model: p.model, category: p.category, price: Number(p.price) || 0 }))
   );
   mideaCacCache = { data, fetchedAt: Date.now() };
+  return data;
+}
+
+// Аналитика по менеджерам — тоже 10 минут: внутри неё дописывается
+// «Журнал заказов», чаще этого делать незачем.
+let analyticsCache: CacheEntry<ManagerAnalytics> | null = null;
+
+export async function getManagerAnalytics(force = false): Promise<ManagerAnalytics> {
+  if (!force && isFresh(analyticsCache)) return analyticsCache!.data;
+  const [{ orders, objects }, products] = await Promise.all([fetchReportSheets(), getProducts()]);
+  const data = await computeManagerAnalytics(
+    orders,
+    objects,
+    (products as any[]).map((p) => ({ model: p.model, price: Number(p.price) || 0 })),
+  );
+  analyticsCache = { data, fetchedAt: Date.now() };
   return data;
 }
