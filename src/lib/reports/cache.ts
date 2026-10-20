@@ -4,6 +4,7 @@ import { computeBookingsReport, type BookingsReport } from './bookings';
 import { computePriceComparison, type PriceComparisonReport } from './price-comparison';
 import { computeWelkinComparison, type WelkinComparisonReport } from './welkin-comparison';
 import { computeMideaCacComparison, type MideaCacComparisonReport } from './midea-cac-comparison';
+import { computeHofmannComparison, type HofmannComparisonReport } from './hofmann-comparison';
 import { getProducts } from '@/lib/products-cache';
 import { computeManagerAnalytics, type ManagerAnalytics } from './manager-analytics';
 
@@ -21,6 +22,7 @@ let bookingsCache: CacheEntry<BookingsReport> | null = null;
 let priceCache: CacheEntry<PriceComparisonReport> | null = null;
 let welkinCache: CacheEntry<WelkinComparisonReport> | null = null;
 let mideaCacCache: CacheEntry<MideaCacComparisonReport> | null = null;
+let hofmannCache: CacheEntry<HofmannComparisonReport> | null = null;
 
 function isFresh<T>(entry: CacheEntry<T> | null): entry is CacheEntry<T> {
   return !!entry && Date.now() - entry.fetchedAt < CACHE_TTL;
@@ -91,5 +93,22 @@ export async function getManagerAnalytics(force = false): Promise<ManagerAnalyti
     (products as any[]).map((p) => ({ model: p.model, price: Number(p.price) || 0 })),
   );
   analyticsCache = { data, fetchedAt: Date.now() };
+  return data;
+}
+
+export async function getHofmannComparisonReport(): Promise<HofmannComparisonReport> {
+  if (isFresh(hofmannCache)) return hofmannCache!.data;
+  const products = await getProducts();
+  const data = computeHofmannComparison(
+    (products as any[]).map((p) => ({
+      model: p.model,
+      category: p.category,
+      series: p.series,
+      price: Number(p.price) || 0,
+      coolingCapacity: Number(p.coolingCapacity) || 0,
+      orderOnly: !!p.orderOnly,
+    }))
+  );
+  hofmannCache = { data, fetchedAt: Date.now() };
   return data;
 }

@@ -418,7 +418,7 @@ const ContactSection = memo(({ data, onChange }: any) => {
   );
 });
 
-const EquipmentRow = memo(({ item, products, cleanProducts, stock, onUpdate, onDelete, onClone, calculatePrice, currencyLabel, labels, oldPriceMap, welkinMap, mideaCacMap, showDiscount, showOldPrice, showWelkin, showMideaCac }: any) => {
+const EquipmentRow = memo(({ item, products, cleanProducts, stock, onUpdate, onDelete, onClone, calculatePrice, currencyLabel, labels, oldPriceMap, welkinMap, hofmannMap, mideaCacMap, showDiscount, showOldPrice, showWelkin, showHofmann, showMideaCac }: any) => {
   const p = products.find((x: any) => x.id === item.productId);
   const [qty, setQty] = useState<number | string>(item.quantity);
   const [discount, setDiscount] = useState<number | string>(item.discount !== undefined ? item.discount : 0);
@@ -450,6 +450,12 @@ const EquipmentRow = memo(({ item, products, cleanProducts, stock, onUpdate, onD
   const welkin = welkinMap?.get(normalizeModel(p?.model));
   const welkinUnitPrice = welkin ? calculatePrice(welkin.price) : null;
   const welkinDeltaPct = welkinUnitPrice && welkinUnitPrice > 0 ? ((finalUnitPrice - welkinUnitPrice) / welkinUnitPrice) * 100 : null;
+
+  // Hofmann Air — чужое железо, аналог по классу и ближайшей мощности
+  // (см. lib/reports/hofmann-comparison.ts). Цена в у.е. — тем же курсом.
+  const hofmann = hofmannMap?.get(normalizeModel(p?.model));
+  const hofmannUnitPrice = hofmann ? calculatePrice(hofmann.price) : null;
+  const hofmannDeltaPct = hofmannUnitPrice && hofmannUnitPrice > 0 ? ((finalUnitPrice - hofmannUnitPrice) / hofmannUnitPrice) * 100 : null;
 
   // Прайс завода Midea («Midea CAC на складе») — точное совпадение по
   // артикулу, тот же бренд. Не путать со «Старой ценой» (статичный
@@ -508,6 +514,19 @@ const EquipmentRow = memo(({ item, products, cleanProducts, stock, onUpdate, onD
             >
               <span className="price-compare-value">{welkin.source === 'hisense-approx' ? '≈ ' : ''}{formatNum(welkinUnitPrice)} {currencyLabel}</span>
               <span className={`price-compare-delta ${welkinDeltaPct >= 0 ? 'bad' : 'good'}`}>{welkinDeltaPct >= 0 ? '+' : ''}{welkinDeltaPct.toFixed(0)}%</span>
+            </span>
+          ) : <span className="price-compare-empty">—</span>}
+        </td>
+      )}
+      {showHofmann && (
+        <td data-label="Hofmann">
+          {hofmannUnitPrice !== null && hofmannDeltaPct !== null ? (
+            <span
+              className="price-compare"
+              title={`Hofmann Air — аналог по классу и мощности: ${hofmann.model}${hofmann.deltaPct ? `. Точность сопоставления: ±${hofmann.deltaPct}%` : ''}`}
+            >
+              <span className="price-compare-value">≈ {formatNum(hofmannUnitPrice)} {currencyLabel}</span>
+              <span className={`price-compare-delta ${hofmannDeltaPct >= 0 ? 'bad' : 'good'}`}>{hofmannDeltaPct >= 0 ? '+' : ''}{hofmannDeltaPct.toFixed(0)}%</span>
             </span>
           ) : <span className="price-compare-empty">—</span>}
         </td>
@@ -656,6 +675,7 @@ export default function Home() {
   const [oldPriceMap, setOldPriceMap] = useState<Map<string, number> | null>(null)
   const [welkinMap, setWelkinMap] = useState<Map<string, { price: number; model: string; deltaPct: number; source: 'midea-exact' | 'hisense-approx' }> | null>(null)
   const [mideaCacMap, setMideaCacMap] = useState<Map<string, number> | null>(null)
+  const [hofmannMap, setHofmannMap] = useState<Map<string, { price: number; model: string; deltaPct: number }> | null>(null)
 
   // Конфиденциальные колонки — скидка, старая цена, Welkin. Намеренно НЕ
   // в localStorage: должны сбрасываться на «скрыто» при каждой загрузке
@@ -667,7 +687,8 @@ export default function Home() {
   const [showOldPrice, setShowOldPrice] = useState(false)
   const [showWelkin, setShowWelkin] = useState(false)
   const [showMideaCac, setShowMideaCac] = useState(false)
-  const adminColsOn = showOldPrice && showWelkin && showMideaCac
+  const [showHofmann, setShowHofmann] = useState(false)
+  const adminColsOn = showOldPrice && showWelkin && showHofmann && showMideaCac
 
   const [options, setOptions] = useState({
     showImages: true,
@@ -842,6 +863,17 @@ export default function Home() {
           })
           .catch(() => setWelkinMap(null));
 
+        fetch('/api/reports/hofmann-comparison')
+          .then(r => r.json())
+          .then(hc => {
+            const map = new Map<string, { price: number; model: string; deltaPct: number }>();
+            for (const row of hc.rows || []) {
+              map.set(normalizeModel(row.model), { price: row.hofmannPrice, model: row.hofmannModel, deltaPct: row.matchDeltaPct });
+            }
+            setHofmannMap(map);
+          })
+          .catch(() => setHofmannMap(null));
+
         fetch('/api/reports/midea-cac-comparison')
           .then(r => r.json())
           .then(mc => {
@@ -974,6 +1006,26 @@ export default function Home() {
     const deltaPct = welkinTotal > 0 ? ((currentMatchedTotal - welkinTotal) / welkinTotal) * 100 : null;
     return { welkinTotal, currentMatchedTotal, matchedQty, totalQty, deltaPct };
   }, [items, products, welkinMap, calculatePrice]);
+
+  const hofmannStats = useMemo(() => {
+    if (!hofmannMap) return null;
+    let hofmannTotal = 0, currentMatchedTotal = 0, matchedQty = 0, totalQty = 0;
+    for (const item of items) {
+      const p = products.find(x => x.id === item.productId);
+      if (!p) continue;
+      const qty = Number(item.quantity) || 0;
+      totalQty += qty;
+      const h = hofmannMap.get(normalizeModel(p.model));
+      if (!h) continue;
+      const discountVal = item.discount || 0;
+      const finalUnit = Math.round(calculatePrice(p.price) * (1 + discountVal / 100));
+      hofmannTotal += calculatePrice(h.price) * qty;
+      currentMatchedTotal += finalUnit * qty;
+      matchedQty += qty;
+    }
+    const deltaPct = matchedQty > 0 && hofmannTotal > 0 ? ((currentMatchedTotal - hofmannTotal) / hofmannTotal) * 100 : null;
+    return { hofmannTotal, currentMatchedTotal, matchedQty, totalQty, deltaPct };
+  }, [items, products, hofmannMap, calculatePrice]);
 
   const mideaCacStats = useMemo(() => {
     if (!mideaCacMap) return null;
@@ -1464,12 +1516,15 @@ export default function Home() {
                     <button className={`chip ${showWelkin ? 'on' : ''}`} onClick={() => setShowWelkin(v => !v)}>
                       {showWelkin ? <Unlock size={13} /> : <Lock size={13} />} Welkin
                     </button>
+                    <button className={`chip ${showHofmann ? 'on' : ''}`} onClick={() => setShowHofmann(v => !v)}>
+                      {showHofmann ? <Unlock size={13} /> : <Lock size={13} />} Hofmann
+                    </button>
                     <button className={`chip ${showMideaCac ? 'on' : ''}`} onClick={() => setShowMideaCac(v => !v)}>
                       {showMideaCac ? <Unlock size={13} /> : <Lock size={13} />} Midea
                     </button>
                     <button
                       className={`chip chip-all ${adminColsOn ? 'on' : ''}`}
-                      onClick={() => { const next = !adminColsOn; setShowOldPrice(next); setShowWelkin(next); setShowMideaCac(next); }}
+                      onClick={() => { const next = !adminColsOn; setShowOldPrice(next); setShowWelkin(next); setShowHofmann(next); setShowMideaCac(next); }}
                     >
                       Показать всё
                     </button>
@@ -1485,6 +1540,7 @@ export default function Home() {
                       <th style={{ width: '11%', textAlign: 'center' }}>{labels.price}</th>
                       {showOldPrice && <th style={{ width: '13%', textAlign: 'center' }}>Старая цена</th>}
                       {showWelkin && <th style={{ width: '13%', textAlign: 'center' }}>Welkin</th>}
+                      {showHofmann && <th style={{ width: '13%', textAlign: 'center' }}>Hofmann</th>}
                       {showMideaCac && <th style={{ width: '13%', textAlign: 'center' }}>Midea</th>}
                       {showDiscount && <th style={{ width: '10%', textAlign: 'center' }}>Скидка %</th>}
                       <th style={{ width: '10%', textAlign: 'center' }}>Кол-во</th>
@@ -1500,8 +1556,8 @@ export default function Home() {
                       <EquipmentRow
                         key={item.id} item={item} products={products} cleanProducts={cleanProducts} stock={stock}
                         onUpdate={updateItem} onDelete={deleteItem} onClone={cloneItem} calculatePrice={calculatePrice}
-                        currencyLabel={currencyLabel} labels={labels} oldPriceMap={oldPriceMap} welkinMap={welkinMap} mideaCacMap={mideaCacMap}
-                        showDiscount={showDiscount} showOldPrice={showOldPrice} showWelkin={showWelkin} showMideaCac={showMideaCac}
+                        currencyLabel={currencyLabel} labels={labels} oldPriceMap={oldPriceMap} welkinMap={welkinMap} hofmannMap={hofmannMap} mideaCacMap={mideaCacMap}
+                        showDiscount={showDiscount} showOldPrice={showOldPrice} showWelkin={showWelkin} showHofmann={showHofmann} showMideaCac={showMideaCac}
                       />
                     ))}
                   </tbody>
@@ -1524,7 +1580,7 @@ export default function Home() {
               </div>
             </div>
 
-            {((showOldPrice && oldPriceStats && oldPriceStats.matchedQty > 0) || (showWelkin && welkinStats && welkinStats.matchedQty > 0) || (showMideaCac && mideaCacStats && mideaCacStats.matchedQty > 0)) && (
+            {((showOldPrice && oldPriceStats && oldPriceStats.matchedQty > 0) || (showWelkin && welkinStats && welkinStats.matchedQty > 0) || (showHofmann && hofmannStats && hofmannStats.matchedQty > 0) || (showMideaCac && mideaCacStats && mideaCacStats.matchedQty > 0)) && (
               <div className="compare-panel">
                 <div className="compare-panel-title">Сравнение цен по текущему подбору</div>
                 <div className="compare-grid">
@@ -1556,6 +1612,22 @@ export default function Home() {
                       {welkinStats.deltaPct !== null && (
                         <span className={`compare-delta ${welkinStats.deltaPct >= 0 ? 'bad' : 'good'}`}>
                           мы {welkinStats.deltaPct >= 0 ? 'дороже' : 'дешевле'} на {Math.abs(welkinStats.deltaPct).toFixed(1)}%
+                        </span>
+                      )}
+                    </div>
+                  )}
+                  {showHofmann && hofmannStats && hofmannStats.matchedQty > 0 && (
+                    <div className="compare-card">
+                      <div className="compare-card-head">
+                        <span className="compare-card-title">Hofmann</span>
+                        <span className="compare-card-coverage">{hofmannStats.matchedQty} из {hofmannStats.totalQty} шт</span>
+                      </div>
+                      <div className="compare-card-value">
+                        ≈ {formatNum(hofmannStats.hofmannTotal)} <span className="compare-card-currency">{currencyLabel}</span>
+                      </div>
+                      {hofmannStats.deltaPct !== null && (
+                        <span className={`compare-delta ${hofmannStats.deltaPct >= 0 ? 'bad' : 'good'}`}>
+                          мы {hofmannStats.deltaPct >= 0 ? 'дороже' : 'дешевле'} на {Math.abs(hofmannStats.deltaPct).toFixed(1)}%
                         </span>
                       )}
                     </div>

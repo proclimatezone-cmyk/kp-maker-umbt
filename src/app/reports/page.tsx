@@ -9,9 +9,10 @@ import type { BookingsReport } from '@/lib/reports/bookings'
 import type { PriceComparisonReport } from '@/lib/reports/price-comparison'
 import type { WelkinComparisonReport } from '@/lib/reports/welkin-comparison'
 import type { MideaCacComparisonReport } from '@/lib/reports/midea-cac-comparison'
+import type { HofmannComparisonReport } from '@/lib/reports/hofmann-comparison'
 import './reports.css'
 
-type Tab = 'sales' | 'bookings' | 'price' | 'welkin' | 'midea-cac'
+type Tab = 'sales' | 'bookings' | 'price' | 'welkin' | 'hofmann' | 'midea-cac'
 
 function useReportData<T>(url: string) {
   const [data, setData] = useState<T | null>(null)
@@ -49,6 +50,7 @@ export default function ReportsPage() {
         <button className={`reports-tab ${tab === 'bookings' ? 'active' : ''}`} onClick={() => setTab('bookings')}>Бронь</button>
         <button className={`reports-tab ${tab === 'price' ? 'active' : ''}`} onClick={() => setTab('price')}>Прайс</button>
         <button className={`reports-tab ${tab === 'welkin' ? 'active' : ''}`} onClick={() => setTab('welkin')}>Welkin</button>
+        <button className={`reports-tab ${tab === 'hofmann' ? 'active' : ''}`} onClick={() => setTab('hofmann')}>Hofmann</button>
         <button className={`reports-tab ${tab === 'midea-cac' ? 'active' : ''}`} onClick={() => setTab('midea-cac')}>Midea (завод)</button>
       </div>
 
@@ -56,6 +58,7 @@ export default function ReportsPage() {
       {tab === 'bookings' && <BookingsTab />}
       {tab === 'price' && <PriceTab />}
       {tab === 'welkin' && <WelkinTab />}
+      {tab === 'hofmann' && <HofmannTab />}
       {tab === 'midea-cac' && <MideaCacTab />}
     </div>
   )
@@ -283,6 +286,122 @@ function WelkinTab() {
             </tbody>
           </table>
           {rows.length > 400 && <div className="stat-tile-hint" style={{ marginTop: 8 }}>Показаны первые 400 из {rows.length} строк.</div>}
+        </div>
+      </div>
+    </>
+  )
+}
+
+// ---------------------------------------------------------------------------
+// Hofmann Air — аналог по классу оборудования и мощности
+// ---------------------------------------------------------------------------
+
+function HofmannTab() {
+  const { data, error, loading } = useReportData<HofmannComparisonReport>('/api/reports/hofmann-comparison')
+  const [cls, setCls] = useState('')
+  const [onlyMoreExpensive, setOnlyMoreExpensive] = useState(false)
+  const [onlyStock, setOnlyStock] = useState(true)
+
+  const rows = useMemo(() => {
+    if (!data) return []
+    return data.rows.filter(r =>
+      (!cls || r.hofmannClass === cls) &&
+      (!onlyMoreExpensive || r.weAreMoreExpensive) &&
+      (!onlyStock || !r.orderOnly))
+  }, [data, cls, onlyMoreExpensive, onlyStock])
+
+  const byClass = useMemo(() => {
+    const map = new Map<string, { sum: number; n: number }>()
+    for (const r of rows) {
+      const e = map.get(r.hofmannClass) || { sum: 0, n: 0 }
+      e.sum += r.deltaPct; e.n++
+      map.set(r.hofmannClass, e)
+    }
+    return [...map.entries()].map(([k, v]) => ({ cls: k, avg: v.sum / v.n, n: v.n })).sort((a, b) => b.avg - a.avg)
+  }, [rows])
+
+  if (loading) return <div className="reports-loading"><RefreshCw className="spin" size={20} /></div>
+  if (error || !data) return <div className="reports-error">{error || 'Нет данных'}</div>
+
+  const avg = rows.length ? rows.reduce((s, r) => s + r.deltaPct, 0) / rows.length : null
+  const dearer = rows.filter(r => r.weAreMoreExpensive).length
+
+  return (
+    <>
+      <div className="completeness-banner">
+        <AlertTriangle size={16} />
+        <span>
+          Hofmann Air — другое железо, общего артикула нет: аналог подбирается по классу и ближайшей мощности (до ±20%).
+          HMV Mini ↔ ATOM; HMV Slim / Flex (боковой выброс) ↔ V8 Easyfit, V6-i, V8 Mini; HMV X (вертикальный выброс) ↔ V8 Master, V8S, V6R.
+          Наша цена — из прайса сайта (у некоторых фанкойлов в неё входит пульт). {data.source}
+        </span>
+      </div>
+
+      <div className="stat-grid">
+        <StatTile label="Сопоставлено моделей" value={String(rows.length)} hint={onlyStock ? 'только наши позиции в наличии' : 'включая «под заказ»'} />
+        <StatTile label="Мы дороже" value={String(dearer)} />
+        <StatTile label="Мы дешевле" value={String(rows.length - dearer)} />
+        <StatTile label="Средняя дельта" value={avg !== null ? `${avg >= 0 ? '+' : ''}${avg.toFixed(1)}%` : '—'} hint="наша цена относительно Hofmann" />
+      </div>
+
+      <div className="report-filters">
+        <select value={cls} onChange={e => setCls(e.target.value)}>
+          <option value="">Все классы</option>
+          {data.classes.map(c => <option key={c} value={c}>{c}</option>)}
+        </select>
+        <label className="report-check">
+          <input type="checkbox" checked={onlyStock} onChange={e => setOnlyStock(e.target.checked)} />
+          Только наши позиции в наличии
+        </label>
+        <label className="report-check">
+          <input type="checkbox" checked={onlyMoreExpensive} onChange={e => setOnlyMoreExpensive(e.target.checked)} />
+          Только где мы дороже
+        </label>
+      </div>
+
+      {!cls && byClass.length > 1 && (
+        <div className="report-section">
+          <h2>Средняя разница по классам</h2>
+          <div className="report-table-wrap">
+            <table className="report-table">
+              <thead><tr><th>Класс Hofmann</th><th className="num">Моделей</th><th className="num">Мы относительно Hofmann</th></tr></thead>
+              <tbody>
+                {byClass.map(b => (
+                  <tr key={b.cls} className="clickable" onClick={() => setCls(b.cls)}>
+                    <td>{b.cls}</td>
+                    <td className="num">{b.n}</td>
+                    <td className="num"><span className={`badge ${b.avg >= 0 ? 'up' : 'down'}`}>{b.avg >= 0 ? '+' : ''}{b.avg.toFixed(1)}%</span></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
+
+      <div className="report-section">
+        <div className="report-table-wrap">
+          <table className="report-table">
+            <thead>
+              <tr>
+                <th>Наша модель</th><th className="num">кВт</th><th>Аналог Hofmann</th>
+                <th className="num">Наша цена, $</th><th className="num">Hofmann, $</th><th className="num">Дельта</th><th className="num">Точность</th>
+              </tr>
+            </thead>
+            <tbody>
+              {rows.slice(0, 500).map((r, i) => (
+                <tr key={i}>
+                  <td>{r.model}{r.orderOnly && <span className="badge unlinked">под заказ</span>}</td>
+                  <td className="num">{r.ourKw}</td>
+                  <td>{r.hofmannModel}</td>
+                  <td className="num">{formatNum(r.ourPrice)}</td>
+                  <td className="num">{formatNum(r.hofmannPrice)}</td>
+                  <td className="num"><span className={`badge ${r.deltaPct >= 0 ? 'up' : 'down'}`}>{r.deltaPct >= 0 ? '+' : ''}{r.deltaPct.toFixed(1)}%</span></td>
+                  <td className="num">{r.matchDeltaPct === 0 ? 'тот же кВт' : `±${r.matchDeltaPct}%`}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </>
