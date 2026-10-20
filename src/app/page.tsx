@@ -4,7 +4,7 @@ import { useState, useEffect, useMemo, useCallback, useRef, memo } from 'react'
 import { ModelSearchSelector } from '@/components/ModelSearchSelector'
 import { Plus, Trash2, FileText, User, Briefcase, Calculator, Search, RefreshCw, Building2, Phone, CheckCircle, CloudCheck, Loader2, Copy, Truck, ChevronDown, FileSignature, BarChart3, Lock, Unlock, Ruler, BookOpen } from 'lucide-react'
 import productsData from '@/data/products.json'
-import { formatNum, formatShortRuDate, toIsoDate } from '@/lib/format'
+import { formatNum, formatShortRuDate, toIsoDate, todayIso, applyDateToKpName } from '@/lib/format'
 import { DELIVERY_TERMS, DeliveryTerm, buildTermsLines, buildSignatureLines, getMoneyLabels } from '@/lib/delivery-terms'
 import { stockModelKey } from '@/lib/stock-match'
 import { normalizeModel } from '@/lib/reports/parse-utils'
@@ -185,7 +185,13 @@ const SettingsSection = memo(({ cpName, setCpName, cpDate, setCpDate, equipmentT
         </div>
         <div className="field">
           <label className="field-label">Дата КП</label>
-          <input type="date" className="field-input" value={lDate} onChange={e => { setLDate(e.target.value); setCpDate(e.target.value); }} />
+          <input type="date" className="field-input" value={lDate} onChange={e => {
+            const v = e.target.value;
+            setLDate(v);
+            setCpDate(v);
+            // Выбрали дату вручную — дата в номере КП меняется вместе с ней.
+            if (v) setCpName(applyDateToKpName(cpName, v));
+          }} />
         </div>
       </div>
       <div className="field">
@@ -685,6 +691,29 @@ export default function Home() {
   // оба прогона, поэтому вторая попытка инициализации — просто no-op.
   const initRanRef = useRef(false)
 
+  // --- Автодата КП ---
+  // umbt_cpDay — день (по Ташкенту), на который дата/номер КП уже выставлены.
+  // Если наступил новый день, дата КП = сегодня, а в номере КП меняется
+  // только дата (префикс, порядковый номер и инициалы остаются).
+  const rollKpDateIfNewDay = useCallback(() => {
+    try {
+      const today = todayIso()
+      if (localStorage.getItem('umbt_cpDay') === today) return
+      localStorage.setItem('umbt_cpDay', today)
+      setCpDate(today)
+      setCpName(prev => applyDateToKpName(prev || localStorage.getItem('umbt_cpName') || '', today))
+    } catch { /* localStorage недоступен — оставляем как есть */ }
+  }, [])
+
+  useEffect(() => {
+    // Вкладку могут держать открытой сутками: проверяем раз в минуту
+    // и при возврате на вкладку.
+    const timer = setInterval(rollKpDateIfNewDay, 60_000)
+    const onVisible = () => { if (document.visibilityState === 'visible') rollKpDateIfNewDay() }
+    document.addEventListener('visibilitychange', onVisible)
+    return () => { clearInterval(timer); document.removeEventListener('visibilitychange', onVisible) }
+  }, [rollKpDateIfNewDay])
+
   // --- Initial Load ---
   useEffect(() => {
     const s = (k: string) => localStorage.getItem(k)
@@ -751,13 +780,10 @@ export default function Home() {
       if (s('umbt_reqOpen')) setReqOpen(s('umbt_reqOpen') === 'true')
     } catch {}
     }
-    if (!s('umbt_cpDate')) {
-      setCpDate(new Date().toISOString().slice(0, 10))
-    }
-    if (!s('umbt_cpName')) {
-      const d = new Date()
-      setCpName(`КП-${d.toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit', year: '2-digit' }).replace(/\./g, '')}/01`)
-    }
+    // Автодата КП: при первом заходе за день (и при смене суток, пока вкладка
+    // открыта — см. эффект ниже) дата КП и дата в номере становятся сегодняшними.
+    // Внутри дня ручной выбор даты/номера не перезаписывается.
+    rollKpDateIfNewDay()
 
     const loadData = async () => {
       try {
