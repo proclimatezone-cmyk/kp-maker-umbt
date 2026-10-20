@@ -6,7 +6,7 @@ import ImageModule from 'docxtemplater-image-module-free';
 import { google } from 'googleapis';
 import { formatNum } from './format';
 import { getGoogleAuth } from './google-auth';
-import { buildTermsLines, buildSignatureLines, COMPANY_ADDRESS_LINES, getDeliverySpec, getMoneyLabels, getWarrantyLine } from './delivery-terms';
+import { buildTermsLines, buildSignatureLines, COMPANY_ADDRESS_LINES, getDeliverySpec, getMoneyLabels, getWarrantyLine, needsNationalCurrencyClause, NATIONAL_CURRENCY_TEXT } from './delivery-terms';
 
 /** Размер картинки товара в ячейке «Внешний вид», в пикселях при 96 dpi. */
 const IMAGE_BOX = { width: 150, height: 110 };
@@ -281,12 +281,12 @@ export function buildTermsRows(opts: BuildKpOptions['options']): { label: string
     { label: 'Гарантия', value: getWarrantyLine(opts.warrantyMonths) },
     { label: 'Срок действия КП', value: '1 неделя с момента подачи' },
   ];
-  if (spec.nationalCurrencyClause) {
+  // Раньше пункт добавлялся только для CIP/DDP — в обычных КП в у.е.
+  // («со склада», «под заказ») оговорки о расчётах в сумах не было вовсе.
+  if (needsNationalCurrencyClause(opts)) {
     rows.push({
       label: 'Валюта расчётов',
-      value:
-        'Цены указаны в у.е. (доллар США). Оплата производится в национальной валюте ' +
-        'по актуальному курсу на момент оплаты',
+      value: NATIONAL_CURRENCY_TEXT.charAt(0).toUpperCase() + NATIONAL_CURRENCY_TEXT.slice(1),
     });
   }
   return rows;

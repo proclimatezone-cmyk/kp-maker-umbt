@@ -51,8 +51,20 @@ export const DELIVERY_TERMS: Record<DeliveryTerm, DeliveryTermSpec> = {
   },
 };
 
+/**
+ * Оговорка о валюте расчётов. Расчёты в иностранной валюте между резидентами
+ * на территории Узбекистана не допускаются — у.е. в КП только единица цены,
+ * платит клиент всегда в сумах по курсу ЦБ РУз на день оплаты.
+ */
+export const NATIONAL_CURRENCY_TEXT =
+  'цены указаны в у.е. (1 у.е. = 1 доллар США). Оплата производится в национальной валюте (сум) по курсу ЦБ РУз на день оплаты';
 const NATIONAL_CURRENCY_CLAUSE =
-  'Цены указаны в у.е. (1 у.е. = 1 доллар США). Все расчеты производятся в национальной валюте по курсу ЦБ РУз на день оплаты.';
+  'Цены указаны в у.е. (1 у.е. = 1 доллар США). Оплата производится в национальной валюте (сум) по курсу ЦБ РУз на день оплаты.';
+
+/** Нужна ли оговорка: КП в у.е. (а также всегда при базисах CIP / DDP). */
+export function needsNationalCurrencyClause(opts?: { deliveryTerms?: unknown; currency?: string }): boolean {
+  return opts?.currency !== 'sum' || getDeliverySpec(opts?.deliveryTerms).nationalCurrencyClause;
+}
 
 export interface ManagerInfo {
   name?: string;
@@ -111,7 +123,6 @@ export function buildTermsLines(opts?: {
   paymentType?: string;
 }): string[] {
   const spec = getDeliverySpec(opts?.deliveryTerms);
-  const isUe = opts?.currency !== 'sum';
 
   const points = [
     `Условия поставки: ${spec.delivery};`,
@@ -123,7 +134,7 @@ export function buildTermsLines(opts?: {
 
   // Ремарка про у.е. и курс ЦБ РУз всегда обязательна при расчетах в у.е.
   // (а также при базисах CIP / DDP).
-  if (isUe || spec.nationalCurrencyClause) {
+  if (needsNationalCurrencyClause(opts)) {
     points[points.length - 1] = 'Срок действия предложения: 1 неделя с момента подачи;';
     points.push(NATIONAL_CURRENCY_CLAUSE);
   }
