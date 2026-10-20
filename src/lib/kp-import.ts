@@ -44,31 +44,64 @@ export function extractTextFromDocx(buffer: Buffer): string {
   return paragraphs.filter(Boolean).join('\n');
 }
 
-export async function extractTextFromPdf(buffer: Buffer): Promise<string> {
-  // pdf-parse 2.x — класс поверх pdfjs-dist, не функция как в 1.x.
-  // На Vercel/serverless может вести себя иначе — оборачиваем в try/catch
-  // и пробуем оба API (v2 class и v1 default-функция).
-  try {
-    const mod = await import('pdf-parse');
-    if (mod.PDFParse) {
-      const parser = new mod.PDFParse({ data: buffer });
-      try {
-        const result = await parser.getText();
-        return result.text || '';
-      } finally {
-        await parser.destroy();
+function ensureDomMatrixPolyfill() {
+  if (typeof globalThis.DOMMatrix === 'undefined') {
+    try {
+      // First try @napi-rs/canvas if available
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
+      const canvas = require('@napi-rs/canvas');
+      if (canvas?.DOMMatrix) {
+        (globalThis as any).DOMMatrix = canvas.DOMMatrix;
+        return;
       }
-    }
-    // Fallback: pdf-parse v1 API (default export — функция)
-    const fallback = (mod as any).default;
-    if (typeof fallback === 'function') {
-      const result = await fallback(buffer);
-      return result.text || '';
-    }
-    throw new Error('pdf-parse: не найден ни PDFParse, ни default export');
+    } catch {}
+
+    // Minimal 2D/3D DOMMatrix shim for coordinate transforms during PDF text extraction
+    (globalThis as any).DOMMatrix = class DOMMatrix {
+      a = 1; b = 0; c = 0; d = 1; e = 0; f = 0;
+      m11 = 1; m12 = 0; m13 = 0; m14 = 0;
+      m21 = 0; m22 = 1; m23 = 0; m24 = 0;
+      m31 = 0; m32 = 0; m33 = 1; m34 = 0;
+      m41 = 0; m42 = 0; m43 = 0; m44 = 1;
+      is2D = true;
+      isIdentity = true;
+      constructor(init?: any) {
+        if (Array.isArray(init)) {
+          if (init.length === 6) {
+            this.a = this.m11 = init[0];
+            this.b = this.m12 = init[1];
+            this.c = this.m21 = init[2];
+            this.d = this.m22 = init[3];
+            this.e = this.m41 = init[4];
+            this.f = this.m42 = init[5];
+          } else if (init.length === 16) {
+            this.m11 = this.a = init[0]; this.m12 = this.b = init[1];
+            this.m21 = this.c = init[4]; this.m22 = this.d = init[5];
+            this.m41 = this.e = init[12]; this.m42 = this.f = init[13];
+          }
+        }
+      }
+      multiply() { return new (globalThis as any).DOMMatrix(); }
+      multiplySelf() { return this; }
+      preMultiplySelf() { return this; }
+      translate() { return this; }
+      scale() { return this; }
+      invertSelf() { return this; }
+      inverse() { return new (globalThis as any).DOMMatrix(); }
+    };
+  }
+}
+
+export async function extractTextFromPdf(buffer: Buffer): Promise<string> {
+  ensureDomMatrixPolyfill();
+
+  try {
+    const { extractText } = await import('unpdf');
+    const result = await extractText(new Uint8Array(buffer));
+    if (!result || !result.text) return '';
+    const text = Array.isArray(result.text) ? result.text.join('\n') : String(result.text);
+    return text || '';
   } catch (err: any) {
-    // Если pdf-parse совсем не работает (canvas/worker на serverless),
-    // даём понятную ошибку вместо стектрейса.
     throw new Error(`Не удалось прочитать PDF: ${err.message}`);
   }
 }
