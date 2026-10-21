@@ -1467,3 +1467,7 @@ body {
   .spec-list div { grid-template-columns: minmax(0, 1fr); gap: 0.15rem; }
   .catalog-frame { height: 70vh; }
 }
+
+/* Индикатор фоновой подготовки PDF на кнопке «Сформировать PDF» */
+.gen-prefetch { display: inline-flex; align-items: center; margin-left: 0.15rem; opacity: 0.85; }
+.gen-prefetch.ready { opacity: 1; }

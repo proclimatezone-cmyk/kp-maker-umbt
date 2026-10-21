@@ -12,7 +12,7 @@ This project is a web-based tool for generating Commercial Proposals (КП - К�
   - Orders/stock spreadsheet (sheets `Заказы`, `Бронь`, `Объекты`, used by the `/reports` section): `1VfKkErXzc3qdDdlFMphmX6ysL60mpg5MGJWE1dYXIRk`
 - **Document Generation**: 
   - Word: `docxtemplater`, `pizzip`
-  - PDF: Local Word automation via `.vbs` scripts (Windows only)
+  - PDF: Google Drive conversion (`src/lib/docx-to-pdf.ts`, ~4 s floor regardless of file size). To make it feel instant the editor pre-builds the PDF in the background (`prefetch: true` to `/api/generate`, 1.5 s after the last edit, when format = PDF); the button then downloads the ready blob and sends `archiveOnly: true` for archiving/saving
 - **Icons**: `lucide-react`
 
 ## Project Structure
@@ -33,7 +33,7 @@ This project is a web-based tool for generating Commercial Proposals (КП - К�
 - **Components**: Use functional components with hooks.
 - **Styling**: Prefer global CSS variables and semantic class names. Avoid inline styles where possible.
 - **Data Sync**: Always verify `GOOGLE_SERVICE_ACCOUNT_EMAIL`/`GOOGLE_PRIVATE_KEY` (or the OAuth vars) are set in `.env.local` before running sync scripts.
-- **PDF Generation**: Note that PDF generation depends on local Word installation on Windows. If it fails, the app provides the `.docx` file as fallback.
+- **PDF Generation**: see the PDF note above — keep the request body built by `buildGenerateBody` in `page.tsx` identical for prefetch and click, otherwise the prefetched PDF is never reused.
 
 ## Implementation Details
 - The main UI allows selecting products, setting manager info, and calculating totals.

@@ -1308,6 +1308,86 @@ export default function Home() {
     } catch { alert('Не удалось сформировать договор') } finally { setContractLoading(false) }
   }
 
+  // Тело запроса на генерацию — одно и то же для фоновой подготовки PDF и
+  // для кнопки, чтобы по нему можно было понять, что готовый PDF актуален.
+  const buildGenerateBody = (live: any[]) => ({
+    manager,
+    client,
+    cpName,
+    cpDate: formatShortRuDate(cpDate),
+    template: options.template || 'new',
+    format: options.format || 'docx',
+    // «Сырые» строки билдера (id/productId/quantity/discount) — для
+    // сохранения подбора на повторное открытие, отдельно от items ниже
+    // (те уже развёрнуты и без discount, годятся только для документа).
+    rawItems: items,
+    items: items.map(i => {
+      const p = live.find(x => x.id === i.productId);
+      if (!p) return null;
+      const baseUnitPrice = calculatePrice(p.price);
+      const discountVal = i.discount || 0;
+      const finalUnitPrice = Math.round(baseUnitPrice * (1 + discountVal / 100));
+      return { ...p, price: finalUnitPrice, quantity: i.quantity };
+    }).filter(Boolean),
+    additionalItems: additionalItems.map(i => ({
+      ...i,
+      price: Math.round(calculatePrice(i.price))
+    })),
+    equipmentTotal,
+    partnerBonus: showDan ? partnerBonusSum : 0,
+    additionalTotal,
+    total: grandTotal,
+    extraData: { company, address, objectType, registrationDate, equipmentType, contactPerson },
+    options,
+    origin: typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000',
+  })
+  // Ключ актуальности: всё, что влияет на документ (формат и origin — нет).
+  const generateKey = (body: any) => JSON.stringify({ ...body, format: undefined, origin: undefined })
+
+  // --- Фоновая подготовка PDF ---
+  // Конвертация в PDF через Google занимает ~4 с и быстрее не бывает. Поэтому,
+  // когда выбран формат PDF, документ собирается заранее — через 1.5 с после
+  // последней правки. К нажатию «Сформировать PDF» файл обычно уже готов.
+  type PdfEntry = { key: string; blob: Blob; warn: string }
+  const pdfPrefetchRef = useRef<PdfEntry | null>(null)
+  // Сборка, которая идёт прямо сейчас: если менеджер нажал кнопку до её
+  // окончания — дожидаемся её, а не запускаем вторую такую же параллельно.
+  const pdfInflightRef = useRef<{ key: string; promise: Promise<PdfEntry | null> } | null>(null)
+  const [pdfPrefetchState, setPdfPrefetchState] = useState<'idle' | 'working' | 'ready'>('idle')
+  const prefetchBody = isMounted && options.format === 'pdf' && manager.name && client && items.length > 0
+    ? buildGenerateBody(products) : null
+  const prefetchKey = prefetchBody ? generateKey(prefetchBody) : ''
+  useEffect(() => {
+    if (!prefetchBody || !prefetchKey) { setPdfPrefetchState('idle'); return }
+    if (pdfPrefetchRef.current?.key === prefetchKey) { setPdfPrefetchState('ready'); return }
+    setPdfPrefetchState('working')
+    const ctrl = new AbortController()
+    let started = false
+    const timer = setTimeout(() => {
+      started = true
+      const promise = (async (): Promise<PdfEntry | null> => {
+        try {
+          const r = await fetch('/api/generate', {
+            method: 'POST', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ ...prefetchBody, prefetch: true }),
+            signal: ctrl.signal,
+          })
+          if (!r.ok) { setPdfPrefetchState('idle'); return null }
+          const entry = { key: prefetchKey, blob: await r.blob(), warn: decodeURIComponent(r.headers.get('X-Size-Warning') || '') }
+          pdfPrefetchRef.current = entry
+          setPdfPrefetchState('ready')
+          return entry
+        } catch { return null /* отменён новой правкой или нет сети — соберём по кнопке */ }
+        finally { if (pdfInflightRef.current?.key === prefetchKey) pdfInflightRef.current = null }
+      })()
+      pdfInflightRef.current = { key: prefetchKey, promise }
+    }, 1500)
+    // Уже начатую сборку не отменяем — её может ждать нажатая кнопка, а
+    // результат по старому ключу просто не совпадёт и будет проигнорирован.
+    return () => { clearTimeout(timer); if (!started) ctrl.abort() }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [prefetchKey])
+
   const handleGenerate = async () => {
     if (!manager.name || !client) { alert('Заполните ФИО менеджера и название объекта'); return }
     setLoading(true)
@@ -1316,7 +1396,9 @@ export default function Home() {
     // вкладку открытой часами, а цены в таблице поменялись. Так в КП всегда
     // актуальные цены, и обновление не зависит от действий менеджера.
     let live = products
-    try {
+    // Прайс свежий (обновлялся меньше минуты назад — при заходе, при возврате
+    // на вкладку или прошлой генерацией) — не тянем все 800+ позиций повторно.
+    if (!baseUpdatedAt || Date.now() - baseUpdatedAt > 60_000) try {
       const pr = await fetch('/api/products')
       const pd = await pr.json()
       if (pd.success && Array.isArray(pd.products) && pd.products.length) {
@@ -1326,40 +1408,32 @@ export default function Home() {
       }
     } catch {}
 
+    const body = buildGenerateBody(live)
+    const key = generateKey(body)
+
+    // PDF уже подготовлен в фоне для ровно этого КП — отдаём мгновенно, а
+    // архив и сохранение подбора делает отдельный лёгкий запрос.
+    let ready = pdfPrefetchRef.current
+    if (options.format === 'pdf' && ready?.key !== key && pdfInflightRef.current?.key === key) {
+      ready = await pdfInflightRef.current.promise
+    }
+    if (options.format === 'pdf' && ready && ready.key === key) {
+      if (ready.warn) alert('⚠️ ' + ready.warn)
+      const url = URL.createObjectURL(ready.blob)
+      setLastFile({ url, ext: 'pdf' })
+      const a = document.createElement('a'); a.href = url; a.download = `${cpName}.pdf`; a.click()
+      fetch('/api/generate', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...body, archiveOnly: true }),
+      }).catch(() => {})
+      setLoading(false)
+      return
+    }
+
     try {
       const r = await fetch('/api/generate', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          manager,
-          client,
-          cpName,
-          cpDate: formatShortRuDate(cpDate),
-          template: options.template || 'new',
-          format: options.format || 'docx',
-          // «Сырые» строки билдера (id/productId/quantity/discount) — для
-          // сохранения подбора на повторное открытие, отдельно от items ниже
-          // (те уже развёрнуты и без discount, годятся только для документа).
-          rawItems: items,
-          items: items.map(i => {
-            const p = live.find(x => x.id === i.productId);
-            if (!p) return null;
-            const baseUnitPrice = calculatePrice(p.price);
-            const discountVal = i.discount || 0;
-            const finalUnitPrice = Math.round(baseUnitPrice * (1 + discountVal / 100));
-            return { ...p, price: finalUnitPrice, quantity: i.quantity }; 
-          }).filter(Boolean), 
-          additionalItems: additionalItems.map(i => ({
-            ...i,
-            price: Math.round(calculatePrice(i.price))
-          })),
-          equipmentTotal,
-          partnerBonus: showDan ? partnerBonusSum : 0,
-          additionalTotal,
-          total: grandTotal, 
-          extraData: { company, address, objectType, registrationDate, equipmentType, contactPerson },
-          options,
-          origin: typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000'
-        })
+        body: JSON.stringify(body)
       })
       if (r.ok) {
         const auditErr = r.headers.get('X-Audit-Error');
@@ -1821,6 +1895,11 @@ export default function Home() {
               {loading
                 ? 'Собираем КП...'
                 : `Сформировать ${options.format === 'pdf' ? 'PDF' : 'Word'}`}
+              {!loading && options.format === 'pdf' && pdfPrefetchState !== 'idle' && (
+                <span className={`gen-prefetch ${pdfPrefetchState}`} title={pdfPrefetchState === 'ready' ? 'PDF уже собран — скачается сразу' : 'PDF собирается заранее, в фоне'}>
+                  {pdfPrefetchState === 'ready' ? <CheckCircle size={14} /> : <Loader2 size={14} className="spin" />}
+                </span>
+              )}
             </button>
           ) : (
             <>

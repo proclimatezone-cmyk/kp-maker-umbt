@@ -35,6 +35,13 @@ export async function POST(req: NextRequest) {
       origin: clientOrigin,
       template = 'new',
       format = 'docx',
+      // prefetch — фоновая подготовка PDF, пока менеджер заполняет КП
+      // (page.tsx): только собрать и отдать файл, без архива и без
+      // сохранения подбора — это ещё черновик, его могут поменять.
+      prefetch = false,
+      // archiveOnly — менеджер уже скачал заранее подготовленный PDF;
+      // осталось записать КП в архив и сохранить подбор, файл не нужен.
+      archiveOnly = false,
     } = data
 
     const origin = clientOrigin || req.nextUrl.origin
@@ -101,8 +108,32 @@ export async function POST(req: NextRequest) {
       login,
     })
 
+    const deferCleanup = { onCleanup: (fn: () => Promise<void>) => after(fn) }
+
+    if (prefetch) {
+      const pdf = await convertDocxToPdf(docx, cpName || 'КП', deferCleanup)
+      return new NextResponse(new Uint8Array(pdf), {
+        headers: {
+          'Content-Type': 'application/pdf',
+          'X-Size-Warning': encodeURIComponent(sizeWarning),
+        },
+      })
+    }
+
+    if (archiveOnly) {
+      after(async () => {
+        let pdf: Buffer | undefined
+        try { pdf = await convertDocxToPdf(docx, cpName || 'КП') } catch (err) {
+          console.error('Архив КП: не удалось получить PDF-копию', err)
+        }
+        await archiveKp({ ...archiveMeta, docx, pdf })
+      })
+      after(saveSelection)
+      return NextResponse.json({ ok: true })
+    }
+
     if (format === 'pdf') {
-      const pdf = await convertDocxToPdf(docx, cpName || 'КП')
+      const pdf = await convertDocxToPdf(docx, cpName || 'КП', deferCleanup)
       // В архив уходят оба формата, даже если менеджер скачал только PDF.
       after(() => archiveKp({ ...archiveMeta, docx, pdf }))
       after(saveSelection)
