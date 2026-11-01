@@ -8,6 +8,7 @@ import { formatNum, formatShortRuDate, toIsoDate, todayIso, applyDateToKpName } 
 import { DELIVERY_TERMS, DeliveryTerm, buildTermsLines, buildSignatureLines, getMoneyLabels } from '@/lib/delivery-terms'
 import { stockModelKey } from '@/lib/stock-match'
 import { normalizeModel } from '@/lib/reports/parse-utils'
+import { captureOvikHash, takeOvikImport } from '@/lib/ovik-import'
 
 /** Ставка НДС в Узбекистане. Та же цифра идёт в спецификацию договора. */
 export const VAT_RATE = 12
@@ -1249,10 +1250,18 @@ export default function Home() {
     handleImportFile(file)
   }
 
+  // Спецификация из OVIK: открываем экран проверки сразу после загрузки страницы
+  useEffect(() => {
+    captureOvikHash()
+    const r = takeOvikImport(productsData as any)
+    if (r) { setImportError(''); setImportResult(r); setSavedKpOpen(true) }
+  }, [])
+
   const applyImportResult = () => {
     if (!importResult) return
     if (items.length > 0 && !confirm('Текущий набор позиций будет заменён распознанным из файла. Продолжить?')) return
     setItems(importResult.items.map((it: any) => ({ id: uid(), productId: it.productId, quantity: it.quantity })))
+    if (importResult.fromOvik && importResult.client) setClient(importResult.client)
     if (importResult.cpNumber) setCpName(importResult.cpNumber)
     if (importResult.cpDate) setCpDate(toIsoDate(importResult.cpDate) || '')
     setImportResult(null)
@@ -1945,7 +1954,7 @@ export default function Home() {
             {importResult ? (
               <>
                 <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)', marginTop: 0 }}>
-                  Распознано по тексту файла — не структура таблицы, поэтому проверь перед тем, как открыть.
+                  {importResult.fromOvik ? `Спецификация из OVIK${importResult.client ? ` — проект «${importResult.client}»` : ''}. Проверь и открой в подборе.` : 'Распознано по тексту файла — не структура таблицы, поэтому проверь перед тем, как открыть.'}
                   {importResult.uncertainCount > 0 && ` У ${importResult.uncertainCount} поз. не нашлось количества рядом — стоит "1", поправь при необходимости.`}
                 </p>
                 <table className="modal-table">
@@ -1953,6 +1962,9 @@ export default function Home() {
                   <tbody>
                     {importResult.items.map((it: any, i: number) => (
                       <tr key={i}><td>{it.model}</td><td>{it.quantity}</td></tr>
+                    ))}
+                    {(importResult.missing || []).map((it: any, i: number) => (
+                      <tr key={'m' + i} style={{ color: 'var(--danger, #b91c1c)' }}><td>{it.model}{it.name ? ` (${it.name})` : ''} — нет в прайсе, добавь вручную</td><td>{it.quantity}</td></tr>
                     ))}
                   </tbody>
                 </table>

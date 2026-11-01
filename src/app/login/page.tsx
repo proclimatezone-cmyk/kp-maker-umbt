@@ -1,5 +1,6 @@
 "use client";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { captureOvikHash } from '@/lib/ovik-import';
 import { Mail, ArrowRight, ShieldCheck, AlertCircle, RefreshCw } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
@@ -8,6 +9,8 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const router = useRouter();
+  // ссылка из OVIK со спецификацией могла прийти сюда до входа — сохраняем её
+  useEffect(() => { captureOvikHash(); }, []);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
