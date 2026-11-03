@@ -37,7 +37,12 @@ export function takeOvikImport(products: { id: string; model: string }[]) {
   try { p = JSON.parse(localStorage.getItem(KEY) || 'null') } catch { p = null }
   localStorage.removeItem(KEY)
   if (!p || (p.at && Date.now() - p.at > 86400000)) return null
-  const byKey = new Map(products.map(x => [normalizeModel(x.model), x]))
+  // одна модель может быть в прайсе дважды: «Midea-V…» (для клиента) и «MDV-V…» (код склада) — берём Midea
+  const byKey = new Map<string, { id: string; model: string }>()
+  for (const x of products) {
+    const k = normalizeModel(x.model), cur = byKey.get(k)
+    if (!cur || (/^midea/i.test(x.model) && !/^midea/i.test(cur.model))) byKey.set(k, x)
+  }
   const items: { productId: string; model: string; quantity: number }[] = []
   const missing: { model: string; quantity: number; name?: string }[] = []
   for (const it of p.items) {
