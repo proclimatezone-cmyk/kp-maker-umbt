@@ -38,7 +38,12 @@ export function getGoogleAuth() {
  * загрузке («Service Accounts do not have storage quota») даже если у него
  * есть права Редактора на папку. Работает только реальный аккаунт с квотой.
  */
+let oauthOnlyClient: InstanceType<typeof google.auth.OAuth2> | null = null;
+
+/** Клиент кешируется на инстанс: access-токен живёт ~1 ч, и без кеша каждая
+ *  генерация PDF тратила ~1 с на лишний обмен refresh → access токена. */
 export function getOAuthOnlyAuth() {
+  if (oauthOnlyClient) return oauthOnlyClient;
   if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET || !process.env.GOOGLE_REFRESH_TOKEN) {
     throw new Error('OAuth не настроен (GOOGLE_CLIENT_ID/GOOGLE_CLIENT_SECRET/GOOGLE_REFRESH_TOKEN) — загрузка на Диск недоступна');
   }
@@ -47,5 +52,6 @@ export function getOAuthOnlyAuth() {
     process.env.GOOGLE_CLIENT_SECRET
   );
   oauth2Client.setCredentials({ refresh_token: process.env.GOOGLE_REFRESH_TOKEN.trim() });
+  oauthOnlyClient = oauth2Client;
   return oauth2Client;
 }

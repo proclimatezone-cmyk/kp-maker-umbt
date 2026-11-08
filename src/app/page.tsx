@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useMemo, useCallback, useRef, memo } from 'react'
 import { ModelSearchSelector } from '@/components/ModelSearchSelector'
-import { Plus, Trash2, FileText, User, Briefcase, Calculator, Search, RefreshCw, Building2, Phone, CheckCircle, CloudCheck, Loader2, Copy, Truck, ChevronDown, FileSignature, BarChart3, Lock, Unlock, Ruler, BookOpen } from 'lucide-react'
+import { Plus, Trash2, FileText, User, Briefcase, Calculator, Search, RefreshCw, Building2, Phone, CheckCircle, CloudCheck, Loader2, Copy, Truck, ChevronDown, FileSignature, BarChart3, Lock, Unlock, Ruler, BookOpen, FilePen } from 'lucide-react'
 import productsData from '@/data/products.json'
 import { formatNum, formatShortRuDate, toIsoDate, todayIso, applyDateToKpName } from '@/lib/format'
 import { DELIVERY_TERMS, DeliveryTerm, buildTermsLines, buildSignatureLines, getMoneyLabels } from '@/lib/delivery-terms'
@@ -1487,6 +1487,10 @@ export default function Home() {
             <a className="btn btn-ghost" href="/podbor">
               <Ruler size={14} />
               Подбор
+            </a>
+            <a className="btn btn-ghost" href="/pdf-editor">
+              <FilePen size={14} />
+              PDF-редактор
             </a>
             <button className="btn btn-ghost" onClick={openSavedKpPanel}>
               <FileText size={14} />
