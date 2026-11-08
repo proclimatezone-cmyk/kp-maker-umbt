@@ -1,11 +1,27 @@
-@font-face { font-family: 'DejaVu Sans'; src: url('/fonts/DejaVuSans.ttf') format('truetype'); font-weight: 400; font-style: normal; }
-@font-face { font-family: 'DejaVu Sans'; src: url('/fonts/DejaVuSans-Bold.ttf') format('truetype'); font-weight: 700; font-style: normal; }
-@font-face { font-family: 'DejaVu Sans'; src: url('/fonts/DejaVuSans-Oblique.ttf') format('truetype'); font-weight: 400; font-style: italic; }
-@font-face { font-family: 'DejaVu Sans'; src: url('/fonts/DejaVuSans-BoldOblique.ttf') format('truetype'); font-weight: 700; font-style: italic; }
-@font-face { font-family: 'DejaVu Serif'; src: url('/fonts/DejaVuSerif.ttf') format('truetype'); font-weight: 400; font-style: normal; }
-@font-face { font-family: 'DejaVu Serif'; src: url('/fonts/DejaVuSerif-Bold.ttf') format('truetype'); font-weight: 700; font-style: normal; }
-@font-face { font-family: 'DejaVu Serif'; src: url('/fonts/DejaVuSerif-Italic.ttf') format('truetype'); font-weight: 400; font-style: italic; }
-@font-face { font-family: 'DejaVu Serif'; src: url('/fonts/DejaVuSerif-BoldItalic.ttf') format('truetype'); font-weight: 700; font-style: italic; }
+@font-face { font-family: 'PE DejaVu Sans'; src: url('/fonts/DejaVuSans.ttf') format('truetype'); font-weight: 400; font-style: normal; font-display: block; }
+@font-face { font-family: 'PE DejaVu Sans'; src: url('/fonts/DejaVuSans-Bold.ttf') format('truetype'); font-weight: 700; font-style: normal; font-display: block; }
+@font-face { font-family: 'PE DejaVu Sans'; src: url('/fonts/DejaVuSans-Oblique.ttf') format('truetype'); font-weight: 400; font-style: italic; font-display: block; }
+@font-face { font-family: 'PE DejaVu Sans'; src: url('/fonts/DejaVuSans-BoldOblique.ttf') format('truetype'); font-weight: 700; font-style: italic; font-display: block; }
+@font-face { font-family: 'PE DejaVu Serif'; src: url('/fonts/DejaVuSerif.ttf') format('truetype'); font-weight: 400; font-style: normal; font-display: block; }
+@font-face { font-family: 'PE DejaVu Serif'; src: url('/fonts/DejaVuSerif-Bold.ttf') format('truetype'); font-weight: 700; font-style: normal; font-display: block; }
+@font-face { font-family: 'PE DejaVu Serif'; src: url('/fonts/DejaVuSerif-Italic.ttf') format('truetype'); font-weight: 400; font-style: italic; font-display: block; }
+@font-face { font-family: 'PE DejaVu Serif'; src: url('/fonts/DejaVuSerif-BoldItalic.ttf') format('truetype'); font-weight: 700; font-style: italic; font-display: block; }
+@font-face { font-family: 'PE Arimo'; src: url('/fonts/Arimo-Regular.ttf') format('truetype'); font-weight: 400; font-style: normal; font-display: block; }
+@font-face { font-family: 'PE Arimo'; src: url('/fonts/Arimo-Bold.ttf') format('truetype'); font-weight: 700; font-style: normal; font-display: block; }
+@font-face { font-family: 'PE Arimo'; src: url('/fonts/Arimo-Italic.ttf') format('truetype'); font-weight: 400; font-style: italic; font-display: block; }
+@font-face { font-family: 'PE Arimo'; src: url('/fonts/Arimo-BoldItalic.ttf') format('truetype'); font-weight: 700; font-style: italic; font-display: block; }
+@font-face { font-family: 'PE Tinos'; src: url('/fonts/Tinos-Regular.ttf') format('truetype'); font-weight: 400; font-style: normal; font-display: block; }
+@font-face { font-family: 'PE Tinos'; src: url('/fonts/Tinos-Bold.ttf') format('truetype'); font-weight: 700; font-style: normal; font-display: block; }
+@font-face { font-family: 'PE Tinos'; src: url('/fonts/Tinos-Italic.ttf') format('truetype'); font-weight: 400; font-style: italic; font-display: block; }
+@font-face { font-family: 'PE Tinos'; src: url('/fonts/Tinos-BoldItalic.ttf') format('truetype'); font-weight: 700; font-style: italic; font-display: block; }
+@font-face { font-family: 'PE PT Sans'; src: url('/fonts/PT_Sans-Web-Regular.ttf') format('truetype'); font-weight: 400; font-style: normal; font-display: block; }
+@font-face { font-family: 'PE PT Sans'; src: url('/fonts/PT_Sans-Web-Bold.ttf') format('truetype'); font-weight: 700; font-style: normal; font-display: block; }
+@font-face { font-family: 'PE PT Sans'; src: url('/fonts/PT_Sans-Web-Italic.ttf') format('truetype'); font-weight: 400; font-style: italic; font-display: block; }
+@font-face { font-family: 'PE PT Sans'; src: url('/fonts/PT_Sans-Web-BoldItalic.ttf') format('truetype'); font-weight: 700; font-style: italic; font-display: block; }
+@font-face { font-family: 'PE PT Serif'; src: url('/fonts/PT_Serif-Web-Regular.ttf') format('truetype'); font-weight: 400; font-style: normal; font-display: block; }
+@font-face { font-family: 'PE PT Serif'; src: url('/fonts/PT_Serif-Web-Bold.ttf') format('truetype'); font-weight: 700; font-style: normal; font-display: block; }
+@font-face { font-family: 'PE PT Serif'; src: url('/fonts/PT_Serif-Web-Italic.ttf') format('truetype'); font-weight: 400; font-style: italic; font-display: block; }
+@font-face { font-family: 'PE PT Serif'; src: url('/fonts/PT_Serif-Web-BoldItalic.ttf') format('truetype'); font-weight: 700; font-style: italic; font-display: block; }
 
 .pe-empty { min-height: 100vh; display: grid; place-items: center; background: var(--bg); padding: 16px; position: relative; }
 .pe-back { position: absolute; top: 16px; left: 16px; }
@@ -76,8 +92,7 @@
 .pe-layer.tool-text { cursor: text; }
 .pe-layer.tool-rect, .pe-layer.tool-ellipse, .pe-layer.tool-line, .pe-layer.tool-whiteout, .pe-layer.tool-highlight { cursor: crosshair; }
 .pe-obj { position: absolute; display: block; box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
-.pe-text { white-space: pre-wrap; overflow-wrap: anywhere; overflow: visible; }
-.pe-text-edit { resize: none; border: none; outline: 1px dashed var(--accent); overflow: hidden; user-select: text; cursor: text; }
+.pe-text-edit { resize: none; border: none; outline: 1px dashed var(--accent); overflow: hidden; user-select: text; cursor: text; white-space: pre-wrap; overflow-wrap: anywhere; z-index: 3; }
 .pe-wrap > .pe-obj { cursor: move; }
 .pe-selbox { position: absolute; outline: 1px solid var(--accent); pointer-events: none; }
 .pe-handle {
@@ -85,8 +100,11 @@
   border: 1.5px solid var(--accent); border-radius: 2px; z-index: 2; cursor: nwse-resize;
 }
 .pe-handle.h-ne, .pe-handle.h-sw { cursor: nesw-resize; }
-.pe-run { position: absolute; cursor: text; border-radius: 2px; background: rgba(99, 91, 255, 0.06); outline: 1px dashed rgba(99, 91, 255, 0.35); }
-.pe-run:hover { background: rgba(99, 91, 255, 0.18); outline-color: var(--accent); }
+.pe-src { position: absolute; cursor: pointer; border-radius: 2px; }
+.pe-src:hover { outline: 1.5px solid var(--accent); background: rgba(99, 91, 255, 0.10); }
+.show-src .pe-src-text { outline: 1px dashed rgba(99, 91, 255, 0.35); }
+.show-src .pe-src-image { outline: 1px dashed rgba(26, 138, 95, 0.45); }
+.show-src .pe-src:hover { outline: 1.5px solid var(--accent); }
 
 @media (max-width: 760px) {
   .pe-thumbs { display: none; }

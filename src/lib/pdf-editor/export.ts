@@ -4,14 +4,9 @@ import {
 } from 'pdf-lib'
 import fontkit from '@pdf-lib/fontkit'
 import {
-  BASELINE_RATIO, LINE_HEIGHT, viewSize,
-  type EditorImage, type EditorPage, type FontFamily, type TextObj,
+  ASCENT, fontFile, viewSize, wrapText,
+  type EditorImage, type EditorPage, type TextObj,
 } from './types'
-
-export const FONT_FILES: Record<FontFamily, [string, string, string, string]> = {
-  sans: ['DejaVuSans.ttf', 'DejaVuSans-Bold.ttf', 'DejaVuSans-Oblique.ttf', 'DejaVuSans-BoldOblique.ttf'],
-  serif: ['DejaVuSerif.ttf', 'DejaVuSerif-Bold.ttf', 'DejaVuSerif-Italic.ttf', 'DejaVuSerif-BoldItalic.ttf'],
-}
 
 export type FontLoader = (file: string) => Promise<Uint8Array>
 
@@ -19,32 +14,6 @@ function hexToRgb(hex: string) {
   const h = hex.replace('#', '')
   const n = parseInt(h.length === 3 ? h.split('').map(c => c + c).join('') : h, 16)
   return rgb(((n >> 16) & 255) / 255, ((n >> 8) & 255) / 255, (n & 255) / 255)
-}
-
-/** Перенос строк по ширине — та же логика, что у CSS white-space: pre-wrap. */
-export function wrapText(text: string, maxW: number, measure: (s: string) => number): string[] {
-  const out: string[] = []
-  for (const para of text.split('\n')) {
-    const words = para.split(/(\s+)/)
-    let line = ''
-    for (const w of words) {
-      const cand = line + w
-      if (line && measure(cand.trimEnd()) > maxW && w.trim()) {
-        out.push(line.trimEnd())
-        line = w.trimStart()
-        while (measure(line) > maxW && line.length > 1) {
-          let i = line.length - 1
-          while (i > 1 && measure(line.slice(0, i)) > maxW) i--
-          out.push(line.slice(0, i))
-          line = line.slice(i)
-        }
-      } else {
-        line = cand
-      }
-    }
-    out.push(line)
-  }
-  return out
 }
 
 /** Матрица из «пространства просмотра» (x вправо, y вверх, размеры повёрнутой
@@ -85,7 +54,7 @@ export async function exportPdf(opts: {
 
   const fontCache = new Map<string, PDFFont>()
   const font = async (o: TextObj) => {
-    const file = FONT_FILES[o.family][(o.bold ? 1 : 0) + (o.italic ? 2 : 0)]
+    const file = fontFile(o.family, o.bold, o.italic)
     if (!fontCache.has(file)) fontCache.set(file, await out.embedFont(await opts.loadFont(file), { subset: true }))
     return fontCache.get(file)!
   }
@@ -142,7 +111,7 @@ export async function exportPdf(opts: {
         lines.forEach((ln, i) => {
           const lw = measure(ln)
           const x = o.align === 'center' ? o.x + (o.w - lw) / 2 : o.align === 'right' ? o.x + o.w - lw : o.x
-          const base = top - (i * LINE_HEIGHT + BASELINE_RATIO) * o.size
+          const base = top - (ASCENT + i * (o.lineHeight || 1.2)) * o.size
           if (ln) page.drawText(ln, { x, y: base, size: o.size, font: f, color, opacity: o.opacity })
           if (o.underline && ln) {
             page.drawLine({ start: { x, y: base - o.size * 0.12 }, end: { x: x + lw, y: base - o.size * 0.12 }, thickness: Math.max(0.5, o.size / 16), color, opacity: o.opacity })

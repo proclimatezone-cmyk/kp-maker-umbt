@@ -1,88 +1,79 @@
 'use client'
 
-import { useCallback, useEffect, useRef, useState } from 'react'
-import type { PDFDocumentProxy, PDFPageProxy } from 'pdfjs-dist'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import type * as MuPDF from 'mupdf'
 import {
-  ArrowLeft, Upload, Download, MousePointer2, Type, TextCursorInput, Square, Circle, Minus,
-  Eraser, Highlighter, ImagePlus, FilePlus2, FileInput, Trash2, Copy, RotateCw, ChevronUp,
-  ChevronDown, Undo2, Redo2, ZoomIn, ZoomOut, Bold, Italic, Underline, AlignLeft, AlignCenter,
-  AlignRight, BringToFront, SendToBack, Loader2,
+  ArrowLeft, Upload, Download, MousePointer2, Type, Square, Circle, Minus, Eraser, Highlighter,
+  ImagePlus, FilePlus2, FileInput, Trash2, Copy, RotateCw, ChevronUp, ChevronDown, Undo2, Redo2,
+  ZoomIn, ZoomOut, Bold, Italic, Underline, AlignLeft, AlignCenter, AlignRight, BringToFront,
+  SendToBack, Loader2, Replace, Eye, EyeOff,
 } from 'lucide-react'
 import { exportPdf } from '@/lib/pdf-editor/export'
+import { derivePage, extractImageRgba, extractItems, pageInfo, renderPage, type Mu, type SourceItem } from '@/lib/pdf-editor/engine'
 import {
-  BASELINE_RATIO, LINE_HEIGHT, viewSize,
+  ASCENT, FONTS, textBoxHeight, viewSize, wrapText,
   type EditorImage, type EditorObj, type EditorPage, type FontFamily, type TextObj,
 } from '@/lib/pdf-editor/types'
 import './pdf-editor.css'
 
-type Tool = 'select' | 'edit' | 'text' | 'rect' | 'ellipse' | 'line' | 'whiteout' | 'highlight'
+type Tool = 'select' | 'text' | 'rect' | 'ellipse' | 'line' | 'whiteout' | 'highlight'
 type Handle = 'nw' | 'ne' | 'sw' | 'se' | 'start' | 'end'
-type Run = { key: string; str: string; x: number; y: number; w: number; h: number; base: number; size: number; font: string }
 
-const uid = () => Math.random().toString(36).slice(2, 10) + Date.now().toString(36).slice(-4)
+const uid = () => Math.random().toString(36).slice(2, 8) + Date.now().toString(36).slice(-5)
 const A4 = { w: 595.28, h: 841.89 }
-const FAMILY_CSS: Record<FontFamily, string> = { sans: '"DejaVu Sans", sans-serif', serif: '"DejaVu Serif", serif' }
 const MIN = 4
 
-let pdfjsPromise: Promise<typeof import('pdfjs-dist')> | null = null
-function pdfjs() {
-  if (!pdfjsPromise) {
-    pdfjsPromise = import('pdfjs-dist').then(m => {
-      m.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs'
-      return m
-    })
-  }
-  return pdfjsPromise
-}
-async function openPdf(bytes: Uint8Array) {
-  const m = await pdfjs()
-  return m.getDocument({
-    data: bytes.slice(),
-    cMapUrl: '/pdfjs-cmaps/', cMapPacked: true,
-    standardFontDataUrl: '/pdfjs-standard-fonts/',
-  }).promise
+/* ------------------------------------------------------------------ */
+/* MuPDF: грузится в рантайме из /mupdf (WASM), мимо бандлера           */
+
+let muPromise: Promise<Mu> | null = null
+function loadMu(): Promise<Mu> {
+  if (!muPromise) muPromise = (new Function('u', 'return import(u)') as (u: string) => Promise<Mu>)('/mupdf/mupdf.js')
+  return muPromise
 }
 
-function lum(r: number, g: number, b: number) { return 0.299 * r + 0.587 * g + 0.114 * b }
-const toHex = (r: number, g: number, b: number) => '#' + [r, g, b].map(v => v.toString(16).padStart(2, '0')).join('')
-
-/** Сшивает куски текста pdf.js в строки, пригодные для правки. */
-async function extractRuns(page: PDFPageProxy, rotation: number): Promise<Run[]> {
-  const m = await pdfjs()
-  const vp = page.getViewport({ scale: 1, rotation })
-  const tc = await page.getTextContent()
-  const items: Run[] = []
-  for (const it of tc.items) {
-    if (!('str' in it) || !it.str) continue
-    const t = m.Util.transform(vp.transform, it.transform)
-    if (!(t[0] > 0) || Math.abs(t[1]) > 0.01 || Math.abs(t[2]) > 0.01) continue
-    const size = Math.abs(t[3])
-    if (size < 1) continue
-    let font = ''
-    try { if (page.commonObjs.has(it.fontName)) font = (page.commonObjs.get(it.fontName) as { name?: string })?.name || '' } catch { /* шрифт ещё не загружен */ }
-    items.push({ key: '', str: it.str, x: t[4], base: t[5], w: it.width, size, font, y: t[5] - size * 0.92, h: size * 1.18 })
-  }
-  items.sort((a, b) => (Math.abs(a.base - b.base) < 0.6 ? a.x - b.x : a.base - b.base))
-  const runs: Run[] = []
-  for (const it of items) {
-    const prev = runs[runs.length - 1]
-    const gap = prev ? it.x - (prev.x + prev.w) : 0
-    if (prev && Math.abs(prev.base - it.base) < 0.6 && prev.font === it.font && Math.abs(prev.size - it.size) < 0.5
-      && gap < it.size * 0.6 && gap > -it.size) {
-      prev.str += (gap > it.size * 0.15 && !prev.str.endsWith(' ') && !it.str.startsWith(' ') ? ' ' : '') + it.str
-      prev.w = it.x + it.w - prev.x
-    } else if (it.str.trim()) {
-      runs.push({ ...it })
+interface Derived { doc: MuPDF.PDFDocument; page: MuPDF.PDFPage; items?: SourceItem[] }
+const derivedCache = new Map<string, Derived>()
+const derivedKey = (p: EditorPage) => `${p.srcId}|${p.srcIndex}|${p.rotation}|${JSON.stringify(p.removed)}`
+function getDerived(mu: Mu, bytes: Uint8Array, p: EditorPage): Derived {
+  const k = derivedKey(p)
+  let d = derivedCache.get(k)
+  if (!d) {
+    d = derivePage(mu, bytes, p.srcIndex, p.rotation, p.removed)
+    derivedCache.set(k, d)
+    if (derivedCache.size > 40) {
+      const [oldK, old] = derivedCache.entries().next().value as [string, Derived]
+      derivedCache.delete(oldK)
+      try { old.page.destroy(); old.doc.destroy() } catch { /* уже освобождён */ }
     }
   }
-  for (const r of runs) { r.str = r.str.trim(); r.key = `${Math.round(r.x)}:${Math.round(r.base)}` }
-  return runs.filter(r => r.str)
+  return d
 }
 
-function measureText(o: Pick<TextObj, 'text' | 'size' | 'family' | 'bold' | 'italic'>) {
-  const c = document.createElement('canvas').getContext('2d')!
-  c.font = `${o.italic ? 'italic ' : ''}${o.bold ? 'bold ' : ''}${o.size}px ${FAMILY_CSS[o.family]}`
-  return Math.max(...o.text.split('\n').map(l => c.measureText(l).width))
+/* ------------------------------------------------------------------ */
+/* Текст: измерение тем же шрифтом, что и при экспорте                  */
+
+const measureCtx = typeof document !== 'undefined' ? document.createElement('canvas').getContext('2d')! : null
+function fontCss(o: Pick<TextObj, 'family' | 'bold' | 'italic' | 'size'>) {
+  return `${o.italic ? 'italic ' : ''}${o.bold ? 'bold ' : ''}${o.size}px ${FONTS[o.family]?.css || FONTS['dejavu-sans'].css}`
+}
+function measurer(o: Pick<TextObj, 'family' | 'bold' | 'italic' | 'size'>) {
+  measureCtx!.font = fontCss(o)
+  return (s: string) => measureCtx!.measureText(s).width
+}
+const layoutText = (o: TextObj) => wrapText(o.text, o.w + 0.5, measurer(o))
+/** Высота блока по фактическому числу строк. */
+const fitText = (o: TextObj): TextObj => ({ ...o, h: textBoxHeight(layoutText(o).length, o.size, o.lineHeight) })
+
+function rgbaToPng(px: { data: Uint8ClampedArray; w: number; h: number }) {
+  const cv = document.createElement('canvas')
+  cv.width = px.w; cv.height = px.h
+  cv.getContext('2d')!.putImageData(new ImageData(new Uint8ClampedArray(px.data), px.w, px.h), 0, 0)
+  const url = cv.toDataURL('image/png')
+  const bin = atob(url.slice(url.indexOf(',') + 1))
+  const bytes = new Uint8Array(bin.length)
+  for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i)
+  return { bytes, url }
 }
 
 async function fileToImage(file: File): Promise<EditorImage & { w: number; h: number }> {
@@ -105,14 +96,17 @@ async function fileToImage(file: File): Promise<EditorImage & { w: number; h: nu
 
 /* ------------------------------------------------------------------ */
 
-function ObjectView({ o, zoom, images, editing, onEditChange, onEditDone }: {
-  o: EditorObj; zoom: number; images: Map<string, EditorImage>
-  editing?: boolean; onEditChange?: (text: string, h: number) => void; onEditDone?: () => void
+function ObjectView({ o, zoom, images, editing, fontsTick, onEditChange, onEditDone }: {
+  o: EditorObj; zoom: number; images: Map<string, EditorImage>; fontsTick: number
+  editing?: boolean; onEditChange?: (text: string) => void; onEditDone?: () => void
 }) {
   const taRef = useRef<HTMLTextAreaElement>(null)
   useEffect(() => {
     if (editing && taRef.current) { taRef.current.focus(); taRef.current.select() }
   }, [editing])
+  const lines = useMemo(() => (o.type === 'text' ? layoutText(o) : []),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [o, fontsTick])
 
   const x = o.type === 'line' ? Math.min(o.x, o.x + o.w) : o.x
   const y = o.type === 'line' ? Math.min(o.y, o.y + o.h) : o.y
@@ -120,33 +114,46 @@ function ObjectView({ o, zoom, images, editing, onEditChange, onEditDone }: {
   const box: React.CSSProperties = { left: x * zoom, top: y * zoom, width: w * zoom, height: h * zoom, opacity: o.opacity }
 
   if (o.type === 'text') {
-    const style: React.CSSProperties = {
-      ...box, fontFamily: FAMILY_CSS[o.family], fontSize: o.size * zoom, lineHeight: LINE_HEIGHT,
-      fontWeight: o.bold ? 700 : 400, fontStyle: o.italic ? 'italic' : 'normal',
-      textDecoration: o.underline ? 'underline' : 'none', color: o.color, background: o.bg || 'transparent', textAlign: o.align,
-    }
     if (editing) {
+      const lhPx = o.size * o.lineHeight * zoom
       return (
         <textarea
-          ref={taRef} className="pe-obj pe-text pe-text-edit" style={style} value={o.text} spellCheck={false}
-          onPointerDown={e => e.stopPropagation()}
-          onChange={e => {
-            const ta = e.currentTarget
-            ta.style.height = '0px'
-            const sh = ta.scrollHeight
-            ta.style.height = ''
-            onEditChange?.(e.target.value, Math.max(o.size * LINE_HEIGHT, sh / zoom))
+          ref={taRef} className="pe-obj pe-text-edit" spellCheck={false} value={o.text}
+          style={{
+            ...box, height: Math.max(h * zoom, lhPx), fontFamily: FONTS[o.family].css, fontSize: o.size * zoom, lineHeight: `${lhPx}px`,
+            paddingTop: Math.max(0, (ASCENT * o.size * zoom) - lhPx / 2 - o.size * zoom * 0.33),
+            fontWeight: o.bold ? 700 : 400, fontStyle: o.italic ? 'italic' : 'normal', color: o.color,
+            background: o.bg || 'rgba(255,255,255,0.92)', textAlign: o.align,
           }}
+          onPointerDown={e => e.stopPropagation()}
+          onChange={e => onEditChange?.(e.target.value)}
           onBlur={onEditDone}
           onKeyDown={e => { if (e.key === 'Escape') { e.preventDefault(); onEditDone?.() } e.stopPropagation() }}
         />
       )
     }
-    return <div className="pe-obj pe-text" style={style}>{o.text || ' '}</div>
+    const m = measurer(o)
+    return (
+      <svg className="pe-obj" style={{ ...box, overflow: 'visible' }} width={Math.max(1, w * zoom)} height={Math.max(1, h * zoom)}>
+        {o.bg && <rect x={0} y={0} width={w * zoom} height={h * zoom} fill={o.bg} />}
+        {lines.map((ln, i) => {
+          const lw = m(ln)
+          const lx = o.align === 'center' ? (o.w - lw) / 2 : o.align === 'right' ? o.w - lw : 0
+          const by = (ASCENT + i * o.lineHeight) * o.size
+          return (
+            <g key={i}>
+              <text x={lx * zoom} y={by * zoom} fill={o.color} xmlSpace="preserve"
+                style={{ font: fontCss({ ...o, size: o.size * zoom }) }}>{ln}</text>
+              {o.underline && ln && <line x1={lx * zoom} x2={(lx + lw) * zoom} y1={(by + o.size * 0.12) * zoom} y2={(by + o.size * 0.12) * zoom}
+                stroke={o.color} strokeWidth={Math.max(0.5, o.size / 16) * zoom} />}
+            </g>
+          )
+        })}
+      </svg>
+    )
   }
   if (o.type === 'image') {
-    const im = images.get(o.imageId)
-    return <img className="pe-obj" style={box} src={im?.url} alt="" draggable={false} />
+    return <img className="pe-obj" style={box} src={images.get(o.imageId)?.url} alt="" draggable={false} />
   }
   const sw = (o.type === 'line' ? o.strokeWidth : o.stroke ? o.strokeWidth : 0) * zoom
   return (
@@ -161,62 +168,75 @@ function ObjectView({ o, zoom, images, editing, onEditChange, onEditDone }: {
   )
 }
 
-function PdfCanvas({ doc, page, zoom, canvasRef, onRendered }: {
-  doc: PDFDocumentProxy | undefined; page: EditorPage; zoom: number
-  canvasRef?: React.RefObject<HTMLCanvasElement | null>; onRendered?: (p: PDFPageProxy) => void
-}) {
-  const own = useRef<HTMLCanvasElement>(null)
-  const ref = canvasRef || own
+/** Фон страницы (исходник без вырезанных элементов), рисуется MuPDF при попадании в экран. */
+function PageCanvas({ mu, bytes, page, zoom }: { mu: Mu | null; bytes: Uint8Array | undefined; page: EditorPage; zoom: number }) {
+  const ref = useRef<HTMLCanvasElement>(null)
+  const [visible, setVisible] = useState(false)
   const { w, h } = viewSize(page)
+  const key = derivedKey(page)
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const io = new IntersectionObserver(([e]) => setVisible(e.isIntersecting), { rootMargin: '600px' })
+    io.observe(el)
+    return () => io.disconnect()
+  }, [])
   useEffect(() => {
     const cv = ref.current
-    if (!cv) return
+    if (!cv || !visible) return
     const dpr = window.devicePixelRatio || 1
-    cv.width = Math.round(w * zoom * dpr)
-    cv.height = Math.round(h * zoom * dpr)
-    const ctx = cv.getContext('2d', { willReadFrequently: true })!
-    ctx.fillStyle = '#fff'
-    ctx.fillRect(0, 0, cv.width, cv.height)
-    if (!doc || page.srcId === null) return
-    let task: ReturnType<PDFPageProxy['render']> | null = null
-    let cancelled = false
-    doc.getPage(page.srcIndex + 1).then(p => {
-      if (cancelled) return
-      task = p.render({ canvasContext: ctx, viewport: p.getViewport({ scale: zoom * dpr, rotation: page.rotation }) })
-      task.promise.then(() => onRendered?.(p)).catch(() => {})
-    })
-    return () => { cancelled = true; task?.cancel() }
+    const ctx = cv.getContext('2d')!
+    if (!mu || !bytes || !page.srcId) {
+      cv.width = Math.round(w * zoom * dpr); cv.height = Math.round(h * zoom * dpr)
+      ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, cv.width, cv.height)
+      return
+    }
+    const t = setTimeout(() => {
+      try {
+        const d = getDerived(mu, bytes, page)
+        const px = renderPage(mu, d.page, zoom * dpr)
+        cv.width = px.w; cv.height = px.h
+        ctx.putImageData(new ImageData(px.data as Uint8ClampedArray<ArrayBuffer>, px.w, px.h), 0, 0)
+      } catch (e) { console.error('render', e) }
+    }, 0)
+    return () => clearTimeout(t)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [doc, page.srcId, page.srcIndex, page.rotation, zoom, w, h])
+  }, [mu, bytes, key, zoom, visible, w, h])
   return <canvas ref={ref} className="pe-canvas" style={{ width: w * zoom, height: h * zoom }} />
 }
 
 /* ------------------------------------------------------------------ */
 
 export default function PdfEditorPage() {
+  const [mu, setMu] = useState<Mu | null>(null)
   const [fileName, setFileName] = useState('')
   const [pages, setPagesState] = useState<EditorPage[]>([])
   const pagesRef = useRef<EditorPage[]>([])
-  const [docs, setDocs] = useState<Map<string, PDFDocumentProxy>>(new Map())
-  const sources = useRef(new Map<string, Uint8Array>())
+  const [sources, setSources] = useState<Map<string, Uint8Array>>(new Map())
   const images = useRef(new Map<string, EditorImage>())
   const [tool, setTool] = useState<Tool>('select')
   const [zoom, setZoom] = useState(1.25)
   const [sel, setSel] = useState<{ page: string; id: string } | null>(null)
   const [curPage, setCurPage] = useState<string | null>(null)
   const [editingId, setEditingId] = useState<string | null>(null)
+  const [showSource, setShowSource] = useState(true)
   const [busy, setBusy] = useState('')
   const [err, setErr] = useState('')
   const [dirty, setDirty] = useState(false)
   const undoStack = useRef<EditorPage[][]>([])
   const redoStack = useRef<EditorPage[][]>([])
   const [, force] = useState(0)
+  const [fontsTick, setFontsTick] = useState(0)
   const clipboard = useRef<EditorObj | null>(null)
-  const [runs, setRuns] = useState<Record<string, Run[]>>({})
-  const pdfPages = useRef(new Map<string, PDFPageProxy>())
-  const [defaults, setDefaults] = useState({ size: 12, family: 'sans' as FontFamily, color: '#1a1f36', stroke: '#c0123c', fill: '' })
+  const [defaults, setDefaults] = useState({ size: 12, family: 'dejavu-sans' as FontFamily, color: '#1a1f36', stroke: '#c0123c', fill: '' })
   const [dragOver, setDragOver] = useState(false)
   const [thumbDrag, setThumbDrag] = useState<number | null>(null)
+
+  useEffect(() => {
+    loadMu().then(setMu).catch(e => setErr(`Не удалось загрузить движок PDF: ${(e as Error).message}`))
+    const fams = Object.values(FONTS).flatMap(f => ['', 'bold ', 'italic ', 'italic bold '].map(s => document.fonts.load(`${s}16px ${f.css}`)))
+    Promise.all(fams).then(() => setFontsTick(t => t + 1)).catch(() => {})
+  }, [])
 
   const setPages = useCallback((next: EditorPage[]) => { pagesRef.current = next; setPagesState(next) }, [])
   const commit = useCallback((next: EditorPage[], prev = pagesRef.current) => {
@@ -237,9 +257,13 @@ export default function PdfEditorPage() {
     undoStack.current.push(pagesRef.current); setPages(next); setSel(null); force(n => n + 1)
   }
 
+  const patchObj = (o: EditorObj, patch: Partial<EditorObj>): EditorObj => {
+    const n = { ...o, ...patch } as EditorObj
+    return n.type === 'text' ? fitText(n) : n
+  }
   const updateObj = useCallback((pageKey: string, id: string, patch: Partial<EditorObj>, record = true) => {
     const next = pagesRef.current.map(p => p.key !== pageKey ? p : {
-      ...p, objects: p.objects.map(o => o.id === id ? ({ ...o, ...patch } as EditorObj) : o),
+      ...p, objects: p.objects.map(o => o.id === id ? patchObj(o, patch) : o),
     })
     if (record) commit(next); else setPages(next)
   }, [commit, setPages])
@@ -251,20 +275,69 @@ export default function PdfEditorPage() {
 
   const selected = sel ? pages.find(p => p.key === sel.page)?.objects.find(o => o.id === sel.id) : undefined
 
+  /* ---------- исходные элементы страницы ---------- */
+
+  const itemsOf = (p: EditorPage): SourceItem[] => {
+    if (!mu || !p.srcId) return []
+    const bytes = sources.get(p.srcId)
+    if (!bytes) return []
+    try {
+      const d = getDerived(mu, bytes, p)
+      if (!d.items) d.items = extractItems(mu, d.page)
+      return d.items
+    } catch (e) { console.error(e); return [] }
+  }
+
+  /** Исходный абзац/картинка → редактируемый объект; исходник вырезается из страницы. */
+  const convertItem = (page: EditorPage, item: SourceItem, edit = false) => {
+    const snapshot = pagesRef.current
+    let obj: EditorObj
+    if (item.kind === 'text') {
+      const base: TextObj = {
+        id: uid(), type: 'text', x: item.x, y: item.base - ASCENT * item.size, w: item.w, h: 0, opacity: 1,
+        text: item.lines.join('\n'), size: Math.round(item.size * 100) / 100, family: item.family, bold: item.bold, italic: item.italic,
+        underline: false, color: item.color, align: item.align, lineHeight: item.lineHeight, bg: null,
+      }
+      // ширина — по самой длинной строке в нашем шрифте, центр/правый край сохраняются
+      const m = measurer(base)
+      const need = Math.max(...item.lines.map(l => m(l))) + 1
+      const grow = Math.max(0, need - item.w)
+      const x = base.align === 'center' ? item.x - grow / 2 : base.align === 'right' ? item.x - grow : item.x
+      obj = fitText({ ...base, x, w: item.w + grow })
+    } else {
+      const d = getDerived(mu!, sources.get(page.srcId!)!, page)
+      const px = extractImageRgba(mu!, d.page, item)
+      if (!px) { setErr('Не удалось извлечь изображение'); return }
+      const png = rgbaToPng(px)
+      const id = uid()
+      images.current.set(id, { bytes: png.bytes, mime: 'image/png', url: png.url })
+      obj = { id: uid(), type: 'image', imageId: id, x: item.x, y: item.y, w: item.w, h: item.h, opacity: 1 }
+    }
+    commit(pagesRef.current.map(p => p.key !== page.key ? p : { ...p, removed: [...p.removed, item.removal], objects: [...p.objects, obj] }), snapshot)
+    setSel({ page: page.key, id: obj.id })
+    setCurPage(page.key)
+    if (edit && obj.type === 'text') setEditingId(obj.id)
+    return obj
+  }
+
   /* ---------- файлы ---------- */
 
   const loadSource = async (file: File) => {
+    const m = mu || await loadMu()
     const bytes = new Uint8Array(await file.arrayBuffer())
-    const doc = await openPdf(bytes)
+    const doc = m.Document.openDocument(bytes, 'application/pdf')
+    if (!(doc instanceof m.PDFDocument)) throw new Error('Это не PDF')
+    if (doc.needsPassword()) throw new Error('PDF защищён паролем')
     const id = uid()
-    sources.current.set(id, bytes)
-    setDocs(prev => new Map(prev).set(id, doc))
     const list: EditorPage[] = []
-    for (let i = 0; i < doc.numPages; i++) {
-      const p = await doc.getPage(i + 1)
-      const [x0, y0, x1, y1] = p.view
-      list.push({ key: uid(), srcId: id, srcIndex: i, box: { x: x0, y: y0, w: x1 - x0, h: y1 - y0 }, rotation: p.rotate % 360, objects: [] })
+    for (let i = 0; i < doc.countPages(); i++) {
+      const pg = doc.loadPage(i) as MuPDF.PDFPage
+      const info = pageInfo(pg)
+      list.push({ key: uid(), srcId: id, srcIndex: i, box: info.box, rotation: info.rotation, removed: [], objects: [] })
+      pg.destroy()
     }
+    doc.destroy()
+    setSources(prev => new Map(prev).set(id, bytes))
     return list
   }
 
@@ -272,7 +345,6 @@ export default function PdfEditorPage() {
     if (dirty && !confirm('Несохранённые изменения будут потеряны. Открыть другой файл?')) return
     setErr(''); setBusy('Открываю PDF…')
     try {
-      sources.current.clear(); images.current.clear(); setDocs(new Map()); setRuns({}); pdfPages.current.clear()
       const list = await loadSource(file)
       undoStack.current = []; redoStack.current = []
       setPages(list); setCurPage(list[0]?.key || null); setSel(null); setDirty(false)
@@ -295,7 +367,7 @@ export default function PdfEditorPage() {
     } finally { setBusy('') }
   }
 
-  const insertImage = async (file: File) => {
+  const insertImage = async (file: File, replaceSel = false) => {
     const target = curPage || pagesRef.current[0]?.key
     const page = pagesRef.current.find(p => p.key === target)
     if (!page) return
@@ -303,6 +375,12 @@ export default function PdfEditorPage() {
       const im = await fileToImage(file)
       const id = uid()
       images.current.set(id, im)
+      if (replaceSel && sel && selected?.type === 'image') {
+        const ratio = im.w / im.h
+        const h = selected.w / ratio
+        updateObj(sel.page, sel.id, { imageId: id, h, y: selected.y + (selected.h - h) / 2 })
+        return
+      }
       const vs = viewSize(page)
       const scale = Math.min(1, (vs.w * 0.5) / im.w, (vs.h * 0.5) / im.h)
       const w = im.w * scale, h = im.h * scale
@@ -312,10 +390,20 @@ export default function PdfEditorPage() {
   }
 
   const save = async () => {
+    if (!mu) return
+    setEditingId(null)
     setErr(''); setBusy('Сохраняю PDF…')
     try {
+      const srcMap = new Map(sources)
+      const prepared = pagesRef.current.map(p => {
+        if (!p.srcId || !p.removed.length) return p
+        const d = getDerived(mu, sources.get(p.srcId)!, p)
+        const id = `d_${uid()}`
+        srcMap.set(id, d.doc.saveToBuffer('compress').asUint8Array().slice())
+        return { ...p, srcId: id }
+      })
       const bytes = await exportPdf({
-        pages: pagesRef.current, sources: sources.current, images: images.current, title: fileName,
+        pages: prepared, sources: srcMap, images: images.current, title: fileName,
         loadFont: async f => new Uint8Array(await (await fetch(`/fonts/${f}`)).arrayBuffer()),
       })
       const a = document.createElement('a')
@@ -325,6 +413,7 @@ export default function PdfEditorPage() {
       setTimeout(() => URL.revokeObjectURL(a.href), 10_000)
       setDirty(false)
     } catch (e) {
+      console.error(e)
       setErr(`Ошибка сохранения: ${(e as Error).message}`)
     } finally { setBusy('') }
   }
@@ -332,16 +421,15 @@ export default function PdfEditorPage() {
   /* ---------- страницы ---------- */
 
   const pageIdx = (key: string | null) => pagesRef.current.findIndex(p => p.key === key)
+  const scrollToPage = (key: string) => setTimeout(() => document.getElementById(`pe-page-${key}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50)
   const addBlank = () => {
     const cur = pagesRef.current
     const i = pageIdx(curPage)
-    const ref = cur[i]
-    const size = ref ? viewSize(ref) : A4
-    const page: EditorPage = { key: uid(), srcId: null, srcIndex: 0, box: { x: 0, y: 0, w: size.w, h: size.h }, rotation: 0, objects: [] }
+    const size = cur[i] ? viewSize(cur[i]) : A4
+    const page: EditorPage = { key: uid(), srcId: null, srcIndex: 0, box: { x: 0, y: 0, w: size.w, h: size.h }, rotation: 0, removed: [], objects: [] }
     const at = i >= 0 ? i + 1 : cur.length
     commit([...cur.slice(0, at), page, ...cur.slice(at)])
-    setCurPage(page.key)
-    setTimeout(() => document.getElementById(`pe-page-${page.key}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50)
+    setCurPage(page.key); scrollToPage(page.key)
   }
   const deletePage = (key: string) => {
     if (pagesRef.current.length <= 1) { setErr('Нельзя удалить единственную страницу'); return }
@@ -357,7 +445,11 @@ export default function PdfEditorPage() {
     const copy = { ...src, key: uid(), objects: src.objects.map(o => ({ ...o, id: uid() })) }
     commit([...pagesRef.current.slice(0, i + 1), copy, ...pagesRef.current.slice(i + 1)])
   }
-  const rotatePage = (key: string) => commit(pagesRef.current.map(p => p.key === key ? { ...p, rotation: (p.rotation + 90) % 360 } : p))
+  const rotatePage = (key: string) => {
+    const p = pagesRef.current.find(x => x.key === key)
+    if (p?.objects.length && !confirm('На странице есть добавленные объекты — после поворота их может понадобиться передвинуть. Повернуть?')) return
+    commit(pagesRef.current.map(x => x.key === key ? { ...x, rotation: (x.rotation + 90) % 360 } : x))
+  }
   const movePage = (from: number, to: number) => {
     const cur = [...pagesRef.current]
     if (to < 0 || to >= cur.length || from === to) return
@@ -386,64 +478,11 @@ export default function PdfEditorPage() {
     }))
   }
 
-  const newText = (x: number, y: number, extra: Partial<TextObj> = {}): TextObj => ({
-    id: uid(), type: 'text', x, y, w: 200, h: defaults.size * LINE_HEIGHT, opacity: 1, text: 'Текст',
+  const newText = (x: number, y: number): TextObj => fitText({
+    id: uid(), type: 'text', x, y, w: 200, h: 0, opacity: 1, text: 'Текст',
     size: defaults.size, family: defaults.family, bold: false, italic: false, underline: false,
-    color: defaults.color, align: 'left', bg: null, ...extra,
+    color: defaults.color, align: 'left', lineHeight: 1.2, bg: null,
   })
-
-  /** Замена существующего текста PDF: замазка цветом фона + редактируемый блок поверх. */
-  const replaceRun = (page: EditorPage, run: Run) => {
-    const fn = run.font.toLowerCase()
-    const style = {
-      text: run.str, size: Math.round(run.size * 10) / 10,
-      family: (/serif|times|roman|georgia|cambria/.test(fn) && !/sans/.test(fn) ? 'serif' : 'sans') as FontFamily,
-      bold: /bold|black|heavy|semibold|demi/.test(fn), italic: /italic|oblique/.test(fn),
-    }
-    const tw = measureText(style)
-    const cover: EditorObj = { id: uid(), type: 'rect', x: run.x - 1.5, y: run.y - 1, w: run.w + 3, h: run.h + 2, opacity: 1, fill: '#ffffff', stroke: null, strokeWidth: 0, origin: run.key }
-    const txt = newText(run.x, run.base - BASELINE_RATIO * style.size, { ...style, color: '#000000', w: Math.max(run.w, tw) + 4, h: style.size * LINE_HEIGHT })
-    addObjects(page.key, [cover, txt])
-    setTool('select')
-    setEditingId(txt.id)
-    sampleColors(page, run).then(c => {
-      if (!c) return
-      setPages(pagesRef.current.map(p => p.key !== page.key ? p : {
-        ...p, objects: p.objects.map(o => o.id === cover.id ? { ...o, fill: c.bg } as EditorObj
-          : o.id === txt.id && (o as TextObj).color === '#000000' ? { ...o, color: c.fg } as EditorObj : o),
-      }))
-    }).catch(() => {})
-  }
-
-  /** Цвет фона и текста под строкой — из отдельного рендера страницы. */
-  const sampleColors = async (page: EditorPage, run: Run) => {
-    const doc = page.srcId ? docs.get(page.srcId) : undefined
-    if (!doc) return null
-    const pp = await doc.getPage(page.srcIndex + 1)
-    const vp = pp.getViewport({ scale: 2, rotation: page.rotation })
-    const cv = document.createElement('canvas')
-    cv.width = Math.round(vp.width); cv.height = Math.round(vp.height)
-    const ctx = cv.getContext('2d', { willReadFrequently: true })!
-    ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, cv.width, cv.height)
-    await pp.render({ canvasContext: ctx, viewport: vp }).promise
-    const k = 2
-    const px = (x: number, y: number) => {
-      const d = ctx.getImageData(Math.max(0, Math.min(cv.width - 1, Math.round(x * k))), Math.max(0, Math.min(cv.height - 1, Math.round(y * k))), 1, 1).data
-      return [d[0], d[1], d[2]] as [number, number, number]
-    }
-    const ring = [
-      px(run.x - 2, run.y - 1), px(run.x + run.w + 2, run.y - 1), px(run.x - 2, run.y + run.h + 1),
-      px(run.x + run.w + 2, run.y + run.h + 1), px(run.x + run.w / 2, run.y - 2), px(run.x + run.w / 2, run.y + run.h + 2),
-    ]
-    const b = ring.sort((a, c) => lum(...c) - lum(...a))[0]
-    const d = ctx.getImageData(Math.round(run.x * k), Math.round(run.y * k), Math.max(1, Math.round(run.w * k)), Math.max(1, Math.round(run.h * k))).data
-    let best = 0, f: [number, number, number] = [0, 0, 0]
-    for (let i = 0; i < d.length; i += 4) {
-      const dist = Math.abs(d[i] - b[0]) + Math.abs(d[i + 1] - b[1]) + Math.abs(d[i + 2] - b[2])
-      if (dist > best) { best = dist; f = [d[i], d[i + 1], d[i + 2]] }
-    }
-    return { bg: toHex(...b), fg: toHex(...f) }
-  }
 
   /* ---------- мышь ---------- */
 
@@ -457,24 +496,25 @@ export default function PdfEditorPage() {
     return { x: (e.clientX - r.left) / zoom, y: (e.clientY - r.top) / zoom }
   }
 
-  const startDrag = (e: React.PointerEvent, page: EditorPage, obj: EditorObj, kind: 'move' | 'resize' | 'create', handle?: Handle, snapshot = pagesRef.current) => {
-    const layer = (e.currentTarget as HTMLElement).closest('.pe-layer') as HTMLElement
-    const p = toPt(e, layer)
-    drag.current = { kind, page: page.key, id: obj.id, handle, sx: p.x, sy: p.y, orig: obj, snapshot, moved: false }
+  const startDrag = (e: { clientX: number; clientY: number }, layerEl: HTMLElement, pageKey: string, obj: EditorObj,
+    kind: 'move' | 'resize' | 'create', handle?: Handle, snapshot = pagesRef.current) => {
+    const p = toPt(e, layerEl)
+    drag.current = { kind, page: pageKey, id: obj.id, handle, sx: p.x, sy: p.y, orig: obj, snapshot, moved: false }
     const onMove = (ev: PointerEvent) => {
       const d = drag.current
       if (!d) return
-      const q = toPt(ev, layer)
+      const q = toPt(ev, layerEl)
       const dx = q.x - d.sx, dy = q.y - d.sy
       if (Math.abs(dx) + Math.abs(dy) > 0.5) d.moved = true
+      if (!d.moved) return
       const o = d.orig
       let patch: Partial<EditorObj> = {}
       if (d.kind === 'move') {
         patch = { x: o.x + dx, y: o.y + dy }
-      } else if (o.type === 'line' || d.handle === 'start' || d.handle === 'end') {
+      } else if (o.type === 'line') {
         patch = d.handle === 'start' ? { x: o.x + dx, y: o.y + dy, w: o.w - dx, h: o.h - dy } : { w: o.w + dx, h: o.h + dy }
         if (ev.shiftKey) {
-          const pw = (patch.w ?? o.w), ph = (patch.h ?? o.h)
+          const pw = patch.w ?? o.w, ph = patch.h ?? o.h
           if (Math.abs(pw) > Math.abs(ph)) patch.h = 0; else patch.w = 0
           if (d.handle === 'start') { patch.x = o.x + o.w - (patch.w ?? 0); patch.y = o.y + o.h - (patch.h ?? 0) }
         }
@@ -483,13 +523,11 @@ export default function PdfEditorPage() {
         if (d.handle!.includes('w')) l += dx; else r += dx
         if (d.handle!.includes('n')) t += dy; else b += dy
         if (o.type === 'image' && !ev.shiftKey && d.kind === 'resize') {
-          const ratio = o.w / o.h
-          const nw = Math.abs(r - l)
-          const nh = nw / ratio
+          const nh = Math.abs(r - l) / (o.w / o.h)
           if (d.handle!.includes('n')) t = b - nh; else b = t + nh
         }
         patch = { x: Math.min(l, r), y: Math.min(t, b), w: Math.max(Math.abs(r - l), MIN), h: Math.max(Math.abs(b - t), MIN) }
-        if (o.type === 'text') patch.h = Math.max(patch.h!, o.size * LINE_HEIGHT)
+        if (o.type === 'text') { delete patch.h; patch.y = o.y }
       }
       updateObj(d.page, d.id, patch, false)
     }
@@ -502,14 +540,15 @@ export default function PdfEditorPage() {
       if (d.kind === 'create') {
         const created = pagesRef.current.find(p => p.key === d.page)?.objects.find(o => o.id === d.id)
         if (created && !d.moved && created.type !== 'text') {
-          const def = created.type === 'line' ? { w: 120, h: 0 } : { w: 120, h: created.type === 'rect' && (created as { origin?: string }).origin === 'hl' ? 16 : 60 }
-          updateObj(d.page, d.id, def, false)
+          updateObj(d.page, d.id, created.type === 'line' ? { w: 120, h: 0 } : { w: 120, h: created.origin === 'hl' ? 16 : 60 }, false)
         }
         undoStack.current.push(d.snapshot); redoStack.current = []; setDirty(true)
         if (created?.type === 'text') setEditingId(created.id)
         setTool('select')
       } else if (d.moved) {
-        undoStack.current.push(d.snapshot); redoStack.current = []; setDirty(true)
+        // при конвертации исходника snapshot уже записан в историю — повторно не пишем
+        if (undoStack.current[undoStack.current.length - 1] !== d.snapshot) { undoStack.current.push(d.snapshot); redoStack.current = [] }
+        setDirty(true)
       }
       force(n => n + 1)
     }
@@ -521,7 +560,7 @@ export default function PdfEditorPage() {
     setCurPage(page.key)
     if (e.button !== 0) return
     if (editingId) { setEditingId(null); return }
-    if (tool === 'select' || tool === 'edit') { setSel(null); return }
+    if (tool === 'select') { setSel(null); return }
     e.preventDefault()
     const p = toPt(e, e.currentTarget)
     const base = { id: uid(), x: p.x, y: p.y, w: 0, h: 0, opacity: 1 }
@@ -532,35 +571,14 @@ export default function PdfEditorPage() {
       case 'ellipse': obj = { ...base, type: 'ellipse', fill: defaults.fill || null, stroke: defaults.stroke, strokeWidth: 1.5 }; break
       case 'line': obj = { ...base, type: 'line', stroke: defaults.stroke, strokeWidth: 1.5 }; break
       case 'whiteout': obj = { ...base, type: 'rect', fill: '#ffffff', stroke: null, strokeWidth: 0 }; break
-      case 'highlight': obj = { ...base, type: 'rect', fill: '#ffe066', stroke: null, strokeWidth: 0, opacity: 0.4, origin: 'hl' } as EditorObj; break
+      case 'highlight': obj = { ...base, type: 'rect', fill: '#ffe066', stroke: null, strokeWidth: 0, opacity: 0.4, origin: 'hl' }; break
       default: return
     }
     const snapshot = pagesRef.current
-    const next = pagesRef.current.map(pg => pg.key !== page.key ? pg : { ...pg, objects: [...pg.objects, obj] })
-    setPages(next)
+    setPages(pagesRef.current.map(pg => pg.key !== page.key ? pg : { ...pg, objects: [...pg.objects, obj] }))
     setSel({ page: page.key, id: obj.id })
-    startDrag(e, page, obj, tool === 'text' ? 'move' : 'create', tool === 'line' ? 'end' : 'se', snapshot)
-    if (drag.current) drag.current.kind = 'create'
+    startDrag(e, e.currentTarget, page.key, obj, 'create', tool === 'line' ? 'end' : 'se', snapshot)
   }
-
-  /* ---------- текст PDF для режима правки ---------- */
-
-  useEffect(() => {
-    if (tool !== 'edit') return
-    let alive = true
-    ;(async () => {
-      const out: Record<string, Run[]> = {}
-      for (const p of pagesRef.current) {
-        if (!p.srcId) continue
-        const doc = docs.get(p.srcId)
-        if (!doc) continue
-        const pp = pdfPages.current.get(p.key) || await doc.getPage(p.srcIndex + 1)
-        out[p.key] = await extractRuns(pp, p.rotation)
-      }
-      if (alive) setRuns(out)
-    })()
-    return () => { alive = false }
-  }, [tool, docs, pages.length, pages.map(p => p.rotation).join()])
 
   /* ---------- клавиатура ---------- */
 
@@ -569,12 +587,13 @@ export default function PdfEditorPage() {
       const tag = (e.target as HTMLElement)?.tagName
       if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return
       const mod = e.metaKey || e.ctrlKey
-      if (mod && e.key.toLowerCase() === 'z') { e.preventDefault(); if (e.shiftKey) redo(); else undo(); return }
-      if (mod && e.key.toLowerCase() === 'y') { e.preventDefault(); redo(); return }
-      if (mod && e.key.toLowerCase() === 's') { e.preventDefault(); if (pagesRef.current.length) save(); return }
-      if (mod && e.key.toLowerCase() === 'd') { e.preventDefault(); duplicateSelected(); return }
-      if (mod && e.key.toLowerCase() === 'c' && selected) { clipboard.current = selected; return }
-      if (mod && e.key.toLowerCase() === 'v' && clipboard.current) {
+      const k = e.key.toLowerCase()
+      if (mod && (k === 'z' || k === 'я')) { e.preventDefault(); if (e.shiftKey) redo(); else undo(); return }
+      if (mod && (k === 'y' || k === 'н')) { e.preventDefault(); redo(); return }
+      if (mod && (k === 's' || k === 'ы')) { e.preventDefault(); if (pagesRef.current.length) save(); return }
+      if (mod && (k === 'd' || k === 'в')) { e.preventDefault(); duplicateSelected(); return }
+      if (mod && (k === 'c' || k === 'с') && selected) { clipboard.current = selected; return }
+      if (mod && (k === 'v' || k === 'м') && clipboard.current) {
         const target = curPage || sel?.page
         if (target) addObjects(target, [{ ...clipboard.current, id: uid(), x: clipboard.current.x + 10, y: clipboard.current.y + 10 } as EditorObj])
         return
@@ -613,14 +632,13 @@ export default function PdfEditorPage() {
   }
 
   const tools: [Tool, React.ReactNode, string][] = [
-    ['select', <MousePointer2 key="s" size={16} />, 'Выбор и перемещение (Esc)'],
-    ['edit', <TextCursorInput key="e" size={16} />, 'Править текст PDF — кликните по строке'],
+    ['select', <MousePointer2 key="s" size={16} />, 'Выбор и правка: клик по любому тексту или картинке документа (Esc)'],
     ['text', <Type key="t" size={16} />, 'Добавить текст'],
     ['rect', <Square key="r" size={16} />, 'Прямоугольник'],
     ['ellipse', <Circle key="c" size={16} />, 'Эллипс'],
     ['line', <Minus key="l" size={16} />, 'Линия (Shift — ровно)'],
-    ['whiteout', <Eraser key="w" size={16} />, 'Замазка — скрыть элемент'],
-    ['highlight', <Highlighter key="h" size={16} />, 'Выделение маркером'],
+    ['whiteout', <Eraser key="w" size={16} />, 'Замазка'],
+    ['highlight', <Highlighter key="h" size={16} />, 'Маркер'],
   ]
 
   const textSel = selected?.type === 'text' ? selected : null
@@ -638,12 +656,12 @@ export default function PdfEditorPage() {
         <div className={`pe-drop ${dragOver ? 'over' : ''}`}>
           <FileInput size={40} strokeWidth={1.5} />
           <h1>Редактор PDF</h1>
-          <p>Перетащите сюда готовое КП или любой PDF — или выберите файл.</p>
-          <button className="btn btn-primary" onClick={() => pickFile('application/pdf,.pdf', openFile)} disabled={!!busy}>
-            {busy ? <Loader2 size={14} className="spin" /> : <Upload size={14} />} {busy || 'Открыть PDF'}
+          <p>Перетащите сюда готовое КП или любой PDF — или выберите файл. Любой текст и любую картинку документа можно изменить, передвинуть или удалить.</p>
+          <button className="btn btn-primary" onClick={() => pickFile('application/pdf,.pdf', openFile)} disabled={!!busy || !mu}>
+            {busy || !mu ? <Loader2 size={14} className="spin" /> : <Upload size={14} />} {busy || (mu ? 'Открыть PDF' : 'Загрузка движка…')}
           </button>
           <button className="btn btn-ghost" onClick={() => {
-            const page: EditorPage = { key: uid(), srcId: null, srcIndex: 0, box: { x: 0, y: 0, ...A4 }, rotation: 0, objects: [] }
+            const page: EditorPage = { key: uid(), srcId: null, srcIndex: 0, box: { x: 0, y: 0, ...A4 }, rotation: 0, removed: [], objects: [] }
             setPages([page]); setCurPage(page.key); setFileName('Новый документ')
           }}>
             <FilePlus2 size={14} /> Пустой документ A4
@@ -685,22 +703,26 @@ export default function PdfEditorPage() {
         {tools.map(([t, icon, title]) => (
           <button key={t} className={`pe-tool ${tool === t ? 'on' : ''}`} title={title} onClick={() => { setTool(t); setEditingId(null) }}>{icon}</button>
         ))}
-        <button className="pe-tool" title="Вставить изображение / печать / подпись" onClick={() => pickFile('image/*', insertImage)}><ImagePlus size={16} /></button>
+        <button className="pe-tool" title="Вставить изображение / печать / подпись" onClick={() => pickFile('image/*', f => insertImage(f))}><ImagePlus size={16} /></button>
+        <button className={`pe-tool ${showSource ? 'on' : ''}`} title="Подсвечивать редактируемые элементы документа" onClick={() => setShowSource(v => !v)}>
+          {showSource ? <Eye size={16} /> : <EyeOff size={16} />}
+        </button>
         <span className="pe-sep" />
         <button className="pe-tool" title="Добавить пустую страницу после текущей" onClick={addBlank}><FilePlus2 size={16} /></button>
         <button className="pe-tool" title="Вставить страницы из другого PDF после текущей" onClick={() => pickFile('application/pdf,.pdf', insertPdf)}><FileInput size={16} /></button>
         <span className="pe-sep" />
         <div className="pe-props">
           {textSel && <>
-            <select value={textSel.family} onChange={e => { patch({ family: e.target.value as FontFamily }); setDefaults(d => ({ ...d, family: e.target.value as FontFamily })) }}>
-              <option value="sans">DejaVu Sans</option>
-              <option value="serif">DejaVu Serif</option>
+            <select value={textSel.family} onChange={e => { const f = e.target.value as FontFamily; patch({ family: f }); setDefaults(d => ({ ...d, family: f })) }}>
+              {Object.entries(FONTS).map(([k, f]) => <option key={k} value={k}>{f.label}</option>)}
             </select>
-            <input type="number" min={4} max={200} step={0.5} value={textSel.size} title="Размер, pt"
-              onChange={e => { const v = +e.target.value || 12; patch({ size: v, h: Math.max(textSel.h, v * LINE_HEIGHT) }); setDefaults(d => ({ ...d, size: v })) }} />
-            <button className={`pe-tool ${textSel.bold ? 'on' : ''}`} onClick={() => patch({ bold: !textSel.bold })}><Bold size={14} /></button>
-            <button className={`pe-tool ${textSel.italic ? 'on' : ''}`} onClick={() => patch({ italic: !textSel.italic })}><Italic size={14} /></button>
-            <button className={`pe-tool ${textSel.underline ? 'on' : ''}`} onClick={() => patch({ underline: !textSel.underline })}><Underline size={14} /></button>
+            <input type="number" min={4} max={300} step={0.5} value={textSel.size} title="Кегль, pt"
+              onChange={e => { const v = +e.target.value || 12; patch({ size: v }); setDefaults(d => ({ ...d, size: v })) }} />
+            <input type="number" min={0.8} max={3} step={0.05} value={textSel.lineHeight} title="Межстрочный интервал"
+              onChange={e => patch({ lineHeight: +e.target.value || 1.2 })} />
+            <button className={`pe-tool ${textSel.bold ? 'on' : ''}`} title="Жирный" onClick={() => patch({ bold: !textSel.bold })}><Bold size={14} /></button>
+            <button className={`pe-tool ${textSel.italic ? 'on' : ''}`} title="Курсив" onClick={() => patch({ italic: !textSel.italic })}><Italic size={14} /></button>
+            <button className={`pe-tool ${textSel.underline ? 'on' : ''}`} title="Подчёркнутый" onClick={() => patch({ underline: !textSel.underline })}><Underline size={14} /></button>
             {(['left', 'center', 'right'] as const).map(a => (
               <button key={a} className={`pe-tool ${textSel.align === a ? 'on' : ''}`} onClick={() => patch({ align: a })}>
                 {a === 'left' ? <AlignLeft size={14} /> : a === 'center' ? <AlignCenter size={14} /> : <AlignRight size={14} />}
@@ -724,18 +746,21 @@ export default function PdfEditorPage() {
               {shapeSel.fill && <button className="pe-mini" onClick={() => patch({ fill: null })}>без заливки</button>}
             </>}
           </>}
+          {selected?.type === 'image' && (
+            <button className="pe-tool" title="Заменить изображение" onClick={() => pickFile('image/*', f => insertImage(f, true))}><Replace size={14} /></button>
+          )}
           {selected && <>
             <label className="pe-op" title="Непрозрачность">
-              <input type="range" min={0.05} max={1} step={0.05} value={selected.opacity} onChange={e => updateObj(sel!.page, sel!.id, { opacity: +e.target.value }, false)}
-                onPointerUp={() => { undoStack.current.push(pagesRef.current); setDirty(true) }} />
+              <input type="range" min={0.05} max={1} step={0.05} value={selected.opacity}
+                onPointerDown={() => { undoStack.current.push(pagesRef.current); setDirty(true) }}
+                onChange={e => updateObj(sel!.page, sel!.id, { opacity: +e.target.value }, false)} />
             </label>
             <button className="pe-tool" title="На передний план" onClick={() => reorder(true)}><BringToFront size={14} /></button>
             <button className="pe-tool" title="На задний план" onClick={() => reorder(false)}><SendToBack size={14} /></button>
             <button className="pe-tool" title="Дублировать (Ctrl+D)" onClick={duplicateSelected}><Copy size={14} /></button>
             <button className="pe-tool danger" title="Удалить (Delete)" onClick={deleteSelected}><Trash2 size={14} /></button>
           </>}
-          {!selected && tool === 'edit' && <span className="pe-hint">Кликните по любой строке текста в документе, чтобы изменить её</span>}
-          {!selected && tool === 'select' && <span className="pe-hint">Двойной клик по тексту — редактировать. Перетащите PDF или картинку в окно — вставить.</span>}
+          {!selected && tool === 'select' && <span className="pe-hint">Клик по тексту или картинке документа — выделить и двигать, двойной клик — править текст, Delete — удалить.</span>}
         </div>
       </div>
 
@@ -752,11 +777,11 @@ export default function PdfEditorPage() {
                 draggable onDragStart={() => setThumbDrag(i)} onDragEnd={() => setThumbDrag(null)}
                 onDragOver={e => { if (thumbDrag !== null) e.preventDefault() }}
                 onDrop={e => { if (thumbDrag !== null) { e.preventDefault(); e.stopPropagation(); movePage(thumbDrag, i); setThumbDrag(null) } }}
-                onClick={() => { setCurPage(p.key); document.getElementById(`pe-page-${p.key}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' }) }}>
+                onClick={() => { setCurPage(p.key); scrollToPage(p.key) }}>
                 <div className="pe-thumb-img" style={{ width: vs.w * tz, height: vs.h * tz }}>
-                  <PdfCanvas doc={p.srcId ? docs.get(p.srcId) : undefined} page={p} zoom={tz} />
+                  <PageCanvas mu={mu} bytes={p.srcId ? sources.get(p.srcId) : undefined} page={p} zoom={tz} />
                   <div className="pe-layer static">
-                    {p.objects.map(o => <ObjectView key={o.id} o={o} zoom={tz} images={images.current} />)}
+                    {p.objects.map(o => <ObjectView key={o.id} o={o} zoom={tz} images={images.current} fontsTick={fontsTick} />)}
                   </div>
                 </div>
                 <div className="pe-thumb-bar">
@@ -776,39 +801,58 @@ export default function PdfEditorPage() {
         <main className="pe-main">
           {pages.map((p, i) => {
             const vs = viewSize(p)
-            const replaced = new Set(p.objects.map(o => (o as { origin?: string }).origin).filter(Boolean))
+            const items = tool === 'select' ? itemsOf(p) : []
+            const pageArea = vs.w * vs.h
+            // крупные картинки снизу, мелкие и текст сверху; фон на всю страницу не перехватывает клики
+            const hits = items.filter(it => it.kind === 'text' || it.w * it.h < pageArea * 0.85)
+              .sort((a, b) => (a.kind === b.kind ? b.w * b.h - a.w * a.h : a.kind === 'image' ? -1 : 1))
             return (
               <section key={p.key} id={`pe-page-${p.key}`} className={`pe-page ${curPage === p.key ? 'on' : ''}`}>
                 <div className="pe-page-label">Стр. {i + 1} из {pages.length}</div>
                 <div className="pe-sheet" style={{ width: vs.w * zoom, height: vs.h * zoom }}>
-                  <PdfCanvas doc={p.srcId ? docs.get(p.srcId) : undefined} page={p} zoom={zoom}
-                    onRendered={pp => pdfPages.current.set(p.key, pp)} />
-                  <div className={`pe-layer tool-${tool}`} onPointerDown={e => onLayerDown(e, p)}>
+                  <PageCanvas mu={mu} bytes={p.srcId ? sources.get(p.srcId) : undefined} page={p} zoom={zoom} />
+                  <div className={`pe-layer tool-${tool} ${showSource ? 'show-src' : ''}`} onPointerDown={e => onLayerDown(e, p)}>
+                    {hits.map(it => (
+                      <div key={it.key} className={`pe-src pe-src-${it.kind}`}
+                        title={it.kind === 'text' ? it.lines.join(' ') : 'Изображение'}
+                        style={{ left: it.x * zoom, top: it.y * zoom, width: it.w * zoom, height: it.h * zoom }}
+                        onPointerDown={e => {
+                          if (e.button !== 0) return
+                          e.stopPropagation()
+                          if (editingId) setEditingId(null)
+                          const layer = e.currentTarget.parentElement as HTMLElement
+                          const pt = { clientX: e.clientX, clientY: e.clientY }
+                          const snapshot = pagesRef.current
+                          const obj = convertItem(p, it, e.detail >= 2)
+                          if (obj && e.detail < 2) startDrag(pt, layer, p.key, obj, 'move', undefined, snapshot)
+                        }} />
+                    ))}
                     {p.objects.map(o => {
                       const isSel = sel?.page === p.key && sel.id === o.id
                       return (
                         <div key={o.id} className={`pe-wrap ${isSel ? 'sel' : ''}`}
                           onPointerDown={e => {
-                            if (tool !== 'select' && tool !== 'edit') return
+                            if (tool !== 'select') return
                             e.stopPropagation()
                             if (editingId === o.id) return
                             if (editingId) setEditingId(null)
-                            setCurPage(p.key); setSel({ page: p.key, id: o.id }); setTool('select')
-                            startDrag(e, p, o, 'move')
+                            setCurPage(p.key); setSel({ page: p.key, id: o.id })
+                            if (e.detail >= 2 && o.type === 'text') { e.preventDefault(); setEditingId(o.id); return }
+                            startDrag(e, e.currentTarget.parentElement as HTMLElement, p.key, o, 'move')
                           }}
                           onDoubleClick={() => { if (o.type === 'text') setEditingId(o.id) }}>
-                          <ObjectView o={o} zoom={zoom} images={images.current} editing={editingId === o.id}
-                            onEditChange={(text, h) => updateObj(p.key, o.id, { text, h: Math.max(h, (o as TextObj).size * LINE_HEIGHT) }, false)}
+                          <ObjectView o={o} zoom={zoom} images={images.current} fontsTick={fontsTick} editing={editingId === o.id}
+                            onEditChange={text => updateObj(p.key, o.id, { text }, false)}
                             onEditDone={() => { setEditingId(null); undoStack.current.push(pagesRef.current); setDirty(true) }} />
-                          {isSel && editingId !== o.id && <SelectionBox o={o} zoom={zoom} onHandle={(e, h) => { e.stopPropagation(); startDrag(e, p, o, 'resize', h) }} />}
+                          {isSel && editingId !== o.id && (
+                            <SelectionBox o={o} zoom={zoom} onHandle={(e, h) => {
+                              e.stopPropagation()
+                              startDrag(e, (e.currentTarget as HTMLElement).closest('.pe-layer') as HTMLElement, p.key, o, 'resize', h)
+                            }} />
+                          )}
                         </div>
                       )
                     })}
-                    {tool === 'edit' && runs[p.key]?.filter(r => !replaced.has(r.key)).map(r => (
-                      <div key={r.key} className="pe-run" title={r.str}
-                        style={{ left: r.x * zoom, top: r.y * zoom, width: r.w * zoom, height: r.h * zoom }}
-                        onPointerDown={e => { e.stopPropagation(); setCurPage(p.key); replaceRun(p, r) }} />
-                    ))}
                   </div>
                 </div>
               </section>
@@ -828,9 +872,12 @@ function SelectionBox({ o, zoom, onHandle }: { o: EditorObj; zoom: number; onHan
     </>
   }
   const l = o.x * zoom, t = o.y * zoom, r = (o.x + o.w) * zoom, b = (o.y + o.h) * zoom
+  const handles: [Handle, number, number][] = o.type === 'text'
+    ? [['nw', l, t], ['ne', r, t]]
+    : [['nw', l, t], ['ne', r, t], ['sw', l, b], ['se', r, b]]
   return <>
     <div className="pe-selbox" style={{ left: l, top: t, width: r - l, height: b - t }} />
-    {([['nw', l, t], ['ne', r, t], ['sw', l, b], ['se', r, b]] as const).map(([h, x, y]) => (
+    {handles.map(([h, x, y]) => (
       <span key={h} className={`pe-handle h-${h}`} style={{ left: x, top: y }} onPointerDown={e => onHandle(e, h)} />
     ))}
   </>
