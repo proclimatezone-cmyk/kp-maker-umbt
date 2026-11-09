@@ -448,6 +448,14 @@ export async function syncSheets() {
       });
     }
 
+    // Ошибки листа (категория/фото не того типа) правим по модели.
+    try {
+      const fixes = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'src/data/product-fixes.json'), 'utf8'));
+      for (const p of products) if (fixes[p.model]) Object.assign(p, fixes[p.model]);
+    } catch (err) {
+      console.warn('product-fixes.json not applied:', err.message);
+    }
+
     try {
       fs.writeFileSync(OUTPUT_FILE, JSON.stringify(products, null, 2));
       console.log(`SUCCESS: Updated ${products.length} products in local file.`);
