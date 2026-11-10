@@ -2,6 +2,7 @@ import path from 'path'
 import { NextRequest, NextResponse, after } from 'next/server'
 import { buildKpDocx } from '@/lib/docx-kp'
 import { convertDocxToPdf } from '@/lib/docx-to-pdf'
+import { buildKpPdf } from '@/lib/kp-pdf'
 import { archiveKp } from '@/lib/kp-archive'
 import { saveKpSelection } from '@/lib/saved-kp'
 import { getSessionEmail } from '@/lib/auth-session'
@@ -75,20 +76,6 @@ export async function POST(req: NextRequest) {
         : undefined,
     }
 
-    let docx = await buildKpDocx(baseArgs)
-    let sizeWarning = ''
-
-    // Vercel рубит ответ больше 4.5 МБ и отдаёт HTML-страницу ошибки вместо
-    // файла. Если фото раздули документ сверх лимита — пересобираем без них,
-    // чтобы менеджер всегда получил рабочий файл, а не тупик.
-    const LIMIT = 4.3 * 1024 * 1024
-    if (docx.length > LIMIT && (options?.showImages ?? true)) {
-      docx = await buildKpDocx({ ...baseArgs, options: { ...(options || {}), showImages: false } })
-      sizeWarning = 'Слишком много фото для одного файла — КП собрано без изображений'
-    }
-
-    const archiveMeta = { cpNumber: cpName || '', client: client || '', manager: manager?.name || '', login, total }
-
     // Отдельно от архива файла (см. archiveKp) — структурированный подбор
     // (позиции/скидки/клиент), чтобы КП можно было открыть на сайте заново,
     // а не только скачать готовый файл. rawItems — «сырые» билдер-строки
@@ -110,8 +97,45 @@ export async function POST(req: NextRequest) {
 
     const deferCleanup = { onCleanup: (fn: () => Promise<void>) => after(fn) }
 
+    // Новый вид собирается в PDF напрямую (pdf-lib, доли секунды); старый —
+    // через конвертацию .docx на Google Drive (несколько секунд).
+    const fastPdf = template !== 'old'
+    const makePdf = (docx: Buffer, cleanup?: typeof deferCleanup) =>
+      fastPdf ? buildKpPdf(baseArgs) : convertDocxToPdf(docx, cpName || 'КП', cleanup)
+
+    if (fastPdf && (prefetch || format === 'pdf')) {
+      const pdf = await buildKpPdf(baseArgs)
+      if (prefetch) {
+        return new NextResponse(new Uint8Array(pdf), { headers: { 'Content-Type': 'application/pdf' } })
+      }
+      const archiveMeta = { cpNumber: cpName || '', client: client || '', manager: manager?.name || '', login, total }
+      after(async () => archiveKp({ ...archiveMeta, docx: await buildKpDocx(baseArgs), pdf }))
+      after(saveSelection)
+      return new NextResponse(new Uint8Array(pdf), {
+        headers: {
+          'Content-Type': 'application/pdf',
+          'Content-Disposition': contentDisposition(cpName || 'КП', 'pdf'),
+        },
+      })
+    }
+
+    let docx = await buildKpDocx(baseArgs)
+    let sizeWarning = ''
+
+    // Vercel рубит ответ больше 4.5 МБ и отдаёт HTML-страницу ошибки вместо
+    // файла. Если фото раздули документ сверх лимита — пересобираем без них,
+    // чтобы менеджер всегда получил рабочий файл, а не тупик.
+    const LIMIT = 4.3 * 1024 * 1024
+    if (docx.length > LIMIT && (options?.showImages ?? true)) {
+      docx = await buildKpDocx({ ...baseArgs, options: { ...(options || {}), showImages: false } })
+      sizeWarning = 'Слишком много фото для одного файла — КП собрано без изображений'
+    }
+
+    const archiveMeta = { cpNumber: cpName || '', client: client || '', manager: manager?.name || '', login, total }
+
+
     if (prefetch) {
-      const pdf = await convertDocxToPdf(docx, cpName || 'КП', deferCleanup)
+      const pdf = await makePdf(docx, deferCleanup)
       return new NextResponse(new Uint8Array(pdf), {
         headers: {
           'Content-Type': 'application/pdf',
@@ -123,7 +147,7 @@ export async function POST(req: NextRequest) {
     if (archiveOnly) {
       after(async () => {
         let pdf: Buffer | undefined
-        try { pdf = await convertDocxToPdf(docx, cpName || 'КП') } catch (err) {
+        try { pdf = await makePdf(docx) } catch (err) {
           console.error('Архив КП: не удалось получить PDF-копию', err)
         }
         await archiveKp({ ...archiveMeta, docx, pdf })
@@ -133,7 +157,7 @@ export async function POST(req: NextRequest) {
     }
 
     if (format === 'pdf') {
-      const pdf = await convertDocxToPdf(docx, cpName || 'КП', deferCleanup)
+      const pdf = await makePdf(docx, deferCleanup)
       // В архив уходят оба формата, даже если менеджер скачал только PDF.
       after(() => archiveKp({ ...archiveMeta, docx, pdf }))
       after(saveSelection)
@@ -153,7 +177,7 @@ export async function POST(req: NextRequest) {
     // ответа, чтобы конвертация через Диск (несколько секунд) не задерживала скачивание.
     after(async () => {
       let pdf: Buffer | undefined
-      try { pdf = await convertDocxToPdf(docx, cpName || 'КП') } catch (err) {
+      try { pdf = await makePdf(docx) } catch (err) {
         console.error('Архив КП: не удалось получить PDF-копию', err)
       }
       await archiveKp({ ...archiveMeta, docx, pdf })

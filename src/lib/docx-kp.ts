@@ -112,7 +112,7 @@ function removeWhiteBackground(data: Buffer, width: number, height: number): voi
   }
 }
 
-interface ShrunkImage {
+export interface ShrunkImage {
   buffer: Buffer;
   /** Реальные пропорции после ресайза — чтобы вписать в ячейку без искажения. */
   width: number;
@@ -173,7 +173,22 @@ async function fetchImage(url: string, origin: string): Promise<ShrunkImage | nu
 }
 
 /** Пробует источники по очереди — первый успешный побеждает. */
+const imageCache = new Map<string, Promise<ShrunkImage | null>>();
+
 async function fetchImageWithFallback(candidates: string[], origin: string): Promise<ShrunkImage | null> {
+  const key = candidates.join('|');
+  let hit = imageCache.get(key);
+  if (!hit) {
+    hit = fetchImageUncached(candidates, origin);
+    imageCache.set(key, hit);
+    if (imageCache.size > 300) imageCache.delete(imageCache.keys().next().value!);
+  }
+  const res = await hit;
+  if (!res) imageCache.delete(key);
+  return res;
+}
+
+async function fetchImageUncached(candidates: string[], origin: string): Promise<ShrunkImage | null> {
   for (const url of candidates) {
     const buf = await fetchImage(url, origin);
     if (buf) return buf;
@@ -191,7 +206,7 @@ async function fetchImageWithFallback(candidates: string[], origin: string): Pro
  * источником. Раньше был выбор только ОДНОГО источника: если он не
  * срабатывал, картинка молча пропадала, даже когда второй источник рабочий.
  */
-async function preloadImages(items: KpItem[], origin: string): Promise<Map<string, ShrunkImage>> {
+export async function preloadImages(items: KpItem[], origin: string): Promise<Map<string, ShrunkImage>> {
   // Ключ карты — то же значение, что попадёт в тег {image} при рендере
   // (item.image || item.slidesImage, см. ниже в doc.render()); кандидаты на
   // скачивание для этого ключа — оба источника, в порядке приоритета.
@@ -211,7 +226,7 @@ async function preloadImages(items: KpItem[], origin: string): Promise<Map<strin
   return loaded;
 }
 
-function quantityLabel(quantity: unknown): string {
+export function quantityLabel(quantity: unknown): string {
   const raw = String(quantity ?? '').trim();
   if (!raw) return '';
   // «3» → «3 шт.», но «работа» или «12 м.п.» оставляем как ввели.
@@ -226,7 +241,7 @@ function quantityLabel(quantity: unknown): string {
  * Доп. работы (isAdditional) и позиции с нечисловым количеством
  * («работа», «12 м.п.») не трогаем — там количество не складывается.
  */
-function mergeIdenticalItems(items: KpItem[]): KpItem[] {
+export function mergeIdenticalItems(items: KpItem[]): KpItem[] {
   const merged: KpItem[] = [];
   const indexByKey = new Map<string, number>();
 
