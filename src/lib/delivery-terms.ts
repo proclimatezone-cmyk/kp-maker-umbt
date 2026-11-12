@@ -4,7 +4,7 @@
  * чтобы менеджер видел на экране ровно тот текст, что уйдёт клиенту.
  */
 
-export type DeliveryTerm = 'warehouse' | 'cip' | 'ddp' | 'order';
+export type DeliveryTerm = 'warehouse' | 'cip' | 'ddp' | 'exw' | 'order';
 export type WarrantyMonths = 18 | 36;
 
 interface DeliveryTermSpec {
@@ -42,6 +42,13 @@ export const DELIVERY_TERMS: Record<DeliveryTerm, DeliveryTermSpec> = {
     incoterm: 'DDP',
     nationalCurrencyClause: true,
   },
+  exw: {
+    label: 'EXW Ташкент',
+    delivery: 'EXW Ташкент (самовывоз со склада продавца)',
+    leadTime: '2 рабочих дня после подтверждения получения платежа* (*уточнить наличие)',
+    incoterm: 'EXW',
+    nationalCurrencyClause: true,
+  },
   order: {
     label: 'Под заказ',
     delivery: 'под заказ',
@@ -61,7 +68,7 @@ export const NATIONAL_CURRENCY_TEXT =
 const NATIONAL_CURRENCY_CLAUSE =
   'Цены указаны в у.е. (1 у.е. = 1 доллар США). Оплата производится в национальной валюте (сум) по курсу ЦБ РУз на день оплаты.';
 
-/** Нужна ли оговорка: КП в у.е. (а также всегда при базисах CIP / DDP). */
+/** Нужна ли оговорка: КП в у.е. (а также всегда при базисах CIP / DDP / EXW). */
 export function needsNationalCurrencyClause(opts?: { deliveryTerms?: unknown; currency?: string }): boolean {
   return opts?.currency !== 'sum' || getDeliverySpec(opts?.deliveryTerms).nationalCurrencyClause;
 }
@@ -133,7 +140,7 @@ export function buildTermsLines(opts?: {
   ];
 
   // Ремарка про у.е. и курс ЦБ РУз всегда обязательна при расчетах в у.е.
-  // (а также при базисах CIP / DDP).
+  // (а также при базисах CIP / DDP / EXW).
   if (needsNationalCurrencyClause(opts)) {
     points[points.length - 1] = 'Срок действия предложения: 1 неделя с момента подачи;';
     points.push(NATIONAL_CURRENCY_CLAUSE);
@@ -159,7 +166,8 @@ export function getMoneyLabels(opts?: {
   const spec = getDeliverySpec(opts?.deliveryTerms);
   const incoterm = spec.incoterm;
   const isSum = opts?.currency === 'sum';
-  const isTransfer = opts?.paymentType === 'transfer';
+  // DDP по определению включает НДС — подпись «с НДС» независимо от способа оплаты.
+  const isTransfer = opts?.paymentType === 'transfer' || incoterm === 'DDP';
 
   let unit = 'у.е.';
   if (isSum && isTransfer) {

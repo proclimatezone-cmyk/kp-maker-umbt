@@ -149,8 +149,10 @@ export async function buildKpPdf(opts: BuildKpOptions): Promise<Buffer> {
     })
   }
 
-  const HEADERS = [['Внешний вид'], ['Наименование', 'Товара'], ['Кол-во'], ['Цена'], ['Сумма']]
-  const headerH = 2 * LINE
+  const money = getMoneyLabels(opts.options)
+  const headWrap = (t: string, i: number) => wrap(t, bold, SIZE, COLS[i] - 2 * CELL_PAD)
+  const HEADERS = [['Внешний вид'], ['Наименование', 'Товара'], ['Кол-во'], headWrap(money.price, 3), headWrap(money.sum, 4)]
+  const headerH = Math.max(...HEADERS.map(h => h.length)) * LINE
   const drawHeader = () => {
     HEADERS.forEach((lines, i) => {
       rect(colX(i), y, COLS[i], headerH, HEADER_BG)
@@ -199,7 +201,6 @@ export async function buildKpPdf(opts: BuildKpOptions): Promise<Buffer> {
     y += h + BORDER
   }
 
-  const money = getMoneyLabels(opts.options)
   const grandTotal = Number.isFinite(Number(opts.total)) ? Number(opts.total) : total
   if (y + TOTAL_ROW > BOTTOM) startTablePage()
   const spanW = COLS.slice(0, 4).reduce((s, w) => s + w, 0)
