@@ -35,6 +35,11 @@ interface Product {
   description?: string
   specs?: string
   orderOnly?: boolean
+  coolingCapacityMax?: number
+  heatingCapacityMax?: number
+  capacityNote?: string
+  catalogKey?: string
+  catalogPage?: number
 }
 
 export default async function EquipmentPage({ params }: { params: Promise<{ id: string }> }) {
@@ -44,9 +49,10 @@ export default async function EquipmentPage({ params }: { params: Promise<{ id: 
 
   const match = getCatalogMatch(product.id)
   const fallbackKey = inferCatalogKey(product)
-  const catalogKey = match?.catalogKey || fallbackKey
+  const catalogKey = product.catalogKey || match?.catalogKey || fallbackKey
+  const catalogPage = product.catalogPage || match?.page || null
   const catalog = getCatalogSource(catalogKey || undefined)
-  const pdfUrl = catalogKey ? getCatalogPdfUrl(catalogKey, match?.page) : null
+  const pdfUrl = catalogKey ? getCatalogPdfUrl(catalogKey, catalogPage) : null
   const driveUrl = getCatalogDriveUrl(catalogKey || undefined)
   const image = resolveProductImage(product)
 
@@ -54,12 +60,12 @@ export default async function EquipmentPage({ params }: { params: Promise<{ id: 
   const keyMetrics = [
     {
       icon: <Snowflake size={20} className="metric-icon cool" />,
-      label: 'Охлаждение',
+      label: product.capacityNote ? 'Охлаждение (сред. скорость)' : 'Охлаждение',
       value: product.coolingCapacity ? `${product.coolingCapacity} кВт` : null,
     },
     {
       icon: <Flame size={20} className="metric-icon heat" />,
-      label: 'Обогрев',
+      label: product.capacityNote ? 'Обогрев (сред. скорость)' : 'Обогрев',
       value: product.heatingCapacity ? `${product.heatingCapacity} кВт` : null,
     },
     {
@@ -76,8 +82,10 @@ export default async function EquipmentPage({ params }: { params: Promise<{ id: 
 
   // Detailed technical parameters table
   const techSpecs = [
-    { label: 'Холодопроизводительность', val: product.coolingCapacity, unit: 'кВт' },
-    { label: 'Теплопроизводительность', val: product.heatingCapacity, unit: 'кВт' },
+    { label: product.capacityNote ? 'Холодопроизводительность (сред. скорость)' : 'Холодопроизводительность', val: product.coolingCapacity, unit: 'кВт' },
+    { label: 'Холодопроизводительность (макс. скорость)', val: product.coolingCapacityMax, unit: 'кВт' },
+    { label: product.capacityNote ? 'Теплопроизводительность (сред. скорость)' : 'Теплопроизводительность', val: product.heatingCapacity, unit: 'кВт' },
+    { label: 'Теплопроизводительность (макс. скорость)', val: product.heatingCapacityMax, unit: 'кВт' },
     { label: 'Рекомендуемая площадь', val: product.recommendedArea, unit: 'м²' },
     { label: 'Потребляемая мощность', val: product.powerConsumption, unit: 'кВт' },
     { label: 'Расход воздуха', val: product.airflow, unit: product.airflow ? 'м³/ч' : '' },
@@ -108,7 +116,7 @@ export default async function EquipmentPage({ params }: { params: Promise<{ id: 
             {pdfUrl && (
               <a className="btn btn-primary" href={pdfUrl} target="_blank" rel="noreferrer">
                 <BookOpen size={16} />
-                Сверить с каталогом {match?.page ? `(стр. ${match.page})` : ''}
+                Сверить с каталогом {catalogPage ? `(стр. ${catalogPage})` : ''}
               </a>
             )}
             {driveUrl && (
@@ -167,7 +175,7 @@ export default async function EquipmentPage({ params }: { params: Promise<{ id: 
               {pdfUrl && (
                 <a className="btn btn-primary" href={pdfUrl} target="_blank" rel="noreferrer">
                   <BookOpen size={16} />
-                  Сверить с каталогом {match?.page ? `(стр. ${match.page})` : ''}
+                  Сверить с каталогом {catalogPage ? `(стр. ${catalogPage})` : ''}
                 </a>
               )}
               {driveUrl && (
@@ -187,9 +195,9 @@ export default async function EquipmentPage({ params }: { params: Promise<{ id: 
               <Activity size={18} style={{ color: 'var(--accent)' }} />
               <h2>Технические характеристики</h2>
             </div>
-            {match?.page && (
+            {catalogPage && (
               <span className="count-pill">
-                Каталог: стр. {match.page}
+                Каталог: стр. {catalogPage}
               </span>
             )}
           </div>

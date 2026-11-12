@@ -1,0 +1,2146 @@
+{
+ "MK02A3HCBS": {
+  "page": 173,
+  "coolMax": 2.5,
+  "coolMid": 2.1,
+  "coolMin": 1.56,
+  "heatMax": 4.1,
+  "heatMid": 3.2,
+  "heatMin": 2.2
+ },
+ "MK02A3SCBS": {
+  "page": 171,
+  "coolMax": 2.35,
+  "coolMid": 2.0,
+  "coolMin": 1.5,
+  "heatMax": 3.9,
+  "heatMid": 3.09,
+  "heatMin": 2.15
+ },
+ "MK02A3UCBS": {
+  "page": 175,
+  "coolMax": 2.5,
+  "coolMid": 2.1,
+  "coolMin": 1.56,
+  "heatMax": 4.1,
+  "heatMid": 3.2,
+  "heatMin": 2.2
+ },
+ "MK03A3HCBS": {
+  "page": 173,
+  "coolMax": 3.4,
+  "coolMid": 2.9,
+  "coolMin": 2.21,
+  "heatMax": 5.67,
+  "heatMid": 4.52,
+  "heatMin": 3.18
+ },
+ "MK03A3SCBS": {
+  "page": 171,
+  "coolMax": 3.4,
+  "coolMid": 2.9,
+  "coolMin": 2.21,
+  "heatMax": 5.67,
+  "heatMid": 4.52,
+  "heatMin": 3.18
+ },
+ "MK03A3UCBS": {
+  "page": 175,
+  "coolMax": 3.4,
+  "coolMid": 2.9,
+  "coolMin": 2.2,
+  "heatMax": 5.67,
+  "heatMid": 4.52,
+  "heatMin": 3.17
+ },
+ "MK04A3HCBS": {
+  "page": 173,
+  "coolMax": 4.41,
+  "coolMid": 3.77,
+  "coolMin": 2.9,
+  "heatMax": 7.35,
+  "heatMid": 5.89,
+  "heatMin": 4.19
+ },
+ "MK04A3SCBS": {
+  "page": 171,
+  "coolMax": 4.41,
+  "coolMid": 3.77,
+  "coolMin": 2.9,
+  "heatMax": 7.35,
+  "heatMid": 5.89,
+  "heatMin": 4.19
+ },
+ "MK04A3UCBS": {
+  "page": 175,
+  "coolMax": 4.41,
+  "coolMid": 3.77,
+  "coolMin": 2.9,
+  "heatMax": 7.35,
+  "heatMid": 5.89,
+  "heatMin": 4.19
+ },
+ "MK05A3HCBS": {
+  "page": 173,
+  "coolMax": 5.0,
+  "coolMid": 4.27,
+  "coolMin": 3.36,
+  "heatMax": 8.6,
+  "heatMid": 6.93,
+  "heatMin": 5.03
+ },
+ "MK05A3SCBS": {
+  "page": 171,
+  "coolMax": 5.0,
+  "coolMid": 4.27,
+  "coolMin": 3.36,
+  "heatMax": 8.6,
+  "heatMid": 6.93,
+  "heatMin": 5.03
+ },
+ "MK05A3UCBS": {
+  "page": 175,
+  "coolMax": 5.0,
+  "coolMid": 4.27,
+  "coolMin": 3.36,
+  "heatMax": 8.6,
+  "heatMid": 6.93,
+  "heatMin": 5.03
+ },
+ "MK06A3HCBS": {
+  "page": 173,
+  "coolMax": 6.0,
+  "coolMid": 5.16,
+  "coolMin": 4.06,
+  "heatMax": 9.98,
+  "heatMid": 8.14,
+  "heatMin": 5.96
+ },
+ "MK06A3SCBS": {
+  "page": 171,
+  "coolMax": 6.0,
+  "coolMid": 5.16,
+  "coolMin": 4.06,
+  "heatMax": 9.98,
+  "heatMid": 8.14,
+  "heatMin": 5.96
+ },
+ "MK06A3UCBS": {
+  "page": 175,
+  "coolMax": 6.0,
+  "coolMid": 5.19,
+  "coolMin": 4.08,
+  "heatMax": 9.98,
+  "heatMid": 8.19,
+  "heatMin": 6.01
+ },
+ "MK07A3HCBS": {
+  "page": 174,
+  "coolMax": 7.2,
+  "coolMid": 6.13,
+  "coolMin": 4.79,
+  "heatMax": 12.0,
+  "heatMid": 9.66,
+  "heatMin": 7.01
+ },
+ "MK07A3SCBS": {
+  "page": 172,
+  "coolMax": 7.05,
+  "coolMid": 6.0,
+  "coolMin": 4.68,
+  "heatMax": 11.71,
+  "heatMid": 9.39,
+  "heatMin": 6.81
+ },
+ "MK07A3UCBS": {
+  "page": 176,
+  "coolMax": 7.2,
+  "coolMid": 6.13,
+  "coolMin": 4.79,
+  "heatMax": 12.0,
+  "heatMid": 9.66,
+  "heatMin": 7.01
+ },
+ "MK08A3HCBS": {
+  "page": 174,
+  "coolMax": 8.03,
+  "coolMid": 6.87,
+  "coolMin": 5.4,
+  "heatMax": 13.6,
+  "heatMid": 10.98,
+  "heatMin": 8.02
+ },
+ "MK08A3SCBS": {
+  "page": 172,
+  "coolMax": 8.03,
+  "coolMid": 6.87,
+  "coolMin": 5.4,
+  "heatMax": 13.61,
+  "heatMid": 10.98,
+  "heatMin": 8.02
+ },
+ "MK08A3UCBS": {
+  "page": 176,
+  "coolMax": 8.03,
+  "coolMid": 6.87,
+  "coolMin": 5.4,
+  "heatMax": 13.6,
+  "heatMid": 10.98,
+  "heatMin": 8.02
+ },
+ "MK10A3HCBS": {
+  "page": 174,
+  "coolMax": 9.27,
+  "coolMid": 8.08,
+  "coolMin": 6.35,
+  "heatMax": 16.0,
+  "heatMid": 13.16,
+  "heatMin": 9.61
+ },
+ "MK10A3SCBS": {
+  "page": 172,
+  "coolMax": 9.0,
+  "coolMid": 7.84,
+  "coolMin": 6.17,
+  "heatMax": 15.61,
+  "heatMid": 12.82,
+  "heatMin": 9.36
+ },
+ "MK10A3UCBS": {
+  "page": 176,
+  "coolMax": 9.27,
+  "coolMid": 8.08,
+  "coolMin": 6.35,
+  "heatMax": 16.0,
+  "heatMid": 13.16,
+  "heatMin": 9.61
+ },
+ "MK12A3HCBS": {
+  "page": 174,
+  "coolMax": 11.2,
+  "coolMid": 9.75,
+  "coolMin": 7.67,
+  "heatMax": 19.2,
+  "heatMid": 15.78,
+  "heatMin": 11.53
+ },
+ "MK12A3SCBS": {
+  "page": 172,
+  "coolMax": 11.2,
+  "coolMid": 9.75,
+  "coolMin": 7.67,
+  "heatMax": 19.21,
+  "heatMid": 15.78,
+  "heatMin": 11.53
+ },
+ "MK12A3UCBS": {
+  "page": 176,
+  "coolMax": 11.2,
+  "coolMid": 9.75,
+  "coolMin": 7.67,
+  "heatMax": 19.2,
+  "heatMid": 15.78,
+  "heatMin": 11.53
+ },
+ "MK14A3HCBS": {
+  "page": 174,
+  "coolMax": 13.0,
+  "coolMid": 11.3,
+  "coolMin": 8.9,
+  "heatMax": 22.16,
+  "heatMid": 18.23,
+  "heatMin": 13.37
+ },
+ "MK14A3SCBS": {
+  "page": 172,
+  "coolMax": 13.0,
+  "coolMid": 11.3,
+  "coolMin": 8.9,
+  "heatMax": 22.17,
+  "heatMid": 18.23,
+  "heatMin": 13.37
+ },
+ "MK14A3UCBS": {
+  "page": 176,
+  "coolMax": 13.0,
+  "coolMid": 11.3,
+  "coolMin": 8.91,
+  "heatMax": 22.16,
+  "heatMid": 18.25,
+  "heatMin": 13.39
+ },
+ "MKA-1200F": {
+  "page": 170,
+  "coolMax": 9.28,
+  "coolMid": 7.45,
+  "coolMin": 6.5,
+  "heatMax": 11.65,
+  "heatMid": 10.49,
+  "heatMin": 8.85
+ },
+ "MKA-1200R": {
+  "page": 169,
+  "coolMax": 10.39,
+  "coolMid": 9.25,
+  "coolMin": 8.2,
+  "heatMax": 17.58,
+  "heatMid": 14.06,
+  "heatMin": 11.42
+ },
+ "MKA-1500F": {
+  "page": 170,
+  "coolMax": 10.58,
+  "coolMid": 7.45,
+  "coolMin": 6.5,
+  "heatMax": 12.62,
+  "heatMid": 11.36,
+  "heatMin": 9.47
+ },
+ "MKA-1500R": {
+  "page": 169,
+  "coolMax": 12.9,
+  "coolMid": 11.51,
+  "coolMin": 10.21,
+  "heatMax": 17.6,
+  "heatMid": 14.08,
+  "heatMin": 11.44
+ },
+ "MKA-600F": {
+  "page": 170,
+  "coolMax": 5.1,
+  "coolMid": 4.08,
+  "coolMin": 3.76,
+  "heatMax": 6.67,
+  "heatMid": 5.87,
+  "heatMin": 5.07
+ },
+ "MKA-600R": {
+  "page": 169,
+  "coolMax": 5.7,
+  "coolMid": 4.73,
+  "coolMin": 3.96,
+  "heatMax": 9.66,
+  "heatMid": 7.72,
+  "heatMin": 6.27
+ },
+ "MKA-750F": {
+  "page": 170,
+  "coolMax": 5.93,
+  "coolMid": 4.41,
+  "coolMin": 3.94,
+  "heatMax": 7.87,
+  "heatMid": 6.85,
+  "heatMin": 5.9
+ },
+ "MKA-750R": {
+  "page": 169,
+  "coolMax": 7.0,
+  "coolMid": 5.62,
+  "coolMin": 4.72,
+  "heatMax": 11.55,
+  "heatMid": 9.24,
+  "heatMin": 7.51
+ },
+ "MKA-850F": {
+  "page": 170,
+  "coolMax": 6.17,
+  "coolMid": 5.13,
+  "coolMin": 4.59,
+  "heatMax": 8.06,
+  "heatMid": 6.93,
+  "heatMin": 6.05
+ },
+ "MKA-850R": {
+  "page": 169,
+  "coolMax": 7.27,
+  "coolMid": 6.46,
+  "coolMin": 5.71,
+  "heatMax": 12.42,
+  "heatMid": 9.93,
+  "heatMin": 8.07
+ },
+ "MKA-950F": {
+  "page": 170,
+  "coolMax": 6.7,
+  "coolMid": 5.48,
+  "coolMin": 4.85,
+  "heatMax": 8.67,
+  "heatMid": 7.63,
+  "heatMin": 6.59
+ },
+ "MKA-950R": {
+  "page": 169,
+  "coolMax": 8.22,
+  "coolMid": 7.39,
+  "coolMin": 6.54,
+  "heatMax": 13.85,
+  "heatMid": 11.08,
+  "heatMin": 9.0
+ },
+ "MKA-V1000CA": {
+  "page": 192,
+  "coolMax": 8.5,
+  "summaryOnly": true
+ },
+ "MKA-V1000F-CA": {
+  "page": 192,
+  "coolMax": 9.01,
+  "summaryOnly": true
+ },
+ "MKA-V1200CA": {
+  "page": 192,
+  "coolMax": 10.5,
+  "summaryOnly": true
+ },
+ "MKA-V1200F-CA": {
+  "page": 192,
+  "coolMax": 10.03,
+  "summaryOnly": true
+ },
+ "MKA-V1200FA": {
+  "page": 197,
+  "coolMax": 7.98,
+  "coolMid": 7.25,
+  "coolMin": 6.7,
+  "heatMax": 9.75,
+  "heatMid": 8.96,
+  "heatMin": 8.42
+ },
+ "MKA-V1200R": {
+  "page": 196,
+  "coolMax": 7.87,
+  "coolMid": 7.12,
+  "coolMin": 6.67,
+  "heatMax": 9.16,
+  "heatMid": 8.54,
+  "heatMin": 7.9
+ },
+ "MKA-V1500FA": {
+  "page": 197,
+  "coolMax": 8.04,
+  "coolMid": 6.62,
+  "coolMin": 5.84,
+  "heatMax": 9.93,
+  "heatMid": 8.33,
+  "heatMin": 7.51
+ },
+ "MKA-V1500R": {
+  "page": 196,
+  "coolMax": 10.7,
+  "coolMid": 8.67,
+  "coolMin": 7.48,
+  "heatMax": 11.86,
+  "heatMid": 9.48,
+  "heatMin": 8.25
+ },
+ "MKA-V600CA": {
+  "page": 192,
+  "coolMax": 5.5,
+  "summaryOnly": true
+ },
+ "MKA-V600F-CA": {
+  "page": 192,
+  "coolMax": 4.7,
+  "summaryOnly": true
+ },
+ "MKA-V600FA": {
+  "page": 197,
+  "coolMax": 4.96,
+  "coolMid": 4.38,
+  "coolMin": 3.64,
+  "heatMax": 6.15,
+  "heatMid": 5.43,
+  "heatMin": 4.61
+ },
+ "MKA-V600R": {
+  "page": 196,
+  "coolMax": 5.93,
+  "coolMid": 5.3,
+  "coolMin": 4.4,
+  "heatMax": 6.06,
+  "heatMid": 5.72,
+  "heatMin": 5.32
+ },
+ "MKA-V700CA": {
+  "page": 192,
+  "coolMax": 6.5,
+  "summaryOnly": true
+ },
+ "MKA-V700F-CA": {
+  "page": 192,
+  "coolMax": 5.0,
+  "summaryOnly": true
+ },
+ "MKA-V750FA": {
+  "page": 197,
+  "coolMax": 5.18,
+  "coolMid": 4.56,
+  "coolMin": 3.88,
+  "heatMax": 6.52,
+  "heatMid": 5.79,
+  "heatMin": 4.94
+ },
+ "MKA-V750R": {
+  "page": 196,
+  "coolMax": 6.12,
+  "coolMid": 5.45,
+  "coolMin": 4.6,
+  "heatMax": 6.27,
+  "heatMid": 5.88,
+  "heatMin": 5.43
+ },
+ "MKA-V800CA": {
+  "page": 192,
+  "coolMax": 7.5,
+  "summaryOnly": true
+ },
+ "MKA-V800F-CA": {
+  "page": 192,
+  "coolMax": 5.5,
+  "summaryOnly": true
+ },
+ "MKA-V850FA": {
+  "page": 197,
+  "coolMax": 5.13,
+  "coolMid": 4.41,
+  "coolMin": 4.06,
+  "heatMax": 6.68,
+  "heatMid": 5.75,
+  "heatMin": 5.28
+ },
+ "MKA-V850R": {
+  "page": 196,
+  "coolMax": 7.52,
+  "coolMid": 6.46,
+  "coolMin": 5.89,
+  "heatMax": 7.88,
+  "heatMid": 7.48,
+  "heatMin": 6.76
+ },
+ "MKA-V950FA": {
+  "page": 197,
+  "coolMax": 5.31,
+  "coolMid": 4.59,
+  "coolMin": 4.28,
+  "heatMax": 6.74,
+  "heatMid": 5.83,
+  "heatMin": 5.4
+ },
+ "MKA-V950R": {
+  "page": 196,
+  "coolMax": 7.84,
+  "coolMid": 6.84,
+  "coolMin": 6.35,
+  "heatMax": 8.49,
+  "heatMid": 8.0,
+  "heatMin": 7.35
+ },
+ "MKC-300R-B": {
+  "page": 166,
+  "coolMax": 3.04,
+  "coolMid": 2.79,
+  "coolMin": 2.56,
+  "heatMax": 5.13,
+  "heatMid": 4.69,
+  "heatMin": 4.04
+ },
+ "MKC-400R-B": {
+  "page": 166,
+  "coolMax": 3.79,
+  "coolMid": 3.58,
+  "coolMin": 3.38,
+  "heatMax": 6.41,
+  "heatMid": 5.86,
+  "heatMin": 5.11
+ },
+ "MKC-V300R-B": {
+  "page": 193,
+  "coolMax": 2.64,
+  "coolMid": 2.23,
+  "coolMin": 1.68,
+  "heatMax": 3.15,
+  "heatMid": 2.83,
+  "heatMin": 2.29
+ },
+ "MKC-V400R-B": {
+  "page": 193,
+  "coolMax": 3.44,
+  "coolMid": 2.99,
+  "coolMin": 2.68,
+  "heatMax": 4.0,
+  "heatMid": 3.32,
+  "heatMin": 2.73
+ },
+ "MKC-V600R-B": {
+  "page": 193,
+  "coolMax": 5.09,
+  "coolMid": 4.36,
+  "coolMin": 3.58,
+  "heatMax": 5.75,
+  "heatMid": 4.68,
+  "heatMin": 3.6
+ },
+ "MKD-300": {
+  "page": 167,
+  "coolMax": 3.0,
+  "coolMid": 2.58,
+  "coolMin": 2.16,
+  "heatMax": 4.0,
+  "heatMid": 3.5,
+  "heatMin": 3.08
+ },
+ "MKD-300S": {
+  "page": 168,
+  "coolMax": 2.5,
+  "coolMid": 2.2,
+  "coolMin": 1.76,
+  "heatMax": 3.7,
+  "heatMid": 3.29,
+  "heatMin": 2.92
+ },
+ "MKD-400": {
+  "page": 167,
+  "coolMax": 3.7,
+  "coolMid": 3.18,
+  "coolMin": 2.66,
+  "heatMax": 5.1,
+  "heatMid": 4.3,
+  "heatMin": 3.83
+ },
+ "MKD-400S": {
+  "page": 168,
+  "coolMax": 2.9,
+  "coolMid": 2.55,
+  "coolMin": 2.04,
+  "heatMax": 4.6,
+  "heatMid": 3.82,
+  "heatMin": 3.4
+ },
+ "MKD-500": {
+  "page": 167,
+  "coolMax": 4.5,
+  "coolMid": 3.6,
+  "coolMin": 3.06,
+  "heatMax": 6.0,
+  "heatMid": 4.76,
+  "heatMin": 4.07
+ },
+ "MKD-500S": {
+  "page": 168,
+  "coolMax": 3.5,
+  "coolMid": 2.87,
+  "coolMin": 2.15,
+  "heatMax": 5.1,
+  "heatMid": 4.03,
+  "heatMin": 3.52
+ },
+ "MKD-V300": {
+  "page": 194,
+  "coolMax": 2.98,
+  "coolMid": 2.53,
+  "coolMin": 2.0,
+  "heatMax": 2.61,
+  "heatMid": 2.31,
+  "heatMin": 2.24
+ },
+ "MKD-V300FA": {
+  "page": 195,
+  "coolMax": 2.16,
+  "coolMid": 1.86,
+  "coolMin": 1.49,
+  "heatMax": 3.13,
+  "heatMid": 2.63,
+  "heatMin": 2.08
+ },
+ "MKD-V400": {
+  "page": 194,
+  "coolMax": 3.96,
+  "coolMid": 3.26,
+  "coolMin": 2.76,
+  "heatMax": 4.08,
+  "heatMid": 3.34,
+  "heatMin": 2.73
+ },
+ "MKD-V400FA": {
+  "page": 195,
+  "coolMax": 2.78,
+  "coolMid": 2.38,
+  "coolMin": 2.05,
+  "heatMax": 3.71,
+  "heatMid": 3.14,
+  "heatMin": 2.65
+ },
+ "MKD-V500": {
+  "page": 194,
+  "coolMax": 4.2,
+  "coolMid": 3.48,
+  "coolMin": 3.01,
+  "heatMax": 4.95,
+  "heatMid": 3.99,
+  "heatMin": 3.26
+ },
+ "MKD-V500FA": {
+  "page": 195,
+  "coolMax": 3.1,
+  "coolMid": 2.38,
+  "coolMin": 2.07,
+  "heatMax": 3.94,
+  "heatMid": 3.3,
+  "heatMin": 2.83
+ },
+ "MKG-250C(D)": {
+  "page": 181,
+  "coolMax": 1.94,
+  "coolMid": 1.84,
+  "coolMin": 1.68,
+  "heatMax": 2.34,
+  "heatMid": 2.15,
+  "heatMin": 1.94
+ },
+ "MKG-300C(D)": {
+  "page": 181,
+  "coolMax": 2.64,
+  "coolMid": 2.4,
+  "coolMin": 1.99,
+  "heatMax": 2.9,
+  "heatMid": 2.6,
+  "heatMin": 2.22
+ },
+ "MKG-400C(D)": {
+  "page": 181,
+  "coolMax": 2.94,
+  "coolMid": 2.58,
+  "coolMin": 2.34,
+  "heatMax": 3.46,
+  "heatMid": 2.75,
+  "heatMin": 2.52
+ },
+ "MKG-500C(D)": {
+  "page": 181,
+  "coolMax": 4.01,
+  "coolMid": 3.61,
+  "coolMin": 3.1,
+  "heatMax": 4.39,
+  "heatMid": 3.8,
+  "heatMin": 3.27
+ },
+ "MKG-600C(D)": {
+  "page": 181,
+  "coolMax": 4.61,
+  "coolMid": 4.33,
+  "coolMin": 3.84,
+  "heatMax": 4.55,
+  "heatMid": 4.2,
+  "heatMin": 3.82
+ },
+ "MKG-V200C": {
+  "page": 192,
+  "coolMax": 2.3,
+  "summaryOnly": true
+ },
+ "MKG-V250C": {
+  "page": 192,
+  "coolMax": 2.7,
+  "summaryOnly": true
+ },
+ "MKG-V250D": {
+  "page": 192,
+  "coolMax": 2.7,
+  "summaryOnly": true
+ },
+ "MKG-V300C": {
+  "page": 192,
+  "coolMax": 2.91,
+  "summaryOnly": true
+ },
+ "MKG-V300D": {
+  "page": 192,
+  "coolMax": 2.91,
+  "summaryOnly": true
+ },
+ "MKG-V400C": {
+  "page": 192,
+  "coolMax": 3.81,
+  "summaryOnly": true
+ },
+ "MKG-V400D": {
+  "page": 192,
+  "coolMax": 3.81,
+  "summaryOnly": true
+ },
+ "MKG-V500C": {
+  "page": 192,
+  "coolMax": 4.47,
+  "summaryOnly": true
+ },
+ "MKG-V500D": {
+  "page": 192,
+  "coolMax": 4.47,
+  "summaryOnly": true
+ },
+ "MKG-V600C": {
+  "page": 192,
+  "coolMax": 4.87,
+  "summaryOnly": true
+ },
+ "MKG-V600D": {
+  "page": 192,
+  "coolMax": 4.87,
+  "summaryOnly": true
+ },
+ "MKH1-150-R3": {
+  "page": 182,
+  "coolMax": 1.58,
+  "coolMid": 1.17,
+  "coolMin": 1.04,
+  "heatMax": 1.77,
+  "heatMid": 1.24,
+  "heatMin": 1.08
+ },
+ "MKH1-150-R4": {
+  "page": 183,
+  "coolMax": 2.16,
+  "coolMid": 1.78,
+  "coolMin": 1.35,
+  "heatMax": 2.26,
+  "heatMid": 1.79,
+  "heatMin": 1.36
+ },
+ "MKH1-150F-R4": {
+  "page": 184,
+  "coolMax": 1.87,
+  "coolMid": 1.54,
+  "coolMin": 1.1,
+  "heatMax": 1.62,
+  "heatMid": 1.35,
+  "heatMin": 1.1
+ },
+ "MKH1-250-R3": {
+  "page": 182,
+  "coolMax": 2.51,
+  "coolMid": 1.92,
+  "coolMin": 1.32,
+  "heatMax": 2.8,
+  "heatMid": 2.01,
+  "heatMin": 1.38
+ },
+ "MKH1-250-R4": {
+  "page": 183,
+  "coolMax": 2.72,
+  "coolMid": 2.02,
+  "coolMin": 1.41,
+  "heatMax": 2.81,
+  "heatMid": 2.04,
+  "heatMin": 1.43
+ },
+ "MKH1-250F-R4": {
+  "page": 184,
+  "coolMax": 2.58,
+  "coolMid": 1.83,
+  "coolMin": 1.12,
+  "heatMax": 2.19,
+  "heatMid": 1.52,
+  "heatMin": 1.06
+ },
+ "MKH1-350-R3": {
+  "page": 182,
+  "coolMax": 3.75,
+  "coolMid": 3.1,
+  "coolMin": 2.4,
+  "heatMax": 3.99,
+  "heatMid": 3.21,
+  "heatMin": 2.41
+ },
+ "MKH1-350-R4": {
+  "page": 183,
+  "coolMax": 4.09,
+  "coolMid": 3.29,
+  "coolMin": 2.41,
+  "heatMax": 4.19,
+  "heatMid": 3.34,
+  "heatMin": 2.45
+ },
+ "MKH1-350F-R4": {
+  "page": 184,
+  "coolMax": 3.99,
+  "coolMid": 3.27,
+  "coolMin": 2.29,
+  "heatMax": 2.88,
+  "heatMid": 2.44,
+  "heatMin": 1.95
+ },
+ "MKH1-500-R3": {
+  "page": 182,
+  "coolMax": 4.59,
+  "coolMid": 3.75,
+  "coolMin": 2.88,
+  "heatMax": 5.13,
+  "heatMid": 3.9,
+  "heatMin": 2.96
+ },
+ "MKH1-500-R4": {
+  "page": 183,
+  "coolMax": 5.21,
+  "coolMid": 4.14,
+  "coolMin": 3.22,
+  "heatMax": 5.33,
+  "heatMid": 4.25,
+  "heatMin": 3.23
+ },
+ "MKH1-500F-R4": {
+  "page": 184,
+  "coolMax": 4.92,
+  "coolMid": 3.95,
+  "coolMin": 3.12,
+  "heatMax": 3.55,
+  "heatMid": 2.97,
+  "heatMin": 2.44
+ },
+ "MKH1-700-R3": {
+  "page": 182,
+  "coolMax": 5.29,
+  "coolMid": 4.43,
+  "coolMin": 3.27,
+  "heatMax": 5.42,
+  "heatMid": 4.5,
+  "heatMin": 3.35
+ },
+ "MKH1-700-R4": {
+  "page": 183,
+  "coolMax": 6.16,
+  "coolMid": 5.29,
+  "coolMin": 3.87,
+  "heatMax": 6.53,
+  "heatMid": 5.3,
+  "heatMin": 3.92
+ },
+ "MKH1-700F-R4": {
+  "page": 184,
+  "coolMax": 5.84,
+  "coolMid": 5.1,
+  "coolMin": 3.65,
+  "heatMax": 4.25,
+  "heatMid": 3.74,
+  "heatMin": 2.91
+ },
+ "MKH1-800-R3": {
+  "page": 182,
+  "coolMax": 6.22,
+  "coolMid": 5.5,
+  "coolMin": 4.36,
+  "heatMax": 6.94,
+  "heatMid": 6.0,
+  "heatMin": 4.62
+ },
+ "MKH1-800-R4": {
+  "page": 183,
+  "coolMax": 6.66,
+  "coolMid": 6.07,
+  "coolMin": 4.74,
+  "heatMax": 6.86,
+  "heatMid": 6.13,
+  "heatMin": 4.76
+ },
+ "MKH1-800F-R4": {
+  "page": 184,
+  "coolMax": 6.18,
+  "coolMid": 5.65,
+  "coolMin": 4.44,
+  "heatMax": 5.9,
+  "heatMid": 5.8,
+  "heatMin": 5.05
+ },
+ "MKH1-V150-R3": {
+  "page": 205,
+  "coolMax": 1.44,
+  "coolMid": 1.01,
+  "coolMin": 0.88,
+  "heatMax": 1.5,
+  "heatMid": 1.02,
+  "heatMin": 0.88
+ },
+ "MKH1-V150-R4": {
+  "page": 206,
+  "coolMax": 1.87,
+  "coolMid": 1.59,
+  "coolMin": 1.16,
+  "heatMax": 1.97,
+  "heatMid": 1.68,
+  "heatMin": 1.2
+ },
+ "MKH1-V150F-R4": {
+  "page": 207,
+  "coolMax": 1.63,
+  "coolMid": 1.38,
+  "coolMin": 0.91,
+  "heatMax": 1.35,
+  "heatMid": 1.18,
+  "heatMin": 0.91
+ },
+ "MKH1-V250-R3": {
+  "page": 205,
+  "coolMax": 2.23,
+  "coolMid": 1.84,
+  "coolMin": 1.13,
+  "heatMax": 2.47,
+  "heatMid": 2.0,
+  "heatMin": 1.27
+ },
+ "MKH1-V250-R4": {
+  "page": 206,
+  "coolMax": 2.55,
+  "coolMid": 1.9,
+  "coolMin": 1.26,
+  "heatMax": 2.63,
+  "heatMid": 1.92,
+  "heatMin": 1.27
+ },
+ "MKH1-V250F-R4": {
+  "page": 207,
+  "coolMax": 2.41,
+  "coolMid": 1.73,
+  "coolMin": 0.99,
+  "heatMax": 2.06,
+  "heatMid": 1.45,
+  "heatMin": 1.02
+ },
+ "MKH1-V350-R3": {
+  "page": 205,
+  "coolMax": 3.41,
+  "coolMid": 2.81,
+  "coolMin": 2.16,
+  "heatMax": 3.7,
+  "heatMid": 3.02,
+  "heatMin": 2.29
+ },
+ "MKH1-V350-R4": {
+  "page": 206,
+  "coolMax": 3.8,
+  "coolMid": 3.11,
+  "coolMin": 2.36,
+  "heatMax": 3.9,
+  "heatMid": 3.13,
+  "heatMin": 2.43
+ },
+ "MKH1-V350F-R4": {
+  "page": 207,
+  "coolMax": 3.7,
+  "coolMid": 3.1,
+  "coolMin": 2.26,
+  "heatMax": 2.81,
+  "heatMid": 2.43,
+  "heatMin": 1.95
+ },
+ "MKH1-V500-R3": {
+  "page": 205,
+  "coolMax": 4.25,
+  "coolMid": 3.43,
+  "coolMin": 2.67,
+  "heatMax": 4.64,
+  "heatMid": 3.65,
+  "heatMin": 2.77
+ },
+ "MKH1-V500-R4": {
+  "page": 206,
+  "coolMax": 4.73,
+  "coolMid": 3.82,
+  "coolMin": 2.85,
+  "heatMax": 5.12,
+  "heatMid": 3.98,
+  "heatMin": 2.96
+ },
+ "MKH1-V500F-R4": {
+  "page": 207,
+  "coolMax": 4.49,
+  "coolMid": 3.66,
+  "coolMin": 2.76,
+  "heatMax": 3.27,
+  "heatMid": 2.81,
+  "heatMin": 2.3
+ },
+ "MKH1-V700-R3": {
+  "page": 205,
+  "coolMax": 4.94,
+  "coolMid": 3.94,
+  "coolMin": 2.77,
+  "heatMax": 5.29,
+  "heatMid": 4.2,
+  "heatMin": 2.96
+ },
+ "MKH1-V700-R4": {
+  "page": 206,
+  "coolMax": 5.6,
+  "coolMid": 4.58,
+  "coolMin": 3.19,
+  "heatMax": 6.22,
+  "heatMid": 4.95,
+  "heatMin": 3.37
+ },
+ "MKH1-V700F-R4": {
+  "page": 207,
+  "coolMax": 5.34,
+  "coolMid": 4.41,
+  "coolMin": 3.02,
+  "heatMax": 4.06,
+  "heatMid": 3.48,
+  "heatMin": 2.66
+ },
+ "MKH1-V800-R3": {
+  "page": 205,
+  "coolMax": 6.21,
+  "coolMid": 5.17,
+  "coolMin": 3.86,
+  "heatMax": 6.8,
+  "heatMid": 5.46,
+  "heatMin": 3.98
+ },
+ "MKH1-V800-R4": {
+  "page": 206,
+  "coolMax": 7.3,
+  "coolMid": 5.88,
+  "coolMin": 4.28,
+  "heatMax": 7.7,
+  "heatMid": 6.02,
+  "heatMin": 4.29
+ },
+ "MKH1-V800F-R4": {
+  "page": 207,
+  "coolMax": 7.65,
+  "coolMid": 6.19,
+  "coolMin": 4.54,
+  "heatMax": 6.6,
+  "heatMid": 5.7,
+  "heatMin": 4.6
+ },
+ "MKH2-150-R3": {
+  "page": 185,
+  "coolMax": 1.65,
+  "coolMid": 1.22,
+  "coolMin": 1.09,
+  "heatMax": 1.85,
+  "heatMid": 1.29,
+  "heatMin": 1.13
+ },
+ "MKH2-150-R4": {
+  "page": 186,
+  "coolMax": 2.25,
+  "coolMid": 1.85,
+  "coolMin": 1.4,
+  "heatMax": 2.35,
+  "heatMid": 1.87,
+  "heatMin": 1.42
+ },
+ "MKH2-150F-R4": {
+  "page": 187,
+  "coolMax": 1.95,
+  "coolMid": 1.6,
+  "coolMin": 1.15,
+  "heatMax": 1.69,
+  "heatMid": 1.4,
+  "heatMin": 1.15
+ },
+ "MKH2-250-R3": {
+  "page": 185,
+  "coolMax": 2.65,
+  "coolMid": 2.02,
+  "coolMin": 1.4,
+  "heatMax": 3.05,
+  "heatMid": 2.24,
+  "heatMin": 1.52
+ },
+ "MKH2-250-R4": {
+  "page": 186,
+  "coolMax": 3.05,
+  "coolMid": 2.26,
+  "coolMin": 1.58,
+  "heatMax": 3.15,
+  "heatMid": 2.28,
+  "heatMin": 1.6
+ },
+ "MKH2-250F-R4": {
+  "page": 187,
+  "coolMax": 2.89,
+  "coolMid": 2.05,
+  "coolMin": 1.25,
+  "heatMax": 2.45,
+  "heatMid": 1.7,
+  "heatMin": 1.19
+ },
+ "MKH2-350-R3": {
+  "page": 185,
+  "coolMax": 3.85,
+  "coolMid": 3.19,
+  "coolMin": 2.46,
+  "heatMax": 4.1,
+  "heatMid": 3.3,
+  "heatMin": 2.48
+ },
+ "MKH2-350-R4": {
+  "page": 186,
+  "coolMax": 4.2,
+  "coolMid": 3.38,
+  "coolMin": 2.48,
+  "heatMax": 4.3,
+  "heatMid": 3.43,
+  "heatMin": 2.52
+ },
+ "MKH2-350F-R4": {
+  "page": 187,
+  "coolMax": 4.09,
+  "coolMid": 3.35,
+  "coolMin": 2.35,
+  "heatMax": 2.95,
+  "heatMid": 2.5,
+  "heatMin": 2.0
+ },
+ "MKH2-500-R3": {
+  "page": 185,
+  "coolMax": 4.65,
+  "coolMid": 3.8,
+  "coolMin": 2.92,
+  "heatMax": 5.2,
+  "heatMid": 3.95,
+  "heatMin": 3.0
+ },
+ "MKH2-500-R4": {
+  "page": 186,
+  "coolMax": 5.35,
+  "coolMid": 4.25,
+  "coolMin": 3.31,
+  "heatMax": 5.7,
+  "heatMid": 4.36,
+  "heatMin": 3.31
+ },
+ "MKH2-500F-R4": {
+  "page": 187,
+  "coolMax": 5.05,
+  "coolMid": 4.05,
+  "coolMin": 3.2,
+  "heatMax": 3.46,
+  "heatMid": 3.05,
+  "heatMin": 2.5
+ },
+ "MKH2-700-R3": {
+  "page": 185,
+  "coolMax": 6.0,
+  "coolMid": 5.03,
+  "coolMin": 3.71,
+  "heatMax": 6.15,
+  "heatMid": 5.1,
+  "heatMin": 3.8
+ },
+ "MKH2-700-R4": {
+  "page": 186,
+  "coolMax": 6.75,
+  "coolMid": 5.8,
+  "coolMin": 4.24,
+  "heatMax": 7.15,
+  "heatMid": 5.81,
+  "heatMin": 4.3
+ },
+ "MKH2-700F-R4": {
+  "page": 187,
+  "coolMax": 6.4,
+  "coolMid": 5.59,
+  "coolMin": 4.0,
+  "heatMax": 4.65,
+  "heatMid": 4.09,
+  "heatMin": 3.19
+ },
+ "MKH2-800-R3": {
+  "page": 185,
+  "coolMax": 7.35,
+  "coolMid": 6.51,
+  "coolMin": 5.15,
+  "heatMax": 8.2,
+  "heatMid": 7.09,
+  "heatMin": 5.46
+ },
+ "MKH2-800-R4": {
+  "page": 186,
+  "coolMax": 8.25,
+  "coolMid": 7.52,
+  "coolMin": 5.87,
+  "heatMax": 8.5,
+  "heatMid": 7.6,
+  "heatMin": 5.9
+ },
+ "MKH2-800F-R4": {
+  "page": 187,
+  "coolMax": 7.65,
+  "coolMid": 7.0,
+  "coolMin": 5.5,
+  "heatMax": 7.3,
+  "heatMid": 7.19,
+  "heatMin": 6.25
+ },
+ "MKH2-V150-R3": {
+  "page": 208,
+  "coolMax": 1.5,
+  "coolMid": 1.06,
+  "coolMin": 0.92,
+  "heatMax": 1.57,
+  "heatMid": 1.07,
+  "heatMin": 0.92
+ },
+ "MKH2-V150-R4": {
+  "page": 209,
+  "coolMax": 1.95,
+  "coolMid": 1.66,
+  "coolMin": 1.21,
+  "heatMax": 2.05,
+  "heatMid": 1.75,
+  "heatMin": 1.25
+ },
+ "MKH2-V150F-R4": {
+  "page": 210,
+  "coolMax": 1.7,
+  "coolMid": 1.44,
+  "coolMin": 0.95,
+  "heatMax": 1.4,
+  "heatMid": 1.23,
+  "heatMin": 0.95
+ },
+ "MKH2-V250-R3": {
+  "page": 208,
+  "coolMax": 2.35,
+  "coolMid": 1.94,
+  "coolMin": 1.19,
+  "heatMax": 2.6,
+  "heatMid": 2.11,
+  "heatMin": 1.34
+ },
+ "MKH2-V250-R4": {
+  "page": 209,
+  "coolMax": 2.85,
+  "coolMid": 2.13,
+  "coolMin": 1.41,
+  "heatMax": 2.95,
+  "heatMid": 2.15,
+  "heatMin": 1.42
+ },
+ "MKH2-V250F-R4": {
+  "page": 210,
+  "coolMax": 2.7,
+  "coolMid": 1.94,
+  "coolMin": 1.1,
+  "heatMax": 2.3,
+  "heatMid": 1.78,
+  "heatMin": 1.22
+ },
+ "MKH2-V350-R3": {
+  "page": 208,
+  "coolMax": 3.5,
+  "coolMid": 2.89,
+  "coolMin": 2.22,
+  "heatMax": 3.8,
+  "heatMid": 3.1,
+  "heatMin": 2.35
+ },
+ "MKH2-V350-R4": {
+  "page": 209,
+  "coolMax": 3.9,
+  "coolMid": 3.2,
+  "coolMin": 2.43,
+  "heatMax": 4.0,
+  "heatMid": 3.22,
+  "heatMin": 2.39
+ },
+ "MKH2-V350F-R4": {
+  "page": 210,
+  "coolMax": 3.8,
+  "coolMid": 3.18,
+  "coolMin": 2.32,
+  "heatMax": 2.88,
+  "heatMid": 2.49,
+  "heatMin": 2.0
+ },
+ "MKH2-V500-R3": {
+  "page": 208,
+  "coolMax": 4.3,
+  "coolMid": 3.48,
+  "coolMin": 2.71,
+  "heatMax": 4.7,
+  "heatMid": 3.7,
+  "heatMin": 2.81
+ },
+ "MKH2-V500-R4": {
+  "page": 209,
+  "coolMax": 4.85,
+  "coolMid": 3.92,
+  "coolMin": 2.93,
+  "heatMax": 5.25,
+  "heatMid": 4.09,
+  "heatMin": 3.04
+ },
+ "MKH2-V500F-R4": {
+  "page": 210,
+  "coolMax": 4.6,
+  "coolMid": 3.75,
+  "coolMin": 2.83,
+  "heatMax": 3.35,
+  "heatMid": 2.88,
+  "heatMin": 2.36
+ },
+ "MKH2-V700-R3": {
+  "page": 208,
+  "coolMax": 5.6,
+  "coolMid": 4.47,
+  "coolMin": 3.14,
+  "heatMax": 6.0,
+  "heatMid": 4.77,
+  "heatMin": 3.36
+ },
+ "MKH2-V700-R4": {
+  "page": 209,
+  "coolMax": 6.35,
+  "coolMid": 5.19,
+  "coolMin": 3.62,
+  "heatMax": 7.05,
+  "heatMid": 5.61,
+  "heatMin": 3.83
+ },
+ "MKH2-V700F-R4": {
+  "page": 210,
+  "coolMax": 6.05,
+  "coolMid": 5.0,
+  "coolMin": 3.43,
+  "heatMax": 4.6,
+  "heatMid": 3.95,
+  "heatMin": 3.02
+ },
+ "MKH2-V800-R3": {
+  "page": 208,
+  "coolMax": 7.35,
+  "coolMid": 6.12,
+  "coolMin": 4.57,
+  "heatMax": 8.05,
+  "heatMid": 6.46,
+  "heatMin": 4.71
+ },
+ "MKH2-V800-R4": {
+  "page": 209,
+  "coolMax": 8.25,
+  "coolMid": 6.65,
+  "coolMin": 4.84,
+  "heatMax": 8.37,
+  "heatMid": 6.81,
+  "heatMin": 4.85
+ },
+ "MKH2-V800F-R4": {
+  "page": 210,
+  "coolMax": 7.65,
+  "coolMid": 6.19,
+  "coolMin": 4.54,
+  "heatMax": 7.5,
+  "heatMid": 6.44,
+  "heatMin": 5.22
+ },
+ "MKH3-150-R3": {
+  "page": 188,
+  "coolMax": 1.65,
+  "coolMid": 1.22,
+  "coolMin": 1.09,
+  "heatMax": 1.85,
+  "heatMid": 1.29,
+  "heatMin": 1.13
+ },
+ "MKH3-150-R4": {
+  "page": 189,
+  "coolMax": 2.25,
+  "coolMid": 1.85,
+  "coolMin": 1.4,
+  "heatMax": 2.35,
+  "heatMid": 1.87,
+  "heatMin": 1.42
+ },
+ "MKH3-150F-R4": {
+  "page": 190,
+  "coolMax": 1.95,
+  "coolMid": 1.6,
+  "coolMin": 1.15,
+  "heatMax": 1.69,
+  "heatMid": 1.4,
+  "heatMin": 1.15
+ },
+ "MKH3-250-R3": {
+  "page": 188,
+  "coolMax": 2.65,
+  "coolMid": 2.02,
+  "coolMin": 1.4,
+  "heatMax": 3.05,
+  "heatMid": 2.24,
+  "heatMin": 1.52
+ },
+ "MKH3-250-R4": {
+  "page": 189,
+  "coolMax": 3.05,
+  "coolMid": 2.26,
+  "coolMin": 1.58,
+  "heatMax": 3.15,
+  "heatMid": 2.28,
+  "heatMin": 1.6
+ },
+ "MKH3-250F-R4": {
+  "page": 190,
+  "coolMax": 2.89,
+  "coolMid": 2.05,
+  "coolMin": 1.25,
+  "heatMax": 2.45,
+  "heatMid": 1.7,
+  "heatMin": 1.19
+ },
+ "MKH3-350-R3": {
+  "page": 188,
+  "coolMax": 3.85,
+  "coolMid": 3.19,
+  "coolMin": 2.46,
+  "heatMax": 4.1,
+  "heatMid": 3.3,
+  "heatMin": 2.48
+ },
+ "MKH3-350-R4": {
+  "page": 189,
+  "coolMax": 4.2,
+  "coolMid": 3.38,
+  "coolMin": 2.48,
+  "heatMax": 4.3,
+  "heatMid": 3.43,
+  "heatMin": 2.52
+ },
+ "MKH3-350F-R4": {
+  "page": 190,
+  "coolMax": 4.09,
+  "coolMid": 3.35,
+  "coolMin": 2.35,
+  "heatMax": 2.95,
+  "heatMid": 2.5,
+  "heatMin": 2.0
+ },
+ "MKH3-500-R3": {
+  "page": 188,
+  "coolMax": 4.65,
+  "coolMid": 3.8,
+  "coolMin": 2.92,
+  "heatMax": 5.2,
+  "heatMid": 3.95,
+  "heatMin": 3.0
+ },
+ "MKH3-500-R4": {
+  "page": 189,
+  "coolMax": 5.35,
+  "coolMid": 4.25,
+  "coolMin": 3.31,
+  "heatMax": 5.7,
+  "heatMid": 4.36,
+  "heatMin": 3.31
+ },
+ "MKH3-500F-R4": {
+  "page": 190,
+  "coolMax": 5.05,
+  "coolMid": 4.05,
+  "coolMin": 3.2,
+  "heatMax": 3.46,
+  "heatMid": 3.05,
+  "heatMin": 2.5
+ },
+ "MKH3-700-R3": {
+  "page": 188,
+  "coolMax": 6.0,
+  "coolMid": 5.03,
+  "coolMin": 3.71,
+  "heatMax": 6.15,
+  "heatMid": 5.1,
+  "heatMin": 3.8
+ },
+ "MKH3-700-R4": {
+  "page": 189,
+  "coolMax": 6.75,
+  "coolMid": 5.8,
+  "coolMin": 4.24,
+  "heatMax": 7.15,
+  "heatMid": 5.81,
+  "heatMin": 4.3
+ },
+ "MKH3-700F-R4": {
+  "page": 190,
+  "coolMax": 6.4,
+  "coolMid": 5.59,
+  "coolMin": 4.0,
+  "heatMax": 4.65,
+  "heatMid": 4.09,
+  "heatMin": 3.19
+ },
+ "MKH3-800-R3": {
+  "page": 188,
+  "coolMax": 7.35,
+  "coolMid": 6.51,
+  "coolMin": 5.15,
+  "heatMax": 8.2,
+  "heatMid": 7.09,
+  "heatMin": 5.46
+ },
+ "MKH3-800-R4": {
+  "page": 189,
+  "coolMax": 8.25,
+  "coolMid": 7.52,
+  "coolMin": 5.87,
+  "heatMax": 8.5,
+  "heatMid": 7.6,
+  "heatMin": 5.9
+ },
+ "MKH3-800F-R4": {
+  "page": 190,
+  "coolMax": 7.65,
+  "coolMid": 7.0,
+  "coolMin": 5.5,
+  "heatMax": 7.3,
+  "heatMid": 7.19,
+  "heatMin": 6.25
+ },
+ "MKH3-V150-R3": {
+  "page": 211,
+  "coolMax": 1.5,
+  "coolMid": 1.06,
+  "coolMin": 0.92,
+  "heatMax": 1.57,
+  "heatMid": 1.07,
+  "heatMin": 0.92
+ },
+ "MKH3-V150-R4": {
+  "page": 212,
+  "coolMax": 1.95,
+  "coolMid": 1.66,
+  "coolMin": 1.21,
+  "heatMax": 2.05,
+  "heatMid": 1.75,
+  "heatMin": 1.25
+ },
+ "MKH3-V150F-R4": {
+  "page": 213,
+  "coolMax": 1.7,
+  "coolMid": 1.44,
+  "coolMin": 0.95,
+  "heatMax": 1.4,
+  "heatMid": 1.23,
+  "heatMin": 0.95
+ },
+ "MKH3-V250-R3": {
+  "page": 211,
+  "coolMax": 2.35,
+  "coolMid": 1.94,
+  "coolMin": 1.19,
+  "heatMax": 2.6,
+  "heatMid": 2.11,
+  "heatMin": 1.34
+ },
+ "MKH3-V250-R4": {
+  "page": 212,
+  "coolMax": 2.85,
+  "coolMid": 2.13,
+  "coolMin": 1.41,
+  "heatMax": 2.95,
+  "heatMid": 2.15,
+  "heatMin": 1.42
+ },
+ "MKH3-V250F-R4": {
+  "page": 213,
+  "coolMax": 2.7,
+  "coolMid": 1.94,
+  "coolMin": 1.1,
+  "heatMax": 2.3,
+  "heatMid": 1.78,
+  "heatMin": 1.22
+ },
+ "MKH3-V350-R3": {
+  "page": 211,
+  "coolMax": 3.5,
+  "coolMid": 2.89,
+  "coolMin": 2.22,
+  "heatMax": 3.8,
+  "heatMid": 3.1,
+  "heatMin": 2.35
+ },
+ "MKH3-V350-R4": {
+  "page": 212,
+  "coolMax": 3.9,
+  "coolMid": 3.2,
+  "coolMin": 2.43,
+  "heatMax": 4.0,
+  "heatMid": 3.22,
+  "heatMin": 2.5
+ },
+ "MKH3-V350F-R4": {
+  "page": 213,
+  "coolMax": 3.8,
+  "coolMid": 3.18,
+  "coolMin": 2.32,
+  "heatMax": 2.88,
+  "heatMid": 2.49,
+  "heatMin": 2.0
+ },
+ "MKH3-V500-R3": {
+  "page": 211,
+  "coolMax": 4.3,
+  "coolMid": 3.48,
+  "coolMin": 2.71,
+  "heatMax": 4.7,
+  "heatMid": 3.7,
+  "heatMin": 2.81
+ },
+ "MKH3-V500-R4": {
+  "page": 212,
+  "coolMax": 4.85,
+  "coolMid": 3.92,
+  "coolMin": 2.93,
+  "heatMax": 5.25,
+  "heatMid": 4.09,
+  "heatMin": 3.04
+ },
+ "MKH3-V500F-R4": {
+  "page": 213,
+  "coolMax": 4.6,
+  "coolMid": 3.75,
+  "coolMin": 2.83,
+  "heatMax": 3.35,
+  "heatMid": 2.88,
+  "heatMin": 2.36
+ },
+ "MKH3-V700-R3": {
+  "page": 211,
+  "coolMax": 5.6,
+  "coolMid": 4.47,
+  "coolMin": 3.14,
+  "heatMax": 6.0,
+  "heatMid": 4.77,
+  "heatMin": 3.36
+ },
+ "MKH3-V700-R4": {
+  "page": 212,
+  "coolMax": 6.35,
+  "coolMid": 5.19,
+  "coolMin": 3.62,
+  "heatMax": 7.05,
+  "heatMid": 5.61,
+  "heatMin": 3.83
+ },
+ "MKH3-V700F-R4": {
+  "page": 213,
+  "coolMax": 6.05,
+  "coolMid": 5.0,
+  "coolMin": 3.43,
+  "heatMax": 4.6,
+  "heatMid": 3.95,
+  "heatMin": 3.02
+ },
+ "MKH3-V800-R3": {
+  "page": 211,
+  "coolMax": 7.35,
+  "coolMid": 6.12,
+  "coolMin": 4.57,
+  "heatMax": 8.05,
+  "heatMid": 6.46,
+  "heatMin": 4.71
+ },
+ "MKH3-V800-R4": {
+  "page": 212,
+  "coolMax": 8.25,
+  "coolMid": 6.65,
+  "coolMin": 4.84,
+  "heatMax": 8.7,
+  "heatMid": 6.81,
+  "heatMin": 4.85
+ },
+ "MKH3-V800F-R4": {
+  "page": 213,
+  "coolMax": 7.65,
+  "coolMid": 6.19,
+  "coolMin": 4.54,
+  "heatMax": 7.5,
+  "heatMid": 6.44,
+  "heatMin": 5.22
+ },
+ "MKT3-V1000G12-CL": {
+  "page": 201,
+  "coolMax": 9.05,
+  "coolMid": 7.1,
+  "coolMin": 4.97,
+  "heatMax": 11.0,
+  "heatMid": 8.02,
+  "heatMin": 5.41
+ },
+ "MKT3-V1200G12-CL": {
+  "page": 201,
+  "coolMax": 10.08,
+  "coolMid": 7.25,
+  "coolMin": 6.02,
+  "heatMax": 11.83,
+  "heatMid": 8.32,
+  "heatMin": 6.78
+ },
+ "MKT3-V1400G12-CL": {
+  "page": 201,
+  "coolMax": 11.11,
+  "coolMid": 10.58,
+  "coolMin": 9.77,
+  "heatMax": 12.67,
+  "heatMid": 11.98,
+  "heatMin": 10.59
+ },
+ "MKT3-V200G12-CL": {
+  "page": 200,
+  "coolMax": 2.45,
+  "coolMid": 2.05,
+  "coolMin": 1.59,
+  "heatMax": 2.68,
+  "heatMid": 2.24,
+  "heatMin": 1.83
+ },
+ "MKT3-V300G12-CL": {
+  "page": 200,
+  "coolMax": 3.35,
+  "coolMid": 2.89,
+  "coolMin": 2.21,
+  "heatMax": 3.95,
+  "heatMid": 3.25,
+  "heatMin": 2.51
+ },
+ "MKT3-V400G12-CL": {
+  "page": 200,
+  "coolMax": 4.25,
+  "coolMid": 3.69,
+  "coolMin": 2.88,
+  "heatMax": 5.0,
+  "heatMid": 4.31,
+  "heatMin": 3.36
+ },
+ "MKT3-V500G12-CL": {
+  "page": 200,
+  "coolMax": 4.55,
+  "coolMid": 3.92,
+  "coolMin": 2.97,
+  "heatMax": 5.5,
+  "heatMid": 4.38,
+  "heatMin": 3.2
+ },
+ "MKT3-V600G12-CL": {
+  "page": 200,
+  "coolMax": 5.85,
+  "coolMid": 4.88,
+  "coolMin": 3.66,
+  "heatMax": 6.9,
+  "heatMid": 5.66,
+  "heatMin": 4.21
+ },
+ "MKT3-V700G12-CL": {
+  "page": 201,
+  "coolMax": 6.5,
+  "coolMid": 6.04,
+  "coolMin": 5.09,
+  "heatMax": 7.6,
+  "heatMid": 6.96,
+  "heatMin": 5.81
+ },
+ "MKT3-V800G12-CL": {
+  "page": 201,
+  "coolMax": 8.02,
+  "coolMid": 6.65,
+  "coolMin": 5.37,
+  "heatMax": 9.4,
+  "heatMid": 7.36,
+  "heatMin": 5.82
+ },
+ "MKT3H-1000G70": {
+  "page": 179,
+  "coolMax": 8.8,
+  "coolMid": 8.19,
+  "coolMin": 7.57,
+  "heatMax": 13.2,
+  "heatMid": 11.48,
+  "heatMin": 9.9
+ },
+ "MKT3H-1200G70": {
+  "page": 179,
+  "coolMax": 10.0,
+  "coolMid": 9.44,
+  "coolMin": 8.5,
+  "heatMax": 15.0,
+  "heatMid": 12.9,
+  "heatMin": 11.25
+ },
+ "MKT3H-1400G70": {
+  "page": 179,
+  "coolMax": 12.0,
+  "coolMid": 11.47,
+  "coolMin": 10.24,
+  "heatMax": 17.9,
+  "heatMid": 15.75,
+  "heatMin": 13.6
+ },
+ "MKT3H-1600G100": {
+  "page": 180,
+  "coolMax": 14.1,
+  "coolMid": 13.03,
+  "coolMin": 11.87,
+  "heatMax": 21.2,
+  "heatMid": 18.23,
+  "heatMin": 15.69
+ },
+ "MKT3H-1800G100": {
+  "page": 180,
+  "coolMax": 15.8,
+  "coolMid": 14.6,
+  "coolMin": 13.46,
+  "heatMax": 23.8,
+  "heatMid": 20.94,
+  "heatMin": 17.85
+ },
+ "MKT3H-2200G100": {
+  "page": 180,
+  "coolMax": 19.9,
+  "coolMid": 18.58,
+  "coolMin": 17.24,
+  "heatMax": 30.0,
+  "heatMid": 26.7,
+  "heatMin": 22.5
+ },
+ "MKT3H-800G70": {
+  "page": 179,
+  "coolMax": 6.6,
+  "coolMid": 6.37,
+  "coolMin": 6.12,
+  "heatMax": 9.7,
+  "heatMid": 8.54,
+  "heatMin": 7.18
+ },
+ "MKT4-1000FG50-CL": {
+  "page": 178,
+  "coolMax": 8.3,
+  "coolMid": 7.45,
+  "coolMin": 6.11,
+  "heatMax": 10.0,
+  "heatMid": 9.55,
+  "heatMin": 8.29
+ },
+ "MKT4-1200FG50-CL": {
+  "page": 178,
+  "coolMax": 9.9,
+  "coolMid": 8.13,
+  "coolMin": 5.36,
+  "heatMax": 10.5,
+  "heatMid": 9.09,
+  "heatMin": 6.3
+ },
+ "MKT4-1400FG50-CL": {
+  "page": 178,
+  "coolMax": 11.6,
+  "coolMid": 9.81,
+  "coolMin": 7.71,
+  "heatMax": 12.7,
+  "heatMid": 11.43,
+  "heatMin": 9.44
+ },
+ "MKT4-200FG50-CL": {
+  "page": 177,
+  "coolMax": 2.25,
+  "coolMid": 1.63,
+  "coolMin": 1.42,
+  "heatMax": 2.4,
+  "heatMid": 1.82,
+  "heatMin": 1.57
+ },
+ "MKT4-300FG50-CL": {
+  "page": 177,
+  "coolMax": 3.0,
+  "coolMid": 2.26,
+  "coolMin": 1.79,
+  "heatMax": 3.8,
+  "heatMid": 2.78,
+  "heatMin": 2.21
+ },
+ "MKT4-400FG50-CL": {
+  "page": 177,
+  "coolMax": 4.1,
+  "coolMid": 2.94,
+  "coolMin": 1.94,
+  "heatMax": 4.7,
+  "heatMid": 3.51,
+  "heatMin": 2.24
+ },
+ "MKT4-500FG50-CL": {
+  "page": 177,
+  "coolMax": 4.6,
+  "coolMid": 3.6,
+  "coolMin": 2.23,
+  "heatMax": 5.0,
+  "heatMid": 4.03,
+  "heatMin": 2.49
+ },
+ "MKT4-600FG50-CL": {
+  "page": 177,
+  "coolMax": 5.4,
+  "coolMid": 4.02,
+  "coolMin": 2.48,
+  "heatMax": 6.4,
+  "heatMid": 5.07,
+  "heatMin": 3.18
+ },
+ "MKT4-700FG50-CL": {
+  "page": 178,
+  "coolMax": 6.3,
+  "coolMid": 4.88,
+  "coolMin": 3.88,
+  "heatMax": 6.3,
+  "heatMid": 5.45,
+  "heatMin": 4.52
+ },
+ "MKT4-800FG50-CL": {
+  "page": 178,
+  "coolMax": 7.4,
+  "coolMid": 5.77,
+  "coolMin": 3.97,
+  "heatMax": 9.6,
+  "heatMid": 8.16,
+  "heatMin": 5.81
+ },
+ "MKT4-V1000F-CL": {
+  "page": 192,
+  "coolMax": 8.2,
+  "summaryOnly": true
+ },
+ "MKT4-V1000FG12-CL": {
+  "page": 203,
+  "coolMax": 8.2,
+  "coolMid": 7.49,
+  "coolMin": 6.72,
+  "heatMax": 10.6,
+  "heatMid": 9.92,
+  "heatMin": 9.07
+ },
+ "MKT4-V1200F-CL": {
+  "page": 192,
+  "coolMax": 9.7,
+  "summaryOnly": true
+ },
+ "MKT4-V1200FG12-CL": {
+  "page": 203,
+  "coolMax": 9.7,
+  "coolMid": 8.62,
+  "coolMin": 7.42,
+  "heatMax": 10.7,
+  "heatMid": 9.72,
+  "heatMin": 8.66
+ },
+ "MKT4-V1400F-CL": {
+  "page": 192,
+  "coolMax": 12.2,
+  "summaryOnly": true
+ },
+ "MKT4-V1400FG12-CL": {
+  "page": 203,
+  "coolMax": 12.2,
+  "coolMid": 10.5,
+  "coolMin": 8.62,
+  "heatMax": 13.4,
+  "heatMid": 12.1,
+  "heatMin": 10.46
+ },
+ "MKT4-V200F-CL": {
+  "page": 192,
+  "coolMax": 2.7,
+  "summaryOnly": true
+ },
+ "MKT4-V200FG12-CL": {
+  "page": 202,
+  "coolMax": 2.7,
+  "coolMid": 2.04,
+  "coolMin": 1.3,
+  "heatMax": 2.7,
+  "heatMid": 2.21,
+  "heatMin": 1.5
+ },
+ "MKT4-V300F-CL": {
+  "page": 192,
+  "coolMax": 3.5,
+  "summaryOnly": true
+ },
+ "MKT4-V300FG12-CL": {
+  "page": 202,
+  "coolMax": 3.5,
+  "coolMid": 3.23,
+  "coolMin": 2.92,
+  "heatMax": 4.3,
+  "heatMid": 4.04,
+  "heatMin": 3.78
+ },
+ "MKT4-V400F-CL": {
+  "page": 192,
+  "coolMax": 4.3,
+  "summaryOnly": true
+ },
+ "MKT4-V400FG12-CL": {
+  "page": 202,
+  "coolMax": 4.3,
+  "coolMid": 3.99,
+  "coolMin": 3.71,
+  "heatMax": 5.4,
+  "heatMid": 5.22,
+  "heatMin": 4.93
+ },
+ "MKT4-V500F-CL": {
+  "page": 192,
+  "coolMax": 4.9,
+  "summaryOnly": true
+ },
+ "MKT4-V500FG12-CL": {
+  "page": 202,
+  "coolMax": 4.9,
+  "coolMid": 4.3,
+  "coolMin": 3.68,
+  "heatMax": 6.1,
+  "heatMid": 5.58,
+  "heatMin": 4.98
+ },
+ "MKT4-V600F-CL": {
+  "page": 192,
+  "coolMax": 5.8,
+  "summaryOnly": true
+ },
+ "MKT4-V600FG12-CL": {
+  "page": 202,
+  "coolMax": 5.8,
+  "coolMid": 5.17,
+  "coolMin": 4.5,
+  "heatMax": 6.7,
+  "heatMid": 6.17,
+  "heatMin": 5.53
+ },
+ "MKT4-V700F-CL": {
+  "page": 192,
+  "coolMax": 6.7,
+  "summaryOnly": true
+ },
+ "MKT4-V700FG12-CL": {
+  "page": 203,
+  "coolMax": 6.7,
+  "coolMid": 6.03,
+  "coolMin": 5.24,
+  "heatMax": 6.7,
+  "heatMid": 6.18,
+  "heatMin": 5.58
+ },
+ "MKT4-V800F-CL": {
+  "page": 192,
+  "coolMax": 7.6,
+  "summaryOnly": true
+ },
+ "MKT4-V800FG12-CL": {
+  "page": 203,
+  "coolMax": 7.6,
+  "coolMid": 6.85,
+  "coolMin": 6.09,
+  "heatMax": 10.1,
+  "heatMid": 9.34,
+  "heatMin": 8.5
+ }
+}

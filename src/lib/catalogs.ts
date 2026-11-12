@@ -44,6 +44,8 @@ export function getCatalogMatch(productId: string): CatalogMatch | null {
 }
 
 export function getCatalogPdfUrl(catalogKey: string, page?: number | null) {
+  // Нарезанная страница (scripts/build-catalog-page-pdfs.mjs) открывается мгновенно и всегда на нужном листе
+  if (page) return `/catalog-pages/${encodeURIComponent(catalogKey)}/${page}.pdf`
   const base = `/api/catalogs/${encodeURIComponent(catalogKey)}`
   return page ? `${base}#page=${page}` : base
 }

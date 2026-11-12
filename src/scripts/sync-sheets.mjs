@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { google } from 'googleapis';
 import { fileURLToPath } from 'url';
+import { applyFcuCapacity } from './apply-fcu-capacity.mjs';
 if (!process.env.GOOGLE_CLIENT_ID) {
   try {
     const dotenv = await import('dotenv');
@@ -455,6 +456,8 @@ export async function syncSheets() {
     } catch (err) {
       console.warn('product-fixes.json not applied:', err.message);
     }
+    // Фанкойлы: средняя мощность по холоду/теплу из каталога Midea FCU.
+    console.log(`FCU capacity: ${applyFcuCapacity(products)} позиций`);
 
     try {
       fs.writeFileSync(OUTPUT_FILE, JSON.stringify(products, null, 2));

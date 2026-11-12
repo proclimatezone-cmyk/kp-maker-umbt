@@ -472,6 +472,11 @@ const EquipmentRow = memo(({ item, products, cleanProducts, stock, onUpdate, onD
         <div className="model-meta-line">
           <div className="cat-label">
             {p?.series || p?.category}
+            {Number(p?.coolingCapacity) > 0 && (
+              <span className="cap-badge" title={p?.capacityNote ? `Холод, ${p.capacityNote}` : 'Холодопроизводительность'}>
+                {String(p.coolingCapacity).replace('.', ',')} кВт{p?.capacityNote ? ' (сред.)' : ''}
+              </span>
+            )}
             {p?.orderOnly && <span className="order-only-badge" title="Позиция под заказ — нет на складе, срок поставки дольше">под заказ</span>}
           </div>
           {p?.id && (
@@ -1059,9 +1064,9 @@ export default function Home() {
       const cat = (p.category || '').toLowerCase();
       const cap = Number(p.coolingCapacity) || 0;
       const qty = Number(item.quantity) || 0;
-      if (cat.includes('наруж') || cat.includes('внеш')) {
+      if (cat.includes('наруж') || cat.includes('внеш') || cat.includes('чиллер')) {
         external += cap * qty;
-      } else if (cat.includes('внутр')) {
+      } else if (cat.includes('внутр') || cat.includes('фанкойл')) {
         internal += cap * qty;
       }
     });
@@ -1570,11 +1575,11 @@ export default function Home() {
               {/* Capacity Metrics Widget */}
               <div className="metrics">
                 <div className="metric">
-                  <span className="metric-label">Внутренние блоки</span>
+                  <span className="metric-label">Внутренние блоки / фанкойлы</span>
                   <span className="metric-value">{capacityMetrics.internal.toFixed(1)} кВт</span>
                 </div>
                 <div className="metric">
-                  <span className="metric-label">Наружные блоки</span>
+                  <span className="metric-label">Наружные блоки / чиллеры</span>
                   <span className="metric-value">{capacityMetrics.external.toFixed(1)} кВт</span>
                 </div>
                 <div className="metric">
