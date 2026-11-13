@@ -10,6 +10,7 @@ const nextConfig = {
   outputFileTracingIncludes: {
     '/api/generate': ['./templates/**'],
     '/api/contract': ['./templates/**'],
+    '/api/spec': ['./templates/**', './public/images/branding/**'],
   },
 
   // Заголовки безопасности на каждый ответ. Проверка показала, что их не было
