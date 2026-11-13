@@ -43,9 +43,9 @@ export const DELIVERY_TERMS: Record<DeliveryTerm, DeliveryTermSpec> = {
     nationalCurrencyClause: true,
   },
   exw: {
-    label: 'EXW Ташкент',
-    delivery: 'EXW Ташкент (самовывоз со склада продавца)',
-    leadTime: '2 рабочих дня после подтверждения получения платежа* (*уточнить наличие)',
+    label: 'EXW завод',
+    delivery: 'EXW завод-изготовитель (самовывоз покупателем с завода)',
+    leadTime: 'около 45 календарных дней (зависит от сроков производства на заводе)',
     incoterm: 'EXW',
     nationalCurrencyClause: true,
   },
