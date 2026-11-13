@@ -23,7 +23,7 @@ interface Product {
   id: string; category?: string; series?: string; model?: string
   coolingCapacity?: number; heatingCapacity?: number; coolingCapacityMax?: number; heatingCapacityMax?: number
   powerConsumption?: number; powerSupply?: string; refrigerant?: string; dimensions?: string; weight?: number
-  noiseLevel?: string; airflow?: string; capacityNote?: string; catalogKey?: string; catalogPage?: number; fcuSpec?: FcuSpec
+  noiseLevel?: string; airflow?: string; capacityNote?: string; genSpec?: Record<string, string>; genSpecSource?: { catalogKey?: string; page?: number }; catalogKey?: string; catalogPage?: number; fcuSpec?: FcuSpec
 }
 export interface SpecItem { productId?: string; model?: string; category?: string; quantity?: number | string; isAdditional?: boolean }
 export interface BuildSpecOptions { cpNumber: string; cpDate: string; items: SpecItem[]; deltaT?: number }
@@ -219,9 +219,9 @@ export async function buildSpecPdf(opts: BuildSpecOptions): Promise<Buffer> {
   const genQt = gens.reduce((s, r) => s + num(r.p?.heatingCapacity) * r.qty, 0)
   const flowOf = (r: typeof fcu[number]) => num(r.p?.fcuSpec?.waterFlow) || num(r.p?.coolingCapacity) / (1.163 * dT)
   const fcuFlow = fcu.reduce((s, r) => s + flowOf(r) * r.qty, 0)
-  const genFlow = genQx / (1.163 * dT)
+  const genFlow = gens.reduce((s, r) => s + (num(r.p?.genSpec?.waterFlow) && num(r.p?.coolingCapacity) ? num(r.p?.genSpec?.waterFlow) : num(r.p?.coolingCapacity) / (1.163 * dT)) * r.qty, 0)
   const fcuPowerKw = fcu.reduce((s, r) => s + num(r.p?.fcuSpec?.powerW) * r.qty, 0) / 1000
-  const genPowerKw = gens.reduce((s, r) => s + num(r.p?.powerConsumption) * r.qty, 0)
+  const genPowerKw = gens.reduce((s, r) => s + (num(r.p?.genSpec?.coolPower) || num(r.p?.powerConsumption)) * r.qty, 0)
   const maxDp = fcu.reduce((m, r) => Math.max(m, num(r.p?.fcuSpec?.waterDp)), 0)
   const designFlow = fcuFlow || genFlow
   const reserve = genQx && fcuQx ? (genQx / fcuQx - 1) * 100 : 0
@@ -269,16 +269,25 @@ export async function buildSpecPdf(opts: BuildSpecOptions): Promise<Buffer> {
       const p = r.p
       ensure(90)
       text(`${p?.category || r.it.category || ''} ${p?.model || r.it.model || ''} — ${fmt(r.qty)} шт.`, M, y, 10, bold, INK); y += 16
-      const kv: [string, string][] = [
-        ['Холодопроизводительность Qx', num(p?.coolingCapacity) ? `${fmt(num(p?.coolingCapacity))} кВт` : 'по запросу'],
-        ['Теплопроизводительность Qt', num(p?.heatingCapacity) ? `${fmt(num(p?.heatingCapacity))} кВт` : 'по запросу'],
-        ['Потребляемая мощность', num(p?.powerConsumption) ? `${fmt(num(p?.powerConsumption))} кВт` : 'по запросу'],
-        ['Электропитание', clean(p?.powerSupply) || 'по запросу'],
-        ['Хладагент', clean(p?.refrigerant) || 'по запросу'],
-        ['Габариты (Ш×В×Г)', clean(p?.dimensions) ? `${p?.dimensions} мм` : 'по запросу'],
-        ['Масса', num(p?.weight) ? `${fmt(num(p?.weight), 0)} кг` : 'по запросу'],
-        ['Уровень шума', clean(p?.noiseLevel) ? `${p?.noiseLevel} дБ(А)` : 'по запросу'],
-      ]
+      const g = p?.genSpec || {}
+      const q = (v?: string, unit = '') => (v ? `${v.replace('.', ',')}${unit ? ' ' + unit : ''}` : '')
+      const kv: [string, string][] = ([
+        ['Холодопроизводительность Qx', q(g.coolKw, 'кВт') || (num(p?.coolingCapacity) ? `${fmt(num(p?.coolingCapacity))} кВт` : '')],
+        ['Теплопроизводительность Qt', q(g.heatKw, 'кВт') || (num(p?.heatingCapacity) ? `${fmt(num(p?.heatingCapacity))} кВт` : '')],
+        ['Потребляемая мощность (охл. / нагр.)', [q(g.coolPower), q(g.heatPower)].some(Boolean) ? `${q(g.coolPower) || '—'} / ${q(g.heatPower) || '—'} кВт` : ''],
+        ['EER / COP', g.eer || g.cop ? `${q(g.eer) || '—'} / ${q(g.cop) || '—'}` : ''],
+        ['Электропитание', g.powerSupply || clean(p?.powerSupply)],
+        ['Максимальный ток', q(g.maxCurrent, 'А')],
+        ['Компрессор', g.compressor || ''],
+        ['Хладагент', (g.refrigerant || clean(p?.refrigerant)).replace('А', 'A')],
+        ['Расход воды / потери давления', g.waterFlow ? `${q(g.waterFlow, 'м³/ч')}${g.waterDp ? ' / ' + q(g.waterDp, 'кПа') : ''}` : ''],
+        ['Присоединение воды', g.pipe || ''],
+        ['Расход воздуха', g.airflow ? `${g.airflow} м³/ч` : ''],
+        ['Уровень звукового давления', q(g.noise, 'дБ(А)') || (clean(p?.noiseLevel) ? `${p?.noiseLevel} дБ(А)` : '')],
+        ['Наружный воздух: охлаждение / нагрев', g.tempCool || g.tempHeat ? `${g.tempCool || '—'} / ${g.tempHeat || '—'} °C` : ''],
+        ['Габариты (Ш×В×Г)', g.dims ? `${g.dims} мм` : (clean(p?.dimensions) ? `${p?.dimensions} мм` : '')],
+        ['Масса нетто', q(g.weight, 'кг') || (num(p?.weight) ? `${fmt(num(p?.weight), 0)} кг` : '')],
+      ] as [string, string][]).map(([k, v]) => [k, v || 'по запросу'] as [string, string])
       table([{ title: 'Параметр', w: 45, align: 'l' }, { title: 'Значение', w: 55, align: 'l' }], kv)
     }
   }

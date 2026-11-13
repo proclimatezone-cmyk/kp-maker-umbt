@@ -24,7 +24,24 @@
     "descHeader": "ПромышленныйкондиционерMideaV825кВт(250м2)",
     "description": "Новое8-епоколениеVRF.Инверторныйкомпрессорэкономитдо30%электричества.Идеальнодляофисовиресторановдо250квадратов.Официальнаягарантия.",
     "specs": "",
-    "orderOnly": false
+    "orderOnly": false,
+    "genSpec": {
+      "coolKw": "25.2",
+      "heatKw": "27.0",
+      "eer": "4.60",
+      "cop": "4.86",
+      "compressor": "HITACHI EVI DC-inverter",
+      "airflow": "12600",
+      "refrigerant": "R410A",
+      "dims": "940×1760×825",
+      "weight": "195",
+      "tempCool": "-15 ~ +55",
+      "tempHeat": "-30 ~ +30"
+    },
+    "genSpecSource": {
+      "catalogKey": "vrf-2026",
+      "page": 46
+    }
   },
   {
     "id": "mv8i-280wv2gn1-ma-",
@@ -51,7 +68,24 @@
     "descHeader": "НаружныйблокVRFMideaV828кВт(на280м2)",
     "description": "Промышленнаясистемакондиционирования.Бесперебойнаяработа24/7.Подходитдлякоммерческихплощадейдо280кв.м.Экономиямонтажнойплощади.",
     "specs": "",
-    "orderOnly": false
+    "orderOnly": false,
+    "genSpec": {
+      "coolKw": "28.0",
+      "heatKw": "31.5",
+      "eer": "4.05",
+      "cop": "4.58",
+      "compressor": "HITACHI EVI DC-inverter",
+      "airflow": "12600",
+      "refrigerant": "R410A",
+      "dims": "940×1760×825",
+      "weight": "195",
+      "tempCool": "-15 ~ +55",
+      "tempHeat": "-30 ~ +30"
+    },
+    "genSpecSource": {
+      "catalogKey": "vrf-2026",
+      "page": 46
+    }
   },
   {
     "id": "mv8i-335wv2gn1-ma-",
@@ -186,7 +220,24 @@
     "descHeader": "ПромышленныйVRFкондиционерMidea56кВт(560м2)",
     "description": "Обеспечиваетклиматнакрупныхобъектах.Компактныйединичныймодульэкономитплощадьнакрышездания.",
     "specs": "",
-    "orderOnly": false
+    "orderOnly": false,
+    "genSpec": {
+      "coolKw": "56.0",
+      "heatKw": "63.0",
+      "eer": "3.50",
+      "cop": "3.83",
+      "compressor": "HITACHI EVI DC-inverter",
+      "airflow": "22000",
+      "refrigerant": "R410A",
+      "dims": "1340×1760×825",
+      "weight": "277",
+      "tempCool": "-15 ~ +55",
+      "tempHeat": "-30 ~ +30"
+    },
+    "genSpecSource": {
+      "catalogKey": "vrf-2026",
+      "page": 47
+    }
   },
   {
     "id": "mv8i-615wv2gn1-ma-",
@@ -213,7 +264,24 @@
     "descHeader": "МультизональныйкондиционерMidea61кВт(610м2)",
     "description": "Высокаяпроизводительность.Специальнодлякоммерческойнедвижимости—перепадвысотмеждублокамидо110метров.",
     "specs": "",
-    "orderOnly": false
+    "orderOnly": false,
+    "genSpec": {
+      "coolKw": "61.5",
+      "heatKw": "69.0",
+      "eer": "3.39",
+      "cop": "3.69",
+      "compressor": "HITACHI EVI DC-inverter",
+      "airflow": "22000",
+      "refrigerant": "R410A",
+      "dims": "1340×1760×825",
+      "weight": "277",
+      "tempCool": "-15 ~ +55",
+      "tempHeat": "-30 ~ +30"
+    },
+    "genSpecSource": {
+      "catalogKey": "vrf-2026",
+      "page": 47
+    }
   },
   {
     "id": "mv8i-670wv2gn1-ma-",
@@ -240,7 +308,25 @@
     "descHeader": "ПромышленныйкондиционерMidea67кВт(670м2)",
     "description": "ФлагманлинейкиV8.Максимальнаямощностькондиционированиясодногоагрегата.",
     "specs": "",
-    "orderOnly": false
+    "orderOnly": false,
+    "genSpec": {
+      "coolKw": "61.5",
+      "heatKw": "69.0",
+      "powerSupply": "380-415/50/3",
+      "eer": "3.39",
+      "cop": "3.69",
+      "compressor": "HITACHI EVI DC-inverter",
+      "airflow": "22000",
+      "refrigerant": "R410A",
+      "dims": "1340×1760×825",
+      "weight": "277",
+      "tempCool": "-15 ~ +55",
+      "tempHeat": "-30 ~ +30"
+    },
+    "genSpecSource": {
+      "catalogKey": "vrf-2026",
+      "page": 47
+    }
   },
   {
     "id": "mv8i-730wv2gn1-ma-",
@@ -267,7 +353,25 @@
     "descHeader": "КрупныйпромышленныйблокVRFMidea73кВт(730м2)",
     "description": "Сверхмощныймодуль.Оптималендлявысотныхзданийикрупныхторговыхцентров.Площадьпокрытиядо730м2.",
     "specs": "",
-    "orderOnly": false
+    "orderOnly": false,
+    "genSpec": {
+      "coolKw": "67.0",
+      "heatKw": "75.0",
+      "powerSupply": "380-415/50/3",
+      "eer": "3.38",
+      "cop": "3.72",
+      "compressor": "HITACHI EVI DC-inverter",
+      "airflow": "21500",
+      "refrigerant": "R410A",
+      "dims": "1340×1760×825",
+      "weight": "279",
+      "tempCool": "-15 ~ +55",
+      "tempHeat": "-30 ~ +30"
+    },
+    "genSpecSource": {
+      "catalogKey": "vrf-2026",
+      "page": 47
+    }
   },
   {
     "id": "mv8i-785wv2gn1-ma-",
@@ -294,7 +398,25 @@
     "descHeader": "СистемакондиционированияVRFMidea78кВт(780м2)",
     "description": "Рекорднаяхладопроизводительность.Идеальныйвыбордляпромышленныхпредприятийискладскихкомплексов.",
     "specs": "",
-    "orderOnly": false
+    "orderOnly": false,
+    "genSpec": {
+      "coolKw": "73.0",
+      "heatKw": "81.5",
+      "powerSupply": "380-415/50/3",
+      "eer": "3.38",
+      "cop": "3.68",
+      "compressor": "HITACHI EVI DC-inverter",
+      "airflow": "21500",
+      "refrigerant": "R410A",
+      "dims": "1340×1760×825",
+      "weight": "279",
+      "tempCool": "-15 ~ +55",
+      "tempHeat": "-30 ~ +30"
+    },
+    "genSpecSource": {
+      "catalogKey": "vrf-2026",
+      "page": 47
+    }
   },
   {
     "id": "mv8i-850wv2gn1-ma-",
@@ -348,7 +470,24 @@
     "descHeader": "МощныйпромышленныйVRFMidea90кВт(900м2)",
     "description": "Высокотехнологичнаясистема8-гопоколения.Стабильнаяработаприперепадахтемпературот-25до+55градусов.",
     "specs": "",
-    "orderOnly": false
+    "orderOnly": false,
+    "genSpec": {
+      "coolKw": "90.0",
+      "heatKw": "100.0",
+      "eer": "2.95",
+      "cop": "3.29",
+      "compressor": "HITACHI EVI DC-inverter",
+      "airflow": "28000",
+      "refrigerant": "R410A",
+      "dims": "1880×1760×825",
+      "weight": "419",
+      "tempCool": "-15 ~ +55",
+      "tempHeat": "-30 ~ +30"
+    },
+    "genSpecSource": {
+      "catalogKey": "vrf-2026",
+      "page": 47
+    }
   },
   {
     "id": "mv8i-950wv2gn1-ma-",
@@ -375,7 +514,24 @@
     "descHeader": "СверхмощныйVRFкондиционерMidea95кВт(950м2)",
     "description": "Единичныймодульогромноймощности.Позволяетзначительносэкономитьнаобвязкеиразветвителях.",
     "specs": "",
-    "orderOnly": false
+    "orderOnly": false,
+    "genSpec": {
+      "coolKw": "95.2",
+      "heatKw": "106.0",
+      "eer": "2.90",
+      "cop": "3.22",
+      "compressor": "HITACHI EVI DC-inverter",
+      "airflow": "28000",
+      "refrigerant": "R410A",
+      "dims": "1880×1760×825",
+      "weight": "419",
+      "tempCool": "-15 ~ +55",
+      "tempHeat": "-30 ~ +30"
+    },
+    "genSpecSource": {
+      "catalogKey": "vrf-2026",
+      "page": 47
+    }
   },
   {
     "id": "mv8i-1010wv2gn1-ma-",
@@ -402,7 +558,25 @@
     "descHeader": "VRFсистемаMidea101кВтдлявысоток(1000м2)",
     "description": "Увеличеннаядлинатрассиперепадвысот.Охладит1000квадратныхметровбезпотеридавленияфреона.",
     "specs": "",
-    "orderOnly": false
+    "orderOnly": false,
+    "genSpec": {
+      "coolKw": "95.2",
+      "heatKw": "106.0",
+      "powerSupply": "380-415/50/3",
+      "eer": "2.90",
+      "cop": "3.22",
+      "compressor": "HITACHI EVI DC-inverter",
+      "airflow": "29000",
+      "refrigerant": "R410A",
+      "dims": "1880×1760×825",
+      "weight": "420",
+      "tempCool": "-15 ~ +55",
+      "tempHeat": "-30 ~ +30"
+    },
+    "genSpecSource": {
+      "catalogKey": "vrf-2026",
+      "page": 47
+    }
   },
   {
     "id": "mv8i-1060wv2gn1-ma-",
@@ -429,7 +603,25 @@
     "descHeader": "ПромышленныйкондиционерMidea106кВт(1060м2)",
     "description": "ОдинизсамыхмощныхединичныхVRFмодулейнарынке.Сокращаетсрокимонтажасистемцентральногокондиционирования.",
     "specs": "",
-    "orderOnly": false
+    "orderOnly": false,
+    "genSpec": {
+      "coolKw": "101.0",
+      "heatKw": "112.0",
+      "powerSupply": "380-415/50/3",
+      "eer": "2.85",
+      "cop": "3.16",
+      "compressor": "HITACHI EVI DC-inverter",
+      "airflow": "29000",
+      "refrigerant": "R410A",
+      "dims": "1880×1760×825",
+      "weight": "420",
+      "tempCool": "-15 ~ +55",
+      "tempHeat": "-30 ~ +30"
+    },
+    "genSpecSource": {
+      "catalogKey": "vrf-2026",
+      "page": 47
+    }
   },
   {
     "id": "mv8i-1120wv2gn1-ma-",
@@ -456,7 +648,25 @@
     "descHeader": "ФлагманскаясистемаVRFMidea112кВт(1120м2)",
     "description": "Заменяетсвязкуизнесколькихклассическихблоков.Минимизируетколичествотрубиразветвителейнакровле.",
     "specs": "",
-    "orderOnly": false
+    "orderOnly": false,
+    "genSpec": {
+      "coolKw": "106.0",
+      "heatKw": "119.0",
+      "powerSupply": "380-415/50/3",
+      "eer": "2.81",
+      "cop": "3.11",
+      "compressor": "HITACHI EVI DC-inverter",
+      "airflow": "30000",
+      "refrigerant": "R410A",
+      "dims": "1880×1760×825",
+      "weight": "420",
+      "tempCool": "-15 ~ +55",
+      "tempHeat": "-30 ~ +30"
+    },
+    "genSpecSource": {
+      "catalogKey": "vrf-2026",
+      "page": 47
+    }
   },
   {
     "id": "mv8i-1170wv2gn1-ma-",
@@ -483,7 +693,25 @@
     "descHeader": "СамыймощныйVRFблокMidea117кВт(1170м2)",
     "description": "Максимальнаявозможнаямощностькондиционированиявединомкорпусе.Экономитдо40%площадинакрыше.",
     "specs": "",
-    "orderOnly": false
+    "orderOnly": false,
+    "genSpec": {
+      "coolKw": "106.0",
+      "heatKw": "119.0",
+      "powerSupply": "380-415/50/3",
+      "eer": "2.81",
+      "cop": "3.08",
+      "compressor": "HITACHI EVI DC-inverter",
+      "airflow": "30000",
+      "refrigerant": "R410A",
+      "dims": "1880×1760×825",
+      "weight": "440",
+      "tempCool": "-15 ~ +55",
+      "tempHeat": "-30 ~ +30"
+    },
+    "genSpecSource": {
+      "catalogKey": "vrf-2026",
+      "page": 47
+    }
   },
   {
     "id": "mvc-m280wv2gn1",
@@ -730,7 +958,21 @@
     "descHeader": "КрупныйпромышленныйVRFMidea50кВт(500м2)",
     "description": "Мощнаясистемацентральногоклимата.Охладит500квадратовкоммерческойплощади.",
     "specs": "",
-    "orderOnly": false
+    "orderOnly": false,
+    "genSpec": {
+      "powerSupply": "380-415/50/3",
+      "eer": "3.91",
+      "cop": "4.11",
+      "airflow": "20000",
+      "dims": "1250×1760×580",
+      "weight": "213",
+      "tempCool": "-15 ~ +55",
+      "tempHeat": "-30 ~ +30"
+    },
+    "genSpecSource": {
+      "catalogKey": "vrf-2026",
+      "page": 61
+    }
   },
   {
     "id": "mvi-560wv2gn1-a-",
@@ -757,7 +999,21 @@
     "descHeader": "ПромышленныйкондиционерMideaMVi56кВт(560м2)",
     "description": "Отличнаяпроизводительностьдлякрупныхобъектов.Защитаотперегрузоксети.",
     "specs": "",
-    "orderOnly": false
+    "orderOnly": false,
+    "genSpec": {
+      "powerSupply": "380-415/50/3",
+      "eer": "3.44",
+      "cop": "4.12",
+      "airflow": "18500",
+      "dims": "1250×1760×580",
+      "weight": "223",
+      "tempCool": "-15 ~ +55",
+      "tempHeat": "-30 ~ +30"
+    },
+    "genSpecSource": {
+      "catalogKey": "vrf-2026",
+      "page": 61
+    }
   },
   {
     "id": "mvi-615wv2gn1-a-",
@@ -784,7 +1040,21 @@
     "descHeader": "СистемацентральногоклиматаMidea61кВт(600м2)",
     "description": "Крупныймодульсвысокойхолодопроизводительностью.Долговечныйантикоррозийныйтеплообменник.",
     "specs": "",
-    "orderOnly": false
+    "orderOnly": false,
+    "genSpec": {
+      "powerSupply": "380-415/50/3",
+      "eer": "3.40",
+      "cop": "4.08",
+      "airflow": "19000",
+      "dims": "1250×1760×580",
+      "weight": "233",
+      "tempCool": "-15 ~ +55",
+      "tempHeat": "-30 ~ +30"
+    },
+    "genSpecSource": {
+      "catalogKey": "vrf-2026",
+      "page": 61
+    }
   },
   {
     "id": "mvi-670wv2gn1-a-",
@@ -811,7 +1081,21 @@
     "descHeader": "МультизональнаясистемаMideaMVi67кВт(670м2)",
     "description": "СамыймощныймодульвсерииMVi.Максимумпроизводительностидлякрупныхпроектов.",
     "specs": "",
-    "orderOnly": false
+    "orderOnly": false,
+    "genSpec": {
+      "powerSupply": "380-415/50/3",
+      "eer": "3.41",
+      "cop": "4.29",
+      "airflow": "19000",
+      "dims": "1250×1760×580",
+      "weight": "238",
+      "tempCool": "-15 ~ +55",
+      "tempHeat": "-30 ~ +30"
+    },
+    "genSpecSource": {
+      "catalogKey": "vrf-2026",
+      "page": 61
+    }
   },
   {
     "id": "mv8m-100wv2hn1",
@@ -2738,7 +3022,7 @@
     "slidesImage": "https://drive.google.com/uc?id=1n-pxc6qhtfC209s3CU0j7UKvMSOX2Utb",
     "driveImage": "https://drive.google.com/file/d/1n-pxc6qhtfC209s3CU0j7UKvMSOX2Utb/view?usp=sharing",
     "coolingCapacity": 130,
-    "heatingCapacity": 0,
+    "heatingCapacity": 142,
     "recommendedArea": 1300,
     "powerConsumption": 0,
     "airflow": "-",
@@ -2750,7 +3034,30 @@
     "descHeader": "Мини-чиллерсовстроеннымгидромодулемMidea90кВт",
     "description": "Готовоерешение:насосибакужевнутри!Купил,подключилтрубыисистемаработает.УдаленноеуправлениечерезModbus.",
     "specs": "",
-    "orderOnly": false
+    "orderOnly": false,
+    "genSpec": {
+      "coolKw": "130",
+      "heatKw": "142",
+      "coolPower": "39.2",
+      "heatPower": "40.8",
+      "eer": "3.32",
+      "cop": "3.48",
+      "compressor": "Спиральный",
+      "waterFlow": "22.4",
+      "waterDp": "60",
+      "airflow": "48000",
+      "noise": "68",
+      "refrigerant": "R410А",
+      "powerSupply": "380 ~ 415, 50, 3",
+      "tempCool": "15 ~ 48",
+      "tempHeat": "-15 ~ 24",
+      "pipe": "DN65",
+      "weight": "875"
+    },
+    "genSpecSource": {
+      "catalogKey": "chiller-2026",
+      "page": 43
+    }
   },
   {
     "id": "mc-ss260-rn1tl",
@@ -2763,7 +3070,7 @@
     "slidesImage": "https://drive.google.com/uc?id=1n-pxc6qhtfC209s3CU0j7UKvMSOX2Utb",
     "driveImage": "https://drive.google.com/file/d/1n-pxc6qhtfC209s3CU0j7UKvMSOX2Utb/view?usp=sharing",
     "coolingCapacity": 260,
-    "heatingCapacity": 0,
+    "heatingCapacity": 280,
     "recommendedArea": 2600,
     "powerConsumption": 0,
     "airflow": "-",
@@ -2775,7 +3082,30 @@
     "descHeader": "МодульныйЧиллерMideaAquaThermal140кВт",
     "description": "Компактныйразмердлятакоймощности.Можнообъединитьдо16чиллеровводнуцепьпомерероставашегобизнеса(каскад).",
     "specs": "",
-    "orderOnly": false
+    "orderOnly": false,
+    "genSpec": {
+      "coolKw": "265",
+      "heatKw": "280",
+      "coolPower": "84",
+      "heatPower": "84.8",
+      "eer": "3.15",
+      "cop": "3.3",
+      "compressor": "Спиральный",
+      "waterFlow": "45.41",
+      "waterDp": "65.4",
+      "airflow": "78000",
+      "noise": "78",
+      "refrigerant": "R410А",
+      "powerSupply": "380 ~ 415/50/3",
+      "tempCool": "-10 ~ 52",
+      "tempHeat": "-15 ~ 24",
+      "pipe": "DN100",
+      "weight": "1890"
+    },
+    "genSpecSource": {
+      "catalogKey": "chiller-2026",
+      "page": 46
+    }
   },
   {
     "id": "mc-su75-rn8l-b",
@@ -2800,7 +3130,22 @@
     "descHeader": "ИнверторныймодульныйчиллерMidea180кВт(R32)",
     "description": "Продвинутаясистемаумнойразморозки.ВкомплектеидетсовременныйпультиплатаинтеграцииModbus.Официальнаягарантиякачества.",
     "specs": "",
-    "orderOnly": false
+    "orderOnly": false,
+    "genSpec": {
+      "heatPower": "23.72",
+      "eer": "2.61",
+      "cop": "3.17",
+      "airflow": "28500",
+      "noise": "69",
+      "refrigerant": "R32",
+      "tempCool": "-10 ~ 48",
+      "tempHeat": "-20 ~ 43",
+      "pipe": "DN50"
+    },
+    "genSpecSource": {
+      "catalogKey": "chiller-2026",
+      "page": 35
+    }
   },
   {
     "id": "mc-su90-rn8l-b",
@@ -2825,7 +3170,23 @@
     "descHeader": "КомпактныйкассетныйфанкойлMidea1.8кВт(Водяной)",
     "description": "Длясистемчиллер-фанкойл.Размер60х60подАрмстронг.Круговойобдувна360градусовивстроеннаяпомпа.Красивыйдисплей.",
     "specs": "",
-    "orderOnly": false
+    "orderOnly": false,
+    "genSpec": {
+      "heatPower": "28.84",
+      "eer": "2.95",
+      "cop": "3.15",
+      "airflow": "35000",
+      "noise": "65",
+      "refrigerant": "R32",
+      "powerSupply": "380 ~ 415, 50, 3",
+      "tempCool": "-10 ~ 48",
+      "tempHeat": "-20 ~ 43",
+      "pipe": "DN50"
+    },
+    "genSpecSource": {
+      "catalogKey": "chiller-2026",
+      "page": 35
+    }
   },
   {
     "id": "mc-su140-rn8l-b",
@@ -2850,7 +3211,23 @@
     "descHeader": "КассетныйфанкойлMideaКомпакт2.7кВт(на30м2)",
     "description": "Идеалендляофисов.Естьвозможностьподмесасвежеговоздухасулицы.Легковстраиваетсявлюбуюпотолочнуюсистему.",
     "specs": "",
-    "orderOnly": false
+    "orderOnly": false,
+    "genSpec": {
+      "heatPower": "28.84",
+      "eer": "2.95",
+      "cop": "3.15",
+      "airflow": "35000",
+      "noise": "65",
+      "refrigerant": "R32",
+      "powerSupply": "380 ~ 415, 50, 3",
+      "tempCool": "-10 ~ 48",
+      "tempHeat": "-20 ~ 43",
+      "pipe": "DN50"
+    },
+    "genSpecSource": {
+      "catalogKey": "chiller-2026",
+      "page": 35
+    }
   },
   {
     "id": "mc-su180-rn8l-b",
@@ -2875,7 +3252,23 @@
     "descHeader": "Водянойкассетныйкондиционер(фанкойл)Midea3.6кВт",
     "description": "Специальный3D-вентиляторработаеточеньтихо.Фильтрлегкодостатьипомыть.Долгийсрокслужбывкоммерческомрежиме.",
     "specs": "",
-    "orderOnly": false
+    "orderOnly": false,
+    "genSpec": {
+      "heatPower": "44.56",
+      "eer": "2.57",
+      "cop": "3.1",
+      "airflow": "50000",
+      "noise": "73",
+      "refrigerant": "R32",
+      "powerSupply": "380 ~ 415, 50, 3",
+      "tempCool": "-10 ~ 48",
+      "tempHeat": "-20 ~ 43",
+      "pipe": "DN65"
+    },
+    "genSpecSource": {
+      "catalogKey": "chiller-2026",
+      "page": 35
+    }
   },
   {
     "id": "mhc-v30w-d2rn8",
@@ -2887,12 +3280,34 @@
     "image": "/images/products/1GIyfhFdtk7-vmem9nkTRyay547bcmgEu.png",
     "slidesImage": "https://drive.google.com/uc?id=1GIyfhFdtk7-vmem9nkTRyay547bcmgEu",
     "driveImage": "https://drive.google.com/file/d/1GIyfhFdtk7-vmem9nkTRyay547bcmgEu/view?usp=sharing",
-    "coolingCapacity": 0,
-    "heatingCapacity": 0,
+    "coolingCapacity": 29.5,
+    "heatingCapacity": 30,
     "recommendedArea": 0,
     "powerConsumption": 0,
     "specs": "",
-    "orderOnly": false
+    "orderOnly": false,
+    "genSpec": {
+      "coolKw": "29.5",
+      "heatKw": "30",
+      "coolPower": "11.57",
+      "heatPower": "10.35",
+      "eer": "2.55",
+      "cop": "2.9",
+      "compressor": "Ротационный",
+      "waterFlow": "5.1",
+      "airflow": "11300",
+      "noise": "63.5",
+      "refrigerant": "R32",
+      "powerSupply": "380 ~ 415, 50, 3",
+      "tempCool": "-10 ~ 46",
+      "tempHeat": "-25 ~ 35",
+      "dims": "1220×1735×565",
+      "weight": "177"
+    },
+    "genSpecSource": {
+      "catalogKey": "chiller-2026",
+      "page": 26
+    }
   },
   {
     "id": "mha-v16w-d2rn8-b",
@@ -5964,7 +6379,19 @@
     "powerConsumption": 0,
     "powerSupply": "220В",
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "eer": "4.06",
+      "cop": "4.35",
+      "airflow": "5000",
+      "weight": "109",
+      "tempCool": "-15~52",
+      "tempHeat": "-20~30"
+    },
+    "genSpecSource": {
+      "catalogKey": "vrf-2026",
+      "page": 67
+    }
   },
   {
     "id": "mv8m-140wv2gn1",
@@ -5982,7 +6409,20 @@
     "powerConsumption": 0,
     "powerSupply": "220В",
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "powerSupply": "380-415/50/3",
+      "eer": "3.9",
+      "cop": "4.35",
+      "airflow": "5000",
+      "weight": "109",
+      "tempCool": "-15~52",
+      "tempHeat": "-20~30"
+    },
+    "genSpecSource": {
+      "catalogKey": "vrf-2026",
+      "page": 67
+    }
   },
   {
     "id": "mv8m-160wv2gn1",
@@ -6000,7 +6440,20 @@
     "powerConsumption": 0,
     "powerSupply": "220В",
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "powerSupply": "380-415/50/3",
+      "eer": "3.9",
+      "cop": "4.25",
+      "airflow": "5000",
+      "weight": "109",
+      "tempCool": "-15~52",
+      "tempHeat": "-20~30"
+    },
+    "genSpecSource": {
+      "catalogKey": "vrf-2026",
+      "page": 67
+    }
   },
   {
     "id": "mv8m-170wv2gn1",
@@ -6018,7 +6471,20 @@
     "powerConsumption": 0,
     "powerSupply": "220В",
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "powerSupply": "380-415/50/3",
+      "eer": "3.61",
+      "cop": "4.1",
+      "airflow": "5000",
+      "weight": "109",
+      "tempCool": "-15~52",
+      "tempHeat": "-20~30"
+    },
+    "genSpecSource": {
+      "catalogKey": "vrf-2026",
+      "page": 67
+    }
   },
   {
     "id": "mv8m-80wv2hn1",
@@ -8441,12 +8907,31 @@
     "price": 6980,
     "image": "/images/products/1f_lFlRNEcVxXB47oOAg4B3eZnh7kaSoI.png",
     "coolingCapacity": 25.2,
-    "heatingCapacity": 0,
+    "heatingCapacity": 27,
     "recommendedArea": 0,
     "powerConsumption": 0,
     "powerSupply": "380В",
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "coolKw": "25.2",
+      "heatKw": "27.0",
+      "powerSupply": "380-415/50/3",
+      "eer": "4.76",
+      "cop": "5.12",
+      "compressor": "HITACHI EVI DC-inverter",
+      "airflow": "12600",
+      "noise": "56",
+      "refrigerant": "R410A",
+      "dims": "940×1760×825",
+      "weight": "195",
+      "tempCool": "-15 ~ +55",
+      "tempHeat": "-30 ~ +30"
+    },
+    "genSpecSource": {
+      "catalogKey": "vrf-2026",
+      "page": 44
+    }
   },
   {
     "id": "mv8-280wv2gn1-ma-",
@@ -8457,12 +8942,31 @@
     "price": 7192,
     "image": "/images/products/1f_lFlRNEcVxXB47oOAg4B3eZnh7kaSoI.png",
     "coolingCapacity": 28,
-    "heatingCapacity": 0,
+    "heatingCapacity": 31.5,
     "recommendedArea": 0,
     "powerConsumption": 0,
     "powerSupply": "380В",
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "coolKw": "28.0",
+      "heatKw": "31.5",
+      "powerSupply": "380-415/50/3",
+      "eer": "4.25",
+      "cop": "4.89",
+      "compressor": "HITACHI EVI DC-inverter",
+      "airflow": "12600",
+      "noise": "57",
+      "refrigerant": "R410A",
+      "dims": "940×1760×825",
+      "weight": "195",
+      "tempCool": "-15 ~ +55",
+      "tempHeat": "-30 ~ +30"
+    },
+    "genSpecSource": {
+      "catalogKey": "vrf-2026",
+      "page": 44
+    }
   },
   {
     "id": "mv8-335wv2gn1-ma-",
@@ -8537,12 +9041,30 @@
     "price": 11985,
     "image": "/images/products/1f_lFlRNEcVxXB47oOAg4B3eZnh7kaSoI.png",
     "coolingCapacity": 56,
-    "heatingCapacity": 0,
+    "heatingCapacity": 63,
     "recommendedArea": 0,
     "powerConsumption": 0,
     "powerSupply": "380В",
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "coolKw": "56.0",
+      "heatKw": "63.0",
+      "powerSupply": "380-415/50/3",
+      "eer": "3.73",
+      "cop": "4.13",
+      "compressor": "HITACHI EVI DC-inverter",
+      "airflow": "22000",
+      "refrigerant": "R410A",
+      "dims": "1340×1760×825",
+      "weight": "277",
+      "tempCool": "-15 ~ +55",
+      "tempHeat": "-30 ~ +30"
+    },
+    "genSpecSource": {
+      "catalogKey": "vrf-2026",
+      "page": 45
+    }
   },
   {
     "id": "mv8-615wv2gn1-ma-",
@@ -8553,12 +9075,30 @@
     "price": 12794,
     "image": "/images/products/1f_lFlRNEcVxXB47oOAg4B3eZnh7kaSoI.png",
     "coolingCapacity": 61.5,
-    "heatingCapacity": 0,
+    "heatingCapacity": 69,
     "recommendedArea": 0,
     "powerConsumption": 0,
     "powerSupply": "380В",
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "coolKw": "61.5",
+      "heatKw": "69.0",
+      "powerSupply": "380-415/50/3",
+      "eer": "3.56",
+      "cop": "3.92",
+      "compressor": "HITACHI EVI DC-inverter",
+      "airflow": "22000",
+      "refrigerant": "R410A",
+      "dims": "1340×1760×825",
+      "weight": "277",
+      "tempCool": "-15 ~ +55",
+      "tempHeat": "-30 ~ +30"
+    },
+    "genSpecSource": {
+      "catalogKey": "vrf-2026",
+      "page": 45
+    }
   },
   {
     "id": "mv8-670wv2gn1-ma-",
@@ -8569,12 +9109,30 @@
     "price": 14390,
     "image": "/images/products/1f_lFlRNEcVxXB47oOAg4B3eZnh7kaSoI.png",
     "coolingCapacity": 67,
-    "heatingCapacity": 0,
+    "heatingCapacity": 75,
     "recommendedArea": 0,
     "powerConsumption": 0,
     "powerSupply": "380В",
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "coolKw": "67.0",
+      "heatKw": "75.0",
+      "powerSupply": "380-415/50/3",
+      "eer": "3.60",
+      "cop": "3.95",
+      "compressor": "HITACHI EVI DC-inverter",
+      "airflow": "21500",
+      "refrigerant": "R410A",
+      "dims": "1340×1760×825",
+      "weight": "297",
+      "tempCool": "-15 ~ +55",
+      "tempHeat": "-30 ~ +30"
+    },
+    "genSpecSource": {
+      "catalogKey": "vrf-2026",
+      "page": 45
+    }
   },
   {
     "id": "mv8-730wv2gn1-ma-",
@@ -8585,12 +9143,30 @@
     "price": 15059,
     "image": "/images/products/1f_lFlRNEcVxXB47oOAg4B3eZnh7kaSoI.png",
     "coolingCapacity": 73,
-    "heatingCapacity": 0,
+    "heatingCapacity": 81.5,
     "recommendedArea": 0,
     "powerConsumption": 0,
     "powerSupply": "380В",
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "coolKw": "73.0",
+      "heatKw": "81.5",
+      "powerSupply": "380-415/50/3",
+      "eer": "3.51",
+      "cop": "3.92",
+      "compressor": "HITACHI EVI DC-inverter",
+      "airflow": "29000",
+      "refrigerant": "R410A",
+      "dims": "1880×1760×825",
+      "weight": "297",
+      "tempCool": "-15 ~ +55",
+      "tempHeat": "-30 ~ +30"
+    },
+    "genSpecSource": {
+      "catalogKey": "vrf-2026",
+      "page": 45
+    }
   },
   {
     "id": "mv8-785wv2gn1-ma-",
@@ -8601,12 +9177,30 @@
     "price": 15759,
     "image": "/images/products/1f_lFlRNEcVxXB47oOAg4B3eZnh7kaSoI.png",
     "coolingCapacity": 78.5,
-    "heatingCapacity": 0,
+    "heatingCapacity": 81.5,
     "recommendedArea": 0,
     "powerConsumption": 0,
     "powerSupply": "380В",
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "coolKw": "73.0",
+      "heatKw": "81.5",
+      "powerSupply": "380-415/50/3",
+      "eer": "3.51",
+      "cop": "3.92",
+      "compressor": "HITACHI EVI DC-inverter",
+      "airflow": "29000",
+      "refrigerant": "R410A",
+      "dims": "1880×1760×825",
+      "weight": "380",
+      "tempCool": "-15 ~ +55",
+      "tempHeat": "-30 ~ +30"
+    },
+    "genSpecSource": {
+      "catalogKey": "vrf-2026",
+      "page": 45
+    }
   },
   {
     "id": "mv8-850wv2gn1-ma-",
@@ -8617,12 +9211,30 @@
     "price": 16997,
     "image": "/images/products/1f_lFlRNEcVxXB47oOAg4B3eZnh7kaSoI.png",
     "coolingCapacity": 85,
-    "heatingCapacity": 0,
+    "heatingCapacity": 87.5,
     "recommendedArea": 0,
     "powerConsumption": 0,
     "powerSupply": "380В",
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "coolKw": "78.5",
+      "heatKw": "87.5",
+      "powerSupply": "380-415/50/3",
+      "eer": "3.32",
+      "cop": "3.65",
+      "compressor": "HITACHI EVI DC-inverter",
+      "airflow": "29000",
+      "refrigerant": "R410A",
+      "dims": "1880×1760×825",
+      "weight": "380",
+      "tempCool": "-15 ~ +55",
+      "tempHeat": "-30 ~ +30"
+    },
+    "genSpecSource": {
+      "catalogKey": "vrf-2026",
+      "page": 45
+    }
   },
   {
     "id": "mv8-900wv2gn1-ma-",
@@ -8633,12 +9245,30 @@
     "price": 17130,
     "image": "/images/products/1f_lFlRNEcVxXB47oOAg4B3eZnh7kaSoI.png",
     "coolingCapacity": 90,
-    "heatingCapacity": 0,
+    "heatingCapacity": 100,
     "recommendedArea": 0,
     "powerConsumption": 0,
     "powerSupply": "380В",
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "coolKw": "90.0",
+      "heatKw": "100.0",
+      "powerSupply": "380-415/50/3",
+      "eer": "3.05",
+      "cop": "3.40",
+      "compressor": "HITACHI EVI DC-inverter",
+      "airflow": "28000",
+      "refrigerant": "R410A",
+      "dims": "1880×1760×825",
+      "weight": "419",
+      "tempCool": "-15 ~ +55",
+      "tempHeat": "-30 ~ +30"
+    },
+    "genSpecSource": {
+      "catalogKey": "vrf-2026",
+      "page": 45
+    }
   },
   {
     "id": "mv8-950wv2gn1-ma-",
@@ -8649,12 +9279,30 @@
     "price": 17722,
     "image": "/images/products/1f_lFlRNEcVxXB47oOAg4B3eZnh7kaSoI.png",
     "coolingCapacity": 95.2,
-    "heatingCapacity": 0,
+    "heatingCapacity": 106,
     "recommendedArea": 0,
     "powerConsumption": 0,
     "powerSupply": "380В",
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "coolKw": "95.2",
+      "heatKw": "106.0",
+      "powerSupply": "380-415/50/3",
+      "eer": "3.00",
+      "cop": "3.34",
+      "compressor": "HITACHI EVI DC-inverter",
+      "airflow": "29000",
+      "refrigerant": "R410A",
+      "dims": "1880×1760×825",
+      "weight": "420",
+      "tempCool": "-15 ~ +55",
+      "tempHeat": "-30 ~ +30"
+    },
+    "genSpecSource": {
+      "catalogKey": "vrf-2026",
+      "page": 45
+    }
   },
   {
     "id": "mv8-1010wv2gn1-ma-",
@@ -8665,12 +9313,30 @@
     "price": 17932,
     "image": "/images/products/1f_lFlRNEcVxXB47oOAg4B3eZnh7kaSoI.png",
     "coolingCapacity": 101,
-    "heatingCapacity": 0,
+    "heatingCapacity": 112,
     "recommendedArea": 0,
     "powerConsumption": 0,
     "powerSupply": "380В",
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "coolKw": "101.0",
+      "heatKw": "112.0",
+      "powerSupply": "380-415/50/3",
+      "eer": "2.97",
+      "cop": "3.30",
+      "compressor": "HITACHI EVI DC-inverter",
+      "airflow": "29000",
+      "refrigerant": "R410A",
+      "dims": "1880×1760×825",
+      "weight": "420",
+      "tempCool": "-15 ~ +55",
+      "tempHeat": "-30 ~ +30"
+    },
+    "genSpecSource": {
+      "catalogKey": "vrf-2026",
+      "page": 45
+    }
   },
   {
     "id": "mv8-1060wv2gn1-ma-",
@@ -8681,12 +9347,30 @@
     "price": 19341,
     "image": "/images/products/1f_lFlRNEcVxXB47oOAg4B3eZnh7kaSoI.png",
     "coolingCapacity": 106,
-    "heatingCapacity": 0,
+    "heatingCapacity": 119,
     "recommendedArea": 0,
     "powerConsumption": 0,
     "powerSupply": "380В",
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "coolKw": "106.0",
+      "heatKw": "119.0",
+      "powerSupply": "380-415/50/3",
+      "eer": "2.91",
+      "cop": "3.22",
+      "compressor": "HITACHI EVI DC-inverter",
+      "airflow": "30000",
+      "refrigerant": "R410A",
+      "dims": "1880×1760×825",
+      "weight": "440",
+      "tempCool": "-15 ~ +55",
+      "tempHeat": "-30 ~ +30"
+    },
+    "genSpecSource": {
+      "catalogKey": "vrf-2026",
+      "page": 45
+    }
   },
   {
     "id": "mv8-1120wv2gn1-ma-",
@@ -8697,12 +9381,30 @@
     "price": 19782,
     "image": "/images/products/1f_lFlRNEcVxXB47oOAg4B3eZnh7kaSoI.png",
     "coolingCapacity": 112,
-    "heatingCapacity": 0,
+    "heatingCapacity": 123.5,
     "recommendedArea": 0,
     "powerConsumption": 0,
     "powerSupply": "380В",
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "coolKw": "112.0",
+      "heatKw": "123.5",
+      "powerSupply": "380-415/50/3",
+      "eer": "2.81",
+      "cop": "3.16",
+      "compressor": "HITACHI EVI DC-inverter",
+      "airflow": "30000",
+      "refrigerant": "R410A",
+      "dims": "1880×1760×825",
+      "weight": "440",
+      "tempCool": "-15 ~ +55",
+      "tempHeat": "-30 ~ +30"
+    },
+    "genSpecSource": {
+      "catalogKey": "vrf-2026",
+      "page": 45
+    }
   },
   {
     "id": "mv8s-252wv2gn1",
@@ -8798,7 +9500,21 @@
     "powerConsumption": 0,
     "powerSupply": "380В",
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "powerSupply": "380-415/50/3",
+      "eer": "3.91",
+      "cop": "4.2",
+      "airflow": "20000",
+      "dims": "1250×1760×580",
+      "weight": "208",
+      "tempCool": "-15 ~ +55",
+      "tempHeat": "-30 ~ +30"
+    },
+    "genSpecSource": {
+      "catalogKey": "vrf-2026",
+      "page": 60
+    }
   },
   {
     "id": "mv8s-560wv2gn1",
@@ -8814,7 +9530,21 @@
     "powerConsumption": 0,
     "powerSupply": "380В",
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "powerSupply": "380-415/50/3",
+      "eer": "3.59",
+      "cop": "4.4",
+      "airflow": "18500",
+      "dims": "1250×1760×580",
+      "weight": "228",
+      "tempCool": "-15 ~ +55",
+      "tempHeat": "-30 ~ +30"
+    },
+    "genSpecSource": {
+      "catalogKey": "vrf-2026",
+      "page": 60
+    }
   },
   {
     "id": "mv8s-615wv2gn1",
@@ -8830,7 +9560,21 @@
     "powerConsumption": 0,
     "powerSupply": "380В",
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "powerSupply": "380-415/50/3",
+      "eer": "3.40",
+      "cop": "4.1",
+      "airflow": "19000",
+      "dims": "1250×1760×580",
+      "weight": "228",
+      "tempCool": "-15 ~ +55",
+      "tempHeat": "-30 ~ +30"
+    },
+    "genSpecSource": {
+      "catalogKey": "vrf-2026",
+      "page": 60
+    }
   },
   {
     "id": "mv8s-670wv2gn1",
@@ -8846,7 +9590,21 @@
     "powerConsumption": 0,
     "powerSupply": "380В",
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "powerSupply": "380-415/50/3",
+      "eer": "3.41",
+      "cop": "4.3",
+      "airflow": "19000",
+      "dims": "1250×1760×580",
+      "weight": "233",
+      "tempCool": "-15 ~ +55",
+      "tempHeat": "-30 ~ +30"
+    },
+    "genSpecSource": {
+      "catalogKey": "vrf-2026",
+      "page": 60
+    }
   },
   {
     "id": "mv8m-120wv2rn8",
@@ -10839,12 +11597,29 @@
     "price": 5455,
     "image": "/images/products/v4w-water-cooled.png",
     "coolingCapacity": 25.2,
-    "heatingCapacity": 0,
+    "heatingCapacity": 27,
     "recommendedArea": 0,
     "powerConsumption": 0,
     "powerSupply": "380В",
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "coolKw": "25.2",
+      "heatKw": "27",
+      "powerSupply": "380-415/50/3",
+      "coolPower": "4.8",
+      "heatPower": "4.45",
+      "eer": "5.25",
+      "cop": "6.07",
+      "waterFlow": "5.4",
+      "noise": "51",
+      "dims": "780×1000×550",
+      "weight": "146"
+    },
+    "genSpecSource": {
+      "catalogKey": "vrf-2026",
+      "page": 117
+    }
   },
   {
     "id": "mdvs-280-10-w-drn1",
@@ -10855,12 +11630,29 @@
     "price": 5809,
     "image": "/images/products/v4w-water-cooled.png",
     "coolingCapacity": 28,
-    "heatingCapacity": 0,
+    "heatingCapacity": 31.5,
     "recommendedArea": 0,
     "powerConsumption": 0,
     "powerSupply": "380В",
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "coolKw": "28",
+      "heatKw": "31.5",
+      "powerSupply": "380-415/50/3",
+      "coolPower": "6.1",
+      "heatPower": "5.83",
+      "eer": "4.59",
+      "cop": "5.4",
+      "waterFlow": "6",
+      "noise": "52",
+      "dims": "780×1000×550",
+      "weight": "146"
+    },
+    "genSpecSource": {
+      "catalogKey": "vrf-2026",
+      "page": 117
+    }
   },
   {
     "id": "mdvs-335-12-w-drn1",
@@ -10871,12 +11663,29 @@
     "price": 6241,
     "image": "/images/products/v4w-water-cooled.png",
     "coolingCapacity": 33.5,
-    "heatingCapacity": 0,
+    "heatingCapacity": 37.5,
     "recommendedArea": 0,
     "powerConsumption": 0,
     "powerSupply": "380В",
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "coolKw": "33.5",
+      "heatKw": "37.5",
+      "powerSupply": "380-415/50/3",
+      "coolPower": "8",
+      "heatPower": "7.8",
+      "eer": "4.19",
+      "cop": "4.81",
+      "waterFlow": "7.2",
+      "noise": "52",
+      "dims": "780×1000×550",
+      "weight": "147"
+    },
+    "genSpecSource": {
+      "catalogKey": "vrf-2026",
+      "page": 117
+    }
   },
   {
     "id": "mdv-v80w-dhn1-d-",
@@ -11153,7 +11962,25 @@
     "powerConsumption": 0,
     "powerSupply": "380В",
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "powerSupply": "220-240/50/1",
+      "coolPower": "0.94",
+      "eer": "3.71",
+      "heatPower": "0.88",
+      "cop": "4.43",
+      "compressor": "DC-Inverter",
+      "airflow": "2500",
+      "noise": "53",
+      "refrigerant": "R410A",
+      "weight": "35",
+      "waterDp": "10",
+      "tempHeat": "-15 ~ +27"
+    },
+    "genSpecSource": {
+      "catalogKey": "atom-2026",
+      "page": 22
+    }
   },
   {
     "id": "mdv-v18wdhn1-atb-",
@@ -11169,7 +11996,25 @@
     "powerConsumption": 0,
     "powerSupply": "380В",
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "powerSupply": "220-240/50/1",
+      "coolPower": "1.47",
+      "eer": "3.60",
+      "heatPower": "1.35",
+      "cop": "4.30",
+      "compressor": "DC-Inverter",
+      "airflow": "2700",
+      "noise": "54",
+      "refrigerant": "R410A",
+      "weight": "35",
+      "waterDp": "10",
+      "tempHeat": "-15 ~ +27"
+    },
+    "genSpecSource": {
+      "catalogKey": "atom-2026",
+      "page": 22
+    }
   },
   {
     "id": "mdv-v21wdhn1-atb-",
@@ -11185,7 +12030,25 @@
     "powerConsumption": 0,
     "powerSupply": "380В",
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "powerSupply": "220-240/50/1",
+      "coolPower": "1.85",
+      "eer": "3.35",
+      "heatPower": "1.41",
+      "cop": "4.25",
+      "compressor": "DC-Inverter",
+      "airflow": "2700",
+      "noise": "55",
+      "refrigerant": "R410A",
+      "weight": "49",
+      "waterDp": "10",
+      "tempHeat": "-15 ~ +27"
+    },
+    "genSpecSource": {
+      "catalogKey": "atom-2026",
+      "page": 22
+    }
   },
   {
     "id": "mdv-v28wdhn1-atb-",
@@ -11201,7 +12064,26 @@
     "powerConsumption": 0,
     "powerSupply": "380В",
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "powerSupply": "220-240/50/1",
+      "coolPower": "2.10",
+      "eer": "3.81",
+      "heatPower": "2.04",
+      "cop": "4.41",
+      "compressor": "DC-Inverter",
+      "airflow": "3750",
+      "noise": "54",
+      "refrigerant": "R410A",
+      "dims": "910×712×426",
+      "weight": "49",
+      "waterDp": "20",
+      "tempHeat": "-15 ~ +27"
+    },
+    "genSpecSource": {
+      "catalogKey": "atom-2026",
+      "page": 22
+    }
   },
   {
     "id": "mdv-v36wdhn1a-atb-",
@@ -11217,7 +12099,26 @@
     "powerConsumption": 0,
     "powerSupply": "380В",
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "powerSupply": "220-240/50/1",
+      "coolPower": "2.66",
+      "eer": "3.76",
+      "heatPower": "3.15",
+      "cop": "3.81",
+      "compressor": "DC-Inverter",
+      "airflow": "4000",
+      "noise": "54",
+      "refrigerant": "R410A",
+      "dims": "910×712×426",
+      "weight": "52.5",
+      "waterDp": "20",
+      "tempHeat": "-15 ~ +27"
+    },
+    "genSpecSource": {
+      "catalogKey": "atom-2026",
+      "page": 22
+    }
   },
   {
     "id": "mdv-v42wdhn1a-atb-",
@@ -11233,7 +12134,26 @@
     "powerConsumption": 0,
     "powerSupply": "380В",
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "powerSupply": "220-240/50/1",
+      "coolPower": "3.39",
+      "eer": "3.63",
+      "heatPower": "3.64",
+      "cop": "3.85",
+      "compressor": "DC-Inverter",
+      "airflow": "5000",
+      "noise": "56",
+      "refrigerant": "R410A",
+      "dims": "950×840×440",
+      "weight": "62.5",
+      "waterDp": "20",
+      "tempHeat": "-15 ~ +27"
+    },
+    "genSpecSource": {
+      "catalogKey": "atom-2026",
+      "page": 23
+    }
   },
   {
     "id": "mdv-v48wdhn1-atb-",
@@ -11495,7 +12415,23 @@
     "powerConsumption": 0,
     "powerSupply": "380В",
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "coolKw": "12",
+      "powerSupply": "220-240/50/1",
+      "eer": "3.87",
+      "compressor": "DC inverter",
+      "noise": "54",
+      "refrigerant": "R410A",
+      "dims": "982×712×427",
+      "weight": "51",
+      "waterDp": "20",
+      "tempCool": "-15~55"
+    },
+    "genSpecSource": {
+      "catalogKey": "atom-2026",
+      "page": 25
+    }
   },
   {
     "id": "mdvc-v48wdhn1-atc-",
@@ -11511,7 +12447,23 @@
     "powerConsumption": 0,
     "powerSupply": "380В",
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "coolKw": "14",
+      "powerSupply": "220-240/50/1",
+      "eer": "3.61",
+      "compressor": "DC inverter",
+      "noise": "56",
+      "refrigerant": "R410A",
+      "dims": "982×712×427",
+      "weight": "63",
+      "waterDp": "20",
+      "tempCool": "-15~55"
+    },
+    "genSpecSource": {
+      "catalogKey": "atom-2026",
+      "page": 25
+    }
   },
   {
     "id": "mdvc-v56wdhn1-atc-",
@@ -11527,7 +12479,22 @@
     "powerConsumption": 0,
     "powerSupply": "380В",
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "coolKw": "16",
+      "powerSupply": "220-240/50/1",
+      "eer": "3.33",
+      "compressor": "DC inverter",
+      "noise": "56",
+      "refrigerant": "R410A",
+      "weight": "69",
+      "waterDp": "30",
+      "tempCool": "-15~55"
+    },
+    "genSpecSource": {
+      "catalogKey": "atom-2026",
+      "page": 25
+    }
   },
   {
     "id": "mdvc-v60wdhn1-atc-",
@@ -11543,7 +12510,22 @@
     "powerConsumption": 0,
     "powerSupply": "380В",
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "coolKw": "17.5",
+      "powerSupply": "220-240/50/1",
+      "eer": "3.37",
+      "compressor": "DC inverter",
+      "noise": "57",
+      "refrigerant": "R410A",
+      "weight": "70",
+      "waterDp": "30",
+      "tempCool": "-15~55"
+    },
+    "genSpecSource": {
+      "catalogKey": "atom-2026",
+      "page": 25
+    }
   },
   {
     "id": "mi2-12dldhn18-at-",
@@ -12428,7 +13410,19 @@
     "recommendedArea": 0,
     "powerConsumption": 0,
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "powerSupply": "380-415/50/3",
+      "eer": "3.75",
+      "cop": "4.5",
+      "dims": "1130×1760×580",
+      "weight": "192",
+      "tempCool": "-15~55"
+    },
+    "genSpecSource": {
+      "catalogKey": "vrf-2026",
+      "page": 124
+    }
   },
   {
     "id": "moul-192hd1n1-g",
@@ -12443,7 +13437,19 @@
     "recommendedArea": 0,
     "powerConsumption": 0,
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "powerSupply": "380-415/50/3",
+      "eer": "3.4",
+      "cop": "4.08",
+      "dims": "1250×1760×580",
+      "weight": "233",
+      "tempCool": "-15~55"
+    },
+    "genSpecSource": {
+      "catalogKey": "vrf-2026",
+      "page": 124
+    }
   },
   {
     "id": "moul-250hd1n1-g",
@@ -12458,7 +13464,19 @@
     "recommendedArea": 0,
     "powerConsumption": 0,
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "powerSupply": "380-415/50/3",
+      "eer": "3.44",
+      "cop": "4.12",
+      "dims": "1250×1760×580",
+      "weight": "238",
+      "tempCool": "-15~55"
+    },
+    "genSpecSource": {
+      "catalogKey": "vrf-2026",
+      "page": 124
+    }
   },
   {
     "id": "moul-68cd1n1-r",
@@ -12473,7 +13491,19 @@
     "recommendedArea": 0,
     "powerConsumption": 0,
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "powerSupply": "380-415/50/3",
+      "eer": "3.9",
+      "noise": "57",
+      "dims": "902×1327×370",
+      "weight": "115",
+      "tempCool": "-5~55"
+    },
+    "genSpecSource": {
+      "catalogKey": "vrf-2026",
+      "page": 123
+    }
   },
   {
     "id": "moul-76cd1n1-r",
@@ -12488,7 +13518,19 @@
     "recommendedArea": 0,
     "powerConsumption": 0,
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "powerSupply": "380-415/50/3",
+      "eer": "3.78",
+      "noise": "57",
+      "dims": "902×1327×370",
+      "weight": "115",
+      "tempCool": "-5~55"
+    },
+    "genSpecSource": {
+      "catalogKey": "vrf-2026",
+      "page": 123
+    }
   },
   {
     "id": "moul-96cd1n1-r",
@@ -12503,7 +13545,19 @@
     "recommendedArea": 0,
     "powerConsumption": 0,
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "powerSupply": "380-415/50/3",
+      "eer": "3.4",
+      "noise": "59",
+      "dims": "902×1327×370",
+      "weight": "115",
+      "tempCool": "-5~55"
+    },
+    "genSpecSource": {
+      "catalogKey": "vrf-2026",
+      "page": 123
+    }
   },
   {
     "id": "moul-96hd1n1-g",
@@ -15800,11 +16854,34 @@
     "price": 24628,
     "image": "/images/products/v4w-water-cooled.png",
     "coolingCapacity": 185,
-    "heatingCapacity": 0,
+    "heatingCapacity": 200,
     "recommendedArea": 0,
     "powerConsumption": 0,
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "coolKw": "185",
+      "heatKw": "200",
+      "coolPower": "63",
+      "heatPower": "61",
+      "eer": "2.94",
+      "cop": "3.28",
+      "compressor": "Спиральный",
+      "waterFlow": "31.7",
+      "waterDp": "29.8",
+      "airflow": "12000",
+      "noise": "74",
+      "refrigerant": "R410А",
+      "powerSupply": "380 ~ 415/50/3",
+      "tempCool": "-10 ~ 46",
+      "tempHeat": "-10 ~ 24",
+      "pipe": "DN80",
+      "weight": "1730"
+    },
+    "genSpecSource": {
+      "catalogKey": "chiller-2026",
+      "page": 46
+    }
   },
   {
     "id": "mc-ss35-rn1l-b",
@@ -15815,11 +16892,32 @@
     "price": 5766,
     "image": "/images/products/chiller-aqua.png",
     "coolingCapacity": 35,
-    "heatingCapacity": 0,
+    "heatingCapacity": 37,
     "recommendedArea": 0,
     "powerConsumption": 0,
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "coolKw": "35",
+      "heatKw": "37",
+      "coolPower": "11.5",
+      "heatPower": "11.3",
+      "eer": "3.04",
+      "cop": "3.27",
+      "compressor": "Спиральный",
+      "airflow": "13500",
+      "noise": "65",
+      "refrigerant": "R410А",
+      "powerSupply": "380 ~ 415, 50, 3",
+      "tempCool": "-10 ~ 46",
+      "tempHeat": "-15 ~ 24",
+      "pipe": "DN40",
+      "weight": "320"
+    },
+    "genSpecSource": {
+      "catalogKey": "chiller-2026",
+      "page": 29
+    }
   },
   {
     "id": "mc-ss65-rn1l",
@@ -15830,11 +16928,32 @@
     "price": 9261,
     "image": "/images/products/chiller-aqua.png",
     "coolingCapacity": 65,
-    "heatingCapacity": 0,
+    "heatingCapacity": 69,
     "recommendedArea": 0,
     "powerConsumption": 0,
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "coolKw": "65",
+      "heatKw": "69",
+      "coolPower": "20.4",
+      "heatPower": "21.5",
+      "eer": "3.19",
+      "cop": "3.21",
+      "compressor": "Спиральный",
+      "airflow": "27000",
+      "noise": "67",
+      "refrigerant": "R410А",
+      "powerSupply": "380 ~ 415, 50, 3",
+      "tempCool": "-10 ~ 46",
+      "tempHeat": "-15 ~ 24",
+      "pipe": "DN65",
+      "weight": "530"
+    },
+    "genSpecSource": {
+      "catalogKey": "chiller-2026",
+      "page": 29
+    }
   },
   {
     "id": "mc-ss80-rn1l",
@@ -15845,11 +16964,32 @@
     "price": 12555,
     "image": "/images/products/chiller-aqua.png",
     "coolingCapacity": 80,
-    "heatingCapacity": 0,
+    "heatingCapacity": 85,
     "recommendedArea": 0,
     "powerConsumption": 0,
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "coolKw": "80",
+      "heatKw": "85",
+      "coolPower": "25.8",
+      "heatPower": "26.5",
+      "eer": "3.1",
+      "cop": "3.21",
+      "compressor": "Спиральный",
+      "airflow": "27000",
+      "noise": "67",
+      "refrigerant": "R410А",
+      "powerSupply": "380 ~ 415, 50, 3",
+      "tempCool": "-10 ~ 46",
+      "tempHeat": "-15 ~ 24",
+      "pipe": "DN65",
+      "weight": "645"
+    },
+    "genSpecSource": {
+      "catalogKey": "chiller-2026",
+      "page": 29
+    }
   },
   {
     "id": "mc-ss65-rn1",
@@ -15860,11 +17000,34 @@
     "price": 8799,
     "image": "/images/products/chiller-aqua.png",
     "coolingCapacity": 65,
-    "heatingCapacity": 0,
+    "heatingCapacity": 71,
     "recommendedArea": 0,
     "powerConsumption": 0,
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "coolKw": "65",
+      "heatKw": "71",
+      "coolPower": "19.5",
+      "heatPower": "20.4",
+      "eer": "3.33",
+      "cop": "3.48",
+      "compressor": "Спиральный",
+      "waterFlow": "11.2",
+      "waterDp": "48",
+      "airflow": "27000",
+      "noise": "65",
+      "refrigerant": "R410А",
+      "powerSupply": "380 ~ 415, 50, 3",
+      "tempCool": "15 ~ 48",
+      "tempHeat": "-15 ~ 24",
+      "pipe": "DN65",
+      "weight": "525"
+    },
+    "genSpecSource": {
+      "catalogKey": "chiller-2026",
+      "page": 43
+    }
   },
   {
     "id": "mc-ss130-rn1tl",
@@ -15875,11 +17038,34 @@
     "price": 16473,
     "image": "/images/products/chiller-aqua.png",
     "coolingCapacity": 130,
-    "heatingCapacity": 0,
+    "heatingCapacity": 138,
     "recommendedArea": 0,
     "powerConsumption": 0,
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "coolKw": "130",
+      "heatKw": "138",
+      "coolPower": "42.3",
+      "heatPower": "43",
+      "eer": "3.07",
+      "cop": "3.21",
+      "compressor": "Спиральный",
+      "waterFlow": "22.28",
+      "waterDp": "33.3",
+      "airflow": "39000",
+      "noise": "74.8",
+      "refrigerant": "R410А",
+      "powerSupply": "380 ~ 415/50/3",
+      "tempCool": "-10 ~ 52",
+      "tempHeat": "-15 ~ 24",
+      "pipe": "DN65",
+      "weight": "831"
+    },
+    "genSpecSource": {
+      "catalogKey": "chiller-2026",
+      "page": 46
+    }
   },
   {
     "id": "kjr-120a-mbte",
@@ -15980,11 +17166,32 @@
     "price": 2355,
     "image": "/images/products/chiller-aqua.png",
     "coolingCapacity": 5.5,
-    "heatingCapacity": 0,
+    "heatingCapacity": 6.6,
     "recommendedArea": 0,
     "powerConsumption": 0,
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "coolKw": "5.5",
+      "heatKw": "6.6",
+      "coolPower": "1.695",
+      "heatPower": "1.65",
+      "eer": "3.24",
+      "cop": "4",
+      "compressor": "Ротационный",
+      "airflow": "3900",
+      "noise": "49.1",
+      "refrigerant": "R32",
+      "powerSupply": "220 ~ 240. 50. 1",
+      "tempCool": "-5 ~ 43",
+      "tempHeat": "-25 ~ 35",
+      "dims": "970×1190×560",
+      "weight": "87"
+    },
+    "genSpecSource": {
+      "catalogKey": "chiller-2026",
+      "page": 23
+    }
   },
   {
     "id": "mgc-v7wd2n8-b2",
@@ -15995,11 +17202,32 @@
     "price": 2610,
     "image": "/images/products/chiller-aqua.png",
     "coolingCapacity": 7.4,
-    "heatingCapacity": 0,
+    "heatingCapacity": 8.5,
     "recommendedArea": 0,
     "powerConsumption": 0,
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "coolKw": "7.4",
+      "heatKw": "8.5",
+      "coolPower": "2.349",
+      "heatPower": "2.237",
+      "eer": "3.15",
+      "cop": "3.8",
+      "compressor": "Ротационный",
+      "airflow": "4500",
+      "noise": "52.1",
+      "refrigerant": "R32",
+      "powerSupply": "220 ~ 240. 50. 1",
+      "tempCool": "-5 ~ 43",
+      "tempHeat": "-25 ~ 35",
+      "dims": "970×1190×560",
+      "weight": "87"
+    },
+    "genSpecSource": {
+      "catalogKey": "chiller-2026",
+      "page": 23
+    }
   },
   {
     "id": "mgc-v9wd2n8-b2",
@@ -16010,11 +17238,32 @@
     "price": 3313,
     "image": "/images/products/chiller-aqua.png",
     "coolingCapacity": 9,
-    "heatingCapacity": 0,
+    "heatingCapacity": 10.2,
     "recommendedArea": 0,
     "powerConsumption": 0,
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "coolKw": "9",
+      "heatKw": "10.2",
+      "coolPower": "3.103",
+      "heatPower": "2.795",
+      "eer": "2.9",
+      "cop": "3.65",
+      "compressor": "Ротационный",
+      "airflow": "4500",
+      "noise": "54.2",
+      "refrigerant": "R32",
+      "powerSupply": "220 ~ 240. 50. 1",
+      "tempCool": "-5 ~ 43",
+      "tempHeat": "-25 ~ 35",
+      "dims": "970×1190×560",
+      "weight": "87"
+    },
+    "genSpecSource": {
+      "catalogKey": "chiller-2026",
+      "page": 23
+    }
   },
   {
     "id": "mgc-v12wd2n8-b2",
@@ -16085,11 +17334,32 @@
     "price": 4260,
     "image": "/images/products/chiller-aqua.png",
     "coolingCapacity": 11.6,
-    "heatingCapacity": 0,
+    "heatingCapacity": 12.5,
     "recommendedArea": 0,
     "powerConsumption": 0,
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "coolKw": "11.6",
+      "heatKw": "12.5",
+      "coolPower": "3.742",
+      "heatPower": "3.378",
+      "eer": "3.1",
+      "cop": "3.7",
+      "compressor": "Ротационный",
+      "airflow": "5200",
+      "noise": "59",
+      "refrigerant": "R32",
+      "powerSupply": "380 ~ 415, 50, 3",
+      "tempCool": "-5 ~ 43",
+      "tempHeat": "-25 ~ 35",
+      "dims": "970×1190×560",
+      "weight": "120"
+    },
+    "genSpecSource": {
+      "catalogKey": "chiller-2026",
+      "page": 23
+    }
   },
   {
     "id": "mgc-v14wd2rn8-b",
@@ -16100,11 +17370,32 @@
     "price": 4293,
     "image": "/images/products/chiller-aqua.png",
     "coolingCapacity": 13.4,
-    "heatingCapacity": 0,
+    "heatingCapacity": 14.5,
     "recommendedArea": 0,
     "powerConsumption": 0,
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "coolKw": "13.4",
+      "heatKw": "14.5",
+      "coolPower": "4.573",
+      "heatPower": "4.085",
+      "eer": "2.93",
+      "cop": "3.55",
+      "compressor": "Ротационный",
+      "airflow": "5200",
+      "noise": "62",
+      "refrigerant": "R32",
+      "powerSupply": "380 ~ 415, 50, 3",
+      "tempCool": "-5 ~ 43",
+      "tempHeat": "-25 ~ 35",
+      "dims": "970×1190×560",
+      "weight": "120"
+    },
+    "genSpecSource": {
+      "catalogKey": "chiller-2026",
+      "page": 23
+    }
   },
   {
     "id": "mgc-v16wd2rn8-b",
@@ -16115,11 +17406,32 @@
     "price": 4703,
     "image": "/images/products/chiller-aqua.png",
     "coolingCapacity": 14,
-    "heatingCapacity": 0,
+    "heatingCapacity": 16.2,
     "recommendedArea": 0,
     "powerConsumption": 0,
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "coolKw": "14",
+      "heatKw": "16.2",
+      "coolPower": "4.828",
+      "heatPower": "4.696",
+      "eer": "2.9",
+      "cop": "3.45",
+      "compressor": "Ротационный",
+      "airflow": "5200",
+      "noise": "62",
+      "refrigerant": "R32",
+      "powerSupply": "380 ~ 415, 50, 3",
+      "tempCool": "-5 ~ 43",
+      "tempHeat": "-25 ~ 35",
+      "dims": "970×1190×560",
+      "weight": "120"
+    },
+    "genSpecSource": {
+      "catalogKey": "chiller-2026",
+      "page": 23
+    }
   },
   {
     "id": "mc-su75m-rn8l-b",
@@ -16130,11 +17442,32 @@
     "price": 11102,
     "image": "/images/products/chiller-aqua.png",
     "coolingCapacity": 70,
-    "heatingCapacity": 0,
+    "heatingCapacity": 75.57,
     "recommendedArea": 0,
     "powerConsumption": 0,
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "coolKw": "69.72",
+      "heatKw": "75.57",
+      "coolPower": "27.34",
+      "heatPower": "24.33",
+      "eer": "2.55",
+      "cop": "3.11",
+      "compressor": "Спиральный",
+      "airflow": "28500",
+      "noise": "69",
+      "refrigerant": "R32",
+      "powerSupply": "380 ~ 415, 50, 3",
+      "tempCool": "-10 ~ 48",
+      "tempHeat": "-20 ~ 43",
+      "pipe": "DN50",
+      "weight": "475"
+    },
+    "genSpecSource": {
+      "catalogKey": "chiller-2026",
+      "page": 35
+    }
   },
   {
     "id": "mc-su90m-rn8l-b",
@@ -16145,11 +17478,32 @@
     "price": 15767,
     "image": "/images/products/chiller-aqua.png",
     "coolingCapacity": 82,
-    "heatingCapacity": 0,
+    "heatingCapacity": 91.11,
     "recommendedArea": 0,
     "powerConsumption": 0,
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "coolKw": "81.73",
+      "heatKw": "91.11",
+      "coolPower": "29.83",
+      "heatPower": "30.61",
+      "eer": "2.74",
+      "cop": "2.98",
+      "compressor": "Спиральный",
+      "airflow": "35000",
+      "noise": "65",
+      "refrigerant": "R32",
+      "powerSupply": "380 ~ 415, 50, 3",
+      "tempCool": "-10 ~ 48",
+      "tempHeat": "-20 ~ 43",
+      "pipe": "DN50",
+      "weight": "686"
+    },
+    "genSpecSource": {
+      "catalogKey": "chiller-2026",
+      "page": 35
+    }
   },
   {
     "id": "mc-su140m-rn8l-b",
@@ -16160,11 +17514,32 @@
     "price": 21078,
     "image": "/images/products/chiller-aqua.png",
     "coolingCapacity": 130,
-    "heatingCapacity": 0,
+    "heatingCapacity": 139,
     "recommendedArea": 0,
     "powerConsumption": 0,
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "coolKw": "129.5",
+      "heatKw": "139",
+      "coolPower": "51.38",
+      "heatPower": "45.64",
+      "eer": "2.52",
+      "cop": "3.05",
+      "compressor": "Спиральный",
+      "airflow": "50000",
+      "noise": "74",
+      "refrigerant": "R32",
+      "powerSupply": "380 ~ 415, 50, 3",
+      "tempCool": "-10 ~ 48",
+      "tempHeat": "-20 ~ 43",
+      "pipe": "DN65",
+      "weight": "746"
+    },
+    "genSpecSource": {
+      "catalogKey": "chiller-2026",
+      "page": 35
+    }
   },
   {
     "id": "mc-su180m-rn8l-b",
@@ -16175,11 +17550,32 @@
     "price": 42845,
     "image": "/images/products/chiller-aqua.png",
     "coolingCapacity": 164,
-    "heatingCapacity": 0,
+    "heatingCapacity": 181.8,
     "recommendedArea": 0,
     "powerConsumption": 0,
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "coolKw": "163.1",
+      "heatKw": "181.8",
+      "coolPower": "57.63",
+      "heatPower": "59.09",
+      "eer": "2.83",
+      "cop": "3.08",
+      "compressor": "Спиральный",
+      "airflow": "70000",
+      "noise": "72",
+      "refrigerant": "R32",
+      "powerSupply": "380 ~ 415, 50, 3",
+      "tempCool": "-10 ~ 48",
+      "tempHeat": "-20 ~ 43",
+      "pipe": "DN80",
+      "weight": "1500"
+    },
+    "genSpecSource": {
+      "catalogKey": "chiller-2026",
+      "page": 35
+    }
   },
   {
     "id": "gw-bac-mc-",
@@ -16526,12 +17922,34 @@
     "image": "/images/products/14iIPE6KGNUi6eCSwxcLGNM10Xv_TcMrJ.png",
     "slidesImage": "https://drive.google.com/uc?id=14iIPE6KGNUi6eCSwxcLGNM10Xv_TcMrJ",
     "driveImage": "https://drive.google.com/file/d/14iIPE6KGNUi6eCSwxcLGNM10Xv_TcMrJ/view?usp=sharing",
-    "coolingCapacity": 0,
-    "heatingCapacity": 0,
+    "coolingCapacity": 193.3,
+    "heatingCapacity": 223.7,
     "recommendedArea": 0,
     "powerConsumption": 0,
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "coolKw": "193.3",
+      "heatKw": "223.7",
+      "coolPower": "61",
+      "heatPower": "61.6",
+      "eer": "3.17",
+      "cop": "3.63",
+      "compressor": "Спиральный",
+      "airflow": "100000",
+      "noise": "68.4",
+      "refrigerant": "R32",
+      "powerSupply": "380 ~ 415, 50, 3",
+      "tempCool": "-10 ~ 48",
+      "tempHeat": "-30 ~ 43",
+      "pipe": "DN100",
+      "dims": "3150×2500×2280",
+      "weight": "1880"
+    },
+    "genSpecSource": {
+      "catalogKey": "chiller-2026",
+      "page": 55
+    }
   },
   {
     "id": "rhah65hvn8",
@@ -16543,12 +17961,34 @@
     "image": "/images/products/14iIPE6KGNUi6eCSwxcLGNM10Xv_TcMrJ.png",
     "slidesImage": "https://drive.google.com/uc?id=14iIPE6KGNUi6eCSwxcLGNM10Xv_TcMrJ",
     "driveImage": "https://drive.google.com/file/d/14iIPE6KGNUi6eCSwxcLGNM10Xv_TcMrJ/view?usp=sharing",
-    "coolingCapacity": 0,
-    "heatingCapacity": 0,
+    "coolingCapacity": 231.5,
+    "heatingCapacity": 263.8,
     "recommendedArea": 0,
     "powerConsumption": 0,
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "coolKw": "231.5",
+      "heatKw": "263.8",
+      "coolPower": "80.45",
+      "heatPower": "77.4",
+      "eer": "2.88",
+      "cop": "3.41",
+      "compressor": "Спиральный",
+      "airflow": "100000",
+      "noise": "70.6",
+      "refrigerant": "R32",
+      "powerSupply": "380 ~ 415, 50, 3",
+      "tempCool": "-10 ~ 48",
+      "tempHeat": "-30 ~ 43",
+      "pipe": "DN100",
+      "dims": "3150×2500×2280",
+      "weight": "1880"
+    },
+    "genSpecSource": {
+      "catalogKey": "chiller-2026",
+      "page": 55
+    }
   },
   {
     "id": "rhah75hvn8",
@@ -16560,12 +18000,34 @@
     "image": "/images/products/14iIPE6KGNUi6eCSwxcLGNM10Xv_TcMrJ.png",
     "slidesImage": "https://drive.google.com/uc?id=14iIPE6KGNUi6eCSwxcLGNM10Xv_TcMrJ",
     "driveImage": "https://drive.google.com/file/d/14iIPE6KGNUi6eCSwxcLGNM10Xv_TcMrJ/view?usp=sharing",
-    "coolingCapacity": 0,
-    "heatingCapacity": 0,
+    "coolingCapacity": 265.5,
+    "heatingCapacity": 301,
     "recommendedArea": 0,
     "powerConsumption": 0,
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "coolKw": "265.5",
+      "heatKw": "301",
+      "coolPower": "101.7",
+      "heatPower": "94",
+      "eer": "2.61",
+      "cop": "3.2",
+      "compressor": "Спиральный",
+      "airflow": "100000",
+      "noise": "73.5",
+      "refrigerant": "R32",
+      "powerSupply": "380 ~ 415, 50, 3",
+      "tempCool": "-10 ~ 48",
+      "tempHeat": "-30 ~ 43",
+      "pipe": "DN100",
+      "dims": "3150×2500×2280",
+      "weight": "1880"
+    },
+    "genSpecSource": {
+      "catalogKey": "chiller-2026",
+      "page": 55
+    }
   },
   {
     "id": "rhah100hvn8",
@@ -16577,12 +18039,34 @@
     "image": "/images/products/14iIPE6KGNUi6eCSwxcLGNM10Xv_TcMrJ.png",
     "slidesImage": "https://drive.google.com/uc?id=14iIPE6KGNUi6eCSwxcLGNM10Xv_TcMrJ",
     "driveImage": "https://drive.google.com/file/d/14iIPE6KGNUi6eCSwxcLGNM10Xv_TcMrJ/view?usp=sharing",
-    "coolingCapacity": 0,
-    "heatingCapacity": 0,
+    "coolingCapacity": 350,
+    "heatingCapacity": 400,
     "recommendedArea": 0,
     "powerConsumption": 0,
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "coolKw": "350",
+      "heatKw": "400",
+      "coolPower": "123.9",
+      "heatPower": "118.7",
+      "eer": "2.82",
+      "cop": "3.37",
+      "compressor": "Спиральный",
+      "airflow": "150000",
+      "noise": "71.1",
+      "refrigerant": "R32",
+      "powerSupply": "380 ~ 415, 50, 3",
+      "tempCool": "-10 ~ 48",
+      "tempHeat": "-30 ~ 43",
+      "pipe": "DN100",
+      "dims": "4650×2500×2280",
+      "weight": "2780"
+    },
+    "genSpecSource": {
+      "catalogKey": "chiller-2026",
+      "page": 55
+    }
   },
   {
     "id": "rhah105hvn8",
@@ -16594,12 +18078,34 @@
     "image": "/images/products/14iIPE6KGNUi6eCSwxcLGNM10Xv_TcMrJ.png",
     "slidesImage": "https://drive.google.com/uc?id=14iIPE6KGNUi6eCSwxcLGNM10Xv_TcMrJ",
     "driveImage": "https://drive.google.com/file/d/14iIPE6KGNUi6eCSwxcLGNM10Xv_TcMrJ/view?usp=sharing",
-    "coolingCapacity": 0,
-    "heatingCapacity": 0,
+    "coolingCapacity": 375,
+    "heatingCapacity": 428,
     "recommendedArea": 0,
     "powerConsumption": 0,
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "coolKw": "375",
+      "heatKw": "428",
+      "coolPower": "139.6",
+      "heatPower": "130.9",
+      "eer": "2.69",
+      "cop": "3.27",
+      "compressor": "Спиральный",
+      "airflow": "150000",
+      "noise": "72.5",
+      "refrigerant": "R32",
+      "powerSupply": "380 ~ 415, 50, 3",
+      "tempCool": "-10 ~ 48",
+      "tempHeat": "-30 ~ 43",
+      "pipe": "DN100",
+      "dims": "4650×2500×2280",
+      "weight": "2780"
+    },
+    "genSpecSource": {
+      "catalogKey": "chiller-2026",
+      "page": 55
+    }
   },
   {
     "id": "rhah110hvn8",
@@ -16611,12 +18117,34 @@
     "image": "/images/products/14iIPE6KGNUi6eCSwxcLGNM10Xv_TcMrJ.png",
     "slidesImage": "https://drive.google.com/uc?id=14iIPE6KGNUi6eCSwxcLGNM10Xv_TcMrJ",
     "driveImage": "https://drive.google.com/file/d/14iIPE6KGNUi6eCSwxcLGNM10Xv_TcMrJ/view?usp=sharing",
-    "coolingCapacity": 0,
-    "heatingCapacity": 0,
+    "coolingCapacity": 398.2,
+    "heatingCapacity": 451.5,
     "recommendedArea": 0,
     "powerConsumption": 0,
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "coolKw": "398.2",
+      "heatKw": "451.5",
+      "coolPower": "152.6",
+      "heatPower": "141.1",
+      "eer": "2.61",
+      "cop": "3.2",
+      "compressor": "Спиральный",
+      "airflow": "150000",
+      "noise": "74",
+      "refrigerant": "R32",
+      "powerSupply": "380 ~ 415, 50, 3",
+      "tempCool": "-10 ~ 48",
+      "tempHeat": "-30 ~ 43",
+      "pipe": "DN100",
+      "dims": "4650×2500×2280",
+      "weight": "2780"
+    },
+    "genSpecSource": {
+      "catalogKey": "chiller-2026",
+      "page": 55
+    }
   },
   {
     "id": "scag115h",
@@ -16633,7 +18161,21 @@
     "recommendedArea": 0,
     "powerConsumption": 0,
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "eer": "3.34",
+      "waterFlow": "68.58",
+      "waterDp": "42.7",
+      "airflow": "23000*6",
+      "noise": "80.82",
+      "tempCool": "10 ~ 43",
+      "pipe": "DN150",
+      "weight": "3700"
+    },
+    "genSpecSource": {
+      "catalogKey": "chiller-2026",
+      "page": 58
+    }
   },
   {
     "id": "scag135h",
@@ -16650,7 +18192,22 @@
     "recommendedArea": 0,
     "powerConsumption": 0,
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "eer": "3.11",
+      "waterFlow": "82.37",
+      "waterDp": "46.3",
+      "airflow": "23000*6",
+      "noise": "80.99",
+      "powerSupply": "380 ~ 415, 50, 3",
+      "tempCool": "10 ~ 43",
+      "pipe": "DN150",
+      "weight": "4300"
+    },
+    "genSpecSource": {
+      "catalogKey": "chiller-2026",
+      "page": 58
+    }
   },
   {
     "id": "scag170h",
@@ -16667,7 +18224,22 @@
     "recommendedArea": 0,
     "powerConsumption": 0,
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "eer": "3.04",
+      "waterFlow": "102.3",
+      "waterDp": "70.4",
+      "airflow": "23000*8",
+      "noise": "81.77",
+      "powerSupply": "380 ~ 415, 50, 3",
+      "tempCool": "10 ~ 43",
+      "pipe": "DN150",
+      "weight": "4900"
+    },
+    "genSpecSource": {
+      "catalogKey": "chiller-2026",
+      "page": 58
+    }
   },
   {
     "id": "scag195h",
@@ -16684,7 +18256,22 @@
     "recommendedArea": 0,
     "powerConsumption": 0,
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "eer": "3.07",
+      "waterFlow": "117.5",
+      "waterDp": "79.2",
+      "airflow": "23000*10",
+      "noise": "82.67",
+      "powerSupply": "380 ~ 415, 50, 3",
+      "tempCool": "10 ~ 43",
+      "pipe": "DN150",
+      "weight": "5550"
+    },
+    "genSpecSource": {
+      "catalogKey": "chiller-2026",
+      "page": 58
+    }
   },
   {
     "id": "scag210h",
@@ -16701,7 +18288,22 @@
     "recommendedArea": 0,
     "powerConsumption": 0,
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "eer": "3.06",
+      "waterFlow": "128",
+      "waterDp": "73.4",
+      "airflow": "23000*12",
+      "noise": "82.89",
+      "powerSupply": "380 ~ 415, 50, 3",
+      "tempCool": "10 ~ 43",
+      "pipe": "DN150",
+      "weight": "5950"
+    },
+    "genSpecSource": {
+      "catalogKey": "chiller-2026",
+      "page": 58
+    }
   },
   {
     "id": "scag245h",
@@ -16718,7 +18320,22 @@
     "recommendedArea": 0,
     "powerConsumption": 0,
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "eer": "3.13",
+      "waterFlow": "148.1",
+      "waterDp": "76.6",
+      "airflow": "23000*12",
+      "noise": "83.11",
+      "powerSupply": "380 ~ 415, 50, 3",
+      "tempCool": "10 ~ 43",
+      "pipe": "DN200",
+      "weight": "6750"
+    },
+    "genSpecSource": {
+      "catalogKey": "chiller-2026",
+      "page": 58
+    }
   },
   {
     "id": "scag280h",
@@ -16735,7 +18352,21 @@
     "recommendedArea": 0,
     "powerConsumption": 0,
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "eer": "3.25",
+      "waterFlow": "169.7",
+      "waterDp": "67.3",
+      "airflow": "23000*14",
+      "noise": "84.3",
+      "tempCool": "10 ~ 43",
+      "pipe": "DN200",
+      "weight": "7300"
+    },
+    "genSpecSource": {
+      "catalogKey": "chiller-2026",
+      "page": 58
+    }
   },
   {
     "id": "scag295h",
@@ -16752,7 +18383,21 @@
     "recommendedArea": 0,
     "powerConsumption": 0,
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "eer": "3.1",
+      "waterFlow": "177.4",
+      "waterDp": "68.9",
+      "airflow": "23000*16",
+      "noise": "82.7",
+      "tempCool": "10 ~ 43",
+      "pipe": "DN200",
+      "weight": "9100"
+    },
+    "genSpecSource": {
+      "catalogKey": "chiller-2026",
+      "page": 58
+    }
   },
   {
     "id": "scag335h",
@@ -16769,7 +18414,22 @@
     "recommendedArea": 0,
     "powerConsumption": 0,
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "eer": "3.1",
+      "waterFlow": "201.6",
+      "waterDp": "76.6",
+      "airflow": "23000*18",
+      "noise": "82.7",
+      "powerSupply": "380 ~ 415, 50, 3",
+      "tempCool": "10 ~ 43",
+      "pipe": "DN200",
+      "weight": "9600"
+    },
+    "genSpecSource": {
+      "catalogKey": "chiller-2026",
+      "page": 58
+    }
   },
   {
     "id": "scag380h",
@@ -16786,7 +18446,22 @@
     "recommendedArea": 0,
     "powerConsumption": 0,
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "eer": "3.02",
+      "waterFlow": "228.6",
+      "waterDp": "75.8",
+      "airflow": "23000*20",
+      "noise": "83.3",
+      "powerSupply": "380 ~ 415, 50, 3",
+      "tempCool": "10 ~ 43",
+      "pipe": "DN200",
+      "weight": "10900"
+    },
+    "genSpecSource": {
+      "catalogKey": "chiller-2026",
+      "page": 58
+    }
   },
   {
     "id": "scag420h",
@@ -16803,7 +18478,22 @@
     "recommendedArea": 0,
     "powerConsumption": 0,
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "eer": "3.1",
+      "waterFlow": "252.2",
+      "waterDp": "75.5",
+      "airflow": "23000*20",
+      "noise": "83.8",
+      "powerSupply": "380 ~ 415, 50, 3",
+      "tempCool": "10 ~ 43",
+      "pipe": "DN200",
+      "weight": "11400"
+    },
+    "genSpecSource": {
+      "catalogKey": "chiller-2026",
+      "page": 58
+    }
   },
   {
     "id": "scag480h",
@@ -16820,7 +18510,22 @@
     "recommendedArea": 0,
     "powerConsumption": 0,
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "eer": "3.13",
+      "waterFlow": "290",
+      "waterDp": "87.4",
+      "airflow": "23000*22",
+      "noise": "83.7",
+      "powerSupply": "380 ~ 415, 50, 3",
+      "tempCool": "10 ~ 43",
+      "pipe": "DN200",
+      "weight": "13540"
+    },
+    "genSpecSource": {
+      "catalogKey": "chiller-2026",
+      "page": 58
+    }
   },
   {
     "id": "scaf115hv-m-",
@@ -17133,12 +18838,34 @@
     "model": "MHC-V18W/D2RN8",
     "price": 6798,
     "image": "/images/products/1GIyfhFdtk7-vmem9nkTRyay547bcmgEu.png",
-    "coolingCapacity": 0,
-    "heatingCapacity": 0,
+    "coolingCapacity": 17,
+    "heatingCapacity": 18,
     "recommendedArea": 0,
     "powerConsumption": 0,
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "coolKw": "17",
+      "heatKw": "18",
+      "coolPower": "5.57",
+      "heatPower": "5.14",
+      "eer": "3.05",
+      "cop": "3.5",
+      "compressor": "Ротационный",
+      "waterFlow": "2.913",
+      "airflow": "11000",
+      "noise": "57.6",
+      "refrigerant": "R32",
+      "powerSupply": "380 ~ 415, 50, 3",
+      "tempCool": "-10 ~ 46",
+      "tempHeat": "-25 ~ 35",
+      "dims": "1220×1735×565",
+      "weight": "177"
+    },
+    "genSpecSource": {
+      "catalogKey": "chiller-2026",
+      "page": 26
+    }
   },
   {
     "id": "mhc-v22w-d2rn8",
@@ -17148,12 +18875,34 @@
     "model": "MHC-V22W/D2RN8",
     "price": 6982,
     "image": "/images/products/1GIyfhFdtk7-vmem9nkTRyay547bcmgEu.png",
-    "coolingCapacity": 0,
-    "heatingCapacity": 0,
+    "coolingCapacity": 21,
+    "heatingCapacity": 22,
     "recommendedArea": 0,
     "powerConsumption": 0,
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "coolKw": "21",
+      "heatKw": "22",
+      "coolPower": "7.12",
+      "heatPower": "6.47",
+      "eer": "2.95",
+      "cop": "3.4",
+      "compressor": "Ротационный",
+      "waterFlow": "3.6",
+      "airflow": "11000",
+      "noise": "59.8",
+      "refrigerant": "R32",
+      "powerSupply": "380 ~ 415, 50, 3",
+      "tempCool": "-10 ~ 46",
+      "tempHeat": "-25 ~ 35",
+      "dims": "1220×1735×565",
+      "weight": "177"
+    },
+    "genSpecSource": {
+      "catalogKey": "chiller-2026",
+      "page": 26
+    }
   },
   {
     "id": "mhc-v26w-d2rn8",
@@ -17163,12 +18912,34 @@
     "model": "MHC-V26W/D2RN8",
     "price": 7101,
     "image": "/images/products/1GIyfhFdtk7-vmem9nkTRyay547bcmgEu.png",
-    "coolingCapacity": 0,
-    "heatingCapacity": 0,
+    "coolingCapacity": 26,
+    "heatingCapacity": 26,
     "recommendedArea": 0,
     "powerConsumption": 0,
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "coolKw": "26",
+      "heatKw": "26",
+      "coolPower": "9.63",
+      "heatPower": "8.39",
+      "eer": "2.7",
+      "cop": "3.1",
+      "compressor": "Ротационный",
+      "waterFlow": "4.46",
+      "airflow": "11300",
+      "noise": "61.5",
+      "refrigerant": "R32",
+      "powerSupply": "380 ~ 415, 50, 3",
+      "tempCool": "-10 ~ 46",
+      "tempHeat": "-25 ~ 35",
+      "dims": "1220×1735×565",
+      "weight": "177"
+    },
+    "genSpecSource": {
+      "catalogKey": "chiller-2026",
+      "page": 26
+    }
   },
   {
     "id": "mha-v4w-d2n8-b",
@@ -17433,12 +19204,28 @@
     "model": "RSJ-120/ZN1-540V1",
     "price": 3444,
     "image": "/images/products/atom-t.png",
-    "coolingCapacity": 11.8,
-    "heatingCapacity": 0,
+    "coolingCapacity": 0,
+    "heatingCapacity": 11.8,
     "recommendedArea": 0,
     "powerConsumption": 0,
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "powerSupply": "220-240/50/1",
+      "heatKw": "11.8",
+      "heatPower": "2.95",
+      "cop": "4.00",
+      "maxCurrent": "18.0",
+      "compressor": "Спиральный",
+      "refrigerant": "R410А",
+      "noise": "59",
+      "weight": "125",
+      "waterFlow": "0.25"
+    },
+    "genSpecSource": {
+      "catalogKey": "chiller-2026",
+      "page": 158
+    }
   },
   {
     "id": "rsj-200-szn1-540v1",
@@ -17448,12 +19235,28 @@
     "model": "RSJ-200/SZN1-540V1",
     "price": 4254,
     "image": "/images/products/atom-t.png",
-    "coolingCapacity": 20.4,
-    "heatingCapacity": 0,
+    "coolingCapacity": 0,
+    "heatingCapacity": 20.4,
     "recommendedArea": 0,
     "powerConsumption": 0,
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "powerSupply": "220-240/50/1",
+      "heatKw": "20.4",
+      "heatPower": "5.05",
+      "cop": "4.04",
+      "maxCurrent": "13.3",
+      "compressor": "Спиральный",
+      "refrigerant": "R410А",
+      "noise": "63",
+      "weight": "157",
+      "waterFlow": "0.45"
+    },
+    "genSpecSource": {
+      "catalogKey": "chiller-2026",
+      "page": 158
+    }
   },
   {
     "id": "rsj-420-szn1-h",
@@ -17463,12 +19266,28 @@
     "model": "RSJ-420/SZN1-H",
     "price": 7347,
     "image": "/images/products/atom-t.png",
-    "coolingCapacity": 39,
-    "heatingCapacity": 0,
+    "coolingCapacity": 0,
+    "heatingCapacity": 39,
     "recommendedArea": 0,
     "powerConsumption": 0,
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "powerSupply": "380-415/50/3",
+      "heatKw": "39.0",
+      "heatPower": "9.65",
+      "cop": "4.04",
+      "maxCurrent": "24.0",
+      "compressor": "Спиральный",
+      "refrigerant": "R410А",
+      "noise": "66",
+      "weight": "323",
+      "waterFlow": "0.89"
+    },
+    "genSpecSource": {
+      "catalogKey": "chiller-2026",
+      "page": 158
+    }
   },
   {
     "id": "rsj-800-szn1-h",
@@ -17478,12 +19297,28 @@
     "model": "RSJ-800/SZN1-H",
     "price": 14969,
     "image": "/images/products/atom-t.png",
-    "coolingCapacity": 80,
-    "heatingCapacity": 0,
+    "coolingCapacity": 0,
+    "heatingCapacity": 80,
     "recommendedArea": 0,
     "powerConsumption": 0,
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "powerSupply": "380-415/50/3",
+      "heatKw": "80",
+      "heatPower": "20",
+      "cop": "4.00",
+      "maxCurrent": "45.0",
+      "compressor": "Спиральный",
+      "refrigerant": "R410А",
+      "noise": "68",
+      "weight": "599",
+      "waterFlow": "1.72"
+    },
+    "genSpecSource": {
+      "catalogKey": "chiller-2026",
+      "page": 158
+    }
   },
   {
     "id": "msc-70d2n8-a",
