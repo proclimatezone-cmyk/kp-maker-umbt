@@ -7,12 +7,10 @@
  */
 import fs from 'fs'
 import path from 'path'
-import QRCode from 'qrcode'
 import { PDFDocument, PDFFont, PDFImage, PDFPage, rgb, type RGB } from 'pdf-lib'
 import fontkit from '@pdf-lib/fontkit'
 import productsData from '@/data/products.json'
 import settings from '@/data/spec-settings.json'
-import { getCatalogMatch, getCatalogSource, inferCatalogKey } from './catalogs'
 import { preloadImages, type ShrunkImage } from './docx-kp'
 
 export const SPEC_ACCESS_EMAIL = 'nosirovmuhammadjon3@gmail.com'
@@ -72,9 +70,6 @@ function pickDn(g: number, v: number) {
   const d = Math.sqrt((4 * g) / (3600 * Math.PI * v)) * 1000
   return DN.find(x => x >= d) || DN[DN.length - 1]
 }
-/** Медный трёхжильный кабель, прокладка в воздухе — ПУЭ табл. 1.3.7 (ориентир, проверить по длине линии). */
-const CABLE: [number, number][] = [[1.5, 19], [2.5, 25], [4, 35], [6, 42], [10, 55], [16, 75], [25, 95], [35, 120], [50, 145], [70, 180], [95, 220], [120, 260]]
-const cableFor = (amps: number) => CABLE.find(([, a]) => a >= amps)?.[0]
 
 const num = (v: unknown) => { const n = Number(String(v ?? '').replace(',', '.')); return Number.isFinite(n) && n > 0 ? n : 0 }
 const fmt = (v: number, d = 2) => v ? v.toLocaleString('ru-RU', { maximumFractionDigits: d, minimumFractionDigits: 0 }).replace(/[  ]/g, ' ') : '—'
@@ -115,11 +110,6 @@ function controlFor(p?: Product): string {
   return c.includes('кассет') ? `${remote} + декоративная панель` : remote
 }
 
-const OPTION_LABEL: Record<string, string> = {
-  valve3x4: '3-ход. клапан (4 порта)', pipingKit: 'Комплект обвязки', valve3: '3-ход. клапан', valve2: '2-ход. клапан',
-  drainTray: 'Поддон клапана', netModule: 'Модуль сети/ЦУ', mountKit: 'Монтажные опоры',
-}
-
 export async function buildSpecPdf(opts: BuildSpecOptions): Promise<Buffer> {
   const dT = opts.deltaT || 5
   const origin = (opts.origin || 'https://kp-maker-umbt.vercel.app').replace(/\/$/, '')
@@ -130,11 +120,6 @@ export async function buildSpecPdf(opts: BuildSpecOptions): Promise<Buffer> {
       return { n: i + 1, it, p, qty: qtyOf(it.quantity), group: groupOf(p, it) }
     })
   type Row = typeof rows[number]
-  const srcOf = (r: Row) => {
-    const key = r.p?.genSpecSource?.catalogKey || r.p?.catalogKey || (r.p && getCatalogMatch(r.p.id)?.catalogKey) || (r.p ? inferCatalogKey(r.p) : null)
-    const page = r.p?.genSpecSource?.page || r.p?.catalogPage || (r.p && getCatalogMatch(r.p.id)?.page) || null
-    return { key, page, source: getCatalogSource(key || undefined) }
-  }
 
   const a = assets()
   const doc = await PDFDocument.create()
@@ -144,20 +129,15 @@ export async function buildSpecPdf(opts: BuildSpecOptions): Promise<Buffer> {
   doc.setProducer('UMBT KP Maker')
 
   const imgItems = rows.filter(r => r.p?.image || r.p?.slidesImage).map(r => ({ image: r.p!.image, slidesImage: r.p!.slidesImage }))
-  const qrTargets = new Map<string, string>()
-  rows.forEach(r => { const s = srcOf(r); if (s.key && s.page) qrTargets.set(`${s.key}/${s.page}`, `${origin}/catalog-pages/${s.key}/${s.page}.pdf`) })
-  const [regular, bold, bg, logo, photos, qrPngs] = await Promise.all([
+  const [regular, bold, bg, logo, photos] = await Promise.all([
     doc.embedFont(a.regular, { subset: true }),
     doc.embedFont(a.bold, { subset: true }),
     doc.embedJpg(a.bg),
     a.logo ? doc.embedJpg(a.logo).catch(() => null) : Promise.resolve(null),
     preloadImages(imgItems, origin).catch(() => new Map<string, ShrunkImage>()),
-    Promise.all([...qrTargets.entries()].map(async ([k, url]) => [k, await QRCode.toBuffer(url, { margin: 0, width: 160, color: { dark: '#1A6FA0', light: '#FFFFFF' } })] as const)),
   ])
   const photo = new Map<string, PDFImage>()
   await Promise.all([...photos.entries()].map(async ([k, im]) => photo.set(k, await doc.embedPng(im.buffer))))
-  const qr = new Map<string, PDFImage>()
-  await Promise.all(qrPngs.map(async ([k, b]) => qr.set(k, await doc.embedPng(b))))
 
   // ---------- Примитивы ----------
   const pages: PDFPage[] = []
@@ -229,7 +209,8 @@ export async function buildSpecPdf(opts: BuildSpecOptions): Promise<Buffer> {
       })
       y += h + 0.75
     }
-    ensure(60); head()
+    const est = (data.length + 1 + (opt.total ? 1 : 0)) * (lh + 2 * pad + 0.75) + 12
+    ensure(est < BOT_Y - TOP_Y - 40 ? est : 60); head()
     data.forEach((row, r) => drawRow(row, r % 2 ? PALE2 : PALE, regular))
     if (opt.total) drawRow(opt.total, PALE, bold)
     y += 12
@@ -294,7 +275,6 @@ export async function buildSpecPdf(opts: BuildSpecOptions): Promise<Buffer> {
   const meta: [string, string][] = [
     ...(opts.client ? [['Объект', opts.client] as [string, string]] : []),
     ['Приложение к', `коммерческому предложению № ${opts.cpNumber} от ${opts.cpDate}`],
-    ...(opts.manager?.name ? [['Инженер-консультант', `${opts.manager.name}${opts.manager.phone ? ', ' + opts.manager.phone : ''}`] as [string, string]] : []),
   ]
   meta.forEach(([k, v]) => {
     text(k, M, y, 9.5, bold, LABEL)
@@ -332,8 +312,8 @@ export async function buildSpecPdf(opts: BuildSpecOptions): Promise<Buffer> {
     })
     y += 74
   }
-  const tocTitles = ['Оборудование', ...(fcu.length ? ['Фанкойлы — рабочий режим', 'Комплектующие'] : []), 'Электроснабжение',
-    'Гидравлика и баланс мощности', 'Эксплуатационные расходы', 'Логистика и монтаж', ...(fcu.length ? ['Уровень шума'] : []), 'Источники данных']
+  const tocTitles = ['Оборудование', ...(gens.length ? ['Характеристики агрегатов'] : []), ...(fcu.length ? ['Фанкойлы — рабочий режим', 'Комплектующие'] : []), 'Электроснабжение',
+    'Гидравлика и баланс мощности', 'Эксплуатационные расходы', 'Логистика и монтаж', ...(fcu.length ? ['Уровень шума'] : [])]
   text('Содержание', M, y, 11, bold, COVER); y += 20
   tocTitles.forEach((t, i) => {
     const x = M + (i % 2) * (CONTENT_W / 2), top = y + Math.floor(i / 2) * 18
@@ -343,7 +323,7 @@ export async function buildSpecPdf(opts: BuildSpecOptions): Promise<Buffer> {
 
   // =============== 1. Оборудование ===============
   newPage()
-  section('Оборудование', 'Номера позиций — как в коммерческом предложении. QR-код открывает страницу каталога Midea')
+  section('Оборудование', 'Номера позиций — как в коммерческом предложении')
   for (const r of rows) {
     const p = r.p, g = p?.genSpec || {}, s = p?.fcuSpec
     const params: [string, string][] = []
@@ -379,10 +359,7 @@ export async function buildSpecPdf(opts: BuildSpecOptions): Promise<Buffer> {
       page.drawImage(im, { x: M + 10 + (boxW - im.width * k) / 2, y: PAGE_H - (y + 12 + (boxH + im.height * k) / 2), width: im.width * k, height: im.height * k })
     }
     const x0 = M + 10 + boxW + 14
-    const src = srcOf(r)
-    const q = src.key && src.page ? qr.get(`${src.key}/${src.page}`) : undefined
-    const rightW = q ? 64 : 0
-    const infoW = CONTENT_W - (x0 - M) - rightW - 10
+    const infoW = CONTENT_W - (x0 - M) - 14
     text(`${r.n}`, x0, y + 12, 9, bold, LABEL)
     text(p?.model || r.it.model || '', x0 + 16, y + 10, 12.5, bold, INK)
     const cat = wrap(p?.category || r.it.category || '', regular, 8, infoW - 60)[0] || ''
@@ -398,13 +375,57 @@ export async function buildSpecPdf(opts: BuildSpecOptions): Promise<Buffer> {
       text(wrap(v, bold, 9, colW - 6)[0], cx, top + 11, 9, bold, GREY)
     })
     if (!shown.length) text('Технические данные — по запросу у производителя', x0, y + 52, 8.5, regular, SOFT)
-    if (q) {
-      const qx = M + CONTENT_W - rightW - 4
-      page.drawImage(q, { x: qx + 8, y: PAGE_H - (y + 18) - 48, width: 48, height: 48 })
-      textC('каталог', qx + 32, y + 72, 7, regular, GREY)
-      textC(`стр. ${src.page}`, qx + 32, y + 82, 7, bold, COVER)
-    }
     y += h + 10
+  }
+
+  // =============== Характеристики агрегатов ===============
+  if (gens.length) {
+    section('Характеристики агрегатов', 'Полные технические данные источников холода и тепла по каталогу Midea', 260)
+    const seenModels = new Set<string>()
+    for (const r of gens) {
+      const p = r.p, g = p?.genSpec || {}
+      if (seenModels.has(p?.model || '')) continue
+      seenModels.add(p?.model || '')
+      const q = (v?: string, unit = '') => (v ? `${dec(v)}${unit ? ' ' + unit : ''}` : '')
+      const vrf = /наруж|vrf/i.test(p?.category || '')
+      const kv: [string, string][] = ([
+        ['Холодопроизводительность', q(g.coolKw, 'кВт') || (num(p?.coolingCapacity) ? `${fmt(num(p?.coolingCapacity))} кВт` : '')],
+        ['Теплопроизводительность', q(g.heatKw, 'кВт') || (num(p?.heatingCapacity) ? `${fmt(num(p?.heatingCapacity))} кВт` : '')],
+        ['Потребляемая мощность, охлаждение', q(g.coolPower, 'кВт')],
+        ['Потребляемая мощность, нагрев', q(g.heatPower, 'кВт')],
+        ['Максимальная потребляемая мощность', q(g.maxPower, 'кВт')],
+        ['EER', q(g.eer)], ['COP', q(g.cop)],
+        ['Электропитание', g.powerSupply || clean(p?.powerSupply)],
+        ['Максимальный ток', q(g.maxCurrent, 'А')],
+        ['Компрессор', g.compressor || ''],
+        ['Хладагент', (g.refrigerant || clean(p?.refrigerant)).replace('А', 'A')],
+        ['Заводская заправка хладагента', q(g.refrigerantCharge, 'кг')],
+        ...(vrf ? [
+          ['Жидкостная труба', q(g.pipeLiquid, 'мм')], ['Газовая труба', q(g.pipeGas, 'мм')],
+          ['Число внутренних блоков', g.maxIndoor || ''],
+        ] as [string, string][] : [
+          [g.waterFlowNote ? 'Расход горячей воды' : 'Расход воды', q(g.waterFlow, 'м³/ч')],
+          ['Потери давления по воде', q(g.waterDp, 'кПа')],
+          ['Напор встроенного насоса', q(g.pump, 'кПа')],
+          ['Присоединение воды', g.pipe || ''],
+        ] as [string, string][]),
+        ['Расход воздуха', g.airflow ? `${g.airflow} м³/ч` : ''],
+        ['Уровень звукового давления', q(g.noise, 'дБ(А)') || (clean(p?.noiseLevel) ? `${p?.noiseLevel} дБ(А)` : '')],
+        ['Диапазон наружного воздуха, охлаждение', g.tempCool ? `${g.tempCool} °C` : ''],
+        ['Диапазон наружного воздуха, нагрев', g.tempHeat ? `${g.tempHeat} °C` : ''],
+        ['Габариты (Ш×В×Г)', g.dims ? `${g.dims} мм` : (clean(p?.dimensions) ? `${p?.dimensions} мм` : '')],
+        ['Масса нетто', q(g.weight, 'кг') || (num(p?.weight) ? `${fmt(num(p?.weight), 0)} кг` : '')],
+        ['Условия испытаний', g.conditions || ''],
+      ] as [string, string][]).filter(([, v]) => v)
+      ensure(Math.ceil(kv.length / 2) * 22 + 60)
+      text(`${p?.model || r.it.model || ''}`, M, y, 11.5, bold, INK)
+      textR(p?.category || '', M + CONTENT_W, y + 2, 8, regular, GREY)
+      y += 18
+      if (!kv.length) { para('Технические данные уточняются у производителя.', 8.5); continue }
+      const half = Math.ceil(kv.length / 2)
+      const data = Array.from({ length: half }, (_, i) => [kv[i][0], kv[i][1], kv[half + i]?.[0] || '', kv[half + i]?.[1] || ''])
+      table([{ title: 'Параметр', w: 30, align: 'l' }, { title: 'Значение', w: 20, align: 'l' }, { title: 'Параметр', w: 30, align: 'l' }, { title: 'Значение', w: 20, align: 'l' }], data, 8)
+    }
   }
 
   // =============== 2–3. Фанкойлы и комплектующие ===============
@@ -426,54 +447,34 @@ export async function buildSpecPdf(opts: BuildSpecOptions): Promise<Buffer> {
     if (missing.length) para(`Нет в каталоге Midea FCU 2025–2026, параметры уточняются у производителя: ${missing.join(', ')}.`, 8)
     para('Условия каталога: охлаждение — вода 7/12 °C, воздух на входе 27 °C (сух.) / 19 °C (влажн.); нагрев — вода 45/40 °C, воздух 20 °C.', 8)
 
-    section('Комплектующие', 'Артикулы по каталогу Midea FCU — что понадобится для монтажа и управления каждой позицией')
-    const optKeys = ['valve3', 'valve2', 'pipingKit', 'drainTray', 'mountKit', 'netModule'].filter(k => fcu.some(r => r.p?.fcuSpec?.options?.[k] && r.p.fcuSpec.options[k] !== 'Встроен'))
+    section('Комплектующие', 'Пульт управления и панель для каждой позиции')
     table(
-      [{ title: '№', w: 4 }, { title: 'Модель', w: 18, align: 'l' }, { title: 'Кол.', w: 6 }, { title: 'Пульт управления', w: 22, align: 'l' },
-        ...optKeys.map(k => ({ title: OPTION_LABEL[k], w: 12 }))],
-      fcu.map(r => [String(r.n), r.p?.model || r.it.model || '', fmt(r.qty), controlFor(r.p), ...optKeys.map(k => (r.p?.fcuSpec?.options?.[k] || '—').replace(/\+/g, ' + '))]),
-      7.5, { boldCol: 1 },
+      [{ title: '№', w: 6 }, { title: 'Модель', w: 30, align: 'l' }, { title: 'Кол.', w: 10 }, { title: 'Пульт управления', w: 30, align: 'l' }, { title: 'Панель', w: 24 }],
+      fcu.map(r => {
+        const c = controlFor(r.p)
+        return [String(r.n), r.p?.model || r.it.model || '', fmt(r.qty), c.split(' + ')[0] || '—', /кассет/i.test(r.p?.category || '') ? 'декоративная панель' : '—']
+      }),
+      8.5, { boldCol: 1 },
     )
-    const need = new Map<string, number>()
-    const addNeed = (art: string, n: number) => {
-      for (const part of art.split('+').map(s => s.trim()).filter(s => s && s !== '—' && s !== 'Встроен')) need.set(part, (need.get(part) || 0) + n)
-    }
-    fcu.forEach(r => {
-      addNeed(controlFor(r.p).split(' + ')[0], r.qty)
-      if (/кассет/i.test(r.p?.category || '')) addNeed('Декоративная панель (по модели блока)', r.qty)
-      const o = r.p?.fcuSpec?.options || {}
-      if (o.valve3) addNeed(o.valve3, r.qty)
-    })
-    if (need.size) {
-      ensure(Math.min(260, 70 + need.size * 22))
-      text('Сводная потребность: пульт, панель и 3-ходовой клапан на каждый фанкойл', M, y, 10, bold, COVER); y += 18
-      table([{ title: 'Артикул', w: 60, align: 'l' }, { title: 'Количество, шт.', w: 40 }],
-        [...need.entries()].sort((x, z) => z[1] - x[1]).map(([k, v]) => [k, fmt(v, 0)]), 8.5, { boldCol: 0 })
-    }
-    para('Выбор между 2- и 3-ходовыми клапанами и комплектами обвязки зависит от гидравлической схемы проекта. Пульты: KJRP-86I — для 2-трубных, KJRP-86A — для 4-трубных фанкойлов.', 8)
+    para('Пульты: KJRP-86I — для 2-трубных, KJRP-86A — для 4-трубных фанкойлов.', 8)
   }
 
   // =============== Электроснабжение ===============
-  section('Электроснабжение', 'Нагрузка на электросеть, токи и защитные автоматы')
+  section('Электроснабжение', 'Потребляемая мощность и нагрузка на электросеть')
   const elec = gens.concat(fcu).map(r => {
     const g = r.p?.genSpec || {}
     const isF = r.group === 'fcu'
-    const powerKw = isF ? num(r.p?.fcuSpec?.powerW) / 1000 : num(g.coolPower) || num(r.p?.powerConsumption)
-    const curr = num(g.cableCurrent) || num(g.maxCurrent)
-    const brk = num(g.breaker)
-    const cable = brk ? cableFor(brk) : curr ? cableFor(curr * 1.25) : undefined
-    return { r, isF, powerKw, supply: isF ? '220–240 В / 1 ф / 50 Гц' : (g.powerSupply || clean(r.p?.powerSupply) || '—'), curr, brk, cable }
+    const powerKw = isF ? num(r.p?.fcuSpec?.powerW) / 1000 : num(g.coolPower) || num(g.heatPower) || num(r.p?.powerConsumption)
+    return { r, powerKw, supply: isF ? '220–240 В / 1 ф / 50 Гц' : (g.powerSupply || clean(r.p?.powerSupply) || '—') }
   })
   table(
-    [{ title: '№', w: 4 }, { title: 'Модель', w: 20, align: 'l' }, { title: 'Кол.', w: 6 }, { title: 'Электропитание', w: 17 },
-      { title: 'Мощность ед., кВт', w: 10 }, { title: 'Мощность итого, кВт', w: 11 }, { title: 'Расчётный ток, А', w: 10 },
-      { title: 'Автомат, А', w: 9 }, { title: 'Кабель Cu, мм²', w: 13 }],
+    [{ title: '№', w: 6 }, { title: 'Модель', w: 28, align: 'l' }, { title: 'Кол.', w: 8 }, { title: 'Электропитание', w: 24 },
+      { title: 'Мощность ед., кВт', w: 16 }, { title: 'Мощность итого, кВт', w: 18 }],
     elec.map(e => [String(e.r.n), e.r.p?.model || e.r.it.model || '', fmt(e.r.qty), e.supply, e.powerKw ? fmt(e.powerKw, 3) : '—',
-      e.powerKw ? fmt(e.powerKw * e.r.qty, 2) : '—', e.curr ? fmt(e.curr, 1) : '—', e.brk ? fmt(e.brk, 0) : '—',
-      e.cable ? `3–5 × ${fmt(e.cable, 1)}` : e.isF ? 'групповая линия' : 'по документации']),
-    8, { boldCol: 1, total: ['', 'Итого', '', '', '', fmt(genPowerCool + fcuPowerKw, 2), '', '', ''] },
+      e.powerKw ? fmt(e.powerKw * e.r.qty, 2) : '—']),
+    8.5, { boldCol: 1, total: ['', 'Итого', '', '', '', fmt(elec.reduce((t, e) => t + e.powerKw * e.r.qty, 0), 2)] },
   )
-  para('Ток и автомат — по таблицам выбора кабеля и автомата каталога Midea VRF и паспортным данным агрегатов. Сечение — ориентир по ПУЭ (табл. 1.3.7, медь, прокладка в воздухе); окончательно проверяется по длине линии, падению напряжения и способу прокладки. Фанкойлы подключаются групповыми линиями 220 В.', 8)
+  para('Мощность агрегатов — номинальная по каталогу (в режиме охлаждения; для тепловых насосов ГВС — в режиме нагрева); фанкойлов — на средней скорости вентилятора.', 8)
 
   // =============== Гидравлика и баланс ===============
   section('Гидравлика и баланс мощности', `Сравнение источников и потребителей, расчёт водяного контура (Δt = ${dT} °C)`, 200)
@@ -536,7 +537,7 @@ export async function buildSpecPdf(opts: BuildSpecOptions): Promise<Buffer> {
   } else para('Нет данных о потребляемой мощности оборудования — расчёт невозможен.', 8.5)
 
   // =============== Логистика и монтаж ===============
-  section('Логистика и монтаж', 'Массы и габариты для доставки, подъёма и оценки нагрузки на основание')
+  section('Логистика и монтаж', 'Габариты, массы и нагрузка на основание')
   const logi = rows.map(r => {
     const g = r.p?.genSpec || {}, s = r.p?.fcuSpec
     const dims = g.dims || s?.dims || clean(r.p?.dimensions)
@@ -545,44 +546,26 @@ export async function buildSpecPdf(opts: BuildSpecOptions): Promise<Buffer> {
     const load = w && d.length === 3 && d[0] && d[2] ? w / ((d[0] / 1000) * (d[2] / 1000)) : 0
     return { r, dims, w, load }
   })
-  const heavy = logi.filter(l => l.w >= 300)
   table(
     [{ title: '№', w: 4 }, { title: 'Модель', w: 22, align: 'l' }, { title: 'Кол.', w: 6 }, { title: 'Габариты Ш×В×Г, мм', w: 20 },
-      { title: 'Масса ед., кг', w: 11 }, { title: 'Масса итого, кг', w: 12 }, { title: 'Нагрузка, кг/м²', w: 12 }, { title: 'Подъём', w: 13 }],
+      { title: 'Масса ед., кг', w: 14 }, { title: 'Масса итого, кг', w: 15 }, { title: 'Нагрузка, кг/м²', w: 15 }],
     logi.map(l => [String(l.r.n), l.r.p?.model || l.r.it.model || '', fmt(l.r.qty), l.dims || '—', l.w ? fmt(l.w, 1) : '—',
-      l.w ? fmt(l.w * l.r.qty, 0) : '—', l.load ? fmt(l.load, 0) : '—', !l.w ? '—' : l.w >= 300 ? 'кран / манипулятор' : l.w >= 80 ? '2–4 человека' : 'вручную']),
-    8, { boldCol: 1, total: ['', 'Итого', fmt(units, 0), '', '', fmt(logi.reduce((s, l) => s + l.w * l.r.qty, 0), 0), '', ''] },
+      l.w ? fmt(l.w * l.r.qty, 0) : '—', l.load ? fmt(l.load, 0) : '—']),
+    8, { boldCol: 1, total: ['', 'Итого', fmt(units, 0), '', '', fmt(logi.reduce((s, l) => s + l.w * l.r.qty, 0), 0), ''] },
   )
-  if (heavy.length) para(`Для ${[...new Set(heavy.map(l => l.r.p?.model))].join(', ')} нужен кран или манипулятор; при установке на кровлю — проверка несущей способности по нагрузке из таблицы.`, 8)
-  para('Нагрузка — масса нетто, делённая на площадь основания по габаритам. Для водяных агрегатов рабочая масса больше на объём воды в теплообменнике. Строки без массы — данные уточняются у производителя.', 7.5)
+  para('Нагрузка — масса нетто, делённая на площадь основания по габаритам. Для водяных агрегатов рабочая масса больше на объём воды в теплообменнике.', 7.5)
 
   // =============== Шум ===============
   if (fcu.length) {
-    section('Уровень шума', 'Шум фанкойлов на средней скорости и рекомендуемые уровни для помещений, дБ(А)')
-    const norms = settings.noiseNorms
+    section('Уровень шума', 'Уровень звукового давления фанкойлов на средней скорости вентилятора')
     table(
-      [{ title: 'Модель', w: 24, align: 'l' }, { title: 'Шум, дБ(А)', w: 12 }, ...norms.map(n => ({ title: `${n.room} — ${n.dba}`, w: 16 }))],
-      [...new Map(fcu.map(r => [r.p?.model, r])).values()].map(r => {
-        const nz = num(r.p?.fcuSpec?.noise)
-        return [r.p?.model || '', nz ? fmt(nz, 0) : '—', ...norms.map(n => !nz ? '—' : nz <= n.dba ? 'подходит' : `+${fmt(nz - n.dba, 0)} дБ`)]
-      }),
-      8, { boldCol: 0 },
+      [{ title: 'Модель', w: 60, align: 'l' }, { title: 'Шум, дБ(А)', w: 40 }],
+      [...new Map(fcu.map(r => [r.p?.model, r])).values()].map(r => [r.p?.model || '', num(r.p?.fcuSpec?.noise) ? fmt(num(r.p?.fcuSpec?.noise), 0) : '—']),
+      8.5, { boldCol: 0 },
     )
-    para('Уровни — ориентир для проектирования; шум в каталоге измерен в полубезэховой камере, в помещении он зависит от отделки, расстояния и способа монтажа. Для спален и номеров рекомендуем низкую скорость в ночном режиме.', 7.5)
   }
 
-  // =============== Источники ===============
-  section('Источники данных', undefined, 80)
-  const seen = new Set<string>()
-  const srcRows: string[][] = []
-  rows.forEach(r => {
-    const s = srcOf(r)
-    const id = `${r.p?.model}|${s.key}|${s.page}`
-    if (seen.has(id)) return; seen.add(id)
-    srcRows.push([r.p?.model || r.it.model || '', s.source?.title || '—', s.page ? String(s.page) : '—'])
-  })
-  table([{ title: 'Модель', w: 35, align: 'l' }, { title: 'Документ', w: 50, align: 'l' }, { title: 'Стр.', w: 15 }], srcRows, 8, { boldCol: 0 })
-  para(`Тариф на электроэнергию: ${settings.tariff.label}. Технические характеристики могут быть изменены производителем без предварительного уведомления. Документ подготовлен UMBT для оценки проектного решения и не заменяет рабочую документацию.`, 7.5)
+  para('Технические характеристики могут быть изменены производителем без предварительного уведомления. Документ подготовлен UMBT для оценки проектного решения и не заменяет рабочую документацию.', 7.5)
 
   pages.forEach((pg, i) => {
     pg.drawLine({ start: { x: M, y: 40 }, end: { x: PAGE_W - M, y: 40 }, thickness: 0.6, color: PALE })
