@@ -254,8 +254,8 @@ export async function buildSpecPdf(opts: BuildSpecOptions): Promise<Buffer> {
     [{ title: '№', w: 4 }, { title: 'Наименование', w: 30, align: 'l' }, { title: 'Модель', w: 22, align: 'l' },
       { title: 'Кол-во, шт', w: 9 }, { title: 'Qx, кВт', w: 9 }, { title: 'Qt, кВт', w: 9 }, { title: 'Источник', w: 17 }],
     rows.map(r => {
-      const key = r.p?.catalogKey || (r.p && getCatalogMatch(r.p.id)?.catalogKey) || (r.p ? inferCatalogKey(r.p) : null)
-      const page = r.p?.catalogPage || (r.p && getCatalogMatch(r.p.id)?.page)
+      const key = r.p?.genSpecSource?.catalogKey || r.p?.catalogKey || (r.p && getCatalogMatch(r.p.id)?.catalogKey) || (r.p ? inferCatalogKey(r.p) : null)
+      const page = r.p?.genSpecSource?.page || r.p?.catalogPage || (r.p && getCatalogMatch(r.p.id)?.page)
       const src = key ? `${getCatalogSource(key)?.title.replace('Каталог ', '') || key}${page ? `, стр. ${page}` : ''}` : '—'
       const med = r.p?.capacityNote ? ' (MED)' : ''
       return [String(r.n), r.p?.category || r.it.category || '', r.p?.model || r.it.model || '', fmt(r.qty, 2),
@@ -280,6 +280,9 @@ export async function buildSpecPdf(opts: BuildSpecOptions): Promise<Buffer> {
         ['Максимальный ток', q(g.maxCurrent, 'А')],
         ['Компрессор', g.compressor || ''],
         ['Хладагент', (g.refrigerant || clean(p?.refrigerant)).replace('А', 'A')],
+        ['Заводская заправка хладагента', q(g.refrigerantCharge, 'кг')],
+        ['Фреоновые трубы: жидкость / газ', g.pipeLiquid || g.pipeGas ? `${q(g.pipeLiquid) || '—'} / ${q(g.pipeGas) || '—'} мм` : ''],
+        ['Макс. число внутренних блоков', g.maxIndoor || ''],
         ['Расход воды / потери давления', g.waterFlow ? `${q(g.waterFlow, 'м³/ч')}${g.waterDp ? ' / ' + q(g.waterDp, 'кПа') : ''}` : ''],
         ['Присоединение воды', g.pipe || ''],
         ['Расход воздуха', g.airflow ? `${g.airflow} м³/ч` : ''],
@@ -287,7 +290,13 @@ export async function buildSpecPdf(opts: BuildSpecOptions): Promise<Buffer> {
         ['Наружный воздух: охлаждение / нагрев', g.tempCool || g.tempHeat ? `${g.tempCool || '—'} / ${g.tempHeat || '—'} °C` : ''],
         ['Габариты (Ш×В×Г)', g.dims ? `${g.dims} мм` : (clean(p?.dimensions) ? `${p?.dimensions} мм` : '')],
         ['Масса нетто', q(g.weight, 'кг') || (num(p?.weight) ? `${fmt(num(p?.weight), 0)} кг` : '')],
-      ] as [string, string][]).map(([k, v]) => [k, v || 'по запросу'] as [string, string])
+      ] as [string, string][])
+        .map(([k, v]) => [k, v || 'по запросу'] as [string, string])
+        // Неприменимые к типу оборудования строки не показываем.
+        .filter(([k, v]) => v !== 'по запросу' || !(
+          (/фреонов|внутренних блоков|заправка/.test(k) && !/наруж|vrf/i.test(p?.category || '')) ||
+          (/Расход воды|Присоединение воды/.test(k) && /наруж|vrf/i.test(p?.category || '')) ||
+          (/Холодопроизводительность/.test(k) && /ГВС|бассейн/i.test(p?.category || ''))))
       table([{ title: 'Параметр', w: 45, align: 'l' }, { title: 'Значение', w: 55, align: 'l' }], kv)
     }
   }
@@ -352,7 +361,7 @@ export async function buildSpecPdf(opts: BuildSpecOptions): Promise<Buffer> {
   heading('Источники данных')
   const srcs = new Set<string>()
   rows.forEach(r => {
-    const key = r.p?.catalogKey || (r.p && getCatalogMatch(r.p.id)?.catalogKey) || (r.p ? inferCatalogKey(r.p) : null)
+    const key = r.p?.genSpecSource?.catalogKey || r.p?.catalogKey || (r.p && getCatalogMatch(r.p.id)?.catalogKey) || (r.p ? inferCatalogKey(r.p) : null)
     const s = getCatalogSource(key || undefined)
     if (s) srcs.add(s.title)
   })

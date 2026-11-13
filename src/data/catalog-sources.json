@@ -27,5 +27,10 @@
     "title": "Каталог Midea FCU 2025-2026",
     "filename": "FCU Midea.pdf",
     "description": "Фанкойлы и гидронические модули Midea."
+  },
+  "easyfit": {
+    "title": "Midea EasyFit Engineering Data Book",
+    "filename": "EASYFIT manual.pdf",
+    "description": "VRF EasyFit (MVi): технические данные наружных блоков."
   }
 }

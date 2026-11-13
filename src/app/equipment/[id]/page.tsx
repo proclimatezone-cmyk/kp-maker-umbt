@@ -40,6 +40,8 @@ interface Product {
   capacityNote?: string
   catalogKey?: string
   catalogPage?: number
+  genSpec?: Record<string, string>
+  genSpecSource?: { catalogKey?: string; page?: number }
 }
 
 export default async function EquipmentPage({ params }: { params: Promise<{ id: string }> }) {
@@ -49,8 +51,8 @@ export default async function EquipmentPage({ params }: { params: Promise<{ id: 
 
   const match = getCatalogMatch(product.id)
   const fallbackKey = inferCatalogKey(product)
-  const catalogKey = product.catalogKey || match?.catalogKey || fallbackKey
-  const catalogPage = product.catalogPage || match?.page || null
+  const catalogKey = product.genSpecSource?.catalogKey || product.catalogKey || match?.catalogKey || fallbackKey
+  const catalogPage = product.genSpecSource?.page || product.catalogPage || match?.page || null
   const catalog = getCatalogSource(catalogKey || undefined)
   const pdfUrl = catalogKey ? getCatalogPdfUrl(catalogKey, catalogPage) : null
   const driveUrl = getCatalogDriveUrl(catalogKey || undefined)
@@ -96,6 +98,16 @@ export default async function EquipmentPage({ params }: { params: Promise<{ id: 
     { label: 'Диаметр газовой трубы', val: product.gasPipe, unit: product.gasPipe ? 'мм' : '' },
     { label: 'Электропитание', val: product.powerSupply, unit: '' },
     { label: 'Хладагент (фреон)', val: product.refrigerant, unit: '' },
+    ...(product.genSpec ? ([
+      ['Потребляемая мощность (охл.)', product.genSpec.coolPower, 'кВт'], ['Потребляемая мощность (нагр.)', product.genSpec.heatPower, 'кВт'],
+      ['EER', product.genSpec.eer, ''], ['COP', product.genSpec.cop, ''], ['Компрессор', product.genSpec.compressor, ''],
+      ['Расход воды', product.genSpec.waterFlow, 'м³/ч'], ['Потери давления воды', product.genSpec.waterDp, 'кПа'],
+      ['Присоединение воды', product.genSpec.pipe, ''], ['Заправка хладагента', product.genSpec.refrigerantCharge, 'кг'],
+      ['Фреоновые трубы жидкость / газ', product.genSpec.pipeLiquid && `${product.genSpec.pipeLiquid} / ${product.genSpec.pipeGas || '—'}`, 'мм'],
+      ['Макс. число внутренних блоков', product.genSpec.maxIndoor, ''], ['Диапазон наружных температур (охл.)', product.genSpec.tempCool, '°C'],
+      ['Диапазон наружных температур (нагр.)', product.genSpec.tempHeat, '°C'], ['Габариты (каталог)', product.genSpec.dims, 'мм'],
+      ['Масса нетто (каталог)', product.genSpec.weight, 'кг'], ['Уровень шума (каталог)', product.genSpec.noise, 'дБ(А)'],
+    ] as [string, string | undefined, string][]).map(([label, val, unit]) => ({ label, val: val ?? null, unit })) : []),
     { label: 'Ориентировочная цена из базы', val: product.price ? `${formatNum(product.price)} у.е.` : null, unit: '' },
     { label: 'Статус доступности', val: product.orderOnly ? 'Под заказ (срок поставки уточняется)' : 'В наличии / основной прайс', unit: '' },
   ].filter(item => item.val !== null && item.val !== undefined && String(item.val).trim() !== '' && String(item.val) !== '0')

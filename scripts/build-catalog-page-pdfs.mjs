@@ -13,7 +13,7 @@ const products = JSON.parse(fs.readFileSync(path.join(root, 'src/data/products.j
 const want = new Map();
 const add = (k, p) => { if (k && p) (want.get(k) || want.set(k, new Set()).get(k)).add(p); };
 for (const m of Object.values(index)) add(m.catalogKey, m.page);
-for (const p of products) add(p.catalogKey, p.catalogPage);
+for (const p of products) { add(p.catalogKey, p.catalogPage); add(p.genSpecSource?.catalogKey, p.genSpecSource?.page) }
 
 for (const [key, pages] of want) {
   const file = path.join(dir, sources[key].filename);
