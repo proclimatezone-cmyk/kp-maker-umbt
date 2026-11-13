@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useMemo, useCallback, useRef, memo } from 'react'
 import { ModelSearchSelector } from '@/components/ModelSearchSelector'
-import { Plus, Trash2, FileText, User, Briefcase, Calculator, Search, RefreshCw, Building2, Phone, CheckCircle, CloudCheck, Loader2, Copy, Truck, ChevronDown, FileSignature, BarChart3, Lock, Unlock, Ruler, BookOpen, FilePen } from 'lucide-react'
+import { Plus, Trash2, FileText, User, Briefcase, Calculator, Search, RefreshCw, Building2, Phone, CheckCircle, CloudCheck, Loader2, Copy, Truck, ChevronDown, FileSignature, BarChart3, Lock, Unlock, Ruler, BookOpen, FilePen, ClipboardList } from 'lucide-react'
 import productsData from '@/data/products.json'
 import { formatNum, formatShortRuDate, toIsoDate, todayIso, applyDateToKpName } from '@/lib/format'
 import { DELIVERY_TERMS, DeliveryTerm, buildTermsLines, buildSignatureLines, getMoneyLabels } from '@/lib/delivery-terms'
@@ -668,6 +668,8 @@ export default function Home() {
   const [stock, setStock] = useState<Record<string, number> | null>(null)
   const [stockError, setStockError] = useState('')
   const [isReportsUser, setIsReportsUser] = useState(false)
+  const [canSpec, setCanSpec] = useState(false)
+  const [specLoading, setSpecLoading] = useState(false)
   const [savedKpOpen, setSavedKpOpen] = useState(false)
   const [savedKpList, setSavedKpList] = useState<any[]>([])
   const [savedKpLoading, setSavedKpLoading] = useState(false)
@@ -845,6 +847,7 @@ export default function Home() {
       .then(r => r.json())
       .then(d => {
         setIsReportsUser(!!d.isReportsUser);
+        setCanSpec(!!d.canSpec);
         if (!d.isReportsUser) return;
 
         fetch('/api/reports/price-comparison')
@@ -1402,6 +1405,21 @@ export default function Home() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [prefetchKey])
 
+  const handleSpec = async () => {
+    if (!items.length) { alert('Добавьте оборудование в КП'); return }
+    setSpecLoading(true)
+    try {
+      const r = await fetch('/api/spec', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(buildGenerateBody(products)),
+      })
+      if (!r.ok) { const e = await r.json().catch(() => ({})); alert(`Ошибка: ${e.error || r.status}`); return }
+      const url = URL.createObjectURL(await r.blob())
+      const a = document.createElement('a'); a.href = url; a.download = `Спецификация ${cpName}.pdf`; a.click()
+      setTimeout(() => URL.revokeObjectURL(url), 60_000)
+    } catch (err: any) { alert('Не удалось собрать спецификацию: ' + (err?.message || 'нет связи')) } finally { setSpecLoading(false) }
+  }
+
   const handleGenerate = async () => {
     if (!manager.name || !client) { alert('Заполните ФИО менеджера и название объекта'); return }
     setLoading(true)
@@ -1907,6 +1925,12 @@ export default function Home() {
             {contractLoading ? <RefreshCw className="spin" size={16} /> : <FileSignature size={16} />}
             {contractLoading ? 'Собираем...' : 'Договор'}
           </button>
+          {canSpec && (
+            <button className="btn btn-ghost gen-secondary" onClick={handleSpec} disabled={specLoading} title="Приложение к КП: ТТХ и инженерный расчёт (отдельный PDF)">
+              {specLoading ? <RefreshCw className="spin" size={16} /> : <ClipboardList size={16} />}
+              {specLoading ? 'Собираем...' : 'Спецификация'}
+            </button>
+          )}
           {!lastFile ? (
             <button className="gen-btn" onClick={handleGenerate} disabled={loading}>
               {loading ? <RefreshCw className="spin" size={20} /> : <FileText size={20} />}

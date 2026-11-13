@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { jwtVerify } from 'jose';
 import { getJwtSecret } from '@/lib/auth-secret';
+import { canUseSpec } from '@/lib/spec-pdf';
 
 /**
  * umbt_auth — httpOnly, клиент не может прочитать email из него сам.
@@ -18,7 +19,7 @@ export async function GET(req: NextRequest) {
     const email = typeof payload.email === 'string' ? payload.email : null;
     const reportsEmail = (process.env.REPORTS_ACCESS_EMAIL || '').trim().toLowerCase();
     const isReportsUser = !!email && !!reportsEmail && email.trim().toLowerCase() === reportsEmail;
-    return NextResponse.json({ email, isReportsUser });
+    return NextResponse.json({ email, isReportsUser, canSpec: canUseSpec(email) });
   } catch {
     return NextResponse.json({ email: null, isReportsUser: false }, { status: 401 });
   }

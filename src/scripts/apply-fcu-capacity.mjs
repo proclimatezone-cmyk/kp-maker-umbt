@@ -30,6 +30,12 @@ export function applyFcuCapacity(products) {
     p.catalogKey = 'fcu-2026';
     p.catalogPage = c.page;
     p.catalogModel = key;
+    // Для кассет вторая строка «Габариты/Масса» — декоративная панель; такие значения не берём.
+    const panel = c.dims && Number(String(c.dims).split('×')[1]) < 100;
+    p.fcuSpec = {
+      waterFlow: c.waterFlow, waterDp: c.waterDp, powerW: c.powerW, airflow: c.airflow, noise: c.noise,
+      dims: panel ? undefined : c.dims, weight: panel ? undefined : c.weight,
+    };
     n++;
   }
   return n;

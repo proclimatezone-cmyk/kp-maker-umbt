@@ -45,8 +45,27 @@ for pi, p in enumerate(pages, 1):
     heat = vals[1] if len(vals) > 1 else []
     if len(cool) != len(models):
         continue
+    extra = {}
+    n = len(models)
+    LABELS = [('Расход воды', 'waterFlow'), ('Перепад давлений', 'waterDp'), ('Потребляемая мощность', 'powerW'),
+              ('Расход воздуха', 'airflow'), ('Уровень звук', 'noise'), ('Габариты', 'dims'), ('Масса', 'weight')]
+    for l in lines[k + 1:k + 22]:
+        for lab, key in LABELS:
+            if lab not in l or key in extra:
+                continue
+            tail = re.split(r'(?:м3/ч|кПа|Вт|дБ\(А\)|мм|кг)\s', l, maxsplit=1)
+            tail = tail[1] if len(tail) > 1 else l
+            if key == 'dims':
+                vals = re.findall(r'\d+\s*[×x]\s*\d+\s*[×x]\s*\d+', tail)
+                vals = [v.replace(' ', '').replace('x', '×') for v in vals]
+            else:
+                tr = TRIP.findall(tail)
+                vals = [f(t[1]) for t in tr] if len(tr) == n else [f(v) for v in re.findall(NUM, tail)]
+            if len(vals) == n:
+                extra[key] = vals
     for idx, m in enumerate(models):
         rec = {'page': pi, 'coolMax': cool[idx][0], 'coolMid': cool[idx][1], 'coolMin': cool[idx][2]}
+        rec.update({key: v[idx] for key, v in extra.items()})
         if len(heat) == len(models):
             rec.update(heatMax=heat[idx][0], heatMid=heat[idx][1], heatMin=heat[idx][2])
         out.setdefault(m, rec)

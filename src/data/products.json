@@ -3212,7 +3212,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 177,
-    "catalogModel": "MKT4-200FG50-CL"
+    "catalogModel": "MKT4-200FG50-CL",
+    "fcuSpec": {
+      "waterFlow": 0.28,
+      "waterDp": 9.48,
+      "powerW": 43,
+      "airflow": 223,
+      "noise": 33,
+      "dims": "632×243×487",
+      "weight": 14
+    }
   },
   {
     "id": "mkt4-300fg50-cr---kjrp-86a-bmfnkd-e-m-",
@@ -3245,7 +3254,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 177,
-    "catalogModel": "MKT4-300FG50-CL"
+    "catalogModel": "MKT4-300FG50-CL",
+    "fcuSpec": {
+      "waterFlow": 0.39,
+      "waterDp": 10.21,
+      "powerW": 47,
+      "airflow": 322,
+      "noise": 34.5,
+      "dims": "773×243×487",
+      "weight": 16
+    }
   },
   {
     "id": "mkt4-400fg50-cr---kjrp-86a-bmfnkd-e-m-",
@@ -3278,7 +3296,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 177,
-    "catalogModel": "MKT4-400FG50-CL"
+    "catalogModel": "MKT4-400FG50-CL",
+    "fcuSpec": {
+      "waterFlow": 0.51,
+      "waterDp": 12.88,
+      "powerW": 63,
+      "airflow": 546,
+      "noise": 34.5,
+      "dims": "908×243×487",
+      "weight": 19
+    }
   },
   {
     "id": "mkt4-500fg50-cr---kjrp-86a-bmfnkd-e-m-",
@@ -3311,7 +3338,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 177,
-    "catalogModel": "MKT4-500FG50-CL"
+    "catalogModel": "MKT4-500FG50-CL",
+    "fcuSpec": {
+      "waterFlow": 0.62,
+      "waterDp": 18.14,
+      "powerW": 67,
+      "airflow": 546,
+      "noise": 42,
+      "dims": "908×243×487",
+      "weight": 19
+    }
   },
   {
     "id": "mkt4-600fg50-cr---kjrp-86a-bmfnkd-e-m-",
@@ -3344,7 +3380,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 177,
-    "catalogModel": "MKT4-600FG50-CL"
+    "catalogModel": "MKT4-600FG50-CL",
+    "fcuSpec": {
+      "waterFlow": 0.69,
+      "waterDp": 22.51,
+      "powerW": 84,
+      "airflow": 622,
+      "noise": 41,
+      "dims": "1003×243×487",
+      "weight": 20.5
+    }
   },
   {
     "id": "mkt4-700fg50-cr---kjrp-86a-bmfnkd-e-m-",
@@ -3377,7 +3422,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 178,
-    "catalogModel": "MKT4-700FG50-CL"
+    "catalogModel": "MKT4-700FG50-CL",
+    "fcuSpec": {
+      "waterFlow": 0.84,
+      "waterDp": 12.97,
+      "powerW": 107,
+      "airflow": 829,
+      "noise": 38,
+      "dims": "1178×243×487",
+      "weight": 22.5
+    }
   },
   {
     "id": "mkt4-800fg50-cr---kjrp-86a-bmfnkd-e-m-",
@@ -3410,7 +3464,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 178,
-    "catalogModel": "MKT4-800FG50-CL"
+    "catalogModel": "MKT4-800FG50-CL",
+    "fcuSpec": {
+      "waterFlow": 0.99,
+      "waterDp": 17.53,
+      "powerW": 120,
+      "airflow": 940,
+      "noise": 41.5,
+      "dims": "1368×243×487",
+      "weight": 27.5
+    }
   },
   {
     "id": "mkt4-1000fg50-cr---kjrp-86a-bmfnkd-e-m-",
@@ -3443,7 +3506,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 178,
-    "catalogModel": "MKT4-1000FG50-CL"
+    "catalogModel": "MKT4-1000FG50-CL",
+    "fcuSpec": {
+      "waterFlow": 1.28,
+      "waterDp": 28.36,
+      "powerW": 157,
+      "airflow": 1296,
+      "noise": 44.5,
+      "dims": "1368×243×487",
+      "weight": 27.5
+    }
   },
   {
     "id": "mkt4-1200fg50-cr---kjrp-86a-bmfnkd-e-m-",
@@ -3476,7 +3548,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 178,
-    "catalogModel": "MKT4-1200FG50-CL"
+    "catalogModel": "MKT4-1200FG50-CL",
+    "fcuSpec": {
+      "waterFlow": 1.4,
+      "waterDp": 20.94,
+      "powerW": 196,
+      "airflow": 1358,
+      "noise": 44,
+      "dims": "1658×243×487",
+      "weight": 35.5
+    }
   },
   {
     "id": "mkt4-1400fg50-cr---kjrp-86a-bmfnkd-e-m-",
@@ -3509,7 +3590,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 178,
-    "catalogModel": "MKT4-1400FG50-CL"
+    "catalogModel": "MKT4-1400FG50-CL",
+    "fcuSpec": {
+      "waterFlow": 1.68,
+      "waterDp": 36.87,
+      "powerW": 218,
+      "airflow": 1728,
+      "noise": 44.5,
+      "dims": "1898×243×487",
+      "weight": 39
+    }
   },
   {
     "id": "mka-600r",
@@ -3542,7 +3632,14 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 169,
-    "catalogModel": "MKA-600R"
+    "catalogModel": "MKA-600R",
+    "fcuSpec": {
+      "waterFlow": 0.88,
+      "waterDp": 18.2,
+      "powerW": 84,
+      "airflow": 850,
+      "noise": 41
+    }
   },
   {
     "id": "mka-750r",
@@ -3575,7 +3672,14 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 169,
-    "catalogModel": "MKA-750R"
+    "catalogModel": "MKA-750R",
+    "fcuSpec": {
+      "waterFlow": 0.96,
+      "waterDp": 20.1,
+      "powerW": 102,
+      "airflow": 1060,
+      "noise": 42
+    }
   },
   {
     "id": "mka-850r",
@@ -3608,7 +3712,14 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 169,
-    "catalogModel": "MKA-850R"
+    "catalogModel": "MKA-850R",
+    "fcuSpec": {
+      "waterFlow": 1.15,
+      "waterDp": 20.2,
+      "powerW": 124,
+      "airflow": 1190,
+      "noise": 43
+    }
   },
   {
     "id": "mka-950r",
@@ -3641,7 +3752,14 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 169,
-    "catalogModel": "MKA-950R"
+    "catalogModel": "MKA-950R",
+    "fcuSpec": {
+      "waterFlow": 1.27,
+      "waterDp": 21.98,
+      "powerW": 131,
+      "airflow": 1360,
+      "noise": 44
+    }
   },
   {
     "id": "mka-1200r",
@@ -3674,7 +3792,14 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 169,
-    "catalogModel": "MKA-1200R"
+    "catalogModel": "MKA-1200R",
+    "fcuSpec": {
+      "waterFlow": 1.6,
+      "waterDp": 17,
+      "powerW": 127,
+      "airflow": 1700,
+      "noise": 45
+    }
   },
   {
     "id": "mka-1500r",
@@ -3707,7 +3832,14 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 169,
-    "catalogModel": "MKA-1500R"
+    "catalogModel": "MKA-1500R",
+    "fcuSpec": {
+      "waterFlow": 1.9,
+      "waterDp": 27.2,
+      "powerW": 136,
+      "airflow": 2170,
+      "noise": 46
+    }
   },
   {
     "id": "mka-600f",
@@ -3740,7 +3872,14 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 170,
-    "catalogModel": "MKA-600F"
+    "catalogModel": "MKA-600F",
+    "fcuSpec": {
+      "waterFlow": 0.64,
+      "waterDp": 9,
+      "powerW": 120,
+      "airflow": 800,
+      "noise": 32
+    }
   },
   {
     "id": "mka-750f",
@@ -3773,7 +3912,14 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 170,
-    "catalogModel": "MKA-750F"
+    "catalogModel": "MKA-750F",
+    "fcuSpec": {
+      "waterFlow": 0.69,
+      "waterDp": 10.11,
+      "powerW": 135,
+      "airflow": 1020,
+      "noise": 34
+    }
   },
   {
     "id": "mka-850f",
@@ -3806,7 +3952,14 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 170,
-    "catalogModel": "MKA-850F"
+    "catalogModel": "MKA-850F",
+    "fcuSpec": {
+      "waterFlow": 0.9,
+      "waterDp": 15,
+      "powerW": 140,
+      "airflow": 1040,
+      "noise": 36
+    }
   },
   {
     "id": "mka-950f",
@@ -3839,7 +3992,14 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 170,
-    "catalogModel": "MKA-950F"
+    "catalogModel": "MKA-950F",
+    "fcuSpec": {
+      "waterFlow": 0.95,
+      "waterDp": 20,
+      "powerW": 145,
+      "airflow": 1200,
+      "noise": 38
+    }
   },
   {
     "id": "mka-1200f",
@@ -3872,7 +4032,14 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 170,
-    "catalogModel": "MKA-1200F"
+    "catalogModel": "MKA-1200F",
+    "fcuSpec": {
+      "waterFlow": 1.3,
+      "waterDp": 35,
+      "powerW": 135,
+      "airflow": 1300,
+      "noise": 40
+    }
   },
   {
     "id": "mka-1500f",
@@ -3905,7 +4072,14 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 170,
-    "catalogModel": "MKA-1500F"
+    "catalogModel": "MKA-1500F",
+    "fcuSpec": {
+      "waterFlow": 1.9,
+      "waterDp": 38.03,
+      "powerW": 165,
+      "airflow": 1470,
+      "noise": 42
+    }
   },
   {
     "id": "mkd-300",
@@ -3938,7 +4112,14 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 167,
-    "catalogModel": "MKD-300"
+    "catalogModel": "MKD-300",
+    "fcuSpec": {
+      "waterFlow": 0.42,
+      "waterDp": 9.11,
+      "powerW": 40,
+      "airflow": 440,
+      "noise": 33
+    }
   },
   {
     "id": "mkd-400",
@@ -3971,7 +4152,14 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 167,
-    "catalogModel": "MKD-400"
+    "catalogModel": "MKD-400",
+    "fcuSpec": {
+      "waterFlow": 0.54,
+      "waterDp": 15,
+      "powerW": 50,
+      "airflow": 580,
+      "noise": 39
+    }
   },
   {
     "id": "mkd-450",
@@ -4031,7 +4219,14 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 167,
-    "catalogModel": "MKD-500"
+    "catalogModel": "MKD-500",
+    "fcuSpec": {
+      "waterFlow": 0.61,
+      "waterDp": 8.37,
+      "powerW": 53,
+      "airflow": 730,
+      "noise": 42
+    }
   },
   {
     "id": "mkd-300s",
@@ -4064,7 +4259,14 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 168,
-    "catalogModel": "MKD-300S"
+    "catalogModel": "MKD-300S",
+    "fcuSpec": {
+      "waterFlow": 0.38,
+      "waterDp": 17.04,
+      "powerW": 40,
+      "airflow": 440,
+      "noise": 33
+    }
   },
   {
     "id": "mkd-400s",
@@ -4097,7 +4299,14 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 168,
-    "catalogModel": "MKD-400S"
+    "catalogModel": "MKD-400S",
+    "fcuSpec": {
+      "waterFlow": 0.44,
+      "waterDp": 12.39,
+      "powerW": 50,
+      "airflow": 580,
+      "noise": 39
+    }
   },
   {
     "id": "mkd-500s",
@@ -4130,7 +4339,14 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 168,
-    "catalogModel": "MKD-500S"
+    "catalogModel": "MKD-500S",
+    "fcuSpec": {
+      "waterFlow": 0.49,
+      "waterDp": 16.14,
+      "powerW": 65,
+      "airflow": 730,
+      "noise": 42
+    }
   },
   {
     "id": "mkh2-150-r4",
@@ -4163,7 +4379,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 186,
-    "catalogModel": "MKH2-150-R4"
+    "catalogModel": "MKH2-150-R4",
+    "fcuSpec": {
+      "waterFlow": 0.32,
+      "waterDp": 22.37,
+      "powerW": 24,
+      "airflow": 192,
+      "noise": 47,
+      "dims": "790×495×200",
+      "weight": 16.7
+    }
   },
   {
     "id": "mkh2-250-r4",
@@ -4196,7 +4421,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 186,
-    "catalogModel": "MKH2-250-R4"
+    "catalogModel": "MKH2-250-R4",
+    "fcuSpec": {
+      "waterFlow": 0.39,
+      "waterDp": 15.66,
+      "powerW": 26,
+      "airflow": 284,
+      "noise": 38,
+      "dims": "1020×495×200",
+      "weight": 20.8
+    }
   },
   {
     "id": "mkh2-350-r4",
@@ -4229,7 +4463,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 186,
-    "catalogModel": "MKH2-350-R4"
+    "catalogModel": "MKH2-350-R4",
+    "fcuSpec": {
+      "waterFlow": 0.58,
+      "waterDp": 27.07,
+      "powerW": 32,
+      "airflow": 450,
+      "noise": 45,
+      "dims": "1240×495×200",
+      "weight": 25.4
+    }
   },
   {
     "id": "mkh2-500-r4",
@@ -4262,7 +4505,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 186,
-    "catalogModel": "MKH2-500-R4"
+    "catalogModel": "MKH2-500-R4",
+    "fcuSpec": {
+      "waterFlow": 0.73,
+      "waterDp": 41.44,
+      "powerW": 54,
+      "airflow": 574,
+      "noise": 51,
+      "dims": "1240×495×200",
+      "weight": 26.3
+    }
   },
   {
     "id": "mkh2-700-r4",
@@ -4295,7 +4547,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 186,
-    "catalogModel": "MKH2-700-R4"
+    "catalogModel": "MKH2-700-R4",
+    "fcuSpec": {
+      "waterFlow": 1,
+      "waterDp": 29.2,
+      "powerW": 89,
+      "airflow": 885,
+      "noise": 56,
+      "dims": "1360×495×200",
+      "weight": 28.5
+    }
   },
   {
     "id": "mkh2-800-r4",
@@ -4328,7 +4589,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 186,
-    "catalogModel": "MKH2-800-R4"
+    "catalogModel": "MKH2-800-R4",
+    "fcuSpec": {
+      "waterFlow": 1.29,
+      "waterDp": 55.03,
+      "powerW": 104,
+      "airflow": 1132,
+      "noise": 58,
+      "dims": "1360×591×200",
+      "weight": 34
+    }
   },
   {
     "id": "mkh2-v150f-r4",
@@ -4361,7 +4631,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 210,
-    "catalogModel": "MKH2-V150F-R4"
+    "catalogModel": "MKH2-V150F-R4",
+    "fcuSpec": {
+      "waterFlow": 0.25,
+      "waterDp": 13.74,
+      "powerW": 14,
+      "airflow": 206,
+      "noise": 33,
+      "dims": "790×495×200",
+      "weight": 19
+    }
   },
   {
     "id": "mkh2-v250f-r4",
@@ -4394,7 +4673,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 210,
-    "catalogModel": "MKH2-V250F-R4"
+    "catalogModel": "MKH2-V250F-R4",
+    "fcuSpec": {
+      "waterFlow": 0.33,
+      "waterDp": 9.73,
+      "powerW": 11,
+      "airflow": 280,
+      "noise": 23,
+      "dims": "1020×495×200",
+      "weight": 22.5
+    }
   },
   {
     "id": "mkh2-v350f-r4",
@@ -4427,7 +4715,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 210,
-    "catalogModel": "MKH2-V350F-R4"
+    "catalogModel": "MKH2-V350F-R4",
+    "fcuSpec": {
+      "waterFlow": 0.55,
+      "waterDp": 28.35,
+      "powerW": 17,
+      "airflow": 461,
+      "noise": 34,
+      "dims": "1240×495×200",
+      "weight": 27
+    }
   },
   {
     "id": "mkh2-v500f-r4",
@@ -4460,7 +4757,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 210,
-    "catalogModel": "MKH2-V500F-R4"
+    "catalogModel": "MKH2-V500F-R4",
+    "fcuSpec": {
+      "waterFlow": 0.64,
+      "waterDp": 39.04,
+      "powerW": 28,
+      "airflow": 595,
+      "noise": 39,
+      "dims": "1240×495×200",
+      "weight": 27
+    }
   },
   {
     "id": "mkh2-v700f-r4",
@@ -4493,7 +4799,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 210,
-    "catalogModel": "MKH2-V700F-R4"
+    "catalogModel": "MKH2-V700F-R4",
+    "fcuSpec": {
+      "waterFlow": 0.86,
+      "waterDp": 36.96,
+      "powerW": 46,
+      "airflow": 887,
+      "noise": 43,
+      "dims": "1360×495×200",
+      "weight": 30
+    }
   },
   {
     "id": "mkh2-v800f-r4",
@@ -4526,7 +4841,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 210,
-    "catalogModel": "MKH2-V800F-R4"
+    "catalogModel": "MKH2-V800F-R4",
+    "fcuSpec": {
+      "waterFlow": 1.06,
+      "waterDp": 32.56,
+      "powerW": 49,
+      "airflow": 969,
+      "noise": 43,
+      "dims": "1360×591×200",
+      "weight": 35
+    }
   },
   {
     "id": "mha-96hwan1-moub-96hd1n1-r",
@@ -6348,7 +6672,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 182,
-    "catalogModel": "MKH1-150-R3"
+    "catalogModel": "MKH1-150-R3",
+    "fcuSpec": {
+      "waterFlow": 0.2,
+      "waterDp": 9,
+      "powerW": 17,
+      "airflow": 160,
+      "noise": 23,
+      "dims": "790×495×211",
+      "weight": 16.3
+    }
   },
   {
     "id": "mkh1-250-r3",
@@ -6372,7 +6705,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 182,
-    "catalogModel": "MKH1-250-R3"
+    "catalogModel": "MKH1-250-R3",
+    "fcuSpec": {
+      "waterFlow": 0.33,
+      "waterDp": 11.7,
+      "powerW": 26,
+      "airflow": 245,
+      "noise": 25,
+      "dims": "1020×495×211",
+      "weight": 20
+    }
   },
   {
     "id": "mkh1-350-r3",
@@ -6396,7 +6738,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 182,
-    "catalogModel": "MKH1-350-R3"
+    "catalogModel": "MKH1-350-R3",
+    "fcuSpec": {
+      "waterFlow": 0.53,
+      "waterDp": 26.4,
+      "powerW": 32,
+      "airflow": 435,
+      "noise": 32,
+      "dims": "1240×495×211",
+      "weight": 24
+    }
   },
   {
     "id": "mkh1-500-r3",
@@ -6420,7 +6771,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 182,
-    "catalogModel": "MKH1-500-R3"
+    "catalogModel": "MKH1-500-R3",
+    "fcuSpec": {
+      "waterFlow": 0.64,
+      "waterDp": 39.5,
+      "powerW": 54,
+      "airflow": 550,
+      "noise": 39,
+      "dims": "1240×495×211",
+      "weight": 25.5
+    }
   },
   {
     "id": "mkh1-700-r3",
@@ -6444,7 +6804,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 182,
-    "catalogModel": "MKH1-700-R3"
+    "catalogModel": "MKH1-700-R3",
+    "fcuSpec": {
+      "waterFlow": 0.76,
+      "waterDp": 32.6,
+      "powerW": 98,
+      "airflow": 750,
+      "noise": 43,
+      "dims": "1360×495×211",
+      "weight": 27.3
+    }
   },
   {
     "id": "mkh1-800-r3",
@@ -6468,7 +6837,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 182,
-    "catalogModel": "MKH1-800-R3"
+    "catalogModel": "MKH1-800-R3",
+    "fcuSpec": {
+      "waterFlow": 0.94,
+      "waterDp": 31.4,
+      "powerW": 93,
+      "airflow": 920,
+      "noise": 48,
+      "dims": "1360×591×211",
+      "weight": 31.7
+    }
   },
   {
     "id": "mkh1-150-r4",
@@ -6492,7 +6870,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 183,
-    "catalogModel": "MKH1-150-R4"
+    "catalogModel": "MKH1-150-R4",
+    "fcuSpec": {
+      "waterFlow": 0.31,
+      "waterDp": 23.2,
+      "powerW": 24,
+      "airflow": 180,
+      "noise": 34,
+      "dims": "790×495×211",
+      "weight": 16.7
+    }
   },
   {
     "id": "mkh1-250-r4",
@@ -6516,7 +6903,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 183,
-    "catalogModel": "MKH1-250-R4"
+    "catalogModel": "MKH1-250-R4",
+    "fcuSpec": {
+      "waterFlow": 0.35,
+      "waterDp": 14,
+      "powerW": 26,
+      "airflow": 250,
+      "noise": 26,
+      "dims": "1020×495×211",
+      "weight": 20.8
+    }
   },
   {
     "id": "mkh1-350-r4",
@@ -6540,7 +6936,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 183,
-    "catalogModel": "MKH1-350-R4"
+    "catalogModel": "MKH1-350-R4",
+    "fcuSpec": {
+      "waterFlow": 0.56,
+      "waterDp": 26.4,
+      "powerW": 32,
+      "airflow": 430,
+      "noise": 32,
+      "dims": "1240×495×211",
+      "weight": 25.4
+    }
   },
   {
     "id": "mkh1-500-r4",
@@ -6564,7 +6969,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 183,
-    "catalogModel": "MKH1-500-R4"
+    "catalogModel": "MKH1-500-R4",
+    "fcuSpec": {
+      "waterFlow": 0.71,
+      "waterDp": 40.4,
+      "powerW": 54,
+      "airflow": 560,
+      "noise": 39,
+      "dims": "1240×495×211",
+      "weight": 26.3
+    }
   },
   {
     "id": "mkh1-700-r4",
@@ -6588,7 +7002,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 183,
-    "catalogModel": "MKH1-700-R4"
+    "catalogModel": "MKH1-700-R4",
+    "fcuSpec": {
+      "waterFlow": 0.91,
+      "waterDp": 26.7,
+      "powerW": 93,
+      "airflow": 800,
+      "noise": 43,
+      "dims": "1360×495×211",
+      "weight": 28.5
+    }
   },
   {
     "id": "mkh1-800-r4",
@@ -6612,7 +7035,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 183,
-    "catalogModel": "MKH1-800-R4"
+    "catalogModel": "MKH1-800-R4",
+    "fcuSpec": {
+      "waterFlow": 1.04,
+      "waterDp": 44.5,
+      "powerW": 81,
+      "airflow": 910,
+      "noise": 48,
+      "dims": "1360×591×211",
+      "weight": 34
+    }
   },
   {
     "id": "mkh2-150-r3",
@@ -6636,7 +7068,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 185,
-    "catalogModel": "MKH2-150-R3"
+    "catalogModel": "MKH2-150-R3",
+    "fcuSpec": {
+      "waterFlow": 0.21,
+      "waterDp": 9.33,
+      "powerW": 17,
+      "airflow": 165,
+      "noise": 24,
+      "dims": "790×495×200",
+      "weight": 16.3
+    }
   },
   {
     "id": "mkh2-250-r3",
@@ -6660,7 +7101,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 185,
-    "catalogModel": "MKH2-250-R3"
+    "catalogModel": "MKH2-250-R3",
+    "fcuSpec": {
+      "waterFlow": 0.35,
+      "waterDp": 11.18,
+      "powerW": 26,
+      "airflow": 273,
+      "noise": 24,
+      "dims": "1020×495×200",
+      "weight": 20
+    }
   },
   {
     "id": "mkh2-350-r3",
@@ -6684,7 +7134,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 185,
-    "catalogModel": "MKH2-350-R3"
+    "catalogModel": "MKH2-350-R3",
+    "fcuSpec": {
+      "waterFlow": 0.55,
+      "waterDp": 27.11,
+      "powerW": 32,
+      "airflow": 447,
+      "noise": 32,
+      "dims": "1240×495×200",
+      "weight": 24
+    }
   },
   {
     "id": "mkh2-500-r3",
@@ -6708,7 +7167,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 185,
-    "catalogModel": "MKH2-500-R3"
+    "catalogModel": "MKH2-500-R3",
+    "fcuSpec": {
+      "waterFlow": 0.65,
+      "waterDp": 40.02,
+      "powerW": 54,
+      "airflow": 560,
+      "noise": 39,
+      "dims": "1240×495×200",
+      "weight": 25.5
+    }
   },
   {
     "id": "mkh2-700-r3",
@@ -6732,7 +7200,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 185,
-    "catalogModel": "MKH2-700-R3"
+    "catalogModel": "MKH2-700-R3",
+    "fcuSpec": {
+      "waterFlow": 0.86,
+      "waterDp": 36.96,
+      "powerW": 98,
+      "airflow": 855,
+      "noise": 43,
+      "dims": "1360×495×200",
+      "weight": 27.3
+    }
   },
   {
     "id": "mkh2-800-r3",
@@ -6756,7 +7233,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 185,
-    "catalogModel": "MKH2-800-R3"
+    "catalogModel": "MKH2-800-R3",
+    "fcuSpec": {
+      "waterFlow": 1.12,
+      "waterDp": 37.06,
+      "powerW": 109,
+      "airflow": 1088,
+      "noise": 46,
+      "dims": "1360×591×200",
+      "weight": 31.7
+    }
   },
   {
     "id": "mkh2-150-r3--a-",
@@ -6780,7 +7266,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 185,
-    "catalogModel": "MKH2-150-R3"
+    "catalogModel": "MKH2-150-R3",
+    "fcuSpec": {
+      "waterFlow": 0.21,
+      "waterDp": 9.33,
+      "powerW": 17,
+      "airflow": 165,
+      "noise": 24,
+      "dims": "790×495×200",
+      "weight": 16.3
+    }
   },
   {
     "id": "mkh2-250-r3--a-",
@@ -6804,7 +7299,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 185,
-    "catalogModel": "MKH2-250-R3"
+    "catalogModel": "MKH2-250-R3",
+    "fcuSpec": {
+      "waterFlow": 0.35,
+      "waterDp": 11.18,
+      "powerW": 26,
+      "airflow": 273,
+      "noise": 24,
+      "dims": "1020×495×200",
+      "weight": 20
+    }
   },
   {
     "id": "mkh2-350-r3--a-",
@@ -6828,7 +7332,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 185,
-    "catalogModel": "MKH2-350-R3"
+    "catalogModel": "MKH2-350-R3",
+    "fcuSpec": {
+      "waterFlow": 0.55,
+      "waterDp": 27.11,
+      "powerW": 32,
+      "airflow": 447,
+      "noise": 32,
+      "dims": "1240×495×200",
+      "weight": 24
+    }
   },
   {
     "id": "mkh2-500-r3--a-",
@@ -6852,7 +7365,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 185,
-    "catalogModel": "MKH2-500-R3"
+    "catalogModel": "MKH2-500-R3",
+    "fcuSpec": {
+      "waterFlow": 0.65,
+      "waterDp": 40.02,
+      "powerW": 54,
+      "airflow": 560,
+      "noise": 39,
+      "dims": "1240×495×200",
+      "weight": 25.5
+    }
   },
   {
     "id": "mkh2-700-r3--a-",
@@ -6876,7 +7398,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 185,
-    "catalogModel": "MKH2-700-R3"
+    "catalogModel": "MKH2-700-R3",
+    "fcuSpec": {
+      "waterFlow": 0.86,
+      "waterDp": 36.96,
+      "powerW": 98,
+      "airflow": 855,
+      "noise": 43,
+      "dims": "1360×495×200",
+      "weight": 27.3
+    }
   },
   {
     "id": "mkh2-800-r3--a-",
@@ -6900,7 +7431,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 185,
-    "catalogModel": "MKH2-800-R3"
+    "catalogModel": "MKH2-800-R3",
+    "fcuSpec": {
+      "waterFlow": 1.12,
+      "waterDp": 37.06,
+      "powerW": 109,
+      "airflow": 1088,
+      "noise": 46,
+      "dims": "1360×591×200",
+      "weight": 31.7
+    }
   },
   {
     "id": "mkh2-150-r4--a-",
@@ -6924,7 +7464,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 186,
-    "catalogModel": "MKH2-150-R4"
+    "catalogModel": "MKH2-150-R4",
+    "fcuSpec": {
+      "waterFlow": 0.32,
+      "waterDp": 22.37,
+      "powerW": 24,
+      "airflow": 192,
+      "noise": 47,
+      "dims": "790×495×200",
+      "weight": 16.7
+    }
   },
   {
     "id": "mkh2-250-r4--a-",
@@ -6948,7 +7497,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 186,
-    "catalogModel": "MKH2-250-R4"
+    "catalogModel": "MKH2-250-R4",
+    "fcuSpec": {
+      "waterFlow": 0.39,
+      "waterDp": 15.66,
+      "powerW": 26,
+      "airflow": 284,
+      "noise": 38,
+      "dims": "1020×495×200",
+      "weight": 20.8
+    }
   },
   {
     "id": "mkh2-350-r4--a-",
@@ -6972,7 +7530,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 186,
-    "catalogModel": "MKH2-350-R4"
+    "catalogModel": "MKH2-350-R4",
+    "fcuSpec": {
+      "waterFlow": 0.58,
+      "waterDp": 27.07,
+      "powerW": 32,
+      "airflow": 450,
+      "noise": 45,
+      "dims": "1240×495×200",
+      "weight": 25.4
+    }
   },
   {
     "id": "mkh2-500-r4--a-",
@@ -6996,7 +7563,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 186,
-    "catalogModel": "MKH2-500-R4"
+    "catalogModel": "MKH2-500-R4",
+    "fcuSpec": {
+      "waterFlow": 0.73,
+      "waterDp": 41.44,
+      "powerW": 54,
+      "airflow": 574,
+      "noise": 51,
+      "dims": "1240×495×200",
+      "weight": 26.3
+    }
   },
   {
     "id": "mkh2-700-r4--a-",
@@ -7020,7 +7596,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 186,
-    "catalogModel": "MKH2-700-R4"
+    "catalogModel": "MKH2-700-R4",
+    "fcuSpec": {
+      "waterFlow": 1,
+      "waterDp": 29.2,
+      "powerW": 89,
+      "airflow": 885,
+      "noise": 56,
+      "dims": "1360×495×200",
+      "weight": 28.5
+    }
   },
   {
     "id": "mkh2-800-r4--a-",
@@ -7044,7 +7629,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 186,
-    "catalogModel": "MKH2-800-R4"
+    "catalogModel": "MKH2-800-R4",
+    "fcuSpec": {
+      "waterFlow": 1.29,
+      "waterDp": 55.03,
+      "powerW": 104,
+      "airflow": 1132,
+      "noise": 58,
+      "dims": "1360×591×200",
+      "weight": 34
+    }
   },
   {
     "id": "mkh3-150-r3",
@@ -7068,7 +7662,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 188,
-    "catalogModel": "MKH3-150-R3"
+    "catalogModel": "MKH3-150-R3",
+    "fcuSpec": {
+      "waterFlow": 0.21,
+      "waterDp": 9.33,
+      "powerW": 17,
+      "airflow": 165,
+      "noise": 24,
+      "dims": "607×455×200",
+      "weight": 11.6
+    }
   },
   {
     "id": "mkh3-250-r3",
@@ -7092,7 +7695,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 188,
-    "catalogModel": "MKH3-250-R3"
+    "catalogModel": "MKH3-250-R3",
+    "fcuSpec": {
+      "waterFlow": 0.35,
+      "waterDp": 11.18,
+      "powerW": 26,
+      "airflow": 273,
+      "noise": 24,
+      "dims": "837×455×200",
+      "weight": 13.9
+    }
   },
   {
     "id": "mkh3-350-r3",
@@ -7116,7 +7728,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 188,
-    "catalogModel": "MKH3-350-R3"
+    "catalogModel": "MKH3-350-R3",
+    "fcuSpec": {
+      "waterFlow": 0.55,
+      "waterDp": 27.11,
+      "powerW": 32,
+      "airflow": 447,
+      "noise": 32,
+      "dims": "1057×455×200",
+      "weight": 17.3
+    }
   },
   {
     "id": "mkh3-500-r3",
@@ -7140,7 +7761,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 188,
-    "catalogModel": "MKH3-500-R3"
+    "catalogModel": "MKH3-500-R3",
+    "fcuSpec": {
+      "waterFlow": 0.65,
+      "waterDp": 40.02,
+      "powerW": 54,
+      "airflow": 560,
+      "noise": 39,
+      "dims": "1057×455×200",
+      "weight": 17.9
+    }
   },
   {
     "id": "mkh3-700-r3",
@@ -7164,7 +7794,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 188,
-    "catalogModel": "MKH3-700-R3"
+    "catalogModel": "MKH3-700-R3",
+    "fcuSpec": {
+      "waterFlow": 0.86,
+      "waterDp": 36.96,
+      "powerW": 98,
+      "airflow": 855,
+      "noise": 43,
+      "dims": "1177×455×200",
+      "weight": 20.5
+    }
   },
   {
     "id": "mkh3-800-r3",
@@ -7188,7 +7827,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 188,
-    "catalogModel": "MKH3-800-R3"
+    "catalogModel": "MKH3-800-R3",
+    "fcuSpec": {
+      "waterFlow": 1.12,
+      "waterDp": 37.06,
+      "powerW": 109,
+      "airflow": 1088,
+      "noise": 46,
+      "dims": "1177×500×200",
+      "weight": 24
+    }
   },
   {
     "id": "mkh3-150-r4",
@@ -7212,7 +7860,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 189,
-    "catalogModel": "MKH3-150-R4"
+    "catalogModel": "MKH3-150-R4",
+    "fcuSpec": {
+      "waterFlow": 0.32,
+      "waterDp": 22.37,
+      "powerW": 24,
+      "airflow": 192,
+      "noise": 35,
+      "dims": "607×455×200",
+      "weight": 12
+    }
   },
   {
     "id": "mkh3-250-r4",
@@ -7236,7 +7893,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 189,
-    "catalogModel": "MKH3-250-R4"
+    "catalogModel": "MKH3-250-R4",
+    "fcuSpec": {
+      "waterFlow": 0.39,
+      "waterDp": 15.66,
+      "powerW": 26,
+      "airflow": 284,
+      "noise": 25,
+      "dims": "837×455×200",
+      "weight": 14.8
+    }
   },
   {
     "id": "mkh3-350-r4",
@@ -7260,7 +7926,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 189,
-    "catalogModel": "MKH3-350-R4"
+    "catalogModel": "MKH3-350-R4",
+    "fcuSpec": {
+      "waterFlow": 0.58,
+      "waterDp": 27.07,
+      "powerW": 32,
+      "airflow": 450,
+      "noise": 35,
+      "dims": "1057×455×200",
+      "weight": 18.2
+    }
   },
   {
     "id": "mkh3-500-r4",
@@ -7284,7 +7959,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 189,
-    "catalogModel": "MKH3-500-R4"
+    "catalogModel": "MKH3-500-R4",
+    "fcuSpec": {
+      "waterFlow": 0.73,
+      "waterDp": 41.44,
+      "powerW": 54,
+      "airflow": 574,
+      "noise": 40,
+      "dims": "1057×455×200",
+      "weight": 18.8
+    }
   },
   {
     "id": "mkh3-700-r4",
@@ -7308,7 +7992,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 189,
-    "catalogModel": "MKH3-700-R4"
+    "catalogModel": "MKH3-700-R4",
+    "fcuSpec": {
+      "waterFlow": 1,
+      "waterDp": 29.2,
+      "powerW": 89,
+      "airflow": 885,
+      "noise": 44,
+      "dims": "1177×455×200",
+      "weight": 21.7
+    }
   },
   {
     "id": "mkh3-800-r4",
@@ -7332,7 +8025,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 189,
-    "catalogModel": "MKH3-800-R4"
+    "catalogModel": "MKH3-800-R4",
+    "fcuSpec": {
+      "waterFlow": 1.29,
+      "waterDp": 55.03,
+      "powerW": 104,
+      "airflow": 1132,
+      "noise": 45,
+      "dims": "1177×500×200",
+      "weight": 25.2
+    }
   },
   {
     "id": "mkh1-v150f-r4",
@@ -7356,7 +8058,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 207,
-    "catalogModel": "MKH1-V150F-R4"
+    "catalogModel": "MKH1-V150F-R4",
+    "fcuSpec": {
+      "waterFlow": 0.24,
+      "waterDp": 13.74,
+      "powerW": 16,
+      "airflow": 180,
+      "noise": 33,
+      "dims": "790×495×211",
+      "weight": 19
+    }
   },
   {
     "id": "mkh1-v250f-r4",
@@ -7380,7 +8091,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 207,
-    "catalogModel": "MKH1-V250F-R4"
+    "catalogModel": "MKH1-V250F-R4",
+    "fcuSpec": {
+      "waterFlow": 0.3,
+      "waterDp": 9.73,
+      "powerW": 12,
+      "airflow": 240,
+      "noise": 26,
+      "dims": "1020×495×211",
+      "weight": 22.5
+    }
   },
   {
     "id": "mkh1-v350f-r4",
@@ -7404,7 +8124,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 207,
-    "catalogModel": "MKH1-V350F-R4"
+    "catalogModel": "MKH1-V350F-R4",
+    "fcuSpec": {
+      "waterFlow": 0.53,
+      "waterDp": 28.35,
+      "powerW": 18,
+      "airflow": 430,
+      "noise": 32,
+      "dims": "1240×495×211",
+      "weight": 27
+    }
   },
   {
     "id": "mkh1-v500f-r4",
@@ -7428,7 +8157,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 207,
-    "catalogModel": "MKH1-V500F-R4"
+    "catalogModel": "MKH1-V500F-R4",
+    "fcuSpec": {
+      "waterFlow": 0.63,
+      "waterDp": 39.04,
+      "powerW": 28,
+      "airflow": 560,
+      "noise": 39,
+      "dims": "1240×495×211",
+      "weight": 27
+    }
   },
   {
     "id": "mkh1-v700f-r4",
@@ -7452,7 +8190,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 207,
-    "catalogModel": "MKH1-V700F-R4"
+    "catalogModel": "MKH1-V700F-R4",
+    "fcuSpec": {
+      "waterFlow": 0.76,
+      "waterDp": 36.96,
+      "powerW": 50,
+      "airflow": 770,
+      "noise": 42,
+      "dims": "1360×495×211",
+      "weight": 30
+    }
   },
   {
     "id": "mkh1-v800f-r4",
@@ -7476,7 +8223,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 207,
-    "catalogModel": "MKH1-V800F-R4"
+    "catalogModel": "MKH1-V800F-R4",
+    "fcuSpec": {
+      "waterFlow": 0.94,
+      "waterDp": 32.56,
+      "powerW": 49,
+      "airflow": 969,
+      "noise": 46,
+      "dims": "1360×591×211",
+      "weight": 35
+    }
   },
   {
     "id": "mkh3-v150f-r4",
@@ -7500,7 +8256,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 213,
-    "catalogModel": "MKH3-V150F-R4"
+    "catalogModel": "MKH3-V150F-R4",
+    "fcuSpec": {
+      "waterFlow": 0.25,
+      "waterDp": 13.74,
+      "powerW": 14,
+      "airflow": 206,
+      "noise": 33,
+      "dims": "637×455×200",
+      "weight": 12.6
+    }
   },
   {
     "id": "mkh3-v250f-r4",
@@ -7524,7 +8289,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 213,
-    "catalogModel": "MKH3-V250F-R4"
+    "catalogModel": "MKH3-V250F-R4",
+    "fcuSpec": {
+      "waterFlow": 0.33,
+      "waterDp": 9.73,
+      "powerW": 11,
+      "airflow": 280,
+      "noise": 23,
+      "dims": "867×455×200",
+      "weight": 15.3
+    }
   },
   {
     "id": "mkh3-v350f-r4",
@@ -7548,7 +8322,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 213,
-    "catalogModel": "MKH3-V350F-R4"
+    "catalogModel": "MKH3-V350F-R4",
+    "fcuSpec": {
+      "waterFlow": 0.55,
+      "waterDp": 28.35,
+      "powerW": 17,
+      "airflow": 461,
+      "noise": 34,
+      "dims": "1087×455×200",
+      "weight": 18.7
+    }
   },
   {
     "id": "mkh3-v500f-r4",
@@ -7572,7 +8355,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 213,
-    "catalogModel": "MKH3-V500F-R4"
+    "catalogModel": "MKH3-V500F-R4",
+    "fcuSpec": {
+      "waterFlow": 0.64,
+      "waterDp": 39.04,
+      "powerW": 28,
+      "airflow": 595,
+      "noise": 39,
+      "dims": "1087×455×200",
+      "weight": 18.7
+    }
   },
   {
     "id": "mkh3-v700f-r4",
@@ -7596,7 +8388,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 213,
-    "catalogModel": "MKH3-V700F-R4"
+    "catalogModel": "MKH3-V700F-R4",
+    "fcuSpec": {
+      "waterFlow": 0.86,
+      "waterDp": 36.96,
+      "powerW": 46,
+      "airflow": 887,
+      "noise": 43,
+      "dims": "1207×455×200",
+      "weight": 21.3
+    }
   },
   {
     "id": "mkh3-v800f-r4",
@@ -7620,7 +8421,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 213,
-    "catalogModel": "MKH3-V800F-R4"
+    "catalogModel": "MKH3-V800F-R4",
+    "fcuSpec": {
+      "waterFlow": 1.06,
+      "waterDp": 32.56,
+      "powerW": 49,
+      "airflow": 969,
+      "noise": 43,
+      "dims": "1207×550×200",
+      "weight": 24.8
+    }
   },
   {
     "id": "mv8-252wv2gn1-ma-",
@@ -12050,7 +12860,15 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 179,
-    "catalogModel": "MKT3H-800G70"
+    "catalogModel": "MKT3H-800G70",
+    "fcuSpec": {
+      "waterFlow": 1.09,
+      "waterDp": 11.7,
+      "powerW": 300,
+      "airflow": 1220,
+      "noise": 42,
+      "weight": 50
+    }
   },
   {
     "id": "mkt3h-1000g70",
@@ -12072,7 +12890,15 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 179,
-    "catalogModel": "MKT3H-1000G70"
+    "catalogModel": "MKT3H-1000G70",
+    "fcuSpec": {
+      "waterFlow": 1.59,
+      "waterDp": 34,
+      "powerW": 320,
+      "airflow": 1530,
+      "noise": 43,
+      "weight": 52
+    }
   },
   {
     "id": "mkt3h-1200g70",
@@ -12094,7 +12920,15 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 179,
-    "catalogModel": "MKT3H-1200G70"
+    "catalogModel": "MKT3H-1200G70",
+    "fcuSpec": {
+      "waterFlow": 1.62,
+      "waterDp": 33.5,
+      "powerW": 320,
+      "airflow": 1880,
+      "noise": 44,
+      "weight": 52
+    }
   },
   {
     "id": "mkt3h-1400g70",
@@ -12116,7 +12950,15 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 179,
-    "catalogModel": "MKT3H-1400G70"
+    "catalogModel": "MKT3H-1400G70",
+    "fcuSpec": {
+      "waterFlow": 1.97,
+      "waterDp": 48.1,
+      "powerW": 364,
+      "airflow": 2120,
+      "noise": 45,
+      "weight": 54
+    }
   },
   {
     "id": "mkt3h-1600g100",
@@ -12138,7 +12980,14 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 180,
-    "catalogModel": "MKT3H-1600G100"
+    "catalogModel": "MKT3H-1600G100",
+    "fcuSpec": {
+      "waterFlow": 2.24,
+      "waterDp": 73.4,
+      "powerW": 520,
+      "airflow": 2450,
+      "noise": 47
+    }
   },
   {
     "id": "mkt3h-1800g100",
@@ -12160,7 +13009,14 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 180,
-    "catalogModel": "MKT3H-1800G100"
+    "catalogModel": "MKT3H-1800G100",
+    "fcuSpec": {
+      "waterFlow": 2.5,
+      "waterDp": 113,
+      "powerW": 680,
+      "airflow": 2750,
+      "noise": 53
+    }
   },
   {
     "id": "mkt3h-2200g100",
@@ -12182,7 +13038,14 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 180,
-    "catalogModel": "MKT3H-2200G100"
+    "catalogModel": "MKT3H-2200G100",
+    "fcuSpec": {
+      "waterFlow": 2.9,
+      "waterDp": 124.2,
+      "powerW": 860,
+      "airflow": 3360,
+      "noise": 54
+    }
   },
   {
     "id": "mkt3h-800eg70",
@@ -12204,7 +13067,15 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 179,
-    "catalogModel": "MKT3H-800G70"
+    "catalogModel": "MKT3H-800G70",
+    "fcuSpec": {
+      "waterFlow": 1.09,
+      "waterDp": 11.7,
+      "powerW": 300,
+      "airflow": 1220,
+      "noise": 42,
+      "weight": 50
+    }
   },
   {
     "id": "mkt3h-1000eg70",
@@ -12226,7 +13097,15 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 179,
-    "catalogModel": "MKT3H-1000G70"
+    "catalogModel": "MKT3H-1000G70",
+    "fcuSpec": {
+      "waterFlow": 1.59,
+      "waterDp": 34,
+      "powerW": 320,
+      "airflow": 1530,
+      "noise": 43,
+      "weight": 52
+    }
   },
   {
     "id": "mkt3h-1200eg70",
@@ -12248,7 +13127,15 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 179,
-    "catalogModel": "MKT3H-1200G70"
+    "catalogModel": "MKT3H-1200G70",
+    "fcuSpec": {
+      "waterFlow": 1.62,
+      "waterDp": 33.5,
+      "powerW": 320,
+      "airflow": 1880,
+      "noise": 44,
+      "weight": 52
+    }
   },
   {
     "id": "mkt3h-1400eg70",
@@ -12270,7 +13157,15 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 179,
-    "catalogModel": "MKT3H-1400G70"
+    "catalogModel": "MKT3H-1400G70",
+    "fcuSpec": {
+      "waterFlow": 1.97,
+      "waterDp": 48.1,
+      "powerW": 364,
+      "airflow": 2120,
+      "noise": 45,
+      "weight": 54
+    }
   },
   {
     "id": "mkt3h-1600eg100",
@@ -12292,7 +13187,14 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 180,
-    "catalogModel": "MKT3H-1600G100"
+    "catalogModel": "MKT3H-1600G100",
+    "fcuSpec": {
+      "waterFlow": 2.24,
+      "waterDp": 73.4,
+      "powerW": 520,
+      "airflow": 2450,
+      "noise": 47
+    }
   },
   {
     "id": "mkt3h-1800eg100",
@@ -12314,7 +13216,14 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 180,
-    "catalogModel": "MKT3H-1800G100"
+    "catalogModel": "MKT3H-1800G100",
+    "fcuSpec": {
+      "waterFlow": 2.5,
+      "waterDp": 113,
+      "powerW": 680,
+      "airflow": 2750,
+      "noise": 53
+    }
   },
   {
     "id": "mkt3h-2200eg100",
@@ -12336,7 +13245,14 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 180,
-    "catalogModel": "MKT3H-2200G100"
+    "catalogModel": "MKT3H-2200G100",
+    "fcuSpec": {
+      "waterFlow": 2.9,
+      "waterDp": 124.2,
+      "powerW": 860,
+      "airflow": 3360,
+      "noise": 54
+    }
   },
   {
     "id": "mkt4-200g30-cr",
@@ -12678,7 +13594,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 177,
-    "catalogModel": "MKT4-200FG50-CL"
+    "catalogModel": "MKT4-200FG50-CL",
+    "fcuSpec": {
+      "waterFlow": 0.28,
+      "waterDp": 9.48,
+      "powerW": 43,
+      "airflow": 223,
+      "noise": 33,
+      "dims": "632×243×487",
+      "weight": 14
+    }
   },
   {
     "id": "mkt4-300fg30-cr",
@@ -12700,7 +13625,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 177,
-    "catalogModel": "MKT4-300FG50-CL"
+    "catalogModel": "MKT4-300FG50-CL",
+    "fcuSpec": {
+      "waterFlow": 0.39,
+      "waterDp": 10.21,
+      "powerW": 47,
+      "airflow": 322,
+      "noise": 34.5,
+      "dims": "773×243×487",
+      "weight": 16
+    }
   },
   {
     "id": "mkt4-400fg30-cr",
@@ -12722,7 +13656,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 177,
-    "catalogModel": "MKT4-400FG50-CL"
+    "catalogModel": "MKT4-400FG50-CL",
+    "fcuSpec": {
+      "waterFlow": 0.51,
+      "waterDp": 12.88,
+      "powerW": 63,
+      "airflow": 546,
+      "noise": 34.5,
+      "dims": "908×243×487",
+      "weight": 19
+    }
   },
   {
     "id": "mkt4-500fg30-cr",
@@ -12744,7 +13687,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 177,
-    "catalogModel": "MKT4-500FG50-CL"
+    "catalogModel": "MKT4-500FG50-CL",
+    "fcuSpec": {
+      "waterFlow": 0.62,
+      "waterDp": 18.14,
+      "powerW": 67,
+      "airflow": 546,
+      "noise": 42,
+      "dims": "908×243×487",
+      "weight": 19
+    }
   },
   {
     "id": "mkt4-600fg30-cr",
@@ -12766,7 +13718,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 177,
-    "catalogModel": "MKT4-600FG50-CL"
+    "catalogModel": "MKT4-600FG50-CL",
+    "fcuSpec": {
+      "waterFlow": 0.69,
+      "waterDp": 22.51,
+      "powerW": 84,
+      "airflow": 622,
+      "noise": 41,
+      "dims": "1003×243×487",
+      "weight": 20.5
+    }
   },
   {
     "id": "mkt4-700fg30-cr",
@@ -12788,7 +13749,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 178,
-    "catalogModel": "MKT4-700FG50-CL"
+    "catalogModel": "MKT4-700FG50-CL",
+    "fcuSpec": {
+      "waterFlow": 0.84,
+      "waterDp": 12.97,
+      "powerW": 107,
+      "airflow": 829,
+      "noise": 38,
+      "dims": "1178×243×487",
+      "weight": 22.5
+    }
   },
   {
     "id": "mkt4-800fg30-cr",
@@ -12810,7 +13780,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 178,
-    "catalogModel": "MKT4-800FG50-CL"
+    "catalogModel": "MKT4-800FG50-CL",
+    "fcuSpec": {
+      "waterFlow": 0.99,
+      "waterDp": 17.53,
+      "powerW": 120,
+      "airflow": 940,
+      "noise": 41.5,
+      "dims": "1368×243×487",
+      "weight": 27.5
+    }
   },
   {
     "id": "mkt4-1000fg30-cr",
@@ -12832,7 +13811,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 178,
-    "catalogModel": "MKT4-1000FG50-CL"
+    "catalogModel": "MKT4-1000FG50-CL",
+    "fcuSpec": {
+      "waterFlow": 1.28,
+      "waterDp": 28.36,
+      "powerW": 157,
+      "airflow": 1296,
+      "noise": 44.5,
+      "dims": "1368×243×487",
+      "weight": 27.5
+    }
   },
   {
     "id": "mkt4-1200fg30-cr",
@@ -12854,7 +13842,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 178,
-    "catalogModel": "MKT4-1200FG50-CL"
+    "catalogModel": "MKT4-1200FG50-CL",
+    "fcuSpec": {
+      "waterFlow": 1.4,
+      "waterDp": 20.94,
+      "powerW": 196,
+      "airflow": 1358,
+      "noise": 44,
+      "dims": "1658×243×487",
+      "weight": 35.5
+    }
   },
   {
     "id": "mkt4-1400fg30-cr",
@@ -12876,7 +13873,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 178,
-    "catalogModel": "MKT4-1400FG50-CL"
+    "catalogModel": "MKT4-1400FG50-CL",
+    "fcuSpec": {
+      "waterFlow": 1.68,
+      "waterDp": 36.87,
+      "powerW": 218,
+      "airflow": 1728,
+      "noise": 44.5,
+      "dims": "1898×243×487",
+      "weight": 39
+    }
   },
   {
     "id": "mkt4-700fg50-cr",
@@ -12898,7 +13904,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 178,
-    "catalogModel": "MKT4-700FG50-CL"
+    "catalogModel": "MKT4-700FG50-CL",
+    "fcuSpec": {
+      "waterFlow": 0.84,
+      "waterDp": 12.97,
+      "powerW": 107,
+      "airflow": 829,
+      "noise": 38,
+      "dims": "1178×243×487",
+      "weight": 22.5
+    }
   },
   {
     "id": "mkc-300r-b",
@@ -12929,7 +13944,14 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 166,
-    "catalogModel": "MKC-300R-B"
+    "catalogModel": "MKC-300R-B",
+    "fcuSpec": {
+      "waterFlow": 0.48,
+      "waterDp": 11.85,
+      "powerW": 22,
+      "airflow": 450,
+      "noise": 34
+    }
   },
   {
     "id": "mkc-400r-b",
@@ -12960,7 +13982,14 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 166,
-    "catalogModel": "MKC-400R-B"
+    "catalogModel": "MKC-400R-B",
+    "fcuSpec": {
+      "waterFlow": 0.61,
+      "waterDp": 17.67,
+      "powerW": 30,
+      "airflow": 560,
+      "noise": 35
+    }
   },
   {
     "id": "mkc-v600r-b",
@@ -12991,7 +14020,13 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 193,
-    "catalogModel": "MKC-V600R-B"
+    "catalogModel": "MKC-V600R-B",
+    "fcuSpec": {
+      "waterFlow": 0.7,
+      "powerW": 27,
+      "airflow": 786,
+      "noise": 38.6
+    }
   },
   {
     "id": "mkd-450s",
@@ -13030,7 +14065,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 205,
-    "catalogModel": "MKH1-V150-R3"
+    "catalogModel": "MKH1-V150-R3",
+    "fcuSpec": {
+      "waterFlow": 0.17,
+      "waterDp": 7.9,
+      "powerW": 7.9,
+      "airflow": 160,
+      "noise": 23,
+      "dims": "790×495×211",
+      "weight": 18
+    }
   },
   {
     "id": "mkh1-v250-r3",
@@ -13052,7 +14096,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 205,
-    "catalogModel": "MKH1-V250-R3"
+    "catalogModel": "MKH1-V250-R3",
+    "fcuSpec": {
+      "waterFlow": 0.32,
+      "waterDp": 9.5,
+      "powerW": 13,
+      "airflow": 245,
+      "noise": 22,
+      "dims": "1020×495×211",
+      "weight": 21.5
+    }
   },
   {
     "id": "mkh1-v350-r3",
@@ -13074,7 +14127,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 205,
-    "catalogModel": "MKH1-V350-R3"
+    "catalogModel": "MKH1-V350-R3",
+    "fcuSpec": {
+      "waterFlow": 0.48,
+      "waterDp": 24,
+      "powerW": 18,
+      "airflow": 435,
+      "noise": 32,
+      "dims": "1240×495×211",
+      "weight": 25.5
+    }
   },
   {
     "id": "mkh1-v500-r3",
@@ -13096,7 +14158,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 205,
-    "catalogModel": "MKH1-V500-R3"
+    "catalogModel": "MKH1-V500-R3",
+    "fcuSpec": {
+      "waterFlow": 0.59,
+      "waterDp": 35.8,
+      "powerW": 26,
+      "airflow": 550,
+      "noise": 39,
+      "dims": "1240×495×211",
+      "weight": 25.5
+    }
   },
   {
     "id": "mkh1-v700-r3",
@@ -13118,7 +14189,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 205,
-    "catalogModel": "MKH1-V700-R3"
+    "catalogModel": "MKH1-V700-R3",
+    "fcuSpec": {
+      "waterFlow": 0.68,
+      "waterDp": 29.5,
+      "powerW": 45,
+      "airflow": 750,
+      "noise": 43,
+      "dims": "1360×495×211",
+      "weight": 28.5
+    }
   },
   {
     "id": "mkh1-v800-r3",
@@ -13140,7 +14220,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 205,
-    "catalogModel": "MKH1-V800-R3"
+    "catalogModel": "MKH1-V800-R3",
+    "fcuSpec": {
+      "waterFlow": 0.89,
+      "waterDp": 28.5,
+      "powerW": 50,
+      "airflow": 850,
+      "noise": 46,
+      "dims": "1360×495×211",
+      "weight": 32.5
+    }
   },
   {
     "id": "mkh1-v150-r4",
@@ -13162,7 +14251,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 206,
-    "catalogModel": "MKH1-V150-R4"
+    "catalogModel": "MKH1-V150-R4",
+    "fcuSpec": {
+      "waterFlow": 0.27,
+      "waterDp": 20.1,
+      "powerW": 16,
+      "airflow": 180,
+      "noise": 33,
+      "dims": "790×495×211",
+      "weight": 18.5
+    }
   },
   {
     "id": "mkh1-v250-r4",
@@ -13184,7 +14282,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 206,
-    "catalogModel": "MKH1-V250-R4"
+    "catalogModel": "MKH1-V250-R4",
+    "fcuSpec": {
+      "waterFlow": 0.33,
+      "waterDp": 13.5,
+      "powerW": 12,
+      "airflow": 240,
+      "noise": 26,
+      "dims": "1020×495×211",
+      "weight": 22
+    }
   },
   {
     "id": "mkh1-v350-r4",
@@ -13206,7 +14313,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 206,
-    "catalogModel": "MKH1-V350-R4"
+    "catalogModel": "MKH1-V350-R4",
+    "fcuSpec": {
+      "waterFlow": 0.53,
+      "waterDp": 25.3,
+      "powerW": 18,
+      "airflow": 430,
+      "noise": 32,
+      "dims": "1240×495×211",
+      "weight": 26.5
+    }
   },
   {
     "id": "mkh1-v500-r4",
@@ -13228,7 +14344,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 206,
-    "catalogModel": "MKH1-V500-R4"
+    "catalogModel": "MKH1-V500-R4",
+    "fcuSpec": {
+      "waterFlow": 0.65,
+      "waterDp": 35.9,
+      "powerW": 28,
+      "airflow": 560,
+      "noise": 39,
+      "dims": "1240×495×211",
+      "weight": 26.5
+    }
   },
   {
     "id": "mkh1-v700-r4",
@@ -13250,7 +14375,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 206,
-    "catalogModel": "MKH1-V700-R4"
+    "catalogModel": "MKH1-V700-R4",
+    "fcuSpec": {
+      "waterFlow": 0.79,
+      "waterDp": 19.2,
+      "powerW": 50,
+      "airflow": 770,
+      "noise": 42,
+      "dims": "1360×495×211",
+      "weight": 29.5
+    }
   },
   {
     "id": "mkh1-v800-r4",
@@ -13272,7 +14406,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 206,
-    "catalogModel": "MKH1-V800-R4"
+    "catalogModel": "MKH1-V800-R4",
+    "fcuSpec": {
+      "waterFlow": 1.01,
+      "waterDp": 40.8,
+      "powerW": 50,
+      "airflow": 860,
+      "noise": 46,
+      "dims": "1360×495×211",
+      "weight": 34.5
+    }
   },
   {
     "id": "mkh2-v150-r3",
@@ -13294,7 +14437,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 208,
-    "catalogModel": "MKH2-V150-R3"
+    "catalogModel": "MKH2-V150-R3",
+    "fcuSpec": {
+      "waterFlow": 0.18,
+      "waterDp": 8.21,
+      "powerW": 9,
+      "airflow": 170,
+      "noise": 24,
+      "dims": "790×495×200",
+      "weight": 18
+    }
   },
   {
     "id": "mkh2-v250-r3",
@@ -13316,7 +14468,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 208,
-    "catalogModel": "MKH2-V250-R3"
+    "catalogModel": "MKH2-V250-R3",
+    "fcuSpec": {
+      "waterFlow": 0.34,
+      "waterDp": 9.98,
+      "powerW": 12,
+      "airflow": 315,
+      "noise": 24,
+      "dims": "1020×495×200",
+      "weight": 21.5
+    }
   },
   {
     "id": "mkh2-v350-r3",
@@ -13338,7 +14499,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 208,
-    "catalogModel": "MKH2-V350-R3"
+    "catalogModel": "MKH2-V350-R3",
+    "fcuSpec": {
+      "waterFlow": 0.5,
+      "waterDp": 24.63,
+      "powerW": 16,
+      "airflow": 470,
+      "noise": 32,
+      "dims": "1240×495×200",
+      "weight": 25.5
+    }
   },
   {
     "id": "mkh2-v500-r3",
@@ -13360,7 +14530,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 208,
-    "catalogModel": "MKH2-V500-R3"
+    "catalogModel": "MKH2-V500-R3",
+    "fcuSpec": {
+      "waterFlow": 0.6,
+      "waterDp": 36.22,
+      "powerW": 24,
+      "airflow": 580,
+      "noise": 38,
+      "dims": "1240×495×200",
+      "weight": 25.5
+    }
   },
   {
     "id": "mkh2-v700-r3",
@@ -13382,7 +14561,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 208,
-    "catalogModel": "MKH2-V700-R3"
+    "catalogModel": "MKH2-V700-R3",
+    "fcuSpec": {
+      "waterFlow": 0.77,
+      "waterDp": 33.38,
+      "powerW": 40,
+      "airflow": 855,
+      "noise": 42,
+      "dims": "1360×495×200",
+      "weight": 28.5
+    }
   },
   {
     "id": "mkh2-v800-r3",
@@ -13404,7 +14592,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 208,
-    "catalogModel": "MKH2-V800-R3"
+    "catalogModel": "MKH2-V800-R3",
+    "fcuSpec": {
+      "waterFlow": 1.05,
+      "waterDp": 33.7,
+      "powerW": 50,
+      "airflow": 1015,
+      "noise": 44,
+      "dims": "1360×591×200",
+      "weight": 32.5
+    }
   },
   {
     "id": "mkh2-v150-r4",
@@ -13426,7 +14623,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 209,
-    "catalogModel": "MKH2-V150-R4"
+    "catalogModel": "MKH2-V150-R4",
+    "fcuSpec": {
+      "waterFlow": 0.28,
+      "waterDp": 20.88,
+      "powerW": 14,
+      "airflow": 210,
+      "noise": 46,
+      "dims": "790×495×200",
+      "weight": 18.5
+    }
   },
   {
     "id": "mkh2-v250-r4",
@@ -13448,7 +14654,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 209,
-    "catalogModel": "MKH2-V250-R4"
+    "catalogModel": "MKH2-V250-R4",
+    "fcuSpec": {
+      "waterFlow": 0.37,
+      "waterDp": 15.06,
+      "powerW": 11,
+      "airflow": 300,
+      "noise": 23,
+      "dims": "1020×495×200",
+      "weight": 22
+    }
   },
   {
     "id": "mkh2-v350-r4",
@@ -13470,7 +14685,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 209,
-    "catalogModel": "MKH2-V350-R4"
+    "catalogModel": "MKH2-V350-R4",
+    "fcuSpec": {
+      "waterFlow": 0.55,
+      "waterDp": 25.91,
+      "powerW": 17,
+      "airflow": 450,
+      "noise": 34,
+      "dims": "1240×495×200",
+      "weight": 26.5
+    }
   },
   {
     "id": "mkh2-v500-r4",
@@ -13492,7 +14716,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 209,
-    "catalogModel": "MKH2-V500-R4"
+    "catalogModel": "MKH2-V500-R4",
+    "fcuSpec": {
+      "waterFlow": 0.67,
+      "waterDp": 36.81,
+      "powerW": 25,
+      "airflow": 600,
+      "noise": 39,
+      "dims": "1240×495×200",
+      "weight": 26.5
+    }
   },
   {
     "id": "mkh2-v700-r4",
@@ -13514,7 +14747,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 209,
-    "catalogModel": "MKH2-V700-R4"
+    "catalogModel": "MKH2-V700-R4",
+    "fcuSpec": {
+      "waterFlow": 0.9,
+      "waterDp": 21.75,
+      "powerW": 44,
+      "airflow": 875,
+      "noise": 43,
+      "dims": "1360×495×200",
+      "weight": 29.5
+    }
   },
   {
     "id": "mkh2-v800-r4",
@@ -13536,7 +14778,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 209,
-    "catalogModel": "MKH2-V800-R4"
+    "catalogModel": "MKH2-V800-R4",
+    "fcuSpec": {
+      "waterFlow": 1.14,
+      "waterDp": 46.17,
+      "powerW": 51,
+      "airflow": 980,
+      "noise": 43,
+      "dims": "1360×591×200",
+      "weight": 34.5
+    }
   },
   {
     "id": "mkh3-v150-r3",
@@ -13558,7 +14809,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 211,
-    "catalogModel": "MKH3-V150-R3"
+    "catalogModel": "MKH3-V150-R3",
+    "fcuSpec": {
+      "waterFlow": 0.18,
+      "waterDp": 8.21,
+      "powerW": 9,
+      "airflow": 170,
+      "noise": 24,
+      "dims": "637×455×200",
+      "weight": 11.8
+    }
   },
   {
     "id": "mkh3-v250-r3",
@@ -13580,7 +14840,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 211,
-    "catalogModel": "MKH3-V250-R3"
+    "catalogModel": "MKH3-V250-R3",
+    "fcuSpec": {
+      "waterFlow": 0.34,
+      "waterDp": 9.98,
+      "powerW": 12,
+      "airflow": 315,
+      "noise": 24,
+      "dims": "867×455×200",
+      "weight": 13.9
+    }
   },
   {
     "id": "mkh3-v350-r3",
@@ -13602,7 +14871,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 211,
-    "catalogModel": "MKH3-V350-R3"
+    "catalogModel": "MKH3-V350-R3",
+    "fcuSpec": {
+      "waterFlow": 0.5,
+      "waterDp": 24.63,
+      "powerW": 16,
+      "airflow": 470,
+      "noise": 32,
+      "dims": "1087×455×200",
+      "weight": 17.3
+    }
   },
   {
     "id": "mkh3-v500-r3",
@@ -13624,7 +14902,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 211,
-    "catalogModel": "MKH3-V500-R3"
+    "catalogModel": "MKH3-V500-R3",
+    "fcuSpec": {
+      "waterFlow": 0.6,
+      "waterDp": 36.22,
+      "powerW": 25,
+      "airflow": 580,
+      "noise": 38,
+      "dims": "1087×455×200",
+      "weight": 17.3
+    }
   },
   {
     "id": "mkh3-v700-r3",
@@ -13646,7 +14933,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 211,
-    "catalogModel": "MKH3-V700-R3"
+    "catalogModel": "MKH3-V700-R3",
+    "fcuSpec": {
+      "waterFlow": 0.77,
+      "waterDp": 33.38,
+      "powerW": 43,
+      "airflow": 855,
+      "noise": 42,
+      "dims": "1207×455×200",
+      "weight": 19.6
+    }
   },
   {
     "id": "mkh3-v800-r3",
@@ -13668,7 +14964,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 211,
-    "catalogModel": "MKH3-V800-R3"
+    "catalogModel": "MKH3-V800-R3",
+    "fcuSpec": {
+      "waterFlow": 1.05,
+      "waterDp": 33.7,
+      "powerW": 53,
+      "airflow": 1015,
+      "noise": 44,
+      "dims": "1207×550×200",
+      "weight": 23.1
+    }
   },
   {
     "id": "mkh3-v150-r4",
@@ -13690,7 +14995,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 212,
-    "catalogModel": "MKH3-V150-R4"
+    "catalogModel": "MKH3-V150-R4",
+    "fcuSpec": {
+      "waterFlow": 0.28,
+      "waterDp": 20.88,
+      "powerW": 14,
+      "airflow": 210,
+      "noise": 33,
+      "dims": "637×455×200",
+      "weight": 12.1
+    }
   },
   {
     "id": "mkh3-v250-r4",
@@ -13712,7 +15026,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 212,
-    "catalogModel": "MKH3-V250-R4"
+    "catalogModel": "MKH3-V250-R4",
+    "fcuSpec": {
+      "waterFlow": 0.37,
+      "waterDp": 15.06,
+      "powerW": 11,
+      "airflow": 300,
+      "noise": 23,
+      "dims": "867×455×200",
+      "weight": 14.8
+    }
   },
   {
     "id": "mkh3-v350-r4",
@@ -13734,7 +15057,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 212,
-    "catalogModel": "MKH3-V350-R4"
+    "catalogModel": "MKH3-V350-R4",
+    "fcuSpec": {
+      "waterFlow": 0.55,
+      "waterDp": 25.91,
+      "powerW": 17,
+      "airflow": 470,
+      "noise": 34,
+      "dims": "1087×455×200",
+      "weight": 18.2
+    }
   },
   {
     "id": "mkh3-v500-r4",
@@ -13756,7 +15088,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 212,
-    "catalogModel": "MKH3-V500-R4"
+    "catalogModel": "MKH3-V500-R4",
+    "fcuSpec": {
+      "waterFlow": 0.67,
+      "waterDp": 36.81,
+      "powerW": 27,
+      "airflow": 600,
+      "noise": 39,
+      "dims": "1087×455×200",
+      "weight": 18.2
+    }
   },
   {
     "id": "mkh3-v700-r4",
@@ -13778,7 +15119,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 212,
-    "catalogModel": "MKH3-V700-R4"
+    "catalogModel": "MKH3-V700-R4",
+    "fcuSpec": {
+      "waterFlow": 0.9,
+      "waterDp": 21.75,
+      "powerW": 47,
+      "airflow": 875,
+      "noise": 43,
+      "dims": "1207×455×200",
+      "weight": 20.8
+    }
   },
   {
     "id": "mkh3-v800-r4",
@@ -13800,7 +15150,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 212,
-    "catalogModel": "MKH3-V800-R4"
+    "catalogModel": "MKH3-V800-R4",
+    "fcuSpec": {
+      "waterFlow": 1.14,
+      "waterDp": 46.17,
+      "powerW": 49,
+      "airflow": 980,
+      "noise": 43,
+      "dims": "1207×550×200",
+      "weight": 24.3
+    }
   },
   {
     "id": "mkt3-v200g12-cr",
@@ -13822,7 +15181,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 200,
-    "catalogModel": "MKT3-V200G12-CL"
+    "catalogModel": "MKT3-V200G12-CL",
+    "fcuSpec": {
+      "waterFlow": 0.35,
+      "waterDp": 13.7,
+      "powerW": 12,
+      "airflow": 301,
+      "noise": 33,
+      "dims": "632×243×482",
+      "weight": 14
+    }
   },
   {
     "id": "mkt3-v300g12-cr",
@@ -13844,7 +15212,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 200,
-    "catalogModel": "MKT3-V300G12-CL"
+    "catalogModel": "MKT3-V300G12-CL",
+    "fcuSpec": {
+      "waterFlow": 0.49,
+      "waterDp": 17.6,
+      "powerW": 14,
+      "airflow": 421,
+      "noise": 31,
+      "dims": "773×243×482",
+      "weight": 17.2
+    }
   },
   {
     "id": "mkt3-v400g12-cr",
@@ -13866,7 +15243,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 200,
-    "catalogModel": "MKT3-V400G12-CL"
+    "catalogModel": "MKT3-V400G12-CL",
+    "fcuSpec": {
+      "waterFlow": 0.63,
+      "waterDp": 14.7,
+      "powerW": 21,
+      "airflow": 584,
+      "noise": 37.5,
+      "dims": "908×243×482",
+      "weight": 19.2
+    }
   },
   {
     "id": "mkt3-v500g12-cr",
@@ -13888,7 +15274,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 200,
-    "catalogModel": "MKT3-V500G12-CL"
+    "catalogModel": "MKT3-V500G12-CL",
+    "fcuSpec": {
+      "waterFlow": 0.67,
+      "waterDp": 18.96,
+      "powerW": 25,
+      "airflow": 622,
+      "noise": 39,
+      "dims": "908×243×482",
+      "weight": 19.2
+    }
   },
   {
     "id": "mkt3-v600g12-cr",
@@ -13910,7 +15305,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 200,
-    "catalogModel": "MKT3-V600G12-CL"
+    "catalogModel": "MKT3-V600G12-CL",
+    "fcuSpec": {
+      "waterFlow": 0.84,
+      "waterDp": 26.5,
+      "powerW": 34,
+      "airflow": 810,
+      "noise": 43.5,
+      "dims": "1003×243×482",
+      "weight": 21.7
+    }
   },
   {
     "id": "mkt3-v700g12-cr",
@@ -13932,7 +15336,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 201,
-    "catalogModel": "MKT3-V700G12-CL"
+    "catalogModel": "MKT3-V700G12-CL",
+    "fcuSpec": {
+      "waterFlow": 1.05,
+      "waterDp": 19,
+      "powerW": 48,
+      "airflow": 1015,
+      "noise": 45,
+      "dims": "1178×243×482",
+      "weight": 23.5
+    }
   },
   {
     "id": "mkt3-v800g12-cr",
@@ -13954,7 +15367,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 201,
-    "catalogModel": "MKT3-V800G12-CL"
+    "catalogModel": "MKT3-V800G12-CL",
+    "fcuSpec": {
+      "waterFlow": 1.17,
+      "waterDp": 26.06,
+      "powerW": 40,
+      "airflow": 1082,
+      "noise": 43,
+      "dims": "1368×243×482",
+      "weight": 27.7
+    }
   },
   {
     "id": "mkt3-v1000g12-cr",
@@ -13976,7 +15398,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 201,
-    "catalogModel": "MKT3-V1000G12-CL"
+    "catalogModel": "MKT3-V1000G12-CL",
+    "fcuSpec": {
+      "waterFlow": 1.26,
+      "waterDp": 22.01,
+      "powerW": 50,
+      "airflow": 1201,
+      "noise": 46,
+      "dims": "1368×243×482",
+      "weight": 27.7
+    }
   },
   {
     "id": "mkt3-v1200g12-cr",
@@ -13998,7 +15429,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 201,
-    "catalogModel": "MKT3-V1200G12-CL"
+    "catalogModel": "MKT3-V1200G12-CL",
+    "fcuSpec": {
+      "waterFlow": 1.44,
+      "waterDp": 20.7,
+      "powerW": 51,
+      "airflow": 1222,
+      "noise": 42.5,
+      "dims": "1658×243×482",
+      "weight": 33.8
+    }
   },
   {
     "id": "mkt3-v1400g12-cr",
@@ -14020,7 +15460,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 201,
-    "catalogModel": "MKT3-V1400G12-CL"
+    "catalogModel": "MKT3-V1400G12-CL",
+    "fcuSpec": {
+      "waterFlow": 1.84,
+      "waterDp": 29.29,
+      "powerW": 85,
+      "airflow": 1952,
+      "noise": 50,
+      "dims": "1898×243×482",
+      "weight": 37
+    }
   },
   {
     "id": "mkt4-v200fg30-cr",
@@ -14042,7 +15491,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 202,
-    "catalogModel": "MKT4-V200FG12-CL"
+    "catalogModel": "MKT4-V200FG12-CL",
+    "fcuSpec": {
+      "waterFlow": 0.36,
+      "waterDp": 23.12,
+      "powerW": 13,
+      "airflow": 313,
+      "noise": 27.5,
+      "dims": "632×243×482",
+      "weight": 13.5
+    }
   },
   {
     "id": "mkt4-v300fg30-cr",
@@ -14064,7 +15522,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 202,
-    "catalogModel": "MKT4-V300FG12-CL"
+    "catalogModel": "MKT4-V300FG12-CL",
+    "fcuSpec": {
+      "waterFlow": 0.56,
+      "waterDp": 26.78,
+      "powerW": 22,
+      "airflow": 558,
+      "noise": 34.5,
+      "dims": "773×243×482",
+      "weight": 16
+    }
   },
   {
     "id": "mkt4-v400fg30-cr",
@@ -14086,7 +15553,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 202,
-    "catalogModel": "MKT4-V400FG12-CL"
+    "catalogModel": "MKT4-V400FG12-CL",
+    "fcuSpec": {
+      "waterFlow": 0.69,
+      "waterDp": 18.7,
+      "powerW": 31,
+      "airflow": 696,
+      "noise": 38.5,
+      "dims": "908×243×482",
+      "weight": 19
+    }
   },
   {
     "id": "mkt4-v500fg30-cr",
@@ -14108,7 +15584,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 202,
-    "catalogModel": "MKT4-V500FG12-CL"
+    "catalogModel": "MKT4-V500FG12-CL",
+    "fcuSpec": {
+      "waterFlow": 0.73,
+      "waterDp": 22.54,
+      "powerW": 40,
+      "airflow": 785,
+      "noise": 40.5,
+      "dims": "908×243×482",
+      "weight": 19
+    }
   },
   {
     "id": "mkt4-v600fg30-cr",
@@ -14130,7 +15615,16 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 202,
-    "catalogModel": "MKT4-V600FG12-CL"
+    "catalogModel": "MKT4-V600FG12-CL",
+    "fcuSpec": {
+      "waterFlow": 0.88,
+      "waterDp": 32.9,
+      "powerW": 44,
+      "airflow": 894,
+      "noise": 41.5,
+      "dims": "1003×243×482",
+      "weight": 20.5
+    }
   },
   {
     "id": "mkt4-v700fg30-cr",
@@ -14152,7 +15646,15 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 203,
-    "catalogModel": "MKT4-V700FG12-CL"
+    "catalogModel": "MKT4-V700FG12-CL",
+    "fcuSpec": {
+      "waterFlow": 1.01,
+      "waterDp": 22.01,
+      "airflow": 1068,
+      "noise": 39.5,
+      "dims": "1178×243×482",
+      "weight": 22.5
+    }
   },
   {
     "id": "mkt4-v800fg30-cr",
@@ -14174,7 +15676,15 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 203,
-    "catalogModel": "MKT4-V800FG12-CL"
+    "catalogModel": "MKT4-V800FG12-CL",
+    "fcuSpec": {
+      "waterFlow": 1.2,
+      "waterDp": 27.71,
+      "airflow": 1209,
+      "noise": 40.5,
+      "dims": "1368×243×482",
+      "weight": 27.5
+    }
   },
   {
     "id": "mkt4-v1000fg30-cr",
@@ -14196,7 +15706,15 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 203,
-    "catalogModel": "MKT4-V1000FG12-CL"
+    "catalogModel": "MKT4-V1000FG12-CL",
+    "fcuSpec": {
+      "waterFlow": 1.32,
+      "waterDp": 31.59,
+      "airflow": 1359,
+      "noise": 44,
+      "dims": "1368×243×482",
+      "weight": 27.5
+    }
   },
   {
     "id": "mkt4-v1200fg30-cr",
@@ -14218,7 +15736,15 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 203,
-    "catalogModel": "MKT4-V1200FG12-CL"
+    "catalogModel": "MKT4-V1200FG12-CL",
+    "fcuSpec": {
+      "waterFlow": 1.49,
+      "waterDp": 26.5,
+      "airflow": 1521,
+      "noise": 41.5,
+      "dims": "1658×243×482",
+      "weight": 35.5
+    }
   },
   {
     "id": "mkt4-v1400fg30-cr",
@@ -14240,7 +15766,15 @@
     "capacityNote": "средняя скорость вентилятора, каталог Midea FCU",
     "catalogKey": "fcu-2026",
     "catalogPage": 203,
-    "catalogModel": "MKT4-V1400FG12-CL"
+    "catalogModel": "MKT4-V1400FG12-CL",
+    "fcuSpec": {
+      "waterFlow": 1.85,
+      "waterDp": 37.08,
+      "airflow": 1942,
+      "noise": 44.5,
+      "dims": "1898×243×482",
+      "weight": 39
+    }
   },
   {
     "id": "mgbt-f180w-rn1",
