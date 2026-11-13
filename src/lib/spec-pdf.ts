@@ -101,13 +101,14 @@ function wrap(text: string, font: PDFFont, size: number, maxW: number): string[]
   return out
 }
 
-/** Пульт и панель: для кассет и настенных — ИК-пульт из комплекта и панель по каталогу; остальные — KJRP-86I (2-трубные) / KJRP-86A (4-трубные). */
+/** Пульт и панель по правилам комплектации UMBT: кассетные — RM12F + декоративная панель (модель по каталогу);
+ *  канальные и напольно-потолочные — KJRP-86I (2-трубные) / KJRP-86A (4-трубные). */
 function controlFor(p?: Product): { remote: string; panel: string } {
   const c = (p?.category || '').toLowerCase()
-  const s = p?.fcuSpec
-  if (s?.kitRemote) return { remote: `${s.kitRemote} (ИК, в комплекте)`, panel: s.panel || (c.includes('кассет') ? 'по модели блока' : '—') }
+  if (c.includes('кассет')) return { remote: 'RM12F', panel: p?.fcuSpec?.panel || 'по модели блока' }
+  if (c.includes('настен')) return { remote: 'RM12F', panel: '—' }
   const fourPipe = /4[-\s]?х?[-\s]?трубн/.test(c)
-  return { remote: fourPipe ? 'KJRP-86A/BMFNKD-E' : 'KJRP-86I/MFK-E', panel: c.includes('кассет') ? (s?.panel || 'по модели блока') : '—' }
+  return { remote: fourPipe ? 'KJRP-86A/BMFNKD-E' : 'KJRP-86I/MFK-E', panel: '—' }
 }
 
 export async function buildSpecPdf(opts: BuildSpecOptions): Promise<Buffer> {
@@ -394,6 +395,7 @@ export async function buildSpecPdf(opts: BuildSpecOptions): Promise<Buffer> {
         ['Потребляемая мощность, охлаждение', q(g.coolPower, 'кВт')],
         ['Потребляемая мощность, нагрев', q(g.heatPower, 'кВт')],
         ['Максимальная потребляемая мощность', q(g.maxPower, 'кВт')],
+        ['Объём бака ГВС', q(g.tank, 'л')], ['Электронагреватель (ТЭН)', q(g.heater, 'кВт')],
         ['EER', q(g.eer)], ['COP', q(g.cop)],
         ['Электропитание', g.powerSupply || clean(p?.powerSupply)],
         ['Максимальный ток', q(g.maxCurrent, 'А')],
@@ -415,6 +417,7 @@ export async function buildSpecPdf(opts: BuildSpecOptions): Promise<Buffer> {
         ['Диапазон наружного воздуха, нагрев', g.tempHeat ? `${g.tempHeat} °C` : ''],
         ['Габариты (Ш×В×Г)', g.dims ? `${g.dims} мм` : (clean(p?.dimensions) ? `${p?.dimensions} мм` : '')],
         ['Масса нетто', q(g.weight, 'кг') || (num(p?.weight) ? `${fmt(num(p?.weight), 0)} кг` : '')],
+        ['Температура воды на выходе', g.waterTemp || ''],
         ['Условия испытаний', g.conditions || ''],
       ] as [string, string][]).filter(([, v]) => v)
       ensure(Math.ceil(kv.length / 2) * 22 + 60)
@@ -456,7 +459,7 @@ export async function buildSpecPdf(opts: BuildSpecOptions): Promise<Buffer> {
       }),
       8.5, { boldCol: 1 },
     )
-    para('Кассетные фанкойлы поставляются с ИК-пультом в комплекте, декоративная панель — по каталогу Midea для модели блока. Канальные и напольно-потолочные: KJRP-86I — для 2-трубных, KJRP-86A — для 4-трубных.', 8)
+    para('Кассетные фанкойлы — пульт RM12F и декоративная панель под модель блока. Канальные и напольно-потолочные — KJRP-86I для 2-трубных, KJRP-86A для 4-трубных.', 8)
   }
 
   // =============== Электроснабжение ===============

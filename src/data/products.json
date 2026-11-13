@@ -23629,7 +23629,23 @@
     "recommendedArea": 0,
     "powerConsumption": 0,
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "powerSupply": "220-240/1/50",
+      "refrigerant": "R32",
+      "pipeLiquid": "6.35",
+      "pipeGas": "15.88",
+      "pipe": "R1",
+      "waterFlow": "0.4~1.25",
+      "dims": "420×790×270",
+      "weight": "37",
+      "noise": "38",
+      "waterTemp": "отопление +25…+65 °C, охлаждение +5…+25 °C, ГВС +20…+60 °C"
+    },
+    "genSpecSource": {
+      "catalogKey": "chiller-2026",
+      "page": 154
+    }
   },
   {
     "id": "hb-a100-cgn8-b",
@@ -23644,7 +23660,23 @@
     "recommendedArea": 0,
     "powerConsumption": 0,
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "powerSupply": "220-240/1/50",
+      "refrigerant": "R32",
+      "pipeLiquid": "9.52",
+      "pipeGas": "15.88",
+      "pipe": "R1",
+      "waterFlow": "0.4~2.10",
+      "dims": "420×790×270",
+      "weight": "37",
+      "noise": "42",
+      "waterTemp": "отопление +25…+65 °C, охлаждение +5…+25 °C, ГВС +20…+60 °C"
+    },
+    "genSpecSource": {
+      "catalogKey": "chiller-2026",
+      "page": 154
+    }
   },
   {
     "id": "hb-a160-cgn8-b",
@@ -23659,7 +23691,23 @@
     "recommendedArea": 0,
     "powerConsumption": 0,
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "powerSupply": "220-240/1/50",
+      "refrigerant": "R32",
+      "pipeLiquid": "9.52",
+      "pipeGas": "15.88",
+      "pipe": "R1",
+      "waterFlow": "0.70~3.00",
+      "dims": "420×790×270",
+      "weight": "39",
+      "noise": "43",
+      "waterTemp": "отопление +25…+65 °C, охлаждение +5…+25 °C, ГВС +20…+60 °C"
+    },
+    "genSpecSource": {
+      "catalogKey": "chiller-2026",
+      "page": 154
+    }
   },
   {
     "id": "hbt-a100-190cd30gn8-b",
@@ -23674,7 +23722,27 @@
     "recommendedArea": 0,
     "powerConsumption": 0,
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "powerSupply": "220-240/1/50",
+      "maxPower": "3.095",
+      "maxCurrent": "13.5",
+      "tank": "190",
+      "heater": "3",
+      "refrigerant": "R32",
+      "pipeLiquid": "6.35",
+      "pipeGas": "15.88",
+      "pipe": "R1 (отопление), R3/4 (ГВС)",
+      "dims": "600×1683×600",
+      "weight": "140",
+      "noise": "38-40",
+      "tempCool": "+5 ~ +35",
+      "waterTemp": "отопление +25…+65 °C, охлаждение +5…+25 °C, ГВС +30…+60 °C"
+    },
+    "genSpecSource": {
+      "catalogKey": "chiller-2026",
+      "page": 154
+    }
   },
   {
     "id": "hbt-a160-240cd30gn8-b",
@@ -23689,7 +23757,27 @@
     "recommendedArea": 0,
     "powerConsumption": 0,
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "powerSupply": "220-240/1/50",
+      "maxPower": "3.095",
+      "maxCurrent": "13.5",
+      "tank": "240",
+      "heater": "3",
+      "refrigerant": "R32",
+      "pipeLiquid": "9.52",
+      "pipeGas": "15.88",
+      "pipe": "R1 (отопление), R3/4 (ГВС)",
+      "dims": "600×1943×600",
+      "weight": "159",
+      "noise": "42-44",
+      "tempCool": "+5 ~ +35",
+      "waterTemp": "отопление +25…+65 °C, охлаждение +5…+25 °C, ГВС +30…+60 °C"
+    },
+    "genSpecSource": {
+      "catalogKey": "chiller-2026",
+      "page": 154
+    }
   },
   {
     "id": "hbt-a160-240cds90gn8-b",
@@ -23719,7 +23807,27 @@
     "recommendedArea": 0,
     "powerConsumption": 0,
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "powerSupply": "220-240/1/50",
+      "maxPower": "3.095",
+      "maxCurrent": "13.5",
+      "tank": "240",
+      "heater": "3",
+      "refrigerant": "R32",
+      "pipeLiquid": "9.52",
+      "pipeGas": "15.88",
+      "pipe": "R1 (отопление), R3/4 (ГВС)",
+      "dims": "600×1943×600",
+      "weight": "157",
+      "noise": "38-40",
+      "tempCool": "+5 ~ +35",
+      "waterTemp": "отопление +25…+65 °C, охлаждение +5…+25 °C, ГВС +30…+60 °C"
+    },
+    "genSpecSource": {
+      "catalogKey": "chiller-2026",
+      "page": 154
+    }
   },
   {
     "id": "hbt-a100-240cds90gn8-b",
