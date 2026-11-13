@@ -2032,7 +2032,10 @@
   "refrigerant": "R410A",
   "powerSupply": "380-415/50/3",
   "tempCool": "-15 ~ +55",
-  "tempHeat": "-30 ~ +30"
+  "tempHeat": "-30 ~ +30",
+  "cableCurrent": "17",
+  "breaker": "20",
+  "elecPage": 152
  },
  "MV8-280WV2GN1(MA)": {
   "model": "MV8-280WV2GN1(MA)",
@@ -2056,7 +2059,10 @@
   "refrigerant": "R410A",
   "powerSupply": "380-415/50/3",
   "tempCool": "-15 ~ +55",
-  "tempHeat": "-30 ~ +30"
+  "tempHeat": "-30 ~ +30",
+  "cableCurrent": "18.8",
+  "breaker": "25",
+  "elecPage": 152
  },
  "MV8-335WV2GN1(MA)": {
   "model": "MV8-335WV2GN1(MA)",
@@ -2080,7 +2086,10 @@
   "refrigerant": "R410A",
   "powerSupply": "380-415/50/3",
   "tempCool": "-15 ~ +55",
-  "tempHeat": "-30 ~ +30"
+  "tempHeat": "-30 ~ +30",
+  "cableCurrent": "23",
+  "breaker": "32",
+  "elecPage": 152
  },
  "MV8-400WV2GN1(MA)": {
   "model": "MV8-400WV2GN1(MA)",
@@ -2104,7 +2113,10 @@
   "refrigerant": "R410A",
   "powerSupply": "380-415/50/3",
   "tempCool": "-15 ~ +55",
-  "tempHeat": "-30 ~ +30"
+  "tempHeat": "-30 ~ +30",
+  "cableCurrent": "26.2",
+  "breaker": "32",
+  "elecPage": 152
  },
  "MV8-450WV2GN1(MA)": {
   "model": "MV8-450WV2GN1(MA)",
@@ -2128,7 +2140,10 @@
   "refrigerant": "R410A",
   "powerSupply": "380-415/50/3",
   "tempCool": "-15 ~ +55",
-  "tempHeat": "-30 ~ +30"
+  "tempHeat": "-30 ~ +30",
+  "cableCurrent": "31.4",
+  "breaker": "40",
+  "elecPage": 152
  },
  "MV8-500WV2GN1(MA)": {
   "model": "MV8-500WV2GN1(MA)",
@@ -2152,7 +2167,10 @@
   "refrigerant": "R410A",
   "powerSupply": "380-415/50/3",
   "tempCool": "-15 ~ +55",
-  "tempHeat": "-30 ~ +30"
+  "tempHeat": "-30 ~ +30",
+  "cableCurrent": "33",
+  "breaker": "40",
+  "elecPage": 152
  },
  "MV8i-252WV2GN1(MA)": {
   "model": "MV8i-252WV2GN1(MA)",
@@ -2176,7 +2194,10 @@
   "refrigerant": "R410A",
   "powerSupply": "380-415/50/3",
   "tempCool": "-15 ~ +55",
-  "tempHeat": "-30 ~ +30"
+  "tempHeat": "-30 ~ +30",
+  "cableCurrent": "17",
+  "breaker": "20",
+  "elecPage": 157
  },
  "MV8i-280WV2GN1(MA)": {
   "model": "MV8i-280WV2GN1(MA)",
@@ -2200,7 +2221,10 @@
   "refrigerant": "R410A",
   "powerSupply": "380-415/50/3",
   "tempCool": "-15 ~ +55",
-  "tempHeat": "-30 ~ +30"
+  "tempHeat": "-30 ~ +30",
+  "cableCurrent": "18.8",
+  "breaker": "25",
+  "elecPage": 157
  },
  "MV8i-335WV2GN1(MA)": {
   "model": "MV8i-335WV2GN1(MA)",
@@ -2224,7 +2248,10 @@
   "refrigerant": "R410A",
   "powerSupply": "380-415/50/3",
   "tempCool": "-15 ~ +55",
-  "tempHeat": "-30 ~ +30"
+  "tempHeat": "-30 ~ +30",
+  "cableCurrent": "23",
+  "breaker": "32",
+  "elecPage": 157
  },
  "MV8i-400WV2GN1(MA)": {
   "model": "MV8i-400WV2GN1(MA)",
@@ -2248,7 +2275,10 @@
   "refrigerant": "R410A",
   "powerSupply": "380-415/50/3",
   "tempCool": "-15 ~ +55",
-  "tempHeat": "-30 ~ +30"
+  "tempHeat": "-30 ~ +30",
+  "cableCurrent": "26.2",
+  "breaker": "32",
+  "elecPage": 157
  },
  "MV8i-450WV2GN1(MA)": {
   "model": "MV8i-450WV2GN1(MA)",
@@ -2272,7 +2302,10 @@
   "refrigerant": "R410A",
   "powerSupply": "380-415/50/3",
   "tempCool": "-15 ~ +55",
-  "tempHeat": "-30 ~ +30"
+  "tempHeat": "-30 ~ +30",
+  "cableCurrent": "31.4",
+  "breaker": "40",
+  "elecPage": 157
  },
  "MV8i-500WV2GN1(MA)": {
   "model": "MV8i-500WV2GN1(MA)",
@@ -2296,7 +2329,10 @@
   "refrigerant": "R410A",
   "powerSupply": "380-415/50/3",
   "tempCool": "-15 ~ +55",
-  "tempHeat": "-30 ~ +30"
+  "tempHeat": "-30 ~ +30",
+  "cableCurrent": "33",
+  "breaker": "40",
+  "elecPage": 157
  },
  "MV8-560WV2GN1(MA)": {
   "model": "MV8-560WV2GN1(MA)",
@@ -2320,7 +2356,10 @@
   "refrigerant": "R410A",
   "powerSupply": "380-415/50/3",
   "tempCool": "-15 ~ +55",
-  "tempHeat": "-30 ~ +30"
+  "tempHeat": "-30 ~ +30",
+  "cableCurrent": "40.5",
+  "breaker": "50",
+  "elecPage": 152
  },
  "MV8-615WV2GN1(MA)": {
   "model": "MV8-615WV2GN1(MA)",
@@ -2344,7 +2383,10 @@
   "refrigerant": "R410A",
   "powerSupply": "380-415/50/3",
   "tempCool": "-15 ~ +55",
-  "tempHeat": "-30 ~ +30"
+  "tempHeat": "-30 ~ +30",
+  "cableCurrent": "41.5",
+  "breaker": "50",
+  "elecPage": 152
  },
  "MV8-670WV2GN1(MA)": {
   "model": "MV8-670WV2GN1(MA)",
@@ -2368,7 +2410,10 @@
   "refrigerant": "R410A",
   "powerSupply": "380-415/50/3",
   "tempCool": "-15 ~ +55",
-  "tempHeat": "-30 ~ +30"
+  "tempHeat": "-30 ~ +30",
+  "cableCurrent": "46",
+  "breaker": "63",
+  "elecPage": 152
  },
  "MV8-730WV2GN1(MA)": {
   "model": "MV8-730WV2GN1(MA)",
@@ -2392,7 +2437,10 @@
   "refrigerant": "R410A",
   "powerSupply": "380-415/50/3",
   "tempCool": "-15 ~ +55",
-  "tempHeat": "-30 ~ +30"
+  "tempHeat": "-30 ~ +30",
+  "cableCurrent": "48",
+  "breaker": "63",
+  "elecPage": 152
  },
  "MV8-785WV2GN1(MA)": {
   "model": "MV8-785WV2GN1(MA)",
@@ -2416,7 +2464,10 @@
   "refrigerant": "R410A",
   "powerSupply": "380-415/50/3",
   "tempCool": "-15 ~ +55",
-  "tempHeat": "-30 ~ +30"
+  "tempHeat": "-30 ~ +30",
+  "cableCurrent": "51",
+  "breaker": "63",
+  "elecPage": 152
  },
  "MV8-850WV2GN1(MA)": {
   "model": "MV8-850WV2GN1(MA)",
@@ -2440,7 +2491,10 @@
   "refrigerant": "R410A",
   "powerSupply": "380-415/50/3",
   "tempCool": "-15 ~ +55",
-  "tempHeat": "-30 ~ +30"
+  "tempHeat": "-30 ~ +30",
+  "cableCurrent": "56.8",
+  "breaker": "80",
+  "elecPage": 152
  },
  "MV8i-560WV2GN1(MA)": {
   "model": "MV8i-560WV2GN1(MA)",
@@ -2464,7 +2518,10 @@
   "refrigerant": "R410A",
   "powerSupply": "380-415/50/3",
   "tempCool": "-15 ~ +55",
-  "tempHeat": "-30 ~ +30"
+  "tempHeat": "-30 ~ +30",
+  "cableCurrent": "40.5",
+  "breaker": "50",
+  "elecPage": 157
  },
  "MV8i-615WV2GN1(MA)": {
   "model": "MV8i-615WV2GN1(MA)",
@@ -2488,7 +2545,10 @@
   "refrigerant": "R410A",
   "powerSupply": "380-415/50/3",
   "tempCool": "-15 ~ +55",
-  "tempHeat": "-30 ~ +30"
+  "tempHeat": "-30 ~ +30",
+  "cableCurrent": "41.5",
+  "breaker": "50",
+  "elecPage": 157
  },
  "MV8i-670WV2GN1(MA)": {
   "model": "MV8i-670WV2GN1(MA)",
@@ -2512,7 +2572,10 @@
   "refrigerant": "R410A",
   "powerSupply": "380-415/50/3",
   "tempCool": "-15 ~ +55",
-  "tempHeat": "-30 ~ +30"
+  "tempHeat": "-30 ~ +30",
+  "cableCurrent": "46",
+  "breaker": "63",
+  "elecPage": 157
  },
  "MV8i-730WV2GN1(MA)": {
   "model": "MV8i-730WV2GN1(MA)",
@@ -2536,7 +2599,10 @@
   "refrigerant": "R410A",
   "powerSupply": "380-415/50/3",
   "tempCool": "-15 ~ +55",
-  "tempHeat": "-30 ~ +30"
+  "tempHeat": "-30 ~ +30",
+  "cableCurrent": "48",
+  "breaker": "63",
+  "elecPage": 157
  },
  "MV8i-785WV2GN1(MA)": {
   "model": "MV8i-785WV2GN1(MA)",
@@ -2560,7 +2626,10 @@
   "refrigerant": "R410A",
   "powerSupply": "380-415/50/3",
   "tempCool": "-15 ~ +55",
-  "tempHeat": "-30 ~ +30"
+  "tempHeat": "-30 ~ +30",
+  "cableCurrent": "51",
+  "breaker": "63",
+  "elecPage": 157
  },
  "MV8i-850WV2GN1(MA)": {
   "model": "MV8i-850WV2GN1(MA)",
@@ -2584,7 +2653,10 @@
   "refrigerant": "R410A",
   "powerSupply": "380-415/50/3",
   "tempCool": "-15 ~ +55",
-  "tempHeat": "-30 ~ +30"
+  "tempHeat": "-30 ~ +30",
+  "cableCurrent": "56.8",
+  "breaker": "80",
+  "elecPage": 157
  },
  "MV8-900WV2GN1(MA)": {
   "model": "MV8-900WV2GN1(MA)",
@@ -2608,7 +2680,10 @@
   "refrigerant": "R410A",
   "powerSupply": "380-415/50/3",
   "tempCool": "-15 ~ +55",
-  "tempHeat": "-30 ~ +30"
+  "tempHeat": "-30 ~ +30",
+  "cableCurrent": "57",
+  "breaker": "80",
+  "elecPage": 152
  },
  "MV8-950WV2GN1(MA)": {
   "model": "MV8-950WV2GN1(MA)",
@@ -2632,7 +2707,10 @@
   "refrigerant": "R410A",
   "powerSupply": "380-415/50/3",
   "tempCool": "-15 ~ +55",
-  "tempHeat": "-30 ~ +30"
+  "tempHeat": "-30 ~ +30",
+  "cableCurrent": "63.7",
+  "breaker": "80",
+  "elecPage": 152
  },
  "MV8-1010WV2GN1(MA)": {
   "model": "MV8-1010WV2GN1(MA)",
@@ -2656,7 +2734,10 @@
   "refrigerant": "R410A",
   "powerSupply": "380-415/50/3",
   "tempCool": "-15 ~ +55",
-  "tempHeat": "-30 ~ +30"
+  "tempHeat": "-30 ~ +30",
+  "cableCurrent": "64",
+  "breaker": "80",
+  "elecPage": 152
  },
  "MV8-1060WV2GN1(MA)": {
   "model": "MV8-1060WV2GN1(MA)",
@@ -2680,7 +2761,10 @@
   "refrigerant": "R410A",
   "powerSupply": "380-415/50/3",
   "tempCool": "-15 ~ +55",
-  "tempHeat": "-30 ~ +30"
+  "tempHeat": "-30 ~ +30",
+  "cableCurrent": "74.6",
+  "breaker": "100",
+  "elecPage": 152
  },
  "MV8-1120WV2GN1(MA)": {
   "model": "MV8-1120WV2GN1(MA)",
@@ -2704,7 +2788,10 @@
   "refrigerant": "R410A",
   "powerSupply": "380-415/50/3",
   "tempCool": "-15 ~ +55",
-  "tempHeat": "-30 ~ +30"
+  "tempHeat": "-30 ~ +30",
+  "cableCurrent": "75",
+  "breaker": "100",
+  "elecPage": 152
  },
  "MV8i-900WV2GN1(MA)": {
   "model": "MV8i-900WV2GN1(MA)",
@@ -2728,7 +2815,10 @@
   "refrigerant": "R410A",
   "powerSupply": "380-415/50/3",
   "tempCool": "-15 ~ +55",
-  "tempHeat": "-30 ~ +30"
+  "tempHeat": "-30 ~ +30",
+  "cableCurrent": "57",
+  "breaker": "80",
+  "elecPage": 157
  },
  "MV8i-950WV2GN1(MA)": {
   "model": "MV8i-950WV2GN1(MA)",
@@ -2752,7 +2842,10 @@
   "refrigerant": "R410A",
   "powerSupply": "380-415/50/3",
   "tempCool": "-15 ~ +55",
-  "tempHeat": "-30 ~ +30"
+  "tempHeat": "-30 ~ +30",
+  "cableCurrent": "63.7",
+  "breaker": "80",
+  "elecPage": 157
  },
  "MV8i-1010WV2GN1(MA)": {
   "model": "MV8i-1010WV2GN1(MA)",
@@ -2776,7 +2869,10 @@
   "refrigerant": "R410A",
   "powerSupply": "380-415/50/3",
   "tempCool": "-15 ~ +55",
-  "tempHeat": "-30 ~ +30"
+  "tempHeat": "-30 ~ +30",
+  "cableCurrent": "64",
+  "breaker": "80",
+  "elecPage": 157
  },
  "MV8i-1060WV2GN1(MA)": {
   "model": "MV8i-1060WV2GN1(MA)",
@@ -2800,7 +2896,10 @@
   "refrigerant": "R410A",
   "powerSupply": "380-415/50/3",
   "tempCool": "-15 ~ +55",
-  "tempHeat": "-30 ~ +30"
+  "tempHeat": "-30 ~ +30",
+  "cableCurrent": "74.6",
+  "breaker": "100",
+  "elecPage": 157
  },
  "MV8i-1120WV2GN1(MA)": {
   "model": "MV8i-1120WV2GN1(MA)",
@@ -2824,7 +2923,10 @@
   "refrigerant": "R410A",
   "powerSupply": "380-415/50/3",
   "tempCool": "-15 ~ +55",
-  "tempHeat": "-30 ~ +30"
+  "tempHeat": "-30 ~ +30",
+  "cableCurrent": "75",
+  "breaker": "100",
+  "elecPage": 157
  },
  "MV8i-1170WV2GN1(MA)": {
   "model": "MV8i-1170WV2GN1(MA)",
@@ -2848,7 +2950,10 @@
   "refrigerant": "R410A",
   "powerSupply": "380-415/50/3",
   "tempCool": "-15 ~ +55",
-  "tempHeat": "-30 ~ +30"
+  "tempHeat": "-30 ~ +30",
+  "cableCurrent": "80",
+  "breaker": "100",
+  "elecPage": 157
  },
  "MV8M-80WV2HN1": {
   "model": "MV8M-80WV2HN1",
@@ -2872,7 +2977,10 @@
   "tempHeat": "-20 ~ 30",
   "dims": "1073×864×523",
   "pipeLiquid": "9.52",
-  "pipeGas": "15.9"
+  "pipeGas": "15.9",
+  "cableCurrent": "21.3",
+  "breaker": "25",
+  "elecPage": 156
  },
  "MV8M-100WV2HN1": {
   "model": "MV8M-100WV2HN1",
@@ -2896,7 +3004,10 @@
   "tempHeat": "-20 ~ 30",
   "dims": "1073×864×523",
   "pipeLiquid": "9.52",
-  "pipeGas": "15.9"
+  "pipeGas": "15.9",
+  "cableCurrent": "24",
+  "breaker": "25",
+  "elecPage": 156
  },
  "MV8M-120WV2HN1": {
   "model": "MV8M-120WV2HN1",
@@ -2920,7 +3031,10 @@
   "tempHeat": "-20 ~ 30",
   "dims": "1073×864×523",
   "pipeLiquid": "9.52",
-  "pipeGas": "15.9"
+  "pipeGas": "15.9",
+  "cableCurrent": "32",
+  "breaker": "32",
+  "elecPage": 156
  },
  "MV8M-140WV2HN1": {
   "model": "MV8M-140WV2HN1",
@@ -2944,7 +3058,10 @@
   "tempHeat": "-20 ~ 30",
   "dims": "1073×864×523",
   "pipeLiquid": "9.52",
-  "pipeGas": "15.9"
+  "pipeGas": "15.9",
+  "cableCurrent": "35",
+  "breaker": "40",
+  "elecPage": 156
  },
  "MV8M-160WV2HN1": {
   "model": "MV8M-160WV2HN1",
@@ -2968,7 +3085,10 @@
   "tempHeat": "-20 ~ 30",
   "dims": "1073×864×523",
   "pipeLiquid": "9.52",
-  "pipeGas": "15.9"
+  "pipeGas": "15.9",
+  "cableCurrent": "40",
+  "breaker": "40",
+  "elecPage": 156
  },
  "MV8M-170WV2HN1": {
   "model": "MV8M-170WV2HN1",
@@ -2992,7 +3112,10 @@
   "tempHeat": "-20 ~ 30",
   "dims": "1073×864×523",
   "pipeLiquid": "9.52",
-  "pipeGas": "15.9"
+  "pipeGas": "15.9",
+  "cableCurrent": "40",
+  "breaker": "40",
+  "elecPage": 156
  },
  "MV8M-120WV2GN1": {
   "model": "MV8M-120WV2GN1",
@@ -3016,7 +3139,10 @@
   "tempHeat": "-20 ~ 30",
   "dims": "1073×864×523",
   "pipeLiquid": "9.52",
-  "pipeGas": "15.9"
+  "pipeGas": "15.9",
+  "cableCurrent": "14",
+  "breaker": "20",
+  "elecPage": 156
  },
  "MV8M-140WV2GN1": {
   "model": "MV8M-140WV2GN1",
@@ -3040,7 +3166,10 @@
   "tempHeat": "-20 ~ 30",
   "dims": "1073×864×523",
   "pipeLiquid": "9.52",
-  "pipeGas": "15.9"
+  "pipeGas": "15.9",
+  "cableCurrent": "15",
+  "breaker": "20",
+  "elecPage": 156
  },
  "MV8M-160WV2GN1": {
   "model": "MV8M-160WV2GN1",
@@ -3064,7 +3193,10 @@
   "tempHeat": "-20 ~ 30",
   "dims": "1073×864×523",
   "pipeLiquid": "9.52",
-  "pipeGas": "15.9"
+  "pipeGas": "15.9",
+  "cableCurrent": "17",
+  "breaker": "20",
+  "elecPage": 156
  },
  "MV8M-170WV2GN1": {
   "model": "MV8M-170WV2GN1",
@@ -3088,7 +3220,10 @@
   "tempHeat": "-20 ~ 30",
   "dims": "1073×864×523",
   "pipeLiquid": "9.52",
-  "pipeGas": "15.9"
+  "pipeGas": "15.9",
+  "cableCurrent": "17",
+  "breaker": "20",
+  "elecPage": 156
  },
  "MV6-R252WV2GN1": {
   "model": "MV6-R252WV2GN1",
@@ -3111,7 +3246,10 @@
   "pipeLiquid": "12.7",
   "pipeGas": "25.4",
   "tempCool": "-15 ~ +52",
-  "tempHeat": "-25 ~ +27"
+  "tempHeat": "-25 ~ +27",
+  "cableCurrent": "18",
+  "breaker": "20",
+  "elecPage": 159
  },
  "MV6-R280WV2GN1": {
   "model": "MV6-R280WV2GN1",
@@ -3134,7 +3272,10 @@
   "pipeLiquid": "12.7",
   "pipeGas": "25.4",
   "tempCool": "-15 ~ +52",
-  "tempHeat": "-25 ~ +27"
+  "tempHeat": "-25 ~ +27",
+  "cableCurrent": "22",
+  "breaker": "25",
+  "elecPage": 159
  },
  "MV6-R335WV2GN1": {
   "model": "MV6-R335WV2GN1",
@@ -3157,7 +3298,10 @@
   "pipeLiquid": "12.7",
   "pipeGas": "25.4",
   "tempCool": "-15 ~ +52",
-  "tempHeat": "-25 ~ +27"
+  "tempHeat": "-25 ~ +27",
+  "cableCurrent": "24",
+  "breaker": "25",
+  "elecPage": 159
  },
  "MV6-R400WV2GN1": {
   "model": "MV6-R400WV2GN1",
@@ -3180,7 +3324,10 @@
   "pipeLiquid": "15.9",
   "pipeGas": "28.6",
   "tempCool": "-15 ~ +52",
-  "tempHeat": "-25 ~ +27"
+  "tempHeat": "-25 ~ +27",
+  "cableCurrent": "28",
+  "breaker": "30",
+  "elecPage": 159
  },
  "MV6-R450WV2GN1": {
   "model": "MV6-R450WV2GN1",
@@ -3203,7 +3350,10 @@
   "pipeLiquid": "15.9",
   "pipeGas": "28.6",
   "tempCool": "-15 ~ +52",
-  "tempHeat": "-25 ~ +27"
+  "tempHeat": "-25 ~ +27",
+  "cableCurrent": "34",
+  "breaker": "35",
+  "elecPage": 159
  },
  "MV6-R500WV2GN1": {
   "model": "MV6-R500WV2GN1",
@@ -3226,7 +3376,10 @@
   "pipeLiquid": "15.9",
   "pipeGas": "28.6",
   "tempCool": "-15 ~ +52",
-  "tempHeat": "-25 ~ +27"
+  "tempHeat": "-25 ~ +27",
+  "cableCurrent": "36",
+  "breaker": "40",
+  "elecPage": 159
  },
  "MV6-R560WV2GN1": {
   "model": "MV6-R560WV2GN1",
@@ -3249,7 +3402,10 @@
   "pipeLiquid": "15.9",
   "pipeGas": "28.6",
   "tempCool": "-15 ~ +52",
-  "tempHeat": "-25 ~ +27"
+  "tempHeat": "-25 ~ +27",
+  "cableCurrent": "36",
+  "breaker": "40",
+  "elecPage": 159
  },
  "MOUL-68HD1N1-G": {
   "model": "MOUL-68HD1N1-G",
@@ -4381,7 +4537,10 @@
   "pipeGas": "19.05",
   "tempCool": "-15 ~ 55",
   "tempHeat": "-25 ~ 30",
-  "maxIndoor": "11"
+  "maxIndoor": "11",
+  "cableCurrent": "19",
+  "breaker": "25",
+  "elecPage": 156
  },
  "MVi-224WV2GN1(A)": {
   "model": "MVi-224WV2GN1(A)",
@@ -4405,7 +4564,10 @@
   "pipeGas": "19.05",
   "tempCool": "-15 ~ 55",
   "tempHeat": "-25 ~ 30",
-  "maxIndoor": "13"
+  "maxIndoor": "13",
+  "cableCurrent": "19",
+  "breaker": "25",
+  "elecPage": 156
  },
  "MVi-260WV2GN1(A)": {
   "model": "MVi-260WV2GN1(A)",
@@ -4429,7 +4591,10 @@
   "pipeGas": "22.2",
   "tempCool": "-15 ~ 55",
   "tempHeat": "-25 ~ 30",
-  "maxIndoor": "15"
+  "maxIndoor": "15",
+  "cableCurrent": "20",
+  "breaker": "25",
+  "elecPage": 156
  },
  "MVi-280WV2GN1(A)": {
   "model": "MVi-280WV2GN1(A)",
@@ -4453,7 +4618,10 @@
   "pipeGas": "22.2",
   "tempCool": "-15 ~ 55",
   "tempHeat": "-25 ~ 30",
-  "maxIndoor": "16"
+  "maxIndoor": "16",
+  "cableCurrent": "21",
+  "breaker": "25",
+  "elecPage": 156
  },
  "MVi-335WV2GN1(A)": {
   "model": "MVi-335WV2GN1(A)",
@@ -4477,7 +4645,10 @@
   "pipeGas": "22.2",
   "tempCool": "-15 ~ 55",
   "tempHeat": "-25 ~ 30",
-  "maxIndoor": "20"
+  "maxIndoor": "20",
+  "cableCurrent": "26.4",
+  "breaker": "32",
+  "elecPage": 156
  },
  "MV8S-252WV2GN1": {
   "model": "MV8S-252WV2GN1",
@@ -4501,7 +4672,10 @@
   "pipeGas": "25.4",
   "tempCool": "-15 ~ +55",
   "tempHeat": "-30 ~ +30",
-  "maxIndoor": "13"
+  "maxIndoor": "13",
+  "cableCurrent": "17",
+  "breaker": "20",
+  "elecPage": 155
  },
  "MV8S-280WV2GN1": {
   "model": "MV8S-280WV2GN1",
@@ -4525,7 +4699,10 @@
   "pipeGas": "25.4",
   "tempCool": "-15 ~ +55",
   "tempHeat": "-30 ~ +30",
-  "maxIndoor": "16"
+  "maxIndoor": "16",
+  "cableCurrent": "21",
+  "breaker": "25",
+  "elecPage": 155
  },
  "MV8S-335WV2GN1": {
   "model": "MV8S-335WV2GN1",
@@ -4549,7 +4726,10 @@
   "pipeGas": "25.4",
   "tempCool": "-15 ~ +55",
   "tempHeat": "-30 ~ +30",
-  "maxIndoor": "19"
+  "maxIndoor": "19",
+  "cableCurrent": "23",
+  "breaker": "32",
+  "elecPage": 155
  },
  "MV8S-400WV2GN1": {
   "model": "MV8S-400WV2GN1",
@@ -4573,7 +4753,10 @@
   "pipeGas": "25.4",
   "tempCool": "-15 ~ +55",
   "tempHeat": "-30 ~ +30",
-  "maxIndoor": "23"
+  "maxIndoor": "23",
+  "cableCurrent": "28",
+  "breaker": "32",
+  "elecPage": 155
  },
  "MV8S-450WV2GN1": {
   "model": "MV8S-450WV2GN1",
@@ -4597,6 +4780,9 @@
   "pipeGas": "28.6",
   "tempCool": "-15 ~ +55",
   "tempHeat": "-30 ~ +30",
-  "maxIndoor": "26"
+  "maxIndoor": "26",
+  "cableCurrent": "30",
+  "breaker": "40",
+  "elecPage": 155
  }
 }

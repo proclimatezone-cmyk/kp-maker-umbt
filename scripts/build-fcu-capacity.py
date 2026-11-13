@@ -63,9 +63,31 @@ for pi, p in enumerate(pages, 1):
                 vals = [f(t[1]) for t in tr] if len(tr) == n else [f(v) for v in re.findall(NUM, tail)]
             if len(vals) == n:
                 extra[key] = vals
+    # Опции (клапаны, обвязка, поддоны): ячейка ближайшая к колонке модели (объединённые ячейки — на несколько моделей).
+    centers = [(mm.start() + mm.end()) / 2 for mm in TRIP.finditer(lines[k].split('кВт', 1)[1])]
+    off = lines[k].index('кВт') + 3
+    centers = [c + off for c in centers]
+    OPT = [('3-ходовой клапан с четырьмя портами', 'valve3x4'), ('Комплект трубной обвязки', 'pipingKit'), ('Дренажный поддон', 'drainTray'),
+           ('Подключение сетевого и центрального управления', 'netModule'), ('3-ходовой клапан, без трубной обвязки', 'valve3'),
+           ('2-ходовой клапан, без трубной обвязки', 'valve2'), ('Комплект монтажных опор', 'mountKit')]
+    opts = {}
+    if len(centers) == n:
+        for l in lines[k:k + 45]:
+            for lab, key in OPT:
+                i0 = l.find(lab)
+                if i0 < 0 or key in opts:
+                    continue
+                lab_end = re.search(re.escape(lab) + r'(?: для \S+)?', l).end()
+                toks = [(t.start(), t.end(), t.group()) for t in re.finditer(r'\S+', l) if t.start() > lab_end + 1]
+                toks = [t for t in toks if re.search(r'[A-ZА-Я0-9]', t[2]) and not re.fullmatch(r'\(?\d+\)?', t[2])]
+                if not toks:
+                    continue
+                opts[key] = [min(toks, key=lambda t: abs((t[0] + t[1]) / 2 - c))[2] for c in centers]
     for idx, m in enumerate(models):
         rec = {'page': pi, 'coolMax': cool[idx][0], 'coolMid': cool[idx][1], 'coolMin': cool[idx][2]}
         rec.update({key: v[idx] for key, v in extra.items()})
+        if opts:
+            rec['options'] = {key: v[idx] for key, v in opts.items()}
         if len(heat) == len(models):
             rec.update(heatMax=heat[idx][0], heatMid=heat[idx][1], heatMin=heat[idx][2])
         out.setdefault(m, rec)

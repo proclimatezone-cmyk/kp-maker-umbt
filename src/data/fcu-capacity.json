@@ -11,6 +11,14 @@
   "noise": 30.0,
   "dims": "632×243×482",
   "weight": 12.3,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-K2",
+   "drainTray": "Встроен",
+   "netModule": "CE-FCUKZ-03",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 4.1,
   "heatMid": 3.2,
   "heatMin": 2.2
@@ -27,6 +35,14 @@
   "noise": 26.5,
   "dims": "632×243×482",
   "weight": 12.3,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-K2",
+   "drainTray": "Встроен",
+   "netModule": "CE-FCUKZ-03",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 3.9,
   "heatMid": 3.09,
   "heatMin": 2.15
@@ -43,6 +59,14 @@
   "noise": 32.0,
   "dims": "632×243×482",
   "weight": 12.3,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-K2",
+   "drainTray": "Встроен",
+   "netModule": "CE-FCUKZ-03",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 4.1,
   "heatMid": 3.2,
   "heatMin": 2.2
@@ -59,6 +83,14 @@
   "noise": 33.0,
   "dims": "773×243×482",
   "weight": 14.7,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-K2",
+   "drainTray": "Встроен",
+   "netModule": "CE-FCUKZ-03",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 5.67,
   "heatMid": 4.52,
   "heatMin": 3.18
@@ -75,6 +107,14 @@
   "noise": 27.5,
   "dims": "773×243×482",
   "weight": 14.7,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-K2",
+   "drainTray": "Встроен",
+   "netModule": "CE-FCUKZ-03",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 5.67,
   "heatMid": 4.52,
   "heatMin": 3.18
@@ -91,6 +131,14 @@
   "noise": 34.0,
   "dims": "773×243×482",
   "weight": 14.7,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-K2",
+   "drainTray": "Встроен",
+   "netModule": "CE-FCUKZ-03",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 5.67,
   "heatMid": 4.52,
   "heatMin": 3.17
@@ -107,6 +155,14 @@
   "noise": 33.0,
   "dims": "908×243×482",
   "weight": 17.6,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-K2A",
+   "drainTray": "Встроен",
+   "netModule": "CE-FCUKZ-03",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 7.35,
   "heatMid": 5.89,
   "heatMin": 4.19
@@ -123,6 +179,14 @@
   "noise": 30.5,
   "dims": "908×243×482",
   "weight": 17.6,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-K2A",
+   "drainTray": "Встроен",
+   "netModule": "CE-FCUKZ-03",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 7.35,
   "heatMid": 5.89,
   "heatMin": 4.19
@@ -139,6 +203,14 @@
   "noise": 37.0,
   "dims": "908×243×482",
   "weight": 17.6,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-K2A",
+   "drainTray": "Встроен",
+   "netModule": "CE-FCUKZ-03",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 7.35,
   "heatMid": 5.89,
   "heatMin": 4.19
@@ -155,6 +227,14 @@
   "noise": 36.0,
   "dims": "908×243×482",
   "weight": 17.6,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-K2A",
+   "drainTray": "Встроен",
+   "netModule": "CE-FCUKZ-03",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 8.6,
   "heatMid": 6.93,
   "heatMin": 5.03
@@ -171,6 +251,14 @@
   "noise": 34.0,
   "dims": "908×243×482",
   "weight": 17.6,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-K2A",
+   "drainTray": "Встроен",
+   "netModule": "CE-FCUKZ-03",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 8.6,
   "heatMid": 6.93,
   "heatMin": 5.03
@@ -187,6 +275,14 @@
   "noise": 40.0,
   "dims": "908×243×482",
   "weight": 17.6,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-K2A",
+   "drainTray": "Встроен",
+   "netModule": "CE-FCUKZ-03",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 8.6,
   "heatMid": 6.93,
   "heatMin": 5.03
@@ -203,6 +299,14 @@
   "noise": 37.0,
   "dims": "1003×243×482",
   "weight": 18.8,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-K2A",
+   "drainTray": "Встроен",
+   "netModule": "CE-FCUKZ-03",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 9.98,
   "heatMid": 8.14,
   "heatMin": 5.96
@@ -219,6 +323,14 @@
   "noise": 36.6,
   "dims": "1003×243×482",
   "weight": 18.8,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-K2A",
+   "drainTray": "Встроен",
+   "netModule": "CE-FCUKZ-03",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 9.98,
   "heatMid": 8.14,
   "heatMin": 5.96
@@ -235,6 +347,14 @@
   "noise": 42.0,
   "dims": "1003×243×482",
   "weight": 18.8,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-K2A",
+   "drainTray": "Встроен",
+   "netModule": "CE-FCUKZ-03",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 9.98,
   "heatMid": 8.19,
   "heatMin": 6.01
@@ -251,6 +371,14 @@
   "noise": 39.0,
   "dims": "1178×243×482",
   "weight": 21.4,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-K2",
+   "drainTray": "Встроен",
+   "netModule": "CE-FCUKZ-03",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 12.0,
   "heatMid": 9.66,
   "heatMin": 7.01
@@ -267,6 +395,14 @@
   "noise": 38.0,
   "dims": "1178×243×482",
   "weight": 21.4,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-K2",
+   "drainTray": "Встроен",
+   "netModule": "CE-FCUKZ-03",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 11.71,
   "heatMid": 9.39,
   "heatMin": 6.81
@@ -283,6 +419,14 @@
   "noise": 43.0,
   "dims": "1178×243×482",
   "weight": 21.4,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-K2",
+   "drainTray": "Встроен",
+   "netModule": "CE-FCUKZ-03",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 12.0,
   "heatMid": 9.66,
   "heatMin": 7.01
@@ -299,6 +443,14 @@
   "noise": 40.0,
   "dims": "1368×243×482",
   "weight": 25.5,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-K2",
+   "drainTray": "Встроен",
+   "netModule": "CE-FCUKZ-03",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 13.6,
   "heatMid": 10.98,
   "heatMin": 8.02
@@ -315,6 +467,14 @@
   "noise": 39.1,
   "dims": "1368×243×482",
   "weight": 25.5,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-K2",
+   "drainTray": "Встроен",
+   "netModule": "CE-FCUKZ-03",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 13.61,
   "heatMid": 10.98,
   "heatMin": 8.02
@@ -331,6 +491,14 @@
   "noise": 39.0,
   "dims": "1368×243×482",
   "weight": 25.5,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-K2",
+   "drainTray": "Встроен",
+   "netModule": "CE-FCUKZ-03",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 13.6,
   "heatMid": 10.98,
   "heatMin": 8.02
@@ -347,6 +515,14 @@
   "noise": 42.0,
   "dims": "1368×243×482",
   "weight": 26.0,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-K2A",
+   "drainTray": "Встроен",
+   "netModule": "CE-FCUKZ-03",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 16.0,
   "heatMid": 13.16,
   "heatMin": 9.61
@@ -363,6 +539,14 @@
   "noise": 40.7,
   "dims": "1368×243×482",
   "weight": 26.0,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-K2A",
+   "drainTray": "Встроен",
+   "netModule": "CE-FCUKZ-03",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 15.61,
   "heatMid": 12.82,
   "heatMin": 9.36
@@ -379,6 +563,14 @@
   "noise": 45.0,
   "dims": "1368×243×482",
   "weight": 26.0,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-K2A",
+   "drainTray": "Встроен",
+   "netModule": "CE-FCUKZ-03",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 16.0,
   "heatMid": 13.16,
   "heatMin": 9.61
@@ -395,6 +587,14 @@
   "noise": 42.0,
   "dims": "1658×243×482",
   "weight": 33.8,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-K2A",
+   "drainTray": "Встроен",
+   "netModule": "CE-FCUKZ-03",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 19.2,
   "heatMid": 15.78,
   "heatMin": 11.53
@@ -411,6 +611,14 @@
   "noise": 42.6,
   "dims": "1658×243×482",
   "weight": 33.8,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-K2A",
+   "drainTray": "Встроен",
+   "netModule": "CE-FCUKZ-03",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 19.21,
   "heatMid": 15.78,
   "heatMin": 11.53
@@ -427,6 +635,14 @@
   "noise": 46.0,
   "dims": "1658×243×482",
   "weight": 33.8,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-K2A",
+   "drainTray": "Встроен",
+   "netModule": "CE-FCUKZ-03",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 19.2,
   "heatMid": 15.78,
   "heatMin": 11.53
@@ -443,6 +659,14 @@
   "noise": 43.0,
   "dims": "1898×243×482",
   "weight": 37.0,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-K2A",
+   "drainTray": "Встроен",
+   "netModule": "CE-FCUKZ-03",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 22.16,
   "heatMid": 18.23,
   "heatMin": 13.37
@@ -459,6 +683,14 @@
   "noise": 47.1,
   "dims": "1898×243×482",
   "weight": 35.3,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-K2A",
+   "drainTray": "Встроен",
+   "netModule": "CE-FCUKZ-03",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 22.17,
   "heatMid": 18.23,
   "heatMin": 13.37
@@ -475,6 +707,14 @@
   "noise": 49.0,
   "dims": "1898×243×482",
   "weight": 35.3,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-K2A",
+   "drainTray": "Встроен",
+   "netModule": "CE-FCUKZ-03",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 22.16,
   "heatMid": 18.25,
   "heatMin": 13.39
@@ -491,6 +731,14 @@
   "noise": 40.0,
   "dims": "950×45×950",
   "weight": 6.0,
+  "options": {
+   "valve3x4": "KQV21A",
+   "pipingKit": "KQP21-V1",
+   "drainTray": "FD-V/KFD-V",
+   "netModule": "Встроен",
+   "valve3": "FV3D20V1+FV3D15V1",
+   "valve2": "FV2D20V1+FV2D15V1"
+  },
   "heatMax": 11.65,
   "heatMid": 10.49,
   "heatMin": 8.85
@@ -507,6 +755,14 @@
   "noise": 45.0,
   "dims": "950×45×950",
   "weight": 6.0,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-V1",
+   "drainTray": "FD-V/KFD-V",
+   "netModule": "Встроен",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 17.58,
   "heatMid": 14.06,
   "heatMin": 11.42
@@ -523,6 +779,14 @@
   "noise": 42.0,
   "dims": "950×45×950",
   "weight": 6.0,
+  "options": {
+   "valve3x4": "KQV21A",
+   "pipingKit": "KQP21-V1",
+   "drainTray": "FD-V/KFD-V",
+   "netModule": "Встроен",
+   "valve3": "FV3D20V1+FV3D15V1",
+   "valve2": "FV2D20V1+FV2D15V1"
+  },
   "heatMax": 12.62,
   "heatMid": 11.36,
   "heatMin": 9.47
@@ -539,6 +803,14 @@
   "noise": 46.0,
   "dims": "950×45×950",
   "weight": 6.0,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-V1",
+   "drainTray": "FD-V/KFD-V",
+   "netModule": "Встроен",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 17.6,
   "heatMid": 14.08,
   "heatMin": 11.44
@@ -555,6 +827,14 @@
   "noise": 32.0,
   "dims": "950×45×950",
   "weight": 6.0,
+  "options": {
+   "valve3x4": "KQV21A",
+   "pipingKit": "KQP21-V1",
+   "drainTray": "FD-V/KFD-V",
+   "netModule": "Встроен",
+   "valve3": "FV3D20V1+FV3D15V1",
+   "valve2": "FV2D20V1+FV2D15V1"
+  },
   "heatMax": 6.67,
   "heatMid": 5.87,
   "heatMin": 5.07
@@ -571,6 +851,14 @@
   "noise": 41.0,
   "dims": "950×45×950",
   "weight": 6.0,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-V1",
+   "drainTray": "FD-V/KFD-V",
+   "netModule": "Встроен",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 9.66,
   "heatMid": 7.72,
   "heatMin": 6.27
@@ -587,6 +875,14 @@
   "noise": 34.0,
   "dims": "950×45×950",
   "weight": 6.0,
+  "options": {
+   "valve3x4": "KQV21A",
+   "pipingKit": "KQP21-V1",
+   "drainTray": "FD-V/KFD-V",
+   "netModule": "Встроен",
+   "valve3": "FV3D20V1+FV3D15V1",
+   "valve2": "FV2D20V1+FV2D15V1"
+  },
   "heatMax": 7.87,
   "heatMid": 6.85,
   "heatMin": 5.9
@@ -603,6 +899,14 @@
   "noise": 42.0,
   "dims": "950×45×950",
   "weight": 6.0,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-V1",
+   "drainTray": "FD-V/KFD-V",
+   "netModule": "Встроен",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 11.55,
   "heatMid": 9.24,
   "heatMin": 7.51
@@ -619,6 +923,14 @@
   "noise": 36.0,
   "dims": "950×45×950",
   "weight": 6.0,
+  "options": {
+   "valve3x4": "KQV21A",
+   "pipingKit": "KQP21-V1",
+   "drainTray": "FD-V/KFD-V",
+   "netModule": "Встроен",
+   "valve3": "FV3D20V1+FV3D15V1",
+   "valve2": "FV2D20V1+FV2D15V1"
+  },
   "heatMax": 8.06,
   "heatMid": 6.93,
   "heatMin": 6.05
@@ -635,6 +947,14 @@
   "noise": 43.0,
   "dims": "950×45×950",
   "weight": 6.0,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-V1",
+   "drainTray": "FD-V/KFD-V",
+   "netModule": "Встроен",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 12.42,
   "heatMid": 9.93,
   "heatMin": 8.07
@@ -651,6 +971,14 @@
   "noise": 38.0,
   "dims": "950×45×950",
   "weight": 6.0,
+  "options": {
+   "valve3x4": "KQV21A",
+   "pipingKit": "KQP21-V1",
+   "drainTray": "FD-V/KFD-V",
+   "netModule": "Встроен",
+   "valve3": "FV3D20V1+FV3D15V1",
+   "valve2": "FV2D20V1+FV2D15V1"
+  },
   "heatMax": 8.67,
   "heatMid": 7.63,
   "heatMin": 6.59
@@ -667,6 +995,14 @@
   "noise": 44.0,
   "dims": "950×45×950",
   "weight": 6.0,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-V1",
+   "drainTray": "FD-V/KFD-V",
+   "netModule": "Встроен",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 13.85,
   "heatMid": 11.08,
   "heatMin": 9.0
@@ -703,6 +1039,14 @@
   "noise": 44.0,
   "dims": "950×45×950",
   "weight": 6.0,
+  "options": {
+   "valve3x4": "KQV21A",
+   "pipingKit": "KQP21-V1",
+   "drainTray": "FD-V/KFD-V",
+   "netModule": "Встроен",
+   "valve3": "FV3D20V1+FV3D15V1",
+   "valve2": "FV2D20V1+FV2D15V1"
+  },
   "heatMax": 9.75,
   "heatMid": 8.96,
   "heatMin": 8.42
@@ -719,6 +1063,14 @@
   "noise": 44.0,
   "dims": "950×45×950",
   "weight": 6.0,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-V1",
+   "drainTray": "FD-V/KFD-V",
+   "netModule": "Встроен",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 9.16,
   "heatMid": 8.54,
   "heatMin": 7.9
@@ -735,6 +1087,14 @@
   "noise": 43.0,
   "dims": "950×45×950",
   "weight": 6.0,
+  "options": {
+   "valve3x4": "KQV21A",
+   "pipingKit": "KQP21-V1",
+   "drainTray": "FD-V/KFD-V",
+   "netModule": "Встроен",
+   "valve3": "FV3D20V1+FV3D15V1",
+   "valve2": "FV2D20V1+FV2D15V1"
+  },
   "heatMax": 9.93,
   "heatMid": 8.33,
   "heatMin": 7.51
@@ -751,6 +1111,14 @@
   "noise": 43.0,
   "dims": "950×45×950",
   "weight": 6.0,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-V1",
+   "drainTray": "FD-V/KFD-V",
+   "netModule": "Встроен",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 11.86,
   "heatMid": 9.48,
   "heatMin": 8.25
@@ -777,6 +1145,14 @@
   "noise": 37.0,
   "dims": "950×45×950",
   "weight": 6.0,
+  "options": {
+   "valve3x4": "KQV21A",
+   "pipingKit": "KQP21-V1",
+   "drainTray": "FD-V/KFD-V",
+   "netModule": "Встроен",
+   "valve3": "FV3D20V1+FV3D15V1",
+   "valve2": "FV2D20V1+FV2D15V1"
+  },
   "heatMax": 6.15,
   "heatMid": 5.43,
   "heatMin": 4.61
@@ -793,6 +1169,14 @@
   "noise": 39.0,
   "dims": "950×45×950",
   "weight": 6.0,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-V1",
+   "drainTray": "FD-V/KFD-V",
+   "netModule": "Встроен",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 6.06,
   "heatMid": 5.72,
   "heatMin": 5.32
@@ -819,6 +1203,14 @@
   "noise": 39.0,
   "dims": "950×45×950",
   "weight": 6.0,
+  "options": {
+   "valve3x4": "KQV21A",
+   "pipingKit": "KQP21-V1",
+   "drainTray": "FD-V/KFD-V",
+   "netModule": "Встроен",
+   "valve3": "FV3D20V1+FV3D15V1",
+   "valve2": "FV2D20V1+FV2D15V1"
+  },
   "heatMax": 6.52,
   "heatMid": 5.79,
   "heatMin": 4.94
@@ -835,6 +1227,14 @@
   "noise": 40.0,
   "dims": "950×45×950",
   "weight": 6.0,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-V1",
+   "drainTray": "FD-V/KFD-V",
+   "netModule": "Встроен",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 6.27,
   "heatMid": 5.88,
   "heatMin": 5.43
@@ -861,6 +1261,14 @@
   "noise": 39.0,
   "dims": "950×45×950",
   "weight": 6.0,
+  "options": {
+   "valve3x4": "KQV21A",
+   "pipingKit": "KQP21-V1",
+   "drainTray": "FD-V/KFD-V",
+   "netModule": "Встроен",
+   "valve3": "FV3D20V1+FV3D15V1",
+   "valve2": "FV2D20V1+FV2D15V1"
+  },
   "heatMax": 6.68,
   "heatMid": 5.75,
   "heatMin": 5.28
@@ -877,6 +1285,14 @@
   "noise": 40.0,
   "dims": "950×45×950",
   "weight": 6.0,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-V1",
+   "drainTray": "FD-V/KFD-V",
+   "netModule": "Встроен",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 7.88,
   "heatMid": 7.48,
   "heatMin": 6.76
@@ -893,6 +1309,14 @@
   "noise": 41.0,
   "dims": "950×45×950",
   "weight": 6.0,
+  "options": {
+   "valve3x4": "KQV21A",
+   "pipingKit": "KQP21-V1",
+   "drainTray": "FD-V/KFD-V",
+   "netModule": "Встроен",
+   "valve3": "FV3D20V1+FV3D15V1",
+   "valve2": "FV2D20V1+FV2D15V1"
+  },
   "heatMax": 6.74,
   "heatMid": 5.83,
   "heatMin": 5.4
@@ -909,6 +1333,14 @@
   "noise": 42.0,
   "dims": "950×45×950",
   "weight": 6.0,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-V1",
+   "drainTray": "FD-V/KFD-V",
+   "netModule": "Встроен",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 8.49,
   "heatMid": 8.0,
   "heatMin": 7.35
@@ -925,6 +1357,12 @@
   "noise": 34.0,
   "dims": "1180×25×465",
   "weight": 3.5,
+  "options": {
+   "valve3x4": "KFV15A",
+   "netModule": "MD-NIM01",
+   "valve3": "FV3D15V1",
+   "valve2": "FV2D15V1"
+  },
   "heatMax": 5.13,
   "heatMid": 4.69,
   "heatMin": 4.04
@@ -941,6 +1379,12 @@
   "noise": 35.0,
   "dims": "1180×25×465",
   "weight": 3.5,
+  "options": {
+   "valve3x4": "KFV15A",
+   "netModule": "MD-NIM01",
+   "valve3": "FV3D15V1",
+   "valve2": "FV2D15V1"
+  },
   "heatMax": 6.41,
   "heatMid": 5.86,
   "heatMin": 5.11
@@ -956,6 +1400,11 @@
   "noise": 40.6,
   "dims": "1180×25×465",
   "weight": 3.5,
+  "options": {
+   "valve3x4": "KFV21A",
+   "valve3": "FV3D15V1",
+   "valve2": "FV2D15V1"
+  },
   "heatMax": 3.15,
   "heatMid": 2.83,
   "heatMin": 2.29
@@ -971,6 +1420,11 @@
   "noise": 32.6,
   "dims": "1350×25×505",
   "weight": 4.0,
+  "options": {
+   "valve3x4": "KFV21A",
+   "valve3": "FV3D15V1",
+   "valve2": "FV2D15V1"
+  },
   "heatMax": 4.0,
   "heatMid": 3.32,
   "heatMin": 2.73
@@ -986,6 +1440,11 @@
   "noise": 38.6,
   "dims": "1350×25×505",
   "weight": 4.0,
+  "options": {
+   "valve3x4": "KFV21A",
+   "valve3": "FV3D15V1",
+   "valve2": "FV2D15V1"
+  },
   "heatMax": 5.75,
   "heatMid": 4.68,
   "heatMin": 3.6
@@ -1002,6 +1461,14 @@
   "noise": 33.0,
   "dims": "647×50×647",
   "weight": 2.6,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-Z1",
+   "drainTray": "FD-Z/KFD-Z",
+   "netModule": "Встроен",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 4.0,
   "heatMid": 3.5,
   "heatMin": 3.08
@@ -1018,6 +1485,14 @@
   "noise": 33.0,
   "dims": "647×50×647",
   "weight": 2.6,
+  "options": {
+   "valve3x4": "KQV21A",
+   "pipingKit": "KQP21-Z1",
+   "drainTray": "FD-Z/KFD-Z",
+   "netModule": "Встроен",
+   "valve3": "FV3D20V1+FV3D15V1",
+   "valve2": "FV2D20V1+FV2D15V1"
+  },
   "heatMax": 3.7,
   "heatMid": 3.29,
   "heatMin": 2.92
@@ -1034,6 +1509,14 @@
   "noise": 39.0,
   "dims": "647×50×647",
   "weight": 2.6,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-Z1",
+   "drainTray": "FD-Z/KFD-Z",
+   "netModule": "Встроен",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 5.1,
   "heatMid": 4.3,
   "heatMin": 3.83
@@ -1050,6 +1533,14 @@
   "noise": 39.0,
   "dims": "647×50×647",
   "weight": 2.6,
+  "options": {
+   "valve3x4": "KQV21A",
+   "pipingKit": "KQP21-Z1",
+   "drainTray": "FD-Z/KFD-Z",
+   "netModule": "Встроен",
+   "valve3": "FV3D20V1+FV3D15V1",
+   "valve2": "FV2D20V1+FV2D15V1"
+  },
   "heatMax": 4.6,
   "heatMid": 3.82,
   "heatMin": 3.4
@@ -1066,6 +1557,14 @@
   "noise": 42.0,
   "dims": "647×50×647",
   "weight": 2.6,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-Z1",
+   "drainTray": "FD-Z/KFD-Z",
+   "netModule": "Встроен",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 6.0,
   "heatMid": 4.76,
   "heatMin": 4.07
@@ -1082,6 +1581,14 @@
   "noise": 42.0,
   "dims": "647×50×647",
   "weight": 2.6,
+  "options": {
+   "valve3x4": "KQV21A",
+   "pipingKit": "KQP21-Z1",
+   "drainTray": "FD-Z/KFD-Z",
+   "netModule": "Встроен",
+   "valve3": "FV3D20V1+FV3D15V1",
+   "valve2": "FV2D20V1+FV2D15V1"
+  },
   "heatMax": 5.1,
   "heatMid": 4.03,
   "heatMin": 3.52
@@ -1098,6 +1605,14 @@
   "noise": 33.0,
   "dims": "647×50×647",
   "weight": 2.5,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-Z1",
+   "drainTray": "FD-Z/KFD-Z",
+   "netModule": "Встроен",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 2.61,
   "heatMid": 2.31,
   "heatMin": 2.24
@@ -1114,6 +1629,14 @@
   "noise": 33.0,
   "dims": "647×50×647",
   "weight": 2.5,
+  "options": {
+   "valve3x4": "KQV21A",
+   "pipingKit": "KQP21-Z1",
+   "drainTray": "FD-Z/KFD-Z",
+   "netModule": "Встроен",
+   "valve3": "FV3D20V1+FV3D15V1",
+   "valve2": "FV2D20V1+FV2D15V1"
+  },
   "heatMax": 3.13,
   "heatMid": 2.63,
   "heatMin": 2.08
@@ -1130,6 +1653,14 @@
   "noise": 36.0,
   "dims": "647×50×647",
   "weight": 2.5,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-Z1",
+   "drainTray": "FD-Z/KFD-Z",
+   "netModule": "Встроен",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 4.08,
   "heatMid": 3.34,
   "heatMin": 2.73
@@ -1146,6 +1677,14 @@
   "noise": 35.0,
   "dims": "647×50×647",
   "weight": 2.5,
+  "options": {
+   "valve3x4": "KQV21A",
+   "pipingKit": "KQP21-Z1",
+   "drainTray": "FD-Z/KFD-Z",
+   "netModule": "Встроен",
+   "valve3": "FV3D20V1+FV3D15V1",
+   "valve2": "FV2D20V1+FV2D15V1"
+  },
   "heatMax": 3.71,
   "heatMid": 3.14,
   "heatMin": 2.65
@@ -1162,6 +1701,14 @@
   "noise": 38.0,
   "dims": "647×50×647",
   "weight": 2.5,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-Z1",
+   "drainTray": "FD-Z/KFD-Z",
+   "netModule": "Встроен",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 4.95,
   "heatMid": 3.99,
   "heatMin": 3.26
@@ -1178,6 +1725,14 @@
   "noise": 39.0,
   "dims": "647×50×647",
   "weight": 2.5,
+  "options": {
+   "valve3x4": "KQV21A",
+   "pipingKit": "KQP21-Z1",
+   "drainTray": "FD-Z/KFD-Z",
+   "netModule": "Встроен",
+   "valve3": "FV3D20V1+FV3D15V1",
+   "valve2": "FV2D20V1+FV2D15V1"
+  },
   "heatMax": 3.94,
   "heatMid": 3.3,
   "heatMin": 2.83
@@ -1324,6 +1879,14 @@
   "noise": 23.0,
   "dims": "790×495×211",
   "weight": 16.3,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 1.77,
   "heatMid": 1.24,
   "heatMin": 1.08
@@ -1340,6 +1903,14 @@
   "noise": 34.0,
   "dims": "790×495×211",
   "weight": 16.7,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 2.26,
   "heatMid": 1.79,
   "heatMin": 1.36
@@ -1356,6 +1927,14 @@
   "noise": 34.0,
   "dims": "790×495×211",
   "weight": 17.2,
+  "options": {
+   "valve3x4": "KQV21A",
+   "pipingKit": "KFP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1+FV3D15V1",
+   "valve2": "FV2D20V1+FV2D15V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 1.62,
   "heatMid": 1.35,
   "heatMin": 1.1
@@ -1372,6 +1951,14 @@
   "noise": 25.0,
   "dims": "1020×495×211",
   "weight": 20.0,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 2.8,
   "heatMid": 2.01,
   "heatMin": 1.38
@@ -1388,6 +1975,14 @@
   "noise": 26.0,
   "dims": "1020×495×211",
   "weight": 20.8,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 2.81,
   "heatMid": 2.04,
   "heatMin": 1.43
@@ -1404,6 +1999,14 @@
   "noise": 26.0,
   "dims": "1020×495×211",
   "weight": 21.3,
+  "options": {
+   "valve3x4": "KQV21A",
+   "pipingKit": "KFP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1+FV3D15V1",
+   "valve2": "FV2D20V1+FV2D15V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 2.19,
   "heatMid": 1.52,
   "heatMin": 1.06
@@ -1420,6 +2023,14 @@
   "noise": 32.0,
   "dims": "1240×495×211",
   "weight": 24.0,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 3.99,
   "heatMid": 3.21,
   "heatMin": 2.41
@@ -1436,6 +2047,14 @@
   "noise": 32.0,
   "dims": "1240×495×211",
   "weight": 25.4,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 4.19,
   "heatMid": 3.34,
   "heatMin": 2.45
@@ -1452,6 +2071,14 @@
   "noise": 32.0,
   "dims": "1240×495×211",
   "weight": 25.9,
+  "options": {
+   "valve3x4": "KQV21A",
+   "pipingKit": "KFP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1+FV3D15V1",
+   "valve2": "FV2D20V1+FV2D15V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 2.88,
   "heatMid": 2.44,
   "heatMin": 1.95
@@ -1468,6 +2095,14 @@
   "noise": 39.0,
   "dims": "1240×495×211",
   "weight": 25.5,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 5.13,
   "heatMid": 3.9,
   "heatMin": 2.96
@@ -1484,6 +2119,14 @@
   "noise": 39.0,
   "dims": "1240×495×211",
   "weight": 26.3,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 5.33,
   "heatMid": 4.25,
   "heatMin": 3.23
@@ -1500,6 +2143,14 @@
   "noise": 39.0,
   "dims": "1240×495×211",
   "weight": 26.8,
+  "options": {
+   "valve3x4": "KQV21A",
+   "pipingKit": "KFP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1+FV3D15V1",
+   "valve2": "FV2D20V1+FV2D15V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 3.55,
   "heatMid": 2.97,
   "heatMin": 2.44
@@ -1516,6 +2167,14 @@
   "noise": 43.0,
   "dims": "1360×495×211",
   "weight": 27.3,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL2",
+   "drainTray": "KFD-H-7",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 5.42,
   "heatMid": 4.5,
   "heatMin": 3.35
@@ -1532,6 +2191,14 @@
   "noise": 43.0,
   "dims": "1360×495×211",
   "weight": 28.5,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL2",
+   "drainTray": "KFD-H-7",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 6.53,
   "heatMid": 5.3,
   "heatMin": 3.92
@@ -1548,6 +2215,14 @@
   "noise": 43.0,
   "dims": "1360×495×211",
   "weight": 29.0,
+  "options": {
+   "valve3x4": "KQV21A",
+   "pipingKit": "KFP21-H/FL2",
+   "drainTray": "KFD-H-7",
+   "valve3": "FV3D20V1+FV3D15V1",
+   "valve2": "FV2D20V1+FV2D15V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 4.25,
   "heatMid": 3.74,
   "heatMin": 2.91
@@ -1564,6 +2239,14 @@
   "noise": 48.0,
   "dims": "1360×591×211",
   "weight": 31.7,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL2",
+   "drainTray": "KFD-H-7",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 6.94,
   "heatMid": 6.0,
   "heatMin": 4.62
@@ -1580,6 +2263,14 @@
   "noise": 48.0,
   "dims": "1360×591×211",
   "weight": 34.0,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL2",
+   "drainTray": "KFD-H-7",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 6.86,
   "heatMid": 6.13,
   "heatMin": 4.76
@@ -1596,6 +2287,14 @@
   "noise": 48.0,
   "dims": "1360×591×211",
   "weight": 34.5,
+  "options": {
+   "valve3x4": "KQV21A",
+   "pipingKit": "KFP21-H/FL2",
+   "drainTray": "KFD-H-7",
+   "valve3": "FV3D20V1+FV3D15V1",
+   "valve2": "FV2D20V1+FV2D15V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 5.9,
   "heatMid": 5.8,
   "heatMin": 5.05
@@ -1612,6 +2311,14 @@
   "noise": 23.0,
   "dims": "790×495×211",
   "weight": 18.0,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 1.5,
   "heatMid": 1.02,
   "heatMin": 0.88
@@ -1628,6 +2335,14 @@
   "noise": 33.0,
   "dims": "790×495×211",
   "weight": 18.5,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 1.97,
   "heatMid": 1.68,
   "heatMin": 1.2
@@ -1644,6 +2359,14 @@
   "noise": 33.0,
   "dims": "790×495×211",
   "weight": 19.0,
+  "options": {
+   "valve3x4": "KQV21A",
+   "pipingKit": "KQP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1+FV3D15V1",
+   "valve2": "FV2D20V1+FV2D15V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 1.35,
   "heatMid": 1.18,
   "heatMin": 0.91
@@ -1660,6 +2383,14 @@
   "noise": 22.0,
   "dims": "1020×495×211",
   "weight": 21.5,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 2.47,
   "heatMid": 2.0,
   "heatMin": 1.27
@@ -1676,6 +2407,14 @@
   "noise": 26.0,
   "dims": "1020×495×211",
   "weight": 22.0,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 2.63,
   "heatMid": 1.92,
   "heatMin": 1.27
@@ -1692,6 +2431,14 @@
   "noise": 26.0,
   "dims": "1020×495×211",
   "weight": 22.5,
+  "options": {
+   "valve3x4": "KQV21A",
+   "pipingKit": "KQP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1+FV3D15V1",
+   "valve2": "FV2D20V1+FV2D15V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 2.06,
   "heatMid": 1.45,
   "heatMin": 1.02
@@ -1708,6 +2455,14 @@
   "noise": 32.0,
   "dims": "1240×495×211",
   "weight": 25.5,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 3.7,
   "heatMid": 3.02,
   "heatMin": 2.29
@@ -1724,6 +2479,14 @@
   "noise": 32.0,
   "dims": "1240×495×211",
   "weight": 26.5,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 3.9,
   "heatMid": 3.13,
   "heatMin": 2.43
@@ -1740,6 +2503,14 @@
   "noise": 32.0,
   "dims": "1240×495×211",
   "weight": 27.0,
+  "options": {
+   "valve3x4": "KQV21A",
+   "pipingKit": "KQP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1+FV3D15V1",
+   "valve2": "FV2D20V1+FV2D15V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 2.81,
   "heatMid": 2.43,
   "heatMin": 1.95
@@ -1756,6 +2527,14 @@
   "noise": 39.0,
   "dims": "1240×495×211",
   "weight": 25.5,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 4.64,
   "heatMid": 3.65,
   "heatMin": 2.77
@@ -1772,6 +2551,14 @@
   "noise": 39.0,
   "dims": "1240×495×211",
   "weight": 26.5,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 5.12,
   "heatMid": 3.98,
   "heatMin": 2.96
@@ -1788,6 +2575,14 @@
   "noise": 39.0,
   "dims": "1240×495×211",
   "weight": 27.0,
+  "options": {
+   "valve3x4": "KQV21A",
+   "pipingKit": "KQP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1+FV3D15V1",
+   "valve2": "FV2D20V1+FV2D15V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 3.27,
   "heatMid": 2.81,
   "heatMin": 2.3
@@ -1804,6 +2599,14 @@
   "noise": 43.0,
   "dims": "1360×495×211",
   "weight": 28.5,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL2",
+   "drainTray": "KFD-H-7",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 5.29,
   "heatMid": 4.2,
   "heatMin": 2.96
@@ -1820,6 +2623,14 @@
   "noise": 42.0,
   "dims": "1360×495×211",
   "weight": 29.5,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL2",
+   "drainTray": "KFD-H-7",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 6.22,
   "heatMid": 4.95,
   "heatMin": 3.37
@@ -1836,6 +2647,14 @@
   "noise": 42.0,
   "dims": "1360×495×211",
   "weight": 30.0,
+  "options": {
+   "valve3x4": "KQV21A",
+   "pipingKit": "KQP21-H/FL2",
+   "drainTray": "KFD-H-7",
+   "valve3": "FV3D20V1+FV3D15V1",
+   "valve2": "FV2D20V1+FV2D15V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 4.06,
   "heatMid": 3.48,
   "heatMin": 2.66
@@ -1852,6 +2671,14 @@
   "noise": 46.0,
   "dims": "1360×495×211",
   "weight": 32.5,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL2",
+   "drainTray": "KFD-H-7",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 6.8,
   "heatMid": 5.46,
   "heatMin": 3.98
@@ -1868,6 +2695,14 @@
   "noise": 46.0,
   "dims": "1360×495×211",
   "weight": 34.5,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL2",
+   "drainTray": "KFD-H-7",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 7.7,
   "heatMid": 6.02,
   "heatMin": 4.29
@@ -1884,6 +2719,14 @@
   "noise": 46.0,
   "dims": "1360×591×211",
   "weight": 35.0,
+  "options": {
+   "valve3x4": "KQV21A",
+   "pipingKit": "KQP21-H/FL2",
+   "drainTray": "KFD-H-7",
+   "valve3": "FV3D20V1+FV3D15V1",
+   "valve2": "FV2D20V1+FV2D15V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 6.6,
   "heatMid": 5.7,
   "heatMin": 4.6
@@ -1900,6 +2743,14 @@
   "noise": 24.0,
   "dims": "790×495×200",
   "weight": 16.3,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 1.85,
   "heatMid": 1.29,
   "heatMin": 1.13
@@ -1916,6 +2767,14 @@
   "noise": 47.0,
   "dims": "790×495×200",
   "weight": 16.7,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 2.35,
   "heatMid": 1.87,
   "heatMin": 1.42
@@ -1931,6 +2790,14 @@
   "airflow": 192.0,
   "noise": 47.0,
   "weight": 17.2,
+  "options": {
+   "valve3x4": "KQV21A",
+   "pipingKit": "KQP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1+FV3D15V1",
+   "valve2": "FV2D20V1+FV2D15V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 1.69,
   "heatMid": 1.4,
   "heatMin": 1.15
@@ -1947,6 +2814,14 @@
   "noise": 24.0,
   "dims": "1020×495×200",
   "weight": 20.0,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 3.05,
   "heatMid": 2.24,
   "heatMin": 1.52
@@ -1963,6 +2838,14 @@
   "noise": 38.0,
   "dims": "1020×495×200",
   "weight": 20.8,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 3.15,
   "heatMid": 2.28,
   "heatMin": 1.6
@@ -1978,6 +2861,14 @@
   "airflow": 284.0,
   "noise": 38.0,
   "weight": 21.3,
+  "options": {
+   "valve3x4": "KQV21A",
+   "pipingKit": "KQP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1+FV3D15V1",
+   "valve2": "FV2D20V1+FV2D15V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 2.45,
   "heatMid": 1.7,
   "heatMin": 1.19
@@ -1994,6 +2885,14 @@
   "noise": 32.0,
   "dims": "1240×495×200",
   "weight": 24.0,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 4.1,
   "heatMid": 3.3,
   "heatMin": 2.48
@@ -2010,6 +2909,14 @@
   "noise": 45.0,
   "dims": "1240×495×200",
   "weight": 25.4,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 4.3,
   "heatMid": 3.43,
   "heatMin": 2.52
@@ -2025,6 +2932,14 @@
   "airflow": 450.0,
   "noise": 45.0,
   "weight": 25.9,
+  "options": {
+   "valve3x4": "KQV21A",
+   "pipingKit": "KQP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1+FV3D15V1",
+   "valve2": "FV2D20V1+FV2D15V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 2.95,
   "heatMid": 2.5,
   "heatMin": 2.0
@@ -2041,6 +2956,14 @@
   "noise": 39.0,
   "dims": "1240×495×200",
   "weight": 25.5,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 5.2,
   "heatMid": 3.95,
   "heatMin": 3.0
@@ -2057,6 +2980,14 @@
   "noise": 51.0,
   "dims": "1240×495×200",
   "weight": 26.3,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 5.7,
   "heatMid": 4.36,
   "heatMin": 3.31
@@ -2072,6 +3003,14 @@
   "airflow": 574.0,
   "noise": 51.0,
   "weight": 26.8,
+  "options": {
+   "valve3x4": "KQV21A",
+   "pipingKit": "KQP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1+FV3D15V1",
+   "valve2": "FV2D20V1+FV2D15V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 3.46,
   "heatMid": 3.05,
   "heatMin": 2.5
@@ -2088,6 +3027,14 @@
   "noise": 43.0,
   "dims": "1360×495×200",
   "weight": 27.3,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL2",
+   "drainTray": "KFD-H-7",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 6.15,
   "heatMid": 5.1,
   "heatMin": 3.8
@@ -2104,6 +3051,14 @@
   "noise": 56.0,
   "dims": "1360×495×200",
   "weight": 28.5,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL2",
+   "drainTray": "KFD-H-7",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 7.15,
   "heatMid": 5.81,
   "heatMin": 4.3
@@ -2119,6 +3074,14 @@
   "airflow": 885.0,
   "noise": 56.0,
   "weight": 29.0,
+  "options": {
+   "valve3x4": "KQV21A",
+   "pipingKit": "KQP21-H/FL2",
+   "drainTray": "KFD-H-7",
+   "valve3": "FV3D20V1+FV3D15V1",
+   "valve2": "FV2D20V1+FV2D15V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 4.65,
   "heatMid": 4.09,
   "heatMin": 3.19
@@ -2135,6 +3098,14 @@
   "noise": 46.0,
   "dims": "1360×591×200",
   "weight": 31.7,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL2",
+   "drainTray": "KFD-H-7",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 8.2,
   "heatMid": 7.09,
   "heatMin": 5.46
@@ -2151,6 +3122,14 @@
   "noise": 58.0,
   "dims": "1360×591×200",
   "weight": 34.0,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL2",
+   "drainTray": "KFD-H-7",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 8.5,
   "heatMid": 7.6,
   "heatMin": 5.9
@@ -2166,6 +3145,14 @@
   "airflow": 1132.0,
   "noise": 58.0,
   "weight": 34.5,
+  "options": {
+   "valve3x4": "KQV21A",
+   "pipingKit": "KQP21-H/FL2",
+   "drainTray": "KFD-H-7",
+   "valve3": "FV3D20V1+FV3D15V1",
+   "valve2": "FV2D20V1+FV2D15V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 7.3,
   "heatMid": 7.19,
   "heatMin": 6.25
@@ -2182,6 +3169,14 @@
   "noise": 24.0,
   "dims": "790×495×200",
   "weight": 18.0,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 1.57,
   "heatMid": 1.07,
   "heatMin": 0.92
@@ -2198,6 +3193,14 @@
   "noise": 46.0,
   "dims": "790×495×200",
   "weight": 18.5,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 2.05,
   "heatMid": 1.75,
   "heatMin": 1.25
@@ -2214,6 +3217,14 @@
   "noise": 33.0,
   "dims": "790×495×200",
   "weight": 19.0,
+  "options": {
+   "valve3x4": "KQV21A",
+   "pipingKit": "KQP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1+FV3D15V1",
+   "valve2": "FV2D20V1+FV2D15V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 1.4,
   "heatMid": 1.23,
   "heatMin": 0.95
@@ -2230,6 +3241,14 @@
   "noise": 24.0,
   "dims": "1020×495×200",
   "weight": 21.5,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 2.6,
   "heatMid": 2.11,
   "heatMin": 1.34
@@ -2246,6 +3265,14 @@
   "noise": 23.0,
   "dims": "1020×495×200",
   "weight": 22.0,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 2.95,
   "heatMid": 2.15,
   "heatMin": 1.42
@@ -2262,6 +3289,14 @@
   "noise": 23.0,
   "dims": "1020×495×200",
   "weight": 22.5,
+  "options": {
+   "valve3x4": "KQV21A",
+   "pipingKit": "KQP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1+FV3D15V1",
+   "valve2": "FV2D20V1+FV2D15V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 2.3,
   "heatMid": 1.78,
   "heatMin": 1.22
@@ -2278,6 +3313,14 @@
   "noise": 32.0,
   "dims": "1240×495×200",
   "weight": 25.5,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 3.8,
   "heatMid": 3.1,
   "heatMin": 2.35
@@ -2294,6 +3337,14 @@
   "noise": 34.0,
   "dims": "1240×495×200",
   "weight": 26.5,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 4.0,
   "heatMid": 3.22,
   "heatMin": 2.39
@@ -2310,6 +3361,14 @@
   "noise": 34.0,
   "dims": "1240×495×200",
   "weight": 27.0,
+  "options": {
+   "valve3x4": "KQV21A",
+   "pipingKit": "KQP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1+FV3D15V1",
+   "valve2": "FV2D20V1+FV2D15V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 2.88,
   "heatMid": 2.49,
   "heatMin": 2.0
@@ -2326,6 +3385,14 @@
   "noise": 38.0,
   "dims": "1240×495×200",
   "weight": 25.5,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 4.7,
   "heatMid": 3.7,
   "heatMin": 2.81
@@ -2342,6 +3409,14 @@
   "noise": 39.0,
   "dims": "1240×495×200",
   "weight": 26.5,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 5.25,
   "heatMid": 4.09,
   "heatMin": 3.04
@@ -2358,6 +3433,14 @@
   "noise": 39.0,
   "dims": "1240×495×200",
   "weight": 27.0,
+  "options": {
+   "valve3x4": "KQV21A",
+   "pipingKit": "KQP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1+FV3D15V1",
+   "valve2": "FV2D20V1+FV2D15V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 3.35,
   "heatMid": 2.88,
   "heatMin": 2.36
@@ -2374,6 +3457,14 @@
   "noise": 42.0,
   "dims": "1360×495×200",
   "weight": 28.5,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL2",
+   "drainTray": "KFD-H-7",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 6.0,
   "heatMid": 4.77,
   "heatMin": 3.36
@@ -2390,6 +3481,14 @@
   "noise": 43.0,
   "dims": "1360×495×200",
   "weight": 29.5,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL2",
+   "drainTray": "KFD-H-7",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 7.05,
   "heatMid": 5.61,
   "heatMin": 3.83
@@ -2406,6 +3505,14 @@
   "noise": 43.0,
   "dims": "1360×495×200",
   "weight": 30.0,
+  "options": {
+   "valve3x4": "KQV21A",
+   "pipingKit": "KQP21-H/FL2",
+   "drainTray": "KFD-H-7",
+   "valve3": "FV3D20V1+FV3D15V1",
+   "valve2": "FV2D20V1+FV2D15V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 4.6,
   "heatMid": 3.95,
   "heatMin": 3.02
@@ -2422,6 +3529,14 @@
   "noise": 44.0,
   "dims": "1360×591×200",
   "weight": 32.5,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL2",
+   "drainTray": "KFD-H-7",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 8.05,
   "heatMid": 6.46,
   "heatMin": 4.71
@@ -2438,6 +3553,14 @@
   "noise": 43.0,
   "dims": "1360×591×200",
   "weight": 34.5,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL2",
+   "drainTray": "KFD-H-7",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 8.37,
   "heatMid": 6.81,
   "heatMin": 4.85
@@ -2454,6 +3577,14 @@
   "noise": 43.0,
   "dims": "1360×591×200",
   "weight": 35.0,
+  "options": {
+   "valve3x4": "KQV21A",
+   "pipingKit": "KQP21-H/FL2",
+   "drainTray": "KFD-H-7",
+   "valve3": "FV3D20V1+FV3D15V1",
+   "valve2": "FV2D20V1+FV2D15V1",
+   "mountKit": "SB-1P"
+  },
   "heatMax": 7.5,
   "heatMid": 6.44,
   "heatMin": 5.22
@@ -2470,6 +3601,13 @@
   "noise": 24.0,
   "dims": "607×455×200",
   "weight": 11.6,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 1.85,
   "heatMid": 1.29,
   "heatMin": 1.13
@@ -2486,6 +3624,13 @@
   "noise": 35.0,
   "dims": "607×455×200",
   "weight": 12.0,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 2.35,
   "heatMid": 1.87,
   "heatMin": 1.42
@@ -2502,6 +3647,12 @@
   "noise": 47.0,
   "dims": "607×455×200",
   "weight": 12.5,
+  "options": {
+   "valve3x4": "KQV21A",
+   "pipingKit": "KQP21-H/FL1",
+   "valve3": "FV3D20V1+FV3D15V1",
+   "valve2": "FV2D20V1+FV2D15V1"
+  },
   "heatMax": 1.69,
   "heatMid": 1.4,
   "heatMin": 1.15
@@ -2518,6 +3669,13 @@
   "noise": 24.0,
   "dims": "837×455×200",
   "weight": 13.9,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 3.05,
   "heatMid": 2.24,
   "heatMin": 1.52
@@ -2534,6 +3692,13 @@
   "noise": 25.0,
   "dims": "837×455×200",
   "weight": 14.8,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 3.15,
   "heatMid": 2.28,
   "heatMin": 1.6
@@ -2550,6 +3715,12 @@
   "noise": 38.0,
   "dims": "837×455×200",
   "weight": 15.3,
+  "options": {
+   "valve3x4": "KQV21A",
+   "pipingKit": "KQP21-H/FL1",
+   "valve3": "FV3D20V1+FV3D15V1",
+   "valve2": "FV2D20V1+FV2D15V1"
+  },
   "heatMax": 2.45,
   "heatMid": 1.7,
   "heatMin": 1.19
@@ -2566,6 +3737,13 @@
   "noise": 32.0,
   "dims": "1057×455×200",
   "weight": 17.3,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 4.1,
   "heatMid": 3.3,
   "heatMin": 2.48
@@ -2582,6 +3760,13 @@
   "noise": 35.0,
   "dims": "1057×455×200",
   "weight": 18.2,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 4.3,
   "heatMid": 3.43,
   "heatMin": 2.52
@@ -2598,6 +3783,12 @@
   "noise": 45.0,
   "dims": "1057×455×200",
   "weight": 18.7,
+  "options": {
+   "valve3x4": "KQV21A",
+   "pipingKit": "KQP21-H/FL1",
+   "valve3": "FV3D20V1+FV3D15V1",
+   "valve2": "FV2D20V1+FV2D15V1"
+  },
   "heatMax": 2.95,
   "heatMid": 2.5,
   "heatMin": 2.0
@@ -2614,6 +3805,13 @@
   "noise": 39.0,
   "dims": "1057×455×200",
   "weight": 17.9,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 5.2,
   "heatMid": 3.95,
   "heatMin": 3.0
@@ -2630,6 +3828,13 @@
   "noise": 40.0,
   "dims": "1057×455×200",
   "weight": 18.8,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 5.7,
   "heatMid": 4.36,
   "heatMin": 3.31
@@ -2646,6 +3851,12 @@
   "noise": 51.0,
   "dims": "1057×455×200",
   "weight": 19.3,
+  "options": {
+   "valve3x4": "KQV21A",
+   "pipingKit": "KQP21-H/FL1",
+   "valve3": "FV3D20V1+FV3D15V1",
+   "valve2": "FV2D20V1+FV2D15V1"
+  },
   "heatMax": 3.46,
   "heatMid": 3.05,
   "heatMin": 2.5
@@ -2662,6 +3873,13 @@
   "noise": 43.0,
   "dims": "1177×455×200",
   "weight": 20.5,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL2",
+   "drainTray": "KFD-H-7",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 6.15,
   "heatMid": 5.1,
   "heatMin": 3.8
@@ -2678,6 +3896,13 @@
   "noise": 44.0,
   "dims": "1177×455×200",
   "weight": 21.7,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL2",
+   "drainTray": "KFD-H-7",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 7.15,
   "heatMid": 5.81,
   "heatMin": 4.3
@@ -2694,6 +3919,12 @@
   "noise": 56.0,
   "dims": "1177×455×200",
   "weight": 22.2,
+  "options": {
+   "valve3x4": "KQV21A",
+   "pipingKit": "KQP21-H/FL2",
+   "valve3": "FV3D20V1+FV3D15V1",
+   "valve2": "FV2D20V1+FV2D15V1"
+  },
   "heatMax": 4.65,
   "heatMid": 4.09,
   "heatMin": 3.19
@@ -2710,6 +3941,13 @@
   "noise": 46.0,
   "dims": "1177×500×200",
   "weight": 24.0,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL2",
+   "drainTray": "KFD-H-7",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 8.2,
   "heatMid": 7.09,
   "heatMin": 5.46
@@ -2726,6 +3964,13 @@
   "noise": 45.0,
   "dims": "1177×500×200",
   "weight": 25.2,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL2",
+   "drainTray": "KFD-H-7",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 8.5,
   "heatMid": 7.6,
   "heatMin": 5.9
@@ -2742,6 +3987,12 @@
   "noise": 58.0,
   "dims": "1177×550×200",
   "weight": 25.7,
+  "options": {
+   "valve3x4": "KQV21A",
+   "pipingKit": "KQP21-H/FL2",
+   "valve3": "FV3D20V1+FV3D15V1",
+   "valve2": "FV2D20V1+FV2D15V1"
+  },
   "heatMax": 7.3,
   "heatMid": 7.19,
   "heatMin": 6.25
@@ -2758,6 +4009,13 @@
   "noise": 24.0,
   "dims": "637×455×200",
   "weight": 11.8,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 1.57,
   "heatMid": 1.07,
   "heatMin": 0.92
@@ -2774,6 +4032,13 @@
   "noise": 33.0,
   "dims": "637×455×200",
   "weight": 12.1,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 2.05,
   "heatMid": 1.75,
   "heatMin": 1.25
@@ -2790,6 +4055,13 @@
   "noise": 33.0,
   "dims": "637×455×200",
   "weight": 12.6,
+  "options": {
+   "valve3x4": "KQV21A",
+   "pipingKit": "KQP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1+FV3D15V1",
+   "valve2": "FV2D20V1+FV2D15V1"
+  },
   "heatMax": 1.4,
   "heatMid": 1.23,
   "heatMin": 0.95
@@ -2806,6 +4078,13 @@
   "noise": 24.0,
   "dims": "867×455×200",
   "weight": 13.9,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 2.6,
   "heatMid": 2.11,
   "heatMin": 1.34
@@ -2822,6 +4101,13 @@
   "noise": 23.0,
   "dims": "867×455×200",
   "weight": 14.8,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 2.95,
   "heatMid": 2.15,
   "heatMin": 1.42
@@ -2838,6 +4124,13 @@
   "noise": 23.0,
   "dims": "867×455×200",
   "weight": 15.3,
+  "options": {
+   "valve3x4": "KQV21A",
+   "pipingKit": "KQP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1+FV3D15V1",
+   "valve2": "FV2D20V1+FV2D15V1"
+  },
   "heatMax": 2.3,
   "heatMid": 1.78,
   "heatMin": 1.22
@@ -2854,6 +4147,13 @@
   "noise": 32.0,
   "dims": "1087×455×200",
   "weight": 17.3,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 3.8,
   "heatMid": 3.1,
   "heatMin": 2.35
@@ -2870,6 +4170,13 @@
   "noise": 34.0,
   "dims": "1087×455×200",
   "weight": 18.2,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 4.0,
   "heatMid": 3.22,
   "heatMin": 2.5
@@ -2886,6 +4193,13 @@
   "noise": 34.0,
   "dims": "1087×455×200",
   "weight": 18.7,
+  "options": {
+   "valve3x4": "KQV21A",
+   "pipingKit": "KQP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1+FV3D15V1",
+   "valve2": "FV2D20V1+FV2D15V1"
+  },
   "heatMax": 2.88,
   "heatMid": 2.49,
   "heatMin": 2.0
@@ -2902,6 +4216,13 @@
   "noise": 38.0,
   "dims": "1087×455×200",
   "weight": 17.3,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 4.7,
   "heatMid": 3.7,
   "heatMin": 2.81
@@ -2918,6 +4239,13 @@
   "noise": 39.0,
   "dims": "1087×455×200",
   "weight": 18.2,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 5.25,
   "heatMid": 4.09,
   "heatMin": 3.04
@@ -2934,6 +4262,13 @@
   "noise": 39.0,
   "dims": "1087×455×200",
   "weight": 18.7,
+  "options": {
+   "valve3x4": "KQV21A",
+   "pipingKit": "KQP21-H/FL1",
+   "drainTray": "KFD-H-1-6",
+   "valve3": "FV3D20V1+FV3D15V1",
+   "valve2": "FV2D20V1+FV2D15V1"
+  },
   "heatMax": 3.35,
   "heatMid": 2.88,
   "heatMin": 2.36
@@ -2950,6 +4285,13 @@
   "noise": 42.0,
   "dims": "1207×455×200",
   "weight": 19.6,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL2",
+   "drainTray": "KFD-H-7",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 6.0,
   "heatMid": 4.77,
   "heatMin": 3.36
@@ -2966,6 +4308,13 @@
   "noise": 43.0,
   "dims": "1207×455×200",
   "weight": 20.8,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL2",
+   "drainTray": "KFD-H-7",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 7.05,
   "heatMid": 5.61,
   "heatMin": 3.83
@@ -2982,6 +4331,13 @@
   "noise": 43.0,
   "dims": "1207×455×200",
   "weight": 21.3,
+  "options": {
+   "valve3x4": "KQV21A",
+   "pipingKit": "KQP21-H/FL2",
+   "drainTray": "KFD-H-7",
+   "valve3": "FV3D20V1+FV3D15V1",
+   "valve2": "FV2D20V1+FV2D15V1"
+  },
   "heatMax": 4.6,
   "heatMid": 3.95,
   "heatMin": 3.02
@@ -2998,6 +4354,13 @@
   "noise": 44.0,
   "dims": "1207×550×200",
   "weight": 23.1,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL2",
+   "drainTray": "KFD-H-7",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 8.05,
   "heatMid": 6.46,
   "heatMin": 4.71
@@ -3014,6 +4377,13 @@
   "noise": 43.0,
   "dims": "1207×550×200",
   "weight": 24.3,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-H/FL2",
+   "drainTray": "KFD-H-7",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 8.7,
   "heatMid": 6.81,
   "heatMin": 4.85
@@ -3030,6 +4400,13 @@
   "noise": 43.0,
   "dims": "1207×550×200",
   "weight": 24.8,
+  "options": {
+   "valve3x4": "KQV21A",
+   "pipingKit": "KQP21-H/FL2",
+   "drainTray": "KFD-H-7",
+   "valve3": "FV3D20V1+FV3D15V1",
+   "valve2": "FV2D20V1+FV2D15V1"
+  },
   "heatMax": 7.5,
   "heatMid": 6.44,
   "heatMin": 5.22
@@ -3046,6 +4423,13 @@
   "noise": 46.0,
   "dims": "1368×243×482",
   "weight": 27.7,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-L1",
+   "drainTray": "Встроен",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 11.0,
   "heatMid": 8.02,
   "heatMin": 5.41
@@ -3062,6 +4446,13 @@
   "noise": 42.5,
   "dims": "1658×243×482",
   "weight": 33.8,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-L1",
+   "drainTray": "Встроен",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 11.83,
   "heatMid": 8.32,
   "heatMin": 6.78
@@ -3078,6 +4469,13 @@
   "noise": 50.0,
   "dims": "1898×243×482",
   "weight": 37.0,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-L1",
+   "drainTray": "Встроен",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 12.67,
   "heatMid": 11.98,
   "heatMin": 10.59
@@ -3094,6 +4492,13 @@
   "noise": 33.0,
   "dims": "632×243×482",
   "weight": 14.0,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-L1",
+   "drainTray": "Встроен",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 2.68,
   "heatMid": 2.24,
   "heatMin": 1.83
@@ -3110,6 +4515,13 @@
   "noise": 31.0,
   "dims": "773×243×482",
   "weight": 17.2,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-L1",
+   "drainTray": "Встроен",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 3.95,
   "heatMid": 3.25,
   "heatMin": 2.51
@@ -3126,6 +4538,13 @@
   "noise": 37.5,
   "dims": "908×243×482",
   "weight": 19.2,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-L1",
+   "drainTray": "Встроен",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 5.0,
   "heatMid": 4.31,
   "heatMin": 3.36
@@ -3142,6 +4561,13 @@
   "noise": 39.0,
   "dims": "908×243×482",
   "weight": 19.2,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-L1",
+   "drainTray": "Встроен",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 5.5,
   "heatMid": 4.38,
   "heatMin": 3.2
@@ -3158,6 +4584,13 @@
   "noise": 43.5,
   "dims": "1003×243×482",
   "weight": 21.7,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-L1",
+   "drainTray": "Встроен",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 6.9,
   "heatMid": 5.66,
   "heatMin": 4.21
@@ -3174,6 +4607,13 @@
   "noise": 45.0,
   "dims": "1178×243×482",
   "weight": 23.5,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-L1",
+   "drainTray": "Встроен",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 7.6,
   "heatMid": 6.96,
   "heatMin": 5.81
@@ -3190,6 +4630,13 @@
   "noise": 43.0,
   "dims": "1368×243×482",
   "weight": 27.7,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-L1",
+   "drainTray": "Встроен",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 9.4,
   "heatMid": 7.36,
   "heatMin": 5.82
@@ -3205,6 +4652,14 @@
   "airflow": 1530.0,
   "noise": 43.0,
   "weight": 52.0,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-T3",
+   "drainTray": "Встроен",
+   "netModule": "CE-FCUKZ-03",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 13.2,
   "heatMid": 11.48,
   "heatMin": 9.9
@@ -3220,6 +4675,14 @@
   "airflow": 1880.0,
   "noise": 44.0,
   "weight": 52.0,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-T3",
+   "drainTray": "Встроен",
+   "netModule": "CE-FCUKZ-03",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 15.0,
   "heatMid": 12.9,
   "heatMin": 11.25
@@ -3235,6 +4698,14 @@
   "airflow": 2120.0,
   "noise": 45.0,
   "weight": 54.0,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-T2",
+   "drainTray": "Встроен",
+   "netModule": "CE-FCUKZ-03",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 17.9,
   "heatMid": 15.75,
   "heatMin": 13.6
@@ -3249,6 +4720,12 @@
   "powerW": 520.0,
   "airflow": 2450.0,
   "noise": 47.0,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-T3",
+   "drainTray": "Встроен",
+   "netModule": "CE-FCUKZ-03"
+  },
   "heatMax": 21.2,
   "heatMid": 18.23,
   "heatMin": 15.69
@@ -3263,6 +4740,12 @@
   "powerW": 680.0,
   "airflow": 2750.0,
   "noise": 53.0,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-T3",
+   "drainTray": "Встроен",
+   "netModule": "CE-FCUKZ-03"
+  },
   "heatMax": 23.8,
   "heatMid": 20.94,
   "heatMin": 17.85
@@ -3277,6 +4760,12 @@
   "powerW": 860.0,
   "airflow": 3360.0,
   "noise": 54.0,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-T3",
+   "drainTray": "Встроен",
+   "netModule": "CE-FCUKZ-03"
+  },
   "heatMax": 30.0,
   "heatMid": 26.7,
   "heatMin": 22.5
@@ -3292,6 +4781,14 @@
   "airflow": 1220.0,
   "noise": 42.0,
   "weight": 50.0,
+  "options": {
+   "valve3x4": "KFV21A",
+   "pipingKit": "KFP21-T1",
+   "drainTray": "Встроен",
+   "netModule": "CE-FCUKZ-03",
+   "valve3": "FV3D20V1",
+   "valve2": "FV2D20V1"
+  },
   "heatMax": 9.7,
   "heatMid": 8.54,
   "heatMin": 7.18
@@ -3308,6 +4805,14 @@
   "noise": 44.5,
   "dims": "1368×243×487",
   "weight": 27.5,
+  "options": {
+   "valve3x4": "KQV22A",
+   "pipingKit": "KQP21-L1",
+   "drainTray": "Встроен",
+   "netModule": "CE-FCUKZ-04",
+   "valve3": "FV3D20V1+FV3D20V1",
+   "valve2": "FV2D20V1+FV2D20V1"
+  },
   "heatMax": 10.0,
   "heatMid": 9.55,
   "heatMin": 8.29
@@ -3324,6 +4829,14 @@
   "noise": 44.0,
   "dims": "1658×243×487",
   "weight": 35.5,
+  "options": {
+   "valve3x4": "KQV22A",
+   "pipingKit": "KQP21-L1",
+   "drainTray": "Встроен",
+   "netModule": "CE-FCUKZ-04",
+   "valve3": "FV3D20V1+FV3D20V1",
+   "valve2": "FV2D20V1+FV2D20V1"
+  },
   "heatMax": 10.5,
   "heatMid": 9.09,
   "heatMin": 6.3
@@ -3340,6 +4853,14 @@
   "noise": 44.5,
   "dims": "1898×243×487",
   "weight": 39.0,
+  "options": {
+   "valve3x4": "KQV22A",
+   "pipingKit": "KQP21-L1",
+   "drainTray": "Встроен",
+   "netModule": "CE-FCUKZ-04",
+   "valve3": "FV3D20V1+FV3D20V1",
+   "valve2": "FV2D20V1+FV2D20V1"
+  },
   "heatMax": 12.7,
   "heatMid": 11.43,
   "heatMin": 9.44
@@ -3356,6 +4877,14 @@
   "noise": 33.0,
   "dims": "632×243×487",
   "weight": 14.0,
+  "options": {
+   "valve3x4": "KQV22A",
+   "pipingKit": "KQP21-L1",
+   "drainTray": "Встроен",
+   "netModule": "CE-FCUKZ-04",
+   "valve3": "FV3D20V1+FV3D20V1",
+   "valve2": "FV2D20V1+FV2D20V1"
+  },
   "heatMax": 2.4,
   "heatMid": 1.82,
   "heatMin": 1.57
@@ -3372,6 +4901,14 @@
   "noise": 34.5,
   "dims": "773×243×487",
   "weight": 16.0,
+  "options": {
+   "valve3x4": "KQV22A",
+   "pipingKit": "KQP21-L1",
+   "drainTray": "Встроен",
+   "netModule": "CE-FCUKZ-04",
+   "valve3": "FV3D20V1+FV3D20V1",
+   "valve2": "FV2D20V1+FV2D20V1"
+  },
   "heatMax": 3.8,
   "heatMid": 2.78,
   "heatMin": 2.21
@@ -3388,6 +4925,14 @@
   "noise": 34.5,
   "dims": "908×243×487",
   "weight": 19.0,
+  "options": {
+   "valve3x4": "KQV22A",
+   "pipingKit": "KQP21-L1",
+   "drainTray": "Встроен",
+   "netModule": "CE-FCUKZ-04",
+   "valve3": "FV3D20V1+FV3D20V1",
+   "valve2": "FV2D20V1+FV2D20V1"
+  },
   "heatMax": 4.7,
   "heatMid": 3.51,
   "heatMin": 2.24
@@ -3404,6 +4949,14 @@
   "noise": 42.0,
   "dims": "908×243×487",
   "weight": 19.0,
+  "options": {
+   "valve3x4": "KQV22A",
+   "pipingKit": "KQP21-L1",
+   "drainTray": "Встроен",
+   "netModule": "CE-FCUKZ-04",
+   "valve3": "FV3D20V1+FV3D20V1",
+   "valve2": "FV2D20V1+FV2D20V1"
+  },
   "heatMax": 5.0,
   "heatMid": 4.03,
   "heatMin": 2.49
@@ -3420,6 +4973,14 @@
   "noise": 41.0,
   "dims": "1003×243×487",
   "weight": 20.5,
+  "options": {
+   "valve3x4": "KQV22A",
+   "pipingKit": "KQP21-L1",
+   "drainTray": "Встроен",
+   "netModule": "CE-FCUKZ-04",
+   "valve3": "FV3D20V1+FV3D20V1",
+   "valve2": "FV2D20V1+FV2D20V1"
+  },
   "heatMax": 6.4,
   "heatMid": 5.07,
   "heatMin": 3.18
@@ -3436,6 +4997,14 @@
   "noise": 38.0,
   "dims": "1178×243×487",
   "weight": 22.5,
+  "options": {
+   "valve3x4": "KQV22A",
+   "pipingKit": "KQP21-L1",
+   "drainTray": "Встроен",
+   "netModule": "CE-FCUKZ-04",
+   "valve3": "FV3D20V1+FV3D20V1",
+   "valve2": "FV2D20V1+FV2D20V1"
+  },
   "heatMax": 6.3,
   "heatMid": 5.45,
   "heatMin": 4.52
@@ -3452,6 +5021,14 @@
   "noise": 41.5,
   "dims": "1368×243×487",
   "weight": 27.5,
+  "options": {
+   "valve3x4": "KQV22A",
+   "pipingKit": "KQP21-L1",
+   "drainTray": "Встроен",
+   "netModule": "CE-FCUKZ-04",
+   "valve3": "FV3D20V1+FV3D20V1",
+   "valve2": "FV2D20V1+FV2D20V1"
+  },
   "heatMax": 9.6,
   "heatMid": 8.16,
   "heatMin": 5.81
@@ -3472,6 +5049,13 @@
   "noise": 44.0,
   "dims": "1368×243×482",
   "weight": 27.5,
+  "options": {
+   "valve3x4": "KQV22A",
+   "pipingKit": "KQP21-L1",
+   "drainTray": "Встроен",
+   "valve3": "FV3D20V1+FV3D20V1",
+   "valve2": "FV2D20V1+FV2D20V1"
+  },
   "heatMax": 10.6,
   "heatMid": 9.92,
   "heatMin": 9.07
@@ -3492,6 +5076,13 @@
   "noise": 41.5,
   "dims": "1658×243×482",
   "weight": 35.5,
+  "options": {
+   "valve3x4": "KQV22A",
+   "pipingKit": "KQP21-L1",
+   "drainTray": "Встроен",
+   "valve3": "FV3D20V1+FV3D20V1",
+   "valve2": "FV2D20V1+FV2D20V1"
+  },
   "heatMax": 10.7,
   "heatMid": 9.72,
   "heatMin": 8.66
@@ -3512,6 +5103,13 @@
   "noise": 44.5,
   "dims": "1898×243×482",
   "weight": 39.0,
+  "options": {
+   "valve3x4": "KQV22A",
+   "pipingKit": "KQP21-L1",
+   "drainTray": "Встроен",
+   "valve3": "FV3D20V1+FV3D20V1",
+   "valve2": "FV2D20V1+FV2D20V1"
+  },
   "heatMax": 13.4,
   "heatMid": 12.1,
   "heatMin": 10.46
@@ -3533,6 +5131,13 @@
   "noise": 27.5,
   "dims": "632×243×482",
   "weight": 13.5,
+  "options": {
+   "valve3x4": "KQV22A",
+   "pipingKit": "KQP21-L1",
+   "drainTray": "Встроен",
+   "valve3": "FV3D20V1+FV3D20V1",
+   "valve2": "FV2D20V1+FV2D20V1"
+  },
   "heatMax": 2.7,
   "heatMid": 2.21,
   "heatMin": 1.5
@@ -3554,6 +5159,13 @@
   "noise": 34.5,
   "dims": "773×243×482",
   "weight": 16.0,
+  "options": {
+   "valve3x4": "KQV22A",
+   "pipingKit": "KQP21-L1",
+   "drainTray": "Встроен",
+   "valve3": "FV3D20V1+FV3D20V1",
+   "valve2": "FV2D20V1+FV2D20V1"
+  },
   "heatMax": 4.3,
   "heatMid": 4.04,
   "heatMin": 3.78
@@ -3575,6 +5187,13 @@
   "noise": 38.5,
   "dims": "908×243×482",
   "weight": 19.0,
+  "options": {
+   "valve3x4": "KQV22A",
+   "pipingKit": "KQP21-L1",
+   "drainTray": "Встроен",
+   "valve3": "FV3D20V1+FV3D20V1",
+   "valve2": "FV2D20V1+FV2D20V1"
+  },
   "heatMax": 5.4,
   "heatMid": 5.22,
   "heatMin": 4.93
@@ -3596,6 +5215,13 @@
   "noise": 40.5,
   "dims": "908×243×482",
   "weight": 19.0,
+  "options": {
+   "valve3x4": "KQV22A",
+   "pipingKit": "KQP21-L1",
+   "drainTray": "Встроен",
+   "valve3": "FV3D20V1+FV3D20V1",
+   "valve2": "FV2D20V1+FV2D20V1"
+  },
   "heatMax": 6.1,
   "heatMid": 5.58,
   "heatMin": 4.98
@@ -3617,6 +5243,13 @@
   "noise": 41.5,
   "dims": "1003×243×482",
   "weight": 20.5,
+  "options": {
+   "valve3x4": "KQV22A",
+   "pipingKit": "KQP21-L1",
+   "drainTray": "Встроен",
+   "valve3": "FV3D20V1+FV3D20V1",
+   "valve2": "FV2D20V1+FV2D20V1"
+  },
   "heatMax": 6.7,
   "heatMid": 6.17,
   "heatMin": 5.53
@@ -3637,6 +5270,13 @@
   "noise": 39.5,
   "dims": "1178×243×482",
   "weight": 22.5,
+  "options": {
+   "valve3x4": "KQV22A",
+   "pipingKit": "KQP21-L1",
+   "drainTray": "Встроен",
+   "valve3": "FV3D20V1+FV3D20V1",
+   "valve2": "FV2D20V1+FV2D20V1"
+  },
   "heatMax": 6.7,
   "heatMid": 6.18,
   "heatMin": 5.58
@@ -3657,6 +5297,13 @@
   "noise": 40.5,
   "dims": "1368×243×482",
   "weight": 27.5,
+  "options": {
+   "valve3x4": "KQV22A",
+   "pipingKit": "KQP21-L1",
+   "drainTray": "Встроен",
+   "valve3": "FV3D20V1+FV3D20V1",
+   "valve2": "FV2D20V1+FV2D20V1"
+  },
   "heatMax": 10.1,
   "heatMid": 9.34,
   "heatMin": 8.5

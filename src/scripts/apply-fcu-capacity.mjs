@@ -34,7 +34,7 @@ export function applyFcuCapacity(products) {
     const panel = c.dims && Number(String(c.dims).split('×')[1]) < 100;
     p.fcuSpec = {
       waterFlow: c.waterFlow, waterDp: c.waterDp, powerW: c.powerW, airflow: c.airflow, noise: c.noise,
-      dims: panel ? undefined : c.dims, weight: panel ? undefined : c.weight,
+      dims: panel ? undefined : c.dims, weight: panel ? undefined : c.weight, options: c.options,
     };
     n++;
   }
