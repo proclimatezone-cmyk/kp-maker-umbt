@@ -10412,12 +10412,37 @@
     "price": 6036,
     "image": "/images/products/1f_lFlRNEcVxXB47oOAg4B3eZnh7kaSoI.png",
     "coolingCapacity": 25.2,
-    "heatingCapacity": 0,
+    "heatingCapacity": 27,
     "recommendedArea": 0,
     "powerConsumption": 0,
     "powerSupply": "380В",
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "compressor": "DC-inverter",
+      "refrigerant": "R410A",
+      "powerSupply": "380-415/50/3",
+      "coolKw": "25.2",
+      "heatKw": "27",
+      "coolPower": "5.8",
+      "eer": "4.38",
+      "heatPower": "5.7",
+      "cop": "4.78",
+      "airflow": "11800",
+      "noise": "56",
+      "refrigerantCharge": "6.1",
+      "dims": "1130×1760×580",
+      "weight": "177",
+      "pipeLiquid": "12.7",
+      "pipeGas": "25.4",
+      "tempCool": "-15 ~ +55",
+      "tempHeat": "-30 ~ +30",
+      "maxIndoor": "13"
+    },
+    "genSpecSource": {
+      "catalogKey": "vrf-2026",
+      "page": 60
+    }
   },
   {
     "id": "mv8s-280wv2gn1",
@@ -10428,12 +10453,37 @@
     "price": 6419,
     "image": "/images/products/1f_lFlRNEcVxXB47oOAg4B3eZnh7kaSoI.png",
     "coolingCapacity": 28,
-    "heatingCapacity": 0,
+    "heatingCapacity": 31.5,
     "recommendedArea": 0,
     "powerConsumption": 0,
     "powerSupply": "380В",
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "compressor": "DC-inverter",
+      "refrigerant": "R410A",
+      "powerSupply": "380-415/50/3",
+      "coolKw": "28",
+      "heatKw": "31.5",
+      "coolPower": "7.5",
+      "eer": "3.73",
+      "heatPower": "6.8",
+      "cop": "4.67",
+      "airflow": "12500",
+      "noise": "57",
+      "refrigerantCharge": "6.1",
+      "dims": "1130×1760×580",
+      "weight": "177",
+      "pipeLiquid": "12.7",
+      "pipeGas": "25.4",
+      "tempCool": "-15 ~ +55",
+      "tempHeat": "-30 ~ +30",
+      "maxIndoor": "16"
+    },
+    "genSpecSource": {
+      "catalogKey": "vrf-2026",
+      "page": 60
+    }
   },
   {
     "id": "mv8s-335wv2gn1",
@@ -10444,12 +10494,37 @@
     "price": 7106,
     "image": "/images/products/1f_lFlRNEcVxXB47oOAg4B3eZnh7kaSoI.png",
     "coolingCapacity": 33.5,
-    "heatingCapacity": 0,
+    "heatingCapacity": 37.5,
     "recommendedArea": 0,
     "powerConsumption": 0,
     "powerSupply": "380В",
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "compressor": "DC-inverter",
+      "refrigerant": "R410A",
+      "powerSupply": "380-415/50/3",
+      "coolKw": "33.5",
+      "heatKw": "37.5",
+      "coolPower": "8.0",
+      "eer": "4.21",
+      "heatPower": "7.9",
+      "cop": "4.78",
+      "airflow": "12500",
+      "noise": "58",
+      "refrigerantCharge": "6.4",
+      "dims": "1130×1760×580",
+      "weight": "180",
+      "pipeLiquid": "12.7",
+      "pipeGas": "25.4",
+      "tempCool": "-15 ~ +55",
+      "tempHeat": "-30 ~ +30",
+      "maxIndoor": "19"
+    },
+    "genSpecSource": {
+      "catalogKey": "vrf-2026",
+      "page": 60
+    }
   },
   {
     "id": "mv8s-400wv2gn1",
@@ -10460,12 +10535,37 @@
     "price": 7768,
     "image": "/images/products/1f_lFlRNEcVxXB47oOAg4B3eZnh7kaSoI.png",
     "coolingCapacity": 40,
-    "heatingCapacity": 0,
+    "heatingCapacity": 45,
     "recommendedArea": 0,
     "powerConsumption": 0,
     "powerSupply": "380В",
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "compressor": "DC-inverter",
+      "refrigerant": "R410A",
+      "powerSupply": "380-415/50/3",
+      "coolKw": "40",
+      "heatKw": "45",
+      "coolPower": "11.2",
+      "eer": "3.57",
+      "heatPower": "10.5",
+      "cop": "4.29",
+      "airflow": "12500",
+      "noise": "59",
+      "refrigerantCharge": "7.4",
+      "dims": "1130×1760×580",
+      "weight": "182",
+      "pipeLiquid": "12.7",
+      "pipeGas": "25.4",
+      "tempCool": "-15 ~ +55",
+      "tempHeat": "-30 ~ +30",
+      "maxIndoor": "23"
+    },
+    "genSpecSource": {
+      "catalogKey": "vrf-2026",
+      "page": 60
+    }
   },
   {
     "id": "mv8s-450wv2gn1",
@@ -10476,12 +10576,37 @@
     "price": 8395,
     "image": "/images/products/1f_lFlRNEcVxXB47oOAg4B3eZnh7kaSoI.png",
     "coolingCapacity": 45,
-    "heatingCapacity": 0,
+    "heatingCapacity": 50,
     "recommendedArea": 0,
     "powerConsumption": 0,
     "powerSupply": "380В",
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "compressor": "DC-inverter",
+      "refrigerant": "R410A",
+      "powerSupply": "380-415/50/3",
+      "coolKw": "45",
+      "heatKw": "50",
+      "coolPower": "11.6",
+      "eer": "3.88",
+      "heatPower": "11.9",
+      "cop": "4.2",
+      "airflow": "18500",
+      "noise": "60",
+      "refrigerantCharge": "8",
+      "dims": "1250×1760×580",
+      "weight": "208",
+      "pipeLiquid": "15.9",
+      "pipeGas": "28.6",
+      "tempCool": "-15 ~ +55",
+      "tempHeat": "-30 ~ +30",
+      "maxIndoor": "26"
+    },
+    "genSpecSource": {
+      "catalogKey": "vrf-2026",
+      "page": 60
+    }
   },
   {
     "id": "mv8s-500wv2gn1",
@@ -12618,12 +12743,37 @@
     "price": 3475,
     "image": "/images/products/1B9cIw4WHso6oUUKuRbPY4dS4T_jpNRjy.png",
     "coolingCapacity": 20,
-    "heatingCapacity": 0,
+    "heatingCapacity": 22.5,
     "recommendedArea": 0,
     "powerConsumption": 0,
     "powerSupply": "380В",
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "compressor": "DC inverter",
+      "refrigerant": "R410A",
+      "powerSupply": "380-415/50/3",
+      "coolKw": "20",
+      "heatKw": "22.5",
+      "coolPower": "5.6",
+      "eer": "3.57",
+      "heatPower": "5.4",
+      "cop": "4.17",
+      "airflow": "11800",
+      "noise": "57",
+      "refrigerantCharge": "4.2",
+      "dims": "990×1557×380",
+      "weight": "124",
+      "pipeLiquid": "9.52",
+      "pipeGas": "19.05",
+      "tempCool": "-15 ~ 55",
+      "tempHeat": "-25 ~ 30",
+      "maxIndoor": "11"
+    },
+    "genSpecSource": {
+      "catalogKey": "vrf-2026",
+      "page": 29
+    }
   },
   {
     "id": "mvi-224wv2gn1-a-",
@@ -12634,12 +12784,37 @@
     "price": 3585,
     "image": "/images/products/1B9cIw4WHso6oUUKuRbPY4dS4T_jpNRjy.png",
     "coolingCapacity": 22.4,
-    "heatingCapacity": 0,
+    "heatingCapacity": 25,
     "recommendedArea": 0,
     "powerConsumption": 0,
     "powerSupply": "380В",
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "compressor": "DC inverter",
+      "refrigerant": "R410A",
+      "powerSupply": "380-415/50/3",
+      "coolKw": "22.4",
+      "heatKw": "25",
+      "coolPower": "6.3",
+      "eer": "3.56",
+      "heatPower": "6",
+      "cop": "4.17",
+      "airflow": "11800",
+      "noise": "57",
+      "refrigerantCharge": "4.2",
+      "dims": "990×1557×380",
+      "weight": "124",
+      "pipeLiquid": "9.52",
+      "pipeGas": "19.05",
+      "tempCool": "-15 ~ 55",
+      "tempHeat": "-25 ~ 30",
+      "maxIndoor": "13"
+    },
+    "genSpecSource": {
+      "catalogKey": "vrf-2026",
+      "page": 29
+    }
   },
   {
     "id": "mvi-260wv2gn1-a-",
@@ -12650,12 +12825,37 @@
     "price": 3708,
     "image": "/images/products/1B9cIw4WHso6oUUKuRbPY4dS4T_jpNRjy.png",
     "coolingCapacity": 26,
-    "heatingCapacity": 0,
+    "heatingCapacity": 28.5,
     "recommendedArea": 0,
     "powerConsumption": 0,
     "powerSupply": "380В",
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "compressor": "DC inverter",
+      "refrigerant": "R410A",
+      "powerSupply": "380-415/50/3",
+      "coolKw": "26",
+      "heatKw": "28.5",
+      "coolPower": "7.6",
+      "eer": "3.42",
+      "heatPower": "7.3",
+      "cop": "3.9",
+      "airflow": "12200",
+      "noise": "58",
+      "refrigerantCharge": "4.2",
+      "dims": "990×1557×380",
+      "weight": "124",
+      "pipeLiquid": "9.52",
+      "pipeGas": "22.2",
+      "tempCool": "-15 ~ 55",
+      "tempHeat": "-25 ~ 30",
+      "maxIndoor": "15"
+    },
+    "genSpecSource": {
+      "catalogKey": "vrf-2026",
+      "page": 29
+    }
   },
   {
     "id": "mvi-280wv2gn1-a-",
@@ -12666,12 +12866,37 @@
     "price": 3859,
     "image": "/images/products/1B9cIw4WHso6oUUKuRbPY4dS4T_jpNRjy.png",
     "coolingCapacity": 28,
-    "heatingCapacity": 0,
+    "heatingCapacity": 31.5,
     "recommendedArea": 0,
     "powerConsumption": 0,
     "powerSupply": "380В",
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "compressor": "DC inverter",
+      "refrigerant": "R410A",
+      "powerSupply": "380-415/50/3",
+      "coolKw": "28",
+      "heatKw": "31.5",
+      "coolPower": "8.25",
+      "eer": "3.39",
+      "heatPower": "8.1",
+      "cop": "3.89",
+      "airflow": "12200",
+      "noise": "60",
+      "refrigerantCharge": "4.2",
+      "dims": "990×1557×380",
+      "weight": "124",
+      "pipeLiquid": "9.52",
+      "pipeGas": "22.2",
+      "tempCool": "-15 ~ 55",
+      "tempHeat": "-25 ~ 30",
+      "maxIndoor": "16"
+    },
+    "genSpecSource": {
+      "catalogKey": "vrf-2026",
+      "page": 29
+    }
   },
   {
     "id": "mvi-335wv2gn1-a-",
@@ -12682,12 +12907,37 @@
     "price": 4484,
     "image": "/images/products/1B9cIw4WHso6oUUKuRbPY4dS4T_jpNRjy.png",
     "coolingCapacity": 33.5,
-    "heatingCapacity": 0,
+    "heatingCapacity": 37.5,
     "recommendedArea": 0,
     "powerConsumption": 0,
     "powerSupply": "380В",
     "specs": "",
-    "orderOnly": true
+    "orderOnly": true,
+    "genSpec": {
+      "compressor": "DC inverter",
+      "refrigerant": "R410A",
+      "powerSupply": "380-415/50/3",
+      "coolKw": "33.5",
+      "heatKw": "37.5",
+      "coolPower": "9.2",
+      "eer": "3.64",
+      "heatPower": "9.2",
+      "cop": "4.08",
+      "airflow": "12200",
+      "noise": "60",
+      "refrigerantCharge": "5.4",
+      "dims": "990×1557×380",
+      "weight": "133",
+      "pipeLiquid": "12.7",
+      "pipeGas": "22.2",
+      "tempCool": "-15 ~ 55",
+      "tempHeat": "-25 ~ 30",
+      "maxIndoor": "20"
+    },
+    "genSpecSource": {
+      "catalogKey": "vrf-2026",
+      "page": 29
+    }
   },
   {
     "id": "mdvc-v200w-drn1",
