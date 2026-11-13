@@ -8,7 +8,7 @@ export async function POST(req: NextRequest) {
     const { cpName, cpDate, items, rawItems, client, manager } = await req.json()
     const list = Array.isArray(rawItems) && rawItems.length ? rawItems : items
     const pdf = await buildSpecPdf({ cpNumber: cpName || '', cpDate: cpDate || '', items: Array.isArray(list) ? list : [], client: typeof client === 'string' ? client : '', manager })
-    const name = encodeURIComponent(`Технический паспорт ${cpName || ''}.pdf`.replace(/[\\/]/g, '-'))
+    const name = encodeURIComponent(`Инженерная спецификация ${cpName || ''}.pdf`.replace(/[\\/]/g, '-'))
     return new NextResponse(new Uint8Array(pdf), {
       headers: { 'Content-Type': 'application/pdf', 'Content-Disposition': `attachment; filename="spec.pdf"; filename*=UTF-8''${name}` },
     })

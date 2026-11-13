@@ -1415,7 +1415,7 @@ export default function Home() {
       })
       if (!r.ok) { const e = await r.json().catch(() => ({})); alert(`Ошибка: ${e.error || r.status}`); return }
       const url = URL.createObjectURL(await r.blob())
-      const a = document.createElement('a'); a.href = url; a.download = `Технический паспорт ${cpName}.pdf`; a.click()
+      const a = document.createElement('a'); a.href = url; a.download = `Инженерная спецификация ${cpName}.pdf`; a.click()
       setTimeout(() => URL.revokeObjectURL(url), 60_000)
     } catch (err: any) { alert('Не удалось собрать спецификацию: ' + (err?.message || 'нет связи')) } finally { setSpecLoading(false) }
   }

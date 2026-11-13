@@ -160,7 +160,7 @@ export async function buildSpecPdf(opts: BuildSpecOptions): Promise<Buffer> {
   const f = fontFiles()
   const doc = await PDFDocument.create()
   doc.registerFontkit(fontkit)
-  doc.setTitle(`Технический паспорт проекта — КП ${opts.cpNumber}`)
+  doc.setTitle(`Инженерная спецификация — КП ${opts.cpNumber}`)
   doc.setAuthor('UMBT')
   doc.setProducer('UMBT KP Maker')
   const [regular, bold] = await Promise.all([doc.embedFont(f.regular, { subset: true }), doc.embedFont(f.bold, { subset: true })])
@@ -190,7 +190,7 @@ export async function buildSpecPdf(opts: BuildSpecOptions): Promise<Buffer> {
     rect(0, 0, PAGE_W, 46, NAVY)
     rect(0, 46, PAGE_W, 3, CYAN)
     text('UMBT', M, 15, 15, bold, WHITE)
-    text('ТЕХНИЧЕСКИЙ ПАСПОРТ ПРОЕКТА', M + 52, 19, 7.5, regular, hex('#9FC3E0'))
+    text('ИНЖЕНЕРНАЯ СПЕЦИФИКАЦИЯ', M + 52, 19, 7.5, regular, hex('#9FC3E0'))
     textR(`КП № ${opts.cpNumber}  ·  ${opts.cpDate}`, PAGE_W - M, 19, 8, regular, WHITE)
     y = TOP_Y
   }
@@ -276,7 +276,7 @@ export async function buildSpecPdf(opts: BuildSpecOptions): Promise<Buffer> {
     : reserve < 10 ? 'малый запас — учесть пиковые нагрузки' : reserve <= 30 ? 'оптимальный запас' : 'избыточный запас — возможна оптимизация'
   const totalUnits = rows.reduce((s, r) => s + r.qty, 0)
 
-  // ================= Страница 1: паспорт =================
+  // ================= Страница 1: обложка =================
   newPage()
   round(M, y, CONTENT_W, 150, 10, NAVY)
   rect(M + CONTENT_W - 160, y, 160, 150, NAVY2)
@@ -286,8 +286,8 @@ export async function buildSpecPdf(opts: BuildSpecOptions): Promise<Buffer> {
     round(M + CONTENT_W - 130, y + 20, 100, lh + 16, 6, WHITE)
     page.drawImage(logo, { x: M + CONTENT_W - 115, y: PAGE_H - (y + 28) - lh, width: lw, height: lh })
   }
-  text('Технический паспорт', M + 22, y + 22, 24, bold, WHITE)
-  text('проекта климатизации', M + 22, y + 52, 16, regular, hex('#BFD9EE'))
+  text('Инженерная спецификация', M + 22, y + 22, 22, bold, WHITE)
+  text('подбор и расчёт системы', M + 22, y + 52, 16, regular, hex('#BFD9EE'))
   const client = (opts.client || '').trim()
   if (client) wrap(`Объект: ${client}`, bold, 10, CONTENT_W - 210).slice(0, 2).forEach((l, i) => text(l, M + 22, y + 84 + i * 14, 10, bold, WHITE))
   text(`Приложение к коммерческому предложению № ${opts.cpNumber} от ${opts.cpDate}`, M + 22, y + 122, 8, regular, hex('#9FC3E0'))
