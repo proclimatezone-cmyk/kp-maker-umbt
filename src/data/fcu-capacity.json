@@ -739,6 +739,8 @@
    "valve3": "FV3D20V1+FV3D15V1",
    "valve2": "FV2D20V1+FV2D15V1"
   },
+  "kitRemote": "R05/BGE",
+  "panel": "T-MBQ4-02C",
   "heatMax": 11.65,
   "heatMid": 10.49,
   "heatMin": 8.85
@@ -763,6 +765,8 @@
    "valve3": "FV3D20V1",
    "valve2": "FV2D20V1"
   },
+  "kitRemote": "R05/BGE",
+  "panel": "T-MBQ4-02C",
   "heatMax": 17.58,
   "heatMid": 14.06,
   "heatMin": 11.42
@@ -787,6 +791,8 @@
    "valve3": "FV3D20V1+FV3D15V1",
    "valve2": "FV2D20V1+FV2D15V1"
   },
+  "kitRemote": "R05/BGE",
+  "panel": "T-MBQ4-02C",
   "heatMax": 12.62,
   "heatMid": 11.36,
   "heatMin": 9.47
@@ -811,6 +817,8 @@
    "valve3": "FV3D20V1",
    "valve2": "FV2D20V1"
   },
+  "kitRemote": "R05/BGE",
+  "panel": "T-MBQ4-02C",
   "heatMax": 17.6,
   "heatMid": 14.08,
   "heatMin": 11.44
@@ -835,6 +843,8 @@
    "valve3": "FV3D20V1+FV3D15V1",
    "valve2": "FV2D20V1+FV2D15V1"
   },
+  "kitRemote": "R05/BGE",
+  "panel": "T-MBQ4-02C",
   "heatMax": 6.67,
   "heatMid": 5.87,
   "heatMin": 5.07
@@ -859,6 +869,8 @@
    "valve3": "FV3D20V1",
    "valve2": "FV2D20V1"
   },
+  "kitRemote": "R05/BGE",
+  "panel": "T-MBQ4-02C",
   "heatMax": 9.66,
   "heatMid": 7.72,
   "heatMin": 6.27
@@ -883,6 +895,8 @@
    "valve3": "FV3D20V1+FV3D15V1",
    "valve2": "FV2D20V1+FV2D15V1"
   },
+  "kitRemote": "R05/BGE",
+  "panel": "T-MBQ4-02C",
   "heatMax": 7.87,
   "heatMid": 6.85,
   "heatMin": 5.9
@@ -907,6 +921,8 @@
    "valve3": "FV3D20V1",
    "valve2": "FV2D20V1"
   },
+  "kitRemote": "R05/BGE",
+  "panel": "T-MBQ4-02C",
   "heatMax": 11.55,
   "heatMid": 9.24,
   "heatMin": 7.51
@@ -931,6 +947,8 @@
    "valve3": "FV3D20V1+FV3D15V1",
    "valve2": "FV2D20V1+FV2D15V1"
   },
+  "kitRemote": "R05/BGE",
+  "panel": "T-MBQ4-02C",
   "heatMax": 8.06,
   "heatMid": 6.93,
   "heatMin": 6.05
@@ -955,6 +973,8 @@
    "valve3": "FV3D20V1",
    "valve2": "FV2D20V1"
   },
+  "kitRemote": "R05/BGE",
+  "panel": "T-MBQ4-02C",
   "heatMax": 12.42,
   "heatMid": 9.93,
   "heatMin": 8.07
@@ -979,6 +999,8 @@
    "valve3": "FV3D20V1+FV3D15V1",
    "valve2": "FV2D20V1+FV2D15V1"
   },
+  "kitRemote": "R05/BGE",
+  "panel": "T-MBQ4-02C",
   "heatMax": 8.67,
   "heatMid": 7.63,
   "heatMin": 6.59
@@ -1003,6 +1025,8 @@
    "valve3": "FV3D20V1",
    "valve2": "FV2D20V1"
   },
+  "kitRemote": "R05/BGE",
+  "panel": "T-MBQ4-02C",
   "heatMax": 13.85,
   "heatMid": 11.08,
   "heatMin": 9.0
@@ -1047,6 +1071,8 @@
    "valve3": "FV3D20V1+FV3D15V1",
    "valve2": "FV2D20V1+FV2D15V1"
   },
+  "kitRemote": "R05/BGE",
+  "panel": "T-MBQ4-01E",
   "heatMax": 9.75,
   "heatMid": 8.96,
   "heatMin": 8.42
@@ -1071,6 +1097,8 @@
    "valve3": "FV3D20V1",
    "valve2": "FV2D20V1"
   },
+  "kitRemote": "R05/BGE",
+  "panel": "T-MBQ4-01E",
   "heatMax": 9.16,
   "heatMid": 8.54,
   "heatMin": 7.9
@@ -1095,6 +1123,8 @@
    "valve3": "FV3D20V1+FV3D15V1",
    "valve2": "FV2D20V1+FV2D15V1"
   },
+  "kitRemote": "R05/BGE",
+  "panel": "T-MBQ4-01E",
   "heatMax": 9.93,
   "heatMid": 8.33,
   "heatMin": 7.51
@@ -1119,6 +1149,8 @@
    "valve3": "FV3D20V1",
    "valve2": "FV2D20V1"
   },
+  "kitRemote": "R05/BGE",
+  "panel": "T-MBQ4-01E",
   "heatMax": 11.86,
   "heatMid": 9.48,
   "heatMin": 8.25
@@ -1153,6 +1185,8 @@
    "valve3": "FV3D20V1+FV3D15V1",
    "valve2": "FV2D20V1+FV2D15V1"
   },
+  "kitRemote": "R05/BGE",
+  "panel": "T-MBQ4-01E",
   "heatMax": 6.15,
   "heatMid": 5.43,
   "heatMin": 4.61
@@ -1177,6 +1211,8 @@
    "valve3": "FV3D20V1",
    "valve2": "FV2D20V1"
   },
+  "kitRemote": "R05/BGE",
+  "panel": "T-MBQ4-01E",
   "heatMax": 6.06,
   "heatMid": 5.72,
   "heatMin": 5.32
@@ -1211,6 +1247,8 @@
    "valve3": "FV3D20V1+FV3D15V1",
    "valve2": "FV2D20V1+FV2D15V1"
   },
+  "kitRemote": "R05/BGE",
+  "panel": "T-MBQ4-01E",
   "heatMax": 6.52,
   "heatMid": 5.79,
   "heatMin": 4.94
@@ -1235,6 +1273,8 @@
    "valve3": "FV3D20V1",
    "valve2": "FV2D20V1"
   },
+  "kitRemote": "R05/BGE",
+  "panel": "T-MBQ4-01E",
   "heatMax": 6.27,
   "heatMid": 5.88,
   "heatMin": 5.43
@@ -1269,6 +1309,8 @@
    "valve3": "FV3D20V1+FV3D15V1",
    "valve2": "FV2D20V1+FV2D15V1"
   },
+  "kitRemote": "R05/BGE",
+  "panel": "T-MBQ4-01E",
   "heatMax": 6.68,
   "heatMid": 5.75,
   "heatMin": 5.28
@@ -1293,6 +1335,8 @@
    "valve3": "FV3D20V1",
    "valve2": "FV2D20V1"
   },
+  "kitRemote": "R05/BGE",
+  "panel": "T-MBQ4-01E",
   "heatMax": 7.88,
   "heatMid": 7.48,
   "heatMin": 6.76
@@ -1317,6 +1361,8 @@
    "valve3": "FV3D20V1+FV3D15V1",
    "valve2": "FV2D20V1+FV2D15V1"
   },
+  "kitRemote": "R05/BGE",
+  "panel": "T-MBQ4-01E",
   "heatMax": 6.74,
   "heatMid": 5.83,
   "heatMin": 5.4
@@ -1341,6 +1387,8 @@
    "valve3": "FV3D20V1",
    "valve2": "FV2D20V1"
   },
+  "kitRemote": "R05/BGE",
+  "panel": "T-MBQ4-01E",
   "heatMax": 8.49,
   "heatMid": 8.0,
   "heatMin": 7.35
@@ -1363,6 +1411,8 @@
    "valve3": "FV3D15V1",
    "valve2": "FV2D15V1"
   },
+  "kitRemote": "R05/BGE",
+  "panel": "MBQ1-02D",
   "heatMax": 5.13,
   "heatMid": 4.69,
   "heatMin": 4.04
@@ -1385,6 +1435,8 @@
    "valve3": "FV3D15V1",
    "valve2": "FV2D15V1"
   },
+  "kitRemote": "R05/BGE",
+  "panel": "MBQ1-02D",
   "heatMax": 6.41,
   "heatMid": 5.86,
   "heatMin": 5.11
@@ -1405,6 +1457,8 @@
    "valve3": "FV3D15V1",
    "valve2": "FV2D15V1"
   },
+  "kitRemote": "R05/BGE",
+  "panel": "MBQ1-02D",
   "heatMax": 3.15,
   "heatMid": 2.83,
   "heatMin": 2.29
@@ -1425,6 +1479,8 @@
    "valve3": "FV3D15V1",
    "valve2": "FV2D15V1"
   },
+  "kitRemote": "R05/BGE",
+  "panel": "MBQ1-02D",
   "heatMax": 4.0,
   "heatMid": 3.32,
   "heatMin": 2.73
@@ -1445,6 +1501,8 @@
    "valve3": "FV3D15V1",
    "valve2": "FV2D15V1"
   },
+  "kitRemote": "R05/BGE",
+  "panel": "MBQ1-02D",
   "heatMax": 5.75,
   "heatMid": 4.68,
   "heatMin": 3.6
@@ -1469,6 +1527,8 @@
    "valve3": "FV3D20V1",
    "valve2": "FV2D20V1"
   },
+  "kitRemote": "R51/E",
+  "panel": "T-MBQ4-03B",
   "heatMax": 4.0,
   "heatMid": 3.5,
   "heatMin": 3.08
@@ -1493,6 +1553,8 @@
    "valve3": "FV3D20V1+FV3D15V1",
    "valve2": "FV2D20V1+FV2D15V1"
   },
+  "kitRemote": "R51/E",
+  "panel": "T-MBQ4-03B",
   "heatMax": 3.7,
   "heatMid": 3.29,
   "heatMin": 2.92
@@ -1517,6 +1579,8 @@
    "valve3": "FV3D20V1",
    "valve2": "FV2D20V1"
   },
+  "kitRemote": "R51/E",
+  "panel": "T-MBQ4-03B",
   "heatMax": 5.1,
   "heatMid": 4.3,
   "heatMin": 3.83
@@ -1541,6 +1605,8 @@
    "valve3": "FV3D20V1+FV3D15V1",
    "valve2": "FV2D20V1+FV2D15V1"
   },
+  "kitRemote": "R51/E",
+  "panel": "T-MBQ4-03B",
   "heatMax": 4.6,
   "heatMid": 3.82,
   "heatMin": 3.4
@@ -1565,6 +1631,8 @@
    "valve3": "FV3D20V1",
    "valve2": "FV2D20V1"
   },
+  "kitRemote": "R51/E",
+  "panel": "T-MBQ4-03B",
   "heatMax": 6.0,
   "heatMid": 4.76,
   "heatMin": 4.07
@@ -1589,6 +1657,8 @@
    "valve3": "FV3D20V1+FV3D15V1",
    "valve2": "FV2D20V1+FV2D15V1"
   },
+  "kitRemote": "R51/E",
+  "panel": "T-MBQ4-03B",
   "heatMax": 5.1,
   "heatMid": 4.03,
   "heatMin": 3.52
@@ -1613,6 +1683,8 @@
    "valve3": "FV3D20V1",
    "valve2": "FV2D20V1"
   },
+  "kitRemote": "R05/BGE",
+  "panel": "T-MBQ4-03B1",
   "heatMax": 2.61,
   "heatMid": 2.31,
   "heatMin": 2.24
@@ -1637,6 +1709,8 @@
    "valve3": "FV3D20V1+FV3D15V1",
    "valve2": "FV2D20V1+FV2D15V1"
   },
+  "kitRemote": "R05/BGE",
+  "panel": "T-MBQ4-03B1",
   "heatMax": 3.13,
   "heatMid": 2.63,
   "heatMin": 2.08
@@ -1661,6 +1735,8 @@
    "valve3": "FV3D20V1",
    "valve2": "FV2D20V1"
   },
+  "kitRemote": "R05/BGE",
+  "panel": "T-MBQ4-03B1",
   "heatMax": 4.08,
   "heatMid": 3.34,
   "heatMin": 2.73
@@ -1685,6 +1761,8 @@
    "valve3": "FV3D20V1+FV3D15V1",
    "valve2": "FV2D20V1+FV2D15V1"
   },
+  "kitRemote": "R05/BGE",
+  "panel": "T-MBQ4-03B1",
   "heatMax": 3.71,
   "heatMid": 3.14,
   "heatMin": 2.65
@@ -1709,6 +1787,8 @@
    "valve3": "FV3D20V1",
    "valve2": "FV2D20V1"
   },
+  "kitRemote": "R05/BGE",
+  "panel": "T-MBQ4-03B1",
   "heatMax": 4.95,
   "heatMid": 3.99,
   "heatMin": 3.26
@@ -1733,6 +1813,8 @@
    "valve3": "FV3D20V1+FV3D15V1",
    "valve2": "FV2D20V1+FV2D15V1"
   },
+  "kitRemote": "R05/BGE",
+  "panel": "T-MBQ4-03B1",
   "heatMax": 3.94,
   "heatMid": 3.3,
   "heatMin": 2.83
@@ -1748,6 +1830,7 @@
   "airflow": 396.0,
   "noise": 24.0,
   "weight": 12.0,
+  "kitRemote": "R51/E",
   "heatMax": 2.34,
   "heatMid": 2.15,
   "heatMin": 1.94
@@ -1763,6 +1846,7 @@
   "airflow": 426.0,
   "noise": 29.0,
   "weight": 12.0,
+  "kitRemote": "R51/E",
   "heatMax": 2.9,
   "heatMid": 2.6,
   "heatMin": 2.22
@@ -1778,6 +1862,7 @@
   "airflow": 534.0,
   "noise": 31.0,
   "weight": 12.0,
+  "kitRemote": "R51/E",
   "heatMax": 3.46,
   "heatMid": 2.75,
   "heatMin": 2.52
@@ -1793,6 +1878,7 @@
   "airflow": 723.0,
   "noise": 33.0,
   "weight": 14.5,
+  "kitRemote": "R51/E",
   "heatMax": 4.39,
   "heatMid": 3.8,
   "heatMin": 3.27
@@ -1808,6 +1894,7 @@
   "airflow": 836.0,
   "noise": 34.0,
   "weight": 14.5,
+  "kitRemote": "R51/E",
   "heatMax": 4.55,
   "heatMid": 4.2,
   "heatMin": 3.82

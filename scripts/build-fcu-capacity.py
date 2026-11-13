@@ -83,11 +83,17 @@ for pi, p in enumerate(pages, 1):
                 if not toks:
                     continue
                 opts[key] = [min(toks, key=lambda t: abs((t[0] + t[1]) / 2 - c))[2] for c in centers]
+    kit = re.search(r'([A-Z][A-Z0-9/()-]{3,}), в комплекте', p)
+    panel = re.search(r'Декоративная панель\s{2,}([A-Z][A-Z0-9/()-]{3,})', p)
     for idx, m in enumerate(models):
         rec = {'page': pi, 'coolMax': cool[idx][0], 'coolMid': cool[idx][1], 'coolMin': cool[idx][2]}
         rec.update({key: v[idx] for key, v in extra.items()})
         if opts:
             rec['options'] = {key: v[idx] for key, v in opts.items()}
+        if kit:
+            rec['kitRemote'] = kit.group(1)
+        if panel:
+            rec['panel'] = panel.group(1)
         if len(heat) == len(models):
             rec.update(heatMax=heat[idx][0], heatMid=heat[idx][1], heatMin=heat[idx][2])
         out.setdefault(m, rec)

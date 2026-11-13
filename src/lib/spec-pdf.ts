@@ -22,7 +22,7 @@ export function canUseSpec(email: unknown): boolean {
 
 interface FcuSpec {
   waterFlow?: number; waterDp?: number; powerW?: number; airflow?: number; noise?: number; dims?: string; weight?: number
-  options?: Record<string, string>
+  options?: Record<string, string>; kitRemote?: string; panel?: string
 }
 interface Product {
   id: string; category?: string; series?: string; model?: string; image?: string; slidesImage?: string
@@ -101,13 +101,13 @@ function wrap(text: string, font: PDFFont, size: number, maxW: number): string[]
   return out
 }
 
-/** Пульт (и панель для кассет) по правилам комплектации UMBT: KJRP-86I — 2-трубные, KJRP-86A — 4-трубные. */
-function controlFor(p?: Product): string {
+/** Пульт и панель: для кассет и настенных — ИК-пульт из комплекта и панель по каталогу; остальные — KJRP-86I (2-трубные) / KJRP-86A (4-трубные). */
+function controlFor(p?: Product): { remote: string; panel: string } {
   const c = (p?.category || '').toLowerCase()
-  if (c.includes('пульт')) return ''
+  const s = p?.fcuSpec
+  if (s?.kitRemote) return { remote: `${s.kitRemote} (ИК, в комплекте)`, panel: s.panel || (c.includes('кассет') ? 'по модели блока' : '—') }
   const fourPipe = /4[-\s]?х?[-\s]?трубн/.test(c)
-  const remote = fourPipe ? 'KJRP-86A/BMFNKD-E' : 'KJRP-86I/MFK-E'
-  return c.includes('кассет') ? `${remote} + декоративная панель` : remote
+  return { remote: fourPipe ? 'KJRP-86A/BMFNKD-E' : 'KJRP-86I/MFK-E', panel: c.includes('кассет') ? (s?.panel || 'по модели блока') : '—' }
 }
 
 export async function buildSpecPdf(opts: BuildSpecOptions): Promise<Buffer> {
@@ -452,11 +452,11 @@ export async function buildSpecPdf(opts: BuildSpecOptions): Promise<Buffer> {
       [{ title: '№', w: 6 }, { title: 'Модель', w: 30, align: 'l' }, { title: 'Кол.', w: 10 }, { title: 'Пульт управления', w: 30, align: 'l' }, { title: 'Панель', w: 24 }],
       fcu.map(r => {
         const c = controlFor(r.p)
-        return [String(r.n), r.p?.model || r.it.model || '', fmt(r.qty), c.split(' + ')[0] || '—', /кассет/i.test(r.p?.category || '') ? 'декоративная панель' : '—']
+        return [String(r.n), r.p?.model || r.it.model || '', fmt(r.qty), c.remote, c.panel]
       }),
       8.5, { boldCol: 1 },
     )
-    para('Пульты: KJRP-86I — для 2-трубных, KJRP-86A — для 4-трубных фанкойлов.', 8)
+    para('Кассетные фанкойлы поставляются с ИК-пультом в комплекте, декоративная панель — по каталогу Midea для модели блока. Канальные и напольно-потолочные: KJRP-86I — для 2-трубных, KJRP-86A — для 4-трубных.', 8)
   }
 
   // =============== Электроснабжение ===============
